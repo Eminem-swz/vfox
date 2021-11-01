@@ -28,7 +28,7 @@ import {
   ref,
   watch
 } from 'vue'
-import PickerInput from '@/Picker/PickerInput.vue'
+import PickerInput from '../Picker/PickerInput.vue'
 import CalendarPopup from '@/CalendarPopup'
 import {
   cloneDetail,
