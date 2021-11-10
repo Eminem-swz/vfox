@@ -3,8 +3,10 @@ import toArray from 'dayjs/plugin/toArray'
 // import minMax from 'dayjs/plugin/minMax'
 import CustomParseFormat from 'dayjs/plugin/customParseFormat'
 
-dayjs.extend(toArray)
-// dayjs.extend(minMax)
-dayjs.extend(CustomParseFormat)
+const newDayjs = dayjs
 
-export default dayjs
+newDayjs.extend(toArray)
+// dayjs.extend(minMax)
+newDayjs.extend(CustomParseFormat)
+
+export default newDayjs
