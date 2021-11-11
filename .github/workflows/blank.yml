@@ -25,7 +25,7 @@ jobs:
 
       - name: Install and Build Code
         run: |
-          yarn add
+          npm install
           yarn lint
           yarn build:manifest
           yarn build:css
