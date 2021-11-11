@@ -1,3 +1,14 @@
+# [2.0.0-beta.20](https://github.com/godxiaoji/vfox/compare/v2.0.0-beta.19...v2.0.0-beta.20) (2021-11-11)
+
+
+### Bug Fixes
+
+* **dayjs:** 修复dayjs引入插件打包错误 ([28b380f](https://github.com/godxiaoji/vfox/commit/28b380fd3e8428b86b6cff5a73382653af62b04d))
+* **pickerinput:** fix import pickerinput bug ([cb71032](https://github.com/godxiaoji/vfox/commit/cb71032dc34ff62c11b84200a1430477dbdf8afa))
+* 优化apis错误回调 ([b6f1ecf](https://github.com/godxiaoji/vfox/commit/b6f1ecfdc63f7817de2bfc670fea601e952377e4))
+* 尝试修复v-bind产生的问题 ([f74d171](https://github.com/godxiaoji/vfox/commit/f74d171d37ef0bcf1b067bc9f835424e1e86aade))
+* 解决groups 导出外部私有模块名 ([34a6fda](https://github.com/godxiaoji/vfox/commit/34a6fda35db462202987580315b55f1e4c9e902b))
+
 # [2.0.0-beta.19](https://github.com/godxiaoji/vfox/compare/v2.0.0-beta.18...v2.0.0-beta.19) (2021-05-21)
 
 
