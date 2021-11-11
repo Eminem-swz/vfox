@@ -10,7 +10,11 @@ interface GroupProvide {
   removeChild: (obj: unknown) => void
 }
 
-export function useGroup<T = any>(name: string) {
+export function useGroup<T = any>(
+  name: string
+): {
+  children: any[]
+} {
   const children = reactive<T[]>([])
 
   provide(getKey(name), {
