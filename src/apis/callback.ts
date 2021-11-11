@@ -5,7 +5,7 @@ import {
   ApiOptionsSuccess
 } from './types'
 import Exception from '@/helpers/exception'
-import { noop, isFunction } from '@/helpers/util'
+import { noop, isFunction, isString } from '@/helpers/util'
 
 /**
  * 获取回调函数
@@ -27,4 +27,14 @@ export function getCallbackFns(options: ApiOptions) {
       ? options.complete
       : noop.bind(options)) as ApiOptionsComplete
   }
+}
+
+export function getException(e: any): Exception {
+  if (e instanceof Exception) {
+    return e
+  }
+  if (e instanceof Error || isString(e)) {
+    return new Exception(e)
+  }
+  return new Exception('unknown')
 }

@@ -1,6 +1,6 @@
 import { frameTo } from '@/helpers/animation'
 import { getScrollDom, querySelector } from '@/helpers/dom'
-import { getCallbackFns } from '@/apis/callback'
+import { getCallbackFns, getException } from '@/apis/callback'
 import { parseParamsByRules } from '@/apis/rules'
 import { ApiOptions } from './types'
 import Exception from '@/helpers/exception'
@@ -27,10 +27,9 @@ export function pageScrollTo(object: ApiOptions) {
 
       elementScrollTo(document, options.scrollTop, options.duration, callback)
     } catch (e) {
-      fail(e)
+      fail(getException(e))
       complete()
-
-      reject(e)
+      reject(getException(e))
     }
   })
 }
@@ -65,10 +64,9 @@ export function scrollTo(object: ApiOptions) {
 
       elementScrollTo(element, options.scrollTop, options.duration, callback)
     } catch (e) {
-      fail(e)
+      fail(getException(e))
       complete()
-
-      reject(e)
+      reject(getException(e))
     }
   })
 }

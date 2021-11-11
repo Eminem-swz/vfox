@@ -23,14 +23,20 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install and Build Code
+      - name: Install
         run: |
           npm install
-          yarn lint
-          yarn build:manifest
-          yarn build:css
-          yarn build:full
-          yarn build:component
+
+      - name: Test
+        run: |
+          npm run lint
+
+      - name: Build
+        run: |
+          npm run build:manifest
+          npm run build:css
+          npm run build:full
+          npm run build:component
 
       - name: Release
         env:
