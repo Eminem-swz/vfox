@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
 import { isObject, isString } from '@/helpers/util'
-import { getCallbackFns, getException } from '@/apis/callback'
+import { getCallbackFns } from '@/apis/callback'
 import { parseParamsByRules } from '@/apis/rules'
 import { ApiOptions, PopupHook, PopupBridge } from './types'
 import { DataObject } from '../helpers/types'
+import Exception from '@/helpers/exception'
 
 type PopupDone = (res: any) => void
 
@@ -114,9 +115,9 @@ export function showPopup<T = DataObject>(
 
       return app
     } catch (e) {
-      fail(getException(e))
+      fail(new Exception(e))
       complete()
-      reject(getException(e))
+      reject(new Exception(e))
     }
   })
 }
@@ -153,9 +154,9 @@ export function hidePopup(object: ApiOptions, apiName: string) {
       complete()
       resolve({})
     } catch (e) {
-      fail(getException(e))
+      fail(new Exception(e))
       complete()
-      reject(getException(e))
+      reject(new Exception(e))
     }
   })
 }

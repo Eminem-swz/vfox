@@ -25,16 +25,23 @@ class Exception extends Error {
     type = TYPE.DEFAULT,
     source = 'Exception'
   ) {
-    if (error instanceof Exception) {
-      error = error.getMessage()
-    } else if (error instanceof Error) {
-      error = error.message
+    let msg = 'unknown'
+
+    if (error instanceof Exception || error instanceof Error) {
+      msg = error.message
+    } else if (error != null) {
+      msg = error.toString()
     }
 
-    super(error as string)
+    super(msg)
 
-    this.source = source
-    this.type = type
+    if (error instanceof Exception) {
+      this.source = error.source
+      this.type = error.type
+    } else {
+      this.source = source
+      this.type = type
+    }
   }
 
   getMessage() {

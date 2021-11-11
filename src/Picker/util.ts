@@ -76,12 +76,12 @@ export function defaultValueParser(value: any, separator: string) {
     } else if (isStringNumberMixArray(value)) {
       values = value as Values
     } else {
-      throw new Error('Invalid prop: invalid "value".')
+      throw new Exception('Invalid prop: invalid "value".')
     }
 
     return values
   } catch (e) {
-    return new Error(e.message)
+    return new Exception(e)
   }
 }
 

@@ -28,13 +28,3 @@ export function getCallbackFns(options: ApiOptions) {
       : noop.bind(options)) as ApiOptionsComplete
   }
 }
-
-export function getException(e: any): Exception {
-  if (e instanceof Exception) {
-    return e
-  }
-  if (e instanceof Error || isString(e)) {
-    return new Exception(e)
-  }
-  return new Exception('unknown')
-}
