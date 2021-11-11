@@ -1,3 +1,10 @@
+# [2.0.0-beta.21](https://github.com/godxiaoji/vfox/compare/v2.0.0-beta.20...v2.0.0-beta.21) (2021-11-11)
+
+
+### Bug Fixes
+
+* 优化现有Error返回 ([544c2d0](https://github.com/godxiaoji/vfox/commit/544c2d01d255e72adbb58bccebbb6eb2682aba23))
+
 # [2.0.0-beta.20](https://github.com/godxiaoji/vfox/compare/v2.0.0-beta.19...v2.0.0-beta.20) (2021-11-11)
 
 
