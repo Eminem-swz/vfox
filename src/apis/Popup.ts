@@ -39,7 +39,9 @@ function createPopup() {
 export function showPopup<T = DataObject>(
   object: string | ApiOptions,
   apiName: string,
-  getOptions: (done: PopupDone) => {
+  getOptions: (
+    done: PopupDone
+  ) => {
     component: any
     hook?: PopupHook
     singleMode?: boolean
@@ -59,10 +61,10 @@ export function showPopup<T = DataObject>(
 
   const { success, fail, complete } = getCallbackFns(options)
 
-  return new Promise<T>(function (resolve, reject) {
+  return new Promise<T>(function(resolve, reject) {
     try {
       const key = apiName.replace('show', '')
-      const { component, hook, singleMode } = getOptions(function (res) {
+      const { component, hook, singleMode } = getOptions(function(res) {
         success(res)
         complete()
         resolve(res)
@@ -115,9 +117,11 @@ export function showPopup<T = DataObject>(
 
       return app
     } catch (e) {
-      fail(e)
+      const err = e instanceof Error ? e : new Error()
+
+      fail(err)
       complete()
-      reject(e)
+      reject(err)
     }
   })
 }
@@ -154,7 +158,7 @@ export function hidePopup(object: ApiOptions, apiName: string) {
       complete()
       resolve({})
     } catch (e) {
-      fail(new Exception(e.message))
+      fail(new Exception(e instanceof Error ? e.message : 'unknown'))
       complete()
       reject(e)
     }

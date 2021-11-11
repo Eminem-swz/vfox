@@ -33,7 +33,7 @@ import Empty from '@/Empty'
 import { frameTo } from '@/helpers/animation'
 import { hasClassName } from '@/helpers/dom'
 import { useView, viewEmits } from '@/Picker/view'
-import pickerCommonProps from '@/Picker/props'
+import { commonProps } from '@/Picker/props'
 
 interface ScrollElement extends HTMLElement {
   scrolling?: boolean
@@ -44,7 +44,7 @@ export default defineComponent({
   name: 'fx-picker-view',
   components: { Empty },
   props: {
-    ...pickerCommonProps
+    ...commonProps
   },
   // created() {
   //   this.formLabel = this.cacheLabel

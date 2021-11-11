@@ -3,7 +3,7 @@ import { getDefaultFieldNames } from '@/Picker/util'
 import { UserFieldNames, UserOptionItem } from './types'
 import { stringNumberArrayMixValidator } from '@/helpers/validator'
 
-export default {
+export const commonProps = {
   modelValue: {
     type: [String, Number, Array],
     validator: stringNumberArrayMixValidator,

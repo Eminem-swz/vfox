@@ -38,7 +38,7 @@ import PickerView from '@/PickerView'
 import Drawer from '@/Drawer'
 import NavBar from '@/NavBar'
 import { viewEmits } from '@/Picker/view'
-import pickerCommonProps from '@/Picker/props'
+import { commonProps } from '@/Picker/props'
 import {
   usePopupExtend,
   popupExtendEmits,
@@ -51,7 +51,7 @@ export default defineComponent({
   components: { PickerView, Drawer, NavBar },
   props: {
     ...popupExtendProps,
-    ...pickerCommonProps,
+    ...commonProps,
     ...pickerPopupProps
   },
   emits: [...viewEmits, ...popupExtendEmits],

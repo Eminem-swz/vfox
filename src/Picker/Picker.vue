@@ -8,7 +8,7 @@
     ]"
     ref="root"
   >
-    <picker-input
+    <PickerInput
       :formLabelString="formLabelString"
       :formValueString="formValueString"
       :disabled="disabled"
@@ -16,8 +16,12 @@
       :placeholder="placeholder"
       @field-click="onFieldClick"
     />
-    <picker-popup
-      v-bind="$props"
+    <PickerPopup
+      :formatString="formatString"
+      :initialSeparator="initialSeparator"
+      :options="options"
+      :fieldNames="fieldNames"
+      :modelValue="modelValue"
       :title="placeholder"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
@@ -33,12 +37,12 @@ import PickerInput from '../Picker/PickerInput.vue'
 import PickerPopup from '@/PickerPopup'
 import { formItemEmits, formItemProps } from '@/hooks/form'
 import { usePicker, pickerEmits, pickerProps } from '@/Picker/picker'
-import pickerCommonProps from '@/Picker/props'
+import { commonProps } from '@/Picker/props'
 
 export default defineComponent({
   name: 'fx-picker',
   components: { PickerInput, PickerPopup },
-  props: { ...formItemProps, ...pickerCommonProps, ...pickerProps },
+  props: { ...formItemProps, ...commonProps, ...pickerProps },
   emits: [...formItemEmits, ...pickerEmits],
   setup(props, ctx) {
     return {

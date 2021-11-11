@@ -44,7 +44,7 @@ import Drawer from '@/Drawer'
 import { frameTo } from '@/helpers/animation'
 import { isSameArray } from '@/helpers/util'
 import { useView, viewEmits } from '@/Picker/view'
-import pickerCommonProps from '@/Picker/props'
+import { commonProps } from '@/Picker/props'
 import {
   usePopupExtend,
   popupExtendEmits,
@@ -57,7 +57,7 @@ export default defineComponent({
   components: { Drawer },
   props: {
     ...popupExtendProps,
-    ...pickerCommonProps,
+    ...commonProps,
     title: {
       type: String,
       default: ''
