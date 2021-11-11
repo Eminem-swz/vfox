@@ -13,7 +13,7 @@
       </ul>
     </div>
     <div class="fx-index-view_body">
-      <sticky-view
+      <StickyView
         :offset-top="stickyOffsetTop"
         ref="body"
         v-model:activeIndex="activeIndex"
@@ -21,20 +21,13 @@
         @change="onChange"
       >
         <slot></slot>
-      </sticky-view>
+      </StickyView>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  ComponentPublicInstance,
-  defineComponent,
-  onMounted,
-  reactive,
-  ref,
-  shallowRef
-} from 'vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
 import StickyView from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import { rangeInteger } from '@/helpers/util'
@@ -53,7 +46,7 @@ export default defineComponent({
   emits: ['change'],
   setup(props, { emit }) {
     const navigation = ref<HTMLElement>()
-    const body = shallowRef<ComponentPublicInstance<typeof StickyView>>()
+    const body = ref()
     const indexList = reactive<
       {
         value: number

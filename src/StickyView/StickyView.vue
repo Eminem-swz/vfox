@@ -3,7 +3,7 @@
     <div class="fx-sticky-view_list" ref="list">
       <slot></slot>
     </div>
-    <sticky
+    <Sticky
       :offset-top="offsetTop"
       :contain-selector="containSelector"
       :disabled="disabled"
@@ -13,20 +13,12 @@
       <div ref="fixed" class="fx-sticky-view_fixed" :style="fixedStyles">
         {{ title }}
       </div>
-    </sticky>
+    </Sticky>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  ComponentPublicInstance,
-  computed,
-  defineComponent,
-  onMounted,
-  ref,
-  shallowRef,
-  watch
-} from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import Sticky from '@/Sticky'
 import {
   getRelativeOffset,
@@ -69,7 +61,7 @@ export default defineComponent({
     const { emit } = ctx
     const root = ref<HTMLElement>()
     const fixed = ref<HTMLElement>()
-    const sticky = shallowRef<ComponentPublicInstance<typeof Sticky>>()
+    const sticky = ref()
     const index = ref(0)
     const title = ref('')
     const titleY = ref<number | null>(0)

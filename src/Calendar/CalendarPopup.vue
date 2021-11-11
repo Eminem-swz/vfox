@@ -11,7 +11,18 @@
     @update:visible="onUpdateVisible"
     ref="popup"
   >
-    <calendar-view ref="calendarView" @select="onSelect" v-bind="$props" />
+    <CalendarView
+      :modelValue="modelValue"
+      :minDate="minDate"
+      :maxDate="maxDate"
+      :initialMode="initialMode"
+      :allowSameDay="allowSameDay"
+      :maxRange="maxRange"
+      :dayHandler="dayHandler"
+      :firstDayOfWeek="firstDayOfWeek"
+      ref="calendarView"
+      @select="onSelect"
+    />
     <div class="fx-calendar-popup_confirm" v-if="showConfirm">
       <fx-button
         type="primary"
@@ -24,13 +35,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  shallowRef,
-  ComponentPublicInstance,
-  onMounted,
-  reactive
-} from 'vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
 import CalendarView from '@/CalendarView'
 import Drawer from '@/Drawer'
 import FxButton from '@/Button'
@@ -64,8 +69,7 @@ export default defineComponent({
   },
   emits: [...popupExtendEmits, 'update:modelValue'],
   setup(props, ctx) {
-    const calendarView =
-      shallowRef<ComponentPublicInstance<typeof CalendarView>>()
+    const calendarView = ref()
     const detail = reactive<DetailObject>(getDefaultDetail())
 
     const popup = usePopupExtend(ctx)

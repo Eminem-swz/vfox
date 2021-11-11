@@ -1,6 +1,6 @@
 <template>
   <div class="fx-calendar" :class="{ disabled }" ref="root">
-    <picker-input
+    <PickerInput
       :formLabelString="formLabel"
       :formValueString="formLabel"
       :disabled="disabled"
@@ -8,8 +8,15 @@
       :placeholder="placeholder"
       @field-click="onFieldClick"
     />
-    <calendar-popup
-      v-bind="$props"
+    <CalendarPopup
+      :modelValue="modelValue"
+      :minDate="minDate"
+      :maxDate="maxDate"
+      :initialMode="initialMode"
+      :allowSameDay="allowSameDay"
+      :maxRange="maxRange"
+      :dayHandler="dayHandler"
+      :firstDayOfWeek="firstDayOfWeek"
       :title="placeholder"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
@@ -20,14 +27,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  shallowRef,
-  ComponentPublicInstance,
-  reactive,
-  ref,
-  watch
-} from 'vue'
+import { defineComponent, reactive, ref, watch } from 'vue'
 import PickerInput from '../Picker/PickerInput.vue'
 import CalendarPopup from '@/CalendarPopup'
 import {
@@ -75,7 +75,7 @@ export default defineComponent({
     const popupVisible = ref(true)
     const formLabel = ref('')
     const formValue = reactive<Date[]>([])
-    const popup = shallowRef<ComponentPublicInstance<typeof CalendarPopup>>()
+    const popup = ref()
 
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)
     let detail = getDefaultDetail()

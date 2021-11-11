@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, onMounted, shallowRef, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { isSameArray, isEmpty } from '@/helpers/util'
 import { DetailObject, PickerHandlers } from './types'
 import { DataObject, UseProps } from '../helpers/types'
@@ -25,7 +25,7 @@ export function usePickerPopup(
   },
   handlers: PickerHandlers
 ) {
-  const view = shallowRef<ComponentPublicInstance<any>>()
+  const view = ref()
 
   let detail = getDefaultDetail()
 

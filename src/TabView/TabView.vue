@@ -1,12 +1,12 @@
 <template>
   <div class="fx-tab-view" :class="{ vertical }">
     <div class="fx-tab-view_header fx-horizontal-hairline">
-      <side-tab
+      <SideTab
         v-if="vertical"
         :options="tabList"
         v-model:activeValue="activeIndex"
-      ></side-tab>
-      <tab
+      ></SideTab>
+      <Tab
         v-else
         :options="tabList"
         v-model:activeValue="activeIndex"
@@ -14,7 +14,7 @@
       />
     </div>
     <div class="fx-tab-view_body" ref="list">
-      <swiper
+      <Swiper
         v-model:activeIndex="activeIndex"
         @change="onChange"
         @animated="onAnimated"
@@ -22,20 +22,13 @@
         :initial-vertical="vertical"
       >
         <slot></slot>
-      </swiper>
+      </Swiper>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  ref,
-  defineComponent,
-  reactive,
-  provide,
-  ComponentPublicInstance,
-  shallowRef
-} from 'vue'
+import { ref, defineComponent, reactive, provide } from 'vue'
 import Tab from '@/Tab'
 import SideTab from '@/SideTab'
 import Swiper from '@/Swiper'
@@ -67,7 +60,7 @@ export default defineComponent({
   emits: ['change', 'animated'],
   setup(props, { emit }) {
     const vertical = ref(!!props.initialVertical)
-    const swiper = shallowRef<ComponentPublicInstance<typeof Swiper>>()
+    const swiper = ref()
     const tabList = reactive<
       {
         value: number

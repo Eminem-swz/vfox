@@ -24,14 +24,7 @@
 </template>
 
 <script lang="ts">
-import {
-  ComponentPublicInstance,
-  defineComponent,
-  onMounted,
-  reactive,
-  ref,
-  shallowRef
-} from 'vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
 import SideTab from '@/SideTab'
 import Sticky from '@/Sticky'
 import StickyView from '@/StickyView'
@@ -53,8 +46,8 @@ export default defineComponent({
   },
   emits: ['change'],
   setup(props, { emit }) {
-    const sidebar = shallowRef<ComponentPublicInstance<typeof Sticky>>()
-    const body = shallowRef<ComponentPublicInstance<typeof StickyView>>()
+    const sidebar = ref()
+    const body = ref()
     const tabList = reactive<
       {
         value: number

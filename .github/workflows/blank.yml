@@ -25,12 +25,12 @@ jobs:
 
       - name: Install and Build Code
         run: |
-          npm install
-          npm run lint
-          npm run build
-          npm run build:css
-          npm run build:full
-          npm run build:component
+          yarn add
+          yarn lint
+          yarn build:manifest
+          yarn build:css
+          yarn build:full
+          yarn build:component
 
       - name: Release
         env:

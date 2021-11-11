@@ -1,11 +1,4 @@
-import {
-  ref,
-  SetupContext,
-  reactive,
-  shallowRef,
-  ComponentPublicInstance,
-  watch
-} from 'vue'
+import { ref, SetupContext, reactive, watch } from 'vue'
 import { cloneData, isSameArray, isEmpty } from '@/helpers/util'
 import {
   getDefaultDetail,
@@ -51,28 +44,24 @@ export function usePicker(
   const formLabelString = ref('')
   const formLabel = reactive<Labels>([])
   const formValue = reactive<Values>([])
-  const popup = shallowRef<ComponentPublicInstance<any>>()
+  const popup = ref()
 
   let detail = getDefaultDetail()
   const separator: string = props.initialSeparator
   // const defaultDetail = getDefaultDetail()
   const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
 
-  const {
-    formName,
-    validateAfterEventTrigger,
-    hookFormValue,
-    root
-  } = useFormItem<string | number>(props, ctx, {
-    formValue,
-    hookFormValue: () =>
-      handlers.valueHook
-        ? handlers.valueHook(cloneData(formValue))
-        : props.formatString
-        ? formValueString.value
-        : cloneData(formValue),
-    hookResetValue: () => updateValue(cloneData(defaultValue)).value
-  })
+  const { formName, validateAfterEventTrigger, hookFormValue, root } =
+    useFormItem<string | number>(props, ctx, {
+      formValue,
+      hookFormValue: () =>
+        handlers.valueHook
+          ? handlers.valueHook(cloneData(formValue))
+          : props.formatString
+          ? formValueString.value
+          : cloneData(formValue),
+      hookResetValue: () => updateValue(cloneData(defaultValue)).value
+    })
 
   const format2String = (array: Values, type: HandleType = 'value') => {
     return handlers.valueFormatter

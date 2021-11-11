@@ -5,8 +5,6 @@ import {
   ref,
   watch,
   inject,
-  shallowRef,
-  ComponentPublicInstance,
   provide
 } from 'vue'
 import { isFunction, isObject, noop } from '@/helpers/util'
@@ -290,7 +288,7 @@ export const popupExtendProps = {
 }
 
 export function usePopupExtend(ctx: SetupContext<any>) {
-  const popup = shallowRef<ComponentPublicInstance<PopupPublicInstance>>()
+  const popup = ref()
   const apis = inject<PopupBridge>('fxApis', {})
 
   const emit: UseEmit = (event: string, res: any) => {

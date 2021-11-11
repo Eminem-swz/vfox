@@ -63,9 +63,7 @@ import {
   reactive,
   ref,
   nextTick,
-  watch,
-  ComponentPublicInstance,
-  shallowRef
+  watch
 } from 'vue'
 import LoadMore from '@/LoadMore'
 import {
@@ -168,7 +166,7 @@ export default defineComponent({
         recycled: boolean
       }[]
     >([])
-    const scrollView = shallowRef<ComponentPublicInstance<typeof ScrollView>>()
+    const scrollView = ref()
     const listEl = ref<HTMLElement>()
 
     let wrapperSize = 0
@@ -286,8 +284,9 @@ export default defineComponent({
 
           $item.style.width = colSize + 'px'
           $item.style.position = 'absolute'
-          $item.style.transform = `translate3d(${colMinIndex *
-            colSize}px, ${colMin}px, 0)`
+          $item.style.transform = `translate3d(${
+            colMinIndex * colSize
+          }px, ${colMin}px, 0)`
 
           newCols[colMinIndex] = colMin + $item.offsetHeight
           $item._translateOffset = offset = colMin
