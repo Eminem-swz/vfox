@@ -5,6 +5,8 @@ const sass = require('gulp-sass')
 const replace = require('gulp-replace')
 const autoprefixer = require('gulp-autoprefixer')
 const through = require('through2')
+const cleanCSS = require('gulp-clean-css')
+const rename = require('gulp-rename')
 
 function sass2css() {
   return gulp
@@ -19,6 +21,22 @@ function copyStyle() {
     .src('../src/**/style/index.js')
     .pipe(replace('.scss', '.css'))
     .pipe(gulp.dest('../es'))
+}
+
+/**
+ * 把 es/style/index.css 压缩放到 dist/bundle.css
+ * @returns
+ */
+function compressCss() {
+  return (
+    gulp
+      .src('../es/**/style/index.css')
+      // 2. 压缩文件
+      .pipe(cleanCSS())
+      .pipe(rename('index.css'))
+      // 3. 另存压缩后的文件
+      .pipe(gulp.dest('../dist'))
+  )
 }
 
 function fixDts() {
@@ -50,6 +68,6 @@ function cacheTsPath() {
     .pipe(fs.createWriteStream('ts-files.txt'))
 }
 
-exports.build = gulp.series(sass2css, copyStyle)
+exports.build = gulp.series(sass2css, copyStyle, compressCss)
 exports.dts = fixDts
 exports.cts = cacheTsPath

@@ -4,16 +4,16 @@ exports[`SideTab should render set mix options correctly 1`] = `
 <div class="fx-side-tab">
   <ul class="fx-side-tab_list">
     <li class="fx-side-tab_item active">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item active-next">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub content="惠" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub content="1" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
   </ul>
 </div>
@@ -23,55 +23,55 @@ exports[`SideTab should render set options correctly 1`] = `
 <div class="fx-side-tab">
   <ul class="fx-side-tab_list">
     <li class="fx-side-tab_item active">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item active-next">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
     <li class="fx-side-tab_item">
-      <fx-badge-stub class="fx-side-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-side-tab_item-inner"></badge-stub>
     </li>
   </ul>
 </div>

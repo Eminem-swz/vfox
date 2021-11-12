@@ -2,20 +2,20 @@
 
 exports[`Pagination should render default correctly 1`] = `
 <div class="fx-pagination"><button class="fx-pagination_prev" disabled="">
-    <fx-icon-stub icon="LeftOutlined"></fx-icon-stub>
+    <icon-stub icon="LeftOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
   </button>
   <div class="fx-pagination_content">1 / 1</div><button class="fx-pagination_next" disabled="">
-    <fx-icon-stub icon="LeftOutlined"></fx-icon-stub>
+    <icon-stub icon="RightOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
   </button>
 </div>
 `;
 
 exports[`Pagination should render set default slot correctly 1`] = `
 <div class="fx-pagination"><button class="fx-pagination_prev" disabled="">
-    <fx-icon-stub icon="LeftOutlined"></fx-icon-stub>
+    <icon-stub icon="LeftOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
   </button>
   <div class="fx-pagination_content">1 / 1</div><button class="fx-pagination_next" disabled="">
-    <fx-icon-stub icon="LeftOutlined"></fx-icon-stub>
+    <icon-stub icon="RightOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
   </button>
 </div>
 `;

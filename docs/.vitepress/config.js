@@ -132,7 +132,6 @@ function getComponentsSidebar() {
         { text: "Steps", link: "/components/Steps" },
         { text: "Price", link: "/components/Price" },
         { text: "Avatar", link: "/components/Avatar" },
-        { text: "QrCode", link: "/components/QrCode" },
         { text: "Timeline", link: "/components/Timeline" },
         { text: "Stopwatch", link: "/components/Stopwatch" },
         { text: "Result", link: "/components/Result" },

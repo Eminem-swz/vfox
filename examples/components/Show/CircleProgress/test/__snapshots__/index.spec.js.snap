@@ -2,28 +2,28 @@
 
 exports[`CircleProgress should render custom default slot correctly 1`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <fx-activity-indicator-loading-stub class="fx-circle-progress_bar" size="100" rate="0" strokewidth="5.37"></fx-activity-indicator-loading-stub>
+  <loading-svg-stub rate="0" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">0%</div>
 </div>
 `;
 
 exports[`CircleProgress should render default slot correctly 1`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <fx-activity-indicator-loading-stub class="fx-circle-progress_bar" size="100" rate="0" strokewidth="5.37"></fx-activity-indicator-loading-stub>
+  <loading-svg-stub rate="0" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">0%</div>
 </div>
 `;
 
 exports[`CircleProgress should render default slot correctly 2`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <fx-activity-indicator-loading-stub class="fx-circle-progress_bar" size="100" rate="0" strokewidth="5.37"></fx-activity-indicator-loading-stub>
+  <loading-svg-stub rate="0.5" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">50%</div>
 </div>
 `;
 
 exports[`CircleProgress should render default slot correctly 3`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <fx-activity-indicator-loading-stub class="fx-circle-progress_bar" size="100" rate="0" strokewidth="5.37"></fx-activity-indicator-loading-stub>
+  <loading-svg-stub rate="1" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">100%</div>
 </div>
 `;

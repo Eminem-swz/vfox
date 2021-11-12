@@ -1,8 +1,8 @@
 /* eslint-disable */
 import vue from 'rollup-plugin-vue'
 import typescript from 'rollup-plugin-typescript2'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
 import sass from 'rollup-plugin-sass'
 import pkg from '../package.json'
 

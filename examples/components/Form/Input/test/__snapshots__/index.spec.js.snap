@@ -31,7 +31,7 @@ exports[`Input should render prop showClear=true correctly 1`] = `
 <label class="fx-input">
   <!--v-if--><input class="fx-input_input" name="" type="text" inputmode="text" placeholder="" maxlength="140" value="">
   <!--v-if-->
-  <fx-icon-stub class="fx-input_clear" icon="CloseCircleFilled" style="display: none;"></fx-icon-stub>
+  <icon-stub icon="CloseCircleFilled" spin="false" size="0" width="0" height="0" class="fx-input_clear" style="display: none;"></icon-stub>
   <!--v-if-->
 </label>
 `;

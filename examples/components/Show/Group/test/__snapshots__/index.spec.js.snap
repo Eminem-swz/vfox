@@ -7,7 +7,9 @@ exports[`Group should render default slot correctly 1`] = `
     <div class="fx-group_more"></div>
   </div>
   <div class="fx-group_body fx-horizontal-hairline hairline-reverse">
-    <div class="fx-group_body-inner"></div>
+    <div class="fx-group_body-inner">
+      <fx-cell-stub label="" description="" content="" clickable="false" required="false" islink="false" arrowdirection="right" disabled="false"></fx-cell-stub>
+    </div>
   </div>
 </div>
 `;

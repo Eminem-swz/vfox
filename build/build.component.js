@@ -1,11 +1,11 @@
 /* eslint-disable */
 const pkg = require('../package.json')
 const { resolve } = require('path')
-const nodeResolve = require('rollup-plugin-node-resolve')
+const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const vue = require('rollup-plugin-vue')
 const rollup = require('rollup')
 const typescript = require('rollup-plugin-typescript2')
-const commonjs = require('rollup-plugin-commonjs')
+const commonjs = require('@rollup/plugin-commonjs')
 const tss = require('./ts-files.json')
 
 const deps = Object.keys(pkg.dependencies)
@@ -66,14 +66,6 @@ const runBuild = async () => {
           abortOnError: false
           // clean: true
         })
-
-        // babel({
-        //   runtimeHelpers: true,
-        //   // 只转换源代码，不运行外部依赖
-        //   exclude: 'node_modules/**',
-        //   // babel 默认不支持 ts 需要手动添加
-        //   extensions: ['.ts']
-        // })
       ]
     }
 

@@ -3,13 +3,13 @@
 exports[`Result should render default correctly 1`] = `
 <div class="fx-result type--info">
   <div class="fx-result_header">
-    <fx-icon-stub class="fx-result_icon type--info" icon="InfoCircleFilled"></fx-icon-stub>
+    <icon-stub icon="InfoCircleFilled" spin="false" size="0" width="0" height="0" class="fx-result_icon type--info"></icon-stub>
     <!--v-if-->
     <!--v-if-->
   </div>
   <div class="fx-result_footer">
-    <fx-button-stub type="primary"></fx-button-stub>
-    <fx-button-stub type="primary"></fx-button-stub>
+    <fx-button-stub type="primary" loading="false" disabled="false" ghost="false" transparent="false"></fx-button-stub>
+    <fx-button-stub type="default" loading="false" disabled="false" ghost="false" transparent="false"></fx-button-stub>
   </div>
 </div>
 `;

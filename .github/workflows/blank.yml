@@ -37,6 +37,7 @@ jobs:
           npm run build:css
           npm run build:full
           npm run build:component
+          npm run build:umd
 
       - name: Release
         env:

@@ -27,6 +27,5 @@ module.exports = {
   snapshotSerializers: ['jest-serializer-vue'],
   testMatch: ['**/examples/**/*.spec.[jt]s?(x)'],
   // https://github.com/facebook/jest/issues/6766
-  testURL: 'http://localhost/',
-  setupFiles: ['<rootDir>/test/.jest/register-context.js']
+  testURL: 'http://localhost/'
 }

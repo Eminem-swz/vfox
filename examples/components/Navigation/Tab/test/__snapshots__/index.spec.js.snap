@@ -4,19 +4,19 @@ exports[`Tab should render set mix options correctly 1`] = `
 <div class="fx-tab no--scroll">
   <ul class="fx-tab_list">
     <li class="fx-tab_item fx-vertical-hairline active">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline active-next">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub content="惠" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub content="1" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
   </ul>
@@ -27,71 +27,71 @@ exports[`Tab should render set options correctly 1`] = `
 <div class="fx-tab">
   <ul class="fx-tab_list">
     <li class="fx-tab_item fx-vertical-hairline active">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline active-next">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <fx-badge-stub class="fx-tab_item-inner"></fx-badge-stub>
+      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
   </ul>
