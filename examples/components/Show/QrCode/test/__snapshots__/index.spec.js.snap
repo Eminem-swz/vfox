@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`QrCode should render prop text="hello world" correctly 1`] = `<canvas class="fx-qr-code"></canvas>`;

@@ -94,7 +94,6 @@ import Step from '@/Step'
 import Price from '@/Price'
 import Avatar from '@/Avatar'
 import AvatarGroup from '@/AvatarGroup'
-import QrCode from '@/QrCode'
 import Timeline from '@/Timeline'
 import TimelineItem from '@/TimelineItem'
 import Stopwatch from '@/Stopwatch'
@@ -196,7 +195,6 @@ export {
   Price,
   Avatar,
   AvatarGroup,
-  QrCode,
   Timeline,
   TimelineItem,
   Stopwatch,
