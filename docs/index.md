@@ -24,7 +24,7 @@ sidebarDepth: 2
 ### NPM
 
 ```
-npm i -S vfox@beta
+npm i -S vfox@next
 ```
 
 ## 引入
@@ -85,7 +85,7 @@ import 'vfox/src/Button/style'
 app.use(Button)
 ```
 
-### API调用
+### API 调用
 
 ```
 import { Toast } from 'vfox'
