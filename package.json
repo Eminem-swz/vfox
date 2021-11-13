@@ -14,7 +14,7 @@
     "lint": "eslint ./src/**/*.js",
     "build:css": "gulp build --gulpfile build/gulpfile.js",
     "build:component": "node ./build/bincomp.js",
-    "build:full": "rollup -c ./build/build.declaration.js",
+    "build:full": "node ./build/build.declaration.js",
     "build:manifest": "node build/build.manifest.js",
     "semantic-release": "semantic-release",
     "docs:dev": "vitepress dev docs",
