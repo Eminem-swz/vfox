@@ -42,6 +42,11 @@
     "es",
     "src"
   ],
+  "release": {
+    "branches": [
+      "beta"
+    ]
+  },
   "homepage": "https://github.com/godxiaoji/vfox#readme",
   "dependencies": {
     "async-validator": "^3.4.0",
