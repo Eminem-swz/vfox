@@ -5,7 +5,7 @@
     ref="root"
   >
     <slot></slot>
-    <icon
+    <Icon
       icon="CloseOutlined"
       :class="{ disabled: !!disabled }"
       @mousedown.stop="noop"

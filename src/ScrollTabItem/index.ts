@@ -5,7 +5,7 @@ import ScrollTabItem from '../ScrollTab/ScrollTabItem.vue'
 const _ScrollTabItem: SFCWithInstall<typeof ScrollTabItem> = Object.assign(
   ScrollTabItem,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(ScrollTabItem.name, ScrollTabItem)
     }
   }

@@ -5,7 +5,7 @@ import StickyViewItem from '../StickyView/StickyViewItem.vue'
 const _StickyViewItem: SFCWithInstall<typeof StickyViewItem> = Object.assign(
   StickyViewItem,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(StickyViewItem.name, StickyViewItem)
     }
   }

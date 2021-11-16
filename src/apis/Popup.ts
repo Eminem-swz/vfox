@@ -4,12 +4,15 @@ import { getCallbackFns } from '@/apis/callback'
 import { parseParamsByRules } from '@/apis/rules'
 import { ApiOptions, PopupHook, PopupBridge } from './types'
 import { DataObject } from '../helpers/types'
+import { PopupCustomCancel } from '../hooks/types'
 import Exception from '@/helpers/exception'
 
 type PopupDone = (res: any) => void
 
+type RefFnName = 'customCancel'
+
 interface RefFns {
-  [propName: string]: Function
+  customCancel?: PopupCustomCancel
 }
 
 const $refs: {
@@ -99,7 +102,7 @@ export function showPopup<T = DataObject>(
 
           hook && hook(hookEvent, res)
         },
-        out(key: string, value: any) {
+        out(key: RefFnName, value: PopupCustomCancel) {
           fns[key] = value
         }
       } as PopupBridge)
@@ -124,8 +127,9 @@ export function showPopup<T = DataObject>(
 
 function clear(key: string) {
   if ($refs[key]) {
-    $refs[key].fns.customCancel('clear', true)
-    delete $refs[key]
+    const fns = $refs[key].fns
+
+    fns.customCancel && fns.customCancel('clear', true)
   }
 }
 
@@ -146,7 +150,7 @@ export function hidePopup(object: ApiOptions, apiName: string) {
 
   const { success, fail, complete } = getCallbackFns(object)
 
-  return new Promise<{}>((resolve, reject) => {
+  return new Promise<Record<string, never>>((resolve, reject) => {
     try {
       clear(apiName.replace('hide', ''))
 

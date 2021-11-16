@@ -7,7 +7,11 @@ export function createStorage(areaName: string, options?: ApiOptions) {
     options = {} as ApiOptions
   }
 
-  const { areaName: _areaName, perLimitSize, limitSize } = parseParamsByRules(
+  const {
+    areaName: _areaName,
+    perLimitSize,
+    limitSize
+  } = parseParamsByRules(
     Object.assign({ areaName }, options),
     'createStorage'
   ) as {

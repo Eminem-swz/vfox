@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Checkbox from './Checkbox.vue'
 
 const _Checkbox: SFCWithInstall<typeof Checkbox> = Object.assign(Checkbox, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Checkbox.name, Checkbox)
   }
 })

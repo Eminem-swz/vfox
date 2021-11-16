@@ -5,7 +5,7 @@ import CheckboxGroup from '../Checkbox/CheckboxGroup.vue'
 const _CheckboxGroup: SFCWithInstall<typeof CheckboxGroup> = Object.assign(
   CheckboxGroup,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(CheckboxGroup.name, CheckboxGroup)
     }
   }

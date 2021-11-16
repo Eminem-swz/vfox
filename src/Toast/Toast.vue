@@ -8,13 +8,13 @@
       v-show="isShow"
     >
       <div class="fx-toast_box" :class="{ 'has--icon': !!iconName }">
-        <activity-indicator
+        <ActivityIndicator
           class="fx-toast_icon"
           :size="21"
           color="#ffffff"
           v-if="type === 'loading'"
         />
-        <icon v v-else-if="iconName" class="fx-toast_icon" :icon="iconName" />
+        <Icon v v-else-if="iconName" class="fx-toast_icon" :icon="iconName" />
         <div class="fx-toast_text">
           {{ title }}
         </div>

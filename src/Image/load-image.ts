@@ -54,7 +54,7 @@ function loadImageAsync(
 
   image.src = item.src
 
-  image.onload = function(e) {
+  image.onload = function (e) {
     resolve({
       naturalHeight: image.naturalHeight,
       naturalWidth: image.naturalWidth,
@@ -63,7 +63,7 @@ function loadImageAsync(
     } as ImageLoadedResource)
   }
 
-  image.onerror = function() {
+  image.onerror = function () {
     reject(
       new Exception(
         `src "${item.src}" not found`,

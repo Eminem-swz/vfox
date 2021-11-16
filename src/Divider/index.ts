@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Divider from './Divider.vue'
 
 const _Divider: SFCWithInstall<typeof Divider> = Object.assign(Divider, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Divider.name, Divider)
   }
 })

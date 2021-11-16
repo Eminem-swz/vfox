@@ -8,7 +8,13 @@ function initEvent() {
   if (isMobile) {
     if (isIOS) {
       // console.log('support active')
-      document.addEventListener('touchstart', function() {}, false)
+      document.addEventListener(
+        'touchstart',
+        function () {
+          // noop
+        },
+        false
+      )
     }
   }
 }

@@ -336,7 +336,9 @@ export function arrayLike2Array(object: ArrayLike<any>) {
   return Array.prototype.slice.call(object)
 }
 
-export function noop() {}
+export function noop() {
+  // empty
+}
 
 export function no() {
   return false
@@ -351,7 +353,10 @@ function hasOwnProperty(object: any, key: string) {
  * @param object 对象
  * @param callback 遍历回调
  */
-export function objectForEach(object: any, callback: Function) {
+export function objectForEach(
+  object: any,
+  callback: (value: unknown, key: string) => void
+) {
   if (isObject(object)) {
     for (const k in object) {
       if (hasOwnProperty(object, k)) {
@@ -394,7 +399,7 @@ export function getRandomNumber(min: number, max: number) {
  * 获取GUID
  */
 export function createGuid() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     const r = (Math.random() * 16) | 0,
       v = c === 'x' ? r : (r & 0x3) | 0x8
     return v.toString(16)
@@ -523,10 +528,7 @@ export function simpleNumber(number: number) {
   }
 
   function toFixed(number: number) {
-    return number
-      .toString()
-      .substr(0, 4)
-      .replace(/\.$/, '')
+    return number.toString().substr(0, 4).replace(/\.$/, '')
   }
 
   number = Math.floor(number)

@@ -5,7 +5,7 @@ import DatePickerView from '../DatePicker/DatePickerView.vue'
 const _DatePickerView: SFCWithInstall<typeof DatePickerView> = Object.assign(
   DatePickerView,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(DatePickerView.name, DatePickerView)
     }
   }

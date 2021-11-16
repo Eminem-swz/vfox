@@ -10,30 +10,25 @@ import {
 import { isFunction, isObject, noop } from '@/helpers/util'
 import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import { UseProps, DataObject } from '../helpers/types'
+import { UseProps, DataObject, Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/blur'
 import {
   VisibleStateChangeArgs,
   VisibleState,
   PopupCustomCancel,
   PopupCustomConfirm,
-  UseEmit
+  UseEmit,
+  PopupStyles
 } from './types'
 import { PopupBridge } from '../apis/types'
 
 interface UseOptions {
   forbidScroll?: boolean
   useBlur?: boolean
-  afterConfirm?: Function
-  afterCancel?: Function
-  afterShow?: Function
-  afterHidden?: Function
-}
-
-interface PopupStyles {
-  zIndex: number
-  top: string
-  position: 'absolute'
+  afterConfirm?: Noop
+  afterCancel?: Noop
+  afterShow?: Noop
+  afterHidden?: Noop
 }
 
 let zIndex = popupZIndex
@@ -88,7 +83,7 @@ export function usePopup(
     }
   }
 
-  function doShow(callback: Function) {
+  function doShow(callback: Noop) {
     if (isShowing) {
       return false
     }
@@ -138,7 +133,7 @@ export function usePopup(
     }
   }
 
-  function _doHide(callback?: Function) {
+  function _doHide(callback?: Noop) {
     if (isHiding) {
       return false
     }
@@ -155,7 +150,7 @@ export function usePopup(
       position.value = null
       top.value = null
 
-      isFunction(callback) && (callback as Function)()
+      isFunction(callback) && (callback as Noop)()
     }, 210)
 
     if (props.visible) {
@@ -243,7 +238,7 @@ export function usePopup(
   })
 
   const popupStyles = computed(() => {
-    const styles: Partial<PopupStyles> = {
+    const styles: PopupStyles = {
       zIndex: zIndex.value
     }
 

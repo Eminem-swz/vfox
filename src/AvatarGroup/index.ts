@@ -5,7 +5,7 @@ import AvatarGroup from '../Avatar/AvatarGroup.vue'
 const _AvatarGroup: SFCWithInstall<typeof AvatarGroup> = Object.assign(
   AvatarGroup,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(AvatarGroup.name, AvatarGroup)
     }
   }

@@ -16,16 +16,27 @@ import { ApiOptions } from '../apis/types'
 
 const placementValidator = createEnumsValidator(PLACEMENT_TYPES)
 
+type RuleDefaultFunction = () =>
+  | null
+  | string
+  | number
+  | boolean
+  | string[]
+  | number[]
+  | Record<string, never>
+
+type RuleType =
+  | StringConstructor
+  | NumberConstructor
+  | BooleanConstructor
+  | ArrayConstructor
+  | DateConstructor
+  | ObjectConstructor
+  | FunctionConstructor
+
 interface ApiRule {
-  type?:
-    | StringConstructor
-    | NumberConstructor
-    | BooleanConstructor
-    | ArrayConstructor
-    | DateConstructor
-    | ObjectConstructor
-    | FunctionConstructor
-  default?: number | boolean | string | Function | null
+  type?: RuleType
+  default?: number | boolean | string | null | RuleDefaultFunction
   validator?: Validator
   required?: boolean
   enums?: string[]
@@ -446,7 +457,7 @@ export const parseParamsByRules = function (
   for (const k in rules) {
     const rule = rules[k]
     const option = options[k]
-    const ruleType = rule.type as Function
+    const ruleType = rule.type as StringConstructor
 
     if (rule.required && !notNullValidator(option)) {
       throw new Exception(
@@ -508,7 +519,7 @@ export const parseParamsByRules = function (
       }
     } else if (rule.default) {
       ret[k] = isFunction(rule.default)
-        ? (rule.default as Function)()
+        ? (rule.default as RuleDefaultFunction)()
         : rule.default
     }
   }

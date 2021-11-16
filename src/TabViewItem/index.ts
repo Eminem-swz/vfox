@@ -5,7 +5,7 @@ import TabViewItem from '../TabView/TabViewItem.vue'
 const _TabViewItem: SFCWithInstall<typeof TabViewItem> = Object.assign(
   TabViewItem,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(TabViewItem.name, TabViewItem)
     }
   }

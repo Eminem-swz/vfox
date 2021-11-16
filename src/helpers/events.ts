@@ -37,9 +37,9 @@ function onEvent(e: Event) {
   if (uid && callbacks[type] && callbacks[type][uid]) {
     const currentCallbacks = callbacks[type][uid]
 
-    const $el = (currentTarget === document
-      ? document.documentElement
-      : currentTarget) as HTMLElement
+    const $el = (
+      currentTarget === document ? document.documentElement : currentTarget
+    ) as HTMLElement
 
     currentCallbacks.forEach((callback: EventCallback) => {
       callback.call(callback, e, $el)
@@ -56,9 +56,9 @@ export function addEvent(
     return
   }
 
-  const target = ($el === document.documentElement
-    ? document
-    : $el) as EventTargetWithUID
+  const target = (
+    $el === document.documentElement ? document : $el
+  ) as EventTargetWithUID
 
   if (!target._euid) {
     target._euid = ++euid
@@ -81,9 +81,9 @@ export function removeEvent(
   callback: EventCallback,
   $el: EventElement = document
 ) {
-  const target = ($el === document.documentElement
-    ? document
-    : $el) as EventTargetWithUID
+  const target = (
+    $el === document.documentElement ? document : $el
+  ) as EventTargetWithUID
 
   const uid = target._euid
 
@@ -174,13 +174,19 @@ export function removeEvent(
 let passiveSupported = false
 try {
   const options = Object.defineProperty({}, 'passive', {
-    get: function() {
+    get: function () {
       return (passiveSupported = true)
     }
   })
-  window.addEventListener('test' as 'click', function() {}, options)
+  window.addEventListener(
+    'test' as 'click',
+    function () {
+      // empty
+    },
+    options
+  )
 } catch (err) {
-  //
+  // empty
 }
 
 const touchstart = isMobile ? 'touchstart' : 'mousedown'

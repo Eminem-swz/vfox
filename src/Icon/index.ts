@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Icon from './Icon.vue'
 
 const _Icon: SFCWithInstall<typeof Icon> = Object.assign(Icon, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Icon.name, Icon)
   }
 })

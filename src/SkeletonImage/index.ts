@@ -5,7 +5,7 @@ import SkeletonImage from '../Skeleton/SkeletonImage.vue'
 const _SkeletonImage: SFCWithInstall<typeof SkeletonImage> = Object.assign(
   SkeletonImage,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(SkeletonImage.name, SkeletonImage)
     }
   }

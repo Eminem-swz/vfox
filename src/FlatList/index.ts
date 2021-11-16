@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import FlatList from './FlatList.vue'
 
 const _FlatList: SFCWithInstall<typeof FlatList> = Object.assign(FlatList, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(FlatList.name, FlatList)
   }
 })

@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Collapse from './Collapse.vue'
 
 const _Collapse: SFCWithInstall<typeof Collapse> = Object.assign(Collapse, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Collapse.name, Collapse)
   }
 })

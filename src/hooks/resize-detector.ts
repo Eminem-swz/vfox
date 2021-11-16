@@ -22,7 +22,7 @@ export function resizeDetector(
   object.type = 'text/html'
   object.setAttribute('aria-hidden', 'true')
   object.data = 'about:blank'
-  object.onload = function() {
+  object.onload = function () {
     if (!object.destroyed) {
       object.contentDocument.defaultView.addEventListener('resize', callback)
     }

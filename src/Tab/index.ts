@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Tab from './Tab.vue'
 
 const _Tab: SFCWithInstall<typeof Tab> = Object.assign(Tab, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Tab.name, Tab)
   }
 })

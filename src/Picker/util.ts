@@ -294,9 +294,7 @@ function validateCascadeCols(
     return false
   }
 
-  return (virtualHandler
-  ? virtualOptionsDeep(0, 0)
-  : deep(options, 0, []))
+  return (virtualHandler ? virtualOptionsDeep(0, 0) : deep(options, 0, []))
     ? {
         valid: true,
         value,

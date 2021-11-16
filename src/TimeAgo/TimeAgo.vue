@@ -11,6 +11,7 @@ import dayjs from '@/helpers/day'
 import { Dayjs } from 'dayjs'
 import { format } from 'timeago.js'
 import { addTimer } from '@/helpers/timer'
+import { Noop } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-time-ago',
@@ -60,7 +61,7 @@ export default defineComponent({
       immediate: true
     })
 
-    let removeTimer: Function | null = null
+    let removeTimer: Noop | null = null
     watch(
       () => props.interval,
       () => {

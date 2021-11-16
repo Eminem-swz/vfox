@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import TabView from './TabView.vue'
 
 const _TabView: SFCWithInstall<typeof TabView> = Object.assign(TabView, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(TabView.name, TabView)
   }
 })

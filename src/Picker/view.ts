@@ -161,9 +161,9 @@ export function useView(
 
     cols.length = 0
 
-    const options = (isArray(options2[0])
-      ? options2
-      : [options2]) as OptionItem[][]
+    const options = (
+      isArray(options2[0]) ? options2 : [options2]
+    ) as OptionItem[][]
 
     options.forEach((subOptions, index) => {
       let hasSelected = false

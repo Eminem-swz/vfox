@@ -5,7 +5,7 @@ import CollapseItem from '../Collapse/CollapseItem.vue'
 const _CollapseItem: SFCWithInstall<typeof CollapseItem> = Object.assign(
   CollapseItem,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(CollapseItem.name, CollapseItem)
     }
   }

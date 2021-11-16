@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Rate from './Rate.vue'
 
 const _Rate: SFCWithInstall<typeof Rate> = Object.assign(Rate, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Rate.name, Rate)
   }
 })

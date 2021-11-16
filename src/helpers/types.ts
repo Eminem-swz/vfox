@@ -44,3 +44,7 @@ export interface MixEventCallback {
 }
 
 export type EasingType = 'linear' | 'swing'
+
+export interface Noop {
+  (): void
+}

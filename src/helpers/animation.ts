@@ -22,7 +22,7 @@ export class AnimationFrameTask {
   id: number
 
   constructor(ref: TaskRef, id: number) {
-    this.stop = function() {
+    this.stop = function () {
       if (ref.idle) {
         cancelAnimationFrame(ref.idle)
         ref.idle = null
@@ -74,7 +74,7 @@ export function frameTo(options: Options) {
   let current = from
 
   function step() {
-    ref.idle = requestAnimationFrame(function() {
+    ref.idle = requestAnimationFrame(function () {
       const t = Date.now()
 
       if (t >= end) {

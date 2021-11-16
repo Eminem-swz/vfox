@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import SearchBar from './SearchBar.vue'
 
 const _SearchBar: SFCWithInstall<typeof SearchBar> = Object.assign(SearchBar, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(SearchBar.name, SearchBar)
   }
 })

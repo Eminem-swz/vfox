@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Sticky from './Sticky.vue'
 
 const _Sticky: SFCWithInstall<typeof Sticky> = Object.assign(Sticky, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Sticky.name, Sticky)
   }
 })

@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Skeleton from './Skeleton.vue'
 
 const _Skeleton: SFCWithInstall<typeof Skeleton> = Object.assign(Skeleton, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Skeleton.name, Skeleton)
   }
 })

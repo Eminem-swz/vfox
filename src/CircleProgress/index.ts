@@ -5,7 +5,7 @@ import CircleProgress from './CircleProgress.vue'
 const _CircleProgress: SFCWithInstall<typeof CircleProgress> = Object.assign(
   CircleProgress,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(CircleProgress.name, CircleProgress)
     }
   }

@@ -44,7 +44,7 @@ export function useFormItem<T extends FormValue = string>(
 
   const newHookFormValue: HookFormValue = hookFormValue
     ? hookFormValue
-    : function() {
+    : function () {
         return isRef(formValue) ? formValue.value : cloneData(formValue)
       }
 

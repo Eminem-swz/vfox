@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Group from './Group.vue'
 
 const _Group: SFCWithInstall<typeof Group> = Object.assign(Group, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Group.name, Group)
   }
 })

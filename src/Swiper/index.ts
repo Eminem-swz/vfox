@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Swiper from './Swiper.vue'
 
 const _Swiper: SFCWithInstall<typeof Swiper> = Object.assign(Swiper, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Swiper.name, Swiper)
   }
 })

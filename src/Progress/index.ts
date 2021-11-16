@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Progress from './Progress.vue'
 
 const _Progress: SFCWithInstall<typeof Progress> = Object.assign(Progress, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Progress.name, Progress)
   }
 })

@@ -7,7 +7,9 @@ const LocalStorage = createStorage('fx')
 const _LocalStorage: SFCWithInstall<typeof LocalStorage> & {
   createStorage: typeof createStorage
 } = Object.assign(LocalStorage, {
-  install: function (app: App) {},
+  install: function (app: App) {
+    // empty
+  },
   createStorage
 })
 

@@ -21,7 +21,7 @@ type ListUpdateCallback = ($items: HTMLElement[]) => void
 export function createUpdateInItem(name: string) {
   name = capitalize(name)
 
-  return function(lazy = 17) {
+  return function (lazy = 17) {
     new Exception(`${name}Item is not in ${name}`, Exception.TYPE.DEFAULT, name)
   }
 }

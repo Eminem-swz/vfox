@@ -106,6 +106,12 @@ export interface PopupPublicInstance {
   customConfirm: PopupCustomConfirm
 }
 
+export type PopupStyles = Partial<{
+  zIndex: number
+  top: string
+  position: 'absolute'
+}>
+
 export interface UseEmit {
   (event: string, ...args: any[]): void
 }

@@ -15,6 +15,7 @@ import {
 import { capitalize, cloneData, inArray } from '@/helpers/util'
 import { useGroup, useGroupItem } from '@/hooks/group'
 import { UseProps } from '../helpers/types'
+import { HookFormValue } from './types'
 
 interface Options {
   formName: string
@@ -128,7 +129,7 @@ interface UpdateValueOptions {
   isChange: boolean
   children: any[]
   uid: number | undefined
-  hookFormValue: Function
+  hookFormValue: HookFormValue
 }
 
 interface WatchValueOptions {

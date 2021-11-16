@@ -8,7 +8,9 @@ const Scroll = {
 }
 
 const _Scroll: SFCWithInstall<typeof Scroll> = Object.assign(Scroll, {
-  install: function (app: App) {}
+  install: function (app: App) {
+    // empty
+  }
 })
 
 export default _Scroll

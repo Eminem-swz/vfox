@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import Dropdown from './Dropdown.vue'
 
 const _Dropdown: SFCWithInstall<typeof Dropdown> = Object.assign(Dropdown, {
-  install: function(app: App) {
+  install: function (app: App) {
     app.component(Dropdown.name, Dropdown)
   }
 })

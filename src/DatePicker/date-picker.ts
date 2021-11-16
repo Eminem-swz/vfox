@@ -40,21 +40,13 @@ export const datePickerProps = {
   // 最小日期
   minDate: {
     type: Date,
-    default: () =>
-      dayjs()
-        .startOf('day')
-        .subtract(9, 'year')
-        .toDate()
+    default: () => dayjs().startOf('day').subtract(9, 'year').toDate()
   },
   // 最大日期
   maxDate: {
     type: Date,
     default: () =>
-      dayjs()
-        .add(1, 'day')
-        .startOf('day')
-        .subtract(1, 'second')
-        .toDate()
+      dayjs().add(1, 'day').startOf('day').subtract(1, 'second').toDate()
   },
   // 过滤器
   filter: {

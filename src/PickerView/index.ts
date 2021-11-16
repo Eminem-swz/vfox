@@ -5,7 +5,7 @@ import PickerView from '../Picker/PickerView.vue'
 const _PickerView: SFCWithInstall<typeof PickerView> = Object.assign(
   PickerView,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(PickerView.name, PickerView)
     }
   }

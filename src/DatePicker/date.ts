@@ -297,18 +297,11 @@ export function array2Date(array: Values, mode: ModeName) {
       break
     }
     case 'day': {
-      djs = djs
-        .hour(0)
-        .minute(0)
-        .second(0)
+      djs = djs.hour(0).minute(0).second(0)
       break
     }
     case 'month': {
-      djs = djs
-        .date(1)
-        .hour(0)
-        .minute(0)
-        .second(0)
+      djs = djs.date(1).hour(0).minute(0).second(0)
       break
     }
     default:

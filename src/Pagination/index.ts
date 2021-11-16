@@ -5,7 +5,7 @@ import Pagination from './Pagination.vue'
 const _Pagination: SFCWithInstall<typeof Pagination> = Object.assign(
   Pagination,
   {
-    install: function(app: App) {
+    install: function (app: App) {
       app.component(Pagination.name, Pagination)
     }
   }
