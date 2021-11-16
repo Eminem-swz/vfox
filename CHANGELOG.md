@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/godxiaoji/vfox/compare/v2.0.1...v2.0.2) (2021-11-16)
+
+
+### Bug Fixes
+
+* **eslint:** 根据eslint修复bug ([392bd72](https://github.com/godxiaoji/vfox/commit/392bd72b882519d2afc61e643ec29c3638544eab))
+
 ## [2.0.1](https://github.com/godxiaoji/vfox/compare/v2.0.0...v2.0.1) (2021-11-16)
 
 
