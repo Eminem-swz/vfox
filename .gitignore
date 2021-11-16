@@ -1,5 +1,8 @@
 es/
 dist/
+dist
+docs/.vitepress/dist
+examples/dist
 
 # Logs
 logs
