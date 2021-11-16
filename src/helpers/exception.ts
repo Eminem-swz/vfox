@@ -20,17 +20,13 @@ class Exception extends Error {
    * @param type 出错类型
    * @param source 出错来源
    */
-  constructor(
-    error: string | Exception | Error,
-    type = TYPE.DEFAULT,
-    source = 'Exception'
-  ) {
+  constructor(error: unknown, type = TYPE.DEFAULT, source = 'Exception') {
     let msg = 'unknown'
 
     if (error instanceof Exception || error instanceof Error) {
       msg = error.message
     } else if (error != null) {
-      msg = error.toString()
+      msg = (error as any).toString()
     }
 
     super(msg)
