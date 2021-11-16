@@ -21,7 +21,7 @@
       <div class="fx-cell_content">
         <slot>{{ content }}</slot>
       </div>
-      <icon class="fx-cell_link-icon" v-if="isLink" :icon="linkIconName" />
+      <Icon class="fx-cell_link-icon" v-if="isLink" :icon="linkIconName" />
     </div>
     <div class="fx-cell_body" v-if="description">
       {{ description }}

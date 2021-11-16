@@ -1,7 +1,7 @@
 <template>
   <div class="fx-avatar-group" :class="['count--' + (children.length || 1)]">
     <slot></slot>
-    <avatar
+    <Avatar
       class="fx-avatar-group_count"
       v-if="totalCount != null"
       :colorStyle="countColorStyle"
@@ -12,7 +12,7 @@
       >
         {{ totalCountStr }}
       </span>
-    </avatar>
+    </Avatar>
   </div>
 </template>
 

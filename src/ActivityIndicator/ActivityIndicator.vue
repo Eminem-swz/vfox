@@ -1,5 +1,5 @@
 <template>
-  <loading-svg
+  <LoadingSvg
     :class="{ animated }"
     :size="size"
     :rate="0.2"

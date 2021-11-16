@@ -1,7 +1,7 @@
 <template>
   <div v-show="isShow" class="fx-back-top" :style="styles" @click="onClick">
     <slot>
-      <icon icon="UpCircleOutlined" />
+      <Icon icon="UpCircleOutlined" />
     </slot>
   </div>
 </template>

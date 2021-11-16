@@ -1,5 +1,5 @@
 <template>
-  <drawer
+  <Drawer
     class="fx-action-sheet"
     :title="title"
     placement="bottom"
@@ -37,7 +37,7 @@
         </div>
       </li>
     </ul>
-  </drawer>
+  </Drawer>
 </template>
 
 <script lang="ts">

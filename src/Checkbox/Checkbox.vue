@@ -13,11 +13,11 @@
       ref="input"
     />
     <div class="fx-checkbox_box">
-      <icon
+      <Icon
         class="fx-checkbox_icon"
         :icon="circle ? 'CircleOutlined' : 'BorderOutlined'"
       />
-      <icon
+      <Icon
         class="fx-checkbox_checked-icon"
         :icon="circle ? 'CheckCircleFilled' : 'CheckSquareFilled'"
       />

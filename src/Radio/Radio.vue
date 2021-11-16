@@ -13,8 +13,8 @@
       ref="input"
     />
     <div class="fx-radio_box">
-      <icon class="fx-radio_icon" icon="CircleOutlined" />
-      <icon class="fx-radio_checked-icon" icon="CheckCircleFilled" />
+      <Icon class="fx-radio_icon" icon="CircleOutlined" />
+      <Icon class="fx-radio_checked-icon" icon="CheckCircleFilled" />
       <span class="fx-radio_text" v-if="$slots.default">
         <slot></slot>
       </span>

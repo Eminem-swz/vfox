@@ -11,7 +11,7 @@
 
 ## 参考文档
 
-[Demo](https://cdn.fox2.cn/2.x/demo/)
+[Demo](https://godxiaoji.github.io/vfox/demo/)
 
 [Docs](https://godxiaoji.github.io/vfox/)
 
