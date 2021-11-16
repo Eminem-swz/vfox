@@ -7,7 +7,7 @@
       v-bind="$attrs"
       v-show="isShow"
     >
-      <notice-bar
+      <NoticeBar
         class="fx-notify_inner"
         :type="type"
         :left-icon="icon"
@@ -47,6 +47,7 @@ export default defineComponent({
       default: null
     },
     icon: {
+      type: null,
       validator: iconValidator,
       default: null
     },

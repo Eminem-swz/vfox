@@ -2,8 +2,8 @@ import { isObject, isStringNumberMix } from '@/helpers/util'
 import { BadgeOptions } from './types'
 
 export function handleBadge(
-  badge: number | string | BadgeOptions | undefined | null
-): BadgeOptions {
+  badge: number | string | Partial<BadgeOptions> | undefined | null
+): Partial<BadgeOptions> {
   if (isStringNumberMix(badge)) {
     return {
       content: badge as string
@@ -11,8 +11,6 @@ export function handleBadge(
   } else if (isObject(badge)) {
     return badge as BadgeOptions
   } else {
-    return {
-      content: null
-    }
+    return {}
   }
 }

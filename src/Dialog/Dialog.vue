@@ -1,5 +1,5 @@
 <template>
-  <modal
+  <Modal
     class="fx-dialog"
     :visible="visible"
     :showClose="false"
@@ -10,41 +10,41 @@
     @update:visible="onUpdateVisible"
     ref="popup"
   >
-    <div class="fx-dialog_header" v-if="title != null">
+    <div class="fx-dialog_header" v-if="title">
       {{ title }}
     </div>
     <div class="fx-dialog_content">
-      <div class="fx-dialog_content-text" v-if="content != null">
+      <div class="fx-dialog_content-text" v-if="content">
         {{ content }}
       </div>
       <slot v-else></slot>
     </div>
     <div class="fx-dialog_footer fx-horizontal-hairline">
-      <fx-button-group class="fx-dialog_footer-inner" pattern="borderless">
-        <fx-button
+      <ButtonGroup class="fx-dialog_footer-inner" pattern="borderless">
+        <FxButton
           v-if="showCancel"
           class="fx-dialog_button"
           type="default"
           @click="onCancelClick"
         >
           {{ cancelText }}
-        </fx-button>
-        <fx-button
+        </FxButton>
+        <FxButton
           class="fx-dialog_button"
           type="primary"
           @click="onConfirmClick"
         >
           {{ confirmText }}
-        </fx-button>
-      </fx-button-group>
+        </FxButton>
+      </ButtonGroup>
     </div>
-  </modal>
+  </Modal>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import FxButton from '@/Button'
-import FxButtonGroup from '@/ButtonGroup'
+import ButtonGroup from '@/ButtonGroup'
 import Modal from '@/Modal'
 import {
   usePopupExtend,
@@ -54,7 +54,7 @@ import {
 
 export default defineComponent({
   name: 'fx-dialog',
-  components: { FxButton, FxButtonGroup, Modal },
+  components: { FxButton, ButtonGroup, Modal },
   props: {
     ...popupExtendProps,
     title: {

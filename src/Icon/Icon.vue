@@ -19,6 +19,7 @@ export default defineComponent({
   name: 'fx-icon',
   props: {
     icon: {
+      type: null,
       validator: iconValidator,
       required: true
     },

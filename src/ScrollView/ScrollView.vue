@@ -27,12 +27,12 @@
               class="fx-scroll-view_pull-refresh-indicator"
               :style="indicatorStyles"
             >
-              <activity-indicator
+              <ActivityIndicator
                 class="fx-scroll-view_pull-refresh-icon"
                 v-if="pullRefreshState === PullRefreshState.Refreshing"
                 :size="18"
               />
-              <icon
+              <Icon
                 class="fx-scroll-view_pull-refresh-icon"
                 v-else
                 icon="CircleOutlined"
@@ -79,6 +79,7 @@ enum PullRefreshState {
 }
 
 type PullDirection = 'up' | 'right' | 'down' | 'left'
+type PullDirectionOrDefault = '' | PullDirection
 
 interface ScrollCoords extends UseTouchCoords {
   pageX: number
@@ -137,6 +138,7 @@ export default defineComponent({
     },
     // 下拉刷新方向
     enablePullDirections: {
+      type: Array,
       validator: (val: PullDirection | PullDirection[]) => {
         return isString(val) || isStringArray(val)
       },
@@ -176,7 +178,7 @@ export default defineComponent({
     const root = ref<HTMLElement>()
     const pullDistance = ref(0)
     const translateDuration = ref(0)
-    const pullDirection = ref('')
+    const pullDirection = ref<PullDirectionOrDefault>('')
     const pullIndicatorSafeArea = reactive({
       top: 0,
       right: 0,

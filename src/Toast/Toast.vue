@@ -55,6 +55,7 @@ export default defineComponent({
       default: 'default'
     },
     icon: {
+      type: null,
       validator: iconValidator,
       default: null
     },

@@ -46,6 +46,7 @@ export default defineComponent({
   components: { Icon },
   props: {
     icon: {
+      type: null,
       validator: iconValidator,
       default: null
     },

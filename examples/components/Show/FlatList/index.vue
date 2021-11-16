@@ -156,20 +156,25 @@
 import { defineComponent } from 'vue'
 import Toast from '@/Toast'
 
+interface ExpList {
+  id: number
+  text: string
+}
+
 export default defineComponent({
   name: 'FlatList',
   data() {
     return {
-      list: [],
+      list: [] as ExpList[],
       lowerLoading: false,
-      loadList: [],
+      loadList: [] as ExpList[],
       getItemSize(item: any, index: number) {
         return 50 + (index % 10) * 2
       }
     }
   },
   created() {
-    const list = []
+    const list: ExpList[] = []
 
     for (let i = 0; i < 100; i++) {
       list.push({
@@ -178,16 +183,16 @@ export default defineComponent({
       })
     }
 
-    this.list = list
+    ;(this.list as ExpList[]) = list
 
     this.getLoadList()
   },
   methods: {
     scrollToIndex(index: number, viewPosition = 0) {
-      this.$refs.flatList.scrollToIndex({ index, viewPosition })
+      ;(this.$refs.flatList as any).scrollToIndex({ index, viewPosition })
     },
     scrollToOffset(offset: number) {
-      this.$refs.flatList.scrollToOffset({ offset })
+      ;(this.$refs.flatList as any).scrollToOffset({ offset })
     },
 
     onRefreshing(res: any, done: () => void) {
@@ -231,12 +236,10 @@ export default defineComponent({
         Toast.showToast(`${item.text} ${recycled ? '回收了' : '加入了'}`)
     },
     getLoadList() {
-      for (
-        let i = this.loadList.length, len = this.loadList.length + 10;
-        i < len;
-        i++
-      ) {
-        this.loadList.push({
+      const loadList: ExpList[] = this.loadList
+
+      for (let i = loadList.length, len = loadList.length + 10; i < len; i++) {
+        loadList.push({
           id: i + 1,
           text: `第 ${i + 1} 个列表`
         })

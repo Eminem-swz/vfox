@@ -11,3 +11,9 @@ export type ImageModes =
   | 'top right'
   | 'bottom left'
   | 'bottom right'
+
+export interface ImageOnLoadPayLoad {
+  width: number
+  height: number
+  src: string
+}

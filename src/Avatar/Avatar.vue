@@ -1,5 +1,5 @@
 <template>
-  <badge
+  <Badge
     class="fx-avatar"
     :class="[
       'size--' + size2,
@@ -10,7 +10,7 @@
     v-bind="{ ...$attrs, ...badge2 }"
   >
     <slot>
-      <fx-image
+      <FxImage
         class="fx-avatar_image"
         :src="src"
         mode="aspectFill"
@@ -18,10 +18,10 @@
       />
     </slot>
     <template #badge>
-      <icon v-if="gender === 'man'" icon="ManOutlined" />
-      <icon v-else-if="gender === 'woman'" icon="WomanOutlined" />
+      <Icon v-if="gender === 'man'" icon="ManOutlined" />
+      <Icon v-else-if="gender === 'woman'" icon="WomanOutlined" />
     </template>
-  </badge>
+  </Badge>
 </template>
 
 <script lang="ts">
@@ -118,7 +118,7 @@ export default defineComponent({
     })
 
     const badge2 = computed(() => {
-      let badge: BadgeOptions
+      let badge: Partial<BadgeOptions>
 
       if (inArray(props.gender, GenderNames)) {
         badge = {

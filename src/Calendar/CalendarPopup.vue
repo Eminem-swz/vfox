@@ -1,9 +1,9 @@
 <template>
-  <drawer
+  <Drawer
     class="fx-calendar-popup"
     placement="bottom"
     :visible="visible"
-    :title="title || null"
+    :title="title"
     :show-close="showClose"
     @visible-state-change="onVisibleStateChange"
     @confirm="onConfirm"
@@ -24,14 +24,14 @@
       @select="onSelect"
     />
     <div class="fx-calendar-popup_confirm" v-if="showConfirm">
-      <fx-button
+      <FxButton
         type="primary"
         @click="onConfirmClick"
         :disabled="detail.value.length == 0"
-        >确定</fx-button
-      >
+        >确定
+      </FxButton>
     </div>
-  </drawer>
+  </Drawer>
 </template>
 
 <script lang="ts">

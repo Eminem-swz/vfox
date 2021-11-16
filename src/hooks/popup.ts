@@ -15,7 +15,6 @@ import { useBlur } from '@/hooks/blur'
 import {
   VisibleStateChangeArgs,
   VisibleState,
-  PopupPublicInstance,
   PopupCustomCancel,
   PopupCustomConfirm,
   UseEmit
@@ -29,6 +28,12 @@ interface UseOptions {
   afterCancel?: Function
   afterShow?: Function
   afterHidden?: Function
+}
+
+interface PopupStyles {
+  zIndex: number
+  top: string
+  position: 'absolute'
 }
 
 let zIndex = popupZIndex
@@ -238,10 +243,16 @@ export function usePopup(
   })
 
   const popupStyles = computed(() => {
-    const styles = {
-      zIndex: zIndex.value,
-      top: top.value,
-      position: position.value
+    const styles: Partial<PopupStyles> = {
+      zIndex: zIndex.value
+    }
+
+    if (top.value != null) {
+      styles.top = top.value
+    }
+
+    if (position.value != null) {
+      styles.position = position.value
     }
 
     return styles

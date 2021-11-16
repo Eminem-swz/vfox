@@ -100,7 +100,7 @@ export default defineComponent({
   },
   methods: {
     show({ title, placement, showClose, visibleEvent }: showArgs) {
-      this.title = title || null
+      this.title = title || ''
       this.placement = placement || 'top'
       this.showClose = showClose || false
       this.visibleEvent = !!visibleEvent

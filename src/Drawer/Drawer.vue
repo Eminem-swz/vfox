@@ -87,7 +87,7 @@ export default defineComponent({
     )
 
     const hasHeader = computed(
-      () => props.title != null || props.showClose || ctx.slots.header
+      () => props.title || props.showClose || ctx.slots.header
     )
 
     const innerStyles = computed(() => {

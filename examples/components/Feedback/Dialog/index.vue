@@ -78,11 +78,7 @@
     </fx-group>
     <fx-dialog
       v-model:visible="visible"
-      :title="title"
-      :content="content"
-      :show-cancel="showCancel"
-      :cancel-text="cancelText"
-      :confirm-text="confirmText"
+      v-bind="dialogArgs"
       @confirm="onConfirm"
       @cancel="onCancel"
       @visible-state-change="onVisibleStateChange"
@@ -92,12 +88,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, reactive } from 'vue'
 import { PopupVisibleStateChangeArgs, PopupCancelArgs } from '../../utils/types'
 import Toast from '@/Toast'
 import Dialog from '@/Dialog'
 
-interface showArgs {
+interface DialogArgs {
   title?: string
   content?: string
   showCancel?: boolean
@@ -107,25 +103,23 @@ interface showArgs {
 
 export default defineComponent({
   name: 'Dialog',
-  props: {},
-  data() {
-    return {
-      visible: false,
+  setup(props, ctx) {
+    const visible = ref(false)
+    let callbackEvent = false
+    let visibleEvent = false
+
+    const dialogArgs = reactive<DialogArgs>({
       title: '',
       content: '',
       cancelText: '',
       confirmText: '',
-      showCancel: false,
+      showCancel: false
+    })
 
-      callbackEvent: false,
-      visibleEvent: false
-    }
-  },
-  methods: {
-    show(obj: showArgs, callbackEvent?: boolean, visibleEvent?: boolean) {
+    function show(obj: DialogArgs, callbackE?: boolean, visibleE?: boolean) {
       obj = Object.assign(
         {
-          title: null,
+          title: '',
           content: '',
           showCancel: true,
           cancelText: '取消',
@@ -134,16 +128,17 @@ export default defineComponent({
         obj
       )
 
-      Object.keys(obj).forEach(k => {
-        this[k] = obj[k]
-      })
+      for (let k in obj) {
+        dialogArgs[k as 'title'] = obj[k as 'title']
+      }
 
-      this.callbackEvent = !!callbackEvent
-      this.visibleEvent = !!visibleEvent
+      callbackEvent = !!callbackE
+      visibleEvent = !!visibleE
 
-      this.visible = true
-    },
-    onCallApi() {
+      visible.value = true
+    }
+
+    function onCallApi() {
       Dialog.showDialog({
         title: '标题',
         content: '提示内容提示内容提示内容提示内容提示内容提示内容',
@@ -153,20 +148,33 @@ export default defineComponent({
           Toast.showToast(res.confirm ? 'confirm = true' : 'cancel = true')
         }
       })
-    },
-    onConfirm(res: PopupCancelArgs) {
+    }
+
+    function onConfirm(res: PopupCancelArgs) {
       console.log('confirm', res)
-      this.callbackEvent && Toast.showToast('点击确定按钮')
-    },
-    onCancel(res: PopupCancelArgs) {
+      callbackEvent && Toast.showToast('点击确定按钮')
+    }
+
+    function onCancel(res: PopupCancelArgs) {
       console.log('cancel', res)
-      this.callbackEvent && Toast.showToast('点击取消按钮')
-    },
-    onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
+      callbackEvent && Toast.showToast('点击取消按钮')
+    }
+
+    function onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
+      if (visibleEvent) {
         console.log(`${state} 事件触发`)
         Toast.showToast(`${state} 事件触发`)
       }
+    }
+
+    return {
+      visible,
+      dialogArgs,
+      show,
+      onCallApi,
+      onConfirm,
+      onCancel,
+      onVisibleStateChange
     }
   }
 })

@@ -125,7 +125,7 @@ export default defineComponent({
   data() {
     return {
       visible: false,
-      title: null,
+      title: '',
       showCancel: false,
       cancelText: '取消',
       options: defaultOptions,
@@ -156,7 +156,7 @@ export default defineComponent({
         this.showCancel = false
         this.cancelText = '取消'
         this.options = defaultOptions
-        this.title = null
+        this.title = ''
         this.visibleEvent = false
         this.showEvent = false
       }

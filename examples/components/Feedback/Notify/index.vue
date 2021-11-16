@@ -150,8 +150,8 @@ export default defineComponent({
     }: showArgs) {
       this.icon = icon || null
       this.title = title || ''
-      this.backgroundColor = backgroundColor || null
-      this.color = color || null
+      this.backgroundColor = backgroundColor || ''
+      this.color = color || ''
       this.type = type || 'primary'
       this.closable = closable || false
       this.duration = duration != null ? duration : 1500

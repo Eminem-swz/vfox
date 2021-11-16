@@ -37,8 +37,12 @@ export interface OptionItem {
   iconLink?: string
   activeIcon?: any
   activeIconLink?: string
-  badge?: BadgeOptions | number | string
+  badge?: Partial<BadgeOptions> | number | string
   subLabel?: string
+}
+
+export interface HandleOptionItem extends OptionItem {
+  badge: Partial<BadgeOptions>
 }
 
 type OptionList = (OptionValue | OptionItem)[]
@@ -85,14 +89,14 @@ export function useTab(
 ) {
   const instance = getCurrentInstance() as ComponentInternalInstance
   const list = ref<HTMLElement>()
-  const options2 = reactive<OptionItem[]>([])
+  const options2 = reactive<HandleOptionItem[]>([])
   const activeIndex = ref(-1)
   const hasSub = ref(false)
 
   let value2: OptionValue | null = props.activeValue
 
   function updateOptions() {
-    const options: OptionItem[] = []
+    const options: HandleOptionItem[] = []
 
     let hasActive = false
     hasSub.value = false
@@ -150,7 +154,7 @@ export function useTab(
             hasActive = true
           }
 
-          options.push(option)
+          options.push(option as HandleOptionItem)
         }
       })
     }

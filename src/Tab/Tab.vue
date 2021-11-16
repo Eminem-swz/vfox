@@ -18,13 +18,13 @@
         :key="item.value"
         @click="onChange(item.value)"
       >
-        <badge class="fx-tab_item-inner" v-bind="item.badge">
-          <icon
+        <Badge class="fx-tab_item-inner" v-bind="item.badge">
+          <Icon
             v-if="item.icon"
             :icon="index === activeIndex ? item.activeIcon : item.icon"
           />
           <span class="fx-tab_item-text">{{ item.label }}</span>
-        </badge>
+        </Badge>
         <span class="fx-tab_item-sub-text" v-if="hasSub">{{
           item.subLabel
         }}</span>

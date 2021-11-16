@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ComputedRef } from 'vue'
 import { paragraphDefaultRow, useSubSkeleton } from '@/Skeleton/skeleton'
 
 export default defineComponent({
@@ -26,7 +26,7 @@ export default defineComponent({
     const { paragraphSize, useAnimation } = useSubSkeleton(props, 'paragraph')
 
     return {
-      paragraphSize,
+      paragraphSize: paragraphSize as ComputedRef<number>,
       useAnimation
     }
   }

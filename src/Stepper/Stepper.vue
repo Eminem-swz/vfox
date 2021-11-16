@@ -1,6 +1,6 @@
 <template>
   <div class="fx-stepper" :class="{ disabled }">
-    <fx-button
+    <FxButton
       icon="MinusOutlined"
       shape="square"
       size="small"
@@ -20,7 +20,7 @@
       @change="onChange"
       ref="input"
     />
-    <fx-button
+    <FxButton
       icon="PlusOutlined"
       shape="square"
       size="small"
@@ -98,8 +98,12 @@ export default defineComponent({
     const { emit } = ctx
     const formValue = ref('1')
 
-    const { formName, validateAfterEventTrigger, getInputEl, hookFormValue } =
-      useFormItem<string>(props, ctx, { formValue })
+    const {
+      formName,
+      validateAfterEventTrigger,
+      getInputEl,
+      hookFormValue
+    } = useFormItem<string>(props, ctx, { formValue })
 
     function onMinusOrPlusClick(isPlus = true) {
       let type = 'plus-click'

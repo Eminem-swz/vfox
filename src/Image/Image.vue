@@ -1,15 +1,15 @@
 <template>
-  <div class="fx-image" @click="onClick" ref="root">
+  <div class="fx-image" ref="root">
     <span
       v-if="aspectRatio != null && aspectRatio > 0"
       class="fx-image_ratio"
       :style="{ paddingTop: aspectRatio * 100 + '%' }"
     ></span>
     <i class="fx-image_loading" v-if="loading">
-      <icon :icon="loadingIcon" :size="iconSize" />
+      <Icon :icon="loadingIcon" :size="iconSize" />
     </i>
     <i class="fx-image_error" v-if="error">
-      <icon :icon="errorIcon" :size="iconSize" />
+      <Icon :icon="errorIcon" :size="iconSize" />
     </i>
     <img
       v-if="currentSrc"
@@ -47,7 +47,7 @@ import {
   iconValidator
 } from '@/helpers/validator'
 import Exception from '@/helpers/exception'
-import { ImageModes } from './types'
+import { ImageModes, ImageOnLoadPayLoad } from './types'
 
 const MODE_NAMES = [
   'scaleToFill',
@@ -110,6 +110,7 @@ export default defineComponent({
       default: null
     }
   },
+  emits: ['load', 'error'],
   setup(props, { emit }) {
     const instance = getCurrentInstance() as ComponentInternalInstance
     const loading = ref(true)
@@ -130,9 +131,12 @@ export default defineComponent({
     }
 
     function checkInView() {
-      const { top, right, bottom, left } = (
-        root.value as HTMLElement
-      ).getBoundingClientRect()
+      const {
+        top,
+        right,
+        bottom,
+        left
+      } = (root.value as HTMLElement).getBoundingClientRect()
 
       return (
         top < window.innerHeight * LAZY_PRELOAD &&
@@ -154,7 +158,7 @@ export default defineComponent({
         width: res.naturalWidth,
         height: res.naturalHeight,
         src: res.src
-      })
+      } as ImageOnLoadPayLoad)
     }
 
     function onError(e: Exception) {
@@ -162,10 +166,6 @@ export default defineComponent({
       error.value = true
 
       emit('error', e)
-    }
-
-    function onClick(e: Event) {
-      emit(e.type, e)
     }
 
     function onDrag(e: Event) {
@@ -192,7 +192,6 @@ export default defineComponent({
       loading,
       error,
       root,
-      onClick,
       onDrag
     }
   }

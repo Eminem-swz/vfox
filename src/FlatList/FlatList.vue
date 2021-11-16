@@ -1,11 +1,11 @@
 <template>
-  <scroll-view
+  <ScrollView
     class="fx-flat-list"
     :class="{ horizontal }"
     :scroll-x="scrollX"
     :scroll-y="scrollY"
     :lower-threshold="lowerThreshold"
-    :enable-pull-directions="enablePullDirections"
+    :enablePullDirections="enablePullDirections"
     :lowerLoading="lowerLoading"
     @scroll="onScroll"
     @scroll-to-lower="onScrollToLower"
@@ -42,16 +42,16 @@
         </div>
       </li>
     </ul>
-    <load-more class="fx-flat-list_indicator" v-show="lowerLoading" loading>
+    <LoadMore class="fx-flat-list_indicator" v-show="lowerLoading" loading>
       正在加载
-    </load-more>
+    </LoadMore>
     <div class="fx-flat-list_empty" v-show="list.length === 0">
       <slot name="empty"></slot>
     </div>
     <div class="fx-flat-list_footer" v-if="$slots.footer">
       <slot name="footer"></slot>
     </div>
-  </scroll-view>
+  </ScrollView>
 </template>
 
 <script lang="ts">

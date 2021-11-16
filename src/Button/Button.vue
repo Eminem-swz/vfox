@@ -12,8 +12,8 @@
     :disabled="disabled"
     :type="realFormType"
   >
-    <icon v-if="loading" icon="LoadingOutlined" :spin="true" />
-    <icon v-else-if="icon" :icon="icon" />
+    <Icon v-if="loading" icon="LoadingOutlined" :spin="true" />
+    <Icon v-else-if="icon" :icon="icon" />
     <span><slot>按钮</slot></span>
   </button>
 </template>
@@ -88,6 +88,7 @@ export default defineComponent({
       default: false
     },
     icon: {
+      type: null,
       validator: iconValidator,
       default: null
     },

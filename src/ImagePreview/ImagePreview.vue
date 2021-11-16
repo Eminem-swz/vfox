@@ -8,7 +8,7 @@
       v-show="isShow"
     >
       <div class="fx-mask"></div>
-      <swiper
+      <Swiper
         v-if="swiperInit"
         v-model:activeIndex="activeIndex"
         :navigation-buttons="navigationButtons"
@@ -16,9 +16,9 @@
         @change="onSwiperChange"
         @animated="onSwiperAnimated"
       >
-        <swiper-item v-for="(item, index) in images" :key="index">
+        <SwiperItem v-for="(item, index) in images" :key="index">
           <div class="fx-preview-image_image-container">
-            <fx-image
+            <FxImage
               :src="item.src"
               :mode="'aspectFit'"
               @load="onImageLoad"
@@ -34,14 +34,14 @@
               @touchend="onImageTouchEnd($event, item)"
             />
           </div>
-        </swiper-item>
-      </swiper>
+        </SwiperItem>
+      </Swiper>
       <div class="fx-preview-image_pagination">
         {{ activeIndex + 1 }} / {{ urls.length }}
       </div>
       <div class="fx-preview-image_close">
         <slot name="close" :activeIndex="activeIndex">
-          <fx-button
+          <FxButton
             v-if="showClose"
             @click.stop="onCloseClick"
             icon="CloseOutlined"
@@ -49,7 +49,7 @@
             pattern="borderless"
             shape="square"
             :ghost="true"
-          ></fx-button>
+          ></FxButton>
         </slot>
       </div>
     </div>
@@ -66,6 +66,7 @@ import { isStringArray, rangeNumber } from '@/helpers/util'
 import { popupEmits, popupProps, usePopup } from '@/hooks/popup'
 import { DataObject } from '../helpers/types'
 import { UseTouchCoords } from '@/hooks/touch'
+import { ImageOnLoadPayLoad } from '../Image/types'
 
 interface ImageObject {
   src: string
@@ -394,15 +395,7 @@ export default defineComponent({
       popup.customCancel('previewClick')
     }
 
-    function onImageLoad({
-      width,
-      height,
-      src
-    }: {
-      width: number
-      height: number
-      src: string
-    }) {
+    function onImageLoad({ width, height, src }: ImageOnLoadPayLoad) {
       if (props.imageHighRendering) {
         const dpr = window.devicePixelRatio || 1
         width = width / dpr

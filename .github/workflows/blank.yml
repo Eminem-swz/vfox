@@ -45,6 +45,18 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run semantic-release
 
+      - name: Build Demo
+        run: |
+          npm run demo:build
+
+      - name: Deploy Demo
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages
+          clean: false
+          folder: examples/dist
+
       - name: Build Docs
         run: |
           npm run docs:build
@@ -55,4 +67,5 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
+          clean_exclude: ['demo']
           folder: docs/.vitepress/dist
