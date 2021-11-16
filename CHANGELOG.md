@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/godxiaoji/vfox/compare/v2.0.0...v2.0.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* 修复ts类型错误的问题 ([409bcc6](https://github.com/godxiaoji/vfox/commit/409bcc6bb3bba3d8ef1b7a8e4a17de8f0db96865))
+
 # [2.0.0-beta.21](https://github.com/godxiaoji/vfox/compare/v2.0.0-beta.20...v2.0.0-beta.21) (2021-11-11)
 
 
