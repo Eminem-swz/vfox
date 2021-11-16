@@ -67,5 +67,5 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
-          clean_exclude: ['demo']
+          clean_exclude: [demo]
           folder: docs/.vitepress/dist
