@@ -65,7 +65,7 @@ import {
   isStringArray
 } from '@/helpers/util'
 import { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
-import { useTouch, UseTouchCoords, UseTouchEvent } from '@/hooks/touch'
+import { useTouch } from '@/hooks/touch'
 
 enum ScrollState {
   Center,
@@ -81,7 +81,7 @@ enum PullRefreshState {
 type PullDirection = 'up' | 'right' | 'down' | 'left'
 type PullDirectionOrDefault = '' | PullDirection
 
-interface ScrollCoords extends UseTouchCoords {
+interface ScrollCoords {
   pageX: number
   pageY: number
   scrollX: boolean
@@ -189,220 +189,6 @@ export default defineComponent({
     function loadComplete() {
       pullRefreshState.value = PullRefreshState.Pulling
       pullDistance.value = 0
-    }
-
-    function onTouchStart(e: UseTouchEvent) {
-      const { pageX, pageY } = e.touchObject
-      const $scroll = root.value as HTMLElement
-      const {
-        scrollHeight,
-        scrollTop,
-        clientHeight,
-        scrollLeft,
-        scrollWidth,
-        clientWidth
-      } = $scroll
-
-      coords = {
-        pageX,
-        pageY,
-        scrollX: props.scrollX && scrollWidth > clientWidth,
-        scrollY: props.scrollY && scrollHeight > clientHeight,
-        stop: null
-      }
-
-      if (props.lowerLoading) {
-        return
-      }
-
-      if (pullRefreshState.value === PullRefreshState.Refreshing) {
-        return
-      }
-
-      const allowPullDirections = stringMix2StringArray(
-        props.enablePullDirections
-      )
-
-      if (allowPullDirections.length === 0) {
-        return
-      }
-
-      pullDistance.value = 0
-      translateDuration.value = 0
-      pullDirection.value = ''
-
-      // 猜想可能刷新的方向，0-4个都有可能
-      const directions: PullDirection[] = []
-
-      if (scrollTop === 0 && inArray('down', allowPullDirections)) {
-        directions.push('down')
-      }
-      if (
-        scrollTop + clientHeight >= scrollHeight &&
-        inArray('up', allowPullDirections)
-      ) {
-        directions.push('up')
-      }
-      if (scrollLeft === 0 && inArray('right', allowPullDirections)) {
-        directions.push('right')
-      }
-      if (
-        scrollLeft + clientWidth >= scrollWidth &&
-        inArray('left', allowPullDirections)
-      ) {
-        directions.push('left')
-      }
-
-      if (directions[0]) {
-        // 只要命中一个方向
-        coords.directions = directions
-      }
-    }
-
-    function onTouchMove(e: UseTouchEvent) {
-      if (!coords) {
-        return
-      }
-
-      // 处理滑动穿透
-      const { pageX, pageY } = e.touchObject
-      const offsetX = pageX - coords.pageX
-      const offsetY = pageY - coords.pageY
-      const y = _isToLowerOrUpperY
-      const x = _isToLowerOrUpperX
-
-      if (coords.stop == null) {
-        if (
-          (coords.scrollY &&
-            Math.abs(offsetY) >= Math.abs(offsetX) &&
-            (y === ScrollState.Center ||
-              (y === ScrollState.Upper && offsetY < 0) ||
-              (y === ScrollState.Lower && offsetY > 0))) ||
-          (coords.scrollX &&
-            Math.abs(offsetX) >= Math.abs(offsetY) &&
-            (x === ScrollState.Center ||
-              (x === ScrollState.Upper && offsetX < 0) ||
-              (x === ScrollState.Lower && offsetX > 0)))
-        ) {
-          coords.stop = true
-        } else {
-          coords.stop = false
-        }
-      }
-
-      if (coords.stop) {
-        e.stopPropagation()
-      }
-
-      // 处理下拉刷新
-      if (!coords.directions) {
-        return
-      }
-
-      let _pullDirection = coords.direction
-
-      if (!_pullDirection) {
-        // 如果可能存在两个方向，继续验证会走的方向
-        if (Math.abs(offsetY) >= Math.abs(offsetX)) {
-          coords.directions = coords.directions.filter(v => {
-            return (
-              inArray(v, ['up', 'down']) &&
-              ((v === 'down' && offsetY > 0) || (v === 'up' && offsetY < 0))
-            )
-          })
-        } else {
-          coords.directions = coords.directions.filter(v => {
-            return (
-              inArray(v, ['left', 'right']) &&
-              ((v === 'right' && offsetX > 0) || (v === 'left' && offsetX < 0))
-            )
-          })
-        }
-
-        coords.direction = _pullDirection = coords.directions[0]
-      }
-
-      if (!_pullDirection) {
-        delete coords.directions
-        return
-      }
-
-      e.preventDefault()
-
-      if (!coords.isSetSafeArea) {
-        const $scroll = root.value as HTMLElement
-
-        pullIndicatorSafeArea.top = 0
-        pullIndicatorSafeArea.right = 0
-        pullIndicatorSafeArea.bottom = 0
-        pullIndicatorSafeArea.left = 0
-
-        if (inArray(_pullDirection, ['up', 'down'])) {
-          pullIndicatorSafeArea.left = $scroll.scrollLeft
-          pullIndicatorSafeArea.right =
-            $scroll.scrollWidth - $scroll.scrollLeft - $scroll.clientWidth
-        } else {
-          pullIndicatorSafeArea.top = $scroll.scrollTop
-          pullIndicatorSafeArea.bottom =
-            $scroll.scrollHeight - $scroll.scrollTop - $scroll.clientHeight
-        }
-
-        coords.isSetSafeArea = true
-      }
-
-      pullDirection.value = _pullDirection
-
-      let distance
-      if (inArray(pullDirection.value, ['up', 'down'])) {
-        distance = offsetY
-      } else {
-        distance = offsetX
-      }
-      distance = Math.abs(distance)
-      const pullRefreshThreshold = props.pullRefreshThreshold
-
-      if (distance >= pullRefreshThreshold) {
-        if (pullRefreshState.value === PullRefreshState.Pulling) {
-          pullRefreshState.value = PullRefreshState.Holding
-        }
-
-        distance =
-          pullRefreshThreshold +
-          Math.ceil(
-            (distance - pullRefreshThreshold) /
-              Math.log(Math.abs(distance - pullRefreshThreshold) / 2)
-          ) // 除于2比不除更好拉一点
-      }
-
-      pullDistance.value = inArray(pullDirection.value, ['down', 'right'])
-        ? distance
-        : -distance
-    }
-
-    function onTouchEnd() {
-      if (!coords) {
-        return
-      }
-      coords = null
-
-      translateDuration.value = 200
-
-      if (pullRefreshState.value === PullRefreshState.Holding) {
-        pullRefreshState.value = PullRefreshState.Refreshing
-        pullDistance.value = inArray(pullDirection.value, ['down', 'right'])
-          ? props.pullRefreshThreshold
-          : -props.pullRefreshThreshold
-
-        emit(
-          'refreshing',
-          {
-            pullDirection: pullDirection.value
-          },
-          loadComplete
-        )
-      } else {
-        pullDistance.value = 0
-      }
     }
 
     /**
@@ -552,16 +338,227 @@ export default defineComponent({
 
     useTouch({
       el: root,
-      onTouchStart,
-      onTouchMove,
-      onTouchEnd
+      onTouchStart(e) {
+        const { pageX, pageY } = e.touchObject
+        const $scroll = root.value as HTMLElement
+        const {
+          scrollHeight,
+          scrollTop,
+          clientHeight,
+          scrollLeft,
+          scrollWidth,
+          clientWidth
+        } = $scroll
+
+        coords = {
+          pageX,
+          pageY,
+          scrollX: props.scrollX && scrollWidth > clientWidth,
+          scrollY: props.scrollY && scrollHeight > clientHeight,
+          stop: null
+        }
+
+        if (props.lowerLoading) {
+          return
+        }
+
+        if (pullRefreshState.value === PullRefreshState.Refreshing) {
+          return
+        }
+
+        const allowPullDirections = stringMix2StringArray(
+          props.enablePullDirections
+        )
+
+        if (allowPullDirections.length === 0) {
+          return
+        }
+
+        pullDistance.value = 0
+        translateDuration.value = 0
+        pullDirection.value = ''
+
+        // 猜想可能刷新的方向，0-4个都有可能
+        const directions: PullDirection[] = []
+
+        if (scrollTop === 0 && inArray('down', allowPullDirections)) {
+          directions.push('down')
+        }
+        if (
+          scrollTop + clientHeight >= scrollHeight &&
+          inArray('up', allowPullDirections)
+        ) {
+          directions.push('up')
+        }
+        if (scrollLeft === 0 && inArray('right', allowPullDirections)) {
+          directions.push('right')
+        }
+        if (
+          scrollLeft + clientWidth >= scrollWidth &&
+          inArray('left', allowPullDirections)
+        ) {
+          directions.push('left')
+        }
+
+        if (directions[0]) {
+          // 只要命中一个方向
+          coords.directions = directions
+        }
+      },
+
+      onTouchMove(e) {
+        if (!coords) {
+          return
+        }
+
+        // 处理滑动穿透
+        const { pageX, pageY } = e.touchObject
+        const offsetX = pageX - coords.pageX
+        const offsetY = pageY - coords.pageY
+        const y = _isToLowerOrUpperY
+        const x = _isToLowerOrUpperX
+
+        if (coords.stop == null) {
+          if (
+            (coords.scrollY &&
+              Math.abs(offsetY) >= Math.abs(offsetX) &&
+              (y === ScrollState.Center ||
+                (y === ScrollState.Upper && offsetY < 0) ||
+                (y === ScrollState.Lower && offsetY > 0))) ||
+            (coords.scrollX &&
+              Math.abs(offsetX) >= Math.abs(offsetY) &&
+              (x === ScrollState.Center ||
+                (x === ScrollState.Upper && offsetX < 0) ||
+                (x === ScrollState.Lower && offsetX > 0)))
+          ) {
+            coords.stop = true
+          } else {
+            coords.stop = false
+          }
+        }
+
+        if (coords.stop) {
+          e.stopPropagation()
+        }
+
+        // 处理下拉刷新
+        if (!coords.directions) {
+          return
+        }
+
+        let _pullDirection = coords.direction
+
+        if (!_pullDirection) {
+          // 如果可能存在两个方向，继续验证会走的方向
+          if (Math.abs(offsetY) >= Math.abs(offsetX)) {
+            coords.directions = coords.directions.filter(v => {
+              return (
+                inArray(v, ['up', 'down']) &&
+                ((v === 'down' && offsetY > 0) || (v === 'up' && offsetY < 0))
+              )
+            })
+          } else {
+            coords.directions = coords.directions.filter(v => {
+              return (
+                inArray(v, ['left', 'right']) &&
+                ((v === 'right' && offsetX > 0) ||
+                  (v === 'left' && offsetX < 0))
+              )
+            })
+          }
+
+          coords.direction = _pullDirection = coords.directions[0]
+        }
+
+        if (!_pullDirection) {
+          delete coords.directions
+          return
+        }
+
+        e.preventDefault()
+
+        if (!coords.isSetSafeArea) {
+          const $scroll = root.value as HTMLElement
+
+          pullIndicatorSafeArea.top = 0
+          pullIndicatorSafeArea.right = 0
+          pullIndicatorSafeArea.bottom = 0
+          pullIndicatorSafeArea.left = 0
+
+          if (inArray(_pullDirection, ['up', 'down'])) {
+            pullIndicatorSafeArea.left = $scroll.scrollLeft
+            pullIndicatorSafeArea.right =
+              $scroll.scrollWidth - $scroll.scrollLeft - $scroll.clientWidth
+          } else {
+            pullIndicatorSafeArea.top = $scroll.scrollTop
+            pullIndicatorSafeArea.bottom =
+              $scroll.scrollHeight - $scroll.scrollTop - $scroll.clientHeight
+          }
+
+          coords.isSetSafeArea = true
+        }
+
+        pullDirection.value = _pullDirection
+
+        let distance
+        if (inArray(pullDirection.value, ['up', 'down'])) {
+          distance = offsetY
+        } else {
+          distance = offsetX
+        }
+        distance = Math.abs(distance)
+        const pullRefreshThreshold = props.pullRefreshThreshold
+
+        if (distance >= pullRefreshThreshold) {
+          if (pullRefreshState.value === PullRefreshState.Pulling) {
+            pullRefreshState.value = PullRefreshState.Holding
+          }
+
+          distance =
+            pullRefreshThreshold +
+            Math.ceil(
+              (distance - pullRefreshThreshold) /
+                Math.log(Math.abs(distance - pullRefreshThreshold) / 2)
+            ) // 除于2比不除更好拉一点
+        }
+
+        pullDistance.value = inArray(pullDirection.value, ['down', 'right'])
+          ? distance
+          : -distance
+      },
+
+      onTouchEnd() {
+        if (!coords) {
+          return
+        }
+        coords = null
+
+        translateDuration.value = 200
+
+        if (pullRefreshState.value === PullRefreshState.Holding) {
+          pullRefreshState.value = PullRefreshState.Refreshing
+          pullDistance.value = inArray(pullDirection.value, ['down', 'right'])
+            ? props.pullRefreshThreshold
+            : -props.pullRefreshThreshold
+
+          emit(
+            'refreshing',
+            {
+              pullDirection: pullDirection.value
+            },
+            loadComplete
+          )
+        } else {
+          pullDistance.value = 0
+        }
+      }
     })
 
     /**
      * 滚动列表到指定的偏移（以像素为单位）
      */
     function scrollToOffset(options: number | ScrollToOffsetOptions) {
-      let behavior: ScrollBehavior = 'smooth'
+      let behavior: 'auto' | 'smooth' = 'smooth'
       let top = 0
       let left = 0
 

@@ -1,5 +1,5 @@
 import { computed, ComputedRef, inject } from 'vue'
-import { UseProps } from '../helpers/types'
+import { UseProps } from '../hooks/types'
 import { isNumber } from '@/helpers/util'
 import { getEnumsValue } from '@/helpers/validator'
 import { AvatarShapeNames, ButtonShapeNames } from './types'

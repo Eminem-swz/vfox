@@ -27,19 +27,20 @@ export interface ScrollToOffsetOptions {
 }
 
 export interface Validator {
-  (value: any): boolean
+  (value: unknown): boolean
   _type: string
 }
 
 export type DomSelector = HTMLElement | string | Document
 
-export type EventElement = HTMLElement | Document
-
-export interface EventCallback {
+/**
+ * 事件
+ */
+export type FxEventElement = HTMLElement | Document
+export interface FxEventCallback {
   (e: Event, $el: HTMLElement): void
 }
-
-export interface MixEventCallback {
+export interface FxCustomEventCallback {
   (res: { type: string } & DataObject): void
 }
 

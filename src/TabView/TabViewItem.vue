@@ -12,7 +12,16 @@
 <script lang="ts">
 import { ref, defineComponent, inject } from 'vue'
 import { useListItem } from '@/hooks/list'
-import { useTouch, UseTouchEvent } from '@/hooks/touch'
+import { useTouch } from '@/hooks/touch'
+
+interface TabViewItemCoords {
+  vertical: boolean
+  startX: number
+  startY: number
+  timeStamp: number
+  position: number
+  stop: boolean
+}
 
 export default defineComponent({
   name: 'fx-tab-view-item',
@@ -42,11 +51,11 @@ export default defineComponent({
     //   }
     // })
 
-    let coords: any
+    let coords: TabViewItemCoords | null
 
     useTouch({
       el: root,
-      onTouchStart(e: UseTouchEvent) {
+      onTouchStart(e) {
         const {
           scrollHeight,
           scrollTop,
@@ -73,12 +82,18 @@ export default defineComponent({
                   : 2,
               startX: touch.pageX,
               startY: touch.pageY,
-              timeStamp: e.timeStamp
+              timeStamp: e.timeStamp,
+              stop: false
             }
           }
         } else {
           // 滚动到中间，直接拒绝掉
           coords = {
+            vertical,
+            position: 1,
+            startX: 0,
+            startY: 0,
+            timeStamp: e.timeStamp,
             stop: true
           }
           // e.stopPropagation()

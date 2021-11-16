@@ -1,31 +1,14 @@
 import { isMobile } from '@/helpers/device'
-import { objectForEach, isFunction } from '@/helpers/util'
-import { EventElement, EventCallback, MixEventCallback } from './types'
-
-export function getDataset(object: any) {
-  const dataset: any = {}
-
-  objectForEach(object, (value: any, key: string) => {
-    if (
-      key.indexOf('v-') === 0 ||
-      (key.indexOf('v') === 0 && key.length === 9)
-    ) {
-      // 屏蔽带v-的vue属性
-    } else {
-      dataset[key] = value
-    }
-  })
-
-  return dataset
-}
+import { isFunction } from '@/helpers/util'
+import { FxEventElement, FxEventCallback, FxCustomEventCallback } from './types'
 
 type EventTargetWithUID = {
   _euid: number
-} & EventElement
+} & FxEventElement
 
 let euid = 0
 
-const callbacks: any = {}
+const callbacks: Record<string, Record<number, FxEventCallback[]>> = {}
 
 // window.callbacks = callbacks
 
@@ -41,7 +24,7 @@ function onEvent(e: Event) {
       currentTarget === document ? document.documentElement : currentTarget
     ) as HTMLElement
 
-    currentCallbacks.forEach((callback: EventCallback) => {
+    currentCallbacks.forEach((callback: FxEventCallback) => {
       callback.call(callback, e, $el)
     })
   }
@@ -49,8 +32,8 @@ function onEvent(e: Event) {
 
 export function addEvent(
   type: string,
-  callback: EventCallback,
-  $el: EventElement = document
+  callback: FxEventCallback,
+  $el: FxEventElement = document
 ) {
   if (!isFunction(callback) || !type) {
     return
@@ -78,8 +61,8 @@ export function addEvent(
 
 export function removeEvent(
   type: string,
-  callback: EventCallback,
-  $el: EventElement = document
+  callback: FxEventCallback,
+  $el: FxEventElement = document
 ) {
   const target = (
     $el === document.documentElement ? document : $el
@@ -108,68 +91,6 @@ export function removeEvent(
     }
   }
 }
-
-// const resizeCallbacks = {}
-
-// function onResize(e) {
-//   const target = e.target
-
-//   if (target._euid && resizeCallbacks[target._euid]) {
-//     const callbacks = resizeCallbacks[target._euid]
-
-//     callbacks.forEach(callback => {
-//       callback.call(callback, e, target)
-//     })
-//   }
-// }
-
-// export function addResizeEvent(callback, target = document) {
-//   if (!isFunction(callback)) {
-//     return
-//   }
-
-//   if (!target._euid) {
-//     target._euid = ++euid
-//   }
-//   const id = target._euid
-
-//   if (!resizeCallbacks[id]) {
-//     resizeCallbacks[id] = []
-//     target.addEventListener('resize', onResize, false)
-//   }
-
-//   resizeCallbacks[id].push(callback)
-// }
-
-// export function removeResizeEvent(callback, target = document) {
-//   if (target === document.documentElement) {
-//     target = document
-//   }
-
-//   if (!isArray(resizeCallbacks[target._euid])) {
-//     return
-//   }
-
-//   const id = target._euid
-//   const callbacks = resizeCallbacks[id]
-//   let index = -1
-
-//   for (let i = 0; i < callbacks.length; i++) {
-//     if (callbacks[i] == callback) {
-//       index = i
-//       break
-//     }
-//   }
-
-//   if (index >= 0) {
-//     callbacks.splice(index, 1)
-
-//     if (callbacks.length === 0) {
-//       target.removeEventListener('resize', onResize, false)
-//       delete resizeCallbacks[id]
-//     }
-//   }
-// }
 
 let passiveSupported = false
 try {
@@ -241,44 +162,6 @@ export const touchEvent = {
   }
 }
 
-// /**
-//  * 添加Touch委托事件，主要是挟持页面点击，取消一些弹出行为
-//  * @param callback 回调函数
-//  * @param $el 被委托元素
-//  */
-// export function addTouchDelegateEvent(
-//   callback: EventCallback,
-//   $el: EventElement = document
-// ) {
-//   addEvent(touchstart, callback, $el)
-// }
-
-// /**
-//  * 删除Touch委托事件
-//  * @param callback 回调函数
-//  * @param $el 被委托元素
-//  */
-// export function removeTouchDelegateEvent(
-//   callback: EventCallback,
-//   $el: EventElement = document
-// ) {
-//   removeEvent(touchstart, callback, $el)
-// }
-
-// export function addBlurEvent(callback: EventCallback) {
-//   addEvent('click', callback, document)
-
-//   let isOff = false
-
-//   return function removeBlurEvent() {
-//     if (!isOff) {
-//       isOff = true
-
-//       removeEvent('click', callback, document)
-//     }
-//   }
-// }
-
 interface LongPressCoords {
   startX: number
   startY: number
@@ -292,7 +175,7 @@ interface LongPressCoords {
  */
 export function addLongPressEvent(
   $el: HTMLElement,
-  callback: MixEventCallback
+  callback: FxCustomEventCallback
 ) {
   let coords: LongPressCoords | null
 

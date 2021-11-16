@@ -1,14 +1,16 @@
 import { ComponentPublicInstance, onBeforeUnmount, onMounted, Ref } from 'vue'
 import { isElement } from '@/helpers/util'
 import { removeEl } from '@/helpers/dom'
+import { Noop } from '../helpers/types'
 
-type ResizeDetectorStopHandle = () => void
-type ResizeDetectorCallback = () => void
+type ResizeDetectorStopHandle = Noop
+type ResizeDetectorCallback = Noop
 
 /**
  * 监听元素大小变化
- * @param {Element} $el 被监听的元素
- * @param {Function} callback 回调函数
+ * @param $el 被监听的元素
+ * @param callback 回调函数
+ * @returns 终止监听方法
  */
 export function resizeDetector(
   $el: HTMLElement,

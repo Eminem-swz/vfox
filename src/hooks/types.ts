@@ -1,5 +1,6 @@
+import { SetupContext } from 'vue'
 import { RuleItem, RuleType } from 'async-validator'
-import { DataObject, UseProps } from '../helpers/types'
+import { DataObject } from '../helpers/types'
 
 export type PlacementType = 'bottom' | 'top' | 'left' | 'right'
 export type StateType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
@@ -112,6 +113,31 @@ export type PopupStyles = Partial<{
   position: 'absolute'
 }>
 
+export type UseProps = Readonly<Record<string, any>>
+
+export type UseCtx = SetupContext<string[]>
+
 export interface UseEmit {
   (event: string, ...args: any[]): void
+}
+
+export interface UseTouchEvent extends Event {
+  touchObject: {
+    pageX: number
+    pageY: number
+    clientX: number
+    clientY: number
+  }
+  target: HTMLElement
+}
+
+export interface UseTouchCoords {
+  [propName: string]:
+    | string
+    | number
+    | boolean
+    | null
+    | undefined
+    | DataObject<string | number | boolean>
+    | string[]
 }

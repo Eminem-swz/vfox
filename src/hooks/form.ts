@@ -1,4 +1,3 @@
-import { UseProps } from '../helpers/types'
 import {
   ref,
   computed,
@@ -7,11 +6,16 @@ import {
   onMounted,
   ComponentInternalInstance,
   Ref,
-  SetupContext,
   isRef
 } from 'vue'
 import { cloneData, isArray, isSameArray } from '@/helpers/util'
-import { FormItemProvide, HookFormValue, FormInputElement } from './types'
+import {
+  FormItemProvide,
+  HookFormValue,
+  FormInputElement,
+  UseProps,
+  UseCtx
+} from './types'
 
 type FormValue = string | number | boolean | Date | (string | number | Date)[]
 interface UseOptions<T> {
@@ -35,7 +39,7 @@ export const formItemProps = {
 
 export function useFormItem<T extends FormValue = string>(
   props: UseProps,
-  { emit }: SetupContext<any>,
+  { emit }: UseCtx,
   { hookFormValue, formValue, hookResetValue }: UseOptions<T>
 ) {
   const root = ref<HTMLElement>()
@@ -95,7 +99,7 @@ export function useFormItem<T extends FormValue = string>(
     $el._fxFormItemOut = {
       uid,
       getFormName() {
-        return formItem?.props.name || ''
+        return (formItem?.props.name as string) || ''
       },
       hookFormValue: newHookFormValue,
       reset() {

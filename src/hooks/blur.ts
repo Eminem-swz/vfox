@@ -3,13 +3,13 @@ import {
   removeEvent as _removeEvent
 } from '@/helpers/events'
 import { onBeforeUnmount } from 'vue'
-import { EventCallback } from '../helpers/types'
+import { FxEventCallback } from '../helpers/types'
 
 interface OffFn {
   (): void
 }
 
-export function useBlur(callback: EventCallback) {
+export function useBlur(callback: FxEventCallback) {
   let off: OffFn | null = null
 
   function addEvent() {

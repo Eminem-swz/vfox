@@ -1,16 +1,8 @@
-import {
-  computed,
-  onMounted,
-  SetupContext,
-  ref,
-  watch,
-  inject,
-  provide
-} from 'vue'
+import { computed, onMounted, ref, watch, inject, provide } from 'vue'
 import { isFunction, isObject, noop } from '@/helpers/util'
 import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import { UseProps, DataObject, Noop } from '../helpers/types'
+import { DataObject, Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/blur'
 import {
   VisibleStateChangeArgs,
@@ -18,18 +10,18 @@ import {
   PopupCustomCancel,
   PopupCustomConfirm,
   UseEmit,
-  PopupStyles
+  PopupStyles,
+  UseProps,
+  UseCtx
 } from './types'
 import { PopupBridge } from '../apis/types'
 
-interface UseOptions {
+type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
+
+type UseOptions = {
   forbidScroll?: boolean
   useBlur?: boolean
-  afterConfirm?: Noop
-  afterCancel?: Noop
-  afterShow?: Noop
-  afterHidden?: Noop
-}
+} & Partial<Record<LifeName, Noop>>
 
 let zIndex = popupZIndex
 
@@ -55,11 +47,7 @@ export const popupEmits = [
   'confirm'
 ]
 
-export function usePopup(
-  props: UseProps,
-  ctx: SetupContext<any>,
-  useOptions: UseOptions
-) {
+export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   const apis = inject<PopupBridge>('fxApis', {})
   const isParent = inject<boolean>('fxPopupExtend', false)
 
@@ -129,7 +117,7 @@ export function usePopup(
 
     if (isSuccess) {
       emitVisibleState('show', res)
-      afterCall('afterShow', res)
+      afterCall('afterShow')
     }
   }
 
@@ -160,27 +148,27 @@ export function usePopup(
     return true
   }
 
-  function hide(res?: unknown, lifeName?: string) {
+  function hide(res?: unknown, lifeName?: LifeName) {
     if (!isObject(res)) {
       res = {}
     }
 
     const isSuccess = _doHide(() => {
       emitVisibleState('hidden', res)
-      afterCall('afterHidden', res)
+      afterCall('afterHidden')
     })
 
     if (isSuccess) {
-      lifeName && afterCall(lifeName, res)
+      lifeName && afterCall(lifeName)
       emitVisibleState('hide', res)
     }
 
     visibleBlur.removeEvent()
   }
 
-  function afterCall(lifeName: string, res: unknown) {
-    if (isFunction((useOptions as any)[lifeName])) {
-      ;(useOptions as any)[lifeName](res)
+  function afterCall(lifeName: LifeName) {
+    if (isFunction(useOptions[lifeName])) {
+      ;(useOptions[lifeName] as Noop)()
     }
   }
 
@@ -293,11 +281,11 @@ export const popupExtendProps = {
   }
 }
 
-export function usePopupExtend(ctx: SetupContext<any>) {
+export function usePopupExtend(ctx: UseCtx) {
   const popup = ref()
   const apis = inject<PopupBridge>('fxApis', {})
 
-  const emit: UseEmit = (event: string, res: any) => {
+  const emit: UseEmit = (event, res) => {
     if (!apis.in) {
       ctx.emit(event, res)
     } else {

@@ -61,7 +61,6 @@ import Drawer from '@/Drawer'
 import { isArray, isStringNumberMix, rangeNumber } from '@/helpers/util'
 import { DataObject } from '../helpers/types'
 import { useTouch } from '@/hooks/touch'
-import { UseTouchEvent } from '../hooks/touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import { cloneData } from '@/helpers/util'
 import { VisibleStateChangeArgs } from '../hooks/types'
@@ -170,50 +169,6 @@ export default defineComponent({
     }
     let deleteAreaY = document.documentElement.clientHeight
     let onTimer: number
-
-    function onTouchStart(e: UseTouchEvent) {
-      const target = getParentTarget(e.target, 'fx-order_item')
-
-      if (!target || drag.on) {
-        return
-      }
-
-      const index = parseInt(target.dataset.index as string)
-      const rects = target.getClientRects()[0]
-      const position = positions[index]
-
-      if (position.draggable === false) {
-        return
-      }
-
-      removeClassName(root.value as HTMLElement, 'forbid-animation')
-
-      const targetObject = {
-        id: position.id,
-        index,
-        startX: e.touchObject.pageX,
-        startY: e.touchObject.pageY,
-        left: position.left,
-        top: position.top,
-        height: target.offsetHeight,
-        fixedOffsetX: rects.left - position.left,
-        fixedOffsetY: rects.top - position.top,
-        rectBottom: rects.bottom
-      }
-
-      drag.current = index
-      drag.targetObject = targetObject
-
-      clearTimeout(onTimer)
-      onTimer = window.setTimeout(() => {
-        if (drag.targetObject && drag.targetObject.id === targetObject.id) {
-          // 长按，进入拖拽模式
-          enterDrag(targetObject)
-        }
-      }, 500)
-
-      // const index = parseInt(target.dataset.index as string)
-    }
 
     function getNewIndex(sort: number[], index: number) {
       let newIndex = index
@@ -348,73 +303,6 @@ export default defineComponent({
       }
     }
 
-    function onTouchMove(e: UseTouchEvent) {
-      if (!dragOn.value || !drag.targetObject) {
-        // 取消拖拽判定
-        clearTimeout(onTimer)
-        return
-      }
-
-      const targetObject = drag.targetObject
-      const index = targetObject.index
-
-      const moveX = e.touchObject.pageX - targetObject.startX
-      const moveY = e.touchObject.pageY - targetObject.startY
-      const left = targetObject.left + moveX
-      const top = targetObject.top + moveY
-      const itemSize = imgsMode.itemSize
-      const sort = cloneData(imgsMode.sort)
-
-      // 优先判断是否删除
-      deleting.value = targetObject.rectBottom + moveY + 2 > deleteAreaY
-
-      const shift = rangeNumber(
-        Math.round(top / itemSize) * 3 + Math.round(left / itemSize),
-        0,
-        max as number
-      )
-
-      if (
-        (imgsMode.moveShift > 0 && imgsMode.moveShift != shift) ||
-        imgsMode.shift != shift
-      ) {
-        // 计算位置
-        sort.splice(imgsMode.shift, 1)
-        sort.splice(shift, 0, index)
-
-        const tempPoss = new Array(sort.length)
-
-        sort.forEach((v, k) => {
-          tempPoss[v] = getItemPos(k)
-        })
-        tempPoss[index].left = left + targetObject.fixedOffsetX
-        tempPoss[index].top = top + targetObject.fixedOffsetY
-
-        positions.forEach((v, k) => {
-          if (tempPoss[k]) {
-            v.left = tempPoss[k].left
-            v.top = tempPoss[k].top
-          }
-        })
-
-        imgsMode.moveShift = shift
-        imgsMode.moveSort = sort
-      } else {
-        positions[index].left = left + targetObject.fixedOffsetX
-        positions[index].top = top + targetObject.fixedOffsetY
-      }
-    }
-
-    function onTouchEnd() {
-      clearTimeout(onTimer)
-
-      if (dragOn.value) {
-        exitDrag()
-      }
-
-      // console.log(imgsMode)
-    }
-
     function updateOptions() {
       setTimeout(() => {
         const newOptions = imgsMode.sort.map(v => {
@@ -490,9 +378,115 @@ export default defineComponent({
 
     useTouch({
       el: root,
-      onTouchStart,
-      onTouchMove,
-      onTouchEnd
+      onTouchStart(e) {
+        const target = getParentTarget(e.target, 'fx-order_item')
+
+        if (!target || drag.on) {
+          return
+        }
+
+        const index = parseInt(target.dataset.index as string)
+        const rects = target.getClientRects()[0]
+        const position = positions[index]
+
+        if (position.draggable === false) {
+          return
+        }
+
+        removeClassName(root.value as HTMLElement, 'forbid-animation')
+
+        const targetObject = {
+          id: position.id,
+          index,
+          startX: e.touchObject.pageX,
+          startY: e.touchObject.pageY,
+          left: position.left,
+          top: position.top,
+          height: target.offsetHeight,
+          fixedOffsetX: rects.left - position.left,
+          fixedOffsetY: rects.top - position.top,
+          rectBottom: rects.bottom
+        }
+
+        drag.current = index
+        drag.targetObject = targetObject
+
+        clearTimeout(onTimer)
+        onTimer = window.setTimeout(() => {
+          if (drag.targetObject && drag.targetObject.id === targetObject.id) {
+            // 长按，进入拖拽模式
+            enterDrag(targetObject)
+          }
+        }, 500)
+
+        // const index = parseInt(target.dataset.index as string)
+      },
+      onTouchMove(e) {
+        if (!dragOn.value || !drag.targetObject) {
+          // 取消拖拽判定
+          clearTimeout(onTimer)
+          return
+        }
+
+        const targetObject = drag.targetObject
+        const index = targetObject.index
+
+        const moveX = e.touchObject.pageX - targetObject.startX
+        const moveY = e.touchObject.pageY - targetObject.startY
+        const left = targetObject.left + moveX
+        const top = targetObject.top + moveY
+        const itemSize = imgsMode.itemSize
+        const sort = cloneData(imgsMode.sort)
+
+        // 优先判断是否删除
+        deleting.value = targetObject.rectBottom + moveY + 2 > deleteAreaY
+
+        const shift = rangeNumber(
+          Math.round(top / itemSize) * 3 + Math.round(left / itemSize),
+          0,
+          max as number
+        )
+
+        if (
+          (imgsMode.moveShift > 0 && imgsMode.moveShift != shift) ||
+          imgsMode.shift != shift
+        ) {
+          // 计算位置
+          sort.splice(imgsMode.shift, 1)
+          sort.splice(shift, 0, index)
+
+          const tempPoss = new Array(sort.length)
+
+          sort.forEach((v, k) => {
+            tempPoss[v] = getItemPos(k)
+          })
+          tempPoss[index].left = left + targetObject.fixedOffsetX
+          tempPoss[index].top = top + targetObject.fixedOffsetY
+
+          positions.forEach((v, k) => {
+            if (tempPoss[k]) {
+              v.left = tempPoss[k].left
+              v.top = tempPoss[k].top
+            }
+          })
+
+          imgsMode.moveShift = shift
+          imgsMode.moveSort = sort
+        } else {
+          positions[index].left = left + targetObject.fixedOffsetX
+          positions[index].top = top + targetObject.fixedOffsetY
+        }
+      },
+
+      onTouchEnd() {
+        clearTimeout(onTimer)
+
+        if (dragOn.value) {
+          exitDrag()
+        }
+
+        // console.log(imgsMode)
+      }
     })
 
     watch(() => props.items, updateItemsData, {

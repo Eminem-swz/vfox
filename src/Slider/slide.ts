@@ -1,4 +1,4 @@
-import { UseProps } from '../helpers/types'
+import { UseProps } from '../hooks/types'
 import { isNumeric, rangeNumber } from '@/helpers/util'
 import { useTouch } from '@/hooks/touch'
 import { ref } from 'vue'

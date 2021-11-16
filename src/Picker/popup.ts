@@ -1,9 +1,9 @@
 import { onMounted, ref, watch } from 'vue'
 import { isSameArray, isEmpty } from '@/helpers/util'
 import { DetailObject, PickerHandlers } from './types'
-import { DataObject, UseProps } from '../helpers/types'
+import { DataObject, Noop } from '../helpers/types'
 import { cloneDetail, getDefaultDetail, getHookValue } from '@/Picker/util'
-import { PopupCustomConfirm, UseEmit } from '@/hooks/types'
+import { PopupCustomConfirm, UseProps, UseEmit } from '../hooks/types'
 
 export const pickerPopupProps = {
   title: {
@@ -21,7 +21,7 @@ export function usePickerPopup(
   }: {
     emit: UseEmit
     customConfirm: PopupCustomConfirm
-    onCancelClick: () => void
+    onCancelClick: Noop
   },
   handlers: PickerHandlers
 ) {

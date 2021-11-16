@@ -39,13 +39,15 @@ import { rangeInteger } from '@/helpers/util'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
 import { StyleObject } from '../helpers/types'
-import { useTouch, UseTouchCoords, UseTouchEvent } from '@/hooks/touch'
+import { useTouch } from '@/hooks/touch'
 
-interface RateCoords extends UseTouchCoords {
+interface RateCoords {
   size: number
   offsetX: number
   startX: number
   current: number
+  isHalf: boolean
+  isChange: boolean
 }
 
 const ALLOW_ICONS = ['star', 'heart']
@@ -98,15 +100,11 @@ export default defineComponent({
     const formValue = ref(0)
     let defaultValue: number
 
-    const {
-      formName,
-      validateAfterEventTrigger,
-      hookFormValue,
-      eventEmit
-    } = useFormItem<number>(props, ctx, {
-      formValue,
-      hookResetValue: () => defaultValue
-    })
+    const { formName, validateAfterEventTrigger, hookFormValue, eventEmit } =
+      useFormItem<number>(props, ctx, {
+        formValue,
+        hookResetValue: () => defaultValue
+      })
 
     function change(value: number, isHalf = false) {
       if (props.allowHalf && isHalf) {
@@ -166,7 +164,7 @@ export default defineComponent({
 
     useTouch({
       el: root,
-      onTouchStart(e: UseTouchEvent) {
+      onTouchStart(e) {
         const { clientX } = e.touchObject
 
         let $target = e.target as HTMLElement
@@ -180,7 +178,9 @@ export default defineComponent({
           size: rects.height,
           offsetX: clientX - rects.left,
           startX: clientX,
-          current: value
+          current: value,
+          isHalf: false,
+          isChange: false
         }
         coords.isHalf = coords.offsetX < coords.size / 2
 
@@ -188,7 +188,7 @@ export default defineComponent({
 
         e.preventDefault()
       },
-      onTouchMove(e: UseTouchEvent) {
+      onTouchMove(e) {
         if (!coords) {
           return
         }

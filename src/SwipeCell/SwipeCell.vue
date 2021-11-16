@@ -45,7 +45,7 @@ import {
 } from '@/helpers/util'
 import { STATE_TYPES } from '@/hooks/constants'
 import { StateType } from '../hooks/types'
-import { useTouch, UseTouchCoords, UseTouchEvent } from '@/hooks/touch'
+import { useTouch } from '@/hooks/touch'
 import { getStretchOffset } from '@/helpers/animation'
 import { useBlur } from '@/hooks/blur'
 
@@ -54,7 +54,7 @@ interface ButtonOptions {
   type?: StateType
 }
 
-interface SwipeCellCoords extends UseTouchCoords {
+interface SwipeCellCoords {
   startX: number
   buttonsW: number
   isShow: boolean
@@ -87,75 +87,6 @@ export default defineComponent({
     const duration = ref(0)
     const buttonTranslateXs = reactive<number[]>([])
     let coords: SwipeCellCoords | null
-
-    function onTouchStart(e: UseTouchEvent) {
-      if (props.buttons.length === 0) {
-        return
-      }
-
-      coords = {
-        startX: e.touchObject.clientX,
-        buttonsW: (buttonEls.value as HTMLElement).clientWidth,
-        isShow: translateX.value > 0,
-        isSwipe: false
-      }
-
-      if (coords.isShow) {
-        e.stopPropagation()
-      }
-    }
-
-    function onTouchMove(e: UseTouchEvent) {
-      if (!coords) {
-        return
-      }
-
-      const { startX, buttonsW, isSwipe, isShow } = coords
-
-      let x = startX - e.touchObject.clientX
-
-      if (!isShow && !isSwipe && x < 0) {
-        coords = null
-        return
-      }
-      coords.isSwipe = true
-
-      if (isShow) {
-        x += buttonsW
-      }
-
-      const max = rangeNumber(x, 0, buttonsW)
-
-      const $children = (buttonEls.value as HTMLElement).children
-
-      for (let i = 0, len = $children.length; i < len; i++) {
-        buttonTranslateXs[i] =
-          (($children[i] as HTMLElement).offsetLeft * (buttonsW - max)) /
-          buttonsW
-      }
-
-      translateX.value =
-        max + (x > buttonsW ? getStretchOffset(x - buttonsW) : 0)
-      duration.value = 0
-
-      e.stopPropagation()
-    }
-
-    function onTouchEnd(e: UseTouchEvent) {
-      if (coords) {
-        const { isSwipe, buttonsW } = coords
-
-        if (isSwipe && translateX.value > buttonsW / 2) {
-          // 展示
-          show(buttonsW)
-        } else {
-          hide()
-        }
-
-        coords = null
-        e.stopPropagation()
-      }
-    }
 
     const swipeBlur = useBlur(hide)
 
@@ -208,9 +139,72 @@ export default defineComponent({
 
     useTouch({
       el: root,
-      onTouchStart,
-      onTouchMove,
-      onTouchEnd
+      onTouchStart(e) {
+        if (props.buttons.length === 0) {
+          return
+        }
+
+        coords = {
+          startX: e.touchObject.clientX,
+          buttonsW: (buttonEls.value as HTMLElement).clientWidth,
+          isShow: translateX.value > 0,
+          isSwipe: false
+        }
+
+        if (coords.isShow) {
+          e.stopPropagation()
+        }
+      },
+      onTouchMove(e) {
+        if (!coords) {
+          return
+        }
+
+        const { startX, buttonsW, isSwipe, isShow } = coords
+
+        let x = startX - e.touchObject.clientX
+
+        if (!isShow && !isSwipe && x < 0) {
+          coords = null
+          return
+        }
+        coords.isSwipe = true
+
+        if (isShow) {
+          x += buttonsW
+        }
+
+        const max = rangeNumber(x, 0, buttonsW)
+
+        const $children = (buttonEls.value as HTMLElement).children
+
+        for (let i = 0, len = $children.length; i < len; i++) {
+          buttonTranslateXs[i] =
+            (($children[i] as HTMLElement).offsetLeft * (buttonsW - max)) /
+            buttonsW
+        }
+
+        translateX.value =
+          max + (x > buttonsW ? getStretchOffset(x - buttonsW) : 0)
+        duration.value = 0
+
+        e.stopPropagation()
+      },
+      onTouchEnd(e) {
+        if (coords) {
+          const { isSwipe, buttonsW } = coords
+
+          if (isSwipe && translateX.value > buttonsW / 2) {
+            // 展示
+            show(buttonsW)
+          } else {
+            hide()
+          }
+
+          coords = null
+          e.stopPropagation()
+        }
+      }
     })
 
     return {

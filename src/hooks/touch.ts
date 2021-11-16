@@ -1,27 +1,6 @@
 import { onBeforeUnmount, onMounted, Ref } from 'vue'
 import { touchEvent } from '@/helpers/events'
-import { DataObject } from '../helpers/types'
-
-export interface UseTouchEvent extends Event {
-  touchObject: {
-    pageX: number
-    pageY: number
-    clientX: number
-    clientY: number
-  }
-  target: HTMLElement
-}
-
-export interface UseTouchCoords {
-  [propName: string]:
-    | string
-    | number
-    | boolean
-    | null
-    | undefined
-    | DataObject<string | number | boolean>
-    | string[]
-}
+import { UseTouchEvent } from './types'
 
 interface UseOptions {
   el: Ref<HTMLElement | undefined>

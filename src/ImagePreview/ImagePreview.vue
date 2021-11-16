@@ -65,7 +65,6 @@ import SwiperItem from '@/SwiperItem'
 import { isStringArray, rangeNumber } from '@/helpers/util'
 import { popupEmits, popupProps, usePopup } from '@/hooks/popup'
 import { DataObject } from '../helpers/types'
-import { UseTouchCoords } from '@/hooks/touch'
 import { ImageOnLoadPayLoad } from '../Image/types'
 
 interface ImageObject {
@@ -93,7 +92,7 @@ type ImageCoordsScroll = {
   maxLeft: number
 }
 
-interface ImageCoords extends UseTouchCoords {
+interface ImageCoords {
   start: {
     pageX: number
     pageY: number
@@ -104,6 +103,10 @@ interface ImageCoords extends UseTouchCoords {
   }
   image?: ImageCoordsImage
   scroll?: ImageCoordsScroll
+  inZoom?: boolean
+  inZoomEnd?: boolean
+  hasZoom?: boolean
+  inMove?: boolean
 }
 
 interface DistanceOptions {

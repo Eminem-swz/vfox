@@ -1,4 +1,4 @@
-import { computed, reactive, ref, SetupContext, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { isArray, cloneData, isSameArray, isFunction } from '@/helpers/util'
 import {
   validateValues,
@@ -21,7 +21,7 @@ import {
   ValueFormatter,
   HandleType
 } from './types'
-import { UseProps } from '../helpers/types'
+import { UseProps, UseCtx } from '../hooks/types'
 
 export const viewEmits = ['change', 'update:modelValue']
 
@@ -32,7 +32,7 @@ interface UseOptions {
 
 export function useView(
   props: UseProps,
-  { emit }: SetupContext<any>,
+  { emit }: UseCtx,
   { name, afterUpdate }: UseOptions,
   handlers: PickerHandlers
 ) {

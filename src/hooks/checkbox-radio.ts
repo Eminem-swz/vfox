@@ -2,7 +2,6 @@ import { useFormItem } from '@/hooks/form'
 import {
   computed,
   onMounted,
-  SetupContext,
   ref,
   watch,
   inject,
@@ -14,8 +13,7 @@ import {
 } from 'vue'
 import { capitalize, cloneData, inArray } from '@/helpers/util'
 import { useGroup, useGroupItem } from '@/hooks/group'
-import { UseProps } from '../helpers/types'
-import { HookFormValue } from './types'
+import { HookFormValue, UseProps, UseCtx } from './types'
 
 interface Options {
   formName: string
@@ -25,11 +23,7 @@ interface Options {
 
 export const checkboxOrRadioEmits = ['update:checked', 'change']
 
-export function useCheckboxOrRadio(
-  props: UseProps,
-  ctx: SetupContext<any>,
-  name: string
-) {
+export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
   const instance = getCurrentInstance() as ComponentInternalInstance
   const options = inject<Options | null>(`fx${capitalize(name)}Options`, null)
   const input = ref<HTMLInputElement>()
@@ -146,7 +140,7 @@ interface UseGroupOptions {
 
 export function useCheckboxOrRadioGroup(
   props: UseProps,
-  ctx: SetupContext<any>,
+  ctx: UseCtx,
   { name, updateValue, watchValue, formValue }: UseGroupOptions
 ) {
   const { children } = useGroup(name)

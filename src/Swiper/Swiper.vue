@@ -65,10 +65,10 @@ import { useList } from '@/hooks/list'
 import { useResizeDetector } from '@/hooks/resize-detector'
 import { getStretchOffset } from '@/helpers/animation'
 import { StyleObject } from '../helpers/types'
-import { useTouch, UseTouchCoords, UseTouchEvent } from '@/hooks/touch'
+import { useTouch } from '@/hooks/touch'
 import { styleObject2CssText } from '@/helpers/dom'
 
-interface SwiperCoords extends UseTouchCoords {
+interface SwiperCoords {
   offset: boolean | null
   startX: number
   startY: number
@@ -375,8 +375,9 @@ export default defineComponent({
       frameNumber: number
     ) {
       durationTimer = requestAnimationFrame(() => {
-        const transform = window.getComputedStyle(list.value as HTMLElement)
-          .transform
+        const transform = window.getComputedStyle(
+          list.value as HTMLElement
+        ).transform
 
         const currentSize = transform
           .slice(7, transform.length - 1)
@@ -494,10 +495,10 @@ export default defineComponent({
     useTouch({
       el: root,
       // 滑动开始事件-记录坐标
-      onTouchStart(e: UseTouchEvent) {
+      onTouchStart(e) {
         // 禁止图片拖拽
         if (e.target.tagName === 'IMG') {
-          e.target.ondragstart = function() {
+          e.target.ondragstart = function () {
             return false
           }
         }
@@ -525,7 +526,7 @@ export default defineComponent({
       /**
        * 滑动过程事件-判断横竖向，跟随滑动
        */
-      onTouchMove(e: UseTouchEvent) {
+      onTouchMove(e) {
         if (!inMove || !coords) {
           return
         }
@@ -589,7 +590,7 @@ export default defineComponent({
       /**
        * 滑动结束事件-滑到指定位置，重置状态
        */
-      onTouchEnd(e: UseTouchEvent) {
+      onTouchEnd(e) {
         if (!inMove) {
           return
         }

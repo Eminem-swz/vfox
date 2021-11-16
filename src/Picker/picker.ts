@@ -1,4 +1,4 @@
-import { ref, SetupContext, reactive, watch } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { cloneData, isSameArray, isEmpty } from '@/helpers/util'
 import {
   getDefaultDetail,
@@ -7,7 +7,6 @@ import {
   updateArray,
   defaultValueParser
 } from '@/Picker/util'
-import { UseProps } from '../helpers/types'
 import {
   DetailObject,
   Labels,
@@ -17,6 +16,7 @@ import {
   HandleType
 } from './types'
 import { useFormItem } from '@/hooks/form'
+import { UseProps, UseCtx } from '../hooks/types'
 
 interface UseOptions {
   name: string
@@ -33,7 +33,7 @@ export const pickerEmits = ['value-change']
 
 export function usePicker(
   props: UseProps,
-  ctx: SetupContext<any>,
+  ctx: UseCtx,
   { name }: UseOptions,
   handlers: PickerHandlers
 ) {

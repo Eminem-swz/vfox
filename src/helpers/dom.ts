@@ -90,23 +90,22 @@ export function getRelativeOffset(
  * @param size eg: 10 10vw 10vh 10px
  * @param defaultValue
  */
-export function getSizeValue(size: number | string, defaultValue = 0) {
+export function getSizeValue(size: unknown, defaultValue = 0) {
   if (isNumber(size)) {
     return size as number
   } else if (isString(size)) {
-    size = size as string
-    const matches = size.match(/^([\d.]+)((px)|(vw)|(vh)|)$/)
+    const matches = (size as string).match(/^([\d.]+)((px)|(vw)|(vh)|)$/)
 
     if (matches) {
-      size = parseFloat(matches[1])
+      let sizeNum = parseFloat(matches[1])
 
       if (matches[2] === 'vw') {
-        size *= docEl.clientWidth / 100
+        sizeNum *= docEl.clientWidth / 100
       } else if (matches[2] === 'vh') {
-        size *= docEl.clientHeight / 100
+        sizeNum *= docEl.clientHeight / 100
       }
 
-      return size
+      return sizeNum
     }
   }
 
@@ -156,7 +155,7 @@ interface StyleObject {
 export function styleObject2CssText(object: StyleObject) {
   const arr: string[] = []
 
-  objectForEach(object, (v: string, k: string) => {
+  objectForEach(object, (v, k) => {
     arr.push(`${camelCase2KebabCase(k)}: ${v}`)
   })
 

@@ -1,15 +1,11 @@
-import { computed, inject, provide, ref, SetupContext, toRef } from 'vue'
-import { UseProps } from '../helpers/types'
+import { computed, inject, provide, ref, toRef } from 'vue'
 import { useList, useListItem } from '@/hooks/list'
 import { capitalize } from '@/helpers/util'
+import { UseProps, UseCtx } from '../hooks/types'
 
 export const stepsEmits = ['update:activeIndex']
 
-export function useStepList(
-  props: UseProps,
-  ctx: SetupContext<any>,
-  name: string
-) {
+export function useStepList(props: UseProps, ctx: UseCtx, name: string) {
   const { list } = useList(name, $items => {
     if (props.activeIndex >= $items.length) {
       ctx.emit('update:activeIndex', $items.length - 1)

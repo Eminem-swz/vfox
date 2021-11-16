@@ -1,7 +1,6 @@
 import {
   getCurrentInstance,
   ComponentInternalInstance,
-  SetupContext,
   PropType,
   reactive,
   ref,
@@ -18,9 +17,9 @@ import {
 import { frameTo } from '@/helpers/animation'
 import Exception from '@/helpers/exception'
 import { iconValidator } from '@/helpers/validator'
-import { UseProps } from '../helpers/types'
 import { handleBadge } from '@/Badge/util'
 import { BadgeOptions } from '../Badge/types'
+import { UseProps, UseCtx } from '../hooks/types'
 
 interface TabProps extends UseProps {
   options: OptionList
@@ -82,11 +81,7 @@ export const tabProps = {
   }
 }
 
-export function useTab(
-  props: TabProps,
-  { emit }: SetupContext<any>,
-  tabName: string
-) {
+export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
   const instance = getCurrentInstance() as ComponentInternalInstance
   const list = ref<HTMLElement>()
   const options2 = reactive<HandleOptionItem[]>([])

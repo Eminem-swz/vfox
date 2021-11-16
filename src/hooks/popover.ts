@@ -1,4 +1,4 @@
-import { computed, SetupContext, PropType, ref, nextTick, watch } from 'vue'
+import { computed, PropType, ref, nextTick, watch } from 'vue'
 import { cloneData } from '@/helpers/util'
 import {
   selectorValidator,
@@ -7,9 +7,9 @@ import {
 } from '@/helpers/validator'
 import { querySelector } from '@/helpers/dom'
 import { PLACEMENT_TYPES } from '@/hooks/constants'
-import { PlacementType } from '../hooks/types'
+import { PlacementType, UseProps, UseCtx } from '../hooks/types'
 import { usePopup, popupProps, popupEmits } from '@/hooks/popup'
-import { StyleObject, UseProps } from '../helpers/types'
+import { StyleObject } from '../helpers/types'
 
 type PopoverPos = {
   t: number | null
@@ -57,7 +57,7 @@ export const popoverProps = {
 
 export const popoverEmits = [...popupEmits]
 
-export function usePopover(props: UseProps, ctx: SetupContext<any>) {
+export function usePopover(props: UseProps, ctx: UseCtx) {
   const padding = 8
   const inner = ref<HTMLElement>()
   const isShow = ref(false)

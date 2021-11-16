@@ -1,5 +1,5 @@
 import dayjs from '@/helpers/day'
-import { PropType, SetupContext } from 'vue'
+import { PropType } from 'vue'
 import { getEnumsValue } from '@/helpers/validator'
 import {
   DefaultValueHandler,
@@ -10,7 +10,7 @@ import {
   ValueParser,
   Values
 } from '../Picker/types'
-import { UseProps } from '../helpers/types'
+import { UseProps } from '../hooks/types'
 import {
   array2Date,
   day2Array,
@@ -74,7 +74,7 @@ export function useDatePicker(props: UseProps) {
     })
   }
 
-  const valueParser: ValueParser = (value: any) => {
+  const valueParser: ValueParser = (value: unknown) => {
     let djs: Dayjs | null = null
 
     if (isDate(value)) {
@@ -85,7 +85,7 @@ export function useDatePicker(props: UseProps) {
       value !== '' &&
       isString(value)
     ) {
-      djs = dayjs(value, props.formatTemplate, true)
+      djs = dayjs(value as string, props.formatTemplate, true)
     }
 
     return day2Array(djs, mode)
