@@ -14,12 +14,12 @@ import {
   HookFormValue,
   FormInputElement,
   UseProps,
-  UseCtx
+  UseCtx,
+  FormValue
 } from './types'
 
-type FormValue = string | number | boolean | Date | (string | number | Date)[]
-interface UseOptions<T> {
-  hookFormValue?: HookFormValue
+interface UseOptions<T extends FormValue> {
+  hookFormValue?: HookFormValue<T>
   formValue: Ref<T> | Array<T>
   hookResetValue?: (input: HTMLInputElement) => T | T[]
 }
@@ -46,7 +46,7 @@ export function useFormItem<T extends FormValue = string>(
   const formItem = inject<FormItemProvide | null>('fxFormItem', null)
   let $input: FormInputElement
 
-  const newHookFormValue: HookFormValue = hookFormValue
+  const newHookFormValue = hookFormValue
     ? hookFormValue
     : function () {
         return isRef(formValue) ? formValue.value : cloneData(formValue)
@@ -59,7 +59,7 @@ export function useFormItem<T extends FormValue = string>(
     return props.name || ''
   })
 
-  function validateAfterEventTrigger(type: string, value: T) {
+  function validateAfterEventTrigger(type: string, value: T | T[]) {
     formItem && formItem.validateAfterEventTrigger(type, value)
   }
 
@@ -128,14 +128,6 @@ export function useFormItem<T extends FormValue = string>(
     } else {
       setItemOut($input, vm.uid)
     }
-
-    // $input._app_component = {
-    //   $: {
-    //     uid: vm.uid
-    //   },
-    //   formName,
-    //   formValue
-    // }
   })
 
   return {

@@ -20,13 +20,14 @@
 import { defineComponent, inject, PropType, provide, ref } from 'vue'
 import Schema from 'async-validator'
 import { isArray, isBoolean, isNumber } from '@/helpers/util'
+import { FormItemProvide } from '../hooks/types'
 import {
-  FormItemProvide,
+  FormRuleValidate,
   FormRuleItem,
   FormRules,
-  FormRuleType,
-  FormRuleValidate
-} from '../hooks/types'
+  FormGroupItemOut,
+  FormRuleType
+} from './types'
 import { useGroupItem } from '@/hooks/group'
 
 export default defineComponent({
@@ -156,7 +157,7 @@ export default defineComponent({
         return props.name
       },
       validate
-    })
+    } as FormGroupItemOut)
 
     return {
       errMsg,

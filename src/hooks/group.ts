@@ -31,7 +31,7 @@ export function useGroup<T = any>(
   }
 }
 
-export function useGroupItem(name: string, object: any) {
+export function useGroupItem<T = any>(name: string, object: T) {
   const group = inject<GroupProvide | null>(getKey(name), null)
 
   group && (group as GroupProvide).addChild(object)

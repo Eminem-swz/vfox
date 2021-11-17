@@ -1,5 +1,5 @@
 <template>
-  <drawer
+  <Drawer
     class="fx-number-keyboard"
     placement="bottom"
     :visible="visible"
@@ -22,7 +22,7 @@
             :key="index"
           >
             <div class="fx-number-keyboard_button" @click="onNumberClick(item)">
-              <icon v-if="item.icon" :icon="item.icon"></icon>
+              <Icon v-if="item.icon" :icon="item.icon" />
               <template v-else>{{ item.text }}</template>
             </div>
           </li>
@@ -36,7 +36,7 @@
               class="fx-number-keyboard_button"
               @click="onNumberClick(backspaceItem)"
             >
-              <icon icon="BackspaceOutlined"></icon>
+              <Icon icon="BackspaceOutlined" />
             </div>
           </div>
           <div class="fx-number-keyboard_confirm">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-  </drawer>
+  </Drawer>
 </template>
 
 <script lang="ts">
@@ -63,7 +63,7 @@ import {
   popupExtendEmits,
   popupExtendProps
 } from '@/hooks/popup'
-import { VisibleStateChangeArgs } from '../hooks/types'
+import { PopupVisibleStateChangeArgs } from '../hooks/types'
 import { getEnumsValue } from '@/helpers/validator'
 
 const TYPE_NAMES = ['default', 'rightColumn']
@@ -73,6 +73,10 @@ interface NumberKeyboardItem {
   text: string
   type: 'text' | 'confirm' | 'backspace'
   span?: number
+}
+
+interface PopupCancelArgs {
+  source: string
 }
 
 export default defineComponent({
@@ -111,7 +115,7 @@ export default defineComponent({
 
     const popup = usePopupExtend(ctx)
 
-    function onVisibleStateChange2(e: VisibleStateChangeArgs) {
+    function onVisibleStateChange2(e: PopupVisibleStateChangeArgs) {
       popup.onVisibleStateChange(e)
 
       if (e.state === 'show') {
@@ -217,15 +221,19 @@ export default defineComponent({
       popup.customConfirm({})
     }
 
-    function onConfirm(res: any) {
-      close(res, true)
+    function onConfirm() {
+      close({}, true)
     }
 
-    function onCancel(res: any) {
+    function onCancel(res: PopupCancelArgs) {
+      console.log(res)
       close(res, false)
     }
 
-    function close(res: any, isConfirm: boolean) {
+    function close(
+      res: PopupCancelArgs | Record<string, never>,
+      isConfirm: boolean
+    ) {
       const detail = Object.assign(
         {
           value: cacheValue

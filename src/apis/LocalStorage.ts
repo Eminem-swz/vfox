@@ -1,24 +1,28 @@
-import { isDate, isObject } from '@/helpers/util'
+import { isDate } from '@/helpers/util'
 import { parseParamsByRules } from '@/apis/rules'
-import { ApiOptions } from './types'
 
-export function createStorage(areaName: string, options?: ApiOptions) {
-  if (!options || !isObject(options)) {
-    options = {} as ApiOptions
-  }
+interface CreateStorageOptions {
+  areaName: string
+  perLimitSize: number
+  limitSize: number
+}
+
+export function createStorage(
+  areaName: string,
+  options?: Partial<CreateStorageOptions>
+) {
+  // if (!options || !isObject(options)) {
+  //   options = {} as ApiOptions
+  // }
 
   const {
     areaName: _areaName,
     perLimitSize,
     limitSize
-  } = parseParamsByRules(
-    Object.assign({ areaName }, options),
+  } = parseParamsByRules<CreateStorageOptions>(
+    Object.assign({ areaName }, options || {}),
     'createStorage'
-  ) as {
-    areaName: string
-    perLimitSize: number
-    limitSize: number
-  }
+  )
 
   const prefix = _areaName + ':'
 

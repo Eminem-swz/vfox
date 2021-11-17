@@ -64,7 +64,6 @@ import Swiper from '@/Swiper'
 import SwiperItem from '@/SwiperItem'
 import { isStringArray, rangeNumber } from '@/helpers/util'
 import { popupEmits, popupProps, usePopup } from '@/hooks/popup'
-import { DataObject } from '../helpers/types'
 import { ImageOnLoadPayLoad } from '../Image/types'
 
 interface ImageObject {
@@ -433,7 +432,7 @@ export default defineComponent({
     watch(
       () => props.urls,
       () => {
-        const map: DataObject<ImageObject> = {}
+        const map: Record<string, ImageObject> = {}
 
         images.forEach(v => {
           map[v.src] = v

@@ -4,7 +4,7 @@
     :class="['column-' + columnNumber]"
     v-bind="$attrs"
   >
-    <order
+    <Order
       :columnNumber="columnNumber"
       :deletable="deletable"
       :items="orderItems"
@@ -18,7 +18,7 @@
           v-if="item.isAdd"
           @contextmenu.prevent="noop"
         >
-          <icon icon="PlusOutlined"></icon>
+          <Icon icon="PlusOutlined" />
           <input
             type="file"
             name=""
@@ -34,25 +34,22 @@
           @contextmenu.prevent="noop"
           @click="onItemClick(item)"
         >
-          <fx-image :src="item.url" :draggable="false" :mode="imageMode" />
+          <FxImage :src="item.url" :draggable="false" :mode="imageMode" />
           <div
             class="fx-image-uploader_item-status"
             v-if="item.status !== 'uploaded' && item.status !== 'reading'"
           >
-            <activity-indicator
+            <ActivityIndicator
               v-if="item.status === 'uploading'"
               :size="40"
               color="#ffffff"
             />
-            <icon
-              icon="DeleteOutlined"
-              v-else-if="item.status === 'failed'"
-            ></icon>
+            <Icon icon="DeleteOutlined" v-else-if="item.status === 'failed'" />
             <span>{{ item.message }}</span>
           </div>
         </div>
       </template>
-    </order>
+    </Order>
     <input
       type="hidden"
       :name="formName"
@@ -60,7 +57,7 @@
       ref="input"
     />
   </div>
-  <image-preview
+  <ImagePreview
     class="fx-image-uploader_preview"
     :urls="formValue"
     v-model:visible="previewVisible"
@@ -68,16 +65,16 @@
     showClose
   >
     <template #close="{ activeIndex }">
-      <fx-button
+      <FxButton
         @click.stop="onPreviewDelete(activeIndex)"
         icon="DeleteOutlined"
         size="large"
         pattern="borderless"
         shape="square"
         :ghost="true"
-      ></fx-button>
+      ></FxButton>
     </template>
-  </image-preview>
+  </ImagePreview>
 </template>
 
 <script lang="ts">
@@ -107,7 +104,6 @@ import {
   noop
 } from '@/helpers/util'
 import { formatFileSize } from '@/helpers/file'
-import { DataObject } from '../helpers/types'
 import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
 import { ImageModes } from '../Image/types'
 
@@ -313,7 +309,7 @@ export default defineComponent({
       if (isBoolean(res)) {
         return Promise.resolve(res)
       } else if (isPromiseLike(res)) {
-        return (res as Promise<any>)
+        return (res as Promise<boolean | File>)
           .then(res => {
             if (res instanceof File) {
               return res
@@ -495,7 +491,7 @@ export default defineComponent({
       updateValue()
     }
 
-    const urlIdCache: DataObject<number> = {}
+    const urlIdCache: Record<string, number> = {}
 
     function urlId(url: string, id?: number) {
       url = url.substr(-100)

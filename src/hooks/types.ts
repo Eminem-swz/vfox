@@ -1,6 +1,5 @@
 import { SetupContext } from 'vue'
-import { RuleItem, RuleType } from 'async-validator'
-import { DataObject } from '../helpers/types'
+import { AnyObject } from '../helpers/types'
 
 export type PlacementType = 'bottom' | 'top' | 'left' | 'right'
 export type StateType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
@@ -37,14 +36,6 @@ export interface OnScrollCallback {
   ): void
 }
 
-export type VisibleState = 'show' | 'shown' | 'hide' | 'hidden'
-
-export interface VisibleStateChangeArgs {
-  type: string
-  state: VisibleState
-  [propName: string]: any
-}
-
 export interface CountTime {
   time: number
   days: string
@@ -56,88 +47,61 @@ export interface CountTime {
   milliseconds: string
 }
 
-export interface FormRuleItem extends RuleItem {
-  trigger?: string
-}
-
-export interface FormRules {
-  [propName: string]: FormRuleItem[]
-}
-
-export type FormRuleType = RuleType
-
-export type HookFormValue = () => any
-
-export interface FormItemOut {
+/**
+ * form
+ */
+export type FormValue = string | number | boolean | Date
+export type HookFormValue<T extends FormValue> = () => T | T[]
+export interface FormItemOut<T extends FormValue> {
   uid: number
   getFormName: () => string
-  hookFormValue: HookFormValue
-  reset?: () => void
+  hookFormValue: HookFormValue<T>
+  reset?: () => T | T[]
 }
-
-export interface FormGroupItemOut {
-  getFormName: () => string
-  validate: FormRuleValidate
-}
-
-export interface FormRuleValidate {
-  (value: any, rules?: FormRuleItem[]): Promise<any>
-}
-
 export interface FormInputElement extends HTMLInputElement {
-  _app_component: any
-  _fxFormItemOut: FormItemOut
+  _fxFormItemOut: FormItemOut<FormValue>
 }
-
 export interface FormItemProvide {
   props: UseProps
   validateAfterEventTrigger: (type: string, value: any) => void
 }
 
+/**
+ * popup
+ */
 export interface PopupCustomCancel {
   (key: string, focus?: boolean): void
 }
-
 export interface PopupCustomConfirm {
-  (detail?: DataObject): void
+  (detail: AnyObject): void
 }
-
 export interface PopupPublicInstance {
   customCancel: PopupCustomCancel
   customConfirm: PopupCustomConfirm
 }
-
 export type PopupStyles = Partial<{
   zIndex: number
   top: string
   position: 'absolute'
 }>
+export type PopupVisibleState = 'show' | 'shown' | 'hide' | 'hidden'
+export interface PopupVisibleStateChangeArgs {
+  type: string
+  state: PopupVisibleState
+}
 
-export type UseProps = Readonly<Record<string, any>>
-
+export type UseProps = Readonly<AnyObject>
 export type UseCtx = SetupContext<string[]>
 
 export interface UseEmit {
   (event: string, ...args: any[]): void
 }
 
-export interface UseTouchEvent extends Event {
-  touchObject: {
-    pageX: number
-    pageY: number
-    clientX: number
-    clientY: number
-  }
-  target: HTMLElement
-}
-
-export interface UseTouchCoords {
+export interface EmitObject {
   [propName: string]:
-    | string
-    | number
     | boolean
-    | null
-    | undefined
-    | DataObject<string | number | boolean>
-    | string[]
+    | number
+    | string
+    | Date
+    | (boolean | number | string | Date)[]
 }

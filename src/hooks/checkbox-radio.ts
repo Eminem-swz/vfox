@@ -21,6 +21,13 @@ interface Options {
   onChange: (uid: number) => void
 }
 
+interface GroupItem {
+  uid: number
+  getInputChecked: () => boolean
+  getValue: () => number | string
+  setChecked: (checked: boolean) => void
+}
+
 export const checkboxOrRadioEmits = ['update:checked', 'change']
 
 export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
@@ -82,7 +89,7 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
     }
   )
 
-  useGroupItem(name, {
+  useGroupItem<GroupItem>(name, {
     uid: instance.uid,
     getInputChecked,
     getValue,
@@ -105,8 +112,6 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
     if (checked !== $input.checked) {
       $input.checked = $input.defaultChecked = checked
     }
-
-    // $input._app_component = this.appCheckboxGroup || this
   })
 
   return {
@@ -121,19 +126,19 @@ export type ModelValue = number | string
 
 interface UpdateValueOptions {
   isChange: boolean
-  children: any[]
+  children: GroupItem[]
   uid: number | undefined
-  hookFormValue: HookFormValue
+  hookFormValue: HookFormValue<ModelValue>
 }
 
 interface WatchValueOptions {
-  children: any[]
-  value: any
+  children: GroupItem[]
+  value: ModelValue | ModelValue[]
 }
 
 interface UseGroupOptions {
   name: string
-  updateValue: (options: UpdateValueOptions) => string | number
+  updateValue: (options: UpdateValueOptions) => ModelValue | ModelValue[]
   watchValue: (options: WatchValueOptions) => void
   formValue: Ref<ModelValue> | ModelValue[]
 }
@@ -143,7 +148,7 @@ export function useCheckboxOrRadioGroup(
   ctx: UseCtx,
   { name, updateValue, watchValue, formValue }: UseGroupOptions
 ) {
-  const { children } = useGroup(name)
+  const { children } = useGroup<GroupItem>(name)
 
   function hookFormValue() {
     return isRef(formValue) ? formValue.value : cloneData(formValue)

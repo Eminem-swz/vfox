@@ -6,10 +6,11 @@
 
 <script lang="ts">
 import { defineComponent, PropType, provide } from 'vue'
-import { inArray, isUndefined } from '@/helpers/util'
+import { inArray, isArray, isUndefined } from '@/helpers/util'
 import { useGroup } from '@/hooks/group'
 import { DataObject } from '../helpers/types'
-import { FormRules, FormInputElement, FormGroupItemOut } from '../hooks/types'
+import { FormInputElement, EmitObject } from '../hooks/types'
+import { FormRules, FormGroupItemOut } from './types'
 
 export default defineComponent({
   name: 'fx-form',
@@ -22,7 +23,7 @@ export default defineComponent({
 
     function onSubmit(e: Event) {
       const inputEls = (e.target as HTMLFormElement).elements
-      const value: DataObject = {}
+      const value: EmitObject = {}
       const uids = []
 
       for (let i = 0, len = inputEls.length; i < len; i++) {
@@ -47,12 +48,12 @@ export default defineComponent({
 
             if (type === 'checkbox') {
               // 数组类型
-              if (!value[name]) {
+              if (!isArray(value[name])) {
                 value[name] = []
               }
 
               if (checked) {
-                value[name].push((el as HTMLInputElement).value)
+                ;(value[name] as string[]).push((el as HTMLInputElement).value)
               }
             } else if (type === 'radio') {
               if (value[name] == null) {
@@ -111,7 +112,7 @@ export default defineComponent({
     }
 
     function validate(value: DataObject) {
-      const retList: Promise<any>[] = []
+      const retList: Promise<never>[] = []
 
       children.forEach(child => {
         const formName = child.getFormName()
@@ -126,7 +127,7 @@ export default defineComponent({
 
     function onReset(e: Event) {
       const inputEls = (e.target as HTMLFormElement).elements
-      const values: DataObject = {}
+      const values: EmitObject = {}
       const uids: number[] = []
 
       setTimeout(() => {

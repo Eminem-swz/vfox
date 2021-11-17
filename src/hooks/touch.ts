@@ -1,6 +1,15 @@
 import { onBeforeUnmount, onMounted, Ref } from 'vue'
 import { touchEvent } from '@/helpers/events'
-import { UseTouchEvent } from './types'
+
+interface UseTouchEvent extends Event {
+  touchObject: {
+    pageX: number
+    pageY: number
+    clientX: number
+    clientY: number
+  }
+  target: HTMLElement
+}
 
 interface UseOptions {
   el: Ref<HTMLElement | undefined>
@@ -26,21 +35,21 @@ export function useTouch({
   onTouchEnd
 }: UseOptions) {
   const object = {
-    handleEvent(e: Event) {
-      ;(e as UseTouchEvent).touchObject = getTouch(e)
+    handleEvent(e: UseTouchEvent) {
+      e.touchObject = getTouch(e)
 
       switch (e.type) {
         case touchstart:
-          onTouchStart(e as UseTouchEvent)
+          onTouchStart(e)
           break
         case touchmove:
-          onTouchMove(e as UseTouchEvent)
+          onTouchMove(e)
           break
         case touchend:
-          onTouchEnd(e as UseTouchEvent)
+          onTouchEnd(e)
           break
         case 'mouseleave':
-          onTouchEnd(e as UseTouchEvent)
+          onTouchEnd(e)
           break
         default:
           break

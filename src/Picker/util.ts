@@ -20,7 +20,7 @@ import {
   isStringNumberMixArray
 } from '@/helpers/util'
 import Exception from '@/helpers/exception'
-import { DataObject } from '../helpers/types'
+import { AnyObject } from '../helpers/types'
 
 export function getColRows(options: OptionItem[], indexes: number[]) {
   const rows: ColRow[] = []
@@ -110,22 +110,21 @@ export function parseOptions(options: any[], fieldNames: FieldNames) {
           extraData: {}
         })
       } else if (isObject(option)) {
-        option = option as DataObject
+        const newOption = option as AnyObject
 
-        if (isStringNumberMix(option[fieldNames.value])) {
-          const extraData = cloneData(option)
+        if (isStringNumberMix(newOption[fieldNames.value])) {
+          const extraData = cloneData(newOption)
           delete extraData[fieldNames.label]
           delete extraData[fieldNames.value]
           delete extraData[fieldNames.children]
           ;(newOptions as OptionItem[]).push({
-            label:
-              option[fieldNames.label] == null
-                ? option[fieldNames.value]
-                : option[fieldNames.label],
-            value: option[fieldNames.value],
-            disabled: option.disabled ? true : false,
+            label: (newOption[fieldNames.label] == null
+              ? newOption[fieldNames.value]
+              : newOption[fieldNames.label]) as string,
+            value: newOption[fieldNames.value] as string,
+            disabled: newOption.disabled ? true : false,
             children: parseOptions(
-              option[fieldNames.children],
+              newOption[fieldNames.children],
               fieldNames
             ) as OptionItem[],
             extraData

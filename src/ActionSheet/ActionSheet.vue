@@ -79,7 +79,9 @@ export default defineComponent({
 
     function onItemClick(index: number) {
       popup.customConfirm({
-        item: cloneData(props.options[index]),
+        item: {
+          name: props.options[index].name
+        },
         index
       })
     }

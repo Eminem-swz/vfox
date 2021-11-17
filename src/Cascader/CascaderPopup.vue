@@ -1,10 +1,10 @@
 <template>
-  <drawer
+  <Drawer
     class="fx-cascader-popup"
     :title="title2"
     placement="right"
     :visible="visible"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
     @confirm="onConfirm"
     @cancel="onCancel"
     @update:visible="onUpdateVisible"
@@ -35,7 +35,7 @@
         </ul>
       </div>
     </div>
-  </drawer>
+  </Drawer>
 </template>
 
 <script lang="ts">

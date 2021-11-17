@@ -1,5 +1,5 @@
 import Exception from '@/helpers/exception'
-import { isObject, inArray, isFunction } from '@/helpers/util'
+import { inArray, isFunction } from '@/helpers/util'
 import {
   notNullValidator,
   stringArrayValidator,
@@ -11,19 +11,11 @@ import {
 } from '@/helpers/validator'
 import { MODE_NAMES as CALENDAR_MODE_NAMES } from '@/Calendar/util'
 import { PLACEMENT_TYPES } from '@/hooks/constants'
-import { DataObject, Validator } from '../helpers/types'
-import { ApiOptions } from '../apis/types'
+import { AnyObject, DataValue, Validator } from '../helpers/types'
 
 const placementValidator = createEnumsValidator(PLACEMENT_TYPES)
 
-type RuleDefaultFunction = () =>
-  | null
-  | string
-  | number
-  | boolean
-  | string[]
-  | number[]
-  | Record<string, never>
+type RuleDefaultFunction = () => DataValue
 
 type RuleType =
   | StringConstructor
@@ -42,7 +34,7 @@ interface ApiRule {
   enums?: string[]
 }
 
-type ApiRules = DataObject<DataObject<ApiRule>>
+type ApiRules = Record<string, Record<string, ApiRule>>
 
 export const apiRules: ApiRules = {
   /**
@@ -442,16 +434,16 @@ export const apiRules: ApiRules = {
   }
 }
 
-export const parseParamsByRules = function (
-  options: ApiOptions,
+export function parseParamsByRules<T extends AnyObject = AnyObject>(
+  options: Partial<T>,
   apiName: string
 ) {
-  if (!isObject(options)) {
-    options = {}
-  }
+  // if (!isObject(options)) {
+  //   options = {}
+  // }
 
   const rules = apiRules[apiName]
-  const ret: DataObject = {}
+  const ret: AnyObject = {}
   const PARAM_ERROR = Exception.TYPE.PARAM_ERROR
 
   for (const k in rules) {
@@ -520,9 +512,9 @@ export const parseParamsByRules = function (
     } else if (rule.default) {
       ret[k] = isFunction(rule.default)
         ? (rule.default as RuleDefaultFunction)()
-        : rule.default
+        : (rule.default as string | number | boolean | null)
     }
   }
 
-  return ret
+  return ret as T
 }

@@ -13,11 +13,16 @@ export interface ApiOptionsComplete {
   (): void
 }
 
+export interface ApiFnOptions {
+  success: ApiOptionsSuccess
+  fail: ApiOptionsFail
+  complete: ApiOptionsComplete
+}
+
 export interface ApiOptions {
   success?: ApiOptionsSuccess
   fail?: ApiOptionsFail
   complete?: ApiOptionsComplete
-  [propName: string]: any
 }
 
 export type PopupHook = (hookEvent: string, args: any) => void
@@ -27,7 +32,7 @@ export interface PopupBridge {
   out?: (key: string, value: any) => void
 }
 
-export interface PopupConfirmArgs extends DataObject {
+export interface PopupConfirmArgs {
   confirm?: boolean
   cancel?: boolean
   detail?: DataObject

@@ -98,12 +98,8 @@ export default defineComponent({
     const { emit } = ctx
     const formValue = ref('1')
 
-    const {
-      formName,
-      validateAfterEventTrigger,
-      getInputEl,
-      hookFormValue
-    } = useFormItem<string>(props, ctx, { formValue })
+    const { formName, validateAfterEventTrigger, getInputEl, hookFormValue } =
+      useFormItem<string>(props, ctx, { formValue })
 
     function onMinusOrPlusClick(isPlus = true) {
       let type = 'plus-click'

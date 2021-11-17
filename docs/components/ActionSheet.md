@@ -43,7 +43,7 @@
 
 | 事件                 | 描述           | 回调函数参数                                                    |
 | -------------------- | -------------- | --------------------------------------------------------------- |
-| confirm              | 点击选项时触发 | {item: any: index: number}                                      |
+| confirm              | 点击选项时触发 | {item: {name: string}: index: number}                           |
 | visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./ActionSheet.md#visiblestate-值说明) } |
 
 ### VisibleState 值说明

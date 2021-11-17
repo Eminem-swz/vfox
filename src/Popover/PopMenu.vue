@@ -26,7 +26,7 @@
                 class="fx-pop-menu_item-inner"
                 :class="{ 'has--icon': item.icon }"
               >
-                <icon v-if="item.icon" :icon="item.icon" />
+                <Icon v-if="item.icon" :icon="item.icon" />
                 <span>{{ item.name }}</span>
               </div>
             </li>
@@ -41,7 +41,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import { popoverProps, popoverEmits, usePopover } from '@/hooks/popover'
 import Icon from '@/Icon'
-import { cloneData, isArray, isObject } from '@/helpers/util'
+import { isArray, isObject } from '@/helpers/util'
 import { OptionItem } from './types'
 
 export default defineComponent({
@@ -65,7 +65,9 @@ export default defineComponent({
       }
 
       popoverHook.customConfirm({
-        item: cloneData(item),
+        item: {
+          name: item.name
+        },
         index
       })
     }

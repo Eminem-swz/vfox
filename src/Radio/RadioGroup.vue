@@ -35,7 +35,7 @@ export default defineComponent({
       name: 'radio',
       updateValue({ isChange, uid, children, hookFormValue }) {
         let hasChecked = false
-        let value = ''
+        let value: ModelValue = ''
 
         children.forEach(child => {
           const checked = uid ? uid === child.uid : child.getInputChecked()

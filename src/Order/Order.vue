@@ -31,18 +31,18 @@
       </div>
     </div>
   </div>
-  <drawer
+  <Drawer
     class="fx-order_delete"
     placement="bottom"
     :visible="dragDelete"
     :showMask="false"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   >
     <div class="fx-order_delete-button" ref="deleteButton">
-      <icon icon="DeleteOutlined"></icon>
+      <Icon icon="DeleteOutlined" />
       <span>{{ deleting ? '松手即可删除' : '拖动到此处删除' }}</span>
     </div>
-  </drawer>
+  </Drawer>
 </template>
 
 <script lang="ts">
@@ -63,7 +63,7 @@ import { DataObject } from '../helpers/types'
 import { useTouch } from '@/hooks/touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import { cloneData } from '@/helpers/util'
-import { VisibleStateChangeArgs } from '../hooks/types'
+import { PopupVisibleStateChangeArgs } from '../hooks/types'
 
 type Item = {
   id: string | number
@@ -368,7 +368,7 @@ export default defineComponent({
       }
     }
 
-    function onVisibleStateChange(e: VisibleStateChangeArgs) {
+    function onVisibleStateChange(e: PopupVisibleStateChangeArgs) {
       if (e.state === 'shown') {
         const rects = (deleteButton.value as HTMLElement).getClientRects()[0]
 

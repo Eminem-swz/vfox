@@ -1,4 +1,4 @@
-import { DataObject } from '../helpers/types'
+import { AnyObject, DataObject } from '../helpers/types'
 
 export interface UserFieldNames {
   label?: string
@@ -72,7 +72,7 @@ export interface ValueHook {
 }
 
 export interface DetailHook {
-  (detail: DetailObject): any
+  (detail: DetailObject): AnyObject
 }
 
 export interface PickerHandlers {

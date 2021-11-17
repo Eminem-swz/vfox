@@ -1,5 +1,5 @@
 <template>
-  <drawer
+  <Drawer
     class="fx-picker-popup fx-date-picker-popup"
     placement="bottom"
     :visible="visible"
@@ -10,7 +10,7 @@
     ref="popup"
   >
     <template #header>
-      <nav-bar
+      <NavBar
         class="fx-drawer_header"
         :title="title"
         :leftButtons="[{ text: '取消', type: 'primary' }]"
@@ -19,10 +19,10 @@
         @leftButtonClick="onHeaderLeftClick"
         @rightButtonClick="onHeaderRightClick"
       >
-      </nav-bar>
+      </NavBar>
     </template>
-    <picker-view ref="view" :handlers="handlers" />
-  </drawer>
+    <PickerView ref="view" :handlers="handlers" />
+  </Drawer>
 </template>
 
 <script lang="ts">

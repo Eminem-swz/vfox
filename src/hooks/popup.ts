@@ -1,12 +1,12 @@
 import { computed, onMounted, ref, watch, inject, provide } from 'vue'
-import { isFunction, isObject, noop } from '@/helpers/util'
+import { isFunction, noop } from '@/helpers/util'
 import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import { DataObject, Noop } from '../helpers/types'
+import { Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/blur'
 import {
-  VisibleStateChangeArgs,
-  VisibleState,
+  PopupVisibleStateChangeArgs,
+  PopupVisibleState,
   PopupCustomCancel,
   PopupCustomConfirm,
   UseEmit,
@@ -110,13 +110,13 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
     return true
   }
 
-  function show(res: DataObject = {}) {
+  function show() {
     const isSuccess = doShow(() => {
-      emitVisibleState('shown', res)
+      emitVisibleState('shown')
     })
 
     if (isSuccess) {
-      emitVisibleState('show', res)
+      emitVisibleState('show')
       afterCall('afterShow')
     }
   }
@@ -148,19 +148,15 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
     return true
   }
 
-  function hide(res?: unknown, lifeName?: LifeName) {
-    if (!isObject(res)) {
-      res = {}
-    }
-
+  function hide(lifeName?: LifeName) {
     const isSuccess = _doHide(() => {
-      emitVisibleState('hidden', res)
+      emitVisibleState('hidden')
       afterCall('afterHidden')
     })
 
     if (isSuccess) {
       lifeName && afterCall(lifeName)
-      emitVisibleState('hide', res)
+      emitVisibleState('hide')
     }
 
     visibleBlur.removeEvent()
@@ -172,17 +168,11 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
     }
   }
 
-  function emitVisibleState(state: VisibleState, res: unknown) {
-    // TODO: 是否合并res值得商榷
-    res = Object.assign(
-      {
-        type: 'visible-state-change',
-        state
-      },
-      res
-    )
-
-    emit('visible-state-change', res)
+  function emitVisibleState(state: PopupVisibleState) {
+    emit('visible-state-change', {
+      type: 'visible-state-change',
+      state
+    } as PopupVisibleStateChangeArgs)
   }
 
   function onBlur() {
@@ -209,15 +199,15 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
       return
     }
 
-    const res = { [key]: true }
+    const res = { [key]: true, source: key }
 
     emit('cancel', res)
-    hide(res, 'afterCancel')
+    hide('afterCancel')
   }
 
   const customConfirm: PopupCustomConfirm = detail => {
     emit('confirm', detail)
-    hide(detail, 'afterConfirm')
+    hide('afterConfirm')
   }
 
   onMounted(() => {
@@ -244,7 +234,7 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   watch(
     () => props.visible,
     (val: boolean) => {
-      val ? show({ visible: true }) : hide({ visible: false })
+      val ? show() : hide()
     }
   )
 
@@ -301,7 +291,7 @@ export function usePopupExtend(ctx: UseCtx) {
     popup.value && popup.value.customConfirm(detail)
   }
 
-  function onVisibleStateChange(e: VisibleStateChangeArgs) {
+  function onVisibleStateChange(e: PopupVisibleStateChangeArgs) {
     emit('visible-state-change', e)
   }
 
@@ -309,7 +299,7 @@ export function usePopupExtend(ctx: UseCtx) {
     customCancel('cancelClick')
   }
 
-  function onCancel(res: DataObject<boolean>) {
+  function onCancel(res: Record<string, boolean>) {
     emit('cancel', res)
   }
 

@@ -2,23 +2,37 @@ import { frameTo } from '@/helpers/animation'
 import { getScrollDom, querySelector } from '@/helpers/dom'
 import { getCallbackFns } from '@/apis/callback'
 import { parseParamsByRules } from '@/apis/rules'
-import { ApiOptions } from './types'
+import { ApiFnOptions } from './types'
 import Exception from '@/helpers/exception'
 
+type ScrollCallbackArgs = { from: number; to: number }
+
 interface ScrollCallback {
-  ({ from, to }: { from: number; to: number }): void
+  (res: ScrollCallbackArgs): void
+}
+
+interface PageScrollToOptions extends ApiFnOptions {
+  scrollTop: number
+  duration: number
+}
+
+interface ScrollToOptions extends PageScrollToOptions {
+  selector: string | HTMLElement | Document
 }
 
 /**
  * 将页面滚动到目标位置（可以设置滚动动画时长）
  * @param object
  */
-export function pageScrollTo(object: ApiOptions) {
+export function pageScrollTo(object: Partial<PageScrollToOptions>) {
   const { success, fail, complete } = getCallbackFns(object)
 
-  return new Promise((resolve, reject) => {
+  return new Promise<ScrollCallbackArgs>((resolve, reject) => {
     try {
-      const options = parseParamsByRules(object, 'pageScrollTo')
+      const options = parseParamsByRules<PageScrollToOptions>(
+        object,
+        'pageScrollTo'
+      )
       const callback: ScrollCallback = res => {
         success(res)
         complete()
@@ -38,12 +52,12 @@ export function pageScrollTo(object: ApiOptions) {
  * 将元素滚动到目标位置（可以设置滚动动画时长）
  * @param object
  */
-export function scrollTo(object: ApiOptions) {
+export function scrollTo(object: Partial<ScrollToOptions>) {
   const { success, fail, complete } = getCallbackFns(object)
 
   return new Promise((resolve, reject) => {
     try {
-      const options = parseParamsByRules(object, 'scrollTo')
+      const options = parseParamsByRules<ScrollToOptions>(object, 'scrollTo')
       const callback: ScrollCallback = res => {
         success(res)
         complete()

@@ -1,16 +1,16 @@
 <template>
   <div class="fx-scroll-tab">
     <div class="fx-scroll-tab_sidebar">
-      <sticky
+      <Sticky
         ref="sidebar"
         :offset-top="stickyOffsetTop"
         :offset-bottom="stickyOffsetBottom"
       >
-        <side-tab :options="tabList" v-model:activeValue="activeIndex" />
-      </sticky>
+        <SideTab :options="tabList" v-model:activeValue="activeIndex" />
+      </Sticky>
     </div>
     <div class="fx-scroll-tab_body">
-      <sticky-view
+      <StickyView
         :offset-top="stickyOffsetTop"
         ref="body"
         v-model:activeIndex="activeIndex"
@@ -18,7 +18,7 @@
         @change="onChange"
       >
         <slot></slot>
-      </sticky-view>
+      </StickyView>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ import SideTab from '@/SideTab'
 import Sticky from '@/Sticky'
 import StickyView from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
-import { ScrollToIndexOptions } from '../helpers/types'
+import { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-scroll-tab',

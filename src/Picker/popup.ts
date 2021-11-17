@@ -1,7 +1,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { isSameArray, isEmpty } from '@/helpers/util'
 import { DetailObject, PickerHandlers } from './types'
-import { DataObject, Noop } from '../helpers/types'
+import { AnyObject, Noop } from '../helpers/types'
 import { cloneDetail, getDefaultDetail, getHookValue } from '@/Picker/util'
 import { PopupCustomConfirm, UseProps, UseEmit } from '../hooks/types'
 
@@ -29,7 +29,7 @@ export function usePickerPopup(
 
   let detail = getDefaultDetail()
 
-  function beforeConfirm(): DataObject {
+  function beforeConfirm() {
     const newDetail = view.value?.getDetail() || getDefaultDetail()
 
     if (!isSameArray(newDetail.value, detail.value)) {
@@ -54,7 +54,7 @@ export function usePickerPopup(
     customConfirm(beforeConfirm())
   }
 
-  function detailHook(detail: DetailObject): any {
+  function detailHook(detail: DetailObject): AnyObject {
     const newDetail = cloneDetail(detail)
 
     return handlers.detailHook ? handlers.detailHook(newDetail) : newDetail

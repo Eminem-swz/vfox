@@ -30,24 +30,26 @@ const showToast = function (object: string | ShowToastOptions) {
 }
 
 const showLoading = function (object: string | ShowLoadingOptions) {
-  let newObject: ShowLoadingOptions
+  let options: ShowLoadingOptions & {
+    type?: string
+  }
 
   if (isString(object)) {
-    newObject = {
+    options = {
       title: object as string
     }
   } else if (!isObject(object)) {
-    newObject = {
+    options = {
       title: ''
     }
   } else {
-    newObject = object as ShowLoadingOptions
+    options = object as ShowLoadingOptions
   }
 
-  newObject.type = 'loading'
-  newObject.duration = 0
+  options.type = 'loading'
+  options.duration = 0
 
-  return showPopup(newObject, 'showLoading', function (done) {
+  return showPopup(options, 'showLoading', function (done) {
     return {
       component: Toast,
       hook: createAlertHook(done),

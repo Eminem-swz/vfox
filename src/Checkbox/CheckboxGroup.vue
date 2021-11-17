@@ -58,13 +58,14 @@ export default defineComponent({
         return hookFormValue()
       },
       watchValue({ children, value }) {
-        value = value as ModelValue[]
-
-        if (isStringNumberMixArray(value) && !isSameArray(value, formValue)) {
+        if (
+          isStringNumberMixArray(value) &&
+          !isSameArray(value as ModelValue[], formValue)
+        ) {
           formValue.length = 0
 
           children.forEach(child => {
-            const checked = inArray(child.getValue(), value)
+            const checked = inArray(child.getValue(), value as ModelValue[])
             child.setChecked(checked)
             checked && formValue.push(child.getValue())
           })

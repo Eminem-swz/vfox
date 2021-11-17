@@ -1,9 +1,9 @@
-import { createApp } from 'vue'
+import { createApp, Component } from 'vue'
 import { isObject, isString } from '@/helpers/util'
 import { getCallbackFns } from '@/apis/callback'
 import { parseParamsByRules } from '@/apis/rules'
-import { ApiOptions, PopupHook, PopupBridge } from './types'
-import { DataObject } from '../helpers/types'
+import { PopupHook, PopupBridge } from './types'
+import { AnyObject, EmptyObject } from '../helpers/types'
 import { PopupCustomCancel } from '../hooks/types'
 import Exception from '@/helpers/exception'
 
@@ -39,25 +39,25 @@ function createPopup() {
  * 展示弹窗
  * @param object 参数
  */
-export function showPopup<T = DataObject>(
-  object: string | ApiOptions,
+export function showPopup<T = EmptyObject>(
+  object: string | AnyObject,
   apiName: string,
   getOptions: (done: PopupDone) => {
-    component: any
+    component: Component
     hook?: PopupHook
     singleMode?: boolean
   }
 ) {
-  let options: ApiOptions
+  let options: AnyObject
 
   if (isString(object)) {
     options = {
-      title: object
+      title: object as string
     }
   } else if (!isObject(object)) {
     options = {}
   } else {
-    options = object as ApiOptions
+    options = object as AnyObject
   }
 
   const { success, fail, complete } = getCallbackFns(options)
@@ -74,7 +74,7 @@ export function showPopup<T = DataObject>(
       singleMode && clear(key)
 
       const fns: RefFns = {}
-      const propsData: any = parseParamsByRules(options, apiName)
+      const propsData = parseParamsByRules(options, apiName)
 
       if (propsData.mode) {
         propsData.initialMode = propsData.mode
@@ -143,7 +143,7 @@ function remove(key: string, uid: number) {
  * 隐藏弹窗
  * @param object 参数
  */
-export function hidePopup(object: ApiOptions, apiName: string) {
+export function hidePopup(object: AnyObject, apiName: string) {
   if (!isObject(object)) {
     object = {}
   }
