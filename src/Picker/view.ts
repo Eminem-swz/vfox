@@ -22,12 +22,13 @@ import {
   HandleType
 } from './types'
 import { UseProps, UseCtx } from '../hooks/types'
+import { Noop } from '../helpers/types'
 
 export const viewEmits = ['change', 'update:modelValue']
 
 interface UseOptions {
   name: 'cascader' | 'picker'
-  afterUpdate: () => void
+  afterUpdate: Noop
 }
 
 export function useView(

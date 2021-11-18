@@ -1,6 +1,6 @@
 <template>
   <div class="fx-load-more" :class="{ loading }">
-    <activity-indicator class="fx-load-more_icon" v-if="loading" />
+    <ActivityIndicator class="fx-load-more_icon" v-if="loading" />
     <slot>
       <i class="fx-load-more_dot"></i>
     </slot>

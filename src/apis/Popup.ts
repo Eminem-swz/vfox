@@ -2,7 +2,7 @@ import { createApp, Component } from 'vue'
 import { isObject, isString } from '@/helpers/util'
 import { getCallbackFns } from '@/apis/callback'
 import { parseParamsByRules } from '@/apis/rules'
-import { PopupHook, PopupBridge } from './types'
+import { PopupHook, PopupBridge, ApiFnOptions } from './types'
 import { AnyObject, EmptyObject } from '../helpers/types'
 import { PopupCustomCancel } from '../hooks/types'
 import Exception from '@/helpers/exception'
@@ -128,8 +128,9 @@ export function showPopup<T = EmptyObject>(
 function clear(key: string) {
   if ($refs[key]) {
     const fns = $refs[key].fns
-
     fns.customCancel && fns.customCancel('clear', true)
+
+    delete $refs[key]
   }
 }
 
@@ -143,7 +144,7 @@ function remove(key: string, uid: number) {
  * 隐藏弹窗
  * @param object 参数
  */
-export function hidePopup(object: AnyObject, apiName: string) {
+export function hidePopup(object: Partial<ApiFnOptions>, apiName: string) {
   if (!isObject(object)) {
     object = {}
   }

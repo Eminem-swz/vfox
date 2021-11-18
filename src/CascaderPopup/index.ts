@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import CascaderPopup from '../Cascader/CascaderPopup.vue'
-import { ApiOptions, PopupConfirmArgs } from '../apis/types'
+import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 import {
   ModeNames,
@@ -11,12 +11,15 @@ import {
 } from '../Picker/types'
 
 type ShowCascaderOptions = {
-  title?: string
-  value?: ModelValue
   options: UserOptionItem[]
-  mode?: ModeNames
-  fieldNames?: UserFieldNames
-} & ApiOptions
+} & Partial<
+  {
+    title: string
+    value: ModelValue
+    mode: ModeNames
+    fieldNames: UserFieldNames
+  } & ApiFnOptions
+>
 
 const showCascader = function (object: ShowCascaderOptions) {
   return showPopup<PopupConfirmArgs>(object, 'showCascader', function (done) {

@@ -7,7 +7,7 @@
       ref="inner"
       :style="{ background }"
     >
-      <fx-input
+      <FxInput
         class="fx-search_field"
         :class="{ ghost: !!ghost }"
         :placeholder="placeholder"
@@ -23,11 +23,11 @@
         @click="onClick"
       >
         <template #prepend>
-          <icon icon="SearchOutlined"></icon>
+          <Icon icon="SearchOutlined" />
         </template>
-      </fx-input>
+      </FxInput>
       <button class="fx-search_button">Search</button>
-      <fx-button
+      <FxButton
         class="fx-search_cancel-button"
         size="large"
         type="default"
@@ -37,9 +37,9 @@
         @click="onCancel"
       >
         取消
-      </fx-button>
+      </FxButton>
     </form>
-    <dropdown
+    <Dropdown
       :selector="$refs.inner"
       v-if="enableDropdown"
       v-model:visible="suggestVisible"
@@ -50,7 +50,7 @@
           :style="{ height: height + 'px' }"
         >
           <div class="fx-search_suggest-list">
-            <cell
+            <Cell
               v-for="item in suggestList"
               :key="item.text"
               :label="item.text.toString()"
@@ -58,12 +58,12 @@
               clickable
               @click="onSuggestItemClick(item.text)"
             >
-              <tag v-for="tag in item.tags" :key="tag">{{ tag }}</tag>
-            </cell>
+              <Tag v-for="tag in item.tags" :key="tag">{{ tag }}</Tag>
+            </Cell>
           </div>
         </div>
       </template>
-    </dropdown>
+    </Dropdown>
   </div>
 </template>
 

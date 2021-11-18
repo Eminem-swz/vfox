@@ -1,6 +1,6 @@
 <template>
   <div class="fx-collapse-item fx-horizontal-hairline" :class="{ active }">
-    <cell
+    <Cell
       class="fx-collapse-item_header"
       :label="title"
       :icon="icon"

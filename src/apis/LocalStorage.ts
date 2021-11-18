@@ -11,10 +11,6 @@ export function createStorage(
   areaName: string,
   options?: Partial<CreateStorageOptions>
 ) {
-  // if (!options || !isObject(options)) {
-  //   options = {} as ApiOptions
-  // }
-
   const {
     areaName: _areaName,
     perLimitSize,

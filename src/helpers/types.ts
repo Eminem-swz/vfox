@@ -2,30 +2,19 @@ import { App } from 'vue'
 
 export type SFCWithInstall<T> = T & { install(app: App): void }
 
-export type DataValue =
-  | Date
-  | null
-  | string
-  | number
-  | boolean
-  | string[]
-  | number[]
-  | Record<string, never>
-  | never
+export type AnyObject = Record<string, any>
+export type EmptyObject = Record<string, never>
+export type StyleObject = Record<string, string>
+
+export type DataValue = Date | null | string | number | boolean | never
 
 export type DataObject = {
   [propName: string]:
     | DataValue
-    | DataValue[]
     | DataObject
-    | DataObject[]
-    | number[][]
-    | string[][]
+    | (DataObject | DataValue)[]
+    | EmptyObject
 }
-
-export type AnyObject = Record<string, any>
-export type EmptyObject = Record<string, never>
-export type StyleObject = Record<string, string>
 
 /**
  * Scroll

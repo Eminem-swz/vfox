@@ -23,7 +23,7 @@
         }"
       ></span>
     </div>
-    <fx-button
+    <FxButton
       v-if="navigationButtons"
       v-show="pagination.length > 1"
       class="fx-swiper_prev"
@@ -33,8 +33,8 @@
       pattern="borderless"
       shape="circle"
       :ghost="true"
-    ></fx-button>
-    <fx-button
+    ></FxButton>
+    <FxButton
       v-if="navigationButtons"
       v-show="pagination.length > 1"
       class="fx-swiper_next"
@@ -44,7 +44,7 @@
       pattern="borderless"
       shape="circle"
       :ghost="true"
-    ></fx-button>
+    ></FxButton>
   </div>
 </template>
 

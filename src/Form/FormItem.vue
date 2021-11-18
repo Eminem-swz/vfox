@@ -20,7 +20,7 @@
 import { defineComponent, inject, PropType, provide, ref } from 'vue'
 import Schema from 'async-validator'
 import { isArray, isBoolean, isNumber } from '@/helpers/util'
-import { FormItemProvide } from '../hooks/types'
+import { FormItemProvide, FormValue } from '../hooks/types'
 import {
   FormRuleValidate,
   FormRuleItem,
@@ -48,7 +48,7 @@ export default defineComponent({
     const errMsg = ref('')
     const formRules = inject<FormRules>('fxFormRules', {})
 
-    function getRulesByName(name: string, value: any) {
+    function getRulesByName(name: string, value: FormValue | FormValue[]) {
       let rules: FormRuleItem[] = []
 
       if (props.rules && props.rules[0]) {
@@ -75,7 +75,10 @@ export default defineComponent({
       return rules
     }
 
-    function validateAfterEventTrigger(event: string, value: any) {
+    function validateAfterEventTrigger(
+      event: string,
+      value: FormValue | FormValue[]
+    ) {
       if (!props.name) {
         return
       }

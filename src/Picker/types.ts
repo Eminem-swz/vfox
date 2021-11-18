@@ -1,3 +1,4 @@
+import { FormValue } from '../hooks/types'
 import { AnyObject, DataObject } from '../helpers/types'
 
 export interface UserFieldNames {
@@ -52,7 +53,7 @@ export type ModeNames = 'multiSelector' | 'date' | 'time' | 'datetime'
 export type HandleType = 'label' | 'value'
 
 export interface ValueParser {
-  (value: any, type: HandleType): Values | Labels | Error
+  (value: unknown, type: HandleType): Values | Labels | Error
 }
 
 export interface ValueFormatter {
@@ -68,7 +69,7 @@ export interface DefaultValueHandler {
 }
 
 export interface ValueHook {
-  (array: Values): any
+  (array: Values): FormValue
 }
 
 export interface DetailHook {

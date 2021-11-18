@@ -26,7 +26,7 @@ class Exception extends Error {
     if (error instanceof Exception || error instanceof Error) {
       msg = error.message
     } else if (error != null) {
-      msg = (error as any).toString()
+      msg = (error as string).toString()
     }
 
     super(msg)

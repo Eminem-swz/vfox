@@ -3,7 +3,7 @@
     class="fx-circle-progress"
     :style="{ fontSize: Math.max(9, size * 0.17 * 0.875) + 'px' }"
   >
-    <loading-svg
+    <LoadingSvg
       class="fx-circle-progress_bar"
       :size="size"
       :rate="rate"

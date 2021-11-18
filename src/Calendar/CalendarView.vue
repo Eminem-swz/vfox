@@ -12,11 +12,7 @@
       </div>
     </div>
     <div class="fx-calendar-view_body">
-      <template
-        class="fx-calendar-view_month"
-        v-for="(month, monthIndex) in months"
-        :key="month.caption"
-      >
+      <template v-for="(month, monthIndex) in months" :key="month.caption">
         <div class="fx-calendar-view_month-caption">
           {{ month.caption }}
         </div>

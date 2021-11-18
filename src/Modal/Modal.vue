@@ -18,7 +18,7 @@
           <slot></slot>
         </div>
         <i v-if="showClose" class="fx-modal_close" @click="onCloseClick">
-          <icon icon="CloseCircleFilled"></icon>
+          <Icon icon="CloseCircleFilled" />
         </i>
       </div>
     </div>

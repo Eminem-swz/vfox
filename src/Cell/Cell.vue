@@ -13,7 +13,7 @@
       <div class="fx-cell_icon" v-if="$slots.icon">
         <slot name="icon"></slot>
       </div>
-      <div class="fx-cell_icon" v-else-if="icon"><icon :icon="icon" /></div>
+      <div class="fx-cell_icon" v-else-if="icon"><Icon :icon="icon" /></div>
       <div class="fx-cell_label" v-if="label">
         {{ label }}
         <span class="fx-cell_required" v-if="required">*</span>

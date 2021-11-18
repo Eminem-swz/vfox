@@ -2,7 +2,7 @@ import { computed, onMounted, ref, watch, inject, provide } from 'vue'
 import { isFunction, noop } from '@/helpers/util'
 import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import { Noop } from '../helpers/types'
+import { AnyObject, Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/blur'
 import {
   PopupVisibleStateChangeArgs,
@@ -63,7 +63,7 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
 
   const visibleBlur = useBlur(onBlur)
 
-  function emit(event: string, res: any) {
+  const emit: UseEmit = (event, res) => {
     if (isParent || !apis.in) {
       ctx.emit(event, res)
     } else {
@@ -303,7 +303,7 @@ export function usePopupExtend(ctx: UseCtx) {
     emit('cancel', res)
   }
 
-  function onConfirm(res: any) {
+  function onConfirm(res: AnyObject) {
     emit('confirm', res)
   }
 

@@ -1,11 +1,7 @@
 <template>
   <div class="fx-result" :class="['type--' + type2]">
     <div class="fx-result_header">
-      <icon
-        class="fx-result_icon"
-        :class="['type--' + type2]"
-        :icon="icon"
-      ></icon>
+      <Icon class="fx-result_icon" :class="['type--' + type2]" :icon="icon" />
       <div class="fx-result_title" v-if="title">{{ title }}</div>
       <div class="fx-result_description" v-if="description">
         {{ description }}
@@ -13,12 +9,12 @@
     </div>
     <slot></slot>
     <div class="fx-result_footer">
-      <fx-button type="primary" @click="onConfirmClick">
+      <FxButton type="primary" @click="onConfirmClick">
         {{ confirmText }}
-      </fx-button>
-      <fx-button v-if="showBack" type="default" @click="onCancelClick">
+      </FxButton>
+      <FxButton v-if="showBack" type="default" @click="onCancelClick">
         {{ backText }}
-      </fx-button>
+      </FxButton>
     </div>
   </div>
 </template>

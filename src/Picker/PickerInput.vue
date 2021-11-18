@@ -7,7 +7,7 @@
     <div class="fx-input_input" :class="{ placeholder: !formLabelString }">
       {{ formLabelString || placeholder }}
     </div>
-    <icon class="fx-input_arrow" icon="RightOutlined" />
+    <Icon class="fx-input_arrow" icon="RightOutlined" />
     <input
       class="fx-input_cover fx-form-input"
       type="text"

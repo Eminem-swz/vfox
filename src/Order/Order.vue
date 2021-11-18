@@ -59,7 +59,7 @@ import {
 import Icon from '@/Icon'
 import Drawer from '@/Drawer'
 import { isArray, isStringNumberMix, rangeNumber } from '@/helpers/util'
-import { DataObject } from '../helpers/types'
+import { DataObject, Noop } from '../helpers/types'
 import { useTouch } from '@/hooks/touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import { cloneData } from '@/helpers/util'
@@ -206,7 +206,7 @@ export default defineComponent({
 
     let lazyTimer: number
 
-    function exitDragDone(callback: () => void) {
+    function exitDragDone(callback: Noop) {
       lazyTimer = window.setTimeout(() => {
         callback()
         drag.on = false

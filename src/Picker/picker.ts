@@ -13,7 +13,8 @@ import {
   Values,
   OptionsHandler,
   PickerHandlers,
-  HandleType
+  HandleType,
+  DetailHook
 } from './types'
 import { useFormItem } from '@/hooks/form'
 import { UseProps, UseCtx } from '../hooks/types'
@@ -52,7 +53,7 @@ export function usePicker(
   const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
 
   const { formName, validateAfterEventTrigger, hookFormValue, root } =
-    useFormItem<string | number>(props, ctx, {
+    useFormItem(props, ctx, {
       formValue,
       hookFormValue: () =>
         handlers.valueHook
@@ -137,7 +138,7 @@ export function usePicker(
     }
   }
 
-  function detailHook(detail: DetailObject): any {
+  const detailHook: DetailHook = detail => {
     return handlers.detailHook ? handlers.detailHook(detail) : cloneData(detail)
   }
 

@@ -10,16 +10,16 @@
         :key="item.value"
         @click="onChange(item.value)"
       >
-        <badge class="fx-tab-bar_item-icon" v-bind="item.badge">
-          <fx-image
+        <Badge class="fx-tab-bar_item-icon" v-bind="item.badge">
+          <FxImage
             v-if="item.iconLink"
             :src="index === activeIndex ? item.activeIconLink : item.iconLink"
           />
-          <icon
+          <Icon
             v-else-if="item.icon"
             :icon="index === activeIndex ? item.activeIcon : item.icon"
           />
-        </badge>
+        </Badge>
         <span class="fx-tab-bar_item-text">{{ item.label }}</span>
       </li>
     </ul>

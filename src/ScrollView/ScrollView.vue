@@ -138,7 +138,7 @@ export default defineComponent({
     },
     // 下拉刷新方向
     enablePullDirections: {
-      type: Array,
+      type: [String, Array],
       validator: (val: PullDirection | PullDirection[]) => {
         return isString(val) || isStringArray(val)
       },

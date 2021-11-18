@@ -12,13 +12,13 @@
         :key="item.value"
         @click="onChange(item.value)"
       >
-        <badge class="fx-side-tab_item-inner" v-bind="item.badge">
-          <icon
+        <Badge class="fx-side-tab_item-inner" v-bind="item.badge">
+          <Icon
             v-if="item.icon"
             :icon="index === activeIndex ? item.activeIcon : item.icon"
           />
           <span class="fx-side-tab_item-text">{{ item.label }}</span>
-        </badge>
+        </Badge>
       </li>
     </ul>
   </div>

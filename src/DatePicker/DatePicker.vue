@@ -8,7 +8,7 @@
     ]"
     ref="root"
   >
-    <picker-input
+    <PickerInput
       :formLabelString="formLabelString"
       :formValueString="formValueString"
       :disabled="disabled"
@@ -16,7 +16,7 @@
       :placeholder="placeholder"
       @field-click="onFieldClick"
     />
-    <picker-popup
+    <PickerPopup
       :title="placeholder"
       :handlers="handlers"
       v-model:visible="popupVisible"

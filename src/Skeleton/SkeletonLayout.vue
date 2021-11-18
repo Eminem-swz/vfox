@@ -3,11 +3,11 @@
     <slot>
       <div class="fx-skeleton_layout">
         <div class="fx-skeleton_layout-left" v-if="avatar">
-          <skeleton-avatar />
+          <SkeletonAvatar />
         </div>
         <div class="fx-skeleton_layout-right">
-          <skeleton-title />
-          <skeleton-paragraph />
+          <SkeletonTitle />
+          <SkeletonParagraph />
         </div>
       </div>
     </slot>

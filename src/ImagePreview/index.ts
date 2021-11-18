@@ -1,16 +1,19 @@
 import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import ImagePreview from './ImagePreview.vue'
-import { ApiOptions, PopupConfirmArgs } from '../apis/types'
+import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 
 type PreviewImageOptions = {
   urls: string[]
-  content?: string
-  showClose?: boolean
-  navigationButtons?: boolean
-  imageHighRendering?: boolean
-} & ApiOptions
+} & Partial<
+  {
+    content: string
+    showClose: boolean
+    navigationButtons: boolean
+    imageHighRendering: boolean
+  } & ApiFnOptions
+>
 
 const previewImage = function (object: PreviewImageOptions) {
   return showPopup<PopupConfirmArgs>(object, 'previewImage', function (done) {

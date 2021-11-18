@@ -43,7 +43,7 @@ export function isSameDateArray(a: Date[], b: Date[]) {
   return true
 }
 
-export function parseValues(val: any, mode: CalendarMode) {
+export function parseValues(val: unknown, mode: CalendarMode) {
   const values: number[] = []
 
   if (val == null || val === 0 || val === '') {
@@ -51,15 +51,23 @@ export function parseValues(val: any, mode: CalendarMode) {
   }
 
   if (isArray(val)) {
-    if (val[0] != null && dayjs(val[0]).isValid()) {
-      values.push(dayjs(val[0]).startOf('day').valueOf())
+    const s = (val as string[])[0]
+    const e = (val as string[])[1]
+
+    if (s != null && dayjs(s).isValid()) {
+      values.push(dayjs(s).startOf('day').valueOf())
     }
-    if (val[1] != null && dayjs(val[1]).isValid()) {
-      values.push(dayjs(val[1]).startOf('day').valueOf())
+    if (e != null && dayjs(e).isValid()) {
+      values.push(dayjs(e).startOf('day').valueOf())
     }
-  } else if (dayjs(val).isValid()) {
-    values.push(dayjs(val).startOf('day').valueOf())
+  } else if (dayjs(val as string).isValid()) {
+    values.push(
+      dayjs(val as string)
+        .startOf('day')
+        .valueOf()
+    )
   }
+
   if (values[0] && (!values[1] || values[1] < values[0])) {
     values[1] = dayjs(values[0]).add(1, 'day').valueOf()
   }

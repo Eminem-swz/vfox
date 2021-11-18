@@ -1,11 +1,11 @@
 <template>
-  <group
+  <Group
     class="fx-sticky-view-item fx-index-view-item"
     :title="name"
     :data-name="name"
   >
     <slot></slot>
-  </group>
+  </Group>
 </template>
 
 <script lang="ts">

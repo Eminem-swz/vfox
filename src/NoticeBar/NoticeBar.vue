@@ -6,7 +6,7 @@
     v-show="visible2"
   >
     <div v-if="leftIcon" class="fx-notice-bar_left-icon">
-      <icon :icon="leftIcon" :style="iconStyles" />
+      <Icon :icon="leftIcon" :style="iconStyles" />
     </div>
     <div class="fx-notice-bar_content">
       <div
@@ -25,7 +25,7 @@
       class="fx-notice-bar_right-icon"
       @click="onRightIconClick"
     >
-      <icon :icon="rightIcon2" :style="iconStyles" />
+      <Icon :icon="rightIcon2" :style="iconStyles" />
     </div>
   </div>
 </template>

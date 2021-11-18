@@ -1,6 +1,9 @@
+import { AnyObject } from './types'
+
 /**
  * 将字段名转为驼峰式格式
- * @param {string} name 字段名
+ * @param name 字段名
+ * @returns eg: my-func -> myFunc
  */
 export function kebabCase2CamelCase(name: string) {
   name = name.replace(/-(\w)/g, (all, letter) => {
@@ -11,7 +14,8 @@ export function kebabCase2CamelCase(name: string) {
 
 /**
  * 将字段名转为横杆连接格式
- * @param {string} name 字段名
+ * @param name 字段名
+ * @returns eg: myFunc -> my-func
  */
 export function camelCase2KebabCase(name: string) {
   const arr = []
@@ -35,117 +39,131 @@ export function camelCase2KebabCase(name: string) {
 /**
  * 是否undefined
  * @param object 值
+ * @returns boolean
  */
-export function isUndefined(object: any) {
+export function isUndefined(object: unknown) {
   return typeof object === 'undefined'
 }
 
 /**
  * 是否布尔值
  * @param object 值
+ * @returns boolean
  */
-export function isBoolean(object: any) {
+export function isBoolean(object: unknown) {
   return typeof object === 'boolean'
 }
 
 /**
  * 是否函数
  * @param object 值
+ * @returns boolean
  */
-export function isFunction(object: any) {
+export function isFunction(object: unknown) {
   return typeof object === 'function'
 }
 
 /**
  * 是否字符串
  * @param object 值
+ * @returns boolean
  */
-export const isString = (object: any) => {
+export const isString = (object: unknown) => {
   return typeof object === 'string'
 }
 
 /**
  * 是否对象，包含常见的{}/[]，不含null
  * @param object 值
+ * @returns boolean
  */
-export function isObject(object: any) {
+export function isObject(object: unknown) {
   return typeof object === 'object' && object !== null
 }
 
 /**
  * 是否数值，这里会对排除无穷大/无穷小的情况
  * @param object 值
+ * @returns boolean
  */
-export function isNumber(object: any) {
+export function isNumber(object: unknown) {
   return typeof object === 'number' && isFinite(object)
 }
 
 /**
  * 是否数值/可转为数值，如'1.1'，这里会对排除无穷大/无穷小的情况
  * @param object 值
+ * @returns boolean
  */
-export const isNumeric = (object: any) => {
+export const isNumeric = (object: unknown) => {
   return (
     isNumber(object) ||
     (isString(object) &&
-      !isNaN(parseFloat(object)) &&
-      isFinite(parseFloat(object)))
+      !isNaN(parseFloat(object as string)) &&
+      isFinite(parseFloat(object as string)))
   )
 }
 
 /**
  * 是否整数
  * @param object 值
+ * @returns boolean
  */
-export function isInteger(object: any) {
-  return isNumber(object) && object % 1 === 0
+export function isInteger(object: unknown) {
+  return isNumber(object) && (object as number) % 1 === 0
 }
 
 /**
  * 是否数组
  * @param object 值
+ * @returns boolean
  */
-export function isArray(object: any) {
+export function isArray(object: unknown) {
   return Array.isArray(object)
 }
 
 /**
  * 是否Date实例
  * @param object 值
+ * @returns boolean
  */
-export function isDate(object: any) {
+export function isDate(object: unknown) {
   return object instanceof Date
 }
 
 /**
  * 是否DOM
  * @param object 值
+ * @returns boolean
  */
-export function isElement(object: any) {
+export function isElement(object: unknown) {
   return object instanceof Element
 }
 
 /**
  * 是否HTML DOM
  * @param object 值
+ * @returns boolean
  */
-export function isHTMLElement(object: any) {
+export function isHTMLElement(object: unknown) {
   return object instanceof HTMLElement
 }
 
 /**
  * 是否node节点
  * @param object 值
+ * @returns boolean
  */
-export function isNode(object: any) {
+export function isNode(object: unknown) {
   return object instanceof Node
 }
 
 /**
  * 是否Symbol
  * @param object 值
+ * @returns boolean
  */
-export function isSymbol(object: any) {
+export function isSymbol(object: unknown) {
   return (
     typeof object === 'symbol' ||
     (isObject(object) &&
@@ -156,8 +174,9 @@ export function isSymbol(object: any) {
 /**
  * 是否空对象{}
  * @param object 值
+ * @returns boolean
  */
-export function isEmptyObject(object: any) {
+export function isEmptyObject(object: unknown) {
   if (
     isObject(object) &&
     !isDate(object) &&
@@ -165,8 +184,8 @@ export function isEmptyObject(object: any) {
     !(object instanceof Error)
   ) {
     let has = false
-    for (const i in object) {
-      if (hasOwnProperty(object, i)) {
+    for (const i in object as AnyObject) {
+      if (hasOwnProperty(object as AnyObject, i)) {
         has = true
         break
       }
@@ -178,25 +197,29 @@ export function isEmptyObject(object: any) {
 }
 
 /**
- *
+ * 是否number或string
  * @param object 值
+ * @returns boolean
  */
-export const isStringNumberMix = (object: any) => {
+export const isStringNumberMix = (object: unknown) => {
   return isString(object) || isNumber(object)
 }
 
 /**
  * 是否Number[]
  * @param object 值
+ * @returns boolean
  */
-export const isNumberArray = (object: any) => {
+export const isNumberArray = (object: unknown) => {
   let is = false
 
   if (isArray(object)) {
     is = true
 
-    for (let i = 0; i < object.length; i++) {
-      if (!isNumber(object[i])) {
+    const arr = object as number[]
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!isNumber(arr[i])) {
         is = false
         break
       }
@@ -209,15 +232,18 @@ export const isNumberArray = (object: any) => {
 /**
  * 是否String[]
  * @param object 值
+ * @returns boolean
  */
-export const isStringArray = (object: any) => {
+export const isStringArray = (object: unknown) => {
   let is = false
 
   if (isArray(object)) {
     is = true
 
-    for (let i = 0; i < object.length; i++) {
-      if (!isString(object[i])) {
+    const arr = object as string[]
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!isString(arr[i])) {
         is = false
         break
       }
@@ -230,8 +256,9 @@ export const isStringArray = (object: any) => {
 /**
  * string/string[]统一转为string[]
  * @param object 值
+ * @returns string[]
  */
-export function stringMix2StringArray(object: any) {
+export function stringMix2StringArray(object: unknown) {
   return isStringArray(object)
     ? (object as string[])
     : isString(object)
@@ -242,15 +269,18 @@ export function stringMix2StringArray(object: any) {
 /**
  * 是否只存在数值或者字符串的数组
  * @param object 值
+ * @returns boolean
  */
-export const isStringNumberMixArray = (object: any) => {
+export const isStringNumberMixArray = (object: unknown) => {
   let is = false
 
   if (isArray(object)) {
     is = true
 
-    for (let i = 0; i < object.length; i++) {
-      if (!(isString(object[i]) || isNumber(object[i]))) {
+    const arr = object as (string | number)[]
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!(isString(arr[i]) || isNumber(arr[i]))) {
         is = false
         break
       }
@@ -263,15 +293,18 @@ export const isStringNumberMixArray = (object: any) => {
 /**
  * 是否Date[]
  * @param object 值
+ * @returns boolean
  */
-export function isDateArray(object: any) {
+export function isDateArray(object: unknown) {
   let is = false
 
   if (isArray(object)) {
     is = true
 
-    for (let i = 0; i < object.length; i++) {
-      if (!isDate(object[i])) {
+    const arr = object as Date[]
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!isDate(arr[i])) {
         is = false
         break
       }
@@ -285,8 +318,9 @@ export function isDateArray(object: any) {
  * 是否相同的数组
  * @param a 数组a
  * @param b 数组b
+ * @returns boolean
  */
-export function isSameArray(a: any[], b: any[]): boolean {
+export function isSameArray(a: unknown[], b: unknown[]): boolean {
   if (a.length === b.length) {
     for (let i = 0; i < a.length; i++) {
       if (a[i] != b[i]) {
@@ -303,7 +337,9 @@ export function isSameArray(a: any[], b: any[]): boolean {
 /**
  * 判断一个字段是否为空
  * @param object
- * 以下的东西被认为是空的：
+ * @returns boolean
+ *
+ * @summary 以下的东西被认为是空的：
  * - "" (空字符串)
  * - 0 (作为整数的0)
  * - 0.0 (作为浮点数的0)
@@ -315,7 +351,7 @@ export function isSameArray(a: any[], b: any[]): boolean {
  * - NaN
  * - {}
  */
-export function isEmpty(object: any) {
+export function isEmpty(object: unknown) {
   return (
     object == null ||
     object === '' ||
@@ -323,7 +359,7 @@ export function isEmpty(object: any) {
     object === false ||
     (isNumber(object) && object == 0) ||
     (typeof object === 'number' && isNaN(object)) ||
-    (isArray(object) && object.length === 0) ||
+    (isArray(object) && (object as string[]).length === 0) ||
     isEmptyObject(object)
   )
 }
@@ -331,20 +367,28 @@ export function isEmpty(object: any) {
 /**
  * 伪数组转为数组
  * @param object 伪数组
+ * @returns boolean
  */
-export function arrayLike2Array(object: ArrayLike<any>) {
+export function arrayLike2Array(object: ArrayLike<unknown>) {
   return Array.prototype.slice.call(object)
 }
 
+/**
+ * 不执行任何操作的函数
+ */
 export function noop() {
   // empty
 }
 
+/**
+ * 返回false的函数
+ * @returns false
+ */
 export function no() {
   return false
 }
 
-function hasOwnProperty(object: any, key: string) {
+function hasOwnProperty(object: AnyObject, key: string) {
   return Object.prototype.hasOwnProperty.call(object, key)
 }
 
@@ -354,13 +398,15 @@ function hasOwnProperty(object: any, key: string) {
  * @param callback 遍历回调
  */
 export function objectForEach(
-  object: any,
+  object: unknown,
   callback: (value: unknown, key: string) => void
 ) {
   if (isObject(object)) {
-    for (const k in object) {
-      if (hasOwnProperty(object, k)) {
-        callback(object[k], k)
+    const obj = object as AnyObject
+
+    for (const k in obj) {
+      if (hasOwnProperty(obj, k)) {
+        callback(obj[k], k)
       }
     }
   }
@@ -369,6 +415,7 @@ export function objectForEach(
 /**
  * 深度拷贝对象
  * @param object 对象
+ * @returns object副本
  */
 export function cloneData<T = any>(object: T): T {
   return JSON.parse(JSON.stringify(object))
@@ -378,8 +425,9 @@ export function cloneData<T = any>(object: T): T {
  * 判断值是否在数组中
  * @param value 值
  * @param array 数组
+ * @returns boolean
  */
-export function inArray(value: any, array: any[]) {
+export function inArray(value: unknown, array: unknown[]) {
   return array.indexOf(value) !== -1
 }
 
@@ -387,6 +435,7 @@ export function inArray(value: any, array: any[]) {
  * 获取随机数
  * @param min 最小值
  * @param max 最大值
+ * @returns 随机数
  */
 export function getRandomNumber(min: number, max: number) {
   if (min === max) {
@@ -397,6 +446,7 @@ export function getRandomNumber(min: number, max: number) {
 
 /**
  * 获取GUID
+ * @returns guid
  */
 export function createGuid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -409,6 +459,7 @@ export function createGuid() {
 /**
  * 获取随机字符
  * @param length 返回字符串长度
+ * @returns 指定长度的随机字符
  */
 export function getRandomString(length = 32) {
   const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678' // 默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1
@@ -423,6 +474,7 @@ export function getRandomString(length = 32) {
 /**
  * 首字母大写
  * @param value 值
+ * @returns 处理过的string
  */
 export function capitalize(value: string) {
   if (!value) return ''
@@ -435,6 +487,7 @@ export function capitalize(value: string) {
  * @param number 数值
  * @param min 最小值
  * @param max 最大值
+ * @returns 限定数值
  */
 export function rangeNumber(number: number, min: number, max: number) {
   return Math.min(max, Math.max(min, number))
@@ -445,6 +498,7 @@ export function rangeNumber(number: number, min: number, max: number) {
  * @param number 数值
  * @param min 最小值
  * @param max 最大值
+ * @returns 限定整数
  */
 export function rangeInteger(
   number: number | string,
@@ -471,6 +525,7 @@ export function rangeInteger(
  * @param number 数值
  * @param min 最小值
  * @param max 最大值
+ * @returns boolean
  */
 export const isInNumberRange = (number: unknown, min: number, max: number) => {
   return (
@@ -485,7 +540,8 @@ export const isInNumberRange = (number: unknown, min: number, max: number) => {
  */
 export const isPromiseLike = (object: unknown) => {
   return (
-    (isObject(object) || isFunction(object)) && isFunction((object as any).then)
+    (isObject(object) || isFunction(object)) &&
+    isFunction((object as Promise<never>).then)
   )
 }
 
@@ -506,7 +562,7 @@ export const isURL = (object: unknown) => {
 /**
  * 千分位
  * @param num 数字
- * @returns
+ * @returns eg: 1,111
  */
 export function thousands(number: number | string) {
   const str = number.toString()
@@ -520,7 +576,7 @@ export function thousands(number: number | string) {
 /**
  * 简化数值
  * @param number 数值
- * @returns
+ * @returns eg: 1.1w
  */
 export function simpleNumber(number: number) {
   if (!isNumber(number)) {

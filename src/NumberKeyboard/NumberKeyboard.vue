@@ -226,7 +226,6 @@ export default defineComponent({
     }
 
     function onCancel(res: PopupCancelArgs) {
-      console.log(res)
       close(res, false)
     }
 

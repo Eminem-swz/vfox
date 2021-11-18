@@ -31,7 +31,7 @@ import { useScrollEvent } from '@/hooks/scroll'
 import { OnScrollCallback } from '../hooks/types'
 import { isNumber } from '@/helpers/util'
 import { useList } from '@/hooks/list'
-import { ScrollToOptions, ScrollToIndexOptions } from '../helpers/types'
+import { ScrollToOptions, ScrollToIndexOptions, Noop } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-sticky-view',
@@ -75,7 +75,7 @@ export default defineComponent({
     }
 
     let $container: HTMLElement
-    let scrollOff: () => void
+    let scrollOff: Noop
 
     function resetContainer(containSelector: any) {
       scrollOff && scrollOff()

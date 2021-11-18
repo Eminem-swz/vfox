@@ -15,22 +15,18 @@
             <div class="fx-popover_text">{{ content }}</div>
           </div>
           <div class="fx-pop-dialog_footer fx-horizontal-hairline">
-            <fx-button-group
+            <FxButtonGroup
               class="fx-pop-dialog_footer-inner"
               pattern="borderless"
               size="middle"
             >
-              <fx-button
-                v-if="showCancel"
-                type="default"
-                @click="onCancelClick"
-              >
+              <FxButton v-if="showCancel" type="default" @click="onCancelClick">
                 {{ cancelText }}
-              </fx-button>
-              <fx-button type="primary" @click="onConfirmClick">
+              </FxButton>
+              <FxButton type="primary" @click="onConfirmClick">
                 {{ confirmText }}
-              </fx-button>
-            </fx-button-group>
+              </FxButton>
+            </FxButtonGroup>
           </div>
         </div>
       </div>

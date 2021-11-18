@@ -2,18 +2,21 @@ import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import Notify from './Notify.vue'
 import { showPopup, hidePopup, createAlertHook } from '@/apis/Popup'
-import { ApiOptions } from '../apis/types'
+import { ApiFnOptions } from '../apis/types'
 import { StateType } from '../hooks/types'
 
 type ShowNotifyOptions = {
   title: string
-  type?: StateType
-  icon?: string
-  duration?: number
-  backgroundColor?: string
-  color?: string
-  closable?: boolean
-} & ApiOptions
+} & Partial<
+  {
+    type: StateType
+    icon: string
+    duration: number
+    backgroundColor: string
+    color: string
+    closable: boolean
+  } & ApiFnOptions
+>
 
 const showNotify = function (object: string | ShowNotifyOptions) {
   return showPopup(object, 'showNotify', function (done) {
@@ -25,7 +28,7 @@ const showNotify = function (object: string | ShowNotifyOptions) {
   })
 }
 
-const hideNotify = function (object?: ApiOptions) {
+const hideNotify = function (object?: Partial<ApiFnOptions>) {
   return hidePopup(object || {}, 'hideNotify')
 }
 

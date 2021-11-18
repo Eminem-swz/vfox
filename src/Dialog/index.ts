@@ -1,17 +1,20 @@
 import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import Dialog from './Dialog.vue'
-import { ApiOptions, PopupConfirmArgs } from '../apis/types'
+import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 
 type ShowDialogOptions = {
-  title?: string
   content: string
-  maskClosable?: boolean
-  showCancel?: boolean
-  cancelText?: string
-  confirmText?: string
-} & ApiOptions
+} & Partial<
+  {
+    title: string
+    maskClosable: boolean
+    showCancel: boolean
+    cancelText: string
+    confirmText: string
+  } & ApiFnOptions
+>
 
 const showDialog = function (object: ShowDialogOptions) {
   return showPopup<PopupConfirmArgs>(object, 'showDialog', function (done) {

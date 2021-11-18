@@ -2,13 +2,13 @@
   <ScrollView
     class="fx-flat-list"
     :class="{ horizontal }"
-    :scroll-x="scrollX"
-    :scroll-y="scrollY"
-    :lower-threshold="lowerThreshold"
+    :scrollX="scrollX"
+    :scrollY="scrollY"
+    :lowerThreshold="lowerThreshold"
     :enablePullDirections="enablePullDirections"
     :lowerLoading="lowerLoading"
     @scroll="onScroll"
-    @scroll-to-lower="onScrollToLower"
+    @scrollToLower="onScrollToLower"
     @refreshing="onRefreshing"
     ref="scrollView"
   >
@@ -80,6 +80,7 @@ import Exception from '@/helpers/exception'
 import { getRelativeOffset } from '@/helpers/dom'
 import { useResizeDetector } from '@/hooks/resize-detector'
 import type {
+  Noop,
   ScrollToIndexOptions,
   ScrollToOffsetOptions,
   StyleObject
@@ -245,7 +246,7 @@ export default defineComponent({
       res: {
         pullDirection: string
       },
-      done: () => void
+      done: Noop
     ) {
       emit('refreshing', res, done)
     }

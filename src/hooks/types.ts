@@ -63,7 +63,10 @@ export interface FormInputElement extends HTMLInputElement {
 }
 export interface FormItemProvide {
   props: UseProps
-  validateAfterEventTrigger: (type: string, value: any) => void
+  validateAfterEventTrigger: (
+    type: string,
+    value: FormValue | FormValue[]
+  ) => void
 }
 
 /**

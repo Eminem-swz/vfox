@@ -1,17 +1,13 @@
-import {
-  ApiOptions,
-  ApiOptionsComplete,
-  ApiOptionsFail,
-  ApiOptionsSuccess
-} from './types'
+import { ApiOptionsComplete, ApiOptionsFail, ApiOptionsSuccess } from './types'
 import Exception from '@/helpers/exception'
 import { noop, isFunction } from '@/helpers/util'
+import { AnyObject } from '../helpers/types'
 
 /**
  * 获取回调函数
  * @param options object
  */
-export function getCallbackFns(options: ApiOptions) {
+export function getCallbackFns(options: AnyObject) {
   return {
     success: (isFunction(options.success)
       ? options.success

@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import PickerPopup from '../Picker/PickerPopup.vue'
-import { ApiOptions, PopupConfirmArgs } from '../apis/types'
+import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 import {
   ModeNames,
@@ -11,12 +11,15 @@ import {
 } from '../Picker/types'
 
 type ShowPickerOptions = {
-  title?: string
-  value?: ModelValue
   options: UserOptionItem[] | UserOptionItem[][]
-  mode?: ModeNames
-  fieldNames?: UserFieldNames
-} & ApiOptions
+} & Partial<
+  {
+    title: string
+    value: ModelValue
+    mode: ModeNames
+    fieldNames: UserFieldNames
+  } & ApiFnOptions
+>
 
 const showPicker = function (object: ShowPickerOptions) {
   return showPopup<PopupConfirmArgs>(object, 'showPicker', function (done) {

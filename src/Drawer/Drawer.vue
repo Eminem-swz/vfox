@@ -14,7 +14,7 @@
         :style="innerStyles"
       >
         <slot name="header">
-          <nav-bar
+          <NavBar
             v-if="hasHeader"
             class="fx-drawer_header"
             :title="title"
@@ -24,7 +24,7 @@
             :icon-only="true"
             @rightButtonClick="onHeaderRightClick"
           >
-          </nav-bar>
+          </NavBar>
         </slot>
         <div class="fx-drawer_body">
           <slot></slot>

@@ -94,8 +94,8 @@ export const calendarValueValidator: Validator = value => {
     return true
   } else if (isStringArray(value) || isNumberArray(value)) {
     let is = true
-    for (let i = 0; i < (value as any[]).length; i++) {
-      if (!dayjs((value as any[])[i]).isValid()) {
+    for (let i = 0; i < (value as string[]).length; i++) {
+      if (!dayjs((value as string[])[i]).isValid()) {
         is = false
         break
       }
@@ -104,7 +104,7 @@ export const calendarValueValidator: Validator = value => {
   } else if (value === '') {
     return true
   }
-  return dayjs(value as any).isValid()
+  return dayjs(value as string).isValid()
 }
 calendarValueValidator._type = 'Date, Date[], number[], string[] et.'
 

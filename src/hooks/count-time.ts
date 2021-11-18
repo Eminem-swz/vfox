@@ -1,11 +1,12 @@
+import { Noop } from '../helpers/types'
 import { cloneData, thousands } from '@/helpers/util'
 import { onBeforeUnmount, reactive } from 'vue'
 import { CountTime } from './types'
 
 interface StepHandlers {
   update: (time: number) => void
-  start: () => void
-  stop: () => void
+  start: Noop
+  stop: Noop
 }
 
 function formatNumber(num: number) {

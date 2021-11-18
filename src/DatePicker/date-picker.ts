@@ -74,7 +74,7 @@ export function useDatePicker(props: UseProps) {
     })
   }
 
-  const valueParser: ValueParser = (value: unknown) => {
+  const valueParser: ValueParser = value => {
     let djs: Dayjs | null = null
 
     if (isDate(value)) {

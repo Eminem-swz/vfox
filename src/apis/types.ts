@@ -19,12 +19,6 @@ export interface ApiFnOptions {
   complete: ApiOptionsComplete
 }
 
-export interface ApiOptions {
-  success?: ApiOptionsSuccess
-  fail?: ApiOptionsFail
-  complete?: ApiOptionsComplete
-}
-
 export type PopupHook = (hookEvent: string, args: any) => void
 
 export interface PopupBridge {

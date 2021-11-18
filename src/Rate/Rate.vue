@@ -22,10 +22,10 @@
       :data-value="num"
     >
       <i class="fx-rate_icon">
-        <icon :icon="iconPattern + 'Outlined'" />
+        <Icon :icon="iconPattern + 'Outlined'" />
       </i>
       <i class="fx-rate_active-icon">
-        <icon :icon="iconPattern + 'Filled'" :style="iconStyles" />
+        <Icon :icon="iconPattern + 'Filled'" :style="iconStyles" />
       </i>
     </div>
   </div>

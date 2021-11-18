@@ -2,22 +2,28 @@ import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import Toast from './Toast.vue'
 import { showPopup, hidePopup, createAlertHook } from '@/apis/Popup'
-import { ApiOptions } from '../apis/types'
+import { ApiFnOptions } from '../apis/types'
 import { isObject, isString } from '@/helpers/util'
 
 type ShowToastOptions = {
   title: string
-  type?: 'default' | 'success' | 'loading' | 'fail'
-  icon?: string
-  duration?: number
-  mask?: boolean
-} & ApiOptions
+} & Partial<
+  {
+    type: 'default' | 'success' | 'loading' | 'fail'
+    icon: string
+    duration: number
+    mask: boolean
+  } & ApiFnOptions
+>
 
 type ShowLoadingOptions = {
   title: string
-  duration?: number
-  mask?: boolean
-} & ApiOptions
+} & Partial<
+  {
+    duration: number
+    mask: boolean
+  } & ApiFnOptions
+>
 
 const showToast = function (object: string | ShowToastOptions) {
   return showPopup(object, 'showToast', function (done) {
@@ -58,11 +64,11 @@ const showLoading = function (object: string | ShowLoadingOptions) {
   })
 }
 
-const hideToast = function (object?: ApiOptions) {
+const hideToast = function (object?: Partial<ApiFnOptions>) {
   return hidePopup(object || {}, 'hideToast')
 }
 
-const hideLoading = function (object?: ApiOptions) {
+const hideLoading = function (object?: Partial<ApiFnOptions>) {
   return hidePopup(object || {}, 'hideLoading')
 }
 

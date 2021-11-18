@@ -22,7 +22,7 @@
           </li>
         </ul>
       </div>
-      <empty description="暂无选项可选" v-if="cols.length === 0"></empty>
+      <Empty description="暂无选项可选" v-if="cols.length === 0" />
     </div>
   </div>
 </template>

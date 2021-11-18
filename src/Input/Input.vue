@@ -47,7 +47,7 @@
     <span class="fx-input_limit" v-if="showLimit && maxLength > 0"
       >{{ formValue.length }}/{{ maxLength }}</span
     >
-    <icon
+    <Icon
       v-if="showClear"
       v-show="formValue && focus2"
       class="fx-input_clear"

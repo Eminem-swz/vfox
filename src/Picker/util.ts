@@ -37,40 +37,16 @@ export function getColRows(options: OptionItem[], indexes: number[]) {
   return rows
 }
 
-// export function string2Array(value: any, valueParser?: ValueParser) {
-//   try {
-//     let values: Values = []
-
-//     if (isFunction(valueParser)) {
-//       values = (valueParser as ValueParser)(value, 'value')
-//     } else if (value == null) {
-//       // return []
-//     } else if (isNumber(value)) {
-//       values = [value]
-//     } else if (!value) {
-//       values = []
-//     } else if (isStringNumberMixArray(value)) {
-//       values = value as Values
-//     } else {
-//       throw new Error('Invalid prop: invalid "value".')
-//     }
-
-//     return values
-//   } catch (e) {
-//     return new Error(e.message)
-//   }
-// }
-
-export function defaultValueParser(value: any, separator: string) {
+export function defaultValueParser(value: unknown, separator: string) {
   let values: Values = []
 
   try {
     if (value == null) {
       values = []
     } else if (isNumber(value)) {
-      values = [value]
+      values = [value as number]
     } else if (isString(value) && value) {
-      values = value.split(separator)
+      values = (value as string).split(separator)
     } else if (!value) {
       values = []
     } else if (isStringNumberMixArray(value)) {
@@ -85,11 +61,14 @@ export function defaultValueParser(value: any, separator: string) {
   }
 }
 
-export function parseOptions(options: any[], fieldNames: FieldNames) {
+export function parseOptions(
+  options: UserOptionItem[] | UserOptionItem[][],
+  fieldNames: FieldNames
+) {
   const newOptions: OptionItem[] | OptionItem[][] = []
 
   if (isArray(options)) {
-    options.forEach((option: UserOptionItem | UserOptionItem[]) => {
+    options.forEach(option => {
       if (isArray(option)) {
         // 二维数组
         const subOptions = parseOptions(
@@ -325,7 +304,7 @@ function printError(message: string) {
  */
 export function validateValues(
   values: Values | Error,
-  options: any[],
+  options: OptionItem[] | OptionItem[][],
   isCascade: boolean,
   virtualHandler?: OptionsHandler | null
 ): ValidateReturn {
@@ -338,7 +317,7 @@ export function validateValues(
     valid = true
   } else {
     const ret = isCascade
-      ? validateCascadeCols(values, options, virtualHandler)
+      ? validateCascadeCols(values, options as OptionItem[], virtualHandler)
       : validateCols(values, options)
 
     if (!ret.valid) {

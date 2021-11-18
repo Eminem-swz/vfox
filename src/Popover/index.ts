@@ -1,16 +1,19 @@
 import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import Popover from './Popover.vue'
-import { ApiOptions } from '../apis/types'
+import { ApiFnOptions } from '../apis/types'
 import { createAlertHook, showPopup } from '@/apis/Popup'
 import { DomSelector } from '../helpers/types'
 import { PlacementType } from '../hooks/types'
 
 type ShowPopoverOptions = {
   selector: DomSelector
-  content?: string
-  placement?: PlacementType
-} & ApiOptions
+  content: string
+} & Partial<
+  {
+    placement: PlacementType
+  } & ApiFnOptions
+>
 
 const showPopover = function (object: ShowPopoverOptions) {
   return showPopup(object, 'showPopover', function (done) {

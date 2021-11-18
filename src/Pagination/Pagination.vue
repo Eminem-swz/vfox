@@ -6,7 +6,7 @@
       @click="onClick('prev')"
     >
       <slot name="prev">
-        <icon icon="LeftOutlined" />
+        <Icon icon="LeftOutlined" />
       </slot>
     </button>
     <div class="fx-pagination_content">
@@ -18,7 +18,7 @@
       @click="onClick('next')"
     >
       <slot name="next">
-        <icon icon="RightOutlined" />
+        <Icon icon="RightOutlined" />
       </slot>
     </button>
   </div>

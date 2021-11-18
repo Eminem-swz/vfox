@@ -3,14 +3,17 @@ import { SFCWithInstall } from '../helpers/types'
 import ActionSheet from './ActionSheet.vue'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 import { ActionSheetItem } from './types'
-import { ApiOptions, PopupConfirmArgs } from '../apis/types'
+import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 
 type ShowActionSheetOptions = {
-  title?: string
-  showCancel?: boolean
-  cancelText?: string
   options: ActionSheetItem[]
-} & ApiOptions
+} & Partial<
+  {
+    title: string
+    showCancel: boolean
+    cancelText: string
+  } & ApiFnOptions
+>
 
 const showActionSheet = function (object: ShowActionSheetOptions) {
   return showPopup<PopupConfirmArgs>(

@@ -1,7 +1,10 @@
+import { FormValue } from '../hooks/types'
 import { RuleItem, RuleType } from 'async-validator'
 
 export interface FormRuleValidate {
-  (value: any, rules?: FormRuleItem[]): Promise<any>
+  (value: FormValue | FormValue[], rules?: FormRuleItem[]): Promise<
+    boolean | void
+  >
 }
 
 export interface FormGroupItemOut {

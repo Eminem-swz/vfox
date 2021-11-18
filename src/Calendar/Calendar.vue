@@ -79,7 +79,7 @@ export default defineComponent({
 
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)
     let detail = getDefaultDetail()
-    let _changeValue: any = null
+    let _changeValue: Date | Date[] | null = null
 
     function updateValue(val: unknown) {
       if (popup.value) {
