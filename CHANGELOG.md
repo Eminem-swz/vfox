@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/godxiaoji/vfox/compare/v2.0.3...v2.0.4) (2021-11-19)
+
+
+### Bug Fixes
+
+* 样式引用错误修正 ([4c2cb91](https://github.com/godxiaoji/vfox/commit/4c2cb911355a43d4fb0afb634dd6212a5992c6e5))
+
 ## [2.0.3](https://github.com/godxiaoji/vfox/compare/v2.0.2...v2.0.3) (2021-11-19)
 
 
