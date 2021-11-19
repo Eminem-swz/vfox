@@ -1,11 +1,11 @@
 <template>
-  <picker-view
+  <PickerView
     class="fx-date-picker-view"
     :handlers="handlers"
     @update:modelValue="onUpdateValue"
     @change="onChange"
   >
-  </picker-view>
+  </PickerView>
 </template>
 
 <script lang="ts">

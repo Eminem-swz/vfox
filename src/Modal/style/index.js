@@ -1,3 +1,3 @@
 import '../../style/popup.scss'
-import '../../Icon/index.scss'
+import '../../Icon/style'
 import '../index.scss'

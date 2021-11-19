@@ -1,4 +1,3 @@
 import '../../style/popup.scss'
-import '../../Icon/index.scss'
-import '../../NoticeBar/index.scss'
+import '../../NoticeBar/style'
 import '../index.scss'

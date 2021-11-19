@@ -1,5 +1,5 @@
 import { FormValue } from '../hooks/types'
-import { AnyObject, DataObject } from '../helpers/types'
+import { AnyObject } from '../helpers/types'
 
 export interface UserFieldNames {
   label?: string
@@ -18,7 +18,7 @@ export type ModelValue = string | number | Values
 export type Values = (string | number)[]
 export type Labels = string[]
 
-export type ExtraData = DataObject
+export type ExtraData = AnyObject
 
 export interface DetailObject {
   valueString: string
@@ -28,7 +28,7 @@ export interface DetailObject {
   extraData: ExtraData[]
 }
 
-export type UserOptionItem = string | number | DataObject
+export type UserOptionItem = string | number | AnyObject
 
 export interface OptionItem {
   label: string

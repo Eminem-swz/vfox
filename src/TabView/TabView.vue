@@ -5,7 +5,7 @@
         v-if="vertical"
         :options="tabList"
         v-model:activeValue="activeIndex"
-      ></SideTab>
+      />
       <Tab
         v-else
         :options="tabList"

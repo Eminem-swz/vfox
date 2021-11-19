@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PickerInput from '../Picker/PickerInput.vue'
+import PickerInput from '@/PickerInput'
 import PickerPopup from '@/PickerPopup'
 import { formItemEmits, formItemProps } from '@/hooks/form'
 import { usePicker, pickerEmits, pickerProps } from '@/Picker/picker'

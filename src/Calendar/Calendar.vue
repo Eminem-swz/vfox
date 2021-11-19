@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from 'vue'
-import PickerInput from '../Picker/PickerInput.vue'
+import PickerInput from '@/PickerInput'
 import CalendarPopup from '@/CalendarPopup'
 import {
   cloneDetail,

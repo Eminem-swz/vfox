@@ -1,5 +1,4 @@
-import '../../style/popup.scss'
 import '../../style/hairline.scss'
-import '../../Icon/index.scss'
-import '../../Popover/index.scss'
+import '../../Icon/style'
+import '../../Popover/style'
 import '../index.scss'

@@ -42,8 +42,7 @@
   },
   "files": [
     "dist",
-    "es",
-    "src"
+    "es"
   ],
   "homepage": "https://github.com/godxiaoji/vfox#readme",
   "dependencies": {

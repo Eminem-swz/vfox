@@ -1,2 +1,2 @@
-import '../../ActivityIndicator/index.scss'
+import '../../ActivityIndicator/style'
 import '../index.scss'

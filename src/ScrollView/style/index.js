@@ -1,3 +1,3 @@
-import '../../Icon/index.scss'
-import '../../ActivityIndicator/index.scss'
+import '../../Icon/style'
+import '../../ActivityIndicator/style'
 import '../index.scss'

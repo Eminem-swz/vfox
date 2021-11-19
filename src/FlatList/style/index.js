@@ -1,3 +1,2 @@
-import '../../LoadMore/index.scss'
-import '../../ScrollView/index.scss'
+import '../../ScrollView/style'
 import '../index.scss'
