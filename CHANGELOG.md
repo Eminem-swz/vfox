@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/godxiaoji/vfox/compare/v2.0.2...v2.0.3) (2021-11-19)
+
+
+### Bug Fixes
+
+* **cli:** 修复Vue3+ts+cli的支持 ([43774e5](https://github.com/godxiaoji/vfox/commit/43774e50041352210e9e3f78e30fbeecb354be9b))
+
 ## [2.0.2](https://github.com/godxiaoji/vfox/compare/v2.0.1...v2.0.2) (2021-11-16)
 
 
