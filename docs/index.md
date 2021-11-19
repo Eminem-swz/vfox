@@ -24,7 +24,7 @@ sidebarDepth: 2
 ### NPM
 
 ```
-npm i -S vfox@next
+npm i -S vfox
 ```
 
 ## 引入

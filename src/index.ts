@@ -29,4 +29,5 @@ const Vfox = {
   }
 }
 
+export * from './components'
 export default Vfox
