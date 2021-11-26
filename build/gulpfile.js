@@ -1,7 +1,7 @@
 /* eslint-disable */
 const fs = require('fs')
 const gulp = require('gulp')
-const sass = require('gulp-sass')
+const sass = require('gulp-sass')(require('sass'))
 const replace = require('gulp-replace')
 const autoprefixer = require('gulp-autoprefixer')
 const through = require('through2')
