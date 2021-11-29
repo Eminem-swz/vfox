@@ -20,7 +20,7 @@
     },
     "lib": ["esnext", "dom", "dom.iterable"],
     "resolveJsonModule": true,
-    "types": ["vite-svg-loader", "vite/client"]
+    "types": ["vite/client"]
   },
   "include": [
     "src/**/*.ts",
