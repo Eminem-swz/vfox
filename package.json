@@ -12,7 +12,7 @@
   "scripts": {
     "test:unit": "jest --detectOpenHandles",
     "build:umd": "rollup -c ./build/build.umd.js",
-    "build:svg": "webpack --config=./build/build.svg.js",
+    "build:svg": "rollup -c ./build/rollup.svg.js",
     "lint": "eslint ./src/**/*.ts",
     "build:css": "gulp build --gulpfile build/gulpfile.js",
     "build:component": "node ./build/bincomp.js",
@@ -57,6 +57,7 @@
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/runtime-corejs3": "^7.12.5",
+    "@godxiaoji/rollup-plugin-require-context": "^1.0.1",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
@@ -93,24 +94,21 @@
     "rollup": "^2.59.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-sass": "^1.2.9",
+    "rollup-plugin-svg-sprites": "^1.0.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-vue": "^6.0.0",
     "sass": "1.32.6",
     "semantic-release": "^18.0.0",
-    "svg-sprite-loader": "^5.0.0",
     "through2": "^4.0.2",
     "ts-jest": "^26.5.6",
     "typescript": "^4.4.4",
     "vite": "^2.6.14",
-    "vite-svg-loader": "^3.1.0",
     "vitepress": "0.18.1",
     "vue": "^3.2.21",
     "vue-jest": "^5.0.0-alpha.10",
     "vue-router": "^4.0.12",
-    "vue-tsc": "^0.29.5",
-    "webpack": "^5.64.0",
-    "webpack-cli": "^4.9.1"
+    "vue-tsc": "^0.29.5"
   },
   "config": {
     "commitizen": {

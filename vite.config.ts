@@ -1,12 +1,17 @@
-const { resolve } = require('path')
-
-import svgLoader from 'vite-svg-loader'
+import { resolve } from 'path'
+import svgSprites from 'rollup-plugin-svg-sprites'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), svgLoader()],
+  plugins: [
+    vue(),
+    svgSprites({
+      vueComponent: true,
+      exclude: ['node_modules/**']
+    })
+  ],
   root: 'examples',
   base: '/vfox/demo/',
   resolve: {

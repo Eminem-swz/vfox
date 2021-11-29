@@ -16,7 +16,7 @@ import {
 } from '@/helpers/util'
 import dayjs from '@/helpers/day'
 import { getSizeValue } from '@/helpers/dom'
-import { Validator } from './types'
+import { AnyObject, Validator } from './types'
 
 const empties = ['null', 'undefined', 'NaN']
 
@@ -110,7 +110,7 @@ calendarValueValidator._type = 'Date, Date[], number[], string[] et.'
 
 /**
  * 获取类型
- * @param {any} obj
+ * @param obj
  */
 export function getType(obj: unknown) {
   if (isFunction(obj)) {
@@ -169,17 +169,20 @@ export function getEnumsValue<T = string>(enums: T[], value?: unknown): T {
  * 判断是否svg组件
  * @param value 值
  */
-export function isSvgComponent(value: any) {
-  if (isFunction(value) && value.name === 'render') {
-    // vite-svg-loader
-    return true
+export function isSvgComponent(value: unknown) {
+  if (isObject(value)) {
+    const obj = value as AnyObject
+
+    if (isString(obj.template) || isFunction(obj.render)) {
+      // vue component
+      return true
+    } else if (obj.__file && obj.__file.indexOf('.svg') > -1) {
+      // vue-svg-loader
+      return true
+    }
   }
 
-  return !!(
-    isObject(value) &&
-    value.__file &&
-    value.__file.indexOf('.svg') > -1
-  ) // vue-svg-loader
+  return false
 }
 
 export const iconValidator: Validator = value => {
