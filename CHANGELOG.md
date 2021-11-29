@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/godxiaoji/vfox/compare/v2.0.4...v2.0.5) (2021-11-29)
+
+
+### Bug Fixes
+
+* **svg:** svg打包插件改成rollup-plugin-svg-sprites ([5e8efec](https://github.com/godxiaoji/vfox/commit/5e8efec3a09ec592173743d949d17313d5c11c11))
+
 ## [2.0.4](https://github.com/godxiaoji/vfox/compare/v2.0.3...v2.0.4) (2021-11-19)
 
 
