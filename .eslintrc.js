@@ -21,7 +21,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module'
   },
-  plugins: ['vue', '@typescript-eslint']
+  plugins: ['vue', '@typescript-eslint'],
   // rules: {
   //   strict: 0,
   //   semi: ['error', 'never'],
@@ -32,4 +32,15 @@ module.exports = {
   //   'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   //   'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   // }
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
 }

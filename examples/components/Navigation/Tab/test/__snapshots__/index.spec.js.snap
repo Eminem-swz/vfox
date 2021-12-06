@@ -4,7 +4,7 @@ exports[`Tab should render set mix options correctly 1`] = `
 <div class="fx-tab no--scroll">
   <ul class="fx-tab_list">
     <li class="fx-tab_item fx-vertical-hairline active">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline active-next">
@@ -12,7 +12,7 @@ exports[`Tab should render set mix options correctly 1`] = `
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
@@ -27,71 +27,71 @@ exports[`Tab should render set options correctly 1`] = `
 <div class="fx-tab">
   <ul class="fx-tab_list">
     <li class="fx-tab_item fx-vertical-hairline active">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline active-next">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
     <li class="fx-tab_item fx-vertical-hairline">
-      <badge-stub maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
+      <badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-tab_item-inner"></badge-stub>
       <!--v-if-->
     </li>
   </ul>

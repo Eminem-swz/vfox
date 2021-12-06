@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '../style/var.scss';
 
 .fx-col {
@@ -15,20 +16,20 @@
 
   @for $i from 1 through 24 {
     &-#{$i} {
-      flex-basis: percentage($i / 24);
-      max-width: percentage($i / 24);
+      flex-basis: percentage(math.div($i, 24));
+      max-width: percentage(math.div($i, 24));
     }
 
     &-offset-#{$i} {
-      margin-left: percentage($i / 24);
+      margin-left: percentage(math.div($i, 24));
     }
 
     &-push-#{$i} {
-      left: percentage($i / 24);
+      left: percentage(math.div($i, 24));
     }
 
     &-pull-#{$i} {
-      right: percentage($i / 24);
+      right: percentage(math.div($i, 24));
     }
   }
 }
