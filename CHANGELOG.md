@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/godxiaoji/vfox/compare/v2.0.5...v2.0.6) (2021-12-07)
+
+
+### Bug Fixes
+
+* **hooks:** hook代码抽出独立 ([982be70](https://github.com/godxiaoji/vfox/commit/982be70784522e06490ea73c908ee017f0d5ecf4))
+
 ## [2.0.5](https://github.com/godxiaoji/vfox/compare/v2.0.4...v2.0.5) (2021-11-29)
 
 
