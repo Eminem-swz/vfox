@@ -55,3 +55,20 @@ export type EasingType = 'linear' | 'swing'
 export interface Noop {
   (): void
 }
+
+export type PlacementType = 'bottom' | 'top' | 'left' | 'right'
+export type StateType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
+export type SizeType = 'large' | 'middle' | 'small'
+export type ColorStyle =
+  | 'DustRed'
+  | 'Volcano'
+  | 'SunsetOrange'
+  | 'CalendulaGold'
+  | 'SunriseYellow'
+  | 'Lime'
+  | 'PolarGreen'
+  | 'Cyan'
+  | 'DaybreakBlue'
+  | 'GeekBlue'
+  | 'GoldenPurple'
+  | 'Magenta'

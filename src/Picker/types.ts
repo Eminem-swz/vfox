@@ -1,5 +1,5 @@
-import { FormValue } from '../hooks/types'
-import { AnyObject } from '../helpers/types'
+import type { FormValue } from '../Form/types'
+import type { AnyObject } from '../helpers/types'
 
 export interface UserFieldNames {
   label?: string

@@ -34,12 +34,12 @@
 <script lang="ts">
 import { computed, defineComponent, ref, PropType, watch } from 'vue'
 import Icon from '@/Icon'
-import { capitalize, isInteger, isNumeric } from '@/helpers/util'
-import { rangeInteger } from '@/helpers/util'
+import { capitalize, isInteger, isNumeric, rangeInteger } from '@/helpers/util'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
-import { StyleObject } from '../helpers/types'
-import { useTouch } from '@/hooks/touch'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useFormItem } from '@/Form/use-form'
+import type { StyleObject } from '../helpers/types'
+import { useTouch } from '@/hooks/use-touch'
 
 interface RateCoords {
   size: number

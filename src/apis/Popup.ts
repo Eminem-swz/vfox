@@ -2,9 +2,9 @@ import { createApp, Component } from 'vue'
 import { isObject, isString } from '@/helpers/util'
 import { getCallbackFns } from '@/apis/callback'
 import { parseParamsByRules } from '@/apis/rules'
-import { PopupHook, PopupBridge, ApiFnOptions } from './types'
-import { AnyObject, EmptyObject } from '../helpers/types'
-import { PopupCustomCancel } from '../hooks/types'
+import type { PopupHook, ApiFnOptions } from './types'
+import type { AnyObject, EmptyObject } from '../helpers/types'
+import type { PopupCustomCancel, PopupBridge } from '../popup/types'
 import Exception from '@/helpers/exception'
 
 type PopupDone = (res: any) => void

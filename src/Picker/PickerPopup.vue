@@ -37,14 +37,10 @@ import { defineComponent } from 'vue'
 import PickerView from '@/PickerView'
 import Drawer from '@/Drawer'
 import NavBar from '@/NavBar'
-import { viewEmits } from '@/Picker/view'
-import { commonProps } from '@/Picker/props'
-import {
-  usePopupExtend,
-  popupExtendEmits,
-  popupExtendProps
-} from '@/hooks/popup'
-import { usePickerPopup, pickerPopupProps } from '@/Picker/popup'
+import { usePopupExtend } from '@/popup/use-popup'
+import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { pickerPopupProps, pickerViewEmits, commonProps } from '@/Picker/picker'
+import { usePickerPopup } from '@/Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-picker-popup',
@@ -54,7 +50,7 @@ export default defineComponent({
     ...commonProps,
     ...pickerPopupProps
   },
-  emits: [...viewEmits, ...popupExtendEmits],
+  emits: [...pickerViewEmits, ...popupExtendEmits],
   setup(props, ctx) {
     const popup = usePopupExtend(ctx)
     const pickerPopup = usePickerPopup(props, popup, {})

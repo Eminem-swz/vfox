@@ -65,11 +65,11 @@ import {
   DEFAULT_MONTH_RANGE,
   getDetail as _getDetail,
   parseValues,
-  MODE_NAMES
-} from '@/Calendar/util'
+  MODE_NAMES,
+  commonProps
+} from '@/Calendar/calendar'
 import { isSameArray } from '@/helpers/util'
 import Exception from '@/helpers/exception'
-import calendarCommonProps from '@/Calendar/props'
 import { getEnumsValue } from '@/helpers/validator'
 import { DayInfo } from './types'
 
@@ -109,7 +109,7 @@ function printError(message: string) {
 
 export default defineComponent({
   name: 'fx-calendar-view',
-  props: { ...calendarCommonProps },
+  props: { ...commonProps },
   emits: ['select', 'update:modelValue'],
   setup(props, { emit }) {
     const weekDays = reactive<WeekDay[]>([])

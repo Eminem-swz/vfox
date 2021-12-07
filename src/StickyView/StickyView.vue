@@ -27,11 +27,14 @@ import {
   querySelector
 } from '@/helpers/dom'
 import { selectorValidator, sizeValidator } from '@/helpers/validator'
-import { useScrollEvent } from '@/hooks/scroll'
-import { OnScrollCallback } from '../hooks/types'
+import { useScrollEvent } from '@/hooks/use-scroll'
 import { isNumber } from '@/helpers/util'
-import { useList } from '@/hooks/list'
-import { ScrollToOptions, ScrollToIndexOptions, Noop } from '../helpers/types'
+import { useList } from '@/hooks/use-list'
+import type {
+  ScrollToOptions,
+  ScrollToIndexOptions,
+  Noop
+} from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-sticky-view',
@@ -87,13 +90,11 @@ export default defineComponent({
 
       sticky.value && sticky.value.resetContainer($container)
 
-      scrollOff = useScrollEvent($container, onScroll)
+      scrollOff = useScrollEvent($container, (e: Event, { scrollTop }) => {
+        updateFixed(scrollTop)
+      })
 
       updateFixed(null)
-    }
-
-    const onScroll: OnScrollCallback = (e: Event, { scrollTop }) => {
-      updateFixed(scrollTop)
     }
 
     function updateFixed(scrollTop: number | null) {

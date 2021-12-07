@@ -58,12 +58,9 @@ import { computed, defineComponent, PropType } from 'vue'
 import Icon from '@/Icon'
 import Drawer from '@/Drawer'
 import { isStringArray, isString, noop } from '@/helpers/util'
-import {
-  usePopupExtend,
-  popupExtendEmits,
-  popupExtendProps
-} from '@/hooks/popup'
-import { PopupVisibleStateChangeArgs } from '../hooks/types'
+import { usePopupExtend } from '@/popup/use-popup'
+import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import type { PopupVisibleStateChangeArgs } from '../popup/types'
 import { getEnumsValue } from '@/helpers/validator'
 
 const TYPE_NAMES = ['default', 'rightColumn']

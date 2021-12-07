@@ -66,7 +66,8 @@ import Icon from '@/Icon'
 import { isNumeric, isNumber, isStringNumberMix } from '@/helpers/util'
 import { formatInputDigit, formatInputNumber } from '@/helpers/input'
 import { getEnumsValue } from '@/helpers/validator'
-import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useFormItem } from '@/Form/use-form'
 
 const TYPE_NAMES = [
   'text',

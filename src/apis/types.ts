@@ -20,12 +20,6 @@ export interface ApiFnOptions {
 }
 
 export type PopupHook = (hookEvent: string, args: any) => void
-
-export interface PopupBridge {
-  in?: (key: string, value?: any) => void
-  out?: (key: string, value: any) => void
-}
-
 export interface PopupConfirmArgs {
   confirm?: boolean
   cancel?: boolean

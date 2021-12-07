@@ -1,4 +1,4 @@
-export interface BadgeOptions {
+export type BadgeOptions = Partial<{
   color: string
   content: string | number
   backgroundColor: string
@@ -7,4 +7,4 @@ export interface BadgeOptions {
   dot: boolean
   maxCount: number
   showZero: boolean
-}
+}>

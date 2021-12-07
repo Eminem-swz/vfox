@@ -31,7 +31,8 @@ import { defineComponent } from 'vue'
 import FxImage from '@/Image'
 import Icon from '@/Icon'
 import Badge from '@/Badge'
-import { useTab, tabEmits, tabProps } from '@/Tab/tab'
+import { tabEmits, tabProps } from '@/Tab/tab'
+import { useTab } from '@/Tab/use-tab'
 
 export default defineComponent({
   name: 'fx-tab-bar',

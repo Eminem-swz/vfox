@@ -32,7 +32,7 @@ import StickyView from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import { rangeInteger } from '@/helpers/util'
 import { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
-import { useTouch } from '@/hooks/touch'
+import { useTouch } from '@/hooks/use-touch'
 
 export default defineComponent({
   name: 'fx-index-view',

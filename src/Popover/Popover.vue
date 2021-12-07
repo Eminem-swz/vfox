@@ -22,7 +22,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { popoverProps, popoverEmits, usePopover } from '@/hooks/popover'
+import { usePopover } from '@/Popover/use-popover'
+import { popoverProps, popoverEmits } from '@/Popover/popover'
 
 export default defineComponent({
   name: 'fx-popover',

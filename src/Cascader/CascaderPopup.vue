@@ -43,14 +43,11 @@ import { defineComponent, nextTick, ref, computed } from 'vue'
 import Drawer from '@/Drawer'
 import { frameTo } from '@/helpers/animation'
 import { isSameArray } from '@/helpers/util'
-import { useView, viewEmits } from '@/Picker/view'
-import { commonProps } from '@/Picker/props'
-import {
-  usePopupExtend,
-  popupExtendEmits,
-  popupExtendProps
-} from '@/hooks/popup'
-import { ColRow, Values } from '../Picker/types'
+import { usePopupExtend } from '@/popup/use-popup'
+import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import type { ColRow, Values } from '../Picker/types'
+import { pickerViewEmits, commonProps } from '@/Picker/picker'
+import { usePickerView } from '@/Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-cascader-popup',
@@ -63,7 +60,7 @@ export default defineComponent({
       default: ''
     }
   },
-  emits: [...viewEmits, ...popupExtendEmits],
+  emits: [...pickerViewEmits, ...popupExtendEmits],
   setup(props, ctx) {
     const dropdown = ref<HTMLElement>()
 
@@ -171,7 +168,12 @@ export default defineComponent({
       getValuesByRow,
       updateValue,
       onChange
-    } = useView(props, ctx, { name: 'cascader', afterUpdate: updateLayout }, {})
+    } = usePickerView(
+      props,
+      ctx,
+      { name: 'cascader', afterUpdate: updateLayout },
+      {}
+    )
 
     const title2 = computed(() => {
       return format2String(cacheLabel) || props.title

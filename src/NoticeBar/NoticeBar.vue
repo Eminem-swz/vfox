@@ -47,9 +47,9 @@ import {
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
-import { StyleObject } from '../helpers/types'
-import { STATE_TYPES } from '@/hooks/constants'
-import { StateType } from '../hooks/types'
+import type { StyleObject } from '../helpers/types'
+import { STATE_TYPES } from '@/helpers/constants'
+import type { StateType } from '../helpers/types'
 
 const modeMaps = new Map([
   ['default', ''],

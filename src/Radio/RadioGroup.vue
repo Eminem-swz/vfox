@@ -10,9 +10,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { formItemEmits, formItemProps } from '@/hooks/form'
-import { useCheckboxOrRadioGroup } from '@/hooks/checkbox-radio'
-import { ModelValue } from '../hooks/checkbox-radio'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
+import type { ModelValue } from '../Checkbox/types'
 
 export default defineComponent({
   name: 'fx-radio-group',

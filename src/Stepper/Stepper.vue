@@ -35,7 +35,8 @@ import { onMounted, ref, defineComponent, watch } from 'vue'
 import FxButton from '@/Button'
 import { rangeInteger, rangeNumber } from '@/helpers/util'
 import { formatInputNumber } from '@/helpers/input'
-import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useFormItem } from '@/Form/use-form'
 
 export default defineComponent({
   name: 'fx-stepper',

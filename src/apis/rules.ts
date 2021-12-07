@@ -9,9 +9,14 @@ import {
   stringNumberArrayMixValidator,
   selectorValidator
 } from '@/helpers/validator'
-import { MODE_NAMES as CALENDAR_MODE_NAMES } from '@/Calendar/util'
-import { PLACEMENT_TYPES } from '@/hooks/constants'
-import { AnyObject, DataValue, EmptyObject, Validator } from '../helpers/types'
+import { MODE_NAMES as CALENDAR_MODE_NAMES } from '@/Calendar/calendar'
+import { PLACEMENT_TYPES } from '@/helpers/constants'
+import type {
+  AnyObject,
+  DataValue,
+  EmptyObject,
+  Validator
+} from '../helpers/types'
 
 const placementValidator = createEnumsValidator(PLACEMENT_TYPES)
 

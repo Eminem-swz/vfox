@@ -10,10 +10,9 @@
 import { defineComponent, computed, toRef, ref } from 'vue'
 import Icon from '@/Icon'
 import { getScrollDom } from '@/helpers/dom'
-import { useSafeAreaInsets } from '@/hooks/safe-area-insets'
+import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
 import { isNumber, isNumberArray } from '@/helpers/util'
-import { useScrollEvent } from '@/hooks/scroll'
-import { OnScrollCallback } from '../hooks/types'
+import { useScrollEvent } from '@/hooks/use-scroll'
 
 export default defineComponent({
   name: 'fx-back-top',
@@ -41,10 +40,6 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const isShow = ref(getScrollDom().scrollTop >= props.visibleHeight)
-
-    const onScroll: OnScrollCallback = (e: Event, { scrollTop }) => {
-      isShow.value = scrollTop >= props.visibleHeight
-    }
 
     function toTop() {
       getScrollDom().scrollTo({
@@ -75,12 +70,15 @@ export default defineComponent({
       }
 
       return {
-        transform: `translate3d(${offset[0]}px, ${offset[1] -
-          safeAreaInsets.bottom}px, 0px)`
+        transform: `translate3d(${offset[0]}px, ${
+          offset[1] - safeAreaInsets.bottom
+        }px, 0px)`
       }
     })
 
-    useScrollEvent(document, onScroll)
+    useScrollEvent(document, (e: Event, { scrollTop }) => {
+      isShow.value = scrollTop >= props.visibleHeight
+    })
 
     return {
       toTop,

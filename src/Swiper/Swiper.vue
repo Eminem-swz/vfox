@@ -61,11 +61,11 @@ import {
 import FxButton from '@/Button'
 import Exception from '@/helpers/exception'
 import { isNumber } from '@/helpers/util'
-import { useList } from '@/hooks/list'
-import { useResizeDetector } from '@/hooks/resize-detector'
+import { useList } from '@/hooks/use-list'
+import { useResizeDetector } from '@/hooks/use-resize-detector'
 import { getStretchOffset } from '@/helpers/animation'
-import { StyleObject } from '../helpers/types'
-import { useTouch } from '@/hooks/touch'
+import type { StyleObject } from '../helpers/types'
+import { useTouch } from '@/hooks/use-touch'
 import { styleObject2CssText } from '@/helpers/dom'
 
 interface SwiperCoords {

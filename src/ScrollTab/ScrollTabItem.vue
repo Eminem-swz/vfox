@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onMounted, onUnmounted } from 'vue'
-import { createUpdateInItem } from '@/hooks/list'
+import { createUpdateInItem } from '@/hooks/use-list'
 
 export default defineComponent({
   name: 'fx-scroll-tab-item',

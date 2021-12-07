@@ -2,19 +2,17 @@ import { computed, onMounted, ref, watch, inject, provide } from 'vue'
 import { isFunction, noop } from '@/helpers/util'
 import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import { AnyObject, Noop } from '../helpers/types'
-import { useBlur } from '@/hooks/blur'
-import {
+import type { AnyObject, Noop } from '../helpers/types'
+import { useBlur } from '@/hooks/use-blur'
+import type { UseEmit, UseProps, UseCtx } from '../hooks/types'
+import type {
   PopupVisibleStateChangeArgs,
   PopupVisibleState,
   PopupCustomCancel,
   PopupCustomConfirm,
-  UseEmit,
   PopupStyles,
-  UseProps,
-  UseCtx
+  PopupBridge
 } from './types'
-import { PopupBridge } from '../apis/types'
 
 type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
 
@@ -28,24 +26,6 @@ let zIndex = popupZIndex
 export function getNewZIndex() {
   return zIndex++
 }
-
-export const popupProps = {
-  visible: {
-    type: Boolean,
-    default: false
-  },
-  maskClosable: {
-    type: Boolean,
-    default: true
-  }
-}
-
-export const popupEmits = [
-  'visible-state-change',
-  'update:visible',
-  'cancel',
-  'confirm'
-]
 
 export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   const apis = inject<PopupBridge>('fxApis', {})
@@ -254,20 +234,6 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
     onMaskClick,
     onCloseClick,
     onCancelClick
-  }
-}
-
-export const popupExtendEmits = [
-  'confirm',
-  'cancel',
-  'visible-state-change',
-  'update:visible'
-]
-
-export const popupExtendProps = {
-  visible: {
-    type: Boolean,
-    default: false
   }
 }
 

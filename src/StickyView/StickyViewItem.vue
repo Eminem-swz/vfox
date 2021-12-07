@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useListItem } from '@/hooks/list'
+import { useListItem } from '@/hooks/use-list'
 
 export default defineComponent({
   name: 'fx-sticky-view-item',

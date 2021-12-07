@@ -1,5 +1,6 @@
 import { isNumber } from '@/helpers/util'
 import { getEnumsValue } from '@/helpers/validator'
+import type { AvatarShapeType } from './types'
 
 const SIZE_TYPES = ['middle', 'large', 'small']
 
@@ -9,6 +10,8 @@ export const avatarProps = {
     default: SIZE_TYPES[0]
   }
 }
+
+export const AVATAR_SHAPE_TYPES: AvatarShapeType[] = ['circle', 'square']
 
 export function getAvatarSize(size: number | string) {
   if (isNumber(size)) {

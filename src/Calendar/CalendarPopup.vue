@@ -39,20 +39,16 @@ import { defineComponent, onMounted, reactive, ref } from 'vue'
 import CalendarView from '@/CalendarView'
 import Drawer from '@/Drawer'
 import FxButton from '@/Button'
-import { getDefaultDetail, cloneDetail } from '@/Calendar/util'
-import calendarCommonProps from '@/Calendar/props'
-import {
-  usePopupExtend,
-  popupExtendEmits,
-  popupExtendProps
-} from '@/hooks/popup'
-import { DetailObject } from './types'
+import { getDefaultDetail, cloneDetail, commonProps } from '@/Calendar/calendar'
+import { usePopupExtend } from '@/popup/use-popup'
+import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import type { DetailObject } from './types'
 
 export default defineComponent({
   name: 'fx-calendar-popup',
   components: { CalendarView, Drawer, FxButton },
   props: {
-    ...calendarCommonProps,
+    ...commonProps,
     ...popupExtendProps,
     title: {
       type: String,

@@ -3,7 +3,7 @@ import { SFCWithInstall } from '@/helpers/types'
 import CascaderPopup from '../Cascader/CascaderPopup.vue'
 import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
-import {
+import type {
   ModeNames,
   UserFieldNames,
   ModelValue,

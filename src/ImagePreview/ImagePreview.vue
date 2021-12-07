@@ -63,8 +63,9 @@ import FxImage from '@/Image'
 import Swiper from '@/Swiper'
 import SwiperItem from '@/SwiperItem'
 import { isStringArray, rangeNumber } from '@/helpers/util'
-import { popupEmits, popupProps, usePopup } from '@/hooks/popup'
-import { ImageOnLoadPayLoad } from '../Image/types'
+import { usePopup } from '@/popup/use-popup'
+import { popupEmits, popupProps } from '@/popup/popup'
+import type { ImageOnLoadPayLoad } from '../Image/types'
 
 interface ImageObject {
   src: string

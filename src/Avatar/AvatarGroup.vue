@@ -19,11 +19,11 @@
 <script lang="ts">
 import { computed, defineComponent, provide, PropType } from 'vue'
 import Avatar from '@/Avatar'
-import { useGroup } from '@/hooks/group'
-import { avatarProps } from '@/Avatar/util'
+import { useGroup } from '@/hooks/use-group'
+import { avatarProps } from '@/Avatar/avatar'
 import { simpleNumber } from '@/helpers/util'
-import { COlOR_STYLES } from '@/hooks/constants'
-import { ColorStyle } from '../hooks/types'
+import { COlOR_STYLES } from '@/helpers/constants'
+import type { ColorStyle } from '../helpers/types'
 import { createEnumsValidator } from '@/helpers/validator'
 
 export default defineComponent({

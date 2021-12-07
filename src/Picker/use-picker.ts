@@ -1,40 +1,288 @@
-import { computed, reactive, ref, watch } from 'vue'
-import { isArray, cloneData, isSameArray, isFunction } from '@/helpers/util'
+import { onMounted, reactive, ref, watch, computed } from 'vue'
 import {
-  validateValues,
-  getFormatOptions,
-  getColRows,
-  updateArray,
-  defaultValueParser,
-  getHookValue,
-  cloneDetail
-} from '@/Picker/util'
-import {
+  isArray,
+  cloneData,
+  isSameArray,
+  isEmpty,
+  isFunction
+} from '@/helpers/util'
+import type {
   ColRow,
   Labels,
   OptionItem,
   Values,
   ExtraData,
   OptionsHandler,
-  PickerHandlers,
   DetailObject,
+  PickerHandlers,
   ValueFormatter,
-  HandleType
+  HandleType,
+  DetailHook
 } from './types'
-import { UseProps, UseCtx } from '../hooks/types'
-import { Noop } from '../helpers/types'
-
-export const viewEmits = ['change', 'update:modelValue']
+import type { AnyObject, Noop } from '../helpers/types'
+import {
+  cloneDetail,
+  getDefaultDetail,
+  getHookValue,
+  validateValues,
+  getFormatOptions,
+  getColRows,
+  updateArray,
+  defaultValueParser
+} from '@/Picker/util'
+import type { UseProps, UseCtx, UseEmit } from '../hooks/types'
+import type { PopupCustomConfirm } from '../popup/types'
+import { useFormItem } from '@/Form/use-form'
 
 interface UseOptions {
+  name: string
+}
+
+export function usePicker(
+  props: UseProps,
+  ctx: UseCtx,
+  { name }: UseOptions,
+  handlers: PickerHandlers
+) {
+  const { emit } = ctx
+  const isInitPopup = ref(false)
+  const popupVisible = ref(true)
+  const formValueString = ref('')
+  const formLabelString = ref('')
+  const formLabel = reactive<Labels>([])
+  const formValue = reactive<Values>([])
+  const popup = ref()
+
+  let detail = getDefaultDetail()
+  const separator: string = props.initialSeparator
+  // const defaultDetail = getDefaultDetail()
+  const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
+
+  const { formName, validateAfterEventTrigger, hookFormValue, root } =
+    useFormItem(props, ctx, {
+      formValue,
+      hookFormValue: () =>
+        handlers.valueHook
+          ? handlers.valueHook(cloneData(formValue))
+          : props.formatString
+          ? formValueString.value
+          : cloneData(formValue),
+      hookResetValue: () => updateValue(cloneData(defaultValue)).value
+    })
+
+  const format2String = (array: Values, type: HandleType = 'value') => {
+    return handlers.valueFormatter
+      ? handlers.valueFormatter(array, type)
+      : array.join(separator)
+  }
+
+  function updateValue(val: unknown) {
+    if (popup.value) {
+      const popupDetail: DetailObject = popup.value.updateValue(val)
+
+      return updateDetail(
+        isEmpty(val) && val !== 0 ? getDefaultDetail() : popupDetail
+      )
+    }
+
+    const values = handlers.valueParser
+      ? handlers.valueParser(val, 'value')
+      : defaultValueParser(val, separator)
+
+    if (!(values instanceof Error)) {
+      const { options, isCascade } = getFormatOptions(
+        props.options || [],
+        props.fieldNames || {},
+        optionsHandler,
+        name === 'cascader'
+      )
+
+      if (!isSameArray(values, formValue)) {
+        const { value, label, valid, extraData } = validateValues(
+          values,
+          options,
+          isCascade,
+          optionsHandler
+        )
+
+        if (valid) {
+          return updateDetail({
+            value,
+            label,
+            extraData,
+            valueString: format2String(value, 'value'),
+            labelString: format2String(label, 'label')
+          })
+        }
+      }
+    }
+
+    return getDetail()
+  }
+
+  function updateDetail(newDetail: DetailObject) {
+    if (!isSameArray(newDetail.value, formValue)) {
+      emit('value-change', detailHook(newDetail), detailHook(detail))
+    }
+
+    detail = newDetail
+    updateArray(formValue, newDetail.value)
+    updateArray(formLabel, newDetail.label)
+    formValueString.value = newDetail.valueString
+    formLabelString.value = newDetail.labelString
+
+    return getDetail()
+  }
+
+  function onFieldClick() {
+    if (!props.disabled) {
+      if (!isInitPopup.value) {
+        isInitPopup.value = true
+      } else {
+        popupVisible.value = true
+      }
+    }
+  }
+
+  const detailHook: DetailHook = detail => {
+    return handlers.detailHook ? handlers.detailHook(detail) : cloneData(detail)
+  }
+
+  function getDetail(): DetailObject {
+    return cloneData(detail)
+  }
+
+  function onChange(detail: DetailObject) {
+    updateDetail(detail)
+
+    emit('update:modelValue', hookFormValue())
+    emit('change', detailHook(detail))
+
+    validateAfterEventTrigger('change', hookFormValue())
+  }
+
+  watch(
+    [() => props.modelValue, () => props.options],
+    () => updateValue(props.modelValue),
+    {
+      immediate: true
+    }
+  )
+
+  const defaultValue = getDetail().value
+
+  return {
+    root,
+    popup,
+    formName,
+    isInitPopup,
+    popupVisible,
+    formValueString,
+    formLabelString,
+    updateValue,
+    onFieldClick,
+    onChange,
+    hookFormValue,
+    validateAfterEventTrigger,
+    defaultValue
+  }
+}
+
+export function usePickerPopup(
+  props: UseProps,
+  {
+    emit,
+    customConfirm,
+    onCancelClick
+  }: {
+    emit: UseEmit
+    customConfirm: PopupCustomConfirm
+    onCancelClick: Noop
+  },
+  handlers: PickerHandlers
+) {
+  const view = ref()
+
+  let detail = getDefaultDetail()
+
+  function beforeConfirm() {
+    const newDetail = view.value?.getDetail() || getDefaultDetail()
+
+    if (!isSameArray(newDetail.value, detail.value)) {
+      detail = newDetail
+
+      // 跟picker-view不一样，改变数值时机是确定按钮
+      emit(
+        'update:modelValue',
+        getHookValue(detail, props.formatString || false, handlers.valueHook)
+      )
+      emit('change', detailHook(detail))
+    }
+
+    return detailHook(detail)
+  }
+
+  function onHeaderLeftClick() {
+    onCancelClick()
+  }
+
+  function onHeaderRightClick() {
+    customConfirm(beforeConfirm())
+  }
+
+  function detailHook(detail: DetailObject): AnyObject {
+    const newDetail = cloneDetail(detail)
+
+    return handlers.detailHook ? handlers.detailHook(newDetail) : newDetail
+  }
+
+  function getDetail() {
+    return cloneDetail(detail)
+  }
+
+  function updateValue(val: unknown) {
+    view.value && (detail = view.value.updateValue(val))
+
+    return getDetail()
+  }
+
+  watch(
+    () => props.modelValue,
+    val => updateValue(val),
+    {
+      immediate: true
+    }
+  )
+
+  watch(
+    () => props.visible,
+    val => val && view.value?.updatePos()
+  )
+
+  onMounted(
+    () =>
+      (!isEmpty(props.modelValue) || props.modelValue === 0) &&
+      updateValue(props.modelValue)
+  )
+
+  return {
+    view,
+    updateValue,
+    getDetail,
+    onHeaderLeftClick,
+    onHeaderRightClick
+  }
+}
+
+interface ViewUseOptions {
   name: 'cascader' | 'picker'
   afterUpdate: Noop
 }
 
-export function useView(
+export function usePickerView(
   props: UseProps,
   { emit }: UseCtx,
-  { name, afterUpdate }: UseOptions,
+  { name, afterUpdate }: ViewUseOptions,
   handlers: PickerHandlers
 ) {
   const separator: string = props.initialSeparator

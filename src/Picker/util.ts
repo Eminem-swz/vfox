@@ -1,4 +1,4 @@
-import {
+import type {
   OptionItem,
   UserOptionItem,
   UserFieldNames,
@@ -9,7 +9,7 @@ import {
   FieldNames,
   OptionsHandler,
   ValueHook
-} from '../Picker/types'
+} from './types'
 import {
   cloneData,
   isArray,
@@ -20,7 +20,7 @@ import {
   isStringNumberMixArray
 } from '@/helpers/util'
 import Exception from '@/helpers/exception'
-import { AnyObject } from '../helpers/types'
+import type { AnyObject } from '../helpers/types'
 
 export function getColRows(options: OptionItem[], indexes: number[]) {
   const rows: ColRow[] = []

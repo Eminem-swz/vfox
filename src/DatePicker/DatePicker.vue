@@ -31,9 +31,11 @@
 import { defineComponent } from 'vue'
 import PickerInput from '@/PickerInput'
 import PickerPopup from '@/PickerPopup'
-import { formItemEmits, formItemProps } from '@/hooks/form'
-import { usePicker, pickerEmits, pickerProps } from '@/Picker/picker'
-import { datePickerProps, useDatePicker } from '@/DatePicker/date-picker'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { pickerEmits, pickerProps } from '@/Picker/picker'
+import { usePicker } from '@/Picker/use-picker'
+import { datePickerProps } from '@/DatePicker/date-picker'
+import { useDatePicker } from '@/DatePicker/use-date-picker'
 
 export default defineComponent({
   name: 'fx-date-picker',

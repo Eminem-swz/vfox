@@ -46,11 +46,8 @@ import { defineComponent } from 'vue'
 import FxButton from '@/Button'
 import ButtonGroup from '@/ButtonGroup'
 import Modal from '@/Modal'
-import {
-  usePopupExtend,
-  popupExtendEmits,
-  popupExtendProps
-} from '@/hooks/popup'
+import { usePopupExtend } from '@/popup/use-popup'
+import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 
 export default defineComponent({
   name: 'fx-dialog',

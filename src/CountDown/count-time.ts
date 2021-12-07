@@ -1,13 +1,5 @@
-import { Noop } from '../helpers/types'
-import { cloneData, thousands } from '@/helpers/util'
-import { onBeforeUnmount, reactive } from 'vue'
+import { thousands } from '@/helpers/util'
 import { CountTime } from './types'
-
-interface StepHandlers {
-  update: (time: number) => void
-  start: Noop
-  stop: Noop
-}
 
 function formatNumber(num: number) {
   return (num > 9 ? '' : '0') + num
@@ -18,7 +10,7 @@ function cutOne(num: number, divisor: number) {
 }
 
 export function getDefaultCountTime(): CountTime {
-  return cloneData({
+  return {
     time: 0,
     days: '0',
     fullHours: '0',
@@ -27,10 +19,10 @@ export function getDefaultCountTime(): CountTime {
     minutes: '00',
     seconds: '00',
     milliseconds: '000'
-  })
+  }
 }
 
-export function getCountTime(time: number) {
+export function getCountTime(time: number): CountTime {
   const times = getDefaultCountTime()
 
   times.time = time
@@ -46,34 +38,4 @@ export function getCountTime(time: number) {
   times.days = cutOne(time, 24).toString()
 
   return times
-}
-
-export function useCountTime(onStep: (handlers: StepHandlers) => void) {
-  const times = reactive<CountTime>(getDefaultCountTime())
-
-  function update(time: number) {
-    Object.assign(times, getCountTime(time))
-  }
-
-  let timer: number
-
-  function start() {
-    timer = requestAnimationFrame(() => {
-      start()
-      onStep({ update, start, stop })
-    })
-  }
-
-  function stop() {
-    cancelAnimationFrame(timer)
-  }
-
-  onBeforeUnmount(stop)
-
-  return {
-    times,
-    start,
-    stop,
-    update
-  }
 }

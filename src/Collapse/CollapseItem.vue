@@ -31,7 +31,7 @@ import {
 } from 'vue'
 import Cell from '@/Cell'
 import { iconValidator } from '@/helpers/validator'
-import { useGroupItem } from '@/hooks/group'
+import { useGroupItem } from '@/hooks/use-group'
 import Exception from '@/helpers/exception'
 
 export default defineComponent({

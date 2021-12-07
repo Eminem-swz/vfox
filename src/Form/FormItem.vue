@@ -20,15 +20,16 @@
 import { defineComponent, inject, PropType, provide, ref } from 'vue'
 import Schema from 'async-validator'
 import { isArray, isBoolean, isNumber } from '@/helpers/util'
-import { FormItemProvide, FormValue } from '../hooks/types'
-import {
+import type {
   FormRuleValidate,
   FormRuleItem,
   FormRules,
   FormGroupItemOut,
-  FormRuleType
+  FormRuleType,
+  FormItemProvide,
+  FormValue
 } from './types'
-import { useGroupItem } from '@/hooks/group'
+import { useGroupItem } from '@/hooks/use-group'
 
 export default defineComponent({
   name: 'fx-form-item',

@@ -1,10 +1,10 @@
 import { App } from 'vue'
 import { SFCWithInstall } from '@/helpers/types'
 import Popover from './Popover.vue'
-import { ApiFnOptions } from '../apis/types'
+import type { ApiFnOptions } from '../apis/types'
 import { createAlertHook, showPopup } from '@/apis/Popup'
-import { DomSelector } from '../helpers/types'
-import { PlacementType } from '../hooks/types'
+import type { DomSelector } from '../helpers/types'
+import type { PlacementType } from '../helpers/types'
 
 type ShowPopoverOptions = {
   selector: DomSelector

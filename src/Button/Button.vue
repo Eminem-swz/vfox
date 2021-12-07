@@ -33,19 +33,11 @@ import {
   PropType,
   ComponentInternalInstance
 } from 'vue'
-import {
-  SIZE_TYPES,
-  BUTTON_PATTERN_TYPES,
-  BUTTON_SHAPE_TYPES,
-  STATE_TYPES
-} from '@/hooks/constants'
-import type {
-  SizeType,
-  ButtonPatternType,
-  ButtonShapeType,
-  StateType
-} from '../hooks/types'
-import { useGroupItem } from '@/hooks/group'
+import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
+import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
+import type { SizeType, StateType } from '../helpers/types'
+import type { ButtonPatternType, ButtonShapeType } from './types'
+import { useGroupItem } from '@/hooks/use-group'
 
 const FORM_TYPES = ['button', 'submit', 'reset']
 type FormTypes = 'button' | 'submit' | 'reset'

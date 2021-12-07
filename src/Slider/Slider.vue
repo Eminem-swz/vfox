@@ -28,8 +28,10 @@
 <script lang="ts">
 import { ref, defineComponent, watch, nextTick } from 'vue'
 import { isNumeric } from '@/helpers/util'
-import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
-import { slideProps, slideEmits, useSlide } from '@/Slider/slide'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useFormItem } from '@/Form/use-form'
+import { slideProps, slideEmits } from '@/Slider/slide'
+import { useSlide } from '@/Slider/use-slide'
 
 export default defineComponent({
   name: 'fx-slider',
@@ -48,14 +50,10 @@ export default defineComponent({
     const formValue = ref(0)
     const { emit } = ctx
 
-    const {
-      formName,
-      validateAfterEventTrigger,
-      hookFormValue,
-      eventEmit
-    } = useFormItem<number>(props, ctx, {
-      formValue
-    })
+    const { formName, validateAfterEventTrigger, hookFormValue, eventEmit } =
+      useFormItem<number>(props, ctx, {
+        formValue
+      })
 
     const { slider, toInteger, rangeValue, value2Progress } = useSlide(props, {
       getValue() {

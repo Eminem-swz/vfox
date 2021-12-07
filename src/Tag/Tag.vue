@@ -20,10 +20,13 @@
 import { computed, defineComponent, PropType, ref } from 'vue'
 import Icon from '@/Icon'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { SIZE_TYPES, STATE_TYPES, TAG_PATTERN_TYPES } from '@/hooks/constants'
-import { useLongPress } from '@/hooks/long-press'
+import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
+import { useLongPress } from '@/hooks/use-long-press'
 import { noop } from '@/helpers/util'
-import { SizeType, StateType, TagPatternType } from '../hooks/types'
+import type { SizeType, StateType } from '../helpers/types'
+
+type TagPatternType = 'light' | 'dark' | 'plain'
+const TAG_PATTERN_TYPES: TagPatternType[] = ['light', 'dark', 'plain']
 
 export default defineComponent({
   name: 'fx-tag',

@@ -27,7 +27,8 @@
 import { defineComponent, computed, onBeforeUnmount, PropType } from 'vue'
 import Icon from '@/Icon'
 import ActivityIndicator from '@/ActivityIndicator'
-import { popupEmits, popupProps, usePopup } from '@/hooks/popup'
+import { usePopup } from '@/popup/use-popup'
+import { popupEmits, popupProps } from '@/popup/popup'
 import { isUndefined } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
 

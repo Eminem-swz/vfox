@@ -39,10 +39,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { popoverProps, popoverEmits, usePopover } from '@/hooks/popover'
+import { usePopover } from '@/Popover/use-popover'
+import { popoverProps, popoverEmits } from '@/Popover/popover'
 import Icon from '@/Icon'
 import { isArray, isObject } from '@/helpers/util'
-import { OptionItem } from './types'
+import type { OptionItem } from './types'
 
 export default defineComponent({
   name: 'fx-pop-menu',

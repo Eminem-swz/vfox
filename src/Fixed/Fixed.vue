@@ -28,13 +28,12 @@ import {
 } from 'vue'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { capitalize } from '@/helpers/util'
-import { PLACEMENT_TYPES } from '@/hooks/constants'
-import { PlacementType } from '../hooks/types'
-import { useResizeDetector } from '@/hooks/resize-detector'
-import { useSafeAreaInsets } from '@/hooks/safe-area-insets'
-import { StyleObject } from '../helpers/types'
-import { useFixed } from '@/hooks/fixed'
+import { PLACEMENT_TYPES } from '@/helpers/constants'
+import type { PlacementType, StyleObject } from '../helpers/types'
+import { useResizeDetector } from '@/hooks/use-resize-detector'
+import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
 import { addClassName, removeClassName } from '@/helpers/dom'
+import { useFixed } from '@/hooks/use-fixed'
 
 export default defineComponent({
   name: 'fx-fixed',

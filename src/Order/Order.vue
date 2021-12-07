@@ -59,11 +59,11 @@ import {
 import Icon from '@/Icon'
 import Drawer from '@/Drawer'
 import { isArray, isStringNumberMix, rangeNumber } from '@/helpers/util'
-import { DataObject, Noop } from '../helpers/types'
-import { useTouch } from '@/hooks/touch'
+import type { DataObject, Noop } from '../helpers/types'
+import { useTouch } from '@/hooks/use-touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import { cloneData } from '@/helpers/util'
-import { PopupVisibleStateChangeArgs } from '../hooks/types'
+import type { PopupVisibleStateChangeArgs } from '../popup/types'
 
 type Item = {
   id: string | number

@@ -64,8 +64,8 @@ import {
   isString,
   isStringArray
 } from '@/helpers/util'
-import { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
-import { useTouch } from '@/hooks/touch'
+import type { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
+import { useTouch } from '@/hooks/use-touch'
 
 enum ScrollState {
   Center,

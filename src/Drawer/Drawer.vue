@@ -37,11 +37,12 @@
 <script lang="ts">
 import { defineComponent, computed, toRef, PropType, watch } from 'vue'
 import NavBar from '@/NavBar'
-import { popupEmits, popupProps, usePopup } from '@/hooks/popup'
-import { useSafeAreaInsets } from '@/hooks/safe-area-insets'
+import { usePopup } from '@/popup/use-popup'
+import { popupEmits, popupProps } from '@/popup/popup'
+import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { PLACEMENT_TYPES } from '@/hooks/constants'
-import { PlacementType } from '../hooks/types'
+import { PLACEMENT_TYPES } from '@/helpers/constants'
+import type { PlacementType } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-drawer',

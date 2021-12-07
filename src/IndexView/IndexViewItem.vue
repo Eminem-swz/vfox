@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent, inject, onMounted, onUnmounted } from 'vue'
 import Group from '@/Group'
-import { createUpdateInItem } from '@/hooks/list'
+import { createUpdateInItem } from '@/hooks/use-list'
 
 export default defineComponent({
   name: 'fx-index-view-item',

@@ -37,14 +37,14 @@ import Icon from '@/Icon'
 import Badge from '@/Badge'
 import FxImage from '@/Image'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { AVATAR_SHAPE_TYPES, COlOR_STYLES } from '@/hooks/constants'
-import { AvatarShapeType, ColorStyle } from '../hooks/types'
-import { useGroupItem } from '@/hooks/group'
-import { getAvatarSize, avatarProps } from '@/Avatar/util'
+import { COlOR_STYLES } from '@/helpers/constants'
+import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '@/Avatar/avatar'
+import type { AvatarShapeType } from './types'
+import { useGroupItem } from '@/hooks/use-group'
 import { isNumber, inArray } from '@/helpers/util'
-import { StyleObject } from '../helpers/types'
-import { handleBadge } from '@/Badge/util'
-import { BadgeOptions } from '../Badge/types'
+import type { ColorStyle, StyleObject } from '../helpers/types'
+import { handleBadge } from '@/Badge/badge'
+import type { BadgeOptions } from '../Badge/types'
 
 type Gender = 'man' | 'woman'
 const GenderNames = ['woman', 'man']
@@ -118,7 +118,7 @@ export default defineComponent({
     })
 
     const badge2 = computed(() => {
-      let badge: Partial<BadgeOptions>
+      let badge: BadgeOptions
 
       if (inArray(props.gender, GenderNames)) {
         badge = {

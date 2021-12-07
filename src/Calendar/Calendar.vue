@@ -36,20 +36,21 @@ import {
   getDetail as _getDetail,
   isSameDateArray,
   MODE_NAMES,
-  parseValues
-} from '@/Calendar/util'
+  parseValues,
+  commonProps
+} from '@/Calendar/calendar'
 import { isFunction, isUndefined } from '@/helpers/util'
 import dayjs from '@/helpers/day'
-import calendarCommonProps from '@/Calendar/props'
-import { formItemEmits, formItemProps, useFormItem } from '@/hooks/form'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useFormItem } from '@/Form/use-form'
 import { getEnumsValue } from '@/helpers/validator'
-import { DetailObject } from './types'
+import type { DetailObject } from './types'
 
 export default defineComponent({
   name: 'fx-calendar',
   components: { PickerInput, CalendarPopup },
   props: {
-    ...calendarCommonProps,
+    ...commonProps,
     ...formItemProps,
     placeholder: {
       type: String,

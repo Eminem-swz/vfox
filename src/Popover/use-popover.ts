@@ -1,15 +1,11 @@
-import { computed, PropType, ref, nextTick, watch } from 'vue'
+import { computed, ref, nextTick, watch } from 'vue'
 import { cloneData } from '@/helpers/util'
-import {
-  selectorValidator,
-  createEnumsValidator,
-  getEnumsValue
-} from '@/helpers/validator'
+import { getEnumsValue } from '@/helpers/validator'
 import { querySelector } from '@/helpers/dom'
-import { PLACEMENT_TYPES } from '@/hooks/constants'
-import { PlacementType, UseProps, UseCtx } from '../hooks/types'
-import { usePopup, popupProps, popupEmits } from '@/hooks/popup'
-import { StyleObject } from '../helpers/types'
+import { PLACEMENT_TYPES } from '@/helpers/constants'
+import type { UseProps, UseCtx } from '../hooks/types'
+import { usePopup } from '@/popup/use-popup'
+import type { StyleObject } from '../helpers/types'
 
 type PopoverPos = {
   t: number | null
@@ -36,26 +32,6 @@ const DEFAULT_POS: PopoverPos = {
   mw: 0,
   mh: 0
 }
-
-export const popoverProps = {
-  ...popupProps,
-  selector: {
-    type: String as PropType<string | HTMLElement>,
-    validator: selectorValidator,
-    required: true
-  },
-  placement: {
-    type: String as PropType<PlacementType>,
-    validator: createEnumsValidator(PLACEMENT_TYPES),
-    default: getEnumsValue(PLACEMENT_TYPES)
-  },
-  showMask: {
-    type: Boolean,
-    default: true
-  }
-}
-
-export const popoverEmits = [...popupEmits]
 
 export function usePopover(props: UseProps, ctx: UseCtx) {
   const padding = 8

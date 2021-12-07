@@ -8,10 +8,10 @@
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import { isDate, isString, isNumber } from '@/helpers/util'
 import dayjs from '@/helpers/day'
-import { Dayjs } from 'dayjs'
+import type { Dayjs } from 'dayjs'
 import { format } from 'timeago.js'
 import { addTimer } from '@/helpers/timer'
-import { Noop } from '../helpers/types'
+import type { Noop } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-time-ago',

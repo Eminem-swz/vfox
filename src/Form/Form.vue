@@ -7,10 +7,10 @@
 <script lang="ts">
 import { defineComponent, PropType, provide } from 'vue'
 import { inArray, isArray, isUndefined } from '@/helpers/util'
-import { useGroup } from '@/hooks/group'
+import { useGroup } from '@/hooks/use-group'
 import { DataObject } from '../helpers/types'
-import { FormInputElement, EmitObject } from '../hooks/types'
-import { FormRules, FormGroupItemOut } from './types'
+import type { EmitObject } from '../hooks/types'
+import type { FormRules, FormGroupItemOut, FormInputElement } from './types'
 
 export default defineComponent({
   name: 'fx-form',

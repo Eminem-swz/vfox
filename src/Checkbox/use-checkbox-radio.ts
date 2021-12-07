@@ -1,4 +1,4 @@
-import { useFormItem } from '@/hooks/form'
+import { useFormItem } from '@/Form/use-form'
 import {
   computed,
   onMounted,
@@ -12,8 +12,10 @@ import {
   isRef
 } from 'vue'
 import { capitalize, cloneData, inArray } from '@/helpers/util'
-import { useGroup, useGroupItem } from '@/hooks/group'
-import { HookFormValue, UseProps, UseCtx } from './types'
+import { useGroup, useGroupItem } from '@/hooks/use-group'
+import type { UseProps, UseCtx } from '../hooks/types'
+import type { HookFormValue } from '../Form/types'
+import type { ModelValue } from './types'
 
 interface Options {
   formName: string
@@ -27,8 +29,6 @@ interface GroupItem {
   getValue: () => number | string
   setChecked: (checked: boolean) => void
 }
-
-export const checkboxOrRadioEmits = ['update:checked', 'change']
 
 export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
   const instance = getCurrentInstance() as ComponentInternalInstance
@@ -121,8 +121,6 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
     onChange
   }
 }
-
-export type ModelValue = number | string
 
 interface UpdateValueOptions {
   isChange: boolean

@@ -10,16 +10,15 @@
 import { defineComponent, computed, ref, onMounted, inject, watch } from 'vue'
 import { widgetZIndex } from '@/helpers/layer'
 import { selectorValidator, sizeValidator } from '@/helpers/validator'
-import { useScrollEvent } from '@/hooks/scroll'
-import { OnScrollCallback } from '../hooks/types'
+import { useScrollEvent } from '@/hooks/use-scroll'
 import {
   getRelativeOffset,
   getScrollDom,
   getSizeValue,
   querySelector
 } from '@/helpers/dom'
-import { Noop, StyleObject } from '../helpers/types'
-import { useFixed } from '@/hooks/fixed'
+import type { Noop, StyleObject } from '../helpers/types'
+import { useFixed } from '@/hooks/use-fixed'
 
 export default defineComponent({
   name: 'fx-sticky',
@@ -62,10 +61,6 @@ export default defineComponent({
       inner: content,
       fixed
     })
-
-    const onScroll: OnScrollCallback = (e: Event, { scrollTop }) => {
-      updateFixed(scrollTop)
-    }
 
     function updateFixed(scrollTop: number | null) {
       if (!root.value || !$container) {
@@ -130,7 +125,9 @@ export default defineComponent({
       scrollOff && scrollOff()
       $container = querySelector(containSelector) || document.documentElement
 
-      scrollOff = useScrollEvent($container, onScroll)
+      scrollOff = useScrollEvent($container, (e: Event, { scrollTop }) => {
+        updateFixed(scrollTop)
+      })
 
       updateFixed(null)
     }

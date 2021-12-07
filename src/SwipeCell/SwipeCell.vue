@@ -43,11 +43,11 @@ import {
   rangeNumber,
   noop
 } from '@/helpers/util'
-import { STATE_TYPES } from '@/hooks/constants'
-import { StateType } from '../hooks/types'
-import { useTouch } from '@/hooks/touch'
+import { STATE_TYPES } from '@/helpers/constants'
+import type { StateType } from '../helpers/types'
+import { useTouch } from '@/hooks/use-touch'
 import { getStretchOffset } from '@/helpers/animation'
-import { useBlur } from '@/hooks/blur'
+import { useBlur } from '@/hooks/use-blur'
 
 interface ButtonOptions {
   text: string

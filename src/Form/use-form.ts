@@ -9,32 +9,18 @@ import {
   isRef
 } from 'vue'
 import { cloneData, isArray, isSameArray } from '@/helpers/util'
-import {
+import type { UseProps, UseCtx } from '../hooks/types'
+import type {
+  FormValue,
   FormItemProvide,
   HookFormValue,
-  FormInputElement,
-  UseProps,
-  UseCtx,
-  FormValue
+  FormInputElement
 } from './types'
 
 interface UseOptions<T extends FormValue> {
   hookFormValue?: HookFormValue<T>
   formValue: Ref<T> | Array<T>
   hookResetValue?: (input: HTMLInputElement) => T | T[]
-}
-
-export const formItemEmits = ['update:modelValue', 'change', 'reset']
-
-export const formItemProps = {
-  name: {
-    type: String,
-    default: ''
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  }
 }
 
 export function useFormItem<T extends FormValue = string>(

@@ -1,5 +1,5 @@
 import { computed, inject, provide, ref, toRef } from 'vue'
-import { useList, useListItem } from '@/hooks/list'
+import { useList, useListItem } from '@/hooks/use-list'
 import { capitalize } from '@/helpers/util'
 import { UseProps, UseCtx } from '../hooks/types'
 

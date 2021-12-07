@@ -11,9 +11,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import PickerView from '@/PickerView'
-import { viewEmits } from '@/Picker/view'
-import { datePickerProps, useDatePicker } from '@/DatePicker/date-picker'
-import { ChangeArgs, DateDetailObject } from './types'
+import { pickerViewEmits } from '@/Picker/picker'
+import { datePickerProps } from '@/DatePicker/date-picker'
+import { useDatePicker } from '@/DatePicker/use-date-picker'
+import type { ChangeArgs, DateDetailObject } from './types'
 
 export default defineComponent({
   name: 'fx-date-picker-view',
@@ -21,7 +22,7 @@ export default defineComponent({
   props: {
     ...datePickerProps
   },
-  emits: [...viewEmits],
+  emits: [...pickerViewEmits],
   setup(props, ctx) {
     const { emit } = ctx
     const { handlers } = useDatePicker(props)

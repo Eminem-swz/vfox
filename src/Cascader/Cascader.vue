@@ -35,9 +35,9 @@
 import { defineComponent } from 'vue'
 import CascaderPopup from '@/CascaderPopup'
 import PickerInput from '@/PickerInput'
-import { formItemEmits, formItemProps } from '@/hooks/form'
-import { usePicker, pickerEmits, pickerProps } from '@/Picker/picker'
-import { commonProps } from '@/Picker/props'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { pickerEmits, pickerProps, commonProps } from '@/Picker/picker'
+import { usePicker } from '@/Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-cascader',

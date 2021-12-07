@@ -8,7 +8,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { createEnumsValidator } from '@/helpers/validator'
-import { BUTTON_SHAPE_NAMES, useSubSkeleton } from '@/Skeleton/skeleton'
+import { BUTTON_SHAPE_NAMES } from '@/Skeleton/skeleton'
+import { useSubSkeleton } from '@/Skeleton/use-skeleton'
 import { ButtonShapeNames } from './types'
 
 export default defineComponent({

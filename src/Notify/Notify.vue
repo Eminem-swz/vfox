@@ -24,9 +24,10 @@
 <script lang="ts">
 import NoticeBar from '@/NoticeBar'
 import { defineComponent, onBeforeUnmount, PropType } from 'vue'
-import { popupEmits, popupProps, usePopup } from '@/hooks/popup'
+import { usePopup } from '@/popup/use-popup'
+import { popupEmits, popupProps } from '@/popup/popup'
 import { iconValidator } from '@/helpers/validator'
-import { StateType } from '../hooks/types'
+import type { StateType } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-notify',

@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, watch } from 'vue'
-import { useCountTime } from '@/hooks/count-time'
+import { useCountTime } from '@/CountDown/use-count-time'
 
 export default defineComponent({
   name: 'fx-count-down',

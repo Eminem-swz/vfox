@@ -2,7 +2,15 @@ import { onBeforeUnmount } from 'vue'
 import { getScrollDom } from '@/helpers/dom'
 import { addEvent, removeEvent } from '@/helpers/events'
 import { FxEventElement, FxEventCallback } from '../helpers/types'
-import { OnScrollCallback } from './types'
+
+interface OnScrollCallback {
+  (
+    e: Event,
+    res: {
+      scrollTop: number
+    }
+  ): void
+}
 
 export function useScrollEvent(
   $el: FxEventElement,

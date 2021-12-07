@@ -27,14 +27,5 @@ module.exports = {
   // testMatch: ['**/tests/unit/**/*.spec.[jt]s?(x)', '**/__tests__/*.[jt]s?(x)'],
   testMatch: ['**/examples/**/*.spec.[jt]s?(x)'],
   // https://github.com/facebook/jest/issues/6766
-  testURL: 'http://localhost/',
-  reporters: [
-    'default',
-    [
-      './node_modules/jest-html-reporter',
-      {
-        pageTitle: 'Test Report'
-      }
-    ]
-  ]
+  testURL: 'http://localhost/'
 }

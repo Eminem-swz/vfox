@@ -78,7 +78,7 @@ import {
 import ScrollView from '@/ScrollView'
 import Exception from '@/helpers/exception'
 import { getRelativeOffset } from '@/helpers/dom'
-import { useResizeDetector } from '@/hooks/resize-detector'
+import { useResizeDetector } from '@/hooks/use-resize-detector'
 import type {
   Noop,
   ScrollToIndexOptions,

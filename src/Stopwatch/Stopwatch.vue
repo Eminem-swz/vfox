@@ -23,8 +23,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { CountTime } from '../hooks/types'
-import { useCountTime, getCountTime } from '@/hooks/count-time'
+import type { CountTime } from '../CountDown/types'
+import { getCountTime } from '@/CountDown/count-time'
+import { useCountTime } from '@/CountDown/use-count-time'
 import { cloneData } from '@/helpers/util'
 
 export default defineComponent({

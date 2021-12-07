@@ -4,7 +4,7 @@ import PopDialog from '../Popover/PopDialog.vue'
 import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 import { DomSelector } from '../helpers/types'
-import { PlacementType } from '../hooks/types'
+import { PlacementType } from '../helpers/types'
 
 type ShowPopDialogOptions = {
   selector: DomSelector

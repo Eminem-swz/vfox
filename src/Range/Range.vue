@@ -50,8 +50,10 @@ import {
   computed
 } from 'vue'
 import { cloneData, isNumberArray, isSameArray, isString } from '@/helpers/util'
-import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
-import { slideProps, slideEmits, useSlide } from '@/Slider/slide'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useFormItem } from '@/Form/use-form'
+import { slideProps, slideEmits } from '@/Slider/slide'
+import { useSlide } from '@/Slider/use-slide'
 
 export default defineComponent({
   name: 'fx-range',
@@ -74,57 +76,48 @@ export default defineComponent({
     const formValue = reactive<number[]>([0, 0])
     const { emit } = ctx
 
-    const {
-      formName,
-      validateAfterEventTrigger,
-      hookFormValue,
-      eventEmit
-    } = useFormItem<number>(props, ctx, {
-      formValue,
-      hookFormValue() {
-        return valueHandler(formValue)
-      }
-    })
+    const { formName, validateAfterEventTrigger, hookFormValue, eventEmit } =
+      useFormItem<number>(props, ctx, {
+        formValue,
+        hookFormValue() {
+          return valueHandler(formValue)
+        }
+      })
 
-    const {
-      slider,
-      toInteger,
-      rangeValue,
-      value2Progress,
-      getMinMax
-    } = useSlide(props, {
-      getValue($target) {
-        const { thumb, index } = $target.dataset
+    const { slider, toInteger, rangeValue, value2Progress, getMinMax } =
+      useSlide(props, {
+        getValue($target) {
+          const { thumb, index } = $target.dataset
 
-        return thumb ? formValue[parseInt(index as string)] : 0
-      },
-      move({ value: newVal, progress: newProgress, $target }) {
-        const { thumb } = $target.dataset
-        let index = 0
+          return thumb ? formValue[parseInt(index as string)] : 0
+        },
+        move({ value: newVal, progress: newProgress, $target }) {
+          const { thumb } = $target.dataset
+          let index = 0
 
-        if (thumb) {
-          index = parseInt($target.dataset.index as string)
-        } else {
-          if (
-            Math.abs(formValue[0] - newVal) > Math.abs(formValue[1] - newVal)
-          ) {
-            index = 1
+          if (thumb) {
+            index = parseInt($target.dataset.index as string)
+          } else {
+            if (
+              Math.abs(formValue[0] - newVal) > Math.abs(formValue[1] - newVal)
+            ) {
+              index = 1
+            }
           }
-        }
-        if (!props.allowSameValue && newVal === formValue[1 - index]) {
-          // 不允许重叠
-        } else {
-          formValue[index] = newVal
-          progress[index] = newProgress
+          if (!props.allowSameValue && newVal === formValue[1 - index]) {
+            // 不允许重叠
+          } else {
+            formValue[index] = newVal
+            progress[index] = newProgress
 
-          inputModel()
-          eventEmit('input')
+            inputModel()
+            eventEmit('input')
+          }
+        },
+        end({ isChange }) {
+          isChange && eventEmit('change')
         }
-      },
-      end({ isChange }) {
-        isChange && eventEmit('change')
-      }
-    })
+      })
 
     function valueHandler(val: unknown) {
       let newVal: number[] = []
@@ -193,9 +186,7 @@ export default defineComponent({
     })
 
     const formValueString = computed(() => {
-      return cloneData(formValue)
-        .sort(sortBy)
-        .join(',')
+      return cloneData(formValue).sort(sortBy).join(',')
     })
 
     const { min, max } = getMinMax()

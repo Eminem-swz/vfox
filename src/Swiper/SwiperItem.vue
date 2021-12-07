@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
-import { useListItem } from '@/hooks/list'
+import { useListItem } from '@/hooks/use-list'
 
 export default defineComponent({
   name: 'fx-swiper-item',

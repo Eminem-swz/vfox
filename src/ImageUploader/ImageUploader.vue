@@ -104,8 +104,9 @@ import {
   noop
 } from '@/helpers/util'
 import { formatFileSize } from '@/helpers/file'
-import { useFormItem, formItemEmits, formItemProps } from '@/hooks/form'
-import { ImageModes } from '../Image/types'
+import { formItemEmits, formItemProps } from '@/Form/form'
+import { useFormItem } from '@/Form/use-form'
+import type { ImageModes } from '../Image/types'
 
 type Accept = 'all' | 'png' | 'jpeg' | 'jpg' | 'webp'
 type UploadStatus = 'reading' | 'uploading' | 'uploaded' | 'failed'

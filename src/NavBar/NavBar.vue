@@ -82,7 +82,7 @@ import FxButton from '@/Button'
 import FxButtonGroup from '@/ButtonGroup'
 import { isArray, isString, isObject } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
-import { StateType } from '../hooks/types'
+import type { StateType } from '../helpers/types'
 
 interface ButtonOptions {
   text: string

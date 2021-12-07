@@ -1,10 +1,5 @@
-import { ComponentPublicInstance, onBeforeUnmount, onMounted, Ref } from 'vue'
-import { isElement } from '@/helpers/util'
 import { removeEl } from '@/helpers/dom'
-import { Noop } from '../helpers/types'
-
-type ResizeDetectorStopHandle = Noop
-type ResizeDetectorCallback = Noop
+import { Noop } from './types'
 
 /**
  * 监听元素大小变化
@@ -12,10 +7,7 @@ type ResizeDetectorCallback = Noop
  * @param callback 回调函数
  * @returns 终止监听方法
  */
-export function resizeDetector(
-  $el: HTMLElement,
-  callback: ResizeDetectorCallback
-): ResizeDetectorStopHandle {
+export function resizeDetector($el: HTMLElement, callback: Noop): Noop {
   // 监听
   const object = document.createElement('object') as any
   object.style.cssText =
@@ -41,23 +33,4 @@ export function resizeDetector(
     removeEl(object)
     $el.style.position = ''
   }
-}
-
-export function useResizeDetector(
-  ctx: Ref<ComponentPublicInstance | HTMLElement | undefined>,
-  callback: ResizeDetectorCallback
-) {
-  let stopHandle: ResizeDetectorStopHandle
-
-  onMounted(() => {
-    const $el: HTMLElement = isElement(ctx.value)
-      ? (ctx.value as HTMLElement)
-      : (ctx as Ref<ComponentPublicInstance>).value.$el
-
-    stopHandle = resizeDetector($el, callback)
-  })
-
-  onBeforeUnmount(() => stopHandle())
-
-  return {}
 }

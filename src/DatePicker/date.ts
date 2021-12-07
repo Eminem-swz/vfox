@@ -1,7 +1,7 @@
-import { ColRow, Values } from '../Picker/types'
-import { ColName, ModeName, OptionFilter } from './types'
+import type { ColRow, Values } from '../Picker/types'
+import type { ColName, ModeName, OptionFilter } from './types'
 import dayjs from '@/helpers/day'
-import { Dayjs } from 'dayjs'
+import type { Dayjs } from 'dayjs'
 
 export const MODE_NAMES: ModeName[] = [
   'date',

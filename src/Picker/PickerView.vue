@@ -32,8 +32,8 @@ import { defineComponent, nextTick, ref } from 'vue'
 import Empty from '@/Empty'
 import { frameTo } from '@/helpers/animation'
 import { hasClassName } from '@/helpers/dom'
-import { useView, viewEmits } from '@/Picker/view'
-import { commonProps } from '@/Picker/props'
+import { commonProps, pickerViewEmits } from '@/Picker/picker'
+import { usePickerView } from '@/Picker/use-picker'
 
 interface ScrollElement extends HTMLElement {
   scrolling?: boolean
@@ -53,7 +53,7 @@ export default defineComponent({
   //   // 需要立即同步好数据
   //   emit('update:modelValue', this.hookFormValue())
   // },
-  emits: viewEmits,
+  emits: [...pickerViewEmits],
   setup(props, ctx) {
     const root = ref<HTMLElement>()
 
@@ -70,7 +70,7 @@ export default defineComponent({
       getValuesByRow,
       updateValue,
       onChange
-    } = useView(
+    } = usePickerView(
       props,
       ctx,
       { name: 'picker', afterUpdate: updatePos },

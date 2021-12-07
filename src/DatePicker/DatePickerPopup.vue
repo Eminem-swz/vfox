@@ -30,14 +30,12 @@ import { defineComponent } from 'vue'
 import PickerView from '@/PickerView'
 import Drawer from '@/Drawer'
 import NavBar from '@/NavBar'
-import { viewEmits } from '@/Picker/view'
-import {
-  usePopupExtend,
-  popupExtendEmits,
-  popupExtendProps
-} from '@/hooks/popup'
-import { usePickerPopup, pickerPopupProps } from '@/Picker/popup'
-import { datePickerProps, useDatePicker } from '@/DatePicker/date-picker'
+import { usePopupExtend } from '@/popup/use-popup'
+import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { pickerPopupProps, pickerViewEmits } from '@/Picker/picker'
+import { usePickerPopup } from '@/Picker/use-picker'
+import { datePickerProps } from '@/DatePicker/date-picker'
+import { useDatePicker } from '@/DatePicker/use-date-picker'
 
 export default defineComponent({
   name: 'fx-date-picker-popup',
@@ -47,7 +45,7 @@ export default defineComponent({
     ...datePickerProps,
     ...pickerPopupProps
   },
-  emits: [...viewEmits, ...popupExtendEmits],
+  emits: [...pickerViewEmits, ...popupExtendEmits],
   setup(props, ctx) {
     const { handlers } = useDatePicker(props)
     const popup = usePopupExtend(ctx)
