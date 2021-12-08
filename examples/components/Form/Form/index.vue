@@ -99,10 +99,10 @@
 
 <script>
 import { multiOptions, regionOptions } from '../Picker/data'
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Form',
+  name: 'ExpForm',
   data() {
     return {
       ageVisible: false,
@@ -161,7 +161,7 @@ export default {
       },
       form: {
         nickname: '',
-        avatar: '',
+        avatar: [],
         gender: '',
         happinessIndex: 0,
         weight: 0,
@@ -184,7 +184,7 @@ export default {
   methods: {
     onSubmit(res) {
       console.log(res)
-      Toast.showToast(res.valid ? '校验通过' : '校验失败')
+      showToast(res.valid ? '校验通过' : '校验失败')
     },
     onReset(res) {
       console.log(res)

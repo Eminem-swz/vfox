@@ -67,10 +67,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Modal',
+  name: 'ExpModal',
   props: {},
   data() {
     return {
@@ -105,16 +105,16 @@ export default {
       console.log('cancel', res)
       if (this.callbackEvent) {
         if (res.closeClick) {
-          Toast.showToast('点击了关闭按钮')
+          showToast('点击了关闭按钮')
         } else if (res.maskClick) {
-          Toast.showToast('点击了蒙层')
+          showToast('点击了蒙层')
         }
       }
     },
     onVisibleStateChange({ state }) {
       if (this.visibleEvent) {
         console.log(`${state} 事件触发`)
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
       }
       if (state === 'hidden') {
         this.callbackEvent = false

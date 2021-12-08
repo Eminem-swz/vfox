@@ -1,5 +1,6 @@
 import type { FormValue } from '../Form/types'
 import type { AnyObject } from '../helpers/types'
+import type { ApiFnOptions } from '../apis/types'
 
 export interface UserFieldNames {
   label?: string
@@ -84,3 +85,14 @@ export interface PickerHandlers {
   valueHook?: ValueHook
   detailHook?: DetailHook
 }
+
+export type ShowPickerOptions = {
+  options: UserOptionItem[] | UserOptionItem[][]
+} & Partial<
+  {
+    title: string
+    value: ModelValue
+    mode: ModeNames
+    fieldNames: UserFieldNames
+  } & ApiFnOptions
+>

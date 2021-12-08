@@ -20,7 +20,7 @@
 import { mixTabList, tabList } from '../Tab/data'
 
 export default {
-  name: 'SideTab',
+  name: 'ExpSideTab',
   data() {
     return {
       activeValue: 1,

@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'CircleProgress',
+  name: 'ExpCircleProgress',
   data() {
     return {
       percentage: 50

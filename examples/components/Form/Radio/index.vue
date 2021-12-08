@@ -47,17 +47,17 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Radio',
+  name: 'ExpRadio',
   props: {},
   data() {
     return { value: false, groupValue: 'man' }
   },
   methods: {
     onChange({ value }) {
-      Toast.showToast(`Change Value: ${value}`)
+      showToast(`Change Value: ${value}`)
     }
   }
 }

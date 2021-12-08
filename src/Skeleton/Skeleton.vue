@@ -6,7 +6,7 @@ import {
   AVATAR_SHAPE_NAMES,
   BUTTON_SHAPE_NAMES
 } from '@/Skeleton/skeleton'
-import { ButtonShapeNames, AvatarShapeNames } from './types'
+import type { ButtonShapeNames, AvatarShapeNames } from './types'
 import { createEnumsValidator } from '@/helpers/validator'
 
 export default defineComponent({

@@ -77,11 +77,11 @@
 
 <script>
 import { cascadeOptions, multiOptions, options, regionOptions } from './data'
-import Toast from '@/Toast'
-import Picker from '@/Picker'
+import { showToast } from '@/Toast'
+import { showPicker } from '@/Picker'
 
 export default {
-  name: 'Picker',
+  name: 'ExpPicker',
   data() {
     return {
       regionValue: [],
@@ -103,25 +103,25 @@ export default {
   methods: {
     onChange(res) {
       console.log('change', res)
-      this.changeEvent && Toast.showToast(`值改为 ${res.labelString}`)
+      this.changeEvent && showToast(`值改为 ${res.labelString}`)
     },
     onConfirm(res) {
       console.log('confirm', res)
-      this.clickEvent && Toast.showToast(`点击确定按钮`)
+      this.clickEvent && showToast(`点击确定按钮`)
     },
     onCancel(res) {
       console.log('cancel', res)
       if (this.clickEvent) {
         if (res.cancelClick) {
-          Toast.showToast('点击了取消按钮')
+          showToast('点击了取消按钮')
         } else if (res.maskClick) {
-          Toast.showToast('点击了蒙层')
+          showToast('点击了蒙层')
         }
       }
     },
     onVisibleStateChange({ state }) {
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
       }
 
       if (state === 'hidden') {
@@ -131,15 +131,15 @@ export default {
       }
     },
     onCallApi() {
-      Picker.showPicker({
+      showPicker({
         title: this.title,
         options: multiOptions,
         success: res => {
           console.log(res)
           if (res.cancel) {
-            Toast.showToast('取消了')
+            showToast('取消了')
           } else {
-            Toast.showToast(`选择了 ${res.detail.labelString}`)
+            showToast(`选择了 ${res.detail.labelString}`)
           }
         }
       })

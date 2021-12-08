@@ -188,11 +188,10 @@
 
 <script>
 import Toast from '@/Toast'
-import PopDialog from '@/PopDialog'
+import { showPopDialog } from '@/PopDialog'
 
 export default {
-  name: 'PopDialog',
-  props: {},
+  name: 'ExpPopDialog',
   data() {
     return {
       visible: false,
@@ -240,7 +239,7 @@ export default {
       }
     },
     onCallApi(selector) {
-      PopDialog.showPopDialog({
+      showPopDialog({
         selector,
         placement: 'top',
         content: this.content,

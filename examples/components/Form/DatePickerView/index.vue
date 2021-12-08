@@ -78,10 +78,10 @@
 
 <script>
 import dayjs from '@/helpers/day'
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'DatePickerView',
+  name: 'ExpDatePickerView',
   data() {
     return {
       dateValue: '',
@@ -117,7 +117,7 @@ export default {
     onChangeEvent(e) {
       console.log(e)
 
-      Toast.showToast(`change: ${e.formatted}`)
+      showToast(`change: ${e.formatted}`)
     }
   }
 }

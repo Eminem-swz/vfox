@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  name: 'TabView',
+  name: 'ExpTabView',
   data() {
     return {
       activeName: 1

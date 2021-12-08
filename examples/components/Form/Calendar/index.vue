@@ -128,12 +128,12 @@
 
 <script>
 import dayjs from '@/helpers/day'
-import Toast from '@/Toast'
-import Calendar from '@/Calendar'
+import { showToast } from '@/Toast'
+import { showCalendar } from '@/Calendar'
 
 export default {
   components: {},
-  name: 'Calendar',
+  name: 'ExpCalendar',
   data() {
     return {
       viewDate: new Date(),
@@ -183,16 +183,16 @@ export default {
     },
     onConfirm(res) {
       console.log('confirm', res)
-      this.confirmEvent && Toast.showToast(`触发了确定事件`)
+      this.confirmEvent && showToast(`触发了确定事件`)
     },
     onRangeConfirm(detail) {
-      Toast.showToast(`选择了 ${detail.label}`)
+      showToast(`选择了 ${detail.label}`)
     },
     onVisibleStateChange({ state }) {
       // console.log(`${type} 事件触发`)
 
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
       }
 
       if (state === 'hidden') {
@@ -201,15 +201,15 @@ export default {
       }
     },
     onCallApi() {
-      Calendar.showCalendar({
+      showCalendar({
         mode: 'range',
         showClose: true,
         success: res => {
           console.log('success', res)
           if (res.cancel) {
-            Toast.showToast('取消了')
+            showToast('取消了')
           } else {
-            Toast.showToast(`选择了 ${res.detail.formatted}`)
+            showToast(`选择了 ${res.detail.formatted}`)
           }
         }
       })

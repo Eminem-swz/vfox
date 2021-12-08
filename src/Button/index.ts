@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Button from './Button.vue'
+import ButtonGroup from './ButtonGroup.vue'
 
-const _Button: SFCWithInstall<typeof Button> = Object.assign(Button, {
-  install: function (app: App) {
-    app.component(Button.name, Button)
-  }
-})
-
-export default _Button
+export { Button, ButtonGroup }
+export default multiWithInstall(Button, [ButtonGroup])

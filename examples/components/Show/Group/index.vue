@@ -31,6 +31,6 @@
 
 <script>
 export default {
-  name: 'Group'
+  name: 'ExpGroup'
 }
 </script>

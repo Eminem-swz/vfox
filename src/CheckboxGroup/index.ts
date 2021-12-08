@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import CheckboxGroup from '../Checkbox/CheckboxGroup.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { CheckboxGroup } from '@/Checkbox'
 
-const _CheckboxGroup: SFCWithInstall<typeof CheckboxGroup> = Object.assign(
-  CheckboxGroup,
-  {
-    install: function (app: App) {
-      app.component(CheckboxGroup.name, CheckboxGroup)
-    }
-  }
-)
-
-export default _CheckboxGroup
+export { CheckboxGroup }
+export default withNoopInstall(CheckboxGroup)

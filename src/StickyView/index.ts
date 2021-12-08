@@ -1,14 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import StickyView from './StickyView.vue'
+import StickyViewItem from './StickyViewItem.vue'
 
-const _StickyView: SFCWithInstall<typeof StickyView> = Object.assign(
-  StickyView,
-  {
-    install: function (app: App) {
-      app.component(StickyView.name, StickyView)
-    }
-  }
-)
-
-export default _StickyView
+export { StickyView, StickyViewItem }
+export default multiWithInstall(StickyView, [StickyViewItem])

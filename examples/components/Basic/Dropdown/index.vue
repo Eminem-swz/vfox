@@ -30,11 +30,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PopupVisibleStateChangeArgs } from '../../utils/types'
-import Toast from '@/Toast'
+import type { PopupVisibleStateChangeArgs } from '../../utils/types'
+import { showToast } from '@/Toast'
 
 export default defineComponent({
-  name: 'Dropdown',
+  name: 'ExpDropdown',
   data() {
     return {
       visible: false,
@@ -45,7 +45,7 @@ export default defineComponent({
   methods: {
     onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
         console.log(`${state} 事件触发`)
       }
       if (state === 'hidden') {

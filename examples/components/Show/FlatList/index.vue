@@ -154,7 +154,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 interface ExpList {
   id: number
@@ -162,7 +162,7 @@ interface ExpList {
 }
 
 export default defineComponent({
-  name: 'FlatList',
+  name: 'ExpFlatList',
   data() {
     return {
       list: [] as ExpList[],
@@ -197,7 +197,7 @@ export default defineComponent({
 
     onRefreshing(res: any, done: () => void) {
       setTimeout(() => {
-        Toast.showToast({
+        showToast({
           title: `刷新成功`,
           type: 'success'
         })
@@ -205,7 +205,7 @@ export default defineComponent({
       }, 2000)
     },
     onEndReached() {
-      Toast.showToast(`到底了`)
+      showToast(`到底了`)
     },
     onLoadMore() {
       if (this.loadList.length >= 100) {
@@ -216,7 +216,7 @@ export default defineComponent({
 
       setTimeout(() => {
         this.getLoadList()
-        Toast.showToast({
+        showToast({
           title: `加载成功`,
           type: 'success'
         })
@@ -233,7 +233,7 @@ export default defineComponent({
       recycled: boolean
     }) {
       index === 49 &&
-        Toast.showToast(`${item.text} ${recycled ? '回收了' : '加入了'}`)
+        showToast(`${item.text} ${recycled ? '回收了' : '加入了'}`)
     },
     getLoadList() {
       const loadList: ExpList[] = this.loadList

@@ -1,12 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import ActivityIndicator from './ActivityIndicator.vue'
 
-const _ActivityIndicator: SFCWithInstall<typeof ActivityIndicator> =
-  Object.assign(ActivityIndicator, {
-    install: function (app: App) {
-      app.component(ActivityIndicator.name, ActivityIndicator)
-    }
-  })
-
-export default _ActivityIndicator
+export { ActivityIndicator }
+export default withInstall(ActivityIndicator)

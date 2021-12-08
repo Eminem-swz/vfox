@@ -83,20 +83,20 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Cell',
+  name: 'ExpCell',
   data() {
     return { checked: false }
   },
   methods: {
     onClick() {
-      Toast.showToast('点击事件')
+      showToast('点击事件')
     },
     onCheckboxChange(e) {
       console.log(e)
-      Toast.showToast(e.checked ? '勾选' : '取消勾选')
+      showToast(e.checked ? '勾选' : '取消勾选')
     }
   }
 }

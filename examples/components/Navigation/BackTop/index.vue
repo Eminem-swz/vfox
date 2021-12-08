@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'BackTop'
+  name: 'ExpBackTop'
 }
 </script>
 

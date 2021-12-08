@@ -74,7 +74,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Toast from '@/Toast'
+import { showToast, showLoading, hideToast, hideLoading } from '@/Toast'
 
 interface showArgs {
   icon?: any
@@ -87,8 +87,7 @@ interface showArgs {
 type ToastType = 'default' | 'success' | 'fail' | 'loading'
 
 export default defineComponent({
-  name: 'Toast',
-  props: {},
+  name: 'ExpToast',
   data() {
     return {
       visible: false,
@@ -109,16 +108,16 @@ export default defineComponent({
       this.visible = true
     },
     callShowToastApi() {
-      Toast.showToast({ title: '提示文本', duration: 5000 })
+      showToast({ title: '提示文本', duration: 5000 })
     },
     callShowLoadingApi() {
-      Toast.showLoading({ title: '加载中' })
+      showLoading({ title: '加载中' })
     },
     callHideLoadingApi() {
-      Toast.hideLoading()
+      hideLoading()
     },
     callHideToastApi() {
-      Toast.hideToast()
+      hideToast()
     }
   }
 })

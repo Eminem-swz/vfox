@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Row from './Row.vue'
 
-const _Row: SFCWithInstall<typeof Row> = Object.assign(Row, {
-  install: function (app: App) {
-    app.component(Row.name, Row)
-  }
-})
-
-export default _Row
+export { Row }
+export default withInstall(Row)

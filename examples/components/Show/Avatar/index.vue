@@ -97,7 +97,7 @@
 
 <script>
 export default {
-  name: 'Avatar'
+  name: 'ExpAvatar'
 }
 </script>
 

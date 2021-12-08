@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Progress from './Progress.vue'
 
-const _Progress: SFCWithInstall<typeof Progress> = Object.assign(Progress, {
-  install: function (app: App) {
-    app.component(Progress.name, Progress)
-  }
-})
-
-export default _Progress
+export { Progress }
+export default withInstall(Progress)

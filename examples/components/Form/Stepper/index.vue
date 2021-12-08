@@ -39,31 +39,31 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Stepper',
+  name: 'ExpStepper',
   data() {
     return { value: '1' }
   },
   methods: {
     onChange({ value }) {
-      Toast.showToast(`值改变为：${value}`)
+      showToast(`值改变为：${value}`)
     },
     onInput({ value }) {
-      Toast.showToast(`当前值为：${value}`)
+      showToast(`当前值为：${value}`)
     },
     onPlusClick() {
-      Toast.showToast('点击 + 按钮')
+      showToast('点击 + 按钮')
     },
     onMinusClick() {
-      Toast.showToast('点击 - 按钮')
+      showToast('点击 - 按钮')
     },
     onFocus() {
-      Toast.showToast('聚焦 focus')
+      showToast('聚焦 focus')
     },
     onBlur() {
-      Toast.showToast('失焦 blur')
+      showToast('失焦 blur')
     }
   }
 }

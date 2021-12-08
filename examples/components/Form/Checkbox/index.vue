@@ -60,16 +60,16 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Checkbox',
+  name: 'ExpCheckbox',
   data() {
     return { checked: false, groupValue: ['A', 'C'], groups: ['A', 'B', 'C'] }
   },
   methods: {
     onChange({ value }) {
-      Toast.showToast(`Change Value: ${value}`)
+      showToast(`Change Value: ${value}`)
     }
   }
 }

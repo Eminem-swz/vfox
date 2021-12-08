@@ -23,19 +23,19 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Copy',
+  name: 'ExpCopy',
   methods: {
     onSuccess({ text }) {
-      Toast.showToast({
+      showToast({
         title: `${text}`,
         type: 'success'
       })
     },
     onError(error) {
-      Toast.showToast({
+      showToast({
         title: error.message,
         type: 'fail'
       })

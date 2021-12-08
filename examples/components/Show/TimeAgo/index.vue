@@ -20,7 +20,7 @@
 import dayjs from '@/helpers/day'
 
 export default {
-  name: 'TimeAgo',
+  name: 'ExpTimeAgo',
   data() {
     return {
       time: new Date(),

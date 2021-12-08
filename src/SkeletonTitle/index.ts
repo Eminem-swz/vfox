@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import SkeletonTitle from '../Skeleton/SkeletonTitle.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { SkeletonTitle } from '@/Skeleton'
 
-const _SkeletonTitle: SFCWithInstall<typeof SkeletonTitle> = Object.assign(
-  SkeletonTitle,
-  {
-    install: function (app: App) {
-      app.component(SkeletonTitle.name, SkeletonTitle)
-    }
-  }
-)
-
-export default _SkeletonTitle
+export { SkeletonTitle }
+export default withNoopInstall(SkeletonTitle)

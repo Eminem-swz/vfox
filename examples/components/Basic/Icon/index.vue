@@ -129,7 +129,7 @@ import WechatSvg from './svgs/wechat.svg'
 import WeiboSvg from './svgs/weibo.svg'
 
 export default {
-  name: 'Icon',
+  name: 'ExpIcon',
   setup() {
     return {
       TaobaoSvg: markRaw(TaobaoSvg),

@@ -1,10 +1,8 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import PopDialog from '../Popover/PopDialog.vue'
-import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
+import type { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
-import { DomSelector } from '../helpers/types'
-import { PlacementType } from '../helpers/types'
+import type { DomSelector, PlacementType } from '../helpers/types'
 
 type ShowPopDialogOptions = {
   selector: DomSelector
@@ -27,13 +25,7 @@ const showPopDialog = function (object: ShowPopDialogOptions) {
   })
 }
 
-const _PopDialog: SFCWithInstall<typeof PopDialog> & {
-  showPopDialog: typeof showPopDialog
-} = Object.assign(PopDialog, {
-  install: function (app: App) {
-    app.component(PopDialog.name, PopDialog)
-  },
+export { PopDialog, showPopDialog }
+export default withInstall(PopDialog, {
   showPopDialog
 })
-
-export default _PopDialog

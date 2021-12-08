@@ -71,19 +71,19 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Tag',
+  name: 'ExpTag',
   methods: {
     onClick() {
-      Toast.showToast('点击事件')
+      showToast('点击事件')
     },
     onClose() {
-      Toast.showToast('关闭事件')
+      showToast('关闭事件')
     },
     onLongPress() {
-      Toast.showToast('长按事件')
+      showToast('长按事件')
     }
   }
 }

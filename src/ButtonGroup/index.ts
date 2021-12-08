@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import ButtonGroup from '../Button/ButtonGroup.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { ButtonGroup } from '@/Button'
 
-const _ButtonGroup: SFCWithInstall<typeof ButtonGroup> = Object.assign(
-  ButtonGroup,
-  {
-    install: function (app: App) {
-      app.component(ButtonGroup.name, ButtonGroup)
-    }
-  }
-)
-
-export default _ButtonGroup
+export { ButtonGroup }
+export default withNoopInstall(ButtonGroup)

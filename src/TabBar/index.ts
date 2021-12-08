@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import TabBar from './TabBar.vue'
 
-const _TabBar: SFCWithInstall<typeof TabBar> = Object.assign(TabBar, {
-  install: function (app: App) {
-    app.component(TabBar.name, TabBar)
-  }
-})
-
-export default _TabBar
+export { TabBar }
+export default withInstall(TabBar)

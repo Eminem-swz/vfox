@@ -1,7 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import ImagePreview from './ImagePreview.vue'
-import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
+import type { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 
 type PreviewImageOptions = {
@@ -24,13 +23,7 @@ const previewImage = function (object: PreviewImageOptions) {
   })
 }
 
-const _ImagePreview: SFCWithInstall<typeof ImagePreview> & {
-  previewImage: typeof previewImage
-} = Object.assign(ImagePreview, {
-  install: function (app: App) {
-    app.component(ImagePreview.name, ImagePreview)
-  },
+export { ImagePreview, previewImage }
+export default withInstall(ImagePreview, {
   previewImage
 })
-
-export default _ImagePreview

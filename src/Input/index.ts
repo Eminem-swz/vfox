@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Input from './Input.vue'
 
-const _Input: SFCWithInstall<typeof Input> = Object.assign(Input, {
-  install: function (app: App) {
-    app.component(Input.name, Input)
-  }
-})
-
-export default _Input
+export { Input }
+export default withInstall(Input)

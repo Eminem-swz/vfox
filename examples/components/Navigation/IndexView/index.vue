@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'IndexView',
+  name: 'ExpIndexView',
   data() {
     return {
       offsetTop: 52,

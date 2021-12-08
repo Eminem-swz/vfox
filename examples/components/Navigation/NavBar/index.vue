@@ -82,26 +82,26 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
-import Dialog from '@/Dialog'
+import { showToast } from '@/Toast'
+import { showDialog } from '@/Dialog'
 
 export default {
-  name: 'NavBar',
+  name: 'ExpNavBar',
   data() {
     return { text: 1 }
   },
   methods: {
     onBack() {
-      Toast.showToast('返回按钮点击')
+      showToast('返回按钮点击')
     },
     onBackHome() {
-      Toast.showToast('首页按钮点击')
+      showToast('首页按钮点击')
     },
     onTitle() {
-      Toast.showToast('标题双击')
+      showToast('标题双击')
     },
     onRightButtonClick({ icon, text, index }) {
-      Dialog.showDialog({
+      showDialog({
         title: '右侧按钮点击',
         showCancel: false,
         content: `icon: '${icon}'\ntext: '${text}'\nindex: ${index}`

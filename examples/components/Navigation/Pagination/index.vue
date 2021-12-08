@@ -32,10 +32,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Pagination',
+  name: 'ExpPagination',
   props: {},
   data() {
     return {
@@ -50,7 +50,7 @@ export default {
   methods: {
     onChange(e) {
       console.log(e)
-      Toast.showToast(`跳转到第 ${e.current} 页`)
+      showToast(`跳转到第 ${e.current} 页`)
     }
   }
 }

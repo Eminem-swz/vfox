@@ -60,10 +60,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'CountDown',
+  name: 'ExpCountDown',
   data() {
     return {
       time: 300 * 1000,
@@ -77,15 +77,15 @@ export default {
   methods: {
     onPause(e) {
       console.log(e)
-      Toast.showToast('已暂停')
+      showToast('已暂停')
     },
     onResume(e) {
       console.log(e)
-      Toast.showToast('继续计时')
+      showToast('继续计时')
     },
     onEnd(e) {
       console.log(e)
-      Toast.showToast('计时结束')
+      showToast('计时结束')
     }
   }
 }

@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Form from './Form.vue'
+import FormItem from './FormItem.vue'
 
-const _Form: SFCWithInstall<typeof Form> = Object.assign(Form, {
-  install: function (app: App) {
-    app.component(Form.name, Form)
-  }
-})
-
-export default _Form
+export { Form, FormItem }
+export default multiWithInstall(Form, [FormItem])

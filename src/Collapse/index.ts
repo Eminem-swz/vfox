@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Collapse from './Collapse.vue'
+import CollapseItem from './CollapseItem.vue'
 
-const _Collapse: SFCWithInstall<typeof Collapse> = Object.assign(Collapse, {
-  install: function (app: App) {
-    app.component(Collapse.name, Collapse)
-  }
-})
-
-export default _Collapse
+export { Collapse, CollapseItem }
+export default multiWithInstall(Collapse, [CollapseItem])

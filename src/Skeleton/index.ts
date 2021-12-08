@@ -1,11 +1,23 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Skeleton from './Skeleton.vue'
+import SkeletonAvatar from './SkeletonAvatar.vue'
+import SkeletonTitle from './SkeletonTitle.vue'
+import SkeletonParagraph from './SkeletonParagraph.vue'
+import SkeletonButton from './SkeletonButton.vue'
+import SkeletonImage from './SkeletonImage.vue'
 
-const _Skeleton: SFCWithInstall<typeof Skeleton> = Object.assign(Skeleton, {
-  install: function (app: App) {
-    app.component(Skeleton.name, Skeleton)
-  }
-})
-
-export default _Skeleton
+export {
+  Skeleton,
+  SkeletonAvatar,
+  SkeletonTitle,
+  SkeletonParagraph,
+  SkeletonButton,
+  SkeletonImage
+}
+export default multiWithInstall(Skeleton, [
+  SkeletonAvatar,
+  SkeletonTitle,
+  SkeletonParagraph,
+  SkeletonButton,
+  SkeletonImage
+])

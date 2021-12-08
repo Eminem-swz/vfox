@@ -20,17 +20,17 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'DemoSwitch',
+  name: 'ExpSwitch',
   data() {
     return { value: false }
   },
   methods: {
     onChange({ value }) {
       console.log(value)
-      Toast.showToast(value ? '开' : '关')
+      showToast(value ? '开' : '关')
     }
   }
 }

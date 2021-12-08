@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import StickyViewItem from '../StickyView/StickyViewItem.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { StickyViewItem } from '@/StickyView'
 
-const _StickyViewItem: SFCWithInstall<typeof StickyViewItem> = Object.assign(
-  StickyViewItem,
-  {
-    install: function (app: App) {
-      app.component(StickyViewItem.name, StickyViewItem)
-    }
-  }
-)
-
-export default _StickyViewItem
+export { StickyViewItem }
+export default withNoopInstall(StickyViewItem)

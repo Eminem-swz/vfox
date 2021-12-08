@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import TimelineItem from '../Timeline/TimelineItem.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { TimelineItem } from '@/Timeline'
 
-const _TimelineItem: SFCWithInstall<typeof TimelineItem> = Object.assign(
-  TimelineItem,
-  {
-    install: function (app: App) {
-      app.component(TimelineItem.name, TimelineItem)
-    }
-  }
-)
-
-export default _TimelineItem
+export { TimelineItem }
+export default withNoopInstall(TimelineItem)

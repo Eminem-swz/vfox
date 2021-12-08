@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import FormItem from '../Form/FormItem.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { FormItem } from '@/Form'
 
-const _FormItem: SFCWithInstall<typeof FormItem> = Object.assign(FormItem, {
-  install: function (app: App) {
-    app.component(FormItem.name, FormItem)
-  }
-})
-
-export default _FormItem
+export { FormItem }
+export default withNoopInstall(FormItem)

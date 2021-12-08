@@ -55,7 +55,7 @@ const customIconList = [
 ]
 
 export default {
-  name: 'TabBar',
+  name: 'ExpTabBar',
   data() {
     return {
       activeValue: 1,

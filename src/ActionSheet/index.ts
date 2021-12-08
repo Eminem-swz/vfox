@@ -1,9 +1,8 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '../helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import ActionSheet from './ActionSheet.vue'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
-import { ActionSheetItem } from './types'
-import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
+import type { ActionSheetItem } from './types'
+import type { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 
 type ShowActionSheetOptions = {
   options: ActionSheetItem[]
@@ -28,13 +27,7 @@ const showActionSheet = function (object: ShowActionSheetOptions) {
   )
 }
 
-const _ActionSheet: SFCWithInstall<typeof ActionSheet> & {
-  showActionSheet: typeof showActionSheet
-} = Object.assign(ActionSheet, {
-  install: function (app: App) {
-    app.component(ActionSheet.name, ActionSheet)
-  },
+export { ActionSheet, showActionSheet }
+export default withInstall(ActionSheet, {
   showActionSheet
 })
-
-export default _ActionSheet

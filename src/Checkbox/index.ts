@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Checkbox from './Checkbox.vue'
+import CheckboxGroup from './CheckboxGroup.vue'
 
-const _Checkbox: SFCWithInstall<typeof Checkbox> = Object.assign(Checkbox, {
-  install: function (app: App) {
-    app.component(Checkbox.name, Checkbox)
-  }
-})
-
-export default _Checkbox
+export { Checkbox, CheckboxGroup }
+export default multiWithInstall(Checkbox, [CheckboxGroup])

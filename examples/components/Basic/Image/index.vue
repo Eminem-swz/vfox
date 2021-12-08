@@ -192,7 +192,7 @@
 
 <script>
 export default {
-  name: 'DemoImage',
+  name: 'ExpImage',
   data() {
     return { imageUrl: 'https://cdn.fox2.cn/vfox/swiper/center-2.jpg' }
   }

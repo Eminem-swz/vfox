@@ -1,3 +1,5 @@
+import type { ApiFnOptions } from '../apis/types'
+
 export type ModeName =
   | 'date'
   | 'time'
@@ -29,4 +31,13 @@ export type ColName = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
 
 export interface OptionFilter {
   (number: number, type: ColName): boolean
+}
+
+export interface ShowPickerOptions extends ApiFnOptions {
+  title: string
+  value: Date
+  minDate: Date
+  maxDate: Date
+  mode: ModeName
+  filter: OptionFilter
 }

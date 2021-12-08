@@ -45,9 +45,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PopupVisibleStateChangeArgs, PopupCancelArgs } from '../../utils/types'
-import Toast from '@/Toast'
-import ImagePreview from '@/ImagePreview'
+import type {
+  PopupVisibleStateChangeArgs,
+  PopupCancelArgs
+} from '../../utils/types'
+import { showToast } from '@/Toast'
+import { previewImage } from '@/ImagePreview'
 
 interface showArgs {
   showClose?: boolean
@@ -62,7 +65,7 @@ interface changeArgs {
 }
 
 export default defineComponent({
-  name: 'ImagePreview',
+  name: 'ExpImagePreview',
   data() {
     return {
       visible: false,
@@ -80,7 +83,7 @@ export default defineComponent({
   },
   methods: {
     onCallApi() {
-      ImagePreview.previewImage({
+      previewImage({
         urls: this.imageUrls,
         showClose: true,
         imageHighRendering: false,
@@ -99,7 +102,7 @@ export default defineComponent({
     onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
         console.log(`${state} 事件触发`)
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
       }
       if (state === 'hidden') {
         this.showClose = false
@@ -110,14 +113,14 @@ export default defineComponent({
     },
     onChange({ activeIndex, current }: changeArgs) {
       if (this.changeEvent) {
-        Toast.showToast(`切换到第 ${activeIndex + 1} 张`)
+        showToast(`切换到第 ${activeIndex + 1} 张`)
         console.log(`change 事件触发`, activeIndex, current)
       }
     },
     onCancel(res: PopupCancelArgs) {
       if (this.changeEvent) {
         console.log('cancel', res)
-        Toast.showToast(`关闭`)
+        showToast(`关闭`)
       }
     }
   }

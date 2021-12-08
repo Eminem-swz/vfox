@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  name: 'ScrollTab',
+  name: 'ExpScrollTab',
   data() {
     return {
       offsetTop: 52,

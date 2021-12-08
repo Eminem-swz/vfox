@@ -97,10 +97,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Collapse',
+  name: 'ExpCollapse',
   data() {
     return {
       activeNames: [],
@@ -111,13 +111,13 @@ export default {
   },
   methods: {
     onChange({ activeNames }) {
-      Toast.showToast(
+      showToast(
         activeNames.length > 0 ? activeNames.join('，') : '没有项' + '展开'
       )
     },
     onToggle(res) {
       console.log(res)
-      Toast.showToast(res.spread ? '展开' : '收起')
+      showToast(res.spread ? '展开' : '收起')
     }
   }
 }

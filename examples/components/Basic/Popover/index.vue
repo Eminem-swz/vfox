@@ -167,11 +167,11 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
-import Popover from '@/Popover'
+import { showToast } from '@/Toast'
+import { showPopover } from '@/Popover'
 
 export default {
-  name: 'Popover',
+  name: 'ExpPopover',
   props: {},
   data() {
     return {
@@ -193,7 +193,7 @@ export default {
     },
     onVisibleStateChange({ state }) {
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
         console.log(`${state} 事件触发`)
       }
       if (state === 'hidden') {
@@ -204,7 +204,7 @@ export default {
       }
     },
     onCallApi(selector) {
-      Popover.showPopover({
+      showPopover({
         selector,
         content: '这是气泡内容',
         placement: 'top',

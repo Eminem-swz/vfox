@@ -47,10 +47,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Range',
+  name: 'ExpRange',
   data() {
     return {
       min: 50,
@@ -69,10 +69,10 @@ export default {
   },
   methods: {
     onInput({ value }) {
-      Toast.showToast(`Input value: ${value}`)
+      showToast(`Input value: ${value}`)
     },
     onChange({ value }) {
-      Toast.showToast(`Change value: ${value}`)
+      showToast(`Change value: ${value}`)
     }
   }
 }

@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'Result'
+  name: 'ExpResult'
 }
 </script>
 

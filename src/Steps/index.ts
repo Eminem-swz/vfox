@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Steps from './Steps.vue'
+import Step from './Step.vue'
 
-const _Steps: SFCWithInstall<typeof Steps> = Object.assign(Steps, {
-  install: function (app: App) {
-    app.component(Steps.name, Steps)
-  }
-})
-
-export default _Steps
+export { Steps, Step }
+export default multiWithInstall(Steps, [Step])

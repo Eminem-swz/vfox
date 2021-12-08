@@ -1,1 +1,1 @@
-import '../../StickyView/style'
+import '../../ScrollTab/style'

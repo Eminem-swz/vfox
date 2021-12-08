@@ -1,9 +1,8 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Notify from './Notify.vue'
 import { showPopup, hidePopup, createAlertHook } from '@/apis/Popup'
-import { ApiFnOptions } from '../apis/types'
-import { StateType } from '../helpers/types'
+import type { ApiFnOptions } from '../apis/types'
+import type { StateType } from '../helpers/types'
 
 type ShowNotifyOptions = {
   title: string
@@ -32,15 +31,8 @@ const hideNotify = function (object?: Partial<ApiFnOptions>) {
   return hidePopup(object || {}, 'hideNotify')
 }
 
-const _Notify: SFCWithInstall<typeof Notify> & {
-  showNotify: typeof showNotify
-  hideNotify: typeof hideNotify
-} = Object.assign(Notify, {
-  install: function (app: App) {
-    app.component(Notify.name, Notify)
-  },
+export { Notify, showNotify, hideNotify }
+export default withInstall(Notify, {
   showNotify,
   hideNotify
 })
-
-export default _Notify

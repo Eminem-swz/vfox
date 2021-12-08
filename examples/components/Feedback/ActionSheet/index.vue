@@ -92,14 +92,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {
+import type {
   PopupCancelArgs,
   PopupConfirmArgs,
   PopupVisibleStateChangeArgs
 } from '../../utils/types'
-import Toast from '@/Toast'
-import Dialog from '@/Dialog'
-import ActionSheet from '@/ActionSheet'
+import { showToast } from '@/Toast'
+import { showDialog } from '@/Dialog'
+import { showActionSheet } from '@/ActionSheet'
 
 interface Option {
   name: string
@@ -120,8 +120,7 @@ const defaultOptions: Option[] = [
 ]
 
 export default defineComponent({
-  name: 'ActionSheet',
-  props: {},
+  name: 'ExpActionSheet',
   data() {
     return {
       visible: false,
@@ -149,7 +148,7 @@ export default defineComponent({
   methods: {
     onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
         console.log(`${state} 事件触发`)
       }
       if (state === 'hidden') {
@@ -164,7 +163,7 @@ export default defineComponent({
     onConfirm(res: PopupConfirmArgs) {
       console.log('confirm', res)
       if (this.showEvent) {
-        Dialog.showDialog({
+        showDialog({
           title: '选择了',
           showCancel: false,
           content: `item.name: '${res.item.name}'\nindex: ${res.index}`
@@ -173,10 +172,10 @@ export default defineComponent({
     },
     onCancel(res: PopupCancelArgs) {
       console.log('cancel', res)
-      this.showEvent && Toast.showToast(`取消事件触发`)
+      this.showEvent && showToast(`取消事件触发`)
     },
     onCallApi() {
-      ActionSheet.showActionSheet({
+      showActionSheet({
         title: '标题',
         options: this.options,
         showCancel: true,
@@ -185,13 +184,13 @@ export default defineComponent({
           const { confirm, detail } = res
 
           if (confirm) {
-            Dialog.showDialog({
+            showDialog({
               title: '选择了',
               showCancel: false,
               content: `item.name: '${detail.item.name}'\nindex: ${detail.index}`
             })
           } else {
-            Toast.showToast('取消了')
+            showToast('取消了')
           }
         }
       })

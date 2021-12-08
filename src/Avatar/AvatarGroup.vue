@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, provide, PropType } from 'vue'
-import Avatar from '@/Avatar'
+import Avatar from './Avatar.vue'
 import { useGroup } from '@/hooks/use-group'
 import { avatarProps } from '@/Avatar/avatar'
 import { simpleNumber } from '@/helpers/util'

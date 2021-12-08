@@ -1,16 +1,7 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withNoopInstall } from '@/helpers/with-install'
 import { createStorage } from '@/apis/LocalStorage'
 
 const LocalStorage = createStorage('fx')
 
-const _LocalStorage: SFCWithInstall<typeof LocalStorage> & {
-  createStorage: typeof createStorage
-} = Object.assign(LocalStorage, {
-  install: function (app: App) {
-    // empty
-  },
-  createStorage
-})
-
-export default _LocalStorage
+export { LocalStorage }
+export default withNoopInstall(LocalStorage)

@@ -77,10 +77,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'CountUp',
+  name: 'ExpCountUp',
   data() {
     return {
       initialNumber: 1000,
@@ -92,7 +92,7 @@ export default {
   methods: {
     onAnimated(e) {
       console.log(e)
-      Toast.showToast('动画结束')
+      showToast('动画结束')
     },
     onAnimated2(e) {
       console.log(e)
@@ -104,7 +104,7 @@ export default {
     cancel() {
       if (!this.isCancel) {
         this.$refs.countUp.cancel()
-        Toast.showToast('已取消')
+        showToast('已取消')
       } else {
         this.number2 = this.number2 > 500 ? 0 : 1000
       }

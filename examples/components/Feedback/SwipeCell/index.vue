@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'SwipeCell',
+  name: 'ExpSwipeCell',
   data() {
     return {
       buttons: [
@@ -38,7 +38,7 @@ export default {
   methods: {
     onButtonClick(e) {
       console.log(e)
-      Toast.showToast(`点击了 ${e.item.text}`)
+      showToast(`点击了 ${e.item.text}`)
     }
   }
 }

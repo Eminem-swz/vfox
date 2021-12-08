@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: 'Skeleton',
+  name: 'ExpSkeleton',
   data() {
     return {
       animated: true,

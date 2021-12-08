@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Avatar from './Avatar.vue'
+import AvatarGroup from './AvatarGroup.vue'
 
-const _Avatar: SFCWithInstall<typeof Avatar> = Object.assign(Avatar, {
-  install: function (app: App) {
-    app.component(Avatar.name, Avatar)
-  }
-})
-
-export default _Avatar
+export { Avatar, AvatarGroup }
+export default multiWithInstall(Avatar, [AvatarGroup])

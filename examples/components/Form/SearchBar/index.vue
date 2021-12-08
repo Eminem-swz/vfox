@@ -46,19 +46,19 @@
 
 <script>
 import { placeholders } from './data'
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'SearchBar',
+  name: 'ExpSearchBar',
   data() {
     return { text: 1, placeholders }
   },
   methods: {
     onCancel() {
-      Toast.showToast('取消按钮点击')
+      showToast('取消按钮点击')
     },
     onEvent({ type }) {
-      Toast.showToast(type)
+      showToast(type)
     },
     onInput(e, fn) {
       fn(
@@ -73,16 +73,16 @@ export default {
       )
     },
     onInput2(e, fn) {
-      Toast.showToast(`输入了 ${e.text}`)
+      showToast(`输入了 ${e.text}`)
 
       this.onInput(e, fn)
     },
     onSearch({ text }) {
-      Toast.showToast(`搜索了 ${text}`)
+      showToast(`搜索了 ${text}`)
     },
     onClick(e) {
       console.log(e)
-      Toast.showToast(`搜索词 ${e.searchText}`)
+      showToast(`搜索词 ${e.searchText}`)
     }
   }
 }

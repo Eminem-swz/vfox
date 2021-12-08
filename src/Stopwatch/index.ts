@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Stopwatch from './Stopwatch.vue'
 
-const _Stopwatch: SFCWithInstall<typeof Stopwatch> = Object.assign(Stopwatch, {
-  install: function (app: App) {
-    app.component(Stopwatch.name, Stopwatch)
-  }
-})
-
-export default _Stopwatch
+export { Stopwatch }
+export default withInstall(Stopwatch)

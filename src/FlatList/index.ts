@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import FlatList from './FlatList.vue'
 
-const _FlatList: SFCWithInstall<typeof FlatList> = Object.assign(FlatList, {
-  install: function (app: App) {
-    app.component(FlatList.name, FlatList)
-  }
-})
-
-export default _FlatList
+export { FlatList }
+export default withInstall(FlatList)

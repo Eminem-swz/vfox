@@ -155,14 +155,14 @@
 
 <script>
 import dayjs from '@/helpers/day'
-import Toast from '@/Toast'
-import DatePicker from '@/DatePicker'
+import { showToast } from '@/Toast'
+import { showDatePicker } from '@/DatePicker'
 
 export default {
-  name: 'DatePicker',
+  name: 'ExpDatePicker',
   data() {
     return {
-      title: 'DatePicker',
+      title: 'ExpDatePicker',
 
       dateValue: '',
       timeValue: '',
@@ -207,7 +207,7 @@ export default {
       console.log('change', res)
 
       if (this.changeEvent) {
-        Toast.showToast(`值改为: ${res.formatted}`)
+        showToast(`值改为: ${res.formatted}`)
       }
     },
     onChangeEvent(res) {
@@ -215,21 +215,21 @@ export default {
     },
     onConfirm(res) {
       console.log('confirm', res)
-      this.clickEvent && Toast.showToast(`点击确定按钮`)
+      this.clickEvent && showToast(`点击确定按钮`)
     },
     onCancel(res) {
       console.log('cancel', res)
       if (this.clickEvent) {
         if (res.cancelClick) {
-          Toast.showToast('点击了取消按钮')
+          showToast('点击了取消按钮')
         } else if (res.maskClick) {
-          Toast.showToast('点击了蒙层')
+          showToast('点击了蒙层')
         }
       }
     },
     onVisibleStateChange({ state }) {
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
       }
 
       if (state === 'hidden') {
@@ -239,14 +239,14 @@ export default {
       }
     },
     onCallApi() {
-      DatePicker.showDatePicker({
+      showDatePicker({
         title: 'DatePicker',
         success: res => {
           console.log(res)
           if (res.cancel) {
-            Toast.showToast('取消了')
+            showToast('取消了')
           } else {
-            Toast.showToast(`选择了 ${res.detail.formatted}`)
+            showToast(`选择了 ${res.detail.formatted}`)
           }
         }
       })

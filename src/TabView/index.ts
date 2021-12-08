@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import TabView from './TabView.vue'
+import TabViewItem from './TabViewItem.vue'
 
-const _TabView: SFCWithInstall<typeof TabView> = Object.assign(TabView, {
-  install: function (app: App) {
-    app.component(TabView.name, TabView)
-  }
-})
-
-export default _TabView
+export { TabView, TabViewItem }
+export default multiWithInstall(TabView, [TabViewItem])

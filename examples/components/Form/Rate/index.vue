@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'Rate',
+  name: 'ExpRate',
   data() {
     return {
       count: 5,
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     onChange({ value }) {
-      Toast.showToast(`Value: ${value}`)
+      showToast(`Value: ${value}`)
     }
   }
 }

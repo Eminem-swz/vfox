@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Stepper from './Stepper.vue'
 
-const _Stepper: SFCWithInstall<typeof Stepper> = Object.assign(Stepper, {
-  install: function (app: App) {
-    app.component(Stepper.name, Stepper)
-  }
-})
-
-export default _Stepper
+export { Stepper }
+export default withInstall(Stepper)

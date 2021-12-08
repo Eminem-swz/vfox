@@ -1,10 +1,8 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Popover from './Popover.vue'
 import type { ApiFnOptions } from '../apis/types'
 import { createAlertHook, showPopup } from '@/apis/Popup'
-import type { DomSelector } from '../helpers/types'
-import type { PlacementType } from '../helpers/types'
+import type { DomSelector, PlacementType } from '../helpers/types'
 
 type ShowPopoverOptions = {
   selector: DomSelector
@@ -24,13 +22,5 @@ const showPopover = function (object: ShowPopoverOptions) {
   })
 }
 
-const _Popover: SFCWithInstall<typeof Popover> & {
-  showPopover: typeof showPopover
-} = Object.assign(Popover, {
-  install: function (app: App) {
-    app.component(Popover.name, Popover)
-  },
-  showPopover
-})
-
-export default _Popover
+export { Popover, showPopover }
+export default withInstall(Popover, { showPopover })

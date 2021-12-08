@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Swiper from './Swiper.vue'
+import SwiperItem from './SwiperItem.vue'
 
-const _Swiper: SFCWithInstall<typeof Swiper> = Object.assign(Swiper, {
-  install: function (app: App) {
-    app.component(Swiper.name, Swiper)
-  }
-})
-
-export default _Swiper
+export { Swiper, SwiperItem }
+export default multiWithInstall(Swiper, [SwiperItem])

@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Icon from './Icon.vue'
 
-const _Icon: SFCWithInstall<typeof Icon> = Object.assign(Icon, {
-  install: function (app: App) {
-    app.component(Icon.name, Icon)
-  }
-})
-
-export default _Icon
+export { Icon }
+export default withInstall(Icon)

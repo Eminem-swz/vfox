@@ -89,9 +89,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
-import { PopupVisibleStateChangeArgs, PopupCancelArgs } from '../../utils/types'
-import Toast from '@/Toast'
-import Dialog from '@/Dialog'
+import type {
+  PopupVisibleStateChangeArgs,
+  PopupCancelArgs
+} from '../../utils/types'
+import { showToast } from '@/Toast'
+import { showDialog } from '@/Dialog'
 
 interface DialogArgs {
   title?: string
@@ -102,7 +105,7 @@ interface DialogArgs {
 }
 
 export default defineComponent({
-  name: 'Dialog',
+  name: 'ExpDialog',
   setup(props, ctx) {
     const visible = ref(false)
     let callbackEvent = false
@@ -139,31 +142,31 @@ export default defineComponent({
     }
 
     function onCallApi() {
-      Dialog.showDialog({
+      showDialog({
         title: '标题',
         content: '提示内容提示内容提示内容提示内容提示内容提示内容',
         maskClosable: true,
         success: (res: any) => {
           console.log('success', res)
-          Toast.showToast(res.confirm ? 'confirm = true' : 'cancel = true')
+          showToast(res.confirm ? 'confirm = true' : 'cancel = true')
         }
       })
     }
 
     function onConfirm(res: PopupCancelArgs) {
       console.log('confirm', res)
-      callbackEvent && Toast.showToast('点击确定按钮')
+      callbackEvent && showToast('点击确定按钮')
     }
 
     function onCancel(res: PopupCancelArgs) {
       console.log('cancel', res)
-      callbackEvent && Toast.showToast('点击取消按钮')
+      callbackEvent && showToast('点击取消按钮')
     }
 
     function onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
       if (visibleEvent) {
         console.log(`${state} 事件触发`)
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
       }
     }
 

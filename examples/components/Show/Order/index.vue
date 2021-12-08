@@ -41,7 +41,7 @@ const items = [
 ]
 
 export default {
-  name: 'Order',
+  name: 'ExpOrder',
   data() {
     return {
       items: cloneData(items),

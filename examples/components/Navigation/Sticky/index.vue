@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'Sticky',
+  name: 'ExpSticky',
   data() {
     return {
       activeIndex: 0

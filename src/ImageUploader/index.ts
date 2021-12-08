@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import ImageUploader from './ImageUploader.vue'
 
-const _ImageUploader: SFCWithInstall<typeof ImageUploader> = Object.assign(
-  ImageUploader,
-  {
-    install: function (app: App) {
-      app.component(ImageUploader.name, ImageUploader)
-    }
-  }
-)
-
-export default _ImageUploader
+export { ImageUploader }
+export default withInstall(ImageUploader)

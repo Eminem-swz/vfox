@@ -93,10 +93,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'NumberKeyboard',
+  name: 'ExpNumberKeyboard',
   data() {
     return {
       value: '',
@@ -113,15 +113,15 @@ export default {
   },
   methods: {
     onInput({ key }) {
-      Toast.showToast(key)
+      showToast(key)
     },
     onDelete() {
-      Toast.showToast('删除')
+      showToast('删除')
     },
     onClose(res) {
       console.log('close', res)
 
-      Toast.showToast(`输入值为：${res.value}`)
+      showToast(`输入值为：${res.value}`)
     }
   }
 }

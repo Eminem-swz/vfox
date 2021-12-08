@@ -34,10 +34,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'ImageUploader',
+  name: 'ExpImageUploader',
   props: {},
   data() {
     return {
@@ -52,10 +52,10 @@ export default {
   methods: {
     onBeforeUpload(file, { formatSize }) {
       if (file.size > 1024 * 1024) {
-        Toast.showToast(`上传图片不能大于 ${formatSize(1024 * 1024)}`)
+        showToast(`上传图片不能大于 ${formatSize(1024 * 1024)}`)
         return false
       }
-      Toast.showToast(`上传图片大小为 ${formatSize(file.size)}`)
+      showToast(`上传图片大小为 ${formatSize(file.size)}`)
     },
 
     onUploadOrFail(file, handlers) {
@@ -81,7 +81,7 @@ export default {
     getDataUrl(file) {
       return new Promise(resolve => {
         const fr = new FileReader()
-        fr.onload = function(e) {
+        fr.onload = function (e) {
           resolve(e.target.result)
         }
         fr.readAsDataURL(file)

@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'Fixed'
+  name: 'ExpFixed'
 }
 </script>
 

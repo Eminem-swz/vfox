@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import TabViewItem from '../TabView/TabViewItem.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { TabViewItem } from '@/TabView'
 
-const _TabViewItem: SFCWithInstall<typeof TabViewItem> = Object.assign(
-  TabViewItem,
-  {
-    install: function (app: App) {
-      app.component(TabViewItem.name, TabViewItem)
-    }
-  }
-)
-
-export default _TabViewItem
+export { TabViewItem }
+export default withNoopInstall(TabViewItem)

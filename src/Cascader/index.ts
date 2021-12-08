@@ -1,15 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Cascader from './Cascader.vue'
-import CascaderPopup from '@/CascaderPopup'
+import { showCascader } from '@/CascaderPopup'
 
-const _Cascader: SFCWithInstall<typeof Cascader> & {
-  showCascader: typeof CascaderPopup.showCascader
-} = Object.assign(Cascader, {
-  install: function (app: App) {
-    app.component(Cascader.name, Cascader)
-  },
-  showCascader: CascaderPopup.showCascader
-})
-
-export default _Cascader
+export { Cascader, showCascader }
+export default withInstall(Cascader, { showCascader })

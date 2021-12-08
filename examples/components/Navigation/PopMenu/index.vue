@@ -155,12 +155,12 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
-import Dialog from '@/Dialog'
-import PopMenu from '@/PopMenu'
+import { showToast } from '@/Toast'
+import { showDialog } from '@/Dialog'
+import { showPopMenu } from '@/PopMenu'
 
 export default {
-  name: 'PopMenu',
+  name: 'ExpPopMenu',
   data() {
     return {
       visible: false,
@@ -195,7 +195,7 @@ export default {
   methods: {
     onVisibleStateChange({ state }) {
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
         console.log(`${state} 事件触发`)
       }
       if (state === 'hidden') {
@@ -206,7 +206,7 @@ export default {
     onConfirm(res) {
       console.log('confirm', res)
       if (this.showEvent) {
-        Dialog.showDialog({
+        showDialog({
           title: '选择了',
           showCancel: false,
           content: `item.name: '${res.item.name}'\nindex: ${res.index}`
@@ -215,19 +215,19 @@ export default {
     },
     onCancel(res) {
       console.log('cancel', res)
-      this.showEvent && Toast.showToast('取消了')
+      this.showEvent && showToast('取消了')
     },
     onCallApi(selector) {
-      PopMenu.showPopMenu({
+      showPopMenu({
         selector,
         options: this.options,
         placement: 'top',
         success: res => {
           console.log('success', res)
           if (res.confirm) {
-            Toast.showToast(`选择了 ${res.detail.item.name}`)
+            showToast(`选择了 ${res.detail.item.name}`)
           } else {
-            Toast.showToast('取消了')
+            showToast('取消了')
           }
         }
       })

@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'Price'
+  name: 'ExpPrice'
 }
 </script>
 

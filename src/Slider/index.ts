@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Slider from './Slider.vue'
 
-const _Slider: SFCWithInstall<typeof Slider> = Object.assign(Slider, {
-  install: function (app: App) {
-    app.component(Slider.name, Slider)
-  }
-})
-
-export default _Slider
+export { Slider }
+export default withInstall(Slider)

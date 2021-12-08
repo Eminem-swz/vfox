@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Tab from './Tab.vue'
 
-const _Tab: SFCWithInstall<typeof Tab> = Object.assign(Tab, {
-  install: function (app: App) {
-    app.component(Tab.name, Tab)
-  }
-})
-
-export default _Tab
+export { Tab }
+export default withInstall(Tab)

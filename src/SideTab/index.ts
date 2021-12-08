@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import SideTab from './SideTab.vue'
 
-const _SideTab: SFCWithInstall<typeof SideTab> = Object.assign(SideTab, {
-  install: function (app: App) {
-    app.component(SideTab.name, SideTab)
-  }
-})
-
-export default _SideTab
+export { SideTab }
+export default withInstall(SideTab)

@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Timeline from './Timeline.vue'
+import TimelineItem from './TimelineItem.vue'
 
-const _Timeline: SFCWithInstall<typeof Timeline> = Object.assign(Timeline, {
-  install: function (app: App) {
-    app.component(Timeline.name, Timeline)
-  }
-})
-
-export default _Timeline
+export { Timeline, TimelineItem }
+export default multiWithInstall(Timeline, [TimelineItem])

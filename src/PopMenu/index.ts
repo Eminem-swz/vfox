@@ -1,11 +1,9 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import PopMenu from '../Popover/PopMenu.vue'
-import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
+import type { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
-import { DomSelector } from '../helpers/types'
-import { PlacementType } from '../helpers/types'
-import { OptionItem } from '../Popover/types'
+import type { DomSelector, PlacementType } from '../helpers/types'
+import type { OptionItem } from '../Popover/types'
 
 type ShowPopMenuOptions = {
   selector: DomSelector
@@ -25,13 +23,7 @@ const showPopMenu = function (object: ShowPopMenuOptions) {
   })
 }
 
-const _PopMenu: SFCWithInstall<typeof PopMenu> & {
-  showPopMenu: typeof showPopMenu
-} = Object.assign(PopMenu, {
-  install: function (app: App) {
-    app.component(PopMenu.name, PopMenu)
-  },
+export { PopMenu, showPopMenu }
+export default withInstall(PopMenu, {
   showPopMenu
 })
-
-export default _PopMenu

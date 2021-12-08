@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Order from './Order.vue'
 
-const _Order: SFCWithInstall<typeof Order> = Object.assign(Order, {
-  install: function (app: App) {
-    app.component(Order.name, Order)
-  }
-})
-
-export default _Order
+export { Order }
+export default withInstall(Order)

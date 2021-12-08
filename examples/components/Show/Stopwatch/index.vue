@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'Stopwatch',
+  name: 'ExpStopwatch',
   data() {
     return {
       paused: true,

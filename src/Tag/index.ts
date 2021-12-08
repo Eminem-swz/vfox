@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Tag from './Tag.vue'
 
-const _Tag: SFCWithInstall<typeof Tag> = Object.assign(Tag, {
-  install: function (app: App) {
-    app.component(Tag.name, Tag)
-  }
-})
-
-export default _Tag
+export { Tag }
+export default withInstall(Tag)

@@ -1,1 +1,2 @@
-import '../../Skeleton/index.scss'
+import '../../Skeleton/style'
+

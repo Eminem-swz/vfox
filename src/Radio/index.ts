@@ -1,11 +1,6 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { multiWithInstall } from '@/helpers/with-install'
 import Radio from './Radio.vue'
+import RadioGroup from './RadioGroup.vue'
 
-const _Radio: SFCWithInstall<typeof Radio> = Object.assign(Radio, {
-  install: function (app: App) {
-    app.component(Radio.name, Radio)
-  }
-})
-
-export default _Radio
+export { Radio, RadioGroup }
+export default multiWithInstall(Radio, [RadioGroup])

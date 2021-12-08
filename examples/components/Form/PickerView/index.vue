@@ -28,7 +28,7 @@ import { cloneData } from '@/helpers/util'
 import { cascadeOptions, multiOptions, options } from '../Picker/data'
 
 export default {
-  name: 'PickerView',
+  name: 'ExpPickerView',
   data() {
     return {
       options,

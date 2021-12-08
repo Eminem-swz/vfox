@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import RadioGroup from '../Radio/RadioGroup.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { RadioGroup } from '@/Radio'
 
-const _RadioGroup: SFCWithInstall<typeof RadioGroup> = Object.assign(
-  RadioGroup,
-  {
-    install: function (app: App) {
-      app.component(RadioGroup.name, RadioGroup)
-    }
-  }
-)
-
-export default _RadioGroup
+export { RadioGroup }
+export default withNoopInstall(RadioGroup)

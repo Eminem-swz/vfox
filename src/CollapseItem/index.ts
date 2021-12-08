@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import CollapseItem from '../Collapse/CollapseItem.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { CollapseItem } from '@/Collapse'
 
-const _CollapseItem: SFCWithInstall<typeof CollapseItem> = Object.assign(
-  CollapseItem,
-  {
-    install: function (app: App) {
-      app.component(CollapseItem.name, CollapseItem)
-    }
-  }
-)
-
-export default _CollapseItem
+export { CollapseItem }
+export default withNoopInstall(CollapseItem)

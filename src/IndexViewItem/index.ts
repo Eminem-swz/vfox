@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import IndexViewItem from '../IndexView/IndexViewItem.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { IndexViewItem } from '@/IndexView'
 
-const _IndexViewItem: SFCWithInstall<typeof IndexViewItem> = Object.assign(
-  IndexViewItem,
-  {
-    install: function (app: App) {
-      app.component(IndexViewItem.name, IndexViewItem)
-    }
-  }
-)
-
-export default _IndexViewItem
+export { IndexViewItem }
+export default withNoopInstall(IndexViewItem)

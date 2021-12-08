@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Group from './Group.vue'
 
-const _Group: SFCWithInstall<typeof Group> = Object.assign(Group, {
-  install: function (app: App) {
-    app.component(Group.name, Group)
-  }
-})
-
-export default _Group
+export { Group }
+export default withInstall(Group)

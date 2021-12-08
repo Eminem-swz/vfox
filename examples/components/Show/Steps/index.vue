@@ -87,7 +87,7 @@
 
 <script>
 export default {
-  name: 'Steps',
+  name: 'ExpSteps',
   data() {
     return {
       stepIndex: 1,

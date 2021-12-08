@@ -1,2 +1,1 @@
-import '../../Cell/style'
-import '../../Collapse/index.scss'
+import '../../Collapse/style'

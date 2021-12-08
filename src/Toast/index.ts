@@ -1,8 +1,7 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import Toast from './Toast.vue'
 import { showPopup, hidePopup, createAlertHook } from '@/apis/Popup'
-import { ApiFnOptions } from '../apis/types'
+import type { ApiFnOptions } from '../apis/types'
 import { isObject, isString } from '@/helpers/util'
 
 type ShowToastOptions = {
@@ -72,19 +71,10 @@ const hideLoading = function (object?: Partial<ApiFnOptions>) {
   return hidePopup(object || {}, 'hideLoading')
 }
 
-const _Toast: SFCWithInstall<typeof Toast> & {
-  showToast: typeof showToast
-  hideToast: typeof hideToast
-  showLoading: typeof showLoading
-  hideLoading: typeof hideLoading
-} = Object.assign(Toast, {
-  install: function (app: App) {
-    app.component(Toast.name, Toast)
-  },
+export { Toast, showToast, hideToast, showLoading, hideLoading }
+export default withInstall(Toast, {
   showToast,
   hideToast,
   showLoading,
   hideLoading
 })
-
-export default _Toast

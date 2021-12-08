@@ -131,7 +131,7 @@
 
 <script>
 export default {
-  name: 'Badge',
+  name: 'ExpBadge',
   data() {
     return {
       count: 0,

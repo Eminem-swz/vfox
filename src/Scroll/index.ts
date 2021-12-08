@@ -1,5 +1,4 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withNoopInstall } from '@/helpers/with-install'
 import { pageScrollTo, scrollTo } from '@/apis/Scroll'
 
 const Scroll = {
@@ -7,10 +6,5 @@ const Scroll = {
   scrollTo
 }
 
-const _Scroll: SFCWithInstall<typeof Scroll> = Object.assign(Scroll, {
-  install: function (app: App) {
-    // empty
-  }
-})
-
-export default _Scroll
+export { Scroll }
+export default withNoopInstall(Scroll)

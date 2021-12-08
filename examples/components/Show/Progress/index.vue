@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  name: 'Progress',
+  name: 'ExpProgress',
   data() {
     return {
       percentage: 0

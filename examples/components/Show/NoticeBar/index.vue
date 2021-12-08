@@ -67,10 +67,10 @@
 </template>
 
 <script>
-import Toast from '@/Toast'
+import { showToast } from '@/Toast'
 
 export default {
-  name: 'NoticeBar',
+  name: 'ExpNoticeBar',
   data() {
     return {
       visible: true,
@@ -81,10 +81,10 @@ export default {
   },
   methods: {
     onClose() {
-      Toast.showToast('点击了关闭按钮')
+      showToast('点击了关闭按钮')
     },
     onClick() {
-      Toast.showToast('点击了通告栏')
+      showToast('点击了通告栏')
     }
   }
 }

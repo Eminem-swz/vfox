@@ -1,12 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import SkeletonParagraph from '../Skeleton/SkeletonParagraph.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { SkeletonParagraph } from '@/Skeleton'
 
-const _SkeletonParagraph: SFCWithInstall<typeof SkeletonParagraph> =
-  Object.assign(SkeletonParagraph, {
-    install: function (app: App) {
-      app.component(SkeletonParagraph.name, SkeletonParagraph)
-    }
-  })
-
-export default _SkeletonParagraph
+export { SkeletonParagraph }
+export default withNoopInstall(SkeletonParagraph)

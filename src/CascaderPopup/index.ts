@@ -1,25 +1,8 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import CascaderPopup from '../Cascader/CascaderPopup.vue'
-import { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
+import type { PopupConfirmArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
-import type {
-  ModeNames,
-  UserFieldNames,
-  ModelValue,
-  UserOptionItem
-} from '../Picker/types'
-
-type ShowCascaderOptions = {
-  options: UserOptionItem[]
-} & Partial<
-  {
-    title: string
-    value: ModelValue
-    mode: ModeNames
-    fieldNames: UserFieldNames
-  } & ApiFnOptions
->
+import type { ShowCascaderOptions } from '../Cascader/types'
 
 const showCascader = function (object: ShowCascaderOptions) {
   return showPopup<PopupConfirmArgs>(object, 'showCascader', function (done) {
@@ -30,13 +13,5 @@ const showCascader = function (object: ShowCascaderOptions) {
   })
 }
 
-const _CascaderPopup: SFCWithInstall<typeof CascaderPopup> & {
-  showCascader: typeof showCascader
-} = Object.assign(CascaderPopup, {
-  install: function (app: App) {
-    app.component(CascaderPopup.name, CascaderPopup)
-  },
-  showCascader
-})
-
-export default _CascaderPopup
+export { CascaderPopup, showCascader }
+export default withInstall(CascaderPopup, { showCascader })

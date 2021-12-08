@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import AvatarGroup from '../Avatar/AvatarGroup.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { AvatarGroup } from '@/Avatar'
 
-const _AvatarGroup: SFCWithInstall<typeof AvatarGroup> = Object.assign(
-  AvatarGroup,
-  {
-    install: function (app: App) {
-      app.component(AvatarGroup.name, AvatarGroup)
-    }
-  }
-)
-
-export default _AvatarGroup
+export { AvatarGroup }
+export default withNoopInstall(AvatarGroup)

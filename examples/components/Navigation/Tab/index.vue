@@ -30,7 +30,7 @@
 import { shortTabList, tabList, mixTabList, subTabList } from './data'
 
 export default {
-  name: 'Tab',
+  name: 'ExpTab',
   data() {
     return {
       shortActiveValue: 1,

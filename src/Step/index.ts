@@ -1,11 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
-import Step from '../Steps/Step.vue'
+import { withNoopInstall } from '@/helpers/with-install'
+import { Step } from '@/Steps'
 
-const _Step: SFCWithInstall<typeof Step> = Object.assign(Step, {
-  install: function (app: App) {
-    app.component(Step.name, Step)
-  }
-})
-
-export default _Step
+export { Step }
+export default withNoopInstall(Step)

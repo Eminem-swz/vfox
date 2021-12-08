@@ -1,14 +1,5 @@
-import { App } from 'vue'
-import { SFCWithInstall } from '@/helpers/types'
+import { withInstall } from '@/helpers/with-install'
 import NumberKeyboard from './NumberKeyboard.vue'
 
-const _NumberKeyboard: SFCWithInstall<typeof NumberKeyboard> = Object.assign(
-  NumberKeyboard,
-  {
-    install: function (app: App) {
-      app.component(NumberKeyboard.name, NumberKeyboard)
-    }
-  }
-)
-
-export default _NumberKeyboard
+export { NumberKeyboard }
+export default withInstall(NumberKeyboard)

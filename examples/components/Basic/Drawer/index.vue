@@ -77,8 +77,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PopupVisibleStateChangeArgs, PlacementType } from '../../utils/types'
-import Toast from '@/Toast'
+import type {
+  PopupVisibleStateChangeArgs,
+  PlacementType
+} from '../../utils/types'
+import { showToast } from '@/Toast'
 
 interface showArgs {
   title?: string
@@ -88,7 +91,7 @@ interface showArgs {
 }
 
 export default defineComponent({
-  name: 'Drawer',
+  name: 'ExpDrawer',
   data() {
     return {
       drawerVisible: false,
@@ -108,7 +111,7 @@ export default defineComponent({
     },
     onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        Toast.showToast(`${state} 事件触发`)
+        showToast(`${state} 事件触发`)
         console.log(`${state} 事件触发`)
       }
     }
