@@ -1,1 +1,1 @@
-import '../../TabView/style'
+import '../../TabView/style/index'

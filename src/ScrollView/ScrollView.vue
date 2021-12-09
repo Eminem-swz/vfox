@@ -55,8 +55,8 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted, watch, reactive } from 'vue'
-import Icon from '@/Icon'
-import ActivityIndicator from '@/ActivityIndicator'
+import { Icon } from '@/Icon'
+import { ActivityIndicator } from '@/ActivityIndicator'
 import {
   inArray,
   stringMix2StringArray,

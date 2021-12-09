@@ -1,12 +1,12 @@
 <template>
   <div class="fx-stepper" :class="{ disabled }">
-    <FxButton
+    <Button
       icon="MinusOutlined"
       shape="square"
       size="small"
       :disabled="disabled || disabledMinus || parseFloat(formValue) <= min"
       @click="onMinusOrPlusClick(false)"
-    />
+    ></Button>
     <input
       class="fx-stepper_input"
       :type="allowDecimal ? 'text' : 'tel'"
@@ -20,19 +20,19 @@
       @change="onChange"
       ref="input"
     />
-    <FxButton
+    <Button
       icon="PlusOutlined"
       shape="square"
       size="small"
       :disabled="disabled || disabledPlus || parseFloat(formValue) >= max"
       @click="onMinusOrPlusClick(true)"
-    />
+    ></Button>
   </div>
 </template>
 
 <script lang="ts">
 import { onMounted, ref, defineComponent, watch } from 'vue'
-import FxButton from '@/Button'
+import { Button } from '@/Button'
 import { rangeInteger, rangeNumber } from '@/helpers/util'
 import { formatInputNumber } from '@/helpers/input'
 import { formItemEmits, formItemProps } from '@/Form/form'
@@ -40,7 +40,7 @@ import { useFormItem } from '@/Form/use-form'
 
 export default defineComponent({
   name: 'fx-stepper',
-  components: { FxButton },
+  components: { Button },
   props: {
     ...formItemProps,
     modelValue: {

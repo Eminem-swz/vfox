@@ -29,7 +29,7 @@ import {
   inject,
   ComponentInternalInstance
 } from 'vue'
-import Cell from '@/Cell'
+import { Cell } from '@/Cell'
 import { iconValidator } from '@/helpers/validator'
 import { useGroupItem } from '@/hooks/use-group'
 import Exception from '@/helpers/exception'

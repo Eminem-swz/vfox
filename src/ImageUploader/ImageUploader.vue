@@ -34,7 +34,7 @@
           @contextmenu.prevent="noop"
           @click="onItemClick(item)"
         >
-          <FxImage :src="item.url" :draggable="false" :mode="imageMode" />
+          <Image :src="item.url" :draggable="false" :mode="imageMode" />
           <div
             class="fx-image-uploader_item-status"
             v-if="item.status !== 'uploaded' && item.status !== 'reading'"
@@ -65,14 +65,14 @@
     showClose
   >
     <template #close="{ activeIndex }">
-      <FxButton
+      <Button
         @click.stop="onPreviewDelete(activeIndex)"
         icon="DeleteOutlined"
         size="large"
         pattern="borderless"
         shape="square"
         :ghost="true"
-      ></FxButton>
+      ></Button>
     </template>
   </ImagePreview>
 </template>
@@ -87,13 +87,13 @@ import {
   ref,
   onMounted
 } from 'vue'
-import FxImage from '@/Image'
-import FxButton from '@/Button'
-import Icon from '@/Icon'
-import Order from '@/Order'
-import ImagePreview from '@/ImagePreview'
-import Dialog from '@/Dialog'
-import ActivityIndicator from '@/ActivityIndicator'
+import { Image } from '@/Image'
+import { Button } from '@/Button'
+import { Icon } from '@/Icon'
+import { Order } from '@/Order'
+import { ImagePreview } from '@/ImagePreview'
+import { showDialog } from '@/Dialog'
+import { ActivityIndicator } from '@/ActivityIndicator'
 import {
   isPromiseLike,
   isString,
@@ -174,8 +174,8 @@ export default defineComponent({
     Order,
     Icon,
     ImagePreview,
-    FxButton,
-    FxImage,
+    Button,
+    Image,
     ActivityIndicator
   },
   props: {
@@ -540,7 +540,7 @@ export default defineComponent({
 
         if (optionItem.status === 'uploaded') {
           if (j === activeIndex && optionItem.url === current) {
-            Dialog.showDialog({
+            showDialog({
               content: '要删除这张图片吗？',
               confirmText: '删除'
             }).then(res => {

@@ -1,2 +1,1 @@
-import '../../Skeleton/style'
-
+import '../../Skeleton/style/index'

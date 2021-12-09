@@ -15,18 +15,18 @@
             <div class="fx-popover_text">{{ content }}</div>
           </div>
           <div class="fx-pop-dialog_footer fx-horizontal-hairline">
-            <FxButtonGroup
+            <ButtonGroup
               class="fx-pop-dialog_footer-inner"
               pattern="borderless"
               size="middle"
             >
-              <FxButton v-if="showCancel" type="default" @click="onCancelClick">
+              <Button v-if="showCancel" type="default" @click="onCancelClick">
                 {{ cancelText }}
-              </FxButton>
-              <FxButton type="primary" @click="onConfirmClick">
+              </Button>
+              <Button type="primary" @click="onConfirmClick">
                 {{ confirmText }}
-              </FxButton>
-            </FxButtonGroup>
+              </Button>
+            </ButtonGroup>
           </div>
         </div>
       </div>
@@ -38,12 +38,11 @@
 import { defineComponent } from 'vue'
 import { usePopover } from '@/Popover/use-popover'
 import { popoverProps, popoverEmits } from '@/Popover/popover'
-import FxButton from '@/Button'
-import FxButtonGroup from '@/ButtonGroup'
+import { Button, ButtonGroup } from '@/Button'
 
 export default defineComponent({
   name: 'fx-pop-dialog',
-  components: { FxButton, FxButtonGroup },
+  components: { Button, ButtonGroup },
   props: {
     ...popoverProps,
     content: {

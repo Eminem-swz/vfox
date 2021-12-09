@@ -1,5 +1,6 @@
 <template>
-  <LoadingSvg
+  <LoadingIcon
+    class="fx-activity-indicator"
     :class="{ animated }"
     :size="size"
     :rate="0.2"
@@ -9,12 +10,12 @@
 </template>
 
 <script lang="ts">
-import LoadingSvg from './LoadingSvg.vue'
 import { defineComponent } from 'vue'
+import { LoadingIcon } from '@/LoadingIcon'
 
 export default defineComponent({
   name: 'fx-activity-indicator',
-  components: { LoadingSvg },
+  components: { LoadingIcon },
   props: {
     animated: {
       type: Boolean,

@@ -123,10 +123,10 @@
 
 <script>
 import { markRaw } from 'vue'
-import TaobaoSvg from './svgs/taobao.svg'
-import QqSvg from './svgs/qq.svg'
-import WechatSvg from './svgs/wechat.svg'
-import WeiboSvg from './svgs/weibo.svg'
+import TaobaoSvg from '../../../assets/icons/taobao.svg'
+import QqSvg from '../../../assets/icons/qq.svg'
+import WechatSvg from '../../../assets/icons/wechat.svg'
+import WeiboSvg from '../../../assets/icons/weibo.svg'
 
 export default {
   name: 'ExpIcon',

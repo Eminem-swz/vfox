@@ -1,2 +1,2 @@
-import '../../Toast/style'
+import '../../Toast/style/index'
 import '../index.scss'

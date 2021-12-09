@@ -1,2 +1,1 @@
-import '../../Slider/style'
-import '../index.scss'
+import '../../Slider/style/index'

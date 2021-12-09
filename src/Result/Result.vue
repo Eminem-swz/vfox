@@ -9,20 +9,20 @@
     </div>
     <slot></slot>
     <div class="fx-result_footer">
-      <FxButton type="primary" @click="onConfirmClick">
+      <Button type="primary" @click="onConfirmClick">
         {{ confirmText }}
-      </FxButton>
-      <FxButton v-if="showBack" type="default" @click="onCancelClick">
+      </Button>
+      <Button v-if="showBack" type="default" @click="onCancelClick">
         {{ backText }}
-      </FxButton>
+      </Button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import Icon from '@/Icon'
-import FxButton from '@/Button'
+import { Icon } from '@/Icon'
+import { Button } from '@/Button'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 
 type ResultType = 'info' | 'warning' | 'success' | 'fail'
@@ -38,7 +38,7 @@ const RESULT_TYPES: ResultType[] = ['info', 'warning', 'success', 'fail']
 
 export default defineComponent({
   name: 'fx-result',
-  components: { Icon, FxButton },
+  components: { Icon, Button },
   props: {
     // 类型
     type: {

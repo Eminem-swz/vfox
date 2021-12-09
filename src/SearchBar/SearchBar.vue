@@ -7,7 +7,7 @@
       ref="inner"
       :style="{ background }"
     >
-      <FxInput
+      <Input
         class="fx-search_field"
         :class="{ ghost: !!ghost }"
         :placeholder="placeholder"
@@ -25,9 +25,9 @@
         <template #prepend>
           <Icon icon="SearchOutlined" />
         </template>
-      </FxInput>
+      </Input>
       <button class="fx-search_button">Search</button>
-      <FxButton
+      <Button
         class="fx-search_cancel-button"
         size="large"
         type="default"
@@ -37,7 +37,7 @@
         @click="onCancel"
       >
         取消
-      </FxButton>
+      </Button>
     </form>
     <Dropdown
       :selector="$refs.inner"
@@ -69,12 +69,12 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, reactive, ref, watch } from 'vue'
-import Icon from '@/Icon'
-import FxInput from '@/Input'
-import FxButton from '@/Button'
-import Dropdown from '@/Dropdown'
-import Cell from '@/Cell'
-import Tag from '@/Tag'
+import { Icon } from '@/Icon'
+import { Input } from '@/Input'
+import { Button } from '@/Button'
+import { Dropdown } from '@/Dropdown'
+import { Cell } from '@/Cell'
+import { Tag } from '@/Tag'
 import {
   isArray,
   isObject,
@@ -93,7 +93,7 @@ type SuggestList = (string | number | SuggestItem)[]
 
 export default defineComponent({
   name: 'fx-search-bar',
-  components: { Icon, FxInput, FxButton, Dropdown, Cell, Tag },
+  components: { Icon, Input, Button, Dropdown, Cell, Tag },
   props: {
     ghost: {
       type: Boolean,

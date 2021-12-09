@@ -1,2 +1,1 @@
-import '../../Picker/style'
-import '../index.scss'
+import '../../Picker/style/index'

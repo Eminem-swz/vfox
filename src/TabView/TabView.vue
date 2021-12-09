@@ -29,9 +29,9 @@
 
 <script lang="ts">
 import { ref, defineComponent, reactive, provide } from 'vue'
-import Tab from '@/Tab'
-import SideTab from '@/SideTab'
-import Swiper from '@/Swiper'
+import { Tab } from '@/Tab'
+import { SideTab } from '@/SideTab'
+import { Swiper } from '@/Swiper'
 import { useList } from '@/hooks/use-list'
 
 interface SwiperCallbackRes {

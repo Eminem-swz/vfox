@@ -1,1 +1,1 @@
-import '../../Button/style'
+import '../../Button/style/index'

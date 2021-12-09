@@ -29,7 +29,7 @@
 import { defineComponent } from 'vue'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
-import Icon from '@/Icon'
+import { Icon } from '@/Icon'
 
 export default defineComponent({
   name: 'fx-modal',

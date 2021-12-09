@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, toRef, PropType, watch } from 'vue'
-import NavBar from '@/NavBar'
+import { NavBar } from '@/NavBar'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
 import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'

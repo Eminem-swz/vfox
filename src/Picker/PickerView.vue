@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent, nextTick, ref } from 'vue'
-import Empty from '@/Empty'
+import { Empty } from '@/Empty'
 import { frameTo } from '@/helpers/animation'
 import { hasClassName } from '@/helpers/dom'
 import { commonProps, pickerViewEmits } from '@/Picker/picker'

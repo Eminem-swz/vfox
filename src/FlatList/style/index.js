@@ -1,2 +1,2 @@
-import '../../ScrollView/style'
+import '../../ScrollView/style/index'
 import '../index.scss'

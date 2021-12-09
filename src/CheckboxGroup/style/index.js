@@ -1,1 +1,1 @@
-import '../../Checkbox/style'
+import '../../Checkbox/style/index'

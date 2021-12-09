@@ -22,14 +22,6 @@
 </template>
 
 <script lang="ts">
-import Icon from '@/Icon'
-import {
-  addLazyQueue,
-  loadNow,
-  removeComponentFromLazy,
-  ImageLoadObject,
-  ImageLoadedResource
-} from '@/Image/load-image'
 import {
   defineComponent,
   onMounted,
@@ -41,13 +33,21 @@ import {
   computed,
   ComponentInternalInstance
 } from 'vue'
+import { Icon } from '@/Icon'
+import {
+  addLazyQueue,
+  loadNow,
+  removeComponentFromLazy,
+  ImageLoadObject,
+  ImageLoadedResource
+} from '@/Image/load-image'
 import {
   createEnumsValidator,
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
 import Exception from '@/helpers/exception'
-import { ImageModes, ImageOnLoadPayLoad } from './types'
+import type { ImageModes, ImageOnLoadPayLoad } from './types'
 
 const MODE_NAMES = [
   'scaleToFill',
@@ -131,12 +131,9 @@ export default defineComponent({
     }
 
     function checkInView() {
-      const {
-        top,
-        right,
-        bottom,
-        left
-      } = (root.value as HTMLElement).getBoundingClientRect()
+      const { top, right, bottom, left } = (
+        root.value as HTMLElement
+      ).getBoundingClientRect()
 
       return (
         top < window.innerHeight * LAZY_PRELOAD &&

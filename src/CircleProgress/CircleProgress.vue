@@ -3,7 +3,7 @@
     class="fx-circle-progress"
     :style="{ fontSize: Math.max(9, size * 0.17 * 0.875) + 'px' }"
   >
-    <LoadingSvg
+    <LoadingIcon
       class="fx-circle-progress_bar"
       :size="size"
       :rate="rate"
@@ -22,13 +22,13 @@
 </template>
 
 <script lang="ts">
-import LoadingSvg from '../ActivityIndicator/LoadingSvg.vue'
 import { computed, defineComponent } from 'vue'
+import { LoadingIcon } from '@/LoadingIcon'
 import { isNumeric, rangeInteger } from '@/helpers/util'
 
 export default defineComponent({
   name: 'fx-circle-progress',
-  components: { LoadingSvg },
+  components: { LoadingIcon },
   props: {
     percentage: {
       type: [String, Number],

@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import { defineComponent, nextTick, ref, computed } from 'vue'
-import Drawer from '@/Drawer'
+import { Drawer } from '@/Drawer'
 import { frameTo } from '@/helpers/animation'
 import { isSameArray } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'

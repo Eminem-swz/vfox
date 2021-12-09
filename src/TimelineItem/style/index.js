@@ -1,1 +1,1 @@
-import '../../Timeline/style'
+import '../../Timeline/style/index'

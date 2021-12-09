@@ -10,7 +10,7 @@
     v-bind="{ ...$attrs, ...badge2 }"
   >
     <slot>
-      <FxImage
+      <Image
         class="fx-avatar_image"
         :src="src"
         mode="aspectFill"
@@ -33,9 +33,9 @@ import {
   PropType,
   ComponentInternalInstance
 } from 'vue'
-import Icon from '@/Icon'
-import Badge from '@/Badge'
-import FxImage from '@/Image'
+import { Icon } from '@/Icon'
+import { Badge } from '@/Badge'
+import { Image } from '@/Image'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { COlOR_STYLES } from '@/helpers/constants'
 import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '@/Avatar/avatar'
@@ -51,7 +51,7 @@ const GenderNames = ['woman', 'man']
 
 export default defineComponent({
   name: 'fx-avatar',
-  components: { Badge, FxImage, Icon },
+  components: { Badge, Image, Icon },
   props: {
     ...avatarProps,
     shape: {

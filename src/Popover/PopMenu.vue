@@ -41,7 +41,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import { usePopover } from '@/Popover/use-popover'
 import { popoverProps, popoverEmits } from '@/Popover/popover'
-import Icon from '@/Icon'
+import { Icon } from '@/Icon'
 import { isArray, isObject } from '@/helpers/util'
 import type { OptionItem } from './types'
 

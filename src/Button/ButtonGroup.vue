@@ -13,13 +13,13 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, PropType, provide, reactive, watch } from 'vue'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { SIZE_TYPES } from '@/helpers/constants'
 import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
 import type { SizeType } from '../helpers/types'
 import type { ButtonPatternType, ButtonShapeType } from './types'
 import { useGroup } from '@/hooks/use-group'
-import { defineComponent, PropType, provide, reactive, watch } from 'vue'
 
 export default defineComponent({
   name: 'fx-button-group',

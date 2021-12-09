@@ -1,6 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import { Checkbox } from '@/Checkbox'
-import { CheckboxGroup } from '@/CheckboxGroup'
+import { Checkbox, CheckboxGroup } from '@/Checkbox'
 
 describe('Checkbox', () => {
   test('should render default correctly', () => {

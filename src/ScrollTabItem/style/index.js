@@ -1,1 +1,1 @@
-import '../../ScrollTab/style'
+import '../../ScrollTab/style/index'

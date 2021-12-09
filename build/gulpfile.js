@@ -8,7 +8,7 @@ const through = require('through2')
 const cleanCSS = require('gulp-clean-css')
 const rename = require('gulp-rename')
 
-function sass2css() {
+function sass2Css() {
   return gulp
     .src('../src/**/*.scss')
     .pipe(sass({ outputStyle: 'expanded' }))
@@ -52,22 +52,17 @@ function cacheTsPath() {
   return gulp
     .src('../src/**/*.ts')
     .pipe(
-      through.obj(function(file, enc, callback) {
-        this.push(
-          `${file.path
-            .replace(/\\/g, '/')
-            .split('src/')
-            .pop()}\n`
-        )
+      through.obj(function (file, enc, callback) {
+        this.push(`${file.path.replace(/\\/g, '/').split('src/').pop()}\n`)
         callback()
       })
     )
-    .on('data', function(data) {
+    .on('data', function (data) {
       paths.push(data)
     })
     .pipe(fs.createWriteStream('ts-files.txt'))
 }
 
-exports.build = gulp.series(sass2css, copyStyle, compressCss)
+exports.build = gulp.series(sass2Css, copyStyle, compressCss)
 exports.dts = fixDts
 exports.cts = cacheTsPath

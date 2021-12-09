@@ -56,13 +56,17 @@ import {
   watch,
   onBeforeUnmount
 } from 'vue'
-import Icon from '@/Icon'
-import Drawer from '@/Drawer'
-import { isArray, isStringNumberMix, rangeNumber } from '@/helpers/util'
+import { Icon } from '@/Icon'
+import { Drawer } from '@/Drawer'
+import {
+  isArray,
+  isStringNumberMix,
+  rangeNumber,
+  cloneData
+} from '@/helpers/util'
 import type { DataObject, Noop } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
-import { cloneData } from '@/helpers/util'
 import type { PopupVisibleStateChangeArgs } from '../popup/types'
 
 type Item = {

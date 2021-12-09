@@ -25,8 +25,8 @@
 
 <script lang="ts">
 import { defineComponent, computed, onBeforeUnmount, PropType } from 'vue'
-import Icon from '@/Icon'
-import ActivityIndicator from '@/ActivityIndicator'
+import { Icon } from '@/Icon'
+import { ActivityIndicator } from '@/ActivityIndicator'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
 import { isUndefined } from '@/helpers/util'

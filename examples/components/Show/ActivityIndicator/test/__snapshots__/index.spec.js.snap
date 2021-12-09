@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActivityIndicator should render default correctly 1`] = `<loading-svg-stub rate="0.2" size="20" strokewidth="1.0739999999999998" class="animated"></loading-svg-stub>`;
+exports[`ActivityIndicator should render default correctly 1`] = `<loading-icon-stub rate="0.2" size="20" strokewidth="1.0739999999999998" class="fx-activity-indicator animated"></loading-icon-stub>`;
 
-exports[`ActivityIndicator should render prop size=48 correctly 1`] = `<loading-svg-stub rate="0.2" size="48" strokewidth="2.5776" class="animated"></loading-svg-stub>`;
+exports[`ActivityIndicator should render prop size=48 correctly 1`] = `<loading-icon-stub rate="0.2" size="48" strokewidth="2.5776" class="fx-activity-indicator animated"></loading-icon-stub>`;

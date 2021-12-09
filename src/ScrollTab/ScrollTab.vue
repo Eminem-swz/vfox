@@ -25,9 +25,9 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, ref } from 'vue'
-import SideTab from '@/SideTab'
-import Sticky from '@/Sticky'
-import StickyView from '@/StickyView'
+import { SideTab } from '@/SideTab'
+import { Sticky } from '@/Sticky'
+import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
 

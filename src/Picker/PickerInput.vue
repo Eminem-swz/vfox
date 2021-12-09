@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Icon from '@/Icon'
+import { Icon } from '@/Icon'
 
 export default defineComponent({
   name: 'fx-picker-input',

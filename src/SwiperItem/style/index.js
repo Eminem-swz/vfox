@@ -1,1 +1,1 @@
-import '../../Swiper/style'
+import '../../Swiper/style/index'

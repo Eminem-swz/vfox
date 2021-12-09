@@ -24,21 +24,21 @@
       @select="onSelect"
     />
     <div class="fx-calendar-popup_confirm" v-if="showConfirm">
-      <FxButton
+      <Button
         type="primary"
         @click="onConfirmClick"
         :disabled="detail.value.length == 0"
         >确定
-      </FxButton>
+      </Button>
     </div>
   </Drawer>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, ref } from 'vue'
-import CalendarView from '@/CalendarView'
-import Drawer from '@/Drawer'
-import FxButton from '@/Button'
+import { CalendarView } from '@/CalendarView'
+import { Drawer } from '@/Drawer'
+import { Button } from '@/Button'
 import { getDefaultDetail, cloneDetail, commonProps } from '@/Calendar/calendar'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
@@ -46,7 +46,7 @@ import type { DetailObject } from './types'
 
 export default defineComponent({
   name: 'fx-calendar-popup',
-  components: { CalendarView, Drawer, FxButton },
+  components: { CalendarView, Drawer, Button },
   props: {
     ...commonProps,
     ...popupExtendProps,

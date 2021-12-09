@@ -1,1 +1,1 @@
-import '../../Collapse/style'
+import '../../Collapse/style/index'

@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ActivityIndicator from '@/ActivityIndicator'
+import { ActivityIndicator } from '@/ActivityIndicator'
 
 export default defineComponent({
   name: 'fx-load-more',

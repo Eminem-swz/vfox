@@ -1,5 +1,5 @@
 import '../../style/hairline.scss'
-import '../../Tab/style'
-import '../../SideTab/style'
-import '../../Swiper/style'
+import '../../Tab/style/index'
+import '../../SideTab/style/index'
+import '../../Swiper/style/index'
 import '../index.scss'

@@ -3,14 +3,14 @@
     <div class="fx-nav-bar_inner">
       <div class="fx-nav-bar_left">
         <slot name="left" v-if="$slots.left"></slot>
-        <FxButtonGroup
+        <ButtonGroup
           v-else-if="leftButtons.length > 0 || showBack || showHome"
           class="fx-nav-bar_button-group"
           :shape="iconOnly ? 'square' : 'rectangle'"
           pattern="borderless"
         >
           <template v-if="leftButtons.length > 0">
-            <FxButton
+            <Button
               class="fx-nav-bar_button"
               transparent
               :type="item.type || 'default'"
@@ -18,30 +18,30 @@
               v-for="(item, index) in leftButtons"
               :key="index"
               @click="onLeftIconClick(item, index)"
-              >{{ item.text }}</FxButton
+              >{{ item.text }}</Button
             >
           </template>
           <template v-else>
-            <FxButton
+            <Button
               class="fx-nav-bar_button"
               type="default"
               icon="LeftOutlined"
               transparent
               v-if="showBack"
               @click="onBack"
-              >返回</FxButton
+              >返回</Button
             >
-            <FxButton
+            <Button
               class="fx-nav-bar_button"
               type="default"
               icon="HomeOutlined"
               transparent
               v-if="showHome"
               @click="onBackHome"
-              >首页</FxButton
+              >首页</Button
             >
           </template>
-        </FxButtonGroup>
+        </ButtonGroup>
       </div>
       <div
         class="fx-nav-bar_title"
@@ -53,13 +53,13 @@
       <div class="fx-nav-bar_right">
         <slot name="right" v-if="$slots.right"></slot>
         <template v-else>
-          <FxButtonGroup
+          <ButtonGroup
             class="fx-nav-bar_button-group"
             :shape="iconOnly ? 'square' : 'rectangle'"
             pattern="borderless"
             v-if="rightButtons.length > 0"
           >
-            <FxButton
+            <Button
               class="fx-nav-bar_button"
               :type="item.type || 'default'"
               :icon="item.icon"
@@ -67,9 +67,9 @@
               :key="index"
               transparent
               @click="onRightIconClick(item, index)"
-              >{{ item.text }}</FxButton
+              >{{ item.text }}</Button
             >
-          </FxButtonGroup>
+          </ButtonGroup>
         </template>
       </div>
     </div>
@@ -78,8 +78,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import FxButton from '@/Button'
-import FxButtonGroup from '@/ButtonGroup'
+import { Button, ButtonGroup } from '@/Button'
 import { isArray, isString, isObject } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
 import type { StateType } from '../helpers/types'
@@ -109,7 +108,7 @@ const validateButtons = (val: any[]) => {
 
 export default defineComponent({
   name: 'fx-nav-bar',
-  components: { FxButton, FxButtonGroup },
+  components: { Button, ButtonGroup },
   props: {
     // 标题
     title: {

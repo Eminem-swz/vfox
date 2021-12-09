@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import Icon from '@/Icon'
+import { Icon } from '@/Icon'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
 import { useLongPress } from '@/hooks/use-long-press'

@@ -55,8 +55,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import Icon from '@/Icon'
-import Drawer from '@/Drawer'
+import { Icon } from '@/Icon'
+import { Drawer } from '@/Drawer'
 import { isStringArray, isString, noop } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'

@@ -1,4 +1,4 @@
-import '../../NavBar/style'
-import '../../Drawer/style'
-import '../../PickerView/style'
+import '../../NavBar/style/index'
+import '../../Drawer/style/index'
+import '../../PickerView/style/index'
 import '../index.scss'

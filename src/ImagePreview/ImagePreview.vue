@@ -18,7 +18,7 @@
       >
         <SwiperItem v-for="(item, index) in images" :key="index">
           <div class="fx-preview-image_image-container">
-            <FxImage
+            <Image
               :src="item.src"
               :mode="'aspectFit'"
               @load="onImageLoad"
@@ -41,7 +41,7 @@
       </div>
       <div class="fx-preview-image_close">
         <slot name="close" :activeIndex="activeIndex">
-          <FxButton
+          <Button
             v-if="showClose"
             @click.stop="onCloseClick"
             icon="CloseOutlined"
@@ -49,7 +49,7 @@
             pattern="borderless"
             shape="square"
             :ghost="true"
-          ></FxButton>
+          ></Button>
         </slot>
       </div>
     </div>
@@ -58,10 +58,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, watch, PropType } from 'vue'
-import FxButton from '@/Button'
-import FxImage from '@/Image'
-import Swiper from '@/Swiper'
-import SwiperItem from '@/SwiperItem'
+import { Button } from '@/Button'
+import { Image } from '@/Image'
+import { Swiper, SwiperItem } from '@/Swiper'
 import { isStringArray, rangeNumber } from '@/helpers/util'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
@@ -116,7 +115,7 @@ interface DistanceOptions {
 
 export default defineComponent({
   name: 'fx-image-preview',
-  components: { FxButton, Swiper, SwiperItem, FxImage },
+  components: { Button, Swiper, SwiperItem, Image },
   props: {
     ...popupProps,
     urls: {

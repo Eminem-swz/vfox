@@ -27,9 +27,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PickerView from '@/PickerView'
-import Drawer from '@/Drawer'
-import NavBar from '@/NavBar'
+import { PickerView } from '@/PickerView'
+import { Drawer } from '@/Drawer'
+import { NavBar } from '@/NavBar'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import { pickerPopupProps, pickerViewEmits } from '@/Picker/picker'

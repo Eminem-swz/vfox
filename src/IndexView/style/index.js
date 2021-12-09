@@ -1,3 +1,3 @@
-import '../../StickyView/style'
-import '../../Group/style'
+import '../../StickyView/style/index'
+import '../../Group/style/index'
 import '../index.scss'

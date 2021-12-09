@@ -33,8 +33,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import CascaderPopup from '@/CascaderPopup'
-import PickerInput from '@/PickerInput'
+import { CascaderPopup } from '@/CascaderPopup'
+import { PickerInput } from '@/PickerInput'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import { pickerEmits, pickerProps, commonProps } from '@/Picker/picker'
 import { usePicker } from '@/Picker/use-picker'

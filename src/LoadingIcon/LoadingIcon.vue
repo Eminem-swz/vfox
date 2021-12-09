@@ -1,12 +1,12 @@
 <template>
   <svg
-    class="fx-activity-indicator"
+    class="fx-loading-icon"
     :height="size"
     :width="size"
     viewBox="0 0 1024 1024"
   >
     <circle
-      class="fx-activity-indicator_track"
+      class="fx-loading-icon_track"
       r="448"
       cx="512"
       cy="512"
@@ -15,7 +15,7 @@
       :style="{ stroke: backgroundColor }"
     ></circle>
     <circle
-      class="fx-activity-indicator_thumb"
+      class="fx-loading-icon_thumb"
       r="448"
       cx="512"
       cy="512"
@@ -34,7 +34,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'fx-activity-indicator-loading',
+  name: 'fx-loading-icon',
   props: {
     rate: {
       type: Number,

@@ -1,5 +1,5 @@
 import '../../style/hairline.scss'
-import '../../Button/style'
-import '../../ButtonGroup/style'
-import '../../Modal/style'
+import '../../Button/style/index'
+import '../../ButtonGroup/style/index'
+import '../../Modal/style/index'
 import '../index.scss'

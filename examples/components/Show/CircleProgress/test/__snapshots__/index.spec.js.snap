@@ -2,28 +2,28 @@
 
 exports[`CircleProgress should render custom default slot correctly 1`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <loading-svg-stub rate="0" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
+  <loading-icon-stub rate="0" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-icon-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">0%</div>
 </div>
 `;
 
 exports[`CircleProgress should render default slot correctly 1`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <loading-svg-stub rate="0" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
+  <loading-icon-stub rate="0" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-icon-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">0%</div>
 </div>
 `;
 
 exports[`CircleProgress should render default slot correctly 2`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <loading-svg-stub rate="0.5" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
+  <loading-icon-stub rate="0.5" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-icon-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">50%</div>
 </div>
 `;
 
 exports[`CircleProgress should render default slot correctly 3`] = `
 <div class="fx-circle-progress" style="font-size: 14.875px;">
-  <loading-svg-stub rate="1" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-svg-stub>
+  <loading-icon-stub rate="1" size="100" strokewidth="5.37" class="fx-circle-progress_bar"></loading-icon-stub>
   <div class="fx-circle-progress_text" style="padding: 5.37px;">100%</div>
 </div>
 `;

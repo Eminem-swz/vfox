@@ -1,1 +1,1 @@
-import '../../Avatar/style'
+import '../../Avatar/style/index'

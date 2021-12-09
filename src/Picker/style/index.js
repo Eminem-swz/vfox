@@ -1,3 +1,3 @@
-import '../../PickerInput/style'
-import '../../PickerPopup/style'
+import '../../PickerInput/style/index'
+import '../../PickerPopup/style/index'
 import '../index.scss'

@@ -1,1 +1,1 @@
-import '../../Steps/style'
+import '../../Steps/style/index'

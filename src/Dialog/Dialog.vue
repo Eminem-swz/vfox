@@ -21,21 +21,17 @@
     </div>
     <div class="fx-dialog_footer fx-horizontal-hairline">
       <ButtonGroup class="fx-dialog_footer-inner" pattern="borderless">
-        <FxButton
+        <Button
           v-if="showCancel"
           class="fx-dialog_button"
           type="default"
           @click="onCancelClick"
         >
           {{ cancelText }}
-        </FxButton>
-        <FxButton
-          class="fx-dialog_button"
-          type="primary"
-          @click="onConfirmClick"
-        >
+        </Button>
+        <Button class="fx-dialog_button" type="primary" @click="onConfirmClick">
           {{ confirmText }}
-        </FxButton>
+        </Button>
       </ButtonGroup>
     </div>
   </Modal>
@@ -43,15 +39,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import FxButton from '@/Button'
-import ButtonGroup from '@/ButtonGroup'
-import Modal from '@/Modal'
+import { Button, ButtonGroup } from '@/Button'
+import { Modal } from '@/Modal'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 
 export default defineComponent({
   name: 'fx-dialog',
-  components: { FxButton, ButtonGroup, Modal },
+  components: { Button, ButtonGroup, Modal },
   props: {
     ...popupExtendProps,
     title: {

@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { computed, PropType, defineComponent } from 'vue'
-import Drawer from '@/Drawer'
+import { Drawer } from '@/Drawer'
 import { isArray, isObject, cloneData } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'

@@ -65,7 +65,8 @@ import {
   nextTick,
   watch
 } from 'vue'
-import LoadMore from '@/LoadMore'
+import { LoadMore } from '@/LoadMore'
+import { ScrollView } from '@/ScrollView'
 import {
   cloneData,
   isFunction,
@@ -75,7 +76,6 @@ import {
   isNumberArray,
   rangeInteger
 } from '@/helpers/util'
-import ScrollView from '@/ScrollView'
 import Exception from '@/helpers/exception'
 import { getRelativeOffset } from '@/helpers/dom'
 import { useResizeDetector } from '@/hooks/use-resize-detector'

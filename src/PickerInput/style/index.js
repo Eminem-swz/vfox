@@ -1,1 +1,1 @@
-import '../../Input/style'
+import '../../Input/style/index'

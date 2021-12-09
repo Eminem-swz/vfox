@@ -1,1 +1,1 @@
-import '../../Radio/style'
+import '../../Radio/style/index'

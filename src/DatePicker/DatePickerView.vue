@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PickerView from '@/PickerView'
+import { PickerView } from '@/PickerView'
 import { pickerViewEmits } from '@/Picker/picker'
 import { datePickerProps } from '@/DatePicker/date-picker'
 import { useDatePicker } from '@/DatePicker/use-date-picker'

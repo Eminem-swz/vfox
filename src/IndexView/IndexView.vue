@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, ref } from 'vue'
-import StickyView from '@/StickyView'
+import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import { rangeInteger } from '@/helpers/util'
 import { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'

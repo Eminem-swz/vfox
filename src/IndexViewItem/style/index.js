@@ -1,1 +1,1 @@
-import '../../IndexView/style'
+import '../../IndexView/style/index'

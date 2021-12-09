@@ -1,4 +1,4 @@
-import '../../SideTab/style'
-import '../../Sticky/style'
-import '../../StickyView/style'
+import '../../SideTab/style/index'
+import '../../Sticky/style/index'
+import '../../StickyView/style/index'
 import '../index.scss'

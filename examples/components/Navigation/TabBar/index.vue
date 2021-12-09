@@ -26,10 +26,10 @@
 <script>
 import { baseList, badgeList, imageList } from './data'
 import { markRaw } from 'vue'
-import TaobaoSvg from '../../Basic/Icon/svgs/taobao.svg'
-import QqSvg from '../../Basic/Icon/svgs/qq.svg'
-import WechatSvg from '../../Basic/Icon/svgs/wechat.svg'
-import WeiboSvg from '../../Basic/Icon/svgs/weibo.svg'
+import TaobaoSvg from '../../../assets/icons/taobao.svg'
+import QqSvg from '../../../assets/icons/qq.svg'
+import WechatSvg from '../../../assets/icons/wechat.svg'
+import WeiboSvg from '../../../assets/icons/weibo.svg'
 
 const customIconList = [
   {

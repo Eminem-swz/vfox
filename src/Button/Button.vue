@@ -19,12 +19,6 @@
 </template>
 
 <script lang="ts">
-import Icon from '@/Icon'
-import {
-  createEnumsValidator,
-  getEnumsValue,
-  iconValidator
-} from '@/helpers/validator'
 import {
   inject,
   defineComponent,
@@ -33,6 +27,12 @@ import {
   PropType,
   ComponentInternalInstance
 } from 'vue'
+import { Icon } from '@/Icon'
+import {
+  createEnumsValidator,
+  getEnumsValue,
+  iconValidator
+} from '@/helpers/validator'
 import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
 import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
 import type { SizeType, StateType } from '../helpers/types'

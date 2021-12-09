@@ -8,9 +8,7 @@ function kebabCase2PascalCase(name) {
 }
 
 function getSymbolId(filePath, iconsPath) {
-  const paths = relative(iconsPath, filePath)
-    .replace(/\\/g, '/')
-    .split('/')
+  const paths = relative(iconsPath, filePath).replace(/\\/g, '/').split('/')
 
   const fileName = paths.pop().replace('.svg', '')
 
@@ -21,10 +19,7 @@ module.exports = {
   kebabCase2PascalCase,
   getSymbolId,
   svgLoader(config, iconsPath) {
-    config.module
-      .rule('svg')
-      .exclude.add(iconsPath)
-      .end()
+    config.module.rule('svg').exclude.add(iconsPath).end()
 
     config.module
       .rule('icons')

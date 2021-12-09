@@ -1,5 +1,5 @@
 import '../../style/hairline.scss'
-import '../../Button/style'
-import '../../ButtonGroup/style'
-import '../../Popover/style'
+import '../../Button/style/index'
+import '../../ButtonGroup/style/index'
+import '../../Popover/style/index'
 import '../index.scss'

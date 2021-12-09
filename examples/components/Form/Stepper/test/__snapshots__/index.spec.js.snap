@@ -2,14 +2,14 @@
 
 exports[`Stepper should render default correctly 1`] = `
 <div class="fx-stepper">
-  <fx-button-stub size="small" shape="square" loading="false" disabled="true" icon="MinusOutlined" ghost="false" transparent="false"></fx-button-stub><input class="fx-stepper_input" type="text" inputmode="decimal" name="" value="1">
-  <fx-button-stub size="small" shape="square" loading="false" disabled="false" icon="PlusOutlined" ghost="false" transparent="false"></fx-button-stub>
+  <button-stub size="small" shape="square" loading="false" disabled="true" icon="MinusOutlined" ghost="false" transparent="false"></button-stub><input class="fx-stepper_input" type="text" inputmode="decimal" name="" value="1">
+  <button-stub size="small" shape="square" loading="false" disabled="false" icon="PlusOutlined" ghost="false" transparent="false"></button-stub>
 </div>
 `;
 
 exports[`Stepper should render prop disabled=true correctly 1`] = `
 <div class="fx-stepper disabled">
-  <fx-button-stub size="small" shape="square" loading="false" disabled="true" icon="MinusOutlined" ghost="false" transparent="false"></fx-button-stub><input class="fx-stepper_input" type="text" inputmode="decimal" name="" disabled="" value="1">
-  <fx-button-stub size="small" shape="square" loading="false" disabled="true" icon="PlusOutlined" ghost="false" transparent="false"></fx-button-stub>
+  <button-stub size="small" shape="square" loading="false" disabled="true" icon="MinusOutlined" ghost="false" transparent="false"></button-stub><input class="fx-stepper_input" type="text" inputmode="decimal" name="" disabled="" value="1">
+  <button-stub size="small" shape="square" loading="false" disabled="true" icon="PlusOutlined" ghost="false" transparent="false"></button-stub>
 </div>
 `;

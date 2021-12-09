@@ -1,1 +1,1 @@
-import '../../Form/style'
+import '../../Form/style/index'

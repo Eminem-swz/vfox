@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, toRef, ref } from 'vue'
-import Icon from '@/Icon'
+import { Icon } from '@/Icon'
 import { getScrollDom } from '@/helpers/dom'
 import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
 import { isNumber, isNumberArray } from '@/helpers/util'

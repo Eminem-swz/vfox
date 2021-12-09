@@ -1,4 +1,4 @@
-import '../../Icon/style'
-import '../../Badge/style'
-import '../../Image/style'
+import '../../Icon/style/index'
+import '../../Badge/style/index'
+import '../../Image/style/index'
 import '../index.scss'

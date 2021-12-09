@@ -23,7 +23,7 @@
         }"
       ></span>
     </div>
-    <FxButton
+    <Button
       v-if="navigationButtons"
       v-show="pagination.length > 1"
       class="fx-swiper_prev"
@@ -33,8 +33,8 @@
       pattern="borderless"
       shape="circle"
       :ghost="true"
-    ></FxButton>
-    <FxButton
+    ></Button>
+    <Button
       v-if="navigationButtons"
       v-show="pagination.length > 1"
       class="fx-swiper_next"
@@ -44,7 +44,7 @@
       pattern="borderless"
       shape="circle"
       :ghost="true"
-    ></FxButton>
+    ></Button>
   </div>
 </template>
 
@@ -58,7 +58,7 @@ import {
   onBeforeUnmount,
   provide
 } from 'vue'
-import FxButton from '@/Button'
+import { Button } from '@/Button'
 import Exception from '@/helpers/exception'
 import { isNumber } from '@/helpers/util'
 import { useList } from '@/hooks/use-list'
@@ -80,7 +80,7 @@ interface SwiperCoords {
 // export
 export default defineComponent({
   name: 'fx-swiper',
-  components: { FxButton },
+  components: { Button },
   props: {
     // 是否显示面板指示点
     indicatorDots: {

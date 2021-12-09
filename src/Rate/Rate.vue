@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, PropType, watch } from 'vue'
-import Icon from '@/Icon'
+import { Icon } from '@/Icon'
 import { capitalize, isInteger, isNumeric, rangeInteger } from '@/helpers/util'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { formItemEmits, formItemProps } from '@/Form/form'

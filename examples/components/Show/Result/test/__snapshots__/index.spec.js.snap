@@ -8,8 +8,8 @@ exports[`Result should render default correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="fx-result_footer">
-    <fx-button-stub type="primary" loading="false" disabled="false" ghost="false" transparent="false"></fx-button-stub>
-    <fx-button-stub type="default" loading="false" disabled="false" ghost="false" transparent="false"></fx-button-stub>
+    <button-stub type="primary" loading="false" disabled="false" ghost="false" transparent="false"></button-stub>
+    <button-stub type="default" loading="false" disabled="false" ghost="false" transparent="false"></button-stub>
   </div>
 </div>
 `;

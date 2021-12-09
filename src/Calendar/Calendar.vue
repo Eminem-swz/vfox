@@ -28,8 +28,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from 'vue'
-import PickerInput from '@/PickerInput'
-import CalendarPopup from '@/CalendarPopup'
+import { PickerInput } from '@/PickerInput'
+import { CalendarPopup } from '@/CalendarPopup'
 import {
   cloneDetail,
   getDefaultDetail,
