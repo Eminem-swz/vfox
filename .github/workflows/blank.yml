@@ -35,7 +35,6 @@ jobs:
         run: |
           npm run build:manifest
           npm run build:css
-          npm run build:css2
           npm run build:full
           npm run build:component
           npm run build:umd

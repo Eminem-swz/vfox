@@ -1,9 +1,8 @@
 /* eslint-disable */
-const { unlinkSync } = require('fs')
+const { unlink } = require('fs').promises
 const { resolve } = require('path')
 const ora = require('ora')
 const chalk = require('chalk')
-
 const pkg = require('../package.json')
 
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
@@ -12,15 +11,14 @@ const rollup = require('rollup')
 const typescript = require('rollup-plugin-typescript2')
 const commonjs = require('@rollup/plugin-commonjs')
 const sass = require('rollup-plugin-sass')
+const { replaceAlias } = require('./plugins')
 
 const deps = Object.keys(pkg.dependencies)
 
 /**
  * 改模块主要是为了生成d.ts文件列表
  */
-async function build() {
-  const spinner = ora(`${chalk.blue('Building...')}`).start()
-
+async function buildDeclaration() {
   const inputOptions = {
     input: resolve(__dirname, '../src/index.ts'),
     external: id => {
@@ -33,10 +31,11 @@ async function build() {
       //   }
 
       if (id === './style') {
-        // 样式不做打包
+        // 样式不打包
         return true
       }
 
+      // 依赖包不打包
       if (deps.some(k => new RegExp('^' + k).test(id))) {
         return true
       }
@@ -44,13 +43,7 @@ async function build() {
       return false
     },
     plugins: [
-      {
-        name: 'replaceAlias',
-        transform(code, id) {
-          spinner.info(`Build: ${id} ...`)
-          return code.replace(/@\//g, '../')
-        }
-      },
+      replaceAlias('@/', '../'),
       sass({
         output: true
       }),
@@ -62,9 +55,8 @@ async function build() {
         tsconfigOverride: {
           compilerOptions: {
             declaration: true
-          },
-          include: ['src/**/*'],
-          exclude: ['node_modules', '__tests__']
+          }
+          // include: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.vue']
         },
         abortOnError: false,
         clean: true
@@ -90,11 +82,21 @@ async function build() {
 
   const bundle = await rollup.rollup(inputOptions)
   await bundle.write(outOptions)
+}
 
-  spinner.succeed(chalk.green('Build done.'))
-
+async function clearTemp() {
   // 删掉无用的 index.full.js
-  unlinkSync(outputPath)
+  await unlink(outputPath)
+}
+
+async function build() {
+  const spinner = ora(`${chalk.blue('Building...')}`).start()
+
+  await buildDeclaration()
+
+  spinner.succeed(chalk.green('Build declaration done.'))
+
+  await clearTemp()
 
   spinner.succeed(chalk.green('Clear Temp done.'))
 }
