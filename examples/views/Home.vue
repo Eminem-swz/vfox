@@ -13,7 +13,7 @@
       >
         <fx-cell
           :clickable="true"
-          :label="item.name.replace('Demo', '') + ' ' + item.zhName"
+          :label="item.name + ' ' + item.zhName"
           v-for="item in group.list"
           :key="item.name"
           @click="onItemClick(item)"
@@ -28,7 +28,7 @@ import { getScrollDom } from '@/helpers/dom'
 import { navConfig } from './data'
 
 export default {
-  name: 'Home',
+  name: 'ExpHome',
   props: {},
   data() {
     return {

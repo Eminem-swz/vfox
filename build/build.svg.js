@@ -1,42 +1,34 @@
-const webpack = require('webpack')
-const { resolve } = require('path')
-const { getSymbolId } = require('./util')
+import svgSprites from 'rollup-plugin-svg-sprites'
+import requireContext from '@godxiaoji/rollup-plugin-require-context'
 
-module.exports = {
-  devtool: false,
-  mode: 'production',
-  entry: {
-    'load-svg': './src/Icon/load-svg.js'
-  },
+function kebabCase2PascalCase(name) {
+  name = name.replace(/-(\w)/g, (all, letter) => {
+    return letter.toUpperCase()
+  })
+  return name.substr(0, 1).toUpperCase() + name.substr(1)
+}
+
+export default {
+  input: './src/Icon/load-svg.js',
   output: {
-    path: resolve('./src/Icon'),
-    filename: 'lib/[name].js'
-  },
-  resolve: {
-    extensions: ['.js']
-  },
-  optimization: {
-    minimize: false
-  },
-  module: {
-    rules: [
-      {
-        test: /\.svg$/,
-        loader: 'svg-sprite-loader',
-        include: [resolve('assets/icons')],
-        options: {
-          symbolId(filePath) {
-            return getSymbolId(filePath, 'assets/icons')
-          }
-        }
-      }
-    ]
+    format: 'esm',
+    file: `src/Icon/lib/load-svg.js`,
+    banner: '/* eslint-disable */'
   },
   plugins: [
-    new webpack.BannerPlugin({
-      banner: '/* eslint-disable */', // 其值为字符串，将作为注释存在
-      raw: true, // 如果值为 true，将直出，不会被作为注释
-      entryOnly: false // 如果值为 true，将只在入口 chunks 文件中添加
+    requireContext(),
+    svgSprites({
+      symbolId(filePath) {
+        const paths = filePath
+          .replace(/\\/g, '/')
+          .split('assets/icons/')[1]
+          .split('/')
+
+        const fileName = paths.pop().replace('.svg', '')
+        return (
+          'icon-' + kebabCase2PascalCase([fileName].concat(paths).join('-'))
+        )
+      }
     })
   ]
 }

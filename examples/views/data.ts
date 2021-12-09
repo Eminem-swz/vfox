@@ -9,7 +9,7 @@ export const navConfig = [
       },
       { name: 'Icon', zhName: '图标' },
       {
-        name: 'DemoImage',
+        name: 'Image',
         zhName: '图片'
       },
       {
@@ -81,7 +81,7 @@ export const navConfig = [
         zhName: '滑块选择器'
       },
       {
-        name: 'DemoSwitch',
+        name: 'Switch',
         zhName: '开关选择器'
       },
       {

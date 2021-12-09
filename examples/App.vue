@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     navBarTitle() {
-      return this.$route.name?.replace('Demo', '') || ''
+      return this.$route.name || ''
     }
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
       navConfig.forEach(group => {
         group.list.forEach(item => {
           menuList.push({
-            label: item.name.replace('Demo', ''),
+            label: item.name,
             value: item.name
           })
         })
@@ -86,7 +86,7 @@ export default {
       this.$router.go(-1)
     },
     onBackHome() {
-      this.$router.replace({ name: 'index' })
+      this.$router.replace({ name: 'ExpHome' })
     }
   }
 }

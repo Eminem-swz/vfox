@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
-  { path: '/', name: 'Home', component: Home },
+  { path: '/', name: Home.name, component: Home },
   {
     path: '/Button',
     name: 'Button',
@@ -125,7 +125,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/Image',
-    name: 'DemoImage',
+    name: 'Image',
     component: () =>
       import(
         /* webpackChunkName: "Image" */ '@/../examples/components/Basic/Image/index.vue'
@@ -229,7 +229,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/Switch',
-    name: 'DemoSwitch',
+    name: 'Switch',
     component: () =>
       import(
         /* webpackChunkName: "Switch" */ '@/../examples/components/Form/Switch/index.vue'
