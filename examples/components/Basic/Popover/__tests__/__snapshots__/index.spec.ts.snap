@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popover should render prop placement="left" correctly 1`] = `<anonymous-stub to="body"></anonymous-stub>`;
+
+exports[`Popover should render prop set content correctly 1`] = `<anonymous-stub to="body"></anonymous-stub>`;
+
+exports[`Popover should render prop visible=true correctly 1`] = `<anonymous-stub to="body"></anonymous-stub>`;

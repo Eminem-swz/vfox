@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Skeleton should render custom layout slot correctly 1`] = `
+<div class="fx-skeleton">
+  <div class="fx-skeleton-image"></div>
+  <div class="fx-skeleton-title"></div>
+  <ul class="fx-skeleton-paragraph">
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="fx-skeleton-button shape--default"></div>
+</div>
+`;
+
+exports[`Skeleton should render default correctly 1`] = `
+<div class="fx-skeleton">
+  <div class="fx-skeleton_layout">
+    <!--v-if-->
+    <div class="fx-skeleton_layout-right">
+      <div class="fx-skeleton-title"></div>
+      <ul class="fx-skeleton-paragraph">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Skeleton should render prop avatar=true correctly 1`] = `<fx-skeleton-layout-stub animated="false" avatar="true"></fx-skeleton-layout-stub>`;

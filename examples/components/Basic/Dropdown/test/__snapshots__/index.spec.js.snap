@@ -1,6 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Dropdown should render default correctly 1`] = `
-<!--teleport start-->
-<!--teleport end-->
-`;

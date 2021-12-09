@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal should render default correctly 1`] = `<anonymous-stub to="body"></anonymous-stub>`;
+
+exports[`Modal should render prop showClose=true correctly 1`] = `<anonymous-stub to="body"></anonymous-stub>`;

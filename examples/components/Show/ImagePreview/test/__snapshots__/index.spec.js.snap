@@ -1,6 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ImagePreview should render props set urls correctly 1`] = `
-<!--teleport start-->
-<!--teleport end-->
-`;

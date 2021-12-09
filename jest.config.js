@@ -24,8 +24,7 @@ module.exports = {
   // testEnvironment: 'jest-environment-jsdom-fifteen',
   // serializer for snapshots
   snapshotSerializers: ['jest-serializer-vue'],
-  // testMatch: ['**/tests/unit/**/*.spec.[jt]s?(x)', '**/__tests__/*.[jt]s?(x)'],
-  testMatch: ['**/examples/**/*.spec.[jt]s?(x)'],
+  testMatch: ['**/tests/unit/**/*.spec.[jt]s?(x)', '**/__tests__/*.[jt]s?(x)'],
   // https://github.com/facebook/jest/issues/6766
   testURL: 'http://localhost/'
 }

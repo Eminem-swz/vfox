@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cascader should render prop set options correctly 1`] = `
+<div class="fx-cascader">
+  <picker-input-stub formlabelstring="" formvaluestring="" formname="" placeholder="" disabled="false"></picker-input-stub>
+  <!--v-if-->
+</div>
+`;

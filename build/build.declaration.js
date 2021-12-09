@@ -1,4 +1,3 @@
-/* eslint-disable */
 const { unlink } = require('fs').promises
 const { resolve } = require('path')
 const ora = require('ora')
@@ -18,7 +17,9 @@ const deps = Object.keys(pkg.dependencies)
 /**
  * 改模块主要是为了生成d.ts文件列表
  */
-async function buildDeclaration() {
+async function build() {
+  const spinner = ora(`${chalk.blue('Building...')}`).start()
+
   const inputOptions = {
     input: resolve(__dirname, '../src/index.ts'),
     external: id => {
@@ -69,7 +70,6 @@ async function buildDeclaration() {
   }
 
   const outputPath = resolve(__dirname, '../es/index.full.js')
-
   const outOptions = {
     format: 'esm',
     file: outputPath,
@@ -82,22 +82,10 @@ async function buildDeclaration() {
 
   const bundle = await rollup.rollup(inputOptions)
   await bundle.write(outOptions)
-}
-
-async function clearTemp() {
-  // 删掉无用的 index.full.js
-  await unlink(outputPath)
-}
-
-async function build() {
-  const spinner = ora(`${chalk.blue('Building...')}`).start()
-
-  await buildDeclaration()
-
   spinner.succeed(chalk.green('Build declaration done.'))
 
-  await clearTemp()
-
+  // 删掉无用的 index.full.js
+  await unlink(outputPath)
   spinner.succeed(chalk.green('Clear Temp done.'))
 }
 

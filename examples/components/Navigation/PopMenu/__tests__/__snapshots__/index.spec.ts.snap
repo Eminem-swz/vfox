@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopMenu should render prop set options correctly 1`] = `<anonymous-stub to="body"></anonymous-stub>`;

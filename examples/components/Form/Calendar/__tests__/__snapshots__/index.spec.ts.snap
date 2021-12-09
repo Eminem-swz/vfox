@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar should render default correctly 1`] = `
+<div class="fx-calendar">
+  <picker-input-stub formlabelstring="" formvaluestring="" formname="" placeholder="" disabled="false"></picker-input-stub>
+  <!--v-if-->
+</div>
+`;

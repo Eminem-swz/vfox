@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image should render prop set imageUrl correctly 1`] = `
+<div class="fx-image">
+  <!--v-if--><i class="fx-image_loading">
+    <icon-stub icon="ImageOutlined" spin="false" width="0" height="0"></icon-stub>
+  </i>
+  <!--v-if-->
+  <!--v-if-->
+</div>
+`;

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopDialog should render default correctly 1`] = `<anonymous-stub to="body" title="title"></anonymous-stub>`;
+
+exports[`PopDialog should render prop showCancel=false correctly 1`] = `<anonymous-stub to="body" title="title"></anonymous-stub>`;
