@@ -1,3 +1,11 @@
+## [2.0.7](https://github.com/godxiaoji/vfox/compare/v2.0.6...v2.0.7) (2021-12-10)
+
+
+### Bug Fixes
+
+* 优化入口 ([b134f1a](https://github.com/godxiaoji/vfox/commit/b134f1ac9176c2b4312da87928896baa98f20d13))
+* 引用和样式优化 ([0cb7331](https://github.com/godxiaoji/vfox/commit/0cb7331381cc2ff225257cc9bd3b99149efc9ec4))
+
 ## [2.0.6](https://github.com/godxiaoji/vfox/compare/v2.0.5...v2.0.6) (2021-12-07)
 
 
