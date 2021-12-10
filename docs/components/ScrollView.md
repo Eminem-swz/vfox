@@ -28,12 +28,12 @@ import { ScrollView } from 'vfox'
 
 ## Events
 
-| 事件            | 描述                  | 回调函数参数                                                                                              |
-| --------------- | --------------------- | --------------------------------------------------------------------------------------------------------- |
-| scroll-to-upper | 滚动到顶部/左边时触发 | { direction: 'top' \| 'left' }                                                                            |
-| scroll-to-lower | 滚动到底部/右边时触发 | { direction: 'bottom' \| 'right' }                                                                        |
-| scroll          | 滚动时触发            | { scrollLeft: number, scrollTop: number, scrollWidth: number, scrollHeight: number }，4 个属性都是 number |
-| refreshing      | 下拉刷新时触发        | ({ pullDirection: string }, done: Function) 其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数    |
+| 事件            | 描述                  | 回调函数参数                                                                                                                          |
+| --------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| scroll-to-upper | 滚动到顶部/左边时触发 | { direction: 'top' \| 'left' }                                                                                                        |
+| scroll-to-lower | 滚动到底部/右边时触发 | { direction: 'bottom' \| 'right' }                                                                                                    |
+| scroll          | 滚动时触发            | { scrollLeft: number, scrollTop: number, scrollWidth: number, scrollHeight: number }                                                  |
+| refreshing      | 下拉刷新时触发        | ({ pullDirection: 'up' \| 'right' \| 'down' \| 'left' }, done: () =>void)，其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数 |
 
 ## Slots
 

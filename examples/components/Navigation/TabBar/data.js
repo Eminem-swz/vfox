@@ -53,8 +53,8 @@ export const badgeList = [
 
 export const imageList = ['home', 'category', 'cart', 'my'].map((v, k) => {
   return {
-    icon: `http://cdn.fox2.cn/vfox/tab-bar/${v}@3x.png`,
-    activeIcon: `http://cdn.fox2.cn/vfox/tab-bar/${v}-selected@3x.png`,
+    icon: `https://cdn.fox2.cn/vfox/tab-bar/${v}@3x.png`,
+    activeIcon: `https://cdn.fox2.cn/vfox/tab-bar/${v}-selected@3x.png`,
     label: v,
     value: k + 1
   }

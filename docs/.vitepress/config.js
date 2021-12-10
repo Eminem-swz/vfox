@@ -39,6 +39,16 @@ module.exports = {
       '/apis/': getApisSidebar()
     },
     smoothScroll: true
+  },
+  markdown: {
+    /**
+     * markdown-it-attrs 冲突
+     * @see https://github.com/vuejs/vitepress/pull/393
+     */
+    attrs: {
+      leftDelimiter: '{{',
+      rightDelimiter: '}}'
+    }
   }
 }
 
