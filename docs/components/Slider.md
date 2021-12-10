@@ -1,6 +1,16 @@
 # Slider 滑块选择器
 
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem-表单项) 使用。
+注：
+
+- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+
+## Import
+
+```
+import { Slider } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Props
 

@@ -1,6 +1,14 @@
-# Button 按钮
+# Button/ButtonGroup 按钮
 
-## Props
+## Import
+
+```
+import { Button, ButtonGroup } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
+## Button Props
 
 | 属性      | 类型    | 默认值      | 必填 | 说明                                                     |
 | --------- | ------- | ----------- | ---- | -------------------------------------------------------- |
@@ -57,10 +65,29 @@
 | submit | 提交表单 |
 | reset  | 重置表单 |
 
-## Slots
+## Button Slots
 
 ### 默认（#default）
 
 ```
 <fx-button form-type="submit">提交</fx-button>
+```
+
+## ButtonGroup Props
+
+| 属性    | 类型   | 默认值      | 必填 | 说明         |
+| ------- | ------ | ----------- | ---- | ------------ |
+| size    | string | 'large'     | 否   | 每个按钮尺寸 |
+| pattern | string | 'default'   | 否   | 每个按钮款式 |
+| shape   | string | 'rectangle' | 否   | 每个按钮形状 |
+
+## ButtonGroup Slots
+
+### 默认（#default）
+
+```
+<fx-button-group shape="square" size="small">
+  <fx-button type="default" icon="LeftOutlined"></fx-button>
+  <fx-button type="default" icon="HomeOutlined"></fx-button>
+</fx-button-group>
 ```

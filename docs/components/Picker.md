@@ -1,6 +1,14 @@
-# Picker 选择器
+# Picker/PickerPopup/PickerView 选择器
 
-## Picker/PickerPopup/PickerView 的公共 Props
+## Import
+
+```
+import { Picker, PickerPopup, PickerView } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
+## 公共 Props
 
 | 属性              | 类型                            | 默认值                                                   | 必填 | 说明                                              |
 | ----------------- | ------------------------------- | -------------------------------------------------------- | ---- | ------------------------------------------------- |
@@ -168,9 +176,13 @@
 xiyiji/guntong
 ```
 
-## Picker 选择器
+## Picker
 
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem-表单项) 使用。
+选择器。
+
+注：
+
+- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
 
 ## Picker Props
 
@@ -195,7 +207,9 @@ xiyiji/guntong
 | value       | number[]/string[] | ["藻类", "轮藻"]     |
 | valueString | string            | "藻类/轮藻"          |
 
-## PickerPopup 选择弹窗
+## PickerPopup
+
+选择弹窗。
 
 ## PickerPopup Props
 
@@ -206,12 +220,12 @@ xiyiji/guntong
 
 ## PickerPopup Events
 
-| 事件                 | 描述                 | 回调函数参数                                    |
-| -------------------- | -------------------- | ----------------------------------------------- |
-| cancel               | 点击取消按钮后触发   |                                                 |
-| confirm              | 点击确定按钮后触发   | [DetailObject](./Picker.md#detailobject-的结构) |
-| change               | 选中值发生变化时触发 | [DetailObject](./Picker.md#detailobject-的结构) |
-| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./DatePicker.md#visiblestate-值说明) }                               |
+| 事件                 | 描述                 | 回调函数参数                                                   |
+| -------------------- | -------------------- | -------------------------------------------------------------- |
+| cancel               | 点击取消按钮后触发   |                                                                |
+| confirm              | 点击确定按钮后触发   | [DetailObject](./Picker.md#detailobject-的结构)                |
+| change               | 选中值发生变化时触发 | [DetailObject](./Picker.md#detailobject-的结构)                |
+| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./DatePicker.md#visiblestate-值说明) } |
 
 ### VisibleState 值说明
 
@@ -222,9 +236,9 @@ xiyiji/guntong
 | hide   | 隐藏时触发           | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 | hidden | 隐藏且动画结束后触发 | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 
-## PickerView 选择
+## PickerView
 
-平铺形式。
+选择，平铺形式。
 
 ## PickerView Events
 

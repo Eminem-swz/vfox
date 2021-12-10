@@ -1,8 +1,17 @@
-# Form 表单
+# Form/FormItem 表单
+
+注：
 
 - 当点击 `Form` 中 form-type 为 submit 的 [Button](./Button.md) 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。
+- 配合 [FormItem](./Form.md#formitem) 组件可以完成一套带校验的表单。
 
-- 配合 [FormItem](./Form.md#formitem-表单项) 组件可以完成一套带校验的表单。
+## Import
+
+```
+import { Form, FormItem } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Form Props
 
@@ -56,7 +65,7 @@
 </fx-form>
 ```
 
-## FormItem 表单项
+## FormItem
 
 ## FormItem Props
 

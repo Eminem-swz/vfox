@@ -1,6 +1,16 @@
 # SearchBar 搜索栏
 
+注：
+
 - 该组件本身没有固定顶部功能，可以配合 [Sticky](./Sticky.md) 组件实现置顶功能。
+
+## Import
+
+```
+import { SearchBar } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Props
 

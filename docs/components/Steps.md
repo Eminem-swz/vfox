@@ -1,5 +1,13 @@
 # Steps 步骤条
 
+## Import
+
+```
+import { Steps, Step } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
 ## Steps Props
 
 | 属性                 | 类型    | 默认值 | 必填 | 说明                 |
@@ -18,7 +26,7 @@
 
 ### 默认（#default）
 
-注：其中只可放置 [Step](./Steps.md#step-步骤子项) 组件，否则会导致未定义的行为。
+注：其中只可放置 [Step](./Steps.md#step-props) 组件，否则会导致未定义的行为。
 
 ```
 <fx-steps>
@@ -27,8 +35,6 @@
   <fx-step title="爱要不要">不要了，滚。</fx-step>
 </fx-steps>
 ```
-
-## Step 步骤子项
 
 ## Step Props
 

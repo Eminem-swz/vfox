@@ -1,6 +1,14 @@
-# Calendar 日历
+# Calendar/CalendarPopup/CalendarView 日历
 
-## Calendar/CalendarPopup/CalendarView 的公共 Props
+## Import
+
+```
+import { Calendar, CalendarPopup, CalendarView } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
+## 公共 Props
 
 | 属性           | 类型        | 默认值             | 必填 | 说明                                                  |
 | -------------- | ----------- | ------------------ | ---- | ----------------------------------------------------- |
@@ -33,9 +41,13 @@ dayHandler(Object: Day) => Day
 | bottomHighlight | boolean | 日期下方展示文本是否高亮                                                                                                                                                                                                                     |
 | dateString      | string  | 日期对应的格式化时间（`YYYY-MM-DD`），如：2020-11-11，该字段不影响展示                                                                                                                                                                       |
 
-## Calendar 日历选择器
+## Calendar
 
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem-表单项) 使用。
+日历选择器。
+
+注：
+
+- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
 
 ## Calendar Props
 
@@ -69,7 +81,9 @@ formatter(value: Date[]) => any
 | formatted  | string              | 选中值对应的描述文本                                     |
 | rangeCount | number              | 选择区间持续的天数（含首尾）                             |
 
-## CalendarPopup 日历弹窗
+## CalendarPopup
+
+日历弹窗。
 
 ## CalendarPopup Props
 
@@ -96,9 +110,9 @@ formatter(value: Date[]) => any
 | hide   | 隐藏时触发           | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 | hidden | 隐藏且动画结束后触发 | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 
-## CalendarView 日历选择
+## CalendarView
 
-平铺形式。
+日历选择，平铺形式。
 
 ## CalendarView Events
 

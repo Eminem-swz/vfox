@@ -1,4 +1,12 @@
-# Timeline 步骤条
+# Timeline/TimelineItem 步骤条
+
+## Import
+
+```
+import { Timeline, TimelineItem } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Timeline CSS
 
@@ -11,7 +19,7 @@
 
 ### 默认（#default）
 
-注：其中只可放置 [TimelineItem](./Timeline.md#timelineitem-时间轴子项) 组件，否则会导致未定义的行为。
+注：其中只可放置 [TimelineItem](./Timeline.md#timelineitem-props) 组件，否则会导致未定义的行为。
 
 ```
 <fx-timeline>
@@ -20,8 +28,6 @@
   <fx-timeline-item title="爱要不要">不要了，滚。</fx-timeline-item>
 </fx-timeline>
 ```
-
-## TimelineItem 时间轴子项
 
 ## TimelineItem Props
 

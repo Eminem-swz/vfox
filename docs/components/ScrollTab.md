@@ -1,4 +1,12 @@
-# ScrollTab 标签滚动布局
+# ScrollTab/ScrollTabItem 标签滚动布局
+
+## Import
+
+```
+import { ScrollTab, ScrollTabItem } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## ScrollTab Props
 
@@ -15,7 +23,7 @@
 
 ## ScrollTab Slots
 
-注：其中只可放置 [ScrollTabItem](./ScrollTab.md#scrolltabitem-标签滚动子项) 组件，否则会导致未定义的行为。
+注：其中只可放置 [ScrollTabItem](./ScrollTab.md#scrolltabitem-props) 组件，否则会导致未定义的行为。
 
 ```
 <fx-scroll-tab>
@@ -31,8 +39,6 @@
   ...
 </fx-scroll-tab>
 ```
-
-## ScrollTabItem 标签滚动子项
 
 ## ScrollTabItem Props
 

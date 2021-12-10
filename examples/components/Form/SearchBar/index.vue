@@ -1,26 +1,22 @@
 <template>
   <div>
     <fx-group title="基础用法">
-      <fx-search-bar></fx-search-bar>
+      <fx-search-bar />
     </fx-group>
     <fx-group title="搜索建议">
-      <fx-search-bar @input="onInput"></fx-search-bar>
+      <fx-search-bar @input="onInput" />
     </fx-group>
     <fx-group title="显示取消按钮">
-      <fx-search-bar show-cancel></fx-search-bar>
+      <fx-search-bar show-cancel />
     </fx-group>
     <fx-group title="设置候选项">
-      <fx-search-bar :placeholders="placeholders"></fx-search-bar>
+      <fx-search-bar :placeholders="placeholders" />
     </fx-group>
     <fx-group title="深色适配">
-      <fx-search-bar
-        class="search-bar-dark-style"
-        show-cancel
-        ghost
-      ></fx-search-bar>
+      <fx-search-bar class="search-bar-dark-style" show-cancel ghost />
     </fx-group>
     <fx-group title="只读（readonly=true）">
-      <fx-search-bar readonly :placeholders="placeholders"></fx-search-bar>
+      <fx-search-bar readonly :placeholders="placeholders" />
     </fx-group>
     <fx-group title="事件监听">
       <fx-search-bar
@@ -35,11 +31,7 @@
       </fx-search-bar>
     </fx-group>
     <fx-group title="事件监听（readonly=true）">
-      <fx-search-bar
-        readonly
-        :placeholders="placeholders"
-        @click="onClick"
-      ></fx-search-bar>
+      <fx-search-bar readonly :placeholders="placeholders" @click="onClick" />
     </fx-group>
   </div>
 </template>

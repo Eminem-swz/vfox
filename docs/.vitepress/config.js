@@ -88,7 +88,8 @@ function getComponentsSidebar() {
         { text: 'NumberKeyboard', link: '/components/NumberKeyboard' },
         { text: 'ImageUploader', link: '/components/ImageUploader' },
         { text: 'DatePicker', link: '/components/DatePicker' },
-        { text: 'Range', link: '/components/Range' }
+        { text: 'Range', link: '/components/Range' },
+        { text: 'Rate', link: '/components/Rate' }
       ]
     },
     {
@@ -97,7 +98,6 @@ function getComponentsSidebar() {
         { text: 'BackTop', link: '/components/BackTop' },
         { text: 'NavBar', link: '/components/NavBar' },
         { text: 'PopMenu', link: '/components/PopMenu' },
-        { text: 'ScrollView', link: '/components/ScrollView' },
         { text: 'Tab', link: '/components/Tab' },
         { text: 'SideTab', link: '/components/SideTab' },
         { text: 'TabBar', link: '/components/TabBar' },

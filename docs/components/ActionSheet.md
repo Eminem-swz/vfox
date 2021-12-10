@@ -1,6 +1,12 @@
-# ActionSheet
+# ActionSheet 动作面板
 
-动作面板。
+## Import
+
+```
+import { ActionSheet } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Props
 

@@ -1,4 +1,12 @@
-# TabView 标签页
+# TabView/TabViewItem 标签页
+
+## Import
+
+```
+import { TabView, TabViewItem } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## TabView Props
 
@@ -16,7 +24,7 @@
 
 ## TabView Slots
 
-注：其中只可放置 [TabViewItem](./TabView.md#tabviewitem-标签页项) 组件，否则会导致未定义的行为。
+注：其中只可放置 [TabViewItem](./TabView.md#tabviewitem-props) 组件，否则会导致未定义的行为。
 
 ```
 <fx-tab-view>
@@ -28,8 +36,6 @@
   </fx-tab-view-item>
 </fx-tab-view>
 ```
-
-## TabViewItem 标签页项
 
 ## TabViewItem Props
 

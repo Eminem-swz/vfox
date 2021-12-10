@@ -1,7 +1,17 @@
 # ImageUploader 图片上传
 
+注：
+
 - 类似于微信朋友圈上传图片的组件。
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem-表单项) 使用。
+- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+
+## Import
+
+```
+import { ImageUploader } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Props
 
@@ -16,7 +26,7 @@
 | multiple      | boolean  | false        | 否   | 是否开启图片多选，部分安卓机型不支持                                           |
 | deletable     | boolean  | true         | 否   | 是否允许删除图片                                                               |
 | image-mode    | string   | 'aspectFill' | 否   | 图片的填充模式，通 [Image](./Image.md) 组件的 mode 属性                        |
-| before-upload | Function |              | 否   | 文件读取前的回调函数，返回 false 或 Promise<false\> 可终止文件上传              |
+| before-upload | Function |              | 否   | 文件读取前的回调函数，返回 false 或 Promise<false\> 可终止文件上传             |
 | upload-ready  | Function |              | 否   | 转入上传文件操作的回调函数                                                     |
 
 ### beforeUpload(file: File, handlers: Object) => boolean | file | Promise<boolean | file\>

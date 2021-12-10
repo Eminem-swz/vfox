@@ -1,5 +1,13 @@
 # TabBar 标签列
 
+## Import
+
+```
+import { TabBar } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
 ## Props
 
 | 属性                 | 类型                       | 默认值                             | 必填 | 说明                                     |

@@ -1,5 +1,17 @@
 # Rate 评分
 
+注：
+
+- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+
+## Import
+
+```
+import { Rate } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
 ## Props
 
 | 属性       | 类型    | 默认值 | 必填 | 说明                             |

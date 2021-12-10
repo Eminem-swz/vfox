@@ -1,5 +1,19 @@
 # Skeleton 骨架屏
 
+## Import
+
+```
+import { Skeleton } from 'vfox'
+```
+
+如果想要自定义布局，可以再引入子组件：
+
+```
+import { SkeletonAvatar, SkeletonImage, SkeletonTitle, SkeletonParagraph, SkeletonButton } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
 ## Skeleton Props
 
 | 属性          | 类型    | 默认值    | 必填 | 说明                                        |
@@ -21,11 +35,9 @@
 </fx-skeleton>
 ```
 
-注：vue 要求组件只有一个 root，建议默认`slot`内容包裹在一个标签中，不然会被加一个包裹标签，可能会导致展示效果不符合预期。
+### 骨架屏重新布局（#layout）
 
-### 骨架屏重新布局（layout）
-
-还可以在 layout 插槽中重新组合骨架屏，目前提供 `image`、`avatar`、`title`、`paragraph`、`button` 5 款子组件。
+还可以在 layout 插槽中重新组合骨架屏，目前提供 [SkeletonAvatar](./Skeleton.md#skeletonavatar-props)、[SkeletonImage](./Skeleton.md#skeletonimage-props)、[SkeletonTitle](./Skeleton.md#skeletontitle-props)、[SkeletonParagraph](./Skeleton.md#skeletonparagraph-props)、[SkeletonButton](./Skeleton.md#skeletonbutton-props) 5 款子组件。
 
 ```
 <fx-skeleton>

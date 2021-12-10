@@ -1,5 +1,13 @@
 # Modal 模态框
 
+## Import
+
+```
+import { Modal } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
 ## Props
 
 | 属性            | 类型    | 默认值 | 必填 | 说明                     |
@@ -23,34 +31,3 @@
 | shown  | 展示且动画结束后触发 |                                                   |
 | hide   | 隐藏时触发           | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 | hidden | 隐藏且动画结束后触发 | 可能携带其他参数 cancel, maskClick, closeClick 等 |
-
-## Slots
-
-### 默认（#default）
-
-```
-<fx-modal>
-  提示内容
-  ...
-</fx-modal>
-```
-
-### 头部（#header）
-
-```
-<fx-modal>
-  <template #header>标题</template>
-</fx-modal>
-```
-
-### 尾部（#footer）
-
-```
-<fx-modal>
-  <template #footer>
-    <fx-button type="primary">
-      确定
-    </fx-button>
-  </template>
-</fx-modal>
-```

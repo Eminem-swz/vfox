@@ -1,4 +1,12 @@
-# Swiper 轮播
+# Swiper/SwiperItem 轮播
+
+## Import
+
+```
+import { Swiper, SwiperItem } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Swiper Props
 
@@ -25,7 +33,7 @@
 
 ## Swiper Slots
 
-注：其中只可放置 [SwiperItem](./Swiper.md#SwiperItem-轮播项) 组件，否则会导致未定义的行为。
+注：其中只可放置 [SwiperItem](./Swiper.md#SwiperItem-slots) 组件，否则会导致未定义的行为。
 
 ```
 <fx-swiper>
@@ -38,8 +46,6 @@
   ...
 </fx-swiper>
 ```
-
-## SwiperItem 轮播项
 
 ## SwiperItem Slots
 

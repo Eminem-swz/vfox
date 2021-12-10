@@ -1,12 +1,20 @@
-# Checkbox 多选项
+# Checkbox/CheckboxGroup 多选项
+
+## Import
+
+```
+import { Checkbox, CheckboxGroup } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Checkbox Props
 
-| 属性            | 类型          | 默认值 | 必填 | 说明                                                                                                      |
-| --------------- | ------------- | ------ | ---- | --------------------------------------------------------------------------------------------------------- |
-| value           | string/number | ''     | 否   | 该项值，[checkbox-group](./Checkbox.md#checkboxgroup-多项选择器) 的 change 事件会携带 `checkbox` 的 value |
-| disabled        | boolean       | false  | 否   | 是否禁用                                                                                                  |
-| v-model:checked | boolean       | false  | 否   | 当前是否选中，可用来设置默认选中                                                                          |
+| 属性            | 类型          | 默认值 | 必填 | 说明                                                                                                     |
+| --------------- | ------------- | ------ | ---- | -------------------------------------------------------------------------------------------------------- |
+| value           | string/number | ''     | 否   | 该项值，[CheckboxGroup](./Checkbox.md#checkboxgroup-多项选择器) 的 change 事件会携带 `checkbox` 的 value |
+| disabled        | boolean       | false  | 否   | 是否禁用                                                                                                 |
+| v-model:checked | boolean       | false  | 否   | 当前是否选中，可用来设置默认选中                                                                         |
 
 ## Checkbox CSS
 
@@ -30,19 +38,20 @@
 ...
 ```
 
-## CheckboxGroup 多项选择器
+## CheckboxGroup
+
+注：
 
 - 内部由多个 [Checkbox](./Checkbox.md#Checkbox-多选项) 组成。
-
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem-表单项) 使用。
+- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
 
 ## CheckboxGroup Props
 
-| 属性    | 类型              | 默认值 | 必填 | 说明                           |
-| ------- | ----------------- | ------ | ---- | ------------------------------ |
-| name    | string            |        | 否   | [Form](./Form.md) 的标识       |
-| inline  | boolean           | false  | 否   | 是否使用内联布局，默认纵向布局 |
-| v-model | string[]/number[] | []     | 否   | 当前选择子项的 value 列表      |
+| 属性    | 类型               | 默认值 | 必填 | 说明                           |
+| ------- | ------------------ | ------ | ---- | ------------------------------ |
+| name    | string             |        | 否   | [Form](./Form.md) 的标识       |
+| inline  | boolean            | false  | 否   | 是否使用内联布局，默认纵向布局 |
+| v-model | string[\]/number[\] | []     | 否   | 当前选择子项的 value 列表      |
 
 ## CheckboxGroup Events
 

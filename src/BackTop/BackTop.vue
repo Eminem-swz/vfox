@@ -1,9 +1,9 @@
 <template>
-  <div v-show="isShow" class="fx-back-top" :style="styles" @click="onClick">
+  <button v-show="isShow" class="fx-back-top" :style="styles" @click="onClick">
     <slot>
       <Icon icon="UpCircleOutlined" />
     </slot>
-  </div>
+  </button>
 </template>
 
 <script lang="ts">

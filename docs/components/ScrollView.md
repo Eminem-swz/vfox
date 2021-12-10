@@ -1,6 +1,16 @@
 # ScrollView 滚动区
 
-需要给 `ScrollView` 一个固定高度，通过 CSS 设置 height。
+注：
+
+- 需要给 `ScrollView` 一个固定高度，通过 CSS 设置 height。
+
+## Import
+
+```
+import { ScrollView } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Props
 

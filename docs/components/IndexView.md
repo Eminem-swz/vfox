@@ -1,4 +1,12 @@
-# IndexView 索引栏
+# IndexView/IndexViewItem 索引栏
+
+## Import
+
+```
+import { IndexView, IndexViewItem } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## IndexView Props
 
@@ -33,8 +41,6 @@
   ...
 </fx-index-view>
 ```
-
-## IndexViewItem 索引子项
 
 ## IndexViewItem Props
 

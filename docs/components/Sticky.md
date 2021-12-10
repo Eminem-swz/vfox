@@ -1,6 +1,16 @@
-# Sticky 粘性布局
+# Sticky/StickyView/StickyViewItem 粘性布局
 
-## StickyView 粘性容器
+## Import
+
+```
+import { Sticky, StickyView, StickyViewItem } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+
+## Sticky
+
+粘性容器。
 
 ## Sticky Props
 
@@ -8,7 +18,7 @@
 | ---------------- | ----------------------- | -------- | ---- | ------------------------------------------------------------------------------- |
 | contain-selector | string/element/document | document | 否   | 基于哪个容器，如果是 string，则为可以被 document.querySelector(selector) 获取到 |
 | offset-top       | number/string           | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
-| offset-buttom    | number/string           | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
+| offset-bottom    | number/string           | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
 
 ## Sticky Slots
 
@@ -20,7 +30,9 @@
 </fx-sticky>
 ```
 
-## StickyView 粘性布局
+## StickyView
+
+粘性布局。
 
 ## StickyView Props
 
@@ -38,7 +50,7 @@
 
 ## StickyView Slots
 
-注：其中只可放置 [StickyViewItem](./Sticky.md#stickyviewitem-粘性布局子项) 组件，否则会导致未定义的行为。
+注：其中只可放置 [StickyViewItem](./Sticky.md#stickyviewitem-props) 组件，否则会导致未定义的行为。
 
 ```
 <fx-sticky-view>
@@ -59,8 +71,6 @@
   </fx-sticky-view-item>
 </fx-sticky-view>
 ```
-
-## StickyViewItem 粘性布局子项
 
 ## StickyViewItem Props
 

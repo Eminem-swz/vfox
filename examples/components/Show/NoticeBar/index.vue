@@ -1,8 +1,8 @@
 <template>
   <div>
     <fx-group title="基础用法">
-      <fx-notice-bar class="notice-bar-item" :title="text1"> </fx-notice-bar>
-      <fx-notice-bar class="notice-bar-item" :title="text2"> </fx-notice-bar>
+      <fx-notice-bar class="notice-bar-item" :title="text1" />
+      <fx-notice-bar class="notice-bar-item" :title="text2" />
     </fx-group>
     <fx-group title="跑马灯">
       <fx-notice-bar class="notice-bar-item" marquee :title="text2">
@@ -14,8 +14,7 @@
         left-icon="SoundOutlined"
         :title="text1"
         marquee
-      >
-      </fx-notice-bar>
+      />
     </fx-group>
     <fx-group title="mode closable/clickable">
       <fx-notice-bar
@@ -24,15 +23,13 @@
         v-model:visible="visible"
         :title="text1"
         @close-click="onClose"
-      >
-      </fx-notice-bar>
+      />
       <fx-notice-bar
         class="notice-bar-item"
         mode="clickable"
         :title="text1"
         @click="onClick"
-      >
-      </fx-notice-bar>
+      />
     </fx-group>
     <fx-group title="type=success/primary/danger">
       <fx-notice-bar

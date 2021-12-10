@@ -1,4 +1,12 @@
-# Avatar 头像
+# Avatar/AvatarGroup 头像
+
+## Import
+
+```
+import { Avatar, AvatarGroup } from 'vfox'
+```
+
+具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
 ## Avatar Props
 
@@ -50,8 +58,6 @@
 ```
 <fx-avatar>曹</fx-avatar>
 ```
-
-## AvatarGroup 头像组
 
 ## AvatarGroup Props
 
