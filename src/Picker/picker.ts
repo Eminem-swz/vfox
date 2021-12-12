@@ -1,7 +1,14 @@
 import type { PropType } from 'vue'
 import { getDefaultFieldNames } from '@/Picker/util'
-import type { UserFieldNames, UserOptionItem } from './types'
+import type {
+  UserFieldNames,
+  UserOptionItem,
+  Values,
+  Parser,
+  Formatter
+} from './types'
 import { stringNumberArrayMixValidator } from '@/helpers/validator'
+import { isNumber, isStringNumberMixArray, isString } from '@/helpers/util'
 
 export const commonProps = {
   modelValue: {
@@ -47,4 +54,27 @@ export const pickerPopupProps = {
   }
 }
 
-export const pickerViewEmits = ['change', 'update:modelValue']
+export const pickerViewEmits = ['change', 'update:modelValue', '_change']
+
+export const labelFormatter = (labelArray: string[]) => {
+  return labelArray.join('/')
+}
+
+export const defaultFormatter: Formatter = (valueArray, labelArray) => {
+  return {
+    value: valueArray,
+    label: labelFormatter(labelArray)
+  }
+}
+
+export const defaultParser: Parser = value => {
+  if (isNumber(value)) {
+    return [value as number]
+  } else if (isString(value) && value) {
+    return [value as string]
+  } else if (isStringNumberMixArray(value)) {
+    return value as (string | number)[]
+  }
+
+  return []
+}

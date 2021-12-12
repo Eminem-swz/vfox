@@ -1,4 +1,5 @@
 import type { ApiFnOptions } from '../apis/types'
+import type { PickerDetail } from '../Picker/types'
 
 export type ModeName =
   | 'date'
@@ -21,6 +22,10 @@ export interface DateDetailObject {
   value: Date | null
   valueArray: number[]
   formatted: string
+}
+
+export interface DatePickerDetail extends PickerDetail {
+  value: Date
 }
 
 export interface ChangeArgs extends DateDetailObject {

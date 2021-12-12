@@ -77,6 +77,8 @@ export interface DetailHook {
   (detail: DetailObject): AnyObject
 }
 
+export type LabelFormatter = (labelArray: string[]) => string
+
 export interface PickerHandlers {
   optionsHandler?: OptionsHandler
   valueParser?: ValueParser
@@ -84,6 +86,9 @@ export interface PickerHandlers {
   defaultValueHandler?: DefaultValueHandler
   valueHook?: ValueHook
   detailHook?: DetailHook
+  formatter: Formatter
+  parser: Parser
+  labelFormatter: LabelFormatter
 }
 
 export type ShowPickerOptions = {
@@ -96,3 +101,18 @@ export type ShowPickerOptions = {
     fieldNames: UserFieldNames
   } & ApiFnOptions
 >
+
+export type PickerValue = string | number | Date
+export type PickerFormatValue = PickerValue | PickerValue[]
+
+export type Formatter = (
+  valueArray: PickerValue[],
+  labelArray: string[]
+) => PickerDetail | PickerFormatValue
+
+export type Parser = (value: unknown) => PickerValue[]
+
+export interface PickerDetail {
+  value: PickerFormatValue
+  label: string
+}

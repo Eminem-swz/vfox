@@ -4,6 +4,7 @@ import type {
   UserFieldNames,
   DetailObject,
   Values,
+  PickerValue,
   ExtraData,
   ColRow,
   FieldNames,
@@ -144,7 +145,7 @@ interface ValidateReturn {
  * @param options
  */
 function validateCols(
-  values: Values,
+  values: PickerValue[],
   options: OptionItem[] | OptionItem[][]
 ): ValidateReturn {
   const optionList = isArray(options[0])
@@ -190,7 +191,7 @@ function validateCols(
  * @param options
  */
 function validateCascadeCols(
-  values: Values,
+  values: PickerValue[],
   options: OptionItem[],
   virtualHandler?: OptionsHandler | null
 ): ValidateReturn {
@@ -303,7 +304,7 @@ function printError(message: string) {
  * @returns { valid, detail }
  */
 export function validateValues(
-  values: Values | Error,
+  values: PickerValue[] | Error,
   options: OptionItem[] | OptionItem[][],
   isCascade: boolean,
   virtualHandler?: OptionsHandler | null

@@ -28,12 +28,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref } from 'vue'
+import { defineComponent, nextTick, ref, PropType } from 'vue'
 import { Empty } from '@/Empty'
 import { frameTo } from '@/helpers/animation'
 import { hasClassName } from '@/helpers/dom'
-import { commonProps, pickerViewEmits } from '@/Picker/picker'
-import { usePickerView } from '@/Picker/use-picker'
+import {
+  commonProps,
+  pickerViewEmits,
+  defaultParser,
+  defaultFormatter,
+  labelFormatter
+} from '@/Picker/picker'
+import { usePickerView } from '@/Picker/use-picker2'
+import type { Formatter, Parser } from './types'
 
 interface ScrollElement extends HTMLElement {
   scrolling?: boolean
@@ -44,15 +51,14 @@ export default defineComponent({
   name: 'fx-picker-view',
   components: { Empty },
   props: {
-    ...commonProps
+    ...commonProps,
+    formatter: {
+      type: Function as PropType<Formatter>
+    },
+    parser: {
+      type: Function as PropType<Parser>
+    }
   },
-  // created() {
-  //   this.formLabel = this.cacheLabel
-  //   this.formValue = this.cacheValue
-
-  //   // 需要立即同步好数据
-  //   emit('update:modelValue', this.hookFormValue())
-  // },
   emits: [...pickerViewEmits],
   setup(props, ctx) {
     const root = ref<HTMLElement>()
@@ -61,8 +67,6 @@ export default defineComponent({
 
     const {
       getDetail,
-      formLabel,
-      formValue,
       cols,
       isCascade,
       update,
@@ -74,7 +78,14 @@ export default defineComponent({
       props,
       ctx,
       { name: 'picker', afterUpdate: updatePos },
-      props.handlers || {}
+      Object.assign(
+        {
+          formatter: props.formatter || defaultFormatter,
+          parser: props.parser || defaultParser,
+          labelFormatter
+        },
+        props.handlers
+      )
     )
 
     function updatePos() {
@@ -181,10 +192,7 @@ export default defineComponent({
       root,
       cols,
       getDetail,
-      formLabel,
-      formValue,
       onListScroll,
-      updatePos,
       updateValue
     }
   }

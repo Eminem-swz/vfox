@@ -4,10 +4,13 @@ import type {
   DefaultValueHandler,
   DetailHook,
   OptionsHandler,
+  Parser,
   ValueFormatter,
   ValueHook,
   ValueParser,
-  Values
+  Values,
+  LabelFormatter,
+  Formatter
 } from '../Picker/types'
 import type { UseProps } from '../hooks/types'
 import {
@@ -121,5 +124,88 @@ export function useDatePicker(props: UseProps) {
 
   return {
     handlers
+  }
+}
+
+export function useView(props: UseProps) {
+  const mode = getEnumsValue(MODE_NAMES, props.initialMode)
+
+  const optionsHandler: OptionsHandler = (index, parent) => {
+    let minDate = props.minDate as Date
+    let maxDate = props.maxDate as Date
+    if (minDate.getTime() > maxDate.getTime()) {
+      // 兼容min max搞反的问题
+      maxDate = [minDate, (minDate = maxDate)][0]
+    }
+
+    return parseRows(index, parent || null, {
+      filter: props.filter,
+      minDate,
+      maxDate,
+      mode
+    })
+  }
+
+  const parser: Parser = value => {
+    if (props.parser) {
+      return props.parser(value)
+    }
+
+    let djs: Dayjs | null = null
+
+    if (isDate(value)) {
+      djs = dayjs(value as Date)
+    } else if (
+      props.formatTemplate &&
+      value != null &&
+      value !== '' &&
+      isString(value)
+    ) {
+      djs = dayjs(value as string, props.formatTemplate, true)
+    }
+
+    return day2Array(djs, mode)
+  }
+
+  const defaultValueHandler = () => {
+    let min = (props.minDate as Date).getTime()
+    let max = (props.maxDate as Date).getTime()
+
+    if (min > max) {
+      // 兼容min max搞反的问题
+      max = [min, (min = max)][0]
+    }
+
+    return parser(new Date(rangeNumber(Date.now(), min, max)))
+  }
+
+  const labelFormatter: LabelFormatter = array => {
+    return array.length === 0
+      ? ''
+      : dayjs(array2Date(array, mode)).format(
+          getFormatTemplate(props.formatTemplate, mode)
+        )
+  }
+
+  const formatter: Formatter = (valueArray, labelArray) => {
+    if (props.formatter) {
+      return props.formatter(valueArray, labelArray)
+    }
+
+    const label = labelFormatter(labelArray)
+    return {
+      value: props.formatTemplate ? label : array2Date(valueArray, mode),
+      label
+    }
+  }
+
+  return {
+    handlers: {
+      optionsHandler,
+      formatter,
+      parser,
+      defaultValueHandler,
+      labelFormatter
+    }
   }
 }

@@ -1,4 +1,4 @@
-import type { ColRow, Values } from '../Picker/types'
+import type { ColRow, PickerValue } from '../Picker/types'
 import type { ColName, ModeName, OptionFilter } from './types'
 import dayjs from '@/helpers/day'
 import type { Dayjs } from 'dayjs'
@@ -281,7 +281,7 @@ export const parseRows: RowsParser = (
   return rows
 }
 
-export function array2Date(array: Values, mode: ModeName) {
+export function array2Date(array: PickerValue[], mode: ModeName) {
   let djs = dayjs().millisecond(0)
 
   const { colNames } = getCopMapItem(mode)
