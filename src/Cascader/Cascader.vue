@@ -36,7 +36,12 @@ import { defineComponent } from 'vue'
 import { CascaderPopup } from '@/CascaderPopup'
 import { PickerInput } from '@/PickerInput'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { pickerEmits, pickerProps, commonProps } from '@/Picker/picker'
+import {
+  pickerEmits,
+  pickerProps,
+  commonProps,
+  mergeHandlers
+} from '@/Picker/picker'
 import { usePicker } from '@/Picker/use-picker'
 
 export default defineComponent({
@@ -46,7 +51,13 @@ export default defineComponent({
   emits: [...formItemEmits, ...pickerEmits],
   setup(props, ctx) {
     return {
-      ...usePicker(props, ctx, { name: 'cascader' }, {})
+      ...usePicker(props, ctx, {
+        name: 'cascader',
+        handlers: mergeHandlers({
+          formatter: props.formatter,
+          parser: props.parser
+        })
+      })
     }
   }
 })

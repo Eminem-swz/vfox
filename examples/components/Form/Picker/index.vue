@@ -37,7 +37,7 @@
         label="基础"
         isLink
         @click="visible = true"
-        :content="value"
+        :content="popupValue.join('/')"
       ></fx-cell>
     </fx-group>
     <fx-group title="PickerPopup Event">
@@ -65,7 +65,7 @@
       :title="title"
       :options="multiOptions"
       :format-string="true"
-      v-model="value"
+      v-model="popupValue"
       @change="onChange"
       @confirm="onConfirm"
       @cancel="onCancel"
@@ -86,7 +86,7 @@ export default {
     return {
       regionValue: [],
       disableValue: [2000, '春'],
-      value: '2000/夏',
+      popupValue: [2000, '夏'],
       visible: false,
       title: 'Picker',
       regionTitle: '选择地区',

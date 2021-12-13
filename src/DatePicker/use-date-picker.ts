@@ -4,13 +4,14 @@ import type {
   DefaultValueHandler,
   DetailHook,
   OptionsHandler,
-  Parser,
+  UserParser,
   ValueFormatter,
   ValueHook,
   ValueParser,
   Values,
   LabelFormatter,
-  Formatter
+  UserFormatter,
+  PickerHandlers
 } from '../Picker/types'
 import type { UseProps } from '../hooks/types'
 import {
@@ -23,6 +24,7 @@ import {
 import { cloneData, isDate, isString, rangeNumber } from '@/helpers/util'
 import type { DateDetailObject } from './types'
 import type { Dayjs } from 'dayjs'
+import { provide } from 'vue'
 
 export function useDatePicker(props: UseProps) {
   const mode = getEnumsValue(MODE_NAMES, props.initialMode)
@@ -127,7 +129,7 @@ export function useDatePicker(props: UseProps) {
   }
 }
 
-export function useView(props: UseProps) {
+export function useHandlers(props: UseProps) {
   const mode = getEnumsValue(MODE_NAMES, props.initialMode)
 
   const optionsHandler: OptionsHandler = (index, parent) => {
@@ -146,7 +148,7 @@ export function useView(props: UseProps) {
     })
   }
 
-  const parser: Parser = value => {
+  const parser: UserParser = value => {
     if (props.parser) {
       return props.parser(value)
     }
@@ -187,7 +189,7 @@ export function useView(props: UseProps) {
         )
   }
 
-  const formatter: Formatter = (valueArray, labelArray) => {
+  const formatter: UserFormatter = (valueArray, labelArray) => {
     if (props.formatter) {
       return props.formatter(valueArray, labelArray)
     }
@@ -199,13 +201,15 @@ export function useView(props: UseProps) {
     }
   }
 
-  return {
-    handlers: {
-      optionsHandler,
-      formatter,
-      parser,
-      defaultValueHandler,
-      labelFormatter
-    }
+  const handlers: PickerHandlers = {
+    optionsHandler,
+    formatter,
+    parser,
+    defaultValueHandler,
+    labelFormatter
   }
+
+  provide('fxPickerHandlers', handlers)
+
+  return { handlers }
 }

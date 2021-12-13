@@ -28,19 +28,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref, PropType } from 'vue'
+import { defineComponent, nextTick, ref, inject } from 'vue'
 import { Empty } from '@/Empty'
 import { frameTo } from '@/helpers/animation'
 import { hasClassName } from '@/helpers/dom'
-import {
-  commonProps,
-  pickerViewEmits,
-  defaultParser,
-  defaultFormatter,
-  labelFormatter
-} from '@/Picker/picker'
-import { usePickerView } from '@/Picker/use-picker2'
-import type { Formatter, Parser } from './types'
+import { commonProps, pickerViewEmits, mergeHandlers } from '@/Picker/picker'
+import { usePickerView } from '@/Picker/use-picker'
+import type { PickerHandlers } from './types'
 
 interface ScrollElement extends HTMLElement {
   scrolling?: boolean
@@ -51,13 +45,7 @@ export default defineComponent({
   name: 'fx-picker-view',
   components: { Empty },
   props: {
-    ...commonProps,
-    formatter: {
-      type: Function as PropType<Formatter>
-    },
-    parser: {
-      type: Function as PropType<Parser>
-    }
+    ...commonProps
   },
   emits: [...pickerViewEmits],
   setup(props, ctx) {
@@ -74,19 +62,17 @@ export default defineComponent({
       getValuesByRow,
       updateValue,
       onChange
-    } = usePickerView(
-      props,
-      ctx,
-      { name: 'picker', afterUpdate: updatePos },
-      Object.assign(
+    } = usePickerView(props, ctx, {
+      name: 'picker',
+      afterUpdate: updatePos,
+      handlers: mergeHandlers(
         {
-          formatter: props.formatter || defaultFormatter,
-          parser: props.parser || defaultParser,
-          labelFormatter
+          formatter: props.formatter,
+          parser: props.parser
         },
-        props.handlers
+        inject<Partial<PickerHandlers>>('fxPickerHandlers', {})
       )
-    )
+    })
 
     function updatePos() {
       nextTick(() => {
@@ -193,7 +179,8 @@ export default defineComponent({
       cols,
       getDetail,
       onListScroll,
-      updateValue
+      updateValue,
+      updatePos
     }
   }
 })

@@ -39,14 +39,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref, computed } from 'vue'
+import { defineComponent, nextTick, ref, computed, inject } from 'vue'
 import { Drawer } from '@/Drawer'
 import { frameTo } from '@/helpers/animation'
 import { isSameArray } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
-import type { ColRow, Values } from '../Picker/types'
-import { pickerViewEmits, commonProps } from '@/Picker/picker'
+import type { ColRow, PickerHandlers, PickerValue } from '../Picker/types'
+import {
+  pickerViewEmits,
+  commonProps,
+  mergeHandlers,
+  labelFormatter
+} from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
 
 export default defineComponent({
@@ -143,7 +148,7 @@ export default defineComponent({
       if (item.hasChildren) {
         update(selecteds)
       } else {
-        if (!isSameArray(formValue, selecteds)) {
+        if (!isSameArray(currentValues, selecteds)) {
           onSelect(selecteds)
           onChange()
         } else {
@@ -152,31 +157,34 @@ export default defineComponent({
       }
     }
 
-    function onSelect(selecteds: Values) {
+    function onSelect(selecteds: PickerValue[]) {
       const confirmDetail = updateValue(selecteds)
       popup.customConfirm(confirmDetail)
     }
 
     const {
-      format2String,
+      currentValues,
       cacheLabel,
       getDetail,
-      formLabel,
-      formValue,
       cols,
       update,
       getValuesByRow,
       updateValue,
       onChange
-    } = usePickerView(
-      props,
-      ctx,
-      { name: 'cascader', afterUpdate: updateLayout },
-      {}
-    )
+    } = usePickerView(props, ctx, {
+      name: 'cascader',
+      afterUpdate: updateLayout,
+      handlers: mergeHandlers(
+        {
+          formatter: props.formatter,
+          parser: props.parser
+        },
+        inject<Partial<PickerHandlers>>('fxPickerHandlers', {})
+      )
+    })
 
     const title2 = computed(() => {
-      return format2String(cacheLabel) || props.title
+      return labelFormatter(cacheLabel) || props.title
     })
 
     return {
@@ -185,8 +193,6 @@ export default defineComponent({
       dropdown,
       cols,
       getDetail,
-      formLabel,
-      formValue,
       updateValue,
       onItemClick
     }

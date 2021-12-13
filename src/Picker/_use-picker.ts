@@ -1,30 +1,283 @@
-import { reactive, ref, watch } from 'vue'
-import { isArray, cloneData, isSameArray, isFunction } from '@/helpers/util'
+import { onMounted, reactive, ref, watch, computed } from 'vue'
+import {
+  isArray,
+  cloneData,
+  isSameArray,
+  isEmpty,
+  isFunction
+} from '@/helpers/util'
 import type {
   ColRow,
   Labels,
   OptionItem,
-  PickerValue,
+  Values,
+  ExtraData,
   OptionsHandler,
-  PickerDetail,
+  DetailObject,
   PickerHandlers,
-  PickerFormatValue
+  ValueFormatter,
+  HandleType,
+  DetailHook
 } from './types'
-import type { Noop } from '../helpers/types'
+import type { AnyObject, Noop } from '../helpers/types'
 import {
+  cloneDetail,
+  getDefaultDetail,
+  getHookValue,
   validateValues,
   getFormatOptions,
   getColRows,
-  updateArray
+  updateArray,
+  defaultValueParser
 } from '@/Picker/util'
-import type { UseProps, UseCtx } from '../hooks/types'
+import type { UseProps, UseCtx, UseEmit } from '../hooks/types'
+import type { PopupCustomConfirm } from '../popup/types'
+import { useFormItem } from '@/Form/use-form'
+
+interface UseOptions {
+  name: string
+  handlers: PickerHandlers
+}
+
+export function usePicker(
+  props: UseProps,
+  ctx: UseCtx,
+  { name, handlers }: UseOptions
+) {
+  const { emit } = ctx
+  const isInitPopup = ref(false)
+  const popupVisible = ref(true)
+  const formValueString = ref('')
+  const formLabelString = ref('')
+  const formLabel = reactive<Labels>([])
+  const formValue = reactive<Values>([])
+  const popup = ref()
+
+  let detail = getDefaultDetail()
+  const separator: string = props.initialSeparator
+  // const defaultDetail = getDefaultDetail()
+  const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
+
+  const { formName, validateAfterEventTrigger, hookFormValue, root } =
+    useFormItem(props, ctx, {
+      formValue,
+      hookFormValue: () =>
+        handlers.valueHook
+          ? handlers.valueHook(cloneData(formValue))
+          : props.formatString
+          ? formValueString.value
+          : cloneData(formValue),
+      hookResetValue: () => updateValue(cloneData(defaultValue)).value
+    })
+
+  const format2String = (array: Values, type: HandleType = 'value') => {
+    return handlers.valueFormatter
+      ? handlers.valueFormatter(array, type)
+      : array.join(separator)
+  }
+
+  function updateValue(val: unknown) {
+    if (popup.value) {
+      const popupDetail: DetailObject = popup.value.updateValue(val)
+
+      return updateDetail(
+        isEmpty(val) && val !== 0 ? getDefaultDetail() : popupDetail
+      )
+    }
+
+    const values = handlers.valueParser
+      ? handlers.valueParser(val, 'value')
+      : defaultValueParser(val, separator)
+
+    if (!(values instanceof Error)) {
+      const { options, isCascade } = getFormatOptions(
+        props.options || [],
+        props.fieldNames || {},
+        optionsHandler,
+        name === 'cascader'
+      )
+
+      if (!isSameArray(values, formValue)) {
+        const { value, label, valid, extraData } = validateValues(
+          values,
+          options,
+          isCascade,
+          optionsHandler
+        )
+
+        if (valid) {
+          return updateDetail({
+            value,
+            label,
+            extraData,
+            valueString: format2String(value, 'value'),
+            labelString: format2String(label, 'label')
+          })
+        }
+      }
+    }
+
+    return getDetail()
+  }
+
+  function updateDetail(newDetail: DetailObject) {
+    if (!isSameArray(newDetail.value, formValue)) {
+      emit('value-change', detailHook(newDetail), detailHook(detail))
+    }
+
+    detail = newDetail
+    updateArray(formValue, newDetail.value)
+    updateArray(formLabel, newDetail.label)
+    formValueString.value = newDetail.valueString
+    formLabelString.value = newDetail.labelString
+
+    return getDetail()
+  }
+
+  function onFieldClick() {
+    if (!props.disabled) {
+      if (!isInitPopup.value) {
+        isInitPopup.value = true
+      } else {
+        popupVisible.value = true
+      }
+    }
+  }
+
+  const detailHook: DetailHook = detail => {
+    return handlers.detailHook ? handlers.detailHook(detail) : cloneData(detail)
+  }
+
+  function getDetail(): DetailObject {
+    return cloneData(detail)
+  }
+
+  function onChange(detail: DetailObject) {
+    updateDetail(detail)
+
+    emit('update:modelValue', hookFormValue())
+    emit('change', detailHook(detail))
+
+    validateAfterEventTrigger('change', hookFormValue())
+  }
+
+  watch(
+    [() => props.modelValue, () => props.options],
+    () => updateValue(props.modelValue),
+    {
+      immediate: true
+    }
+  )
+
+  const defaultValue = getDetail().value
+
+  return {
+    root,
+    popup,
+    formName,
+    isInitPopup,
+    popupVisible,
+    formValueString,
+    formLabelString,
+    updateValue,
+    onFieldClick,
+    onChange,
+    hookFormValue,
+    validateAfterEventTrigger,
+    defaultValue
+  }
+}
+
+export function usePickerPopup(
+  props: UseProps,
+  {
+    emit,
+    customConfirm,
+    onCancelClick
+  }: {
+    emit: UseEmit
+    customConfirm: PopupCustomConfirm
+    onCancelClick: Noop
+  },
+  handlers: PickerHandlers
+) {
+  const view = ref()
+
+  let detail = getDefaultDetail()
+
+  function beforeConfirm() {
+    const newDetail = view.value?.getDetail() || getDefaultDetail()
+
+    if (!isSameArray(newDetail.value, detail.value)) {
+      detail = newDetail
+
+      // 跟picker-view不一样，改变数值时机是确定按钮
+      emit(
+        'update:modelValue',
+        getHookValue(detail, props.formatString || false, handlers.valueHook)
+      )
+      emit('change', detailHook(detail))
+    }
+
+    return detailHook(detail)
+  }
+
+  function onHeaderLeftClick() {
+    onCancelClick()
+  }
+
+  function onHeaderRightClick() {
+    customConfirm(beforeConfirm())
+  }
+
+  function detailHook(detail: DetailObject): AnyObject {
+    const newDetail = cloneDetail(detail)
+
+    return handlers.detailHook ? handlers.detailHook(newDetail) : newDetail
+  }
+
+  function getDetail() {
+    return cloneDetail(detail)
+  }
+
+  function updateValue(val: unknown) {
+    view.value && (detail = view.value.updateValue(val))
+
+    return getDetail()
+  }
+
+  watch(
+    () => props.modelValue,
+    val => updateValue(val),
+    {
+      immediate: true
+    }
+  )
+
+  watch(
+    () => props.visible,
+    val => val && view.value?.updatePos()
+  )
+
+  onMounted(
+    () =>
+      (!isEmpty(props.modelValue) || props.modelValue === 0) &&
+      updateValue(props.modelValue)
+  )
+
+  return {
+    view,
+    updateValue,
+    getDetail,
+    onHeaderLeftClick,
+    onHeaderRightClick
+  }
+}
 
 interface ViewUseOptions {
   name: 'cascader' | 'picker'
   afterUpdate: Noop
 }
-
-type ViewFormatter = () => PickerDetail
 
 export function usePickerView(
   props: UseProps,
@@ -32,18 +285,21 @@ export function usePickerView(
   { name, afterUpdate }: ViewUseOptions,
   handlers: PickerHandlers
 ) {
+  const separator: string = props.initialSeparator
+
   const cols = reactive<ColRow[][]>([])
   const formLabel = reactive<Labels>([])
-  const formValue = reactive<PickerValue[]>([])
+  const formValue = reactive<Values>([])
   const options2 = reactive<OptionItem[] | OptionItem[][]>([])
   const isCascade = ref(false)
 
   const cacheLabel = reactive<Labels>([])
-  const cacheValue = reactive<PickerValue[]>([])
+  const cacheValue = reactive<Values>([])
 
   const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
+  let extraData: any = []
 
-  function updateOptions(val: PickerValue[]) {
+  function updateOptions(val: Values) {
     const { options, isCascade: isCascade2 } = getFormatOptions(
       props.options,
       props.fieldNames,
@@ -60,7 +316,9 @@ export function usePickerView(
   }
 
   function updateValue(val: unknown, forceUpdate = false) {
-    const values = handlers.parser(val)
+    const values = handlers.valueParser
+      ? handlers.valueParser(val, 'value')
+      : defaultValueParser(val, separator)
 
     const { valid, value } = validateValues(
       values,
@@ -85,16 +343,44 @@ export function usePickerView(
     return getDetail()
   }
 
-  function getDetail() {
-    return formatter()
+  const format2String: ValueFormatter = (
+    array: Values,
+    type: HandleType = 'label'
+  ) => {
+    return handlers.valueFormatter
+      ? handlers.valueFormatter(array, type)
+      : array.join(separator as string)
   }
 
-  function addCache(item: { value: string | number; label: string }) {
+  function getDetail() {
+    const detail: DetailObject = {
+      valueString: format2String(formValue, 'value'),
+      labelString: format2String(formLabel, 'label'),
+      value: cloneData(formValue),
+      label: cloneData(formLabel),
+      extraData
+    }
+
+    return detail
+  }
+
+  function detailHook(detail: DetailObject): any {
+    const newDetail = cloneDetail(detail)
+
+    return handlers.detailHook ? handlers.detailHook(newDetail) : newDetail
+  }
+
+  function addCache(item: {
+    value: string | number
+    label: string
+    extraData: ExtraData
+  }) {
     cacheValue.push(item.value)
     cacheLabel.push(item.label)
+    extraData.push(item.extraData)
   }
 
-  function update(selecteds: PickerValue[]) {
+  function update(selecteds: Values) {
     !isCascade.value ? updateCols(selecteds) : updateCascadeCols(selecteds)
 
     if (name === 'picker') {
@@ -108,12 +394,13 @@ export function usePickerView(
   function clearCache() {
     updateArray(cacheLabel, [])
     updateArray(cacheValue, [])
+    extraData = []
   }
 
   /**
    * 更新多列展示效果
    */
-  function updateCols(selecteds: PickerValue[]) {
+  function updateCols(selecteds: Values) {
     clearCache()
 
     if (options2.length === 0) {
@@ -166,7 +453,7 @@ export function usePickerView(
    * 日期等更新模式
    * @param selecteds 选择值
    */
-  function updateVirtualOptionsCols(selecteds: PickerValue[]) {
+  function updateVirtualOptionsCols(selecteds: Values) {
     clearCache()
 
     if (selecteds.length === 0) {
@@ -203,7 +490,8 @@ export function usePickerView(
 
             addCache({
               label: row.label,
-              value: row.value
+              value: row.value,
+              extraData: {}
             })
           }
         }
@@ -227,7 +515,8 @@ export function usePickerView(
         lastColFirstRow.selected = true
         addCache({
           label: lastColFirstRow.label,
-          value: lastColFirstRow.value
+          value: lastColFirstRow.value,
+          extraData: {}
         })
 
         if (lastColFirstRow.hasChildren) {
@@ -247,7 +536,7 @@ export function usePickerView(
    * 级联更新模式
    * @param selecteds 选择值
    */
-  function updateCascadeCols(selecteds: PickerValue[]) {
+  function updateCascadeCols(selecteds: Values) {
     if (isFunction(optionsHandler)) {
       updateVirtualOptionsCols(selecteds)
       return
@@ -357,9 +646,9 @@ export function usePickerView(
     }
 
     function getFirstSelected(
-      values: PickerValue[],
+      values: Values,
       optionList: OptionItem[]
-    ): PickerValue[] {
+    ): Values {
       const optionItem = optionList[0]
 
       if (optionItem) {
@@ -380,10 +669,10 @@ export function usePickerView(
 
   function getValuesByRow(row: ColRow) {
     if (row.values) {
-      return row.values as PickerValue[]
+      return row.values as Values
     }
 
-    const values: PickerValue[] = []
+    const values: Values = []
     const indexes = row.indexes
     let i = 0
     let options = options2 as OptionItem[]
@@ -399,29 +688,19 @@ export function usePickerView(
     return values
   }
 
-  const formatter: ViewFormatter = () => {
-    const ret = handlers.formatter(cloneData(formValue), cloneData(formLabel))
-
-    if ((ret as PickerDetail)?.value) {
-      return {
-        value: (ret as PickerDetail).value,
-        label: (ret as PickerDetail).label ?? ''
-      }
-    }
-
-    return {
-      value: ret as PickerFormatValue,
-      label: handlers.labelFormatter(cloneData(formLabel))
-    }
-  }
+  const formLabelString = computed(() => format2String(formLabel, 'label'))
+  const formValueString = computed(() => format2String(formValue, 'value'))
 
   function emitValue() {
-    emit('update:modelValue', formatter().value)
+    emit(
+      'update:modelValue',
+      getHookValue(getDetail(), props.formatString || false, handlers.valueHook)
+    )
   }
 
   function onChange() {
     emitValue()
-    emit('change', Object.assign({ type: 'change' }, getDetail()))
+    emit('change', detailHook(getDetail()))
   }
 
   watch(
@@ -448,11 +727,14 @@ export function usePickerView(
   }
 
   return {
+    format2String,
     cols,
     cacheLabel,
     cacheValue,
     formLabel,
     formValue,
+    formLabelString,
+    formValueString,
     isCascade,
     getDetail,
     update,

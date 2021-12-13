@@ -256,7 +256,8 @@ function validateCascadeCols(
       const optionItem = row2OptionItem(row)
 
       if (row.value === values[valueIndex]) {
-        if (row.hasChildren && values[valueIndex + 1]) {
+        // 之前value[valueIndex + 1] 没有考虑0的情况
+        if (row.hasChildren && valueIndex + 1 < values.length) {
           // 都有下一项
           addData(optionItem)
           return virtualOptionsDeep(index + 1, valueIndex + 1, row)
@@ -339,7 +340,7 @@ export function validateValues(
 export function getFormatOptions(
   options: UserOptionItem[],
   fieldNames: UserFieldNames,
-  virtualHandler: OptionsHandler | null,
+  virtualHandler: OptionsHandler | null | undefined,
   cascader = false
 ) {
   const newFieldNames = getDefaultFieldNames()
@@ -347,7 +348,7 @@ export function getFormatOptions(
   let newOptions: OptionItem[] | OptionItem[][] = []
   let isCascade = false
 
-  if (virtualHandler === null) {
+  if (virtualHandler == null) {
     if (isObject(fieldNames)) {
       isString(fieldNames.label) &&
         fieldNames.label &&

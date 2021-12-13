@@ -21,7 +21,7 @@
       >
       </NavBar>
     </template>
-    <PickerView ref="view" :handlers="handlers" />
+    <PickerView ref="view" :formatter="formatter" :parser="parser" />
   </Drawer>
 </template>
 
@@ -34,27 +34,27 @@ import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import { pickerPopupProps, pickerViewEmits } from '@/Picker/picker'
 import { usePickerPopup } from '@/Picker/use-picker'
-import { datePickerProps } from '@/DatePicker/date-picker'
-import { useDatePicker } from '@/DatePicker/use-date-picker'
+import { commonProps } from '@/DatePicker/date-picker'
+import { useHandlers } from './use-date-picker'
 
 export default defineComponent({
   name: 'fx-date-picker-popup',
   components: { PickerView, Drawer, NavBar },
   props: {
     ...popupExtendProps,
-    ...datePickerProps,
+    ...commonProps,
     ...pickerPopupProps
   },
   emits: [...pickerViewEmits, ...popupExtendEmits],
   setup(props, ctx) {
-    const { handlers } = useDatePicker(props)
+    useHandlers(props)
+
     const popup = usePopupExtend(ctx)
-    const pickerPopup = usePickerPopup(props, popup, handlers)
+    const pickerPopup = usePickerPopup(props, popup)
 
     return {
       ...popup,
-      ...pickerPopup,
-      handlers
+      ...pickerPopup
     }
   }
 })

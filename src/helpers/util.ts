@@ -323,8 +323,15 @@ export function isDateArray(object: unknown) {
 export function isSameArray(a: unknown[], b: unknown[]): boolean {
   if (a.length === b.length) {
     for (let i = 0; i < a.length; i++) {
-      if (a[i] != b[i]) {
-        return false
+      if (isDate(a[i]) && isDate(b[i])) {
+        // 增加处理时间
+        if (!isSameDate(a[i] as Date, b[i] as Date)) {
+          return false
+        }
+      } else {
+        if (a[i] != b[i]) {
+          return false
+        }
       }
     }
   } else {
@@ -332,6 +339,16 @@ export function isSameArray(a: unknown[], b: unknown[]): boolean {
   }
 
   return true
+}
+
+/**
+ * 是否相同时间
+ * @param a Date实例a
+ * @param b Date实例b
+ * @returns boolean
+ */
+export function isSameDate(a: Date, b: Date) {
+  return a.getTime() === b.getTime()
 }
 
 /**

@@ -23,6 +23,8 @@
       :fieldNames="fieldNames"
       :modelValue="modelValue"
       :title="placeholder"
+      :formatter="formatter"
+      :parser="parser"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
       @change="onChange"
@@ -36,7 +38,12 @@ import { defineComponent } from 'vue'
 import { PickerInput } from '@/PickerInput'
 import { PickerPopup } from '@/PickerPopup'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { pickerEmits, pickerProps, commonProps } from '@/Picker/picker'
+import {
+  pickerEmits,
+  pickerProps,
+  commonProps,
+  mergeHandlers
+} from '@/Picker/picker'
 import { usePicker } from '@/Picker/use-picker'
 
 export default defineComponent({
@@ -46,7 +53,13 @@ export default defineComponent({
   emits: [...formItemEmits, ...pickerEmits],
   setup(props, ctx) {
     return {
-      ...usePicker(props, ctx, { name: 'picker' }, {})
+      ...usePicker(props, ctx, {
+        name: 'picker',
+        handlers: mergeHandlers({
+          formatter: props.formatter,
+          parser: props.parser
+        })
+      })
     }
   }
 })

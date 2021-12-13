@@ -18,7 +18,8 @@
     />
     <PickerPopup
       :title="placeholder"
-      :handlers="handlers"
+      :formatter="formatter"
+      :parser="parser"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
       @change="onChange"
@@ -34,20 +35,19 @@ import { PickerPopup } from '@/PickerPopup'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import { pickerEmits, pickerProps } from '@/Picker/picker'
 import { usePicker } from '@/Picker/use-picker'
-import { datePickerProps } from '@/DatePicker/date-picker'
-import { useDatePicker } from '@/DatePicker/use-date-picker'
+import { commonProps } from '@/DatePicker/date-picker'
+import { useHandlers } from '@/DatePicker/use-date-picker'
 
 export default defineComponent({
   name: 'fx-date-picker',
   components: { PickerInput, PickerPopup },
-  props: { ...formItemProps, ...datePickerProps, ...pickerProps },
+  props: { ...formItemProps, ...commonProps, ...pickerProps },
   emits: [...formItemEmits, ...pickerEmits],
   setup(props, ctx) {
-    const { handlers } = useDatePicker(props)
+    const { handlers } = useHandlers(props)
 
     return {
-      ...usePicker(props, ctx, { name: 'picker' }, handlers),
-      handlers
+      ...usePicker(props, ctx, { name: 'picker', handlers })
     }
   }
 })

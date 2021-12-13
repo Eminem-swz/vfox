@@ -28,6 +28,8 @@
       :options="options"
       :fieldNames="fieldNames"
       :handlers="handlers"
+      :formatter="formatter"
+      :parser="parser"
     />
   </Drawer>
 </template>
@@ -53,7 +55,7 @@ export default defineComponent({
   emits: [...pickerViewEmits, ...popupExtendEmits],
   setup(props, ctx) {
     const popup = usePopupExtend(ctx)
-    const pickerPopup = usePickerPopup(props, popup, {})
+    const pickerPopup = usePickerPopup(props, popup)
 
     return {
       ...popup,

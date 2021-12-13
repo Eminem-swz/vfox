@@ -66,7 +66,7 @@ export interface OptionsHandler {
 }
 
 export interface DefaultValueHandler {
-  (): Values
+  (): PickerValue[]
 }
 
 export interface ValueHook {
@@ -86,8 +86,8 @@ export interface PickerHandlers {
   defaultValueHandler?: DefaultValueHandler
   valueHook?: ValueHook
   detailHook?: DetailHook
-  formatter: Formatter
-  parser: Parser
+  formatter: UserFormatter
+  parser: UserParser
   labelFormatter: LabelFormatter
 }
 
@@ -105,12 +105,12 @@ export type ShowPickerOptions = {
 export type PickerValue = string | number | Date
 export type PickerFormatValue = PickerValue | PickerValue[]
 
-export type Formatter = (
+export type UserFormatter = (
   valueArray: PickerValue[],
   labelArray: string[]
 ) => PickerDetail | PickerFormatValue
 
-export type Parser = (value: unknown) => PickerValue[]
+export type UserParser = (value: unknown) => PickerValue[]
 
 export interface PickerDetail {
   value: PickerFormatValue
