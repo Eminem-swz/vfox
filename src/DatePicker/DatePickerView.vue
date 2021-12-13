@@ -14,7 +14,7 @@ import { pickerViewEmits } from '@/Picker/picker'
 import { commonProps } from '@/DatePicker/date-picker'
 import { useHandlers } from '@/DatePicker/use-date-picker'
 import type { DateDetailObject } from './types'
-import type { PickerFormatValue } from '../Picker/types'
+import type { PickerModelValue } from '../Picker/types'
 
 export default defineComponent({
   name: 'fx-date-picker-view',
@@ -32,7 +32,7 @@ export default defineComponent({
       emit('change', e)
     }
 
-    function onUpdateValue(e: PickerFormatValue) {
+    function onUpdateValue(e: PickerModelValue) {
       emit('update:modelValue', e)
     }
 

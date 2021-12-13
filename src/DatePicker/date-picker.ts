@@ -2,7 +2,7 @@ import dayjs from '@/helpers/day'
 import type { PropType } from 'vue'
 import { MODE_NAMES } from '@/DatePicker/date'
 import type { ModeName, OptionFilter } from './types'
-import type { UserFormatter, UserParser } from '../Picker/types'
+import type { ValueFormatter, ValueParser } from '../Picker/types'
 
 export const commonProps = {
   modelValue: {
@@ -36,9 +36,9 @@ export const commonProps = {
     default: () => true
   },
   formatter: {
-    type: Function as PropType<UserFormatter>
+    type: Function as PropType<ValueFormatter>
   },
   parser: {
-    type: Function as PropType<UserParser>
+    type: Function as PropType<ValueParser>
   }
 }

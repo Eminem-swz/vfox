@@ -1,42 +1,30 @@
-import type { FormValue } from '../Form/types'
 import type { AnyObject } from '../helpers/types'
 import type { ApiFnOptions } from '../apis/types'
+
+export type PickerValue = string | number | Date
+export type PickerModelValue = PickerValue | PickerValue[]
+export interface PickerDetail {
+  value: PickerModelValue
+  label: string
+}
 
 export interface UserFieldNames {
   label?: string
   value?: string
   children?: string
 }
-
 export interface FieldNames {
   label: string
   value: string
   children: string
 }
 
-export type ModelValue = string | number | Values
-
-export type Values = (string | number)[]
-export type Labels = string[]
-
-export type ExtraData = AnyObject
-
-export interface DetailObject {
-  valueString: string
-  labelString: string
-  value: Values
-  label: Labels
-  extraData: ExtraData[]
-}
-
 export type UserOptionItem = string | number | AnyObject
-
 export interface OptionItem {
   label: string
   value: string | number
   children: OptionItem[]
   disabled: boolean
-  extraData: ExtraData
 }
 
 export interface ColRow {
@@ -44,50 +32,28 @@ export interface ColRow {
   value: string | number
   hasChildren: boolean
   indexes: number[]
-  values?: Values
+  values?: PickerValue[]
   disabled?: boolean
   selected?: boolean
-}
-
-export type ModeNames = 'multiSelector' | 'date' | 'time' | 'datetime'
-
-export type HandleType = 'label' | 'value'
-
-export interface ValueParser {
-  (value: unknown, type: HandleType): Values | Labels | Error
-}
-
-export interface ValueFormatter {
-  (array: Values | Labels, type?: HandleType): string
 }
 
 export interface OptionsHandler {
   (index: number, parent?: ColRow): ColRow[]
 }
-
-export interface DefaultValueHandler {
+export interface DefaultValueGetter {
   (): PickerValue[]
 }
-
-export interface ValueHook {
-  (array: Values): FormValue
-}
-
-export interface DetailHook {
-  (detail: DetailObject): AnyObject
-}
-
+export type ValueFormatter = (
+  valueArray: PickerValue[],
+  labelArray: string[]
+) => PickerDetail | PickerModelValue
+export type ValueParser = (value: unknown) => PickerValue[]
 export type LabelFormatter = (labelArray: string[]) => string
-
 export interface PickerHandlers {
   optionsHandler?: OptionsHandler
-  valueParser?: ValueParser
-  valueFormatter?: ValueFormatter
-  defaultValueHandler?: DefaultValueHandler
-  valueHook?: ValueHook
-  detailHook?: DetailHook
-  formatter: UserFormatter
-  parser: UserParser
+  defaultValueGetter?: DefaultValueGetter
+  formatter: ValueFormatter
+  parser: ValueParser
   labelFormatter: LabelFormatter
 }
 
@@ -96,23 +62,7 @@ export type ShowPickerOptions = {
 } & Partial<
   {
     title: string
-    value: ModelValue
-    mode: ModeNames
+    value: PickerModelValue
     fieldNames: UserFieldNames
   } & ApiFnOptions
 >
-
-export type PickerValue = string | number | Date
-export type PickerFormatValue = PickerValue | PickerValue[]
-
-export type UserFormatter = (
-  valueArray: PickerValue[],
-  labelArray: string[]
-) => PickerDetail | PickerFormatValue
-
-export type UserParser = (value: unknown) => PickerValue[]
-
-export interface PickerDetail {
-  value: PickerFormatValue
-  label: string
-}

@@ -1,8 +1,7 @@
 import type { ApiFnOptions } from '../apis/types'
 import type {
-  ModeNames,
   UserFieldNames,
-  ModelValue,
+  PickerModelValue,
   UserOptionItem
 } from '../Picker/types'
 
@@ -11,8 +10,7 @@ export type ShowCascaderOptions = {
 } & Partial<
   {
     title: string
-    value: ModelValue
-    mode: ModeNames
+    value: PickerModelValue
     fieldNames: UserFieldNames
   } & ApiFnOptions
 >

@@ -1,417 +1,50 @@
-import type {
-  OptionItem,
-  UserOptionItem,
-  UserFieldNames,
-  DetailObject,
-  Values,
-  PickerValue,
-  ExtraData,
-  ColRow,
-  FieldNames,
-  OptionsHandler,
-  ValueHook
-} from './types'
+import type { PickerDetail, PickerModelValue } from './types'
 import {
   cloneData,
   isArray,
-  isNumber,
-  isObject,
-  isString,
-  isStringNumberMix,
-  isStringNumberMixArray
+  isDate,
+  isDateArray,
+  isSameArray,
+  isSameDate
 } from '@/helpers/util'
-import Exception from '@/helpers/exception'
-import type { AnyObject } from '../helpers/types'
-
-export function getColRows(options: OptionItem[], indexes: number[]) {
-  const rows: ColRow[] = []
-
-  options.forEach((item, index) => {
-    rows.push({
-      label: item.label,
-      value: item.value,
-      hasChildren: item.children && item.children.length > 0,
-      indexes: [...indexes, index]
-    })
-  })
-
-  return rows
-}
-
-export function defaultValueParser(value: unknown, separator: string) {
-  let values: Values = []
-
-  try {
-    if (value == null) {
-      values = []
-    } else if (isNumber(value)) {
-      values = [value as number]
-    } else if (isString(value) && value) {
-      values = (value as string).split(separator)
-    } else if (!value) {
-      values = []
-    } else if (isStringNumberMixArray(value)) {
-      values = value as Values
-    } else {
-      throw new Exception('Invalid prop: invalid "value".')
-    }
-
-    return values
-  } catch (e) {
-    return new Exception(e)
-  }
-}
-
-export function parseOptions(
-  options: UserOptionItem[] | UserOptionItem[][],
-  fieldNames: FieldNames
-) {
-  const newOptions: OptionItem[] | OptionItem[][] = []
-
-  if (isArray(options)) {
-    options.forEach(option => {
-      if (isArray(option)) {
-        // 二维数组
-        const subOptions = parseOptions(
-          option as UserOptionItem[],
-          fieldNames
-        ) as OptionItem[]
-
-        if (subOptions.length > 0) {
-          ;(newOptions as OptionItem[][]).push(subOptions)
-        }
-      } else if (isNumber(option) || isString(option)) {
-        // 纯数值或者字符串
-        ;(newOptions as OptionItem[]).push({
-          label: option.toString(),
-          value: option as string,
-          children: [],
-          disabled: false,
-          extraData: {}
-        })
-      } else if (isObject(option)) {
-        const newOption = option as AnyObject
-
-        if (isStringNumberMix(newOption[fieldNames.value])) {
-          const extraData = cloneData(newOption)
-          delete extraData[fieldNames.label]
-          delete extraData[fieldNames.value]
-          delete extraData[fieldNames.children]
-          ;(newOptions as OptionItem[]).push({
-            label: (newOption[fieldNames.label] == null
-              ? newOption[fieldNames.value]
-              : newOption[fieldNames.label]) as string,
-            value: newOption[fieldNames.value] as string,
-            disabled: newOption.disabled ? true : false,
-            children: parseOptions(
-              newOption[fieldNames.children],
-              fieldNames
-            ) as OptionItem[],
-            extraData
-          })
-        }
-      }
-    })
-  }
-
-  return newOptions
-}
-
-export const getDefaultFieldNames: () => FieldNames = () => {
-  return { label: 'label', value: 'value', children: 'children' }
-}
-
-export const getDefaultDetail: () => DetailObject = () => {
-  return {
-    valueString: '',
-    value: [],
-    labelString: '',
-    label: [],
-    extraData: [],
-    modelValue: []
-  }
-}
-
-interface ValidateReturn {
-  valid: boolean
-  value: Values
-  label: string[]
-  extraData: ExtraData[]
-}
-
-/**
- * 非级联检查
- * @param values
- * @param options
- */
-function validateCols(
-  values: PickerValue[],
-  options: OptionItem[] | OptionItem[][]
-): ValidateReturn {
-  const optionList = isArray(options[0])
-    ? (options as OptionItem[][])
-    : [options as OptionItem[]]
-  let selectCount = 0
-  const value: Values = []
-  const label: string[] = []
-  const extraData: ExtraData[] = []
-
-  optionList.forEach((subOptionList, colIndex) => {
-    for (let i = 0; i < subOptionList.length; i++) {
-      const optionItem = subOptionList[i]
-
-      if (optionItem.value == values[colIndex]) {
-        selectCount++
-        value.push(optionItem.value)
-        label.push(optionItem.label)
-        extraData.push(cloneData(optionItem.extraData))
-        break
-      }
-    }
-  })
-
-  return selectCount === optionList.length
-    ? {
-        valid: true,
-        value,
-        label,
-        extraData
-      }
-    : {
-        valid: false,
-        value: [],
-        label: [],
-        extraData: []
-      }
-}
-
-/**
- * 级联检查
- * @param values
- * @param options
- */
-function validateCascadeCols(
-  values: PickerValue[],
-  options: OptionItem[],
-  virtualHandler?: OptionsHandler | null
-): ValidateReturn {
-  const value: Values = []
-  const label: string[] = []
-  const extraData: ExtraData[] = []
-
-  function addData(optionItem: OptionItem) {
-    value.push(optionItem.value)
-    label.push(optionItem.label)
-    extraData.push(cloneData(optionItem.extraData))
-  }
-
-  function deep(
-    optionList: OptionItem[],
-    valueIndex: number,
-    indexes: number[]
-  ): boolean {
-    const rows = getColRows(optionList, indexes)
-
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i]
-      const optionItem = optionList[i]
-
-      if (row.value === values[valueIndex]) {
-        if (row.hasChildren && values[valueIndex + 1]) {
-          // 都有下一项
-          addData(optionItem)
-          return deep(optionItem.children, valueIndex + 1, [...indexes, i])
-        } else if (!row.hasChildren && valueIndex + 1 >= values.length) {
-          // 都没有下一项，匹配正确
-          addData(optionItem)
-          return true
-        } else {
-          return false
-        }
-      }
-    }
-
-    return false
-  }
-
-  function virtualOptionsDeep(
-    index: number,
-    valueIndex: number,
-    parent?: ColRow
-  ): boolean {
-    function row2OptionItem(row: ColRow) {
-      return {
-        label: row.label,
-        value: row.value,
-        children: [],
-        disabled: false,
-        extraData: {}
-      }
-    }
-
-    const rows = (virtualHandler as OptionsHandler)(index, parent)
-
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i]
-      const optionItem = row2OptionItem(row)
-
-      if (row.value === values[valueIndex]) {
-        // 之前value[valueIndex + 1] 没有考虑0的情况
-        if (row.hasChildren && valueIndex + 1 < values.length) {
-          // 都有下一项
-          addData(optionItem)
-          return virtualOptionsDeep(index + 1, valueIndex + 1, row)
-        } else if (!row.hasChildren && valueIndex + 1 >= values.length) {
-          // 都没有下一项，匹配正确
-          addData(optionItem)
-          return true
-        } else {
-          return false
-        }
-      }
-    }
-
-    return false
-  }
-
-  return (virtualHandler ? virtualOptionsDeep(0, 0) : deep(options, 0, []))
-    ? {
-        valid: true,
-        value,
-        label,
-        extraData
-      }
-    : {
-        valid: false,
-        value: [],
-        label: [],
-        extraData: []
-      }
-}
-
-function printError(message: string) {
-  console.error(
-    new Exception(message, Exception.TYPE.PROP_ERROR, 'MulitSelector')
-  )
-}
-
-/**
- * 校验值
- * @param values 值
- * @param options
- * @param separator
- * @param isCascade
- * @param virtualHandler
- * @returns { valid, detail }
- */
-export function validateValues(
-  values: PickerValue[] | Error,
-  options: OptionItem[] | OptionItem[][],
-  isCascade: boolean,
-  virtualHandler?: OptionsHandler | null
-): ValidateReturn {
-  let valid = false
-
-  if (values instanceof Error) {
-    printError(values.message)
-  } else if (values.length === 0) {
-    // 空数组也算符合
-    valid = true
-  } else {
-    const ret = isCascade
-      ? validateCascadeCols(values, options as OptionItem[], virtualHandler)
-      : validateCols(values, options)
-
-    if (!ret.valid) {
-      printError('"value" is not in "options".')
-    } else {
-      return ret
-    }
-  }
-
-  return {
-    valid,
-    value: [],
-    label: [],
-    extraData: []
-  }
-}
-
-export function getFormatOptions(
-  options: UserOptionItem[],
-  fieldNames: UserFieldNames,
-  virtualHandler: OptionsHandler | null | undefined,
-  cascader = false
-) {
-  const newFieldNames = getDefaultFieldNames()
-
-  let newOptions: OptionItem[] | OptionItem[][] = []
-  let isCascade = false
-
-  if (virtualHandler == null) {
-    if (isObject(fieldNames)) {
-      isString(fieldNames.label) &&
-        fieldNames.label &&
-        (newFieldNames.label = fieldNames.label as string)
-      isString(fieldNames.value) &&
-        fieldNames.value &&
-        (newFieldNames.value = fieldNames.value as string)
-      isString(fieldNames.children) &&
-        fieldNames.children &&
-        (newFieldNames.children = fieldNames.children as string)
-    }
-
-    newOptions = parseOptions(options, newFieldNames)
-
-    // 判断是否级联模式
-    if (cascader) {
-      // 级联选择器下强制级联模式
-      isCascade = true
-    } else {
-      for (let i = 0; i < newOptions.length; i++) {
-        const newOption = newOptions[i] as OptionItem
-
-        if (newOption.children && newOption.children[0]) {
-          isCascade = true
-          break
-        }
-      }
-    }
-  } else {
-    isCascade = true
-  }
-
-  return {
-    options: newOptions,
-    isCascade,
-    fieldNames: newFieldNames
-  }
-}
 
 export function updateArray(array: any[], newArray: any[]) {
   array.splice(0, Infinity, ...newArray)
 }
 
-export function getHookValue(
-  detail: DetailObject,
-  formatString: boolean,
-  hook?: ValueHook
-) {
-  const value = cloneData(detail.value)
+export function isSameValue(aVal: unknown, bVal: unknown) {
+  if (isArray(aVal) && isArray(bVal)) {
+    return isSameArray(aVal as string[], bVal as string[])
+  }
 
-  return hook
-    ? hook(value)
-    : formatString
-    ? detail.valueString
-    : cloneData(value)
+  if (isDate(aVal) && isDate(bVal)) {
+    return isSameDate(aVal as Date, bVal as Date)
+  }
+
+  return aVal === bVal
 }
 
-export function cloneDetail(detail: DetailObject) {
-  const newDetail = cloneData(detail)
+export function isSameDetail(a: PickerDetail, b: PickerDetail) {
+  return isSameValue(a.value, b.value)
+}
 
-  newDetail.extraData.forEach((v, k) => {
-    newDetail.extraData[k] = detail.extraData[k]
-  })
+export function cloneValue(value: PickerModelValue) {
+  if (isDate(value)) {
+    return new Date(value as Date)
+  } else if (isDateArray(value)) {
+    const newValue: Date[] = []
+    ;(value as Date[]).forEach(date => {
+      newValue.push(new Date(date))
+    })
+    return newValue
+  }
+
+  return cloneData(value)
+}
+
+export function cloneDetail(detail: PickerDetail) {
+  const newDetail = cloneData(detail)
+  newDetail.value = cloneValue(detail.value)
 
   return newDetail
 }

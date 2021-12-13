@@ -8,26 +8,25 @@ import {
 } from '@/helpers/util'
 import type {
   ColRow,
-  Labels,
   OptionItem,
   PickerValue,
   OptionsHandler,
   PickerDetail,
   PickerHandlers,
-  PickerFormatValue
+  PickerModelValue
 } from './types'
 import type { Noop } from '../helpers/types'
 import {
-  validateValues,
-  getFormatOptions,
-  getColRows,
-  updateArray
+  updateArray,
+  cloneDetail,
+  isSameDetail,
+  isSameValue
 } from '@/Picker/util'
 import {
   getDefaultDetail,
-  isSameDetail,
-  cloneDetail,
-  isSameValue
+  validateValues,
+  getColRows,
+  getFormatOptions
 } from '@/Picker/picker'
 import type { UseProps, UseCtx, UseEmit } from '../hooks/types'
 import { PopupCustomConfirm } from '@/popup/types'
@@ -248,7 +247,7 @@ export function usePickerView(
   const options2 = reactive<OptionItem[] | OptionItem[][]>([])
   const isCascade = ref(false)
 
-  const cacheLabel = reactive<Labels>([])
+  const cacheLabel = reactive<string[]>([])
   const cacheValue = reactive<PickerValue[]>([])
 
   const currentLabels = reactive<string[]>([])
@@ -567,8 +566,8 @@ export function usePickerView(
    * @summary 主要用于一些日期啥的，可以默认当天
    */
   function getCascadeDefaultSelecteds() {
-    const selecteds = handlers.defaultValueHandler
-      ? handlers.defaultValueHandler()
+    const selecteds = handlers.defaultValueGetter
+      ? handlers.defaultValueGetter()
       : []
 
     if (selecteds.length > 0) {
@@ -684,7 +683,7 @@ const formatter: PickerFormatter = (valueArray, labelArray, handlers) => {
   }
 
   return {
-    value: ret as PickerFormatValue,
+    value: ret as PickerModelValue,
     label: defaultLabel
   }
 }
