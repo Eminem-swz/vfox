@@ -46,7 +46,7 @@ import { Drawer } from '@/Drawer'
 import { isArray, isObject, cloneData } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
-import type { ActionSheetItem } from './types'
+import type { ActionSheetOption, ActionSheetDetail } from './types'
 
 export default defineComponent({
   name: 'fx-action-sheet',
@@ -66,8 +66,8 @@ export default defineComponent({
       default: '取消'
     },
     options: {
-      type: Array as PropType<ActionSheetItem[]>,
-      default: () => [] as ActionSheetItem[]
+      type: Array as PropType<ActionSheetOption[]>,
+      default: () => [] as ActionSheetOption[]
     }
   },
   emits: popupExtendEmits,
@@ -76,21 +76,21 @@ export default defineComponent({
 
     function onItemClick(index: number) {
       popup.customConfirm({
+        index,
         item: {
           name: props.options[index].name
-        },
-        index
-      })
+        }
+      } as ActionSheetDetail)
     }
 
     const options2 = computed(() => {
-      const options: ActionSheetItem[] = []
+      const options: ActionSheetOption[] = []
 
       if (isArray(props.options)) {
         props.options.forEach(v => {
           options.push(
             isObject(v)
-              ? cloneData<ActionSheetItem>(v)
+              ? cloneData<ActionSheetOption>(v)
               : {
                   name: v.toString()
                 }

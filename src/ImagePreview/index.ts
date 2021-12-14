@@ -1,27 +1,23 @@
 import { withInstall } from '@/helpers/with-install'
 import ImagePreview from './ImagePreview.vue'
-import type { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
-import { createConfirmHook, showPopup } from '@/apis/Popup'
+import type { PopupSuccessArgs } from '../popup/types'
+import { createConfirmHook, createShowPopup } from '@/apis/Popup'
+import { EmptyObject } from '../helpers/types'
 
-type PreviewImageOptions = {
-  urls: string[]
-} & Partial<
+const previewImage = createShowPopup<
   {
-    content: string
-    showClose: boolean
-    navigationButtons: boolean
-    imageHighRendering: boolean
-  } & ApiFnOptions
->
-
-const previewImage = function (object: PreviewImageOptions) {
-  return showPopup<PopupConfirmArgs>(object, 'previewImage', function (done) {
-    return {
-      component: ImagePreview,
-      hook: createConfirmHook(done)
-    }
-  })
-}
+    urls: string[]
+    content?: string
+    showClose?: boolean
+    navigationButtons?: boolean
+    imageHighRendering?: boolean
+  },
+  PopupSuccessArgs<EmptyObject>
+>({
+  apiName: 'previewImage',
+  component: ImagePreview,
+  createHook: createConfirmHook
+})
 
 export { ImagePreview, previewImage }
 export default withInstall(ImagePreview, {

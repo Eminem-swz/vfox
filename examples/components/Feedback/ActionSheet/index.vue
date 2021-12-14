@@ -93,21 +93,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type {
+  ActionSheetOption,
+  ActionSheetConfirmArgs,
   PopupCancelArgs,
-  PopupConfirmArgs,
   PopupVisibleStateChangeArgs
 } from '@/types'
 import { showToast } from '@/Toast'
 import { showDialog } from '@/Dialog'
 import { showActionSheet } from '@/ActionSheet'
 
-interface Option {
-  name: string
-  description?: string
-  highlight?: boolean
-}
-
-const defaultOptions: Option[] = [
+const defaultOptions: ActionSheetOption[] = [
   {
     name: '选项1'
   },
@@ -139,19 +134,20 @@ export default defineComponent({
         {
           name: '选项3'
         }
-      ] as Option[],
+      ] as ActionSheetOption[],
 
       showEvent: false,
       visibleEvent: false
     }
   },
   methods: {
-    onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
+    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        showToast(`${state} 事件触发`)
-        console.log(`${state} 事件触发`)
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
       }
-      if (state === 'hidden') {
+
+      if (res.state === 'hidden') {
         this.showCancel = false
         this.cancelText = '取消'
         this.options = defaultOptions
@@ -160,8 +156,8 @@ export default defineComponent({
         this.showEvent = false
       }
     },
-    onConfirm(res: PopupConfirmArgs) {
-      console.log('confirm', res)
+    onConfirm(res: ActionSheetConfirmArgs) {
+      console.log('event', res)
       if (this.showEvent) {
         showDialog({
           title: '选择了',
@@ -171,7 +167,7 @@ export default defineComponent({
       }
     },
     onCancel(res: PopupCancelArgs) {
-      console.log('cancel', res)
+      console.log('event', res)
       this.showEvent && showToast(`取消事件触发`)
     },
     onCallApi() {
@@ -179,7 +175,7 @@ export default defineComponent({
         title: '标题',
         options: this.options,
         showCancel: true,
-        success: (res: any) => {
+        success: res => {
           console.log('success', res)
           const { confirm, detail } = res
 

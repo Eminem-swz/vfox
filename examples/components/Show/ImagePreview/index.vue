@@ -48,17 +48,13 @@ import { defineComponent } from 'vue'
 import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/types'
 import { showToast } from '@/Toast'
 import { previewImage } from '@/ImagePreview'
+import type { ImagePreviewChangeArgs } from '@/types'
 
 interface showArgs {
   showClose?: boolean
   current?: string
   changeEvent?: boolean
   visibleEvent?: boolean
-}
-
-interface changeArgs {
-  activeIndex: number
-  current: number
 }
 
 export default defineComponent({
@@ -96,22 +92,22 @@ export default defineComponent({
       this.visibleEvent = res.visibleEvent || false
       this.visible = true
     },
-    onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
+    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        console.log(`${state} 事件触发`)
-        showToast(`${state} 事件触发`)
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
       }
-      if (state === 'hidden') {
+      if (res.state === 'hidden') {
         this.showClose = false
         this.current = ''
         this.changeEvent = false
         this.visibleEvent = false
       }
     },
-    onChange({ activeIndex, current }: changeArgs) {
+    onChange(res: ImagePreviewChangeArgs) {
       if (this.changeEvent) {
-        showToast(`切换到第 ${activeIndex + 1} 张`)
-        console.log(`change 事件触发`, activeIndex, current)
+        console.log('event', res)
+        showToast(`切换到第 ${res.activeIndex + 1} 张`)
       }
     },
     onCancel(res: PopupCancelArgs) {

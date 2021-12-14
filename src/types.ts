@@ -26,6 +26,20 @@ import type {
   DatePickerCancelArgs
 } from './DatePicker/types'
 
+import type {
+  CascaderChangeArgs,
+  CascaderConfirmArgs,
+  CascaderCancelArgs
+} from './Cascader/types'
+
+import {
+  ActionSheetOption,
+  ActionSheetConfirmArgs,
+  ActionSheetCancelArgs
+} from './ActionSheet/types'
+
+import { ImagePreviewChangeArgs } from './ImagePreview/types'
+
 export {
   // type
   StateType,
@@ -46,5 +60,15 @@ export {
   DatePickerFilter,
   DatePickerChangeArgs,
   DatePickerConfirmArgs,
-  DatePickerCancelArgs
+  DatePickerCancelArgs,
+  // Cascader
+  CascaderChangeArgs,
+  CascaderConfirmArgs,
+  CascaderCancelArgs,
+  // ActionSheet
+  ActionSheetOption,
+  ActionSheetConfirmArgs,
+  ActionSheetCancelArgs,
+  // ImagePreview
+  ImagePreviewChangeArgs
 }

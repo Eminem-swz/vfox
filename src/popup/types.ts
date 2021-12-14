@@ -27,3 +27,10 @@ export interface PopupBridge {
   in?: (key: string, value?: any) => void
   out?: (key: string, value: any) => void
 }
+
+export interface PopupSuccessArgs<T = AnyObject> {
+  confirm: boolean
+  cancel: boolean
+  detail: T
+  source: string
+}

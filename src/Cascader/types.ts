@@ -1,16 +1,18 @@
-import type { ApiFnOptions } from '../apis/types'
+import type { PopupCancelArgs, PopupConfirmArgs } from '../popup/types'
+import type { PickerDetail, PickerChangeArgs } from '../Picker/types'
 import type {
   UserFieldNames,
   PickerModelValue,
   UserOptionItem
 } from '../Picker/types'
 
-export type ShowCascaderOptions = {
+export type CascaderChangeArgs = PickerChangeArgs
+export type CascaderConfirmArgs = PopupConfirmArgs<PickerDetail>
+export type CascaderCancelArgs = PopupCancelArgs
+
+export interface ShowCascaderOptions {
   options: UserOptionItem[]
-} & Partial<
-  {
-    title: string
-    value: PickerModelValue
-    fieldNames: UserFieldNames
-  } & ApiFnOptions
->
+  title?: string
+  value?: PickerModelValue
+  fieldNames?: UserFieldNames
+}

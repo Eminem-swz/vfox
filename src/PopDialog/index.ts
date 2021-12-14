@@ -1,6 +1,6 @@
 import { withInstall } from '@/helpers/with-install'
 import PopDialog from '../Popover/PopDialog.vue'
-import type { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
+import type { ApiFnOptions, PopupSuccessArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 import type { DomSelector, PlacementType } from '../helpers/types'
 
@@ -17,7 +17,7 @@ type ShowPopDialogOptions = {
 >
 
 const showPopDialog = function (object: ShowPopDialogOptions) {
-  return showPopup<PopupConfirmArgs>(object, 'showPopDialog', function (done) {
+  return showPopup<PopupSuccessArgs>(object, 'showPopDialog', function (done) {
     return {
       component: PopDialog,
       hook: createConfirmHook(done)

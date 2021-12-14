@@ -1,8 +1,8 @@
-import { computed, onMounted, ref, watch, inject, provide } from 'vue'
-import { inArray, isFunction, isObject, noop } from '@/helpers/util'
+import { computed, onMounted, ref, watch, inject } from 'vue'
+import { inArray, isFunction, noop } from '@/helpers/util'
 import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import type { AnyObject, Noop } from '../helpers/types'
+import type { Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/use-blur'
 import type { UseEmit, UseProps, UseCtx } from '../hooks/types'
 import type {

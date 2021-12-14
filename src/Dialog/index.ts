@@ -1,6 +1,6 @@
 import { withInstall } from '@/helpers/with-install'
 import Dialog from './Dialog.vue'
-import type { ApiFnOptions, PopupConfirmArgs } from '../apis/types'
+import type { ApiFnOptions, PopupSuccessArgs } from '../apis/types'
 import { createConfirmHook, showPopup } from '@/apis/Popup'
 
 type ShowDialogOptions = {
@@ -16,7 +16,7 @@ type ShowDialogOptions = {
 >
 
 const showDialog = function (object: ShowDialogOptions) {
-  return showPopup<PopupConfirmArgs>(object, 'showDialog', function (done) {
+  return showPopup<PopupSuccessArgs>(object, 'showDialog', function (done) {
     return {
       component: Dialog,
       hook: createConfirmHook(done)

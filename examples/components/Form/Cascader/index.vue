@@ -34,15 +34,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { cascadeOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
-import { showDialog } from '@/Dialog'
 import { showCascader } from '@/Cascader'
+import type { CascaderConfirmArgs } from '@/types'
 
-export default {
+export default defineComponent({
   name: 'ExpCascader',
-  props: {},
   data() {
     return {
       options: cascadeOptions,
@@ -51,14 +51,10 @@ export default {
     }
   },
   methods: {
-    onChange(res) {
-      console.log('change', res)
+    onChange(res: CascaderConfirmArgs) {
+      console.log('event', res)
 
-      showDialog({
-        title: '选择了',
-        showCancel: false,
-        content: `label: '${res.labelString}'\nvalue: ${res.valueString}`
-      })
+      showToast(`选择了 ${res.label}`)
     },
     onCallApi() {
       showCascader({
@@ -69,11 +65,11 @@ export default {
           if (res.cancel) {
             showToast('取消了')
           } else {
-            showToast(`选择了 ${res.detail.labelString}`)
+            showToast(`选择了 ${res.detail.label}`)
           }
         }
       })
     }
   }
-}
+})
 </script>
