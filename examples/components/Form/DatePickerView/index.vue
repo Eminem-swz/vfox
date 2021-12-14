@@ -75,7 +75,7 @@
 import { defineComponent, ref } from 'vue'
 import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
-import { DatePickerFilter, DatePickerChangeArgs } from '@/types'
+import type { DatePickerFilter, DatePickerChangeArgs } from '@/types'
 
 export default defineComponent({
   name: 'ExpDatePickerView',

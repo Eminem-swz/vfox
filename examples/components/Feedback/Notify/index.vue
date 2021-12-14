@@ -101,7 +101,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PopupCancelArgs, StateType } from '../../utils/types'
+import type { PopupCancelArgs, StateType } from '@/types'
 import { showNotify, hideNotify } from '@/Notify'
 
 interface showArgs {

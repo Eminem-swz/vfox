@@ -96,7 +96,7 @@ import type {
   PopupCancelArgs,
   PopupConfirmArgs,
   PopupVisibleStateChangeArgs
-} from '../../utils/types'
+} from '@/types'
 import { showToast } from '@/Toast'
 import { showDialog } from '@/Dialog'
 import { showActionSheet } from '@/ActionSheet'

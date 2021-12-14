@@ -77,10 +77,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type {
-  PopupVisibleStateChangeArgs,
-  PlacementType
-} from '../../utils/types'
+import type { PopupVisibleStateChangeArgs, PlacementType } from '@/types'
 import { showToast } from '@/Toast'
 
 interface showArgs {

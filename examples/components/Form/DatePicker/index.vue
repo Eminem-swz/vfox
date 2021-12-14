@@ -148,7 +148,7 @@ import { defineComponent, ref } from 'vue'
 import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
 import { showDatePicker } from '@/DatePicker'
-import {
+import type {
   PopupVisibleStateChangeArgs,
   DatePickerFilter,
   DatePickerChangeArgs,

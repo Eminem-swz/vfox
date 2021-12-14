@@ -1,4 +1,11 @@
 import type {
+  StateType,
+  PlacementType,
+  ColorStyle,
+  SizeType
+} from './helpers/types'
+
+import type {
   PopupVisibleStateChangeArgs,
   PopupConfirmArgs,
   PopupCancelArgs
@@ -20,6 +27,11 @@ import type {
 } from './DatePicker/types'
 
 export {
+  // type
+  StateType,
+  PlacementType,
+  ColorStyle,
+  SizeType,
   // Popup
   PopupVisibleStateChangeArgs,
   PopupConfirmArgs,

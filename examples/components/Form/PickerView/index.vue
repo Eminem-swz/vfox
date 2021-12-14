@@ -48,7 +48,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { showToast } from '@/Toast'
-import { PickerValueFormatter, PickerChangeArgs } from '@/types'
+import type { PickerValueFormatter, PickerChangeArgs } from '@/types'
 import { cascadeOptions, multiOptions, options } from '../Picker/data'
 
 export default defineComponent({
