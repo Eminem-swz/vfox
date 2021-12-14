@@ -1,6 +1,7 @@
-import type { ApiFnOptions } from '../apis/types'
-import type { PickerDetail } from '../Picker/types'
+import type { PopupCancelArgs, PopupConfirmArgs } from '../popup/types'
+import type { PickerDetail, PickerChangeArgs } from '../Picker/types'
 
+export type ColName = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
 export type ModeName =
   | 'date'
   | 'time'
@@ -18,31 +19,23 @@ export type ModeName =
   | 'year-month-day-hour-minute'
   | 'year-month-day-hour-minute-second'
 
-export interface DateDetailObject {
-  value: Date | null
-  valueArray: number[]
-  formatted: string
+export interface DatePickerFilter {
+  (number: number, type: ColName): boolean
 }
 
 export interface DatePickerDetail extends PickerDetail {
   value: Date
 }
 
-export interface ChangeArgs extends DateDetailObject {
-  type: 'change'
-}
+export type DatePickerChangeArgs = PickerChangeArgs
+export type DatePickerConfirmArgs = PopupConfirmArgs<DatePickerDetail>
+export type DatePickerCancelArgs = PopupCancelArgs
 
-export type ColName = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
-
-export interface OptionFilter {
-  (number: number, type: ColName): boolean
-}
-
-export interface ShowPickerOptions extends ApiFnOptions {
+export type ShowDatePickerOptions = Partial<{
   title: string
   value: Date
   minDate: Date
   maxDate: Date
   mode: ModeName
-  filter: OptionFilter
-}
+  filter: DatePickerFilter
+}>

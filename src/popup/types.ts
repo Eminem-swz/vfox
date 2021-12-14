@@ -13,8 +13,15 @@ export type PopupStyles = Partial<{
 }>
 export type PopupVisibleState = 'show' | 'shown' | 'hide' | 'hidden'
 export interface PopupVisibleStateChangeArgs {
-  type: string
+  type: 'visible-state-change'
   state: PopupVisibleState
+}
+export type PopupConfirmArgs<T = AnyObject> = T & {
+  type: 'confirm'
+}
+export interface PopupCancelArgs {
+  type: 'cancel'
+  source: string
 }
 export interface PopupBridge {
   in?: (key: string, value?: any) => void

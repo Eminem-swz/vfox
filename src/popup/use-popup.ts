@@ -1,5 +1,5 @@
 import { computed, onMounted, ref, watch, inject, provide } from 'vue'
-import { isFunction, noop } from '@/helpers/util'
+import { inArray, isFunction, isObject, noop } from '@/helpers/util'
 import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
 import type { AnyObject, Noop } from '../helpers/types'
@@ -11,7 +11,9 @@ import type {
   PopupCustomCancel,
   PopupCustomConfirm,
   PopupStyles,
-  PopupBridge
+  PopupBridge,
+  PopupCancelArgs,
+  PopupConfirmArgs
 } from './types'
 
 type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
@@ -27,9 +29,13 @@ export function getNewZIndex() {
   return zIndex++
 }
 
+function isTypeEvent(event: string) {
+  return inArray(event, ['change', 'confirm', 'cancel', 'visible-state-change'])
+}
+
 export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   const apis = inject<PopupBridge>('fxApis', {})
-  const isParent = inject<boolean>('fxPopupExtend', false)
+  // const isParent = inject<boolean>('fxPopupExtend', false)
 
   const isShow = ref(false)
   const zIndex = ref(popupZIndex)
@@ -44,9 +50,13 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   const visibleBlur = useBlur(onBlur)
 
   const emit: UseEmit = (event, res) => {
-    if (isParent || !apis.in) {
-      ctx.emit(event, res)
+    if (!apis.in) {
+      ctx.emit(
+        event,
+        !isTypeEvent(event) ? res : Object.assign({ type: event }, res)
+      )
     } else {
+      // api形式
       apis.in(event, res)
     }
   }
@@ -150,9 +160,8 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
 
   function emitVisibleState(state: PopupVisibleState) {
     emit('visible-state-change', {
-      type: 'visible-state-change',
       state
-    } as PopupVisibleStateChangeArgs)
+    })
   }
 
   function onBlur() {
@@ -178,10 +187,7 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
     if (isShowing && !focus) {
       return
     }
-
-    const res = { [key]: true, source: key }
-
-    emit('cancel', res)
+    emit('cancel', { source: key })
     hide('afterCancel')
   }
 
@@ -243,8 +249,16 @@ export function usePopupExtend(ctx: UseCtx) {
 
   const emit: UseEmit = (event, res) => {
     if (!apis.in) {
-      ctx.emit(event, res)
+      ctx.emit(
+        event,
+        !isTypeEvent(res) ? res : Object.assign({ type: event }, res)
+      )
     } else {
+      // api形式
+      if (isTypeEvent(res)) {
+        delete res.type
+      }
+
       apis.in(event, res)
     }
   }
@@ -265,11 +279,11 @@ export function usePopupExtend(ctx: UseCtx) {
     customCancel('cancelClick')
   }
 
-  function onCancel(res: Record<string, boolean>) {
+  function onCancel(res: PopupCancelArgs) {
     emit('cancel', res)
   }
 
-  function onConfirm(res: AnyObject) {
+  function onConfirm(res: PopupConfirmArgs) {
     emit('confirm', res)
   }
 
@@ -277,7 +291,7 @@ export function usePopupExtend(ctx: UseCtx) {
     emit('update:visible', value)
   }
 
-  provide('fxPopupExtend', true)
+  // provide('fxPopupExtend', true)
 
   return {
     emit,

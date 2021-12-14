@@ -1,5 +1,5 @@
+import { PopupConfirmArgs, PopupCancelArgs } from '../popup/types'
 import type { AnyObject } from '../helpers/types'
-import type { ApiFnOptions } from '../apis/types'
 
 export type PickerValue = string | number | Date
 export type PickerModelValue = PickerValue | PickerValue[]
@@ -37,32 +37,40 @@ export interface ColRow {
   selected?: boolean
 }
 
-export interface OptionsHandler {
+export interface PickerOptionsHandler {
   (index: number, parent?: ColRow): ColRow[]
 }
 export interface DefaultValueGetter {
   (): PickerValue[]
 }
-export type ValueFormatter = (
-  valueArray: PickerValue[],
-  labelArray: string[]
-) => PickerDetail | PickerModelValue
-export type ValueParser = (value: unknown) => PickerValue[]
-export type LabelFormatter = (labelArray: string[]) => string
+export interface PickerValueFormatter {
+  (valueArray: PickerValue[], labelArray: string[]):
+    | PickerDetail
+    | PickerModelValue
+}
+export interface PickerValueParser {
+  (value: unknown): PickerValue[]
+}
+export interface PickerLabelFormatter {
+  (labelArray: string[]): string
+}
 export interface PickerHandlers {
-  optionsHandler?: OptionsHandler
+  optionsHandler?: PickerOptionsHandler
   defaultValueGetter?: DefaultValueGetter
-  formatter: ValueFormatter
-  parser: ValueParser
-  labelFormatter: LabelFormatter
+  formatter: PickerValueFormatter
+  parser: PickerValueParser
+  labelFormatter: PickerLabelFormatter
 }
 
-export type ShowPickerOptions = {
+export interface ShowPickerOptions {
   options: UserOptionItem[] | UserOptionItem[][]
-} & Partial<
-  {
-    title: string
-    value: PickerModelValue
-    fieldNames: UserFieldNames
-  } & ApiFnOptions
->
+  title?: string
+  value?: PickerModelValue
+  fieldNames?: UserFieldNames
+}
+
+export interface PickerChangeArgs extends PickerDetail {
+  type: 'change'
+}
+export type PickerConfirmArgs = PopupConfirmArgs<PickerDetail>
+export type PickerCancelArgs = PopupCancelArgs

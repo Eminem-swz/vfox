@@ -1,5 +1,5 @@
 import type { ColRow, PickerValue } from '../Picker/types'
-import type { ColName, ModeName, OptionFilter } from './types'
+import type { ColName, ModeName, DatePickerFilter } from './types'
 import dayjs from '@/helpers/day'
 import type { Dayjs } from 'dayjs'
 
@@ -29,7 +29,7 @@ export interface RowsParser {
       minDate: Date
       maxDate: Date
       mode: ModeName
-      filter: OptionFilter
+      filter: DatePickerFilter
     }
   ): ColRow[]
 }

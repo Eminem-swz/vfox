@@ -3,10 +3,10 @@ import dayjs from '@/helpers/day'
 import type { Dayjs } from 'dayjs'
 import { getEnumsValue } from '@/helpers/validator'
 import type {
-  OptionsHandler,
-  ValueParser,
-  LabelFormatter,
-  ValueFormatter,
+  PickerOptionsHandler,
+  PickerValueParser,
+  PickerLabelFormatter,
+  PickerValueFormatter,
   PickerHandlers
 } from '../Picker/types'
 import type { UseProps } from '../hooks/types'
@@ -22,7 +22,7 @@ import { isDate, isString, rangeNumber } from '@/helpers/util'
 export function useHandlers(props: UseProps) {
   const mode = getEnumsValue(MODE_NAMES, props.initialMode)
 
-  const optionsHandler: OptionsHandler = (index, parent) => {
+  const optionsHandler: PickerOptionsHandler = (index, parent) => {
     let minDate = props.minDate as Date
     let maxDate = props.maxDate as Date
     if (minDate.getTime() > maxDate.getTime()) {
@@ -38,7 +38,7 @@ export function useHandlers(props: UseProps) {
     })
   }
 
-  const parser: ValueParser = value => {
+  const parser: PickerValueParser = value => {
     if (props.parser) {
       return props.parser(value)
     }
@@ -71,7 +71,7 @@ export function useHandlers(props: UseProps) {
     return parser(new Date(rangeNumber(Date.now(), min, max)))
   }
 
-  const labelFormatter: LabelFormatter = array => {
+  const labelFormatter: PickerLabelFormatter = array => {
     return array.length === 0
       ? ''
       : dayjs(array2Date(array, mode)).format(
@@ -79,7 +79,7 @@ export function useHandlers(props: UseProps) {
         )
   }
 
-  const formatter: ValueFormatter = (valueArray, labelArray) => {
+  const formatter: PickerValueFormatter = (valueArray, labelArray) => {
     if (props.formatter) {
       return props.formatter(valueArray, labelArray)
     }

@@ -61,66 +61,72 @@
         </div>
       </div>
     </fx-group>
-    <fx-group title="事件监听">
-      <div class="date-picker-view-box">
-        <div class="date-picker-view-header">change</div>
-        <div class="date-picker-view-body">
-          <fx-date-picker-view
-            initialMode="date"
-            v-model="changeValue"
-            @change="onChangeEvent"
-          />
-        </div>
-      </div>
+    <fx-group title="change 事件">
+      <fx-date-picker-view
+        initialMode="date"
+        v-model="changeValue"
+        @change="onChangeEvent"
+      />
     </fx-group>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
+import { DatePickerFilter, DatePickerChangeArgs } from '@/types'
 
-export default {
+export default defineComponent({
   name: 'ExpDatePickerView',
-  data() {
-    return {
-      dateValue: '',
-      timeValue: '',
-      dateTimeValue: '',
+  setup() {
+    const dateValue = ref('')
+    const timeValue = ref('')
+    const dateTimeValue = ref('')
+    const minMaxValue = ref('')
+    const formatValue = ref('')
+    const filterValue = ref('')
+    const changeValue = ref('')
 
-      // 设定时间访问
-      minDate: dayjs().startOf('day').subtract(4, 'year').toDate(),
-      maxDate: dayjs().startOf('day').add(5, 'year').toDate(),
-      minMaxValue: '',
+    const minDate = dayjs().startOf('day').subtract(4, 'year').toDate()
+    const maxDate = dayjs().startOf('day').add(5, 'year').toDate()
 
-      // 格式化
-      formatValue: '',
+    const filter: DatePickerFilter = (number, type) => {
+      if (type === 'second' && number % 5 !== 0) {
+        return false
+      }
 
-      // 过滤
-      filterValue: '',
-      filter: (number, type) => {
-        if (type === 'second' && number % 5 !== 0) {
-          return false
-        }
-
-        return true
-      },
-
-      // 事件
-      changeValue: ''
+      return true
     }
-  },
-  methods: {
-    onChange(e) {
-      console.log(e)
-    },
-    onChangeEvent(e) {
-      console.log(e)
 
-      showToast(`change: ${e.formatted}`)
+    function onChange(e: DatePickerChangeArgs) {
+      console.log('event', e)
+    }
+
+    function onChangeEvent(e: DatePickerChangeArgs) {
+      onChange(e)
+
+      showToast(`change: ${e.label}`)
+    }
+
+    return {
+      dateValue,
+      timeValue,
+      dateTimeValue,
+      minMaxValue,
+      formatValue,
+      filterValue,
+      changeValue,
+
+      minDate,
+      maxDate,
+
+      filter,
+      onChange,
+      onChangeEvent
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

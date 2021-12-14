@@ -10,10 +10,11 @@ import type {
   ColRow,
   OptionItem,
   PickerValue,
-  OptionsHandler,
+  PickerOptionsHandler,
   PickerDetail,
   PickerHandlers,
-  PickerModelValue
+  PickerModelValue,
+  PickerChangeArgs
 } from './types'
 import type { Noop } from '../helpers/types'
 import {
@@ -123,7 +124,7 @@ export function usePicker(
     updateDetail(detail)
 
     emit('update:modelValue', hookFormValue())
-    emit('change', getDetail())
+    emit('change', getChangeArgs(getDetail()))
 
     validateAfterEventTrigger('change', hookFormValue())
   }
@@ -179,7 +180,7 @@ export function usePickerPopup(
 
       // 跟picker-view不一样，改变数值时机是确定按钮
       emit('update:modelValue', getDetail().value)
-      emit('change', getDetail())
+      emit('change', getChangeArgs(getDetail()))
     }
 
     return getDetail()
@@ -255,7 +256,8 @@ export function usePickerView(
 
   const isPicker = name === 'picker'
 
-  const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
+  const optionsHandler: PickerOptionsHandler | null =
+    handlers.optionsHandler || null
 
   function updateOptions(val: PickerValue[]) {
     const { options, isCascade: isCascade2 } = getFormatOptions(
@@ -394,7 +396,7 @@ export function usePickerView(
 
     cols.length = 0
 
-    const getRows = optionsHandler as OptionsHandler
+    const getRows = optionsHandler as PickerOptionsHandler
     let colIndex = 0
     let rows = getRows(colIndex)
     let lastGroupSelected = false
@@ -621,7 +623,7 @@ export function usePickerView(
 
   function onChange() {
     emitValue()
-    emit('change', Object.assign({ type: 'change' }, getDetail()))
+    emit('change', getChangeArgs(getDetail()))
   }
 
   watch(
@@ -690,4 +692,8 @@ const formatter: PickerFormatter = (valueArray, labelArray, handlers) => {
 
 const parser: PickerParser = (val, handlers) => {
   return handlers.parser(val)
+}
+
+function getChangeArgs(detail: PickerDetail): PickerChangeArgs {
+  return Object.assign({ type: 'change' as const }, detail)
 }

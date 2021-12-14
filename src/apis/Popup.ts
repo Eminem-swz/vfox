@@ -35,6 +35,107 @@ function createPopup() {
   }
 }
 
+export function createShowPopup<T, E = EmptyObject>({
+  apiName,
+  createHook,
+  component,
+  singleMode
+}: {
+  apiName: string
+  createHook: (done: PopupDone) => PopupHook
+  component: Component
+  singleMode?: boolean
+}) {
+  return function show(
+    object: T &
+      Partial<{
+        success: (res: E) => void
+        fail: (e: Exception) => void
+        complete: () => void
+      }>
+  ) {
+    let options: AnyObject
+
+    if (isString(object)) {
+      options = {
+        title: object as any
+      }
+    } else if (!isObject(object)) {
+      options = {}
+    } else {
+      options = object as AnyObject
+    }
+
+    const { success, fail, complete } = getCallbackFns(options)
+
+    return new Promise<E>(function (resolve, reject) {
+      try {
+        const key = apiName.replace('show', '')
+
+        const hook = createHook(function (res) {
+          success(res)
+          complete()
+          resolve(res)
+        })
+
+        singleMode && clear(key)
+
+        const fns: RefFns = {}
+        const propsData = parseParamsByRules(options, apiName)
+
+        if (propsData.mode) {
+          propsData.initialMode = propsData.mode
+          delete propsData.mode
+        }
+        if (propsData.value) {
+          propsData.modelValue = propsData.value
+          delete propsData.value
+        }
+
+        const { $wrapper } = createPopup()
+
+        const app = createApp(
+          component,
+          Object.assign(propsData, {
+            visible: true
+          })
+        )
+        app.provide('fxApis', {
+          in(hookEvent, res) {
+            if (
+              hookEvent === 'visible-state-change' &&
+              res.state === 'hidden'
+            ) {
+              app.unmount()
+              singleMode && remove(key, $ref.uid)
+            }
+
+            hook && hook(hookEvent, res)
+          },
+          out(key: RefFnName, value: PopupCustomCancel) {
+            fns[key] = value
+          }
+        } as PopupBridge)
+        app.mount($wrapper)
+
+        const $ref = {
+          uid: app._uid,
+          fns
+        }
+
+        // 单例：如Toast
+        singleMode && ($refs[key] = $ref)
+
+        return app
+      } catch (e) {
+        fail(new Exception(e))
+        complete()
+        reject(new Exception(e))
+      }
+    })
+  }
+}
+
 /**
  * 展示弹窗
  * @param object 参数

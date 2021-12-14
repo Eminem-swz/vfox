@@ -1,17 +1,17 @@
 import { withInstall } from '@/helpers/with-install'
 import PickerPopup from '../Picker/PickerPopup.vue'
 import type { PopupConfirmArgs } from '../apis/types'
-import { createConfirmHook, showPopup } from '@/apis/Popup'
-import type { ShowPickerOptions } from '../Picker/types'
+import { createConfirmHook, createShowPopup } from '@/apis/Popup'
+import type { PickerDetail, ShowPickerOptions } from '../Picker/types'
 
-const showPicker = function (object: ShowPickerOptions) {
-  return showPopup<PopupConfirmArgs>(object, 'showPicker', function (done) {
-    return {
-      component: PickerPopup,
-      hook: createConfirmHook(done)
-    }
-  })
-}
+const showPicker = createShowPopup<
+  ShowPickerOptions,
+  PopupConfirmArgs<PickerDetail>
+>({
+  apiName: 'showPicker',
+  component: PickerPopup,
+  createHook: createConfirmHook
+})
 
 export { PickerPopup, showPicker }
 export default withInstall(PickerPopup, { showPicker })

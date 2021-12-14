@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { Picker } from '@/Picker'
-import { cascadeOptions } from '../../Picker/data'
+import { cascadeOptions } from '../data'
 
 describe('Picker', () => {
   test('should render prop set options correctly', () => {

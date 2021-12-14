@@ -69,81 +69,107 @@
       @change="onChange"
       @confirm="onConfirm"
       @cancel="onCancel"
-      @visible-state-change="onVisibleStateChange"
-    >
-    </fx-picker-popup>
+      @visibleStateChange="onVisibleStateChange"
+    />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, reactive, ref } from 'vue'
 import { cascadeOptions, multiOptions, options, regionOptions } from './data'
 import { showToast } from '@/Toast'
 import { showPicker } from '@/Picker'
+import type {
+  PickerChangeArgs,
+  PickerConfirmArgs,
+  PickerCancelArgs,
+  PopupVisibleStateChangeArgs
+} from '@/types'
 
-export default {
+export default defineComponent({
   name: 'ExpPicker',
-  data() {
+  setup() {
+    const regionValue = reactive([])
+    const disableValue = reactive([2000, '春'])
+    const popupValue = reactive([2000, '夏'])
+    const title = ref('Picker')
+    const visible = ref(false)
+    const clickEvent = ref(false)
+    const changeEvent = ref(false)
+    const visibleEvent = ref(false)
+
+    function onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
+      if (visibleEvent.value) {
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
+      }
+
+      if (res.state === 'hidden') {
+        clickEvent.value = false
+        visibleEvent.value = false
+        changeEvent.value = false
+      }
+    }
+
+    function onCallApi() {
+      showPicker({
+        title: title.value,
+        options: multiOptions
+      }).then(res => {
+        console.log('ApiSuccess', res)
+        if (res.cancel) {
+          showToast('取消了')
+        } else {
+          showToast(`选择了 ${res.detail.label}`)
+        }
+      })
+    }
+
+    function onConfirm(res: PickerConfirmArgs) {
+      if (clickEvent.value) {
+        console.log('event', res)
+        showToast(`点击确定按钮`)
+      }
+    }
+
+    function onChange(res: PickerChangeArgs) {
+      if (changeEvent.value) {
+        console.log('event', res)
+        showToast(`值改为 ${res.label}`)
+      }
+    }
+
+    function onCancel(res: PickerCancelArgs) {
+      if (clickEvent.value) {
+        console.log('event', res)
+
+        if (res.source === 'cancelClick') {
+          showToast('点击了取消按钮')
+        } else if (res.source === 'maskClick') {
+          showToast('点击了蒙层')
+        }
+      }
+    }
+
     return {
-      regionValue: [],
-      disableValue: [2000, '春'],
-      popupValue: [2000, '夏'],
-      visible: false,
-      title: 'Picker',
-      regionTitle: '选择地区',
+      regionValue,
+      disableValue,
+      popupValue,
+      title,
+      visible,
+      clickEvent,
+      changeEvent,
+      visibleEvent,
       multiOptions,
       options,
       cascadeOptions,
       regionOptions,
-
-      clickEvent: false,
-      changeEvent: false,
-      visibleEvent: false
-    }
-  },
-  methods: {
-    onChange(res) {
-      console.log('change', res)
-      this.changeEvent && showToast(`值改为 ${res.labelString}`)
-    },
-    onConfirm(res) {
-      console.log('confirm', res)
-      this.clickEvent && showToast(`点击确定按钮`)
-    },
-    onCancel(res) {
-      console.log('cancel', res)
-      if (this.clickEvent) {
-        if (res.cancelClick) {
-          showToast('点击了取消按钮')
-        } else if (res.maskClick) {
-          showToast('点击了蒙层')
-        }
-      }
-    },
-    onVisibleStateChange({ state }) {
-      if (this.visibleEvent) {
-        showToast(`${state} 事件触发`)
-      }
-
-      if (state === 'hidden') {
-        this.clickEvent = false
-        this.visibleEvent = false
-        this.changeEvent = false
-      }
-    },
-    onCallApi() {
-      showPicker({
-        title: this.title,
-        options: multiOptions,
-        success: res => {
-          console.log(res)
-          if (res.cancel) {
-            showToast('取消了')
-          } else {
-            showToast(`选择了 ${res.detail.labelString}`)
-          }
-        }
-      })
+      onConfirm,
+      onCancel,
+      onChange,
+      onVisibleStateChange,
+      onCallApi
     }
   }
-}
+})
 </script>

@@ -13,7 +13,7 @@ import { PickerView } from '@/PickerView'
 import { pickerViewEmits } from '@/Picker/picker'
 import { commonProps } from '@/DatePicker/date-picker'
 import { useHandlers } from '@/DatePicker/use-date-picker'
-import type { DateDetailObject } from './types'
+import type { DatePickerChangeArgs } from './types'
 import type { PickerModelValue } from '../Picker/types'
 
 export default defineComponent({
@@ -28,7 +28,7 @@ export default defineComponent({
 
     useHandlers(props)
 
-    function onChange(e: DateDetailObject) {
+    function onChange(e: DatePickerChangeArgs) {
       emit('change', e)
     }
 

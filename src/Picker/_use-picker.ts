@@ -12,10 +12,10 @@ import type {
   OptionItem,
   Values,
   ExtraData,
-  OptionsHandler,
+  PickerOptionsHandler,
   DetailObject,
   PickerHandlers,
-  ValueFormatter,
+  PickerValueFormatter,
   HandleType,
   DetailHook
 } from './types'
@@ -28,7 +28,7 @@ import {
   getFormatOptions,
   getColRows,
   updateArray,
-  defaultValueParser
+  defaultPickerValueParser
 } from '@/Picker/util'
 import type { UseProps, UseCtx, UseEmit } from '../hooks/types'
 import type { PopupCustomConfirm } from '../popup/types'
@@ -56,7 +56,8 @@ export function usePicker(
   let detail = getDefaultDetail()
   const separator: string = props.initialSeparator
   // const defaultDetail = getDefaultDetail()
-  const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
+  const optionsHandler: PickerOptionsHandler | null =
+    handlers.optionsHandler || null
 
   const { formName, validateAfterEventTrigger, hookFormValue, root } =
     useFormItem(props, ctx, {
@@ -87,7 +88,7 @@ export function usePicker(
 
     const values = handlers.valueParser
       ? handlers.valueParser(val, 'value')
-      : defaultValueParser(val, separator)
+      : defaultPickerValueParser(val, separator)
 
     if (!(values instanceof Error)) {
       const { options, isCascade } = getFormatOptions(
@@ -296,7 +297,8 @@ export function usePickerView(
   const cacheLabel = reactive<Labels>([])
   const cacheValue = reactive<Values>([])
 
-  const optionsHandler: OptionsHandler | null = handlers.optionsHandler || null
+  const optionsHandler: PickerOptionsHandler | null =
+    handlers.optionsHandler || null
   let extraData: any = []
 
   function updateOptions(val: Values) {
@@ -318,7 +320,7 @@ export function usePickerView(
   function updateValue(val: unknown, forceUpdate = false) {
     const values = handlers.valueParser
       ? handlers.valueParser(val, 'value')
-      : defaultValueParser(val, separator)
+      : defaultPickerValueParser(val, separator)
 
     const { valid, value } = validateValues(
       values,
@@ -343,7 +345,7 @@ export function usePickerView(
     return getDetail()
   }
 
-  const format2String: ValueFormatter = (
+  const format2String: PickerValueFormatter = (
     array: Values,
     type: HandleType = 'label'
   ) => {
@@ -463,7 +465,7 @@ export function usePickerView(
 
     cols.length = 0
 
-    const getRows = optionsHandler as OptionsHandler
+    const getRows = optionsHandler as PickerOptionsHandler
     let colIndex = 0
     let rows = getRows(colIndex)
     let lastGroupSelected = false

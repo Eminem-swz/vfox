@@ -100,16 +100,6 @@
         />
       </fx-form-item>
     </fx-group>
-    <fx-group title="事件监听">
-      <fx-form-item name="date-picker" label="change">
-        <fx-date-picker
-          initialMode="date"
-          v-model="changeValue"
-          @change="onChangeEvent"
-        />
-      </fx-form-item>
-    </fx-group>
-
     <fx-group title="DatePickerPopup">
       <fx-cell
         label="基础"
@@ -153,106 +143,134 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
 import { showDatePicker } from '@/DatePicker'
+import {
+  PopupVisibleStateChangeArgs,
+  DatePickerFilter,
+  DatePickerChangeArgs,
+  DatePickerCancelArgs,
+  DatePickerConfirmArgs
+} from '@/types'
 
-export default {
+export default defineComponent({
   name: 'ExpDatePicker',
-  data() {
-    return {
-      title: 'ExpDatePicker',
+  setup() {
+    const title = 'DatePicker'
 
-      dateValue: '',
-      timeValue: '',
-      dateTimeValue: '',
+    const dateValue = ref('')
+    const timeValue = ref('')
+    const dateTimeValue = ref('')
+    const minMaxValue = ref('')
+    const formatValue = ref('')
+    const filterValue = ref('')
+    const disableValue = ref(new Date())
+    const popupValue = ref('')
 
-      // 设定时间访问
-      minDate: dayjs().startOf('day').subtract(4, 'year').toDate(),
-      maxDate: dayjs().startOf('day').add(5, 'year').toDate(),
-      minMaxValue: '',
+    const minDate = dayjs().startOf('day').subtract(4, 'year').toDate()
+    const maxDate = dayjs().startOf('day').add(5, 'year').toDate()
 
-      // 格式化
-      formatValue: '',
+    const visible = ref(false)
 
-      // 过滤
-      filterValue: '',
-      filter: (number, type) => {
-        if (type === 'second' && number % 5 !== 0) {
-          return false
-        }
+    const clickEvent = ref(false)
+    const changeEvent = ref(false)
+    const visibleEvent = ref(false)
 
-        return true
-      },
-
-      // disabled
-      disableValue: new Date(),
-
-      // 事件
-      changeValue: '',
-
-      // popup
-
-      visible: false,
-      popupValue: '',
-
-      clickEvent: false,
-      visibleEvent: false,
-      changeEvent: false
-    }
-  },
-  methods: {
-    onChange(res) {
-      console.log('change', res)
-
-      if (this.changeEvent) {
-        showToast(`值改为: ${res.formatted}`)
+    const filter: DatePickerFilter = (number, type) => {
+      if (type === 'second' && number % 5 !== 0) {
+        return false
       }
-    },
-    onChangeEvent(res) {
-      console.log('change', res)
-    },
-    onConfirm(res) {
-      console.log('confirm', res)
-      this.clickEvent && showToast(`点击确定按钮`)
-    },
-    onCancel(res) {
-      console.log('cancel', res)
-      if (this.clickEvent) {
-        if (res.cancelClick) {
+
+      return true
+    }
+
+    function onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
+      if (visibleEvent.value) {
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
+      }
+
+      if (res.state === 'hidden') {
+        clickEvent.value = false
+        visibleEvent.value = false
+        changeEvent.value = false
+      }
+    }
+
+    function onChange(res: DatePickerChangeArgs) {
+      if (changeEvent.value) {
+        console.log('event', res)
+        showToast(`值改为 ${res.label}`)
+      }
+    }
+
+    function onConfirm(res: DatePickerConfirmArgs) {
+      if (clickEvent.value) {
+        console.log('event', res)
+        showToast(`点击确定按钮`)
+      }
+    }
+
+    function onCancel(res: DatePickerCancelArgs) {
+      if (clickEvent.value) {
+        console.log('event', res)
+
+        if (res.source === 'cancelClick') {
           showToast('点击了取消按钮')
-        } else if (res.maskClick) {
+        } else if (res.source === 'maskClick') {
           showToast('点击了蒙层')
         }
       }
-    },
-    onVisibleStateChange({ state }) {
-      if (this.visibleEvent) {
-        showToast(`${state} 事件触发`)
-      }
+    }
 
-      if (state === 'hidden') {
-        this.clickEvent = false
-        this.visibleEvent = false
-        this.changeEvent = false
-      }
-    },
-    onCallApi() {
+    function onCallApi() {
       showDatePicker({
-        title: 'DatePicker',
+        title,
         success: res => {
           console.log(res)
           if (res.cancel) {
             showToast('取消了')
           } else {
-            showToast(`选择了 ${res.detail.formatted}`)
+            showToast(`选择了 ${res.detail.label}`)
           }
         }
       })
     }
+
+    return {
+      title,
+
+      dateValue,
+      timeValue,
+      dateTimeValue,
+      minMaxValue,
+      formatValue,
+      filterValue,
+      disableValue,
+
+      filter,
+
+      minDate,
+      maxDate,
+
+      visible,
+      popupValue,
+
+      clickEvent,
+      visibleEvent,
+      changeEvent,
+
+      onConfirm,
+      onCancel,
+      onChange,
+      onVisibleStateChange,
+      onCallApi
+    }
   }
-}
+})
 </script>
 
 <style lang="scss">

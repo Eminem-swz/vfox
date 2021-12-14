@@ -1,4 +1,4 @@
-import { DataObject } from '../helpers/types'
+import { DataObject, EmptyObject } from '../helpers/types'
 import Exception from '../helpers/exception'
 
 export interface ApiOptionsSuccess {
@@ -20,8 +20,9 @@ export interface ApiFnOptions {
 }
 
 export type PopupHook = (hookEvent: string, args: any) => void
-export interface PopupConfirmArgs {
-  confirm?: boolean
-  cancel?: boolean
-  detail?: DataObject
+
+export interface PopupConfirmArgs<T = DataObject> {
+  confirm: boolean
+  cancel: boolean
+  detail: T
 }

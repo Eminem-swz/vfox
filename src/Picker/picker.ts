@@ -3,13 +3,13 @@ import type { AnyObject } from '../helpers/types'
 import type {
   UserFieldNames,
   UserOptionItem,
-  ValueParser,
-  ValueFormatter,
+  PickerValueParser,
+  PickerValueFormatter,
   PickerDetail,
   PickerHandlers,
   PickerValue,
   FieldNames,
-  OptionsHandler,
+  PickerOptionsHandler,
   OptionItem,
   ColRow
 } from './types'
@@ -57,12 +57,10 @@ export const commonProps = {
     default: null
   },
   formatter: {
-    type: Function as PropType<ValueFormatter>,
-    default: null
+    type: Function as PropType<PickerValueFormatter>
   },
   parser: {
-    type: Function as PropType<ValueParser>,
-    default: null
+    type: Function as PropType<PickerValueParser>
   }
 }
 
@@ -88,14 +86,17 @@ export const labelFormatter = (labelArray: string[]) => {
   return labelArray.join('/')
 }
 
-export const defaultFormatter: ValueFormatter = (valueArray, labelArray) => {
+export const defaultFormatter: PickerValueFormatter = (
+  valueArray,
+  labelArray
+) => {
   return {
     value: valueArray,
     label: labelFormatter(labelArray)
   }
 }
 
-export const defaultParser: ValueParser = value => {
+export const defaultParser: PickerValueParser = value => {
   if (isNumber(value)) {
     return [value as number]
   } else if (isString(value) && value) {
@@ -125,7 +126,7 @@ export function mergeHandlers(...handlersArray: Partial<PickerHandlers>[]) {
     objectForEach(handlersItem, (value, key) => {
       if (value) {
         // 规避 undefined 问题
-        handlers[key as 'parser'] = value as ValueParser
+        handlers[key as 'parser'] = value as PickerValueParser
       }
     })
   })
@@ -253,7 +254,7 @@ function validateCols(
 function validateCascadeCols(
   values: PickerValue[],
   options: OptionItem[],
-  virtualHandler?: OptionsHandler | null
+  virtualHandler?: PickerOptionsHandler | null
 ): ValidateReturn {
   const value: PickerValue[] = []
   const label: string[] = []
@@ -306,7 +307,7 @@ function validateCascadeCols(
       }
     }
 
-    const rows = (virtualHandler as OptionsHandler)(index, parent)
+    const rows = (virtualHandler as PickerOptionsHandler)(index, parent)
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i]
@@ -363,7 +364,7 @@ export function validateValues(
   values: PickerValue[] | Error,
   options: OptionItem[] | OptionItem[][],
   isCascade: boolean,
-  virtualHandler?: OptionsHandler | null
+  virtualHandler?: PickerOptionsHandler | null
 ): ValidateReturn {
   let valid = false
 
@@ -394,7 +395,7 @@ export function validateValues(
 export function getFormatOptions(
   options: UserOptionItem[],
   fieldNames: UserFieldNames,
-  virtualHandler: OptionsHandler | null | undefined,
+  virtualHandler: PickerOptionsHandler | null | undefined,
   cascader = false
 ) {
   const newFieldNames = getDefaultFieldNames()
