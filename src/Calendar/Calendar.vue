@@ -1,8 +1,8 @@
 <template>
   <div class="fx-calendar" :class="{ disabled }" ref="root">
     <PickerInput
-      :formLabelString="formLabel"
-      :formValueString="formLabel"
+      :formLabelString="formLabelString"
+      :formValueString="formValueString"
       :disabled="disabled"
       :formName="formName"
       :placeholder="placeholder"
@@ -18,6 +18,8 @@
       :dayHandler="dayHandler"
       :firstDayOfWeek="firstDayOfWeek"
       :title="placeholder"
+      :formatter="formatter"
+      :parser="parser"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
       @confirm="onConfirm"
@@ -30,21 +32,14 @@
 import { defineComponent, reactive, ref, watch } from 'vue'
 import { PickerInput } from '@/PickerInput'
 import { CalendarPopup } from '@/CalendarPopup'
-import {
-  cloneDetail,
-  getDefaultDetail,
-  getDetail as _getDetail,
-  isSameDateArray,
-  MODE_NAMES,
-  parseValues,
-  commonProps
-} from '@/Calendar/calendar'
-import { isFunction, isUndefined } from '@/helpers/util'
-import dayjs from '@/helpers/day'
+import { getDefaultDetail, MODE_NAMES, commonProps } from '@/Calendar/calendar'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import { useFormItem } from '@/Form/use-form'
 import { getEnumsValue } from '@/helpers/validator'
-import type { DetailObject } from './types'
+import type { CalendarDetail } from './types'
+import { useHandlers } from '@/Calendar/use-calendar'
+import { cloneDetail, isSameValue } from '@/Picker/util'
+import type { PickerModelValue, PickerValue } from '../Picker/types'
 
 export default defineComponent({
   name: 'fx-calendar',
@@ -55,10 +50,6 @@ export default defineComponent({
     placeholder: {
       type: String,
       default: ''
-    },
-    formatter: {
-      type: Function,
-      default: null
     },
     showConfirm: {
       type: Boolean,
@@ -74,26 +65,33 @@ export default defineComponent({
     const { emit } = ctx
     const isInitPopup = ref(false)
     const popupVisible = ref(true)
-    const formLabel = ref('')
-    const formValue = reactive<Date[]>([])
+    const formLabelString = ref('')
+    const formValueString = ref('')
+    const formValue = reactive<number[]>([])
     const popup = ref()
 
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)
-    let detail = getDefaultDetail()
-    let _changeValue: Date | Date[] | null = null
+
+    const { formatter, parser } = useHandlers(props, { mode })
+
+    let detail: CalendarDetail = getDefaultDetail()
+    let _changeValue: PickerModelValue | null = null
 
     function updateValue(val: unknown) {
       if (popup.value) {
         return updateDetail(popup.value.updateValue(val))
       } else {
-        return updateDetail(_getDetail(parseValues(val, mode), mode))
+        return updateDetail(formatter(parser(val)))
       }
     }
 
-    function updateDetail(_detail: DetailObject) {
+    function updateDetail(_detail: CalendarDetail) {
       detail = _detail
-      formLabel.value = _detail.formatted
-      formValue.splice(0, Infinity, ...getDetail().value)
+
+      formLabelString.value = _detail.label
+      formValueString.value =
+        detail.value != null ? detail.value.toString() : ''
+      formValue.splice(0, Infinity, ...parser(getDetail().value))
 
       return getDetail()
     }
@@ -112,46 +110,31 @@ export default defineComponent({
       return cloneDetail(detail)
     }
 
-    function onConfirm(_detail: DetailObject) {
-      if (isSameDateArray(detail.value, _detail.value)) {
+    function onConfirm(_detail: CalendarDetail) {
+      if (isSameValue(detail.value, _detail.value)) {
         return
       }
 
       updateDetail(_detail)
-      const formatValue = hookFormValue()
-      _changeValue = formatValue
-      emit('update:modelValue', formatValue)
+
+      _changeValue = hookFormValue()
+      emit('update:modelValue', hookFormValue())
       emit('change', getDetail())
 
-      validateAfterEventTrigger('change', formatValue)
+      validateAfterEventTrigger('change', hookFormValue())
     }
 
     const { formName, validateAfterEventTrigger, hookFormValue, root } =
-      useFormItem<Date>(props, ctx, {
+      useFormItem<PickerValue>(props, ctx, {
         formValue,
-        hookFormValue() {
-          const newValue = cloneDetail(detail).value
-          if (isFunction(props.formatter)) {
-            return props.formatter(
-              newValue,
-              function formatter(template: string) {
-                return newValue.map(date => {
-                  return dayjs(date).format(template)
-                })
-              }
-            )
-          }
-          return newValue
-        },
-        hookResetValue: () => updateValue(defaultValue).value
+        hookFormValue: () => getDetail().value,
+        hookResetValue: () => updateValue(formatter([]).value).value
       })
 
     watch(
       () => props.modelValue,
       val => {
-        if (!isUndefined(_changeValue) && _changeValue == val) {
-          //
-        } else {
+        if (_changeValue != null && isSameValue(val, _changeValue)) {
           updateValue(val)
         }
 
@@ -161,21 +144,19 @@ export default defineComponent({
 
     updateValue(props.modelValue)
 
-    const defaultValue = cloneDetail(detail).value
-
     return {
       root,
       isInitPopup,
       popupVisible,
       formName,
-      formLabel,
+      formLabelString,
       formValue,
+      formValueString,
       popup,
       hookFormValue,
       validateAfterEventTrigger,
       onFieldClick,
-      onConfirm,
-      defaultValue
+      onConfirm
     }
   }
 })

@@ -32,13 +32,30 @@ import type {
   CascaderCancelArgs
 } from './Cascader/types'
 
+import type {
+  CalendarFormatter,
+  CalendarParser,
+  CalendarChangeArgs,
+  CalendarSelectArgs,
+  CalendarConfirmArgs,
+  CalendarCancelArgs
+} from './Calendar/types'
+
 import {
   ActionSheetOption,
   ActionSheetConfirmArgs,
   ActionSheetCancelArgs
 } from './ActionSheet/types'
 
+import {
+  PopMenuOption,
+  PopMenuConfirmArgs,
+  PopMenuCancelArgs
+} from './Popover/types'
+
 import { ImagePreviewChangeArgs } from './ImagePreview/types'
+
+import { IconData } from './Icon/types'
 
 export {
   // type
@@ -65,10 +82,23 @@ export {
   CascaderChangeArgs,
   CascaderConfirmArgs,
   CascaderCancelArgs,
+  // Calendar
+  CalendarFormatter,
+  CalendarParser,
+  CalendarChangeArgs,
+  CalendarSelectArgs,
+  CalendarConfirmArgs,
+  CalendarCancelArgs,
   // ActionSheet
   ActionSheetOption,
   ActionSheetConfirmArgs,
   ActionSheetCancelArgs,
   // ImagePreview
-  ImagePreviewChangeArgs
+  ImagePreviewChangeArgs,
+  // PopMenu
+  PopMenuOption,
+  PopMenuConfirmArgs,
+  PopMenuCancelArgs,
+  // Icon
+  IconData
 }

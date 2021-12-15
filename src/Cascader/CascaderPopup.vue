@@ -158,7 +158,7 @@ export default defineComponent({
     }
 
     function onSelect(selecteds: PickerValue[]) {
-      const confirmDetail = updateValue(selecteds)
+      const confirmDetail = updateOriginalValue(selecteds)
       popup.customConfirm(confirmDetail)
     }
 
@@ -170,6 +170,7 @@ export default defineComponent({
       update,
       getValuesByRow,
       updateValue,
+      updateOriginalValue,
       onChange
     } = usePickerView(props, ctx, {
       name: 'cascader',

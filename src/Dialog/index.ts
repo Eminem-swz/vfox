@@ -1,28 +1,25 @@
 import { withInstall } from '@/helpers/with-install'
 import Dialog from './Dialog.vue'
-import type { ApiFnOptions, PopupSuccessArgs } from '../apis/types'
-import { createConfirmHook, showPopup } from '@/apis/Popup'
+import { createConfirmHook, createShowPopup } from '@/popup/api'
+import type { PopupSuccessConfirmArgs } from '../popup/types'
+import type { EmptyObject } from '../helpers/types'
 
-type ShowDialogOptions = {
-  content: string
-} & Partial<
+const showDialog = createShowPopup<
   {
+    content: string
+  } & Partial<{
     title: string
     maskClosable: boolean
     showCancel: boolean
     cancelText: string
     confirmText: string
-  } & ApiFnOptions
->
-
-const showDialog = function (object: ShowDialogOptions) {
-  return showPopup<PopupSuccessArgs>(object, 'showDialog', function (done) {
-    return {
-      component: Dialog,
-      hook: createConfirmHook(done)
-    }
-  })
-}
+  }>,
+  PopupSuccessConfirmArgs<EmptyObject>
+>({
+  apiName: 'showDialog',
+  component: Dialog,
+  createHook: createConfirmHook
+})
 
 export { Dialog, showDialog }
 export default withInstall(Dialog, { showDialog })

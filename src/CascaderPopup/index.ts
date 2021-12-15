@@ -1,13 +1,13 @@
 import { withInstall } from '@/helpers/with-install'
 import CascaderPopup from '../Cascader/CascaderPopup.vue'
-import type { PopupSuccessArgs } from '../popup/types'
-import { createConfirmHook, createShowPopup } from '@/apis/Popup'
-import type { ShowCascaderOptions } from '../Cascader/types'
+import { createConfirmHook, createShowPopup } from '@/popup/api'
+import type { PopupSuccessConfirmArgs } from '../popup/types'
 import type { PickerDetail } from '../Picker/types'
+import type { ShowCascaderOptions } from '../Cascader/types'
 
 const showCascader = createShowPopup<
   ShowCascaderOptions,
-  PopupSuccessArgs<PickerDetail>
+  PopupSuccessConfirmArgs<PickerDetail>
 >({
   apiName: 'showCascader',
   component: CascaderPopup,

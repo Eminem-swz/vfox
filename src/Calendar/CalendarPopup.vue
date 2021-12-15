@@ -20,14 +20,13 @@
       :maxRange="maxRange"
       :dayHandler="dayHandler"
       :firstDayOfWeek="firstDayOfWeek"
+      :formatter="formatter"
+      :parser="parser"
       ref="calendarView"
       @select="onSelect"
     />
     <div class="fx-calendar-popup_confirm" v-if="showConfirm">
-      <Button
-        type="primary"
-        @click="onConfirmClick"
-        :disabled="detail.value.length == 0"
+      <Button type="primary" @click="onConfirmClick" :disabled="valueSize == 0"
         >确定
       </Button>
     </div>
@@ -35,14 +34,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import { CalendarView } from '@/CalendarView'
 import { Drawer } from '@/Drawer'
 import { Button } from '@/Button'
-import { getDefaultDetail, cloneDetail, commonProps } from '@/Calendar/calendar'
+import { getDefaultDetail, commonProps } from '@/Calendar/calendar'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
-import type { DetailObject } from './types'
+import { cloneDetail } from '@/Picker/util'
+import type { CalendarDetail } from './types'
 
 export default defineComponent({
   name: 'fx-calendar-popup',
@@ -66,11 +66,13 @@ export default defineComponent({
   emits: [...popupExtendEmits, 'update:modelValue'],
   setup(props, ctx) {
     const calendarView = ref()
-    const detail = reactive<DetailObject>(getDefaultDetail())
+    const valueSize = ref(0)
+
+    let detail: CalendarDetail = getDefaultDetail()
 
     const popup = usePopupExtend(ctx)
 
-    function onSelect(_detail: DetailObject) {
+    function onSelect(_detail: CalendarDetail) {
       updateDetail(_detail)
 
       if (!props.showConfirm) {
@@ -90,24 +92,19 @@ export default defineComponent({
       updateDetail(calendarView.value.getDetail())
 
       popup.emit('update:modelValue', getDetail().value)
-
-      const confirmDetail = getDetail()
-
-      popup.customConfirm(confirmDetail)
+      popup.customConfirm(getDetail())
     }
 
     function getDetail() {
       return cloneDetail(detail)
     }
 
-    function updateDetail(_detail: DetailObject) {
-      detail.value.splice(0, Infinity, ..._detail.value)
-      detail.valueArray.splice(0, Infinity, ..._detail.valueArray)
-      detail.formatted = _detail.formatted
-      detail.rangeCount = _detail.rangeCount
+    function updateDetail(_detail: CalendarDetail) {
+      detail = _detail
+      valueSize.value = detail.valueArray.length
     }
 
-    function updateValue(val: unknown): DetailObject {
+    function updateValue(val: unknown): CalendarDetail {
       return calendarView.value
         ? calendarView.value.updateValue(val)
         : getDefaultDetail()
@@ -119,7 +116,7 @@ export default defineComponent({
 
     return {
       ...popup,
-      detail,
+      valueSize,
       calendarView,
       onSelect,
       onConfirmClick,

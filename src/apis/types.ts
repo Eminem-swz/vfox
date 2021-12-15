@@ -1,4 +1,4 @@
-import { AnyObject } from '../helpers/types'
+import { AnyObject, Noop } from '../helpers/types'
 import Exception from '../helpers/exception'
 
 export interface ApiOptionsSuccess {
@@ -9,9 +9,7 @@ export interface ApiOptionsFail {
   (e: Exception): void
 }
 
-export interface ApiOptionsComplete {
-  (): void
-}
+export type ApiOptionsComplete = Noop
 
 export interface ApiFnOptions {
   success: ApiOptionsSuccess
@@ -21,7 +19,7 @@ export interface ApiFnOptions {
 
 export type PopupHook = (hookEvent: string, args: any) => void
 
-export interface PopupSuccessArgs<T = AnyObject> {
+export interface PopupSuccessConfirmArgs<T = AnyObject> {
   confirm: boolean
   cancel: boolean
   detail: T

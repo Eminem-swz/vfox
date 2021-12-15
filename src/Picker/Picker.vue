@@ -17,8 +17,6 @@
       @field-click="onFieldClick"
     />
     <PickerPopup
-      :formatString="formatString"
-      :initialSeparator="initialSeparator"
       :options="options"
       :fieldNames="fieldNames"
       :modelValue="modelValue"

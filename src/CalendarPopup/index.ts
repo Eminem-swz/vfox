@@ -1,17 +1,17 @@
 import { withInstall } from '@/helpers/with-install'
 import CalendarPopup from '../Calendar/CalendarPopup.vue'
-import type { PopupSuccessArgs } from '../popup/types'
-import { createConfirmHook, showPopup } from '@/apis/Popup'
-import type { ShowCalendarOptions } from '../Calendar/types'
+import { createConfirmHook, createShowPopup } from '@/popup/api'
+import type { PopupSuccessConfirmArgs } from '../popup/types'
+import type { ShowCalendarOptions, CalendarDetail } from '../Calendar/types'
 
-const showCalendar = function (object: ShowCalendarOptions) {
-  return showPopup<PopupSuccessArgs>(object, 'showCalendar', function (done) {
-    return {
-      component: CalendarPopup,
-      hook: createConfirmHook(done)
-    }
-  })
-}
+const showCalendar = createShowPopup<
+  ShowCalendarOptions,
+  PopupSuccessConfirmArgs<CalendarDetail>
+>({
+  apiName: 'showCalendar',
+  component: CalendarPopup,
+  createHook: createConfirmHook
+})
 
 export { CalendarPopup, showCalendar }
 export default withInstall(CalendarPopup, { showCalendar })

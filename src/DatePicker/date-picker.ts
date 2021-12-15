@@ -6,7 +6,7 @@ import type { PickerValueFormatter, PickerValueParser } from '../Picker/types'
 
 export const commonProps = {
   modelValue: {
-    type: [Date, String],
+    type: [Date, String, Number, Array],
     default: null
   },
   // 格式化模板

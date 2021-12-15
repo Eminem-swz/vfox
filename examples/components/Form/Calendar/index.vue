@@ -2,15 +2,15 @@
   <div>
     <fx-group title="Calendar">
       <fx-cell label="基础">
-        <fx-calendar :placeholder="placeholder" />
+        <fx-calendar />
       </fx-cell>
       <fx-cell label="v-model today">
         <fx-calendar v-model="value" popup-show-confirm />
       </fx-cell>
       <fx-cell label="minDate/maxDate 11-11">
         <fx-calendar
-          :min-date="new Date('2020-11-11')"
-          :max-date="new Date('2021-11-11')"
+          :min-date="new Date('2021-11-11')"
+          :max-date="new Date('2022-11-11')"
           placeholder="选择日期"
           popup-show-close
         />
@@ -37,11 +37,13 @@
     </fx-group>
     <fx-group title="CalendarView">
       <div class="calendar-view-box">
-        <div class="calendar-view-header">选择：{{ viewDateString }}</div>
+        <div class="calendar-view-header">选择：{{ viewValue }}</div>
         <div class="calendar-view-body">
           <fx-calendar-view
             initialMode="single"
-            v-model="viewDate"
+            v-model="viewValue"
+            :formatter="formatter"
+            :parser="parser"
             @select="onSelect"
           ></fx-calendar-view>
         </div>
@@ -49,12 +51,14 @@
     </fx-group>
     <fx-group title="CalendarView initialMode=range">
       <div class="calendar-view-box">
-        <div class="calendar-view-header">选择：{{ viewRangeDateString }}</div>
+        <div class="calendar-view-header">选择：{{ viewRangeValue }}</div>
         <div class="calendar-view-body">
           <fx-calendar-view
             initialMode="range"
             :first-day-of-week="1"
-            v-model="viewRangeDate"
+            v-model="viewRangeValue"
+            :formatter="formatter"
+            :parser="parser"
             @select="onSelect"
           ></fx-calendar-view>
         </div>
@@ -62,7 +66,7 @@
     </fx-group>
     <fx-group title="CalendarPopup">
       <fx-cell label="v-modal +1day" isLink @click="addOneDay">{{
-        popupValueString
+        popupValue
       }}</fx-cell>
       <fx-cell
         label="showConfirm=true"
@@ -111,6 +115,8 @@
       :show-confirm="popupShowConfirm"
       :show-close="popupShowClose"
       v-model="popupValue"
+      :formatter="formatter"
+      :parser="parser"
       @confirm="onConfirm"
       @visible-state-change="onVisibleStateChange"
     />
@@ -126,81 +132,97 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, reactive, ref } from 'vue'
 import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
 import { showCalendar } from '@/Calendar'
+import {
+  CalendarChangeArgs,
+  CalendarConfirmArgs,
+  CalendarFormatter,
+  CalendarParser,
+  CalendarSelectArgs,
+  PopupVisibleStateChangeArgs
+} from '@/types'
 
-export default {
-  components: {},
+export default defineComponent({
   name: 'ExpCalendar',
-  data() {
-    return {
-      viewDate: new Date(),
-      viewRangeDate: [],
+  setup() {
+    const template = 'YYYY-MM-DD'
 
-      popupValue: [new Date()],
-      popupRangeValue: [],
-      popupVisible: false,
-      popupRangeVisible: false,
-      popupShowConfirm: false,
-      popupShowClose: false,
+    const value = reactive([new Date()])
+    const rangeValue = reactive([])
+    const viewValue = ref('')
+    const viewRangeValue = ref('')
+    const popupValue = ref(dayjs().format(template))
+    const popupRangeValue = reactive([])
 
-      title: '日期选择',
+    const popupVisible = ref(false)
+    const popupRangeVisible = ref(false)
+    const popupShowConfirm = ref(false)
+    const popupShowClose = ref(false)
+    const confirmEvent = ref(false)
+    const visibleEvent = ref(false)
 
-      value: new Date(),
-      rangeValue: [],
-      placeholder: '',
+    const title = '日期选择'
 
-      confirmEvent: false,
-      visibleEvent: false
+    const formatter: CalendarFormatter = (valueArray, mode) => {
+      if (mode === 'range') {
+        return valueArray
+          .map(date => {
+            return dayjs(date).format(template)
+          })
+          .join(' ~ ')
+      } else {
+        return dayjs(valueArray[0]).format(template)
+      }
     }
-  },
-  computed: {
-    popupValueString() {
-      return dayjs(this.popupValue).format('YYYY-MM-DD')
-    },
-    viewDateString() {
-      return dayjs(this.viewDate).format('YYYY-MM-DD')
-    },
-    viewRangeDateString() {
-      return this.viewRangeDate
-        .map(date => {
-          return dayjs(date).format('YYYY-MM-DD')
+
+    const parser: CalendarParser = (value, mode) => {
+      if (mode === 'range') {
+        return (value as string).split(' ~ ').map(v => {
+          return dayjs(v, template, true).toDate()
         })
-        .join(' ~ ')
+      } else {
+        return [dayjs(value as string, template, true).toDate()]
+      }
     }
-  },
-  methods: {
-    onChange(res) {
-      console.log('change', res)
-    },
-    onSelect(res) {
-      console.log('select', res)
-    },
-    addOneDay() {
-      this.popupValue = [dayjs(this.popupValue[0]).add(1, 'day').toDate()]
-    },
-    onConfirm(res) {
-      console.log('confirm', res)
-      this.confirmEvent && showToast(`触发了确定事件`)
-    },
-    onRangeConfirm(detail) {
-      showToast(`选择了 ${detail.label}`)
-    },
-    onVisibleStateChange({ state }) {
+
+    function onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
       // console.log(`${type} 事件触发`)
 
-      if (this.visibleEvent) {
-        showToast(`${state} 事件触发`)
+      if (visibleEvent.value) {
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
       }
 
-      if (state === 'hidden') {
-        this.visibleEvent = false
-        this.confirmEvent = false
+      if (res.state === 'hidden') {
+        visibleEvent.value = false
+        confirmEvent.value = false
       }
-    },
-    onCallApi() {
+    }
+
+    function onChange(res: CalendarChangeArgs) {
+      console.log('change', res)
+    }
+
+    function onSelect(res: CalendarSelectArgs) {
+      console.log('select', res)
+    }
+
+    function onConfirm(res: CalendarConfirmArgs) {
+      if (confirmEvent.value) {
+        console.log('event', res)
+        showToast(`触发了确定事件`)
+      }
+    }
+
+    function onRangeConfirm(res: CalendarConfirmArgs) {
+      showToast(`选择了 ${res.label}`)
+    }
+
+    function onCallApi() {
       showCalendar({
         mode: 'range',
         showClose: true,
@@ -209,13 +231,48 @@ export default {
           if (res.cancel) {
             showToast('取消了')
           } else {
-            showToast(`选择了 ${res.detail.formatted}`)
+            showToast(`选择了 ${res.detail.label}`)
           }
         }
       })
     }
+
+    function addOneDay() {
+      popupValue.value = dayjs(popupValue.value, template, true)
+        .add(1, 'day')
+        .format(template)
+    }
+
+    return {
+      title,
+
+      value,
+      rangeValue,
+      viewValue,
+      viewRangeValue,
+      popupValue,
+      popupRangeValue,
+
+      formatter,
+      parser,
+
+      popupVisible,
+      popupRangeVisible,
+      popupShowConfirm,
+      popupShowClose,
+      confirmEvent,
+      visibleEvent,
+
+      onVisibleStateChange,
+      onChange,
+      onSelect,
+      onConfirm,
+      onRangeConfirm,
+      onCallApi,
+      addOneDay
+    }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

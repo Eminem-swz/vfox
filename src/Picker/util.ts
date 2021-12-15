@@ -42,7 +42,7 @@ export function cloneValue(value: PickerModelValue) {
   return cloneData(value)
 }
 
-export function cloneDetail(detail: PickerDetail) {
+export function cloneDetail<T extends PickerDetail>(detail: T) {
   const newDetail = cloneData(detail)
   newDetail.value = cloneValue(detail.value)
 

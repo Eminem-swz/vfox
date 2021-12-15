@@ -13,7 +13,6 @@ import type {
   OptionItem,
   ColRow
 } from './types'
-import { stringNumberArrayMixValidator } from '@/helpers/validator'
 import {
   isNumber,
   isStringNumberMixArray,
@@ -32,17 +31,8 @@ export const getDefaultFieldNames: () => FieldNames = () => {
 
 export const commonProps = {
   modelValue: {
-    type: [String, Number, Array],
-    validator: stringNumberArrayMixValidator,
-    default: () => ''
-  },
-  formatString: {
-    type: Boolean,
-    default: false
-  },
-  initialSeparator: {
-    type: [String, Function],
-    default: '/'
+    type: [Date, String, Number, Array],
+    default: null
   },
   options: {
     type: Array,
@@ -51,10 +41,6 @@ export const commonProps = {
   fieldNames: {
     type: Object as PropType<UserFieldNames>,
     default: getDefaultFieldNames
-  },
-  handlers: {
-    type: Object,
-    default: null
   },
   formatter: {
     type: Function as PropType<PickerValueFormatter>

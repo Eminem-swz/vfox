@@ -166,11 +166,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 import { showPopover } from '@/Popover'
+import { PopupVisibleStateChangeArgs } from '@/types'
 
-export default {
+export default defineComponent({
   name: 'ExpPopover',
   props: {},
   data() {
@@ -191,19 +193,19 @@ export default {
         this.noMaskVisible = false
       }, 5000)
     },
-    onVisibleStateChange({ state }) {
+    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        showToast(`${state} 事件触发`)
-        console.log(`${state} 事件触发`)
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
       }
-      if (state === 'hidden') {
+      if (res.state === 'hidden') {
         this.selector = ''
         this.placement = 'bottom'
         this.content = '这是气泡内容'
         this.visibleEvent = false
       }
     },
-    onCallApi(selector) {
+    onCallApi(selector: string) {
       showPopover({
         selector,
         content: '这是气泡内容',
@@ -214,7 +216,7 @@ export default {
       })
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

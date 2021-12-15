@@ -116,7 +116,7 @@ export default defineComponent({
         title: title.value,
         options: multiOptions
       }).then(res => {
-        console.log('ApiSuccess', res)
+        console.log('success', res)
         if (res.cancel) {
           showToast('取消了')
         } else {

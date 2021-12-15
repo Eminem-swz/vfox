@@ -1,10 +1,9 @@
 import { createApp, Component } from 'vue'
-import { isObject, isString } from '@/helpers/util'
+import { inArray, isObject, isString, objectForEach } from '@/helpers/util'
 import { getCallbackFns } from '@/apis/callback'
-import { parseParamsByRules } from '@/apis/rules'
-import type { PopupHook, ApiFnOptions } from './types'
 import type { AnyObject, EmptyObject } from '../helpers/types'
-import type { PopupCustomCancel, PopupBridge } from '../popup/types'
+import type { PopupCustomCancel, PopupBridge, PopupHook } from '../popup/types'
+import type { ApiOptionsComplete, ApiOptionsFail } from '../apis/types'
 import Exception from '@/helpers/exception'
 
 type PopupDone = (res: any) => void
@@ -39,19 +38,21 @@ export function createShowPopup<T, E = EmptyObject>({
   apiName,
   createHook,
   component,
-  singleMode
+  singleMode,
+  hookOptions
 }: {
   apiName: string
   createHook: (done: PopupDone) => PopupHook
   component: Component
   singleMode?: boolean
+  hookOptions?: (options: AnyObject) => AnyObject
 }) {
   return function show(
     object: T &
       Partial<{
         success: (res: E) => void
-        fail: (e: Exception) => void
-        complete: () => void
+        fail: ApiOptionsFail
+        complete: ApiOptionsComplete
       }>
   ) {
     let options: AnyObject
@@ -64,6 +65,10 @@ export function createShowPopup<T, E = EmptyObject>({
       options = {}
     } else {
       options = object as AnyObject
+    }
+
+    if (hookOptions) {
+      options = hookOptions(options)
     }
 
     const { success, fail, complete } = getCallbackFns(options)
@@ -81,16 +86,19 @@ export function createShowPopup<T, E = EmptyObject>({
         singleMode && clear(key)
 
         const fns: RefFns = {}
-        const propsData = parseParamsByRules(options, apiName)
+        const propsData: AnyObject = {}
 
-        if (propsData.mode) {
-          propsData.initialMode = propsData.mode
-          delete propsData.mode
-        }
-        if (propsData.value) {
-          propsData.modelValue = propsData.value
-          delete propsData.value
-        }
+        objectForEach(options, (v, k) => {
+          if (!inArray(k, ['success', 'fail', 'complete'])) {
+            if (k === 'mode') {
+              propsData.initialMode = v
+            } else if (k === 'value') {
+              propsData.modelValue = v
+            } else {
+              propsData[k] = v
+            }
+          }
+        })
 
         const { $wrapper } = createPopup()
 
@@ -136,96 +144,6 @@ export function createShowPopup<T, E = EmptyObject>({
   }
 }
 
-/**
- * 展示弹窗
- * @param object 参数
- */
-export function showPopup<T = EmptyObject>(
-  object: string | AnyObject,
-  apiName: string,
-  getOptions: (done: PopupDone) => {
-    component: Component
-    hook?: PopupHook
-    singleMode?: boolean
-  }
-) {
-  let options: AnyObject
-
-  if (isString(object)) {
-    options = {
-      title: object as string
-    }
-  } else if (!isObject(object)) {
-    options = {}
-  } else {
-    options = object as AnyObject
-  }
-
-  const { success, fail, complete } = getCallbackFns(options)
-
-  return new Promise<T>(function (resolve, reject) {
-    try {
-      const key = apiName.replace('show', '')
-      const { component, hook, singleMode } = getOptions(function (res) {
-        success(res)
-        complete()
-        resolve(res)
-      })
-
-      singleMode && clear(key)
-
-      const fns: RefFns = {}
-      const propsData = parseParamsByRules(options, apiName)
-
-      if (propsData.mode) {
-        propsData.initialMode = propsData.mode
-        delete propsData.mode
-      }
-      if (propsData.value) {
-        propsData.modelValue = propsData.value
-        delete propsData.value
-      }
-
-      const { $wrapper } = createPopup()
-
-      const app = createApp(
-        component,
-        Object.assign(propsData, {
-          visible: true
-        })
-      )
-      app.provide('fxApis', {
-        in(hookEvent, res) {
-          if (hookEvent === 'visible-state-change' && res.state === 'hidden') {
-            app.unmount()
-            singleMode && remove(key, $ref.uid)
-          }
-
-          hook && hook(hookEvent, res)
-        },
-        out(key: RefFnName, value: PopupCustomCancel) {
-          fns[key] = value
-        }
-      } as PopupBridge)
-      app.mount($wrapper)
-
-      const $ref = {
-        uid: app._uid,
-        fns
-      }
-
-      // 单例：如Toast
-      singleMode && ($refs[key] = $ref)
-
-      return app
-    } catch (e) {
-      fail(new Exception(e))
-      complete()
-      reject(new Exception(e))
-    }
-  })
-}
-
 function clear(key: string) {
   if ($refs[key]) {
     const fns = $refs[key].fns
@@ -241,30 +159,32 @@ function remove(key: string, uid: number) {
   }
 }
 
-/**
- * 隐藏弹窗
- * @param object 参数
- */
-export function hidePopup(object: Partial<ApiFnOptions>, apiName: string) {
-  if (!isObject(object)) {
-    object = {}
+type HideOptions = Partial<{
+  success: (res: EmptyObject) => void
+  fail: ApiOptionsFail
+  complete: ApiOptionsComplete
+}>
+
+export function createHidePopup({ apiName }: { apiName: string }) {
+  return function hide(object?: HideOptions) {
+    const { success, fail, complete } = getCallbackFns(
+      isObject(object) ? (object as HideOptions) : {}
+    )
+
+    return new Promise<EmptyObject>((resolve, reject) => {
+      try {
+        clear(apiName.replace('hide', ''))
+
+        success({})
+        complete()
+        resolve({})
+      } catch (e) {
+        fail(new Exception(e))
+        complete()
+        reject(new Exception(e))
+      }
+    })
   }
-
-  const { success, fail, complete } = getCallbackFns(object)
-
-  return new Promise<Record<string, never>>((resolve, reject) => {
-    try {
-      clear(apiName.replace('hide', ''))
-
-      success()
-      complete()
-      resolve({})
-    } catch (e) {
-      fail(new Exception(e))
-      complete()
-      reject(new Exception(e))
-    }
-  })
 }
 
 export function createConfirmHook(done: PopupDone) {

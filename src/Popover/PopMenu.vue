@@ -43,7 +43,7 @@ import { usePopover } from '@/Popover/use-popover'
 import { popoverProps, popoverEmits } from '@/Popover/popover'
 import { Icon } from '@/Icon'
 import { isArray, isObject } from '@/helpers/util'
-import type { OptionItem } from './types'
+import type { PopMenuOption } from './types'
 
 export default defineComponent({
   name: 'fx-pop-menu',
@@ -51,7 +51,7 @@ export default defineComponent({
   props: {
     ...popoverProps,
     options: {
-      type: Array as PropType<OptionItem[]>
+      type: Array as PropType<PopMenuOption[]>
     }
   },
   emits: [...popoverEmits, 'select'],
@@ -74,10 +74,10 @@ export default defineComponent({
     }
 
     const options2 = computed(() => {
-      const options: OptionItem[] = []
+      const options: PopMenuOption[] = []
 
       if (isArray(props.options)) {
-        props.options?.forEach((v: OptionItem) => {
+        props.options?.forEach((v: PopMenuOption) => {
           isObject(v)
             ? options.push({
                 icon: v.icon || null,

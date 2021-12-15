@@ -23,7 +23,9 @@
     </fx-group>
     <fx-group title="formatter/parser">
       <div class="exp-picker-view-box">
-        <div class="exp-picker-view-header">分割线“-”，v-model: {{ formatValue }}</div>
+        <div class="exp-picker-view-header">
+          分割线“-”，v-model: {{ formatValue }}
+        </div>
         <div class="exp-picker-view-body">
           <fx-picker-view
             v-model="formatValue"
@@ -48,7 +50,11 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { showToast } from '@/Toast'
-import type { PickerValueFormatter, PickerChangeArgs } from '@/types'
+import type {
+  PickerValueFormatter,
+  PickerValueParser,
+  PickerChangeArgs
+} from '@/types'
 import { cascadeOptions, multiOptions, options } from '../Picker/data'
 
 export default defineComponent({
@@ -68,12 +74,12 @@ export default defineComponent({
       }
     }
 
-    function parser(value: string) {
-      return value ? value.split(separator) : []
+    const parser: PickerValueParser = value => {
+      return value ? (value as string).split(separator) : []
     }
 
     function onChange(res: PickerChangeArgs) {
-      console.log('change', res)
+      console.log('event', res)
     }
 
     function onChangeEvent(e: PickerChangeArgs) {

@@ -17,12 +17,12 @@
       @field-click="onFieldClick"
     />
     <CascaderPopup
-      :formatString="formatString"
-      :initialSeparator="initialSeparator"
       :options="options"
       :fieldNames="fieldNames"
       :modelValue="modelValue"
       :title="placeholder"
+      :formatter="formatter"
+      :parser="parser"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
       @change="onChange"

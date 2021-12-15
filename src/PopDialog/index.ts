@@ -1,29 +1,25 @@
 import { withInstall } from '@/helpers/with-install'
 import PopDialog from '../Popover/PopDialog.vue'
-import type { ApiFnOptions, PopupSuccessArgs } from '../apis/types'
-import { createConfirmHook, showPopup } from '@/apis/Popup'
-import type { DomSelector, PlacementType } from '../helpers/types'
+import { createConfirmHook, createShowPopup } from '@/popup/api'
+import type { PopupSuccessConfirmArgs } from '../popup/types'
+import type { DomSelector, PlacementType, EmptyObject } from '../helpers/types'
 
-type ShowPopDialogOptions = {
-  selector: DomSelector
-  content: string
-} & Partial<
+const showPopDialog = createShowPopup<
   {
+    selector: DomSelector
+    content: string
+  } & Partial<{
     placement: PlacementType
     showCancel: boolean
     cancelText: string
     confirmText: string
-  } & ApiFnOptions
->
-
-const showPopDialog = function (object: ShowPopDialogOptions) {
-  return showPopup<PopupSuccessArgs>(object, 'showPopDialog', function (done) {
-    return {
-      component: PopDialog,
-      hook: createConfirmHook(done)
-    }
-  })
-}
+  }>,
+  PopupSuccessConfirmArgs<EmptyObject>
+>({
+  apiName: 'showPopDialog',
+  component: PopDialog,
+  createHook: createConfirmHook
+})
 
 export { PopDialog, showPopDialog }
 export default withInstall(PopDialog, {

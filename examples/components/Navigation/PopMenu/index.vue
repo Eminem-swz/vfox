@@ -154,12 +154,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 import { showDialog } from '@/Dialog'
 import { showPopMenu } from '@/PopMenu'
+import type {
+  PopMenuConfirmArgs,
+  PopupCancelArgs,
+  PopupVisibleStateChangeArgs
+} from '@/types'
 
-export default {
+export default defineComponent({
   name: 'ExpPopMenu',
   data() {
     return {
@@ -193,19 +199,19 @@ export default {
     }
   },
   methods: {
-    onVisibleStateChange({ state }) {
+    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        showToast(`${state} 事件触发`)
-        console.log(`${state} 事件触发`)
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
       }
-      if (state === 'hidden') {
+      if (res.state === 'hidden') {
         this.visibleEvent = false
         this.showEvent = false
       }
     },
-    onConfirm(res) {
-      console.log('confirm', res)
+    onConfirm(res: PopMenuConfirmArgs) {
       if (this.showEvent) {
+        console.log('event', res)
         showDialog({
           title: '选择了',
           showCancel: false,
@@ -213,11 +219,13 @@ export default {
         })
       }
     },
-    onCancel(res) {
-      console.log('cancel', res)
-      this.showEvent && showToast('取消了')
+    onCancel(res: PopupCancelArgs) {
+      if (this.showEvent) {
+        console.log('event', res)
+        showToast('取消了')
+      }
     },
-    onCallApi(selector) {
+    onCallApi(selector: string) {
       showPopMenu({
         selector,
         options: this.options,
@@ -233,7 +241,7 @@ export default {
       })
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

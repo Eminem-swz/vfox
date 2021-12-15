@@ -101,11 +101,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PopupCancelArgs, StateType } from '@/types'
 import { showNotify, hideNotify } from '@/Notify'
+import type { PopupCancelArgs, StateType, IconData } from '@/types'
 
 interface showArgs {
-  icon?: any
+  icon?: IconData
   title?: string
   backgroundColor?: string
   color?: string
@@ -134,7 +134,7 @@ export default defineComponent({
         title: '通知文本',
         duration: 5000,
         closable: true,
-        success(res: any) {
+        success(res) {
           console.log('success', res)
         }
       })
@@ -158,7 +158,11 @@ export default defineComponent({
       this.visible = true
     },
     callHideApi() {
-      hideNotify()
+      hideNotify({
+        success(res) {
+          console.log('success', res)
+        }
+      })
     },
     onCancel(res: PopupCancelArgs) {
       console.log('cancel', res)

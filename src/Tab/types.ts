@@ -1,13 +1,14 @@
 import type { BadgeOptions } from '../Badge/types'
+import type { IconData } from '../Icon/types'
 
 export type OptionValue = number | string
 
 export interface OptionItem {
   label: string
   value: OptionValue
-  icon?: any
+  icon?: IconData
   iconLink?: string
-  activeIcon?: any
+  activeIcon?: IconData
   activeIconLink?: string
   badge?: BadgeOptions | number | string
   subLabel?: string

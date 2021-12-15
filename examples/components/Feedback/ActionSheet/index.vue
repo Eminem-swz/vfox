@@ -157,8 +157,8 @@ export default defineComponent({
       }
     },
     onConfirm(res: ActionSheetConfirmArgs) {
-      console.log('event', res)
       if (this.showEvent) {
+        console.log('event', res)
         showDialog({
           title: '选择了',
           showCancel: false,
@@ -167,8 +167,10 @@ export default defineComponent({
       }
     },
     onCancel(res: PopupCancelArgs) {
-      console.log('event', res)
-      this.showEvent && showToast(`取消事件触发`)
+      if (this.showEvent) {
+        console.log('event', res)
+        showToast('取消了')
+      }
     },
     onCallApi() {
       showActionSheet({

@@ -23,12 +23,8 @@ export interface DatePickerFilter {
   (number: number, type: ColName): boolean
 }
 
-export interface DatePickerDetail extends PickerDetail {
-  value: Date
-}
-
 export type DatePickerChangeArgs = PickerChangeArgs
-export type DatePickerConfirmArgs = PopupConfirmArgs<DatePickerDetail>
+export type DatePickerConfirmArgs = PopupConfirmArgs<PickerDetail>
 export type DatePickerCancelArgs = PopupCancelArgs
 
 export type ShowDatePickerOptions = Partial<{

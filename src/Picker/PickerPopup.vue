@@ -23,11 +23,8 @@
     </template>
     <PickerView
       ref="view"
-      :formatString="formatString"
-      :initialSeparator="initialSeparator"
       :options="options"
       :fieldNames="fieldNames"
-      :handlers="handlers"
       :formatter="formatter"
       :parser="parser"
     />

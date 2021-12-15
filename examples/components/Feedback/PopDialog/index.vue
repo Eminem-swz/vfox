@@ -186,11 +186,17 @@
   </div>
 </template>
 
-<script>
-import Toast from '@/Toast'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { showToast } from '@/Toast'
 import { showPopDialog } from '@/PopDialog'
+import {
+  PopupVisibleStateChangeArgs,
+  PopupConfirmArgs,
+  PopupCancelArgs
+} from '@/types'
 
-export default {
+export default defineComponent({
   name: 'ExpPopDialog',
   data() {
     return {
@@ -212,12 +218,12 @@ export default {
     }
   },
   methods: {
-    onVisibleStateChange({ state }) {
+    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
       if (this.visibleEvent) {
-        console.log(`${state} 事件触发`)
-        Toast.showToast(`${state} 事件触发`)
+        console.log('event', res)
+        showToast(`${res.state} 事件触发`)
       }
-      if (state === 'hidden') {
+      if (res.state === 'hidden') {
         this.showCancel = true
         this.visibleEvent = false
         this.showEvent = false
@@ -226,31 +232,31 @@ export default {
         this.cancelText = '取消'
       }
     },
-    onCancel(res) {
-      console.log('cancel', res)
+    onCancel(res: PopupCancelArgs) {
       if (this.showEvent) {
-        Toast.showToast(`取消事件触发`)
+        console.log('event', res)
+        showToast(`取消事件触发`)
       }
     },
-    onConfirm(res) {
-      console.log('confirm', res)
+    onConfirm(res: PopupConfirmArgs) {
       if (this.showEvent) {
-        Toast.showToast(`确定事件触发`)
+        console.log('event', res)
+        showToast(`确定事件触发`)
       }
     },
-    onCallApi(selector) {
+    onCallApi(selector: string) {
       showPopDialog({
         selector,
         placement: 'top',
         content: this.content,
         success: res => {
           console.log('success', res)
-          Toast.showToast(res.confirm ? `点击了确定` : `点击了取消`)
+          showToast(res.confirm ? `点击了确定` : `点击了取消`)
         }
       })
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

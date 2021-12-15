@@ -1,4 +1,4 @@
-import type { AnyObject } from '../helpers/types'
+import type { AnyObject, EmptyObject } from '../helpers/types'
 
 export interface PopupCustomCancel {
   (key: string, focus?: boolean): void
@@ -16,21 +16,25 @@ export interface PopupVisibleStateChangeArgs {
   type: 'visible-state-change'
   state: PopupVisibleState
 }
-export type PopupConfirmArgs<T = AnyObject> = T & {
+export type PopupConfirmArgs<T = EmptyObject> = T & {
   type: 'confirm'
 }
 export interface PopupCancelArgs {
   type: 'cancel'
   source: string
 }
+
 export interface PopupBridge {
   in?: (key: string, value?: any) => void
   out?: (key: string, value: any) => void
 }
+export type PopupHook = (hookEvent: string, args: any) => void
 
-export interface PopupSuccessArgs<T = AnyObject> {
+export interface PopupSuccessConfirmArgs<T = AnyObject> {
   confirm: boolean
   cancel: boolean
   detail: T
   source: string
 }
+
+export type PopupSuccessAlertArgs = EmptyObject

@@ -18,6 +18,15 @@
           v-model="value"
         />
       </fx-cell>
+      <fx-cell label="formatter/parser">
+        <fx-cascader
+          :options="options"
+          placeholder="选择家电"
+          v-model="formatValue"
+          :formatter="formatter"
+          :parser="parser"
+        />
+      </fx-cell>
     </fx-group>
     <fx-group title="事件监听">
       <fx-cell label="change">
@@ -35,28 +44,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { cascadeOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
 import { showCascader } from '@/Cascader'
-import type { CascaderConfirmArgs } from '@/types'
+import type {
+  CascaderConfirmArgs,
+  PickerValueFormatter,
+  PickerValueParser
+} from '@/types'
 
 export default defineComponent({
   name: 'ExpCascader',
-  data() {
-    return {
-      options: cascadeOptions,
-      regionOptions,
-      value: ['bingxiang', 'duikaimen']
+  setup() {
+    const separator = '-'
+
+    const value = reactive(['bingxiang', 'duikaimen'])
+    const formatValue = ref(`bingxiang${separator}duikaimen`)
+
+    const formatter: PickerValueFormatter = (valueArray, labelArray) => {
+      return {
+        value: valueArray.join(separator),
+        label: labelArray.join(separator)
+      }
     }
-  },
-  methods: {
-    onChange(res: CascaderConfirmArgs) {
+
+    const parser: PickerValueParser = value => {
+      return value ? (value as string).split(separator) : []
+    }
+
+    function onChange(res: CascaderConfirmArgs) {
       console.log('event', res)
 
       showToast(`选择了 ${res.label}`)
-    },
-    onCallApi() {
+    }
+
+    function onCallApi() {
       showCascader({
         title: '家电',
         options: cascadeOptions,
@@ -69,6 +92,19 @@ export default defineComponent({
           }
         }
       })
+    }
+
+    return {
+      value,
+      formatValue,
+      formatter,
+      parser,
+
+      options: cascadeOptions,
+      regionOptions,
+
+      onChange,
+      onCallApi
     }
   }
 })

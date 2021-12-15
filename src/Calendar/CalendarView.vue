@@ -63,14 +63,13 @@ import { isDate, isInNumberRange, isEmpty, isSameArray } from '@/helpers/util'
 import { showToast } from '@/Toast'
 import {
   DEFAULT_MONTH_RANGE,
-  getDetail as _getDetail,
-  parseValues,
   MODE_NAMES,
-  commonProps
+  commonProps,
+  printError
 } from '@/Calendar/calendar'
-import Exception from '@/helpers/exception'
 import { getEnumsValue } from '@/helpers/validator'
 import type { DayInfo } from './types'
+import { useHandlers } from '@/Calendar/use-calendar'
 
 interface WeekDay {
   label: string
@@ -102,19 +101,18 @@ const defaultWeekDays: WeekDay[] = [
   { label: '六', value: 6 }
 ]
 
-function printError(message: string) {
-  console.error(new Exception(message, Exception.TYPE.PROP_ERROR, 'Calendar'))
-}
-
 export default defineComponent({
   name: 'fx-calendar-view',
   props: { ...commonProps },
   emits: ['select', 'update:modelValue'],
   setup(props, { emit }) {
+    const mode = getEnumsValue(MODE_NAMES, props.initialMode)
+
+    const { formatter, parser } = useHandlers(props, { mode })
+
     const weekDays = reactive<WeekDay[]>([])
     const months = reactive<Month[]>([])
 
-    const mode = getEnumsValue(MODE_NAMES, props.initialMode)
     let start: SelectDay = getDefaultSelectDay()
     let end: SelectDay = getDefaultSelectDay()
 
@@ -149,8 +147,10 @@ export default defineComponent({
     }
 
     function updateValue(val: unknown) {
-      const timeArr = parseValues(val, mode)
+      return updateOriginalValue(parser(val))
+    }
 
+    function updateOriginalValue(timeArr: number[]) {
       if (!isSameArray(timeArr, [start.timestamp, end.timestamp])) {
         if (timeArr.length === 0) {
           setSelected('start', null)
@@ -485,20 +485,12 @@ export default defineComponent({
     }
 
     function onSelect() {
-      let value: Date | Date[]
-
-      if (mode === 'range') {
-        value = [dayjs(start.timestamp).toDate(), dayjs(end.timestamp).toDate()]
-      } else {
-        value = dayjs(start.timestamp).toDate()
-      }
-
-      emit('update:modelValue', value)
+      emit('update:modelValue', getDetail().value)
       emit('select', getDetail())
     }
 
     function getDetail() {
-      return _getDetail([start.timestamp, end.timestamp], mode)
+      return formatter([start.timestamp, end.timestamp])
     }
 
     /**
@@ -549,7 +541,7 @@ export default defineComponent({
         updateOptions()
         const values = [start.timestamp, end.timestamp]
 
-        updateValue(values)
+        updateOriginalValue(values)
       }, 17)
     }
 

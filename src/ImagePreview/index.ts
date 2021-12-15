@@ -1,8 +1,8 @@
 import { withInstall } from '@/helpers/with-install'
 import ImagePreview from './ImagePreview.vue'
-import type { PopupSuccessArgs } from '../popup/types'
-import { createConfirmHook, createShowPopup } from '@/apis/Popup'
-import { EmptyObject } from '../helpers/types'
+import { createConfirmHook, createShowPopup } from '@/popup/api'
+import type { EmptyObject } from '../helpers/types'
+import type { PopupSuccessConfirmArgs } from '../popup/types'
 
 const previewImage = createShowPopup<
   {
@@ -12,7 +12,7 @@ const previewImage = createShowPopup<
     navigationButtons?: boolean
     imageHighRendering?: boolean
   },
-  PopupSuccessArgs<EmptyObject>
+  PopupSuccessConfirmArgs<EmptyObject>
 >({
   apiName: 'previewImage',
   component: ImagePreview,

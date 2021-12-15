@@ -7,7 +7,11 @@ import { AnyObject } from '../helpers/types'
  * 获取回调函数
  * @param options object
  */
-export function getCallbackFns(options: AnyObject) {
+export function getCallbackFns(options: AnyObject): {
+  success: ApiOptionsSuccess
+  fail: ApiOptionsFail
+  complete: ApiOptionsComplete
+} {
   return {
     success: (isFunction(options.success)
       ? options.success

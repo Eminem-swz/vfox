@@ -82,10 +82,11 @@ import { Button, ButtonGroup } from '@/Button'
 import { isArray, isString, isObject } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
 import type { StateType } from '../helpers/types'
+import type { IconData } from '../Icon/types'
 
 interface ButtonOptions {
   text: string
-  icon?: any
+  icon?: IconData
   type?: StateType
 }
 

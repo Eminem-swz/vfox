@@ -1,27 +1,22 @@
 import { withInstall } from '@/helpers/with-install'
 import PopMenu from '../Popover/PopMenu.vue'
-import type { ApiFnOptions, PopupSuccessArgs } from '../apis/types'
-import { createConfirmHook, showPopup } from '@/apis/Popup'
+import { createConfirmHook, createShowPopup } from '@/popup/api'
+import type { PopupSuccessConfirmArgs } from '../popup/types'
 import type { DomSelector, PlacementType } from '../helpers/types'
-import type { OptionItem } from '../Popover/types'
+import type { PopMenuOption, PopMenuDetail } from '../Popover/types'
 
-type ShowPopMenuOptions = {
-  selector: DomSelector
-  options: OptionItem[]
-} & Partial<
+const showPopMenu = createShowPopup<
   {
-    placement: PlacementType
-  } & ApiFnOptions
->
-
-const showPopMenu = function (object: ShowPopMenuOptions) {
-  return showPopup<PopupSuccessArgs>(object, 'showPopMenu', function (done) {
-    return {
-      component: PopMenu,
-      hook: createConfirmHook(done)
-    }
-  })
-}
+    selector: DomSelector
+    options: PopMenuOption[]
+    placement?: PlacementType
+  },
+  PopupSuccessConfirmArgs<PopMenuDetail>
+>({
+  apiName: 'showPopMenu',
+  component: PopMenu,
+  createHook: createConfirmHook
+})
 
 export { PopMenu, showPopMenu }
 export default withInstall(PopMenu, {

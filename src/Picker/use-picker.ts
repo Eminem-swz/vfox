@@ -55,10 +55,10 @@ export function usePicker(
   // const defaultDetail = getDefaultDetail()
 
   const { formName, validateAfterEventTrigger, hookFormValue, root } =
-    useFormItem(props, ctx, {
+    useFormItem<PickerValue>(props, ctx, {
       formValue,
       hookFormValue: () => getDetail().value,
-      hookResetValue: () => updateValue(cloneData(defaultValue)).value
+      hookResetValue: () => updateValue(formatter([], [], handlers).value).value
     })
 
   function updateValue(val: unknown) {
@@ -100,7 +100,7 @@ export function usePicker(
     }
 
     detail = newDetail
-    formValueString.value = detail.value.toString()
+    formValueString.value = detail.value != null ? detail.value.toString() : ''
     formLabelString.value = detail.label
 
     return getDetail()
@@ -259,7 +259,7 @@ export function usePickerView(
   const optionsHandler: PickerOptionsHandler | null =
     handlers.optionsHandler || null
 
-  function updateOptions(val: PickerValue[]) {
+  function updateOptions() {
     const { options, isCascade: isCascade2 } = getFormatOptions(
       props.options,
       props.fieldNames,
@@ -270,16 +270,11 @@ export function usePickerView(
     updateArray(options2, options)
 
     isCascade.value = isCascade2
-
-    // 顺便更新一下values
-    updateValue(val, true)
   }
 
-  function updateValue(val: unknown, forceUpdate = false) {
-    const _values = parser(val, handlers)
-
+  function updateOriginalValue(val: PickerValue[], forceUpdate = false) {
     const { valid, value: values } = validateValues(
-      _values,
+      val,
       options2,
       isCascade.value,
       optionsHandler
@@ -299,6 +294,10 @@ export function usePickerView(
     }
 
     return getDetail()
+  }
+
+  function updateValue(val: unknown, forceUpdate = false) {
+    return updateOriginalValue(parser(val, handlers), forceUpdate)
   }
 
   function getDetail() {
@@ -628,7 +627,10 @@ export function usePickerView(
 
   watch(
     [() => props.options, () => props.fieldNames],
-    () => updateOptions(currentValues),
+    () => {
+      updateOptions()
+      updateOriginalValue(currentValues, true)
+    },
     {
       deep: true
     }
@@ -642,7 +644,8 @@ export function usePickerView(
     }
   )
 
-  updateOptions(props.modelValue)
+  updateOptions()
+  updateValue(props.modelValue, true)
 
   // picker 要默认数据
   if (isPicker) {
@@ -661,6 +664,7 @@ export function usePickerView(
     updateColSelected,
     getValuesByRow,
     updateValue,
+    updateOriginalValue,
     onChange
   }
 }

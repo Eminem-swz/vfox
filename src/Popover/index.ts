@@ -1,26 +1,20 @@
 import { withInstall } from '@/helpers/with-install'
 import Popover from './Popover.vue'
-import type { ApiFnOptions } from '../apis/types'
-import { createAlertHook, showPopup } from '@/apis/Popup'
+import { createAlertHook, createShowPopup } from '@/popup/api'
+import type { PopupSuccessAlertArgs } from '../popup/types'
 import type { DomSelector, PlacementType } from '../helpers/types'
 
-type ShowPopoverOptions = {
+interface ShowPopoverOptions {
   selector: DomSelector
   content: string
-} & Partial<
-  {
-    placement: PlacementType
-  } & ApiFnOptions
->
-
-const showPopover = function (object: ShowPopoverOptions) {
-  return showPopup(object, 'showPopover', function (done) {
-    return {
-      component: Popover,
-      hook: createAlertHook(done)
-    }
-  })
+  placement?: PlacementType
 }
+
+const showPopover = createShowPopup<ShowPopoverOptions, PopupSuccessAlertArgs>({
+  apiName: 'showPopover',
+  component: Popover,
+  createHook: createAlertHook
+})
 
 export { Popover, showPopover }
 export default withInstall(Popover, { showPopover })
