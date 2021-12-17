@@ -1,5 +1,15 @@
 export const navConfig = [
   {
+    name: 'Design',
+    zhName: '设计',
+    list: [
+      {
+        name: 'Color',
+        zhName: '颜色'
+      }
+    ]
+  },
+  {
     name: 'Basic',
     zhName: '基础',
     list: [

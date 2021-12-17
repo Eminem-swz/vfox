@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     navBarTitle() {
-      return this.$route.name || ''
+      return this.$route.name?.replace('Exp', '')
     }
   },
   methods: {
@@ -55,7 +55,7 @@ export default {
       const menuList = [
         {
           label: '首页',
-          value: 'index'
+          value: 'ExpHome'
         }
       ]
 
@@ -63,7 +63,7 @@ export default {
         group.list.forEach(item => {
           menuList.push({
             label: item.name,
-            value: item.name
+            value: 'Exp' + item.name
           })
         })
       })

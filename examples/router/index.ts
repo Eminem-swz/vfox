@@ -1,596 +1,397 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
+import Color from '../views/Color.vue'
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: Home.name, component: Home },
+  { path: '/Color', name: Color.name, component: Color },
   {
     path: '/Button',
-    name: 'Button',
-    component: () =>
-      import(
-        /* webpackChunkName: "Button" */ '@/../examples/components/Basic/Button/index.vue'
-      )
+    name: 'ExpButton',
+    component: () => import('@/../examples/components/Basic/Button/index.vue')
   },
   {
     path: '/Skeleton',
-    name: 'Skeleton',
-    component: () =>
-      import(
-        /* webpackChunkName: "Skeleton" */ '@/../examples/components/Show/Skeleton/index.vue'
-      )
+    name: 'ExpSkeleton',
+    component: () => import('@/../examples/components/Show/Skeleton/index.vue')
   },
   {
     path: '/Cell',
-    name: 'Cell',
-    component: () =>
-      import(
-        /* webpackChunkName: "Cell" */ '@/../examples/components/Show/Cell/index.vue'
-      )
+    name: 'ExpCell',
+    component: () => import('@/../examples/components/Show/Cell/index.vue')
   },
   {
     path: '/Tab',
-    name: 'Tab',
-    component: () =>
-      import(
-        /* webpackChunkName: "Tab" */ '@/../examples/components/Navigation/Tab/index.vue'
-      )
+    name: 'ExpTab',
+    component: () => import('@/../examples/components/Navigation/Tab/index.vue')
   },
   {
     path: '/Form',
-    name: 'Form',
-    component: () =>
-      import(
-        /* webpackChunkName: "Form" */ '@/../examples/components/Form/Form/index.vue'
-      )
+    name: 'ExpForm',
+    component: () => import('@/../examples/components/Form/Form/index.vue')
   },
   {
     path: '/Stepper',
-    name: 'Stepper',
-    component: () =>
-      import(
-        /* webpackChunkName: "Stepper" */ '@/../examples/components/Form/Stepper/index.vue'
-      )
+    name: 'ExpStepper',
+    component: () => import('@/../examples/components/Form/Stepper/index.vue')
   },
   {
     path: '/Input',
-    name: 'Input',
-    component: () =>
-      import(
-        /* webpackChunkName: "Input" */ '@/../examples/components/Form/Input/index.vue'
-      )
+    name: 'ExpInput',
+    component: () => import('@/../examples/components/Form/Input/index.vue')
   },
   {
     path: '/NavBar',
-    name: 'NavBar',
+    name: 'ExpNavBar',
     component: () =>
-      import(
-        /* webpackChunkName: "NavBar" */ '@/../examples/components/Navigation/NavBar/index.vue'
-      )
+      import('@/../examples/components/Navigation/NavBar/index.vue')
   },
   {
     path: '/Toast',
-    name: 'Toast',
-    component: () =>
-      import(
-        /* webpackChunkName: "Toast" */ '@/../examples/components/Feedback/Toast/index.vue'
-      )
+    name: 'ExpToast',
+    component: () => import('@/../examples/components/Feedback/Toast/index.vue')
   },
   {
     path: '/Dialog',
-    name: 'Dialog',
+    name: 'ExpDialog',
     component: () =>
-      import(
-        /* webpackChunkName: "Dialog" */ '@/../examples/components/Feedback/Dialog/index.vue'
-      )
+      import('@/../examples/components/Feedback/Dialog/index.vue')
   },
   {
     path: '/Notify',
-    name: 'Notify',
+    name: 'ExpNotify',
     component: () =>
-      import(
-        /* webpackChunkName: "Notify" */ '@/../examples/components/Feedback/Notify/index.vue'
-      )
+      import('@/../examples/components/Feedback/Notify/index.vue')
   },
   {
     path: '/Layout',
-    name: 'Layout',
-    component: () =>
-      import(
-        /* webpackChunkName: "Layout" */ '@/../examples/components/Show/Layout/index.vue'
-      )
+    name: 'ExpLayout',
+    component: () => import('@/../examples/components/Show/Layout/index.vue')
   },
   {
     path: '/Drawer',
-    name: 'Drawer',
-    component: () =>
-      import(
-        /* webpackChunkName: "Drawer" */ '@/../examples/components/Basic/Drawer/index.vue'
-      )
+    name: 'ExpDrawer',
+    component: () => import('@/../examples/components/Basic/Drawer/index.vue')
   },
   {
     path: '/ImagePreview',
-    name: 'ImagePreview',
+    name: 'ExpImagePreview',
     component: () =>
-      import(
-        /* webpackChunkName: "ImagePreview" */ '@/../examples/components/Show/ImagePreview/index.vue'
-      )
+      import('@/../examples/components/Show/ImagePreview/index.vue')
   },
   {
     path: '/Swiper',
-    name: 'Swiper',
-    component: () =>
-      import(
-        /* webpackChunkName: "Swiper" */ '@/../examples/components/Show/Swiper/index.vue'
-      )
+    name: 'ExpSwiper',
+    component: () => import('@/../examples/components/Show/Swiper/index.vue')
   },
   {
     path: '/Image',
-    name: 'Image',
-    component: () =>
-      import(
-        /* webpackChunkName: "Image" */ '@/../examples/components/Basic/Image/index.vue'
-      )
+    name: 'ExpImage',
+    component: () => import('@/../examples/components/Basic/Image/index.vue')
   },
   {
     path: '/BackTop',
-    name: 'BackTop',
+    name: 'ExpBackTop',
     component: () =>
-      import(
-        /* webpackChunkName: "BackTop" */ '@/../examples/components/Navigation/BackTop/index.vue'
-      )
+      import('@/../examples/components/Navigation/BackTop/index.vue')
   },
   {
     path: '/Badge',
-    name: 'Badge',
-    component: () =>
-      import(
-        /* webpackChunkName: "Badge" */ '@/../examples/components/Show/Badge/index.vue'
-      )
+    name: 'ExpBadge',
+    component: () => import('@/../examples/components/Show/Badge/index.vue')
   },
   {
     path: '/Copy',
-    name: 'Copy',
-    component: () =>
-      import(
-        /* webpackChunkName: "Copy" */ '@/../examples/components/Other/Copy/index.vue'
-      )
+    name: 'ExpCopy',
+    component: () => import('@/../examples/components/Other/Copy/index.vue')
   },
   {
     path: '/ScrollView',
-    name: 'ScrollView',
+    name: 'ExpScrollView',
     component: () =>
-      import(
-        /* webpackChunkName: "ScrollView" */ '@/../examples/components/Basic/ScrollView/index.vue'
-      )
+      import('@/../examples/components/Basic/ScrollView/index.vue')
   },
   {
     path: '/FlatList',
-    name: 'FlatList',
-    component: () =>
-      import(
-        /* webpackChunkName: "FlatList" */ '@/../examples/components/Show/FlatList/index.vue'
-      )
+    name: 'ExpFlatList',
+    component: () => import('@/../examples/components/Show/FlatList/index.vue')
   },
   {
     path: '/Empty',
-    name: 'Empty',
-    component: () =>
-      import(
-        /* webpackChunkName: "Empty" */ '@/../examples/components/Show/Empty/index.vue'
-      )
+    name: 'ExpEmpty',
+    component: () => import('@/../examples/components/Show/Empty/index.vue')
   },
   {
     path: '/Group',
-    name: 'Group',
-    component: () =>
-      import(
-        /* webpackChunkName: "Group" */ '@/../examples/components/Show/Group/index.vue'
-      )
+    name: 'ExpGroup',
+    component: () => import('@/../examples/components/Show/Group/index.vue')
   },
   {
     path: '/PickerView',
-    name: 'PickerView',
+    name: 'ExpPickerView',
     component: () =>
-      import(
-        /* webpackChunkName: "PickerView" */ '@/../examples/components/Form/PickerView/index.vue'
-      )
+      import('@/../examples/components/Form/PickerView/index.vue')
   },
   {
     path: '/Picker',
-    name: 'Picker',
-    component: () =>
-      import(
-        /* webpackChunkName: "Picker" */ '@/../examples/components/Form/Picker/index.vue'
-      )
+    name: 'ExpPicker',
+    component: () => import('@/../examples/components/Form/Picker/index.vue')
   },
   {
     path: '/NoticeBar',
-    name: 'NoticeBar',
-    component: () =>
-      import(
-        /* webpackChunkName: "NoticeBar" */ '@/../examples/components/Show/NoticeBar/index.vue'
-      )
+    name: 'ExpNoticeBar',
+    component: () => import('@/../examples/components/Show/NoticeBar/index.vue')
   },
   {
     path: '/Divider',
-    name: 'Divider',
-    component: () =>
-      import(
-        /* webpackChunkName: "Divider" */ '@/../examples/components/Show/Divider/index.vue'
-      )
+    name: 'ExpDivider',
+    component: () => import('@/../examples/components/Show/Divider/index.vue')
   },
   {
     path: '/Slider',
-    name: 'Slider',
-    component: () =>
-      import(
-        /* webpackChunkName: "Slider" */ '@/../examples/components/Form/Slider/index.vue'
-      )
+    name: 'ExpSlider',
+    component: () => import('@/../examples/components/Form/Slider/index.vue')
   },
   {
     path: '/Switch',
-    name: 'Switch',
-    component: () =>
-      import(
-        /* webpackChunkName: "Switch" */ '@/../examples/components/Form/Switch/index.vue'
-      )
+    name: 'ExpSwitch',
+    component: () => import('@/../examples/components/Form/Switch/index.vue')
   },
   {
     path: '/Rate',
-    name: 'Rate',
-    component: () =>
-      import(
-        /* webpackChunkName: "Rate" */ '@/../examples/components/Form/Rate/index.vue'
-      )
+    name: 'ExpRate',
+    component: () => import('@/../examples/components/Form/Rate/index.vue')
   },
   {
     path: '/Cascader',
-    name: 'Cascader',
-    component: () =>
-      import(
-        /* webpackChunkName: "Cascader" */ '@/../examples/components/Form/Cascader/index.vue'
-      )
+    name: 'ExpCascader',
+    component: () => import('@/../examples/components/Form/Cascader/index.vue')
   },
   {
     path: '/Radio',
-    name: 'Radio',
-    component: () =>
-      import(
-        /* webpackChunkName: "Radio" */ '@/../examples/components/Form/Radio/index.vue'
-      )
+    name: 'ExpRadio',
+    component: () => import('@/../examples/components/Form/Radio/index.vue')
   },
   {
     path: '/Checkbox',
-    name: 'Checkbox',
-    component: () =>
-      import(
-        /* webpackChunkName: "Checkbox" */ '@/../examples/components/Form/Checkbox/index.vue'
-      )
+    name: 'ExpCheckbox',
+    component: () => import('@/../examples/components/Form/Checkbox/index.vue')
   },
   {
     path: '/Modal',
-    name: 'Modal',
-    component: () =>
-      import(
-        /* webpackChunkName: "Modal" */ '@/../examples/components/Basic/Modal/index.vue'
-      )
+    name: 'ExpModal',
+    component: () => import('@/../examples/components/Basic/Modal/index.vue')
   },
   {
     path: '/Calendar',
-    name: 'Calendar',
-    component: () =>
-      import(
-        /* webpackChunkName: "Calendar" */ '@/../examples/components/Form/Calendar/index.vue'
-      )
+    name: 'ExpCalendar',
+    component: () => import('@/../examples/components/Form/Calendar/index.vue')
   },
   {
     path: '/ActionSheet',
-    name: 'ActionSheet',
+    name: 'ExpActionSheet',
     component: () =>
-      import(
-        /* webpackChunkName: "ActionSheet" */ '@/../examples/components/Feedback/ActionSheet/index.vue'
-      )
+      import('@/../examples/components/Feedback/ActionSheet/index.vue')
   },
   {
     path: '/Popover',
-    name: 'Popover',
-    component: () =>
-      import(
-        /* webpackChunkName: "Popover" */ '@/../examples/components/Basic/Popover/index.vue'
-      )
+    name: 'ExpPopover',
+    component: () => import('@/../examples/components/Basic/Popover/index.vue')
   },
   {
     path: '/PopDialog',
-    name: 'PopDialog',
+    name: 'ExpPopDialog',
     component: () =>
-      import(
-        /* webpackChunkName: "PopDialog" */ '@/../examples/components/Feedback/PopDialog/index.vue'
-      )
+      import('@/../examples/components/Feedback/PopDialog/index.vue')
   },
   {
     path: '/PopMenu',
-    name: 'PopMenu',
+    name: 'ExpPopMenu',
     component: () =>
-      import(
-        /* webpackChunkName: "PopMenu" */ '@/../examples/components/Navigation/PopMenu/index.vue'
-      )
+      import('@/../examples/components/Navigation/PopMenu/index.vue')
   },
   {
     path: '/Collapse',
-    name: 'Collapse',
-    component: () =>
-      import(
-        /* webpackChunkName: "Collapse" */ '@/../examples/components/Show/Collapse/index.vue'
-      )
+    name: 'ExpCollapse',
+    component: () => import('@/../examples/components/Show/Collapse/index.vue')
   },
   {
     path: '/Dropdown',
-    name: 'Dropdown',
-    component: () =>
-      import(
-        /* webpackChunkName: "Dropdown" */ '@/../examples/components/Basic/Dropdown/index.vue'
-      )
+    name: 'ExpDropdown',
+    component: () => import('@/../examples/components/Basic/Dropdown/index.vue')
   },
   {
     path: '/Icon',
-    name: 'Icon',
-    component: () =>
-      import(
-        /* webpackChunkName: "Icon" */ '@/../examples/components/Basic/Icon/index.vue'
-      )
+    name: 'ExpIcon',
+    component: () => import('@/../examples/components/Basic/Icon/index.vue')
   },
   {
     path: '/TabView',
-    name: 'TabView',
+    name: 'ExpTabView',
     component: () =>
-      import(
-        /* webpackChunkName: "TabView" */ '@/../examples/components/Navigation/TabView/index.vue'
-      )
+      import('@/../examples/components/Navigation/TabView/index.vue')
   },
   {
     path: '/Sticky',
-    name: 'Sticky',
+    name: 'ExpSticky',
     component: () =>
-      import(
-        /* webpackChunkName: "Sticky" */ '@/../examples/components/Navigation/Sticky/index.vue'
-      )
+      import('@/../examples/components/Navigation/Sticky/index.vue')
   },
   {
     path: '/ScrollTab',
-    name: 'ScrollTab',
+    name: 'ExpScrollTab',
     component: () =>
-      import(
-        /* webpackChunkName: "ScrollTab" */ '@/../examples/components/Navigation/ScrollTab/index.vue'
-      )
+      import('@/../examples/components/Navigation/ScrollTab/index.vue')
   },
   {
     path: '/IndexView',
-    name: 'IndexView',
+    name: 'ExpIndexView',
     component: () =>
-      import(
-        /* webpackChunkName: "IndexView" */ '@/../examples/components/Navigation/IndexView/index.vue'
-      )
+      import('@/../examples/components/Navigation/IndexView/index.vue')
   },
   {
     path: '/TabBar',
-    name: 'TabBar',
+    name: 'ExpTabBar',
     component: () =>
-      import(
-        /* webpackChunkName: "TabBar" */ '@/../examples/components/Navigation/TabBar/index.vue'
-      )
+      import('@/../examples/components/Navigation/TabBar/index.vue')
   },
   {
     path: '/SearchBar',
-    name: 'SearchBar',
-    component: () =>
-      import(
-        /* webpackChunkName: "SearchBar" */ '@/../examples/components/Form/SearchBar/index.vue'
-      )
+    name: 'ExpSearchBar',
+    component: () => import('@/../examples/components/Form/SearchBar/index.vue')
   },
   {
     path: '/SideTab',
-    name: 'SideTab',
+    name: 'ExpSideTab',
     component: () =>
-      import(
-        /* webpackChunkName: "SideTab" */ '@/../examples/components/Navigation/SideTab/index.vue'
-      )
+      import('@/../examples/components/Navigation/SideTab/index.vue')
   },
   {
     path: '/SwipeCell',
-    name: 'SwipeCell',
+    name: 'ExpSwipeCell',
     component: () =>
-      import(
-        /* webpackChunkName: "SwipeCell" */ '@/../examples/components/Feedback/SwipeCell/index.vue'
-      )
+      import('@/../examples/components/Feedback/SwipeCell/index.vue')
   },
   {
     path: '/Progress',
-    name: 'Progress',
-    component: () =>
-      import(
-        /* webpackChunkName: "Progress" */ '@/../examples/components/Show/Progress/index.vue'
-      )
+    name: 'ExpProgress',
+    component: () => import('@/../examples/components/Show/Progress/index.vue')
   },
   {
     path: '/Tag',
-    name: 'Tag',
-    component: () =>
-      import(
-        /* webpackChunkName: "Tag" */ '@/../examples/components/Show/Tag/index.vue'
-      )
+    name: 'ExpTag',
+    component: () => import('@/../examples/components/Show/Tag/index.vue')
   },
   {
     path: '/Fixed',
-    name: 'Fixed',
+    name: 'ExpFixed',
     component: () =>
-      import(
-        /* webpackChunkName: "Fixed" */ '@/../examples/components/Navigation/Fixed/index.vue'
-      )
+      import('@/../examples/components/Navigation/Fixed/index.vue')
   },
   {
     path: '/Order',
-    name: 'Order',
-    component: () =>
-      import(
-        /* webpackChunkName: "Order" */ '@/../examples/components/Show/Order/index.vue'
-      )
+    name: 'ExpOrder',
+    component: () => import('@/../examples/components/Show/Order/index.vue')
   },
   {
     path: '/NumberKeyboard',
 
-    name: 'NumberKeyboard',
+    name: 'ExpNumberKeyboard',
     component: () =>
-      import(
-        /* webpackChunkName: "NumberKeyboard" */ '@/../examples/components/Form/NumberKeyboard/index.vue'
-      )
+      import('@/../examples/components/Form/NumberKeyboard/index.vue')
   },
   {
     path: '/ImageUploader',
 
-    name: 'ImageUploader',
+    name: 'ExpImageUploader',
     component: () =>
-      import(
-        /* webpackChunkName: "ImageUploader" */ '@/../examples/components/Form/ImageUploader/index.vue'
-      )
+      import('@/../examples/components/Form/ImageUploader/index.vue')
   },
   {
     path: '/CountDown',
-    name: 'CountDown',
-    component: () =>
-      import(
-        /* webpackChunkName: "CountDown" */ '@/../examples/components/Show/CountDown/index.vue'
-      )
+    name: 'ExpCountDown',
+    component: () => import('@/../examples/components/Show/CountDown/index.vue')
   },
   {
     path: '/Steps',
-    name: 'Steps',
-    component: () =>
-      import(
-        /* webpackChunkName: "Steps" */ '@/../examples/components/Show/Steps/index.vue'
-      )
+    name: 'ExpSteps',
+    component: () => import('@/../examples/components/Show/Steps/index.vue')
   },
   {
     path: '/Price',
-    name: 'Price',
-    component: () =>
-      import(
-        /* webpackChunkName: "Price" */ '@/../examples/components/Show/Price/index.vue'
-      )
+    name: 'ExpPrice',
+    component: () => import('@/../examples/components/Show/Price/index.vue')
   },
   {
     path: '/Avatar',
-    name: 'Avatar',
-    component: () =>
-      import(
-        /* webpackChunkName: "Avatar" */ '@/../examples/components/Show/Avatar/index.vue'
-      )
+    name: 'ExpAvatar',
+    component: () => import('@/../examples/components/Show/Avatar/index.vue')
   },
   {
     path: '/Timeline',
-    name: 'Timeline',
-    component: () =>
-      import(
-        /* webpackChunkName: "Timeline" */ '@/../examples/components/Show/Timeline/index.vue'
-      )
+    name: 'ExpTimeline',
+    component: () => import('@/../examples/components/Show/Timeline/index.vue')
   },
   {
     path: '/Stopwatch',
-    name: 'Stopwatch',
-    component: () =>
-      import(
-        /* webpackChunkName: "Stopwatch" */ '@/../examples/components/Show/Stopwatch/index.vue'
-      )
+    name: 'ExpStopwatch',
+    component: () => import('@/../examples/components/Show/Stopwatch/index.vue')
   },
   {
     path: '/Result',
-    name: 'Result',
-    component: () =>
-      import(
-        /* webpackChunkName: "Result" */ '@/../examples/components/Show/Result/index.vue'
-      )
+    name: 'ExpResult',
+    component: () => import('@/../examples/components/Show/Result/index.vue')
   },
   {
     path: '/LoadMore',
-    name: 'LoadMore',
-    component: () =>
-      import(
-        /* webpackChunkName: "LoadMore" */ '@/../examples/components/Show/LoadMore/index.vue'
-      )
+    name: 'ExpLoadMore',
+    component: () => import('@/../examples/components/Show/LoadMore/index.vue')
   },
   {
     path: '/DatePicker',
-    name: 'DatePicker',
+    name: 'ExpDatePicker',
     component: () =>
-      import(
-        /* webpackChunkName: "DatePicker" */ '@/../examples/components/Form/DatePicker/index.vue'
-      )
+      import('@/../examples/components/Form/DatePicker/index.vue')
   },
   {
     path: '/DatePickerView',
-    name: 'DatePickerView',
+    name: 'ExpDatePickerView',
     component: () =>
-      import(
-        /* webpackChunkName: "DatePickerView" */ '@/../examples/components/Form/DatePickerView/index.vue'
-      )
+      import('@/../examples/components/Form/DatePickerView/index.vue')
   },
   {
     path: '/Range',
-    name: 'Range',
-    component: () =>
-      import(
-        /* webpackChunkName: "Range" */ '@/../examples/components/Form/Range/index.vue'
-      )
+    name: 'ExpRange',
+    component: () => import('@/../examples/components/Form/Range/index.vue')
   },
   {
     path: '/TimeAgo',
-    name: 'TimeAgo',
-    component: () =>
-      import(
-        /* webpackChunkName: "TimeAgo" */ '@/../examples/components/Show/TimeAgo/index.vue'
-      )
+    name: 'ExpTimeAgo',
+    component: () => import('@/../examples/components/Show/TimeAgo/index.vue')
   },
   {
     path: '/CountUp',
-    name: 'CountUp',
-    component: () =>
-      import(
-        /* webpackChunkName: "CountUp" */ '@/../examples/components/Show/CountUp/index.vue'
-      )
+    name: 'ExpCountUp',
+    component: () => import('@/../examples/components/Show/CountUp/index.vue')
   },
   {
     path: '/Pagination',
-    name: 'Pagination',
+    name: 'ExpPagination',
     component: () =>
-      import(
-        /* webpackChunkName: "Pagination" */ '@/../examples/components/Navigation/Pagination/index.vue'
-      )
+      import('@/../examples/components/Navigation/Pagination/index.vue')
   },
   {
     path: '/CircleProgress',
-    name: 'CircleProgress',
+    name: 'ExpCircleProgress',
     component: () =>
-      import(
-        /* webpackChunkName: "CircleProgress" */ '@/../examples/components/Show/CircleProgress/index.vue'
-      )
+      import('@/../examples/components/Show/CircleProgress/index.vue')
   },
   {
     path: '/ActivityIndicator',
-    name: 'ActivityIndicator',
+    name: 'ExpActivityIndicator',
     component: () =>
-      import(
-        /* webpackChunkName: "ActivityIndicator" */ '@/../examples/components/Show/ActivityIndicator/index.vue'
-      )
+      import('@/../examples/components/Show/ActivityIndicator/index.vue')
   }
-
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue")
-  // }
 ]
 
 const router = createRouter({

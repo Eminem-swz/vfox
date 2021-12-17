@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     onItemClick({ name }) {
-      this.$router.push({ name })
+      this.$router.push({ name: 'Exp' + name })
     },
     scrollTo(scrollTop, animated = false) {
       getScrollDom().scrollTo({
