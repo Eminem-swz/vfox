@@ -140,8 +140,8 @@ import { showCalendar } from '@/Calendar'
 import {
   CalendarChangeArgs,
   CalendarConfirmArgs,
-  CalendarFormatter,
-  CalendarParser,
+  CalendarValueFormatter,
+  CalendarValueParser,
   CalendarSelectArgs,
   PopupVisibleStateChangeArgs
 } from '@/types'
@@ -167,7 +167,7 @@ export default defineComponent({
 
     const title = '日期选择'
 
-    const formatter: CalendarFormatter = (valueArray, mode) => {
+    const formatter: CalendarValueFormatter = (valueArray, mode) => {
       if (mode === 'range') {
         return valueArray
           .map(date => {
@@ -179,7 +179,7 @@ export default defineComponent({
       }
     }
 
-    const parser: CalendarParser = (value, mode) => {
+    const parser: CalendarValueParser = (value, mode) => {
       if (mode === 'range') {
         return (value as string).split(' ~ ').map(v => {
           return dayjs(v, template, true).toDate()

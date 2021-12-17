@@ -33,8 +33,8 @@ import type {
 } from './Cascader/types'
 
 import type {
-  CalendarFormatter,
-  CalendarParser,
+  CalendarValueFormatter,
+  CalendarValueParser,
   CalendarChangeArgs,
   CalendarSelectArgs,
   CalendarConfirmArgs,
@@ -83,8 +83,8 @@ export {
   CascaderConfirmArgs,
   CascaderCancelArgs,
   // Calendar
-  CalendarFormatter,
-  CalendarParser,
+  CalendarValueFormatter,
+  CalendarValueParser,
   CalendarChangeArgs,
   CalendarSelectArgs,
   CalendarConfirmArgs,

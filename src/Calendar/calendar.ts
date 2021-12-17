@@ -4,8 +4,8 @@ import dayjs from '@/helpers/day'
 import type {
   DayHandler,
   CalendarMode,
-  CalendarFormatter,
-  CalendarParser,
+  CalendarValueFormatter,
+  CalendarValueParser,
   CalendarOriginalDetail
 } from './types'
 import { createEnumsValidator } from '@/helpers/validator'
@@ -61,10 +61,10 @@ export const commonProps = {
     default: 0
   },
   formatter: {
-    type: Function as PropType<CalendarFormatter>
+    type: Function as PropType<CalendarValueFormatter>
   },
   parser: {
-    type: Function as PropType<CalendarParser>
+    type: Function as PropType<CalendarValueParser>
   }
 }
 

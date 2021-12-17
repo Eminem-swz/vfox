@@ -3406,10 +3406,10 @@ color-support@^1.1.2, color-support@^1.1.3:
   resolved "https://registry.npmmirror.com/color-support/download/color-support-1.1.3.tgz?cache=0&sync_timestamp=1632754046636&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcolor-support%2Fdownload%2Fcolor-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
   integrity sha1-k4NDeaHMmgxh+C9S8NBDIiUb1aI=
 
-colorfuls@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmmirror.com/colorfuls/download/colorfuls-1.0.0.tgz#539bcebf139d1543d212d75f930342fdff4f716a"
-  integrity sha512-KEvSG7GM5A+d/XgNSi48LdLV7r9ZDzIHxYRBNyjVIZBNJ06CWTEDhs3IwCh3vWjTDSoQ90yIDmx0kRVa6850Pw==
+colorfuls@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/colorfuls/download/colorfuls-1.0.1.tgz#29e63033cef91a33d44fd9b3e0f97c650d468cfe"
+  integrity sha512-S71/71vLEqMND4qGZMBc+UuHJFr38fE0y9opRuI5v0PWmsjDwB36FrQiJiHKKE7DEpecdRC9PZx3zhDKHDDdDQ==
 
 colors@^1.1.2:
   version "1.4.0"

@@ -10,13 +10,19 @@ import { Picker, PickerPopup, PickerView } from 'vfox'
 
 ## 公共 Props
 
-| 属性              | 类型                            | 默认值                                                   | 必填 | 说明                                              |
-| ----------------- | ------------------------------- | -------------------------------------------------------- | ---- | ------------------------------------------------- |
-| v-modal           | string/number/string[]/number[] | []                                                       | 否   | 选中值                                            |
-| options           | array                           | []                                                       | 否   | 数据集                                            |
-| format-string     | boolean                         | false                                                    | 否   | value 双向绑定值是为字符串                        |
-| initial-separator | string                          | '/'                                                      | 否   | 分隔符                                            |
-| field-names       | object                          | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key |
+| 属性        | 类型                                                                                             | 默认值                                                   | 必填 | 说明                                                 |
+| ----------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
+| v-model     | [PickerValue](./Picker.md#pickervalue-的类型) \| [PickerValue](./Picker.md#pickervalue-的类型)[] | []                                                       | 否   | 选中值                                               |
+| options     | [Options](./Picker.md#options-的结构)                                                            | []                                                       | 是   | 数据集                                               |
+| field-names | object                                                                                           | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key    |
+| formatter   | [PickerValueFormatter](./Picker.md#pickervalueformatter)                                         |                                                          | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
+| parser      | [PickerValueParser](./Picker.md#pickervalueparser)                                               |                                                          | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
+
+### PickerValue 的类型
+
+允许的类型为：`string | number | Date`
+
+在不自定义 `formatter/parser` 的情况下，v-model 只有 `(string | number)[]` 这种情况。
 
 ### options 的结构
 
@@ -164,17 +170,34 @@ import { Picker, PickerPopup, PickerView } from 'vfox'
 ]
 ```
 
-### modelValue 的结构
+### formatter/parser
+
+高阶配置，`formatter` 和 `parser` 需要一同设置，对 v-model 的值转为自定义值。
+
+#### PickerValueFormatter
 
 ```
-[ 'xiyiji', 'guntong' ]
+interface PickerValueFormatter {
+  (valueArray: PickerValue[], labelArray: string[]):
+    | {
+        value: PickerValue | PickerValue[]
+        label: string
+      }
+    | (PickerValue | PickerValue[])
+}
 ```
 
-当 formatString 为 true 时，根据分割线 `/` 返回：
+将 v-model 的原始值转为需要的自定义值，值需要满足 `PickerValue | PickerValue[]` 的类型约束，可以返回 { value, label } 对两个数据进行修改，或者单独返回 value。
+
+#### PickerValueParser
 
 ```
-xiyiji/guntong
+interface PickerValueParser {
+  (value: unknown): PickerValue[]
+}
 ```
+
+跟 `PickerValueFormatter` 相反，将自定义 v-model 的值转为组件认识的原始数组。
 
 ## Picker
 
@@ -196,16 +219,14 @@ xiyiji/guntong
 
 | 事件   | 描述                       | 回调函数参数                                    |
 | ------ | -------------------------- | ----------------------------------------------- |
-| change | 选择后选中值发生变化时触发 | [DetailObject](./Picker.md#detailobject-的结构) |
+| change | 选择后选中值发生变化时触发 | [PickerDetail](./Picker.md#pickerdetail-的结构) |
 
-### DetailObject 的结构
+### PickerDetail 的结构
 
-| 值          | 类型              | 说明                 |
-| ----------- | ----------------- | -------------------- |
-| value       | number[]/string[] | ["zaolei", "lunzao"] |
-| valueString | string            | "zaolei/lunzao"      |
-| value       | number[]/string[] | ["藻类", "轮藻"]     |
-| valueString | string            | "藻类/轮藻"          |
+| 字段  | 类型                                                                                                 | 说明                                                  |
+| ----- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| value | [PickerValue](./Cascader.md#pickervalue-的类型) \| [PickerValue](./Cascader.md#pickervalue-的类型)[] | ["zaolei", "lunzao"]；`formatter/parser` 的优先级更高 |
+| label | string                                                                                               | "藻类/轮藻"                                           |
 
 ## PickerPopup
 
@@ -223,8 +244,8 @@ xiyiji/guntong
 | 事件                 | 描述                 | 回调函数参数                                                   |
 | -------------------- | -------------------- | -------------------------------------------------------------- |
 | cancel               | 点击取消按钮后触发   |                                                                |
-| confirm              | 点击确定按钮后触发   | [DetailObject](./Picker.md#detailobject-的结构)                |
-| change               | 选中值发生变化时触发 | [DetailObject](./Picker.md#detailobject-的结构)                |
+| confirm              | 点击确定按钮后触发   | [PickerDetail](./Picker.md#pickerdetail-的结构)                |
+| change               | 选中值发生变化时触发 | [PickerDetail](./Picker.md#pickerdetail-的结构)                |
 | visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./DatePicker.md#visiblestate-值说明) } |
 
 ### VisibleState 值说明
@@ -244,4 +265,4 @@ xiyiji/guntong
 
 | 事件   | 描述                       | 回调函数参数                                    |
 | ------ | -------------------------- | ----------------------------------------------- |
-| change | 滑动后选中值发生变化时触发 | [DetailObject](./Picker.md#detailobject-的结构) |
+| change | 滑动后选中值发生变化时触发 | [PickerDetail](./Picker.md#pickerdetail-的结构) |

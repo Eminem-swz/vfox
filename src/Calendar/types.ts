@@ -52,10 +52,10 @@ export type ShowCalendarOptions = Partial<{
   dayHandler: DayHandler
 }>
 
-export interface CalendarFormatter {
+export interface CalendarValueFormatter {
   (valueArray: Date[], mode: CalendarMode): PickerDetail | PickerModelValue
 }
-export interface CalendarParser {
+export interface CalendarValueParser {
   (value: unknown, mode: CalendarMode): Date[]
 }
 

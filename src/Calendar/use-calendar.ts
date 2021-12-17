@@ -11,8 +11,8 @@ import type {
   DayHandler,
   CalendarMode,
   CalendarDetail,
-  CalendarFormatter,
-  CalendarParser
+  CalendarValueFormatter,
+  CalendarValueParser
 } from './types'
 
 function valueParser(val: unknown, mode: CalendarMode) {
@@ -90,8 +90,8 @@ function detailFormatter(timeArray: number[], mode: CalendarMode) {
 
 export function useHandlers(
   props: UseProps & {
-    parser?: CalendarParser
-    formatter?: CalendarFormatter
+    parser?: CalendarValueParser
+    formatter?: CalendarValueFormatter
   },
   {
     mode
