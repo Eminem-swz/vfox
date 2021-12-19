@@ -6,7 +6,7 @@
     v-show="visible2"
   >
     <div v-if="leftIcon" class="fx-notice-bar_left-icon">
-      <Icon :icon="leftIcon" :style="iconStyles" />
+      <Icon :icon="leftIcon" />
     </div>
     <div class="fx-notice-bar_content">
       <div
@@ -25,7 +25,7 @@
       class="fx-notice-bar_right-icon"
       @click="onRightIconClick"
     >
-      <Icon :icon="rightIcon2" :style="iconStyles" />
+      <Icon :icon="rightIcon2" />
     </div>
   </div>
 </template>
@@ -49,6 +49,7 @@ import {
 } from '@/helpers/validator'
 import type { StyleObject, StateType } from '../helpers/types'
 import { STATE_TYPES } from '@/helpers/constants'
+import { getColorObject, isColorValue } from '@/helpers/color'
 
 const modeMaps = new Map([
   ['default', ''],
@@ -87,15 +88,9 @@ export default defineComponent({
       validator: iconValidator,
       default: null
     },
-    // 背景颜色
-    backgroundColor: {
-      type: String,
-      default: null
-    },
-    // 字体颜色
     color: {
-      type: String,
-      default: null
+      type: [String, Object],
+      validator: isColorValue
     },
     // 是否采用跑马灯显示
     marquee: {
@@ -198,16 +193,12 @@ export default defineComponent({
     const styles = computed(() => {
       const obj: StyleObject = {}
 
-      props.backgroundColor && (obj.backgroundColor = props.backgroundColor)
-      props.color && (obj.color = props.color)
+      const colorObj = getColorObject(props.color as string)
 
-      return obj
-    })
-
-    const iconStyles = computed(() => {
-      const obj: StyleObject = {}
-
-      props.color && (obj.fill = props.color)
+      if (colorObj.hasColor) {
+        obj[`--fx-color`] = colorObj.varColor
+        obj[`--fx-front-color`] = colorObj.varFrontColor
+      }
 
       return obj
     })
@@ -242,7 +233,6 @@ export default defineComponent({
       visible2,
       rightIcon2,
       styles,
-      iconStyles,
       contentStyles,
       typeClassName,
       onRightIconClick

@@ -67,15 +67,6 @@
     }
   }
 
-  &_close.type--default {
-    position: absolute;
-    top: 0;
-    right: 0;
-    flex-shrink: 0;
-    border-radius: 0;
-    --button-font-color: #{$font3-color};
-  }
-
   &_body {
     flex-shrink: 1;
     flex-grow: 1;

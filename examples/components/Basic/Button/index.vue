@@ -1,39 +1,37 @@
 <template>
   <div>
-    <fx-group title="标准按钮">
+    <fx-group title="标准 & 渐变 & 实线 & 虚线 & 无边框">
       <ul class="button-group">
         <li>
           <fx-button type="default">默认</fx-button>
-        </li>
-        <li>
           <fx-button type="primary">主要</fx-button>
           <fx-button type="success">成功</fx-button>
           <fx-button type="warning">警告</fx-button>
           <fx-button type="danger">危险</fx-button>
         </li>
-      </ul>
-    </fx-group>
-    <fx-group title="渐变 & 实线 & 虚线 & 无边框">
-      <ul class="button-group">
         <li>
+          <fx-button type="default" pattern="gradient">默认</fx-button>
           <fx-button type="primary" pattern="gradient">主要</fx-button>
           <fx-button type="success" pattern="gradient">成功</fx-button>
           <fx-button type="warning" pattern="gradient">警告</fx-button>
           <fx-button type="danger" pattern="gradient">危险</fx-button>
         </li>
         <li>
+          <fx-button type="default" pattern="solid">默认</fx-button>
           <fx-button type="primary" pattern="solid">主要</fx-button>
           <fx-button type="success" pattern="solid">成功</fx-button>
           <fx-button type="warning" pattern="solid">警告</fx-button>
           <fx-button type="danger" pattern="solid">危险</fx-button>
         </li>
         <li>
+          <fx-button type="default" pattern="dashed">默认</fx-button>
           <fx-button type="primary" pattern="dashed">主要</fx-button>
           <fx-button type="success" pattern="dashed">成功</fx-button>
           <fx-button type="warning" pattern="dashed">警告</fx-button>
           <fx-button type="danger" pattern="dashed">危险</fx-button>
         </li>
         <li>
+          <fx-button type="default" pattern="borderless">默认</fx-button>
           <fx-button type="primary" pattern="borderless">主要</fx-button>
           <fx-button type="success" pattern="borderless">成功</fx-button>
           <fx-button type="warning" pattern="borderless">警告</fx-button>
@@ -51,6 +49,20 @@
           <fx-button type="success" ghost>成功</fx-button>
           <fx-button type="warning" ghost>警告</fx-button>
           <fx-button type="danger" ghost>危险</fx-button>
+        </li>
+      </ul>
+    </fx-group>
+    <fx-group title="自定义颜色（长春花色#6667AB/莲花色#E2C0BF）">
+      <ul class="button-group">
+        <li>
+          <fx-button color="#6667AB">深色</fx-button>
+          <fx-button color="#6667AB" pattern="gradient">渐变</fx-button>
+          <fx-button color="#E2C0BF">浅色</fx-button>
+        </li>
+        <li>
+          <fx-button color="#6667AB" pattern="solid">实线</fx-button>
+          <fx-button color="#6667AB" pattern="dashed">虚线</fx-button>
+          <fx-button color="#6667AB" pattern="borderless">无边框</fx-button>
         </li>
       </ul>
     </fx-group>

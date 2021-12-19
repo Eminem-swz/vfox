@@ -1,10 +1,16 @@
+@use 'sass:math';
 @import '../style/mixin.scss';
 
 .fx-button {
-  --button-font-color: #fff;
-  --button-border-color: transparent;
-  --button-icon-size: 20px;
-  --button-size: 48px;
+  --fx-color: transparent;
+  --fx-dark-color: transparent;
+  --fx-light-color: transparent;
+
+  --fx-white-color: #{$white-color};
+  --fx-black-color: #{$title-color};
+  --fx-front-color: var(--fx-color);
+  --fx-icon-size: 20px;
+  --fx-size: 48px;
 
   display: inline-flex;
   flex-grow: 1;
@@ -15,19 +21,137 @@
   border-radius: 4px;
   outline: none;
   cursor: pointer;
-  height: var(--button-size);
+  height: var(--fx-size);
   padding: 0 12px;
   font-size: 17px;
   line-height: 24px;
-  border: 1px solid var(--button-border-color);
   background: #fff;
   font-weight: 500;
-  color: var(--button-font-color);
   user-select: none;
   position: relative;
   overflow: hidden;
   -webkit-appearance: none;
   transform: translateZ(0);
+
+  background-color: var(--fx-color);
+  border: 1px solid var(--fx-color);
+  color: var(--fx-front-color);
+
+  .fx-icon {
+    flex-shrink: 0;
+    --color: var(--fx-front-color);
+    --size: var(--fx-icon-size);
+  }
+
+  &:not(:disabled):active {
+    background-color: var(--fx-dark-color);
+    border-color: var(--fx-dark-color);
+  }
+
+  &:not(.type--default) {
+    &.pattern--solid,
+    &.pattern--dashed,
+    &.pattern--borderless,
+    &.ghost,
+    &.transparent {
+      background-color: #fff;
+
+      &:not(:disabled):active {
+        background-color: $background-color;
+        border-color: var(--fx-dark-color);
+        --fx-front-color: var(--fx-dark-color);
+      }
+    }
+
+    &:not(.ghost) {
+      &.pattern--default,
+      &.pattern--gradient {
+        --fx-front-color: var(--fx-white-color);
+      }
+    }
+
+    &.transparent,
+    &.ghost {
+      background: transparent;
+
+      &:not(:disabled):active {
+        background: transparent;
+      }
+    }
+
+    &.ghost {
+      &:not(:disabled):active {
+        border-color: var(--fx-light-color);
+        --fx-front-color: var(--fx-light-color);
+      }
+    }
+  }
+
+  &.pattern--gradient:not(.type--default) {
+    background-image: linear-gradient(
+      90deg,
+      var(--fx-light-color) 0%,
+      var(--fx-color) 100%
+    );
+
+    &:not(:disabled):active {
+      background-image: linear-gradient(
+        90deg,
+        var(--fx-color) 0%,
+        var(--fx-dark-color) 100%
+      );
+    }
+  }
+
+  &.type--primary {
+    --fx-color: #{$primary-color};
+    --fx-dark-color: #{$primary-color-7};
+    --fx-light-color: #{$primary-color-5};
+  }
+
+  &.type--success {
+    --fx-color: #{$success-color};
+    --fx-dark-color: #{$success-color-7};
+    --fx-light-color: #{$success-color-5};
+  }
+
+  &.type--warning {
+    --fx-color: #{$warning-color};
+    --fx-dark-color: #{$warning-color-7};
+    --fx-light-color: #{$warning-color-5};
+  }
+
+  &.type--danger {
+    --fx-color: #{$danger-color};
+    --fx-dark-color: #{$danger-color-7};
+    --fx-light-color: #{$danger-color-5};
+  }
+
+  &.type--default {
+    background-color: #fff;
+    --fx-color: #{$border-color};
+    --fx-dark-color: #{$border-color};
+    --fx-light-color: #{$border-color};
+    --fx-front-color: var(--fx-black-color);
+
+    &:not(:disabled):active {
+      background-color: $background-color;
+    }
+
+    &.transparent,
+    &.ghost {
+      background-color: transparent;
+
+      &:not(:disabled):active {
+        background-color: rgba($color: $black-color, $alpha: 0.04);
+      }
+    }
+
+    &.ghost {
+      --fx-color: #fff;
+      --fx-front-color: #fff;
+    }
+  }
 
   span {
     word-break: break-word;
@@ -42,36 +166,15 @@
     height: 12px;
     width: 1px;
     transform: translate3d(0, -50%, 0) scaleX(1);
-    background-color: var(--button-border-color);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    box-sizing: border-box;
-    border: 0 solid var(--button-border-color);
-  }
-
-  &:not(:disabled):active::after {
-    @include background-active;
+    background-color: var(--fx-color);
   }
 
   + .fx-button {
-    margin-left: 16px;
-  }
-
-  .fx-icon {
-    flex-shrink: 0;
-    --color: var(--button-font-color);
-    --size: var(--button-icon-size);
+    margin-left: 12px;
   }
 
   &.shape--round {
-    border-radius: calc(var(--button-size) / 2);
+    border-radius: calc(var(--fx-size) / 2);
   }
 
   &.shape--round,
@@ -86,14 +189,14 @@
     flex-grow: 0;
     flex-shrink: 0;
 
-    --button-icon-size: 24px;
+    --fx-icon-size: 24px;
 
     &.size--middle {
-      --button-icon-size: 20px;
+      --fx-icon-size: 20px;
     }
 
     &.size--small {
-      --button-icon-size: 18px;
+      --fx-icon-size: 18px;
     }
 
     span {
@@ -106,10 +209,10 @@
   }
 
   &.size--middle {
-    --button-size: 40px;
+    --fx-size: 40px;
     line-height: 21px;
     font-size: 15px;
-    --button-icon-size: 18px;
+    --fx-icon-size: 18px;
 
     &.shape--square,
     &.shape--circle {
@@ -134,10 +237,10 @@
   }
 
   &.size--small {
-    --button-size: 28px;
+    --fx-size: 28px;
     line-height: 17px;
     font-size: 12px;
-    --button-icon-size: 16px;
+    --fx-icon-size: 16px;
     // border-width: 0;
 
     &.shape--square,
@@ -150,10 +253,6 @@
       border-radius: 2px;
     }
 
-    // &::after {
-    //   border-width: 1px;
-    // }
-
     &.shape--round,
     &.shape--rectangle {
       .fx-icon {
@@ -162,147 +261,19 @@
     }
   }
 
-  &.pattern--dashed,
-  &.pattern--dashed::after {
+  &.pattern--dashed {
     border-style: dashed;
   }
 
   &.pattern--borderless,
-  &.pattern--borderless::after {
-    border-width: 0;
+  &.pattern--gradient:not(.type--default) {
+    // border-width: 0;
+    border-color: transparent !important;
   }
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.2;
-  }
-
-  &.type--default {
-    background-color: #fff;
-    --button-font-color: #{$title-color};
-    --button-border-color: #{$border-color};
-
-    &.transparent {
-      background-color: transparent;
-    }
-
-    &.ghost {
-      background-color: transparent;
-      --button-font-color: #fff;
-      --button-border-color: #fff;
-    }
-  }
-
-  &.type--primary {
-    background-color: $primary-color;
-
-    &.pattern--solid,
-    &.pattern--dashed,
-    &.pattern--borderless,
-    &.ghost,
-    &.transparent {
-      background-color: #fff;
-      --button-font-color: #{$primary-color};
-      --button-border-color: #{$primary-border-color};
-    }
-
-    &.pattern--gradient {
-      background-image: linear-gradient(
-        90deg,
-        $primary-border-color 0%,
-        $primary-color 100%
-      );
-      --button-border-color: transparent;
-    }
-
-    &.ghost,
-    &.transparent {
-      background-color: transparent;
-    }
-  }
-
-  &.type--success {
-    background-color: $success-color;
-
-    &.pattern--solid,
-    &.pattern--dashed,
-    &.pattern--borderless,
-    &.ghost,
-    &.transparent {
-      background-color: #fff;
-      --button-font-color: #{$success-color};
-      --button-border-color: #{$success-border-color};
-    }
-
-    &.pattern--gradient {
-      background-image: linear-gradient(
-        90deg,
-        $success-border-color 0%,
-        $success-color 100%
-      );
-      --button-border-color: transparent;
-    }
-
-    &.ghost,
-    &.transparent {
-      background-color: transparent;
-    }
-  }
-
-  &.type--warning {
-    background-color: $warning-color;
-
-    &.pattern--solid,
-    &.pattern--dashed,
-    &.pattern--borderless,
-    &.ghost,
-    &.transparent {
-      background-color: #fff;
-      --button-font-color: #{$warning-color};
-      --button-border-color: #{$warning-border-color};
-    }
-
-    &.pattern--gradient {
-      background-image: linear-gradient(
-        90deg,
-        $warning-border-color 0%,
-        $warning-color 100%
-      );
-      --button-border-color: transparent;
-    }
-
-    &.ghost,
-    &.transparent {
-      background-color: transparent;
-    }
-  }
-
-  &.type--danger {
-    background-color: $danger-color;
-
-    &.pattern--solid,
-    &.pattern--dashed,
-    &.pattern--borderless,
-    &.ghost,
-    &.transparent {
-      background-color: #fff;
-      --button-font-color: #{$danger-color};
-      --button-border-color: #{$danger-border-color};
-    }
-
-    &.pattern--gradient {
-      background-image: linear-gradient(
-        90deg,
-        $danger-border-color 0%,
-        $danger-color 100%
-      );
-      --button-border-color: transparent;
-    }
-
-    &.ghost,
-    &.transparent {
-      background-color: transparent;
-    }
   }
 }
 
@@ -311,30 +282,14 @@
     &::before {
       transform: translate3d(0, -50%, 0) scaleX(0.5);
     }
-
-    // &::after {
-    //   left: -50%;
-    //   right: -50%;
-    //   top: -50%;
-    //   bottom: -50%;
-    //   transform: scale(0.5);
-    // }
   }
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 3) {
   .fx-button {
     &::before {
-      transform: translate3d(0, -50%, 0) scaleX($one-third);
+      transform: translate3d(0, -50%, 0) scaleX(math.div(1, 3));
     }
-
-    // &::after {
-    //   left: -100%;
-    //   right: -100%;
-    //   top: -100%;
-    //   bottom: -100%;
-    //   transform: scale($one-third);
-    // }
   }
 }
 

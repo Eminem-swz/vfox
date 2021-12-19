@@ -10,12 +10,13 @@ import { Tag } from 'vfox'
 
 ## Props
 
-| 属性     | 类型    | 默认值    | 必填 | 说明                                               |
-| -------- | ------- | --------- | ---- | -------------------------------------------------- |
-| type     | string  | 'default' | 否   | 标签类型                                           |
-| pattern  | string  | 'light'   | 否   | 标签款式                                           |
-| size     | string  | 'middle'  | 否   | 标签尺寸                                           |
-| closable | boolean | true      | 否   | 是否展示关闭按钮，只推荐在 size='large' 情况下开启 |
+| 属性     | 类型    | 默认值    | 必填 | 说明                                                                               |
+| -------- | ------- | --------- | ---- | ---------------------------------------------------------------------------------- |
+| type     | string  | 'default' | 否   | 标签类型                                                                           |
+| pattern  | string  | 'light'   | 否   | 标签款式                                                                           |
+| color    | string  |           | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/Color.md#自定义色彩) |
+| size     | string  | 'middle'  | 否   | 标签尺寸                                                                           |
+| closable | boolean | true      | 否   | 是否展示关闭按钮，只推荐在 size='large' 情况下开启                                 |
 
 ### type 的合法值
 

@@ -9,6 +9,16 @@ function replaceAlias({ search, replace }) {
   }
 }
 
+function replaceImportToSassImport() {
+  return {
+    name: 'replaceImportToSassImport',
+    renderChunk(code) {
+      return code.replace(/import/g, '@import')
+    }
+  }
+}
+
 module.exports = {
-  replaceAlias
+  replaceAlias,
+  replaceImportToSassImport
 }

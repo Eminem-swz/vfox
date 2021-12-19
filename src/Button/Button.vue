@@ -11,6 +11,7 @@
     ]"
     :disabled="disabled"
     :type="realFormType"
+    :style="styles"
   >
     <Icon v-if="loading" icon="LoadingOutlined" :spin="true" />
     <Icon v-else-if="icon" :icon="icon" />
@@ -35,9 +36,14 @@ import {
 } from '@/helpers/validator'
 import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
 import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
-import type { SizeType, StateType } from '../helpers/types'
-import type { ButtonPatternType, ButtonShapeType } from './types'
+import type { SizeType, StateType, StyleObject } from '../helpers/types'
+import type {
+  ButtonGroupOptions,
+  ButtonPatternType,
+  ButtonShapeType
+} from './types'
 import { useGroupItem } from '@/hooks/use-group'
+import { getColorGroups, isColorValue, isDarkColor } from '@/helpers/color'
 
 const FORM_TYPES = ['button', 'submit', 'reset']
 type FormTypes = 'button' | 'submit' | 'reset'
@@ -91,17 +97,27 @@ export default defineComponent({
     transparent: {
       type: Boolean,
       default: false
+    },
+    color: {
+      type: [String, Object],
+      validator: isColorValue
     }
   },
   setup(props) {
     const uid = (getCurrentInstance() as ComponentInternalInstance).uid
-    const buttonGroupOptions = inject('fxButtonGroupOptions', null)
+    const buttonGroupOptions = inject<ButtonGroupOptions | null>(
+      'fxButtonGroupOptions',
+      null
+    )
 
     const classNames = computed(() => {
       const { size, pattern, shape } = buttonGroupOptions || props
 
       return [
-        'type--' + getEnumsValue(STATE_TYPES, props.type),
+        'type--' +
+          (props.color && isColorValue(props.color as string)
+            ? STATE_TYPES[1]
+            : getEnumsValue(STATE_TYPES, props.type)),
         'pattern--' + getEnumsValue(BUTTON_PATTERN_TYPES, pattern),
         'size--' + getEnumsValue(SIZE_TYPES, size),
         'shape--' + getEnumsValue(BUTTON_SHAPE_TYPES, shape)
@@ -112,11 +128,36 @@ export default defineComponent({
       return getEnumsValue(FORM_TYPES, props.formType) as FormTypes
     })
 
+    const styles = computed(() => {
+      const obj: StyleObject = {}
+
+      if (props.color && isColorValue(props.color as string)) {
+        const colors = getColorGroups(props.color as string)
+        const isDark = isDarkColor(props.color as string)
+        const pattern = getEnumsValue(
+          BUTTON_PATTERN_TYPES,
+          buttonGroupOptions?.pattern || props.pattern
+        )
+
+        obj[`--fx-color`] = colors[5]
+        obj[`--fx-dark-color`] = colors[6]
+        obj[`--fx-light-color`] = colors[4]
+
+        if (!isDark && (pattern === 'default' || pattern === 'gradient')) {
+          // 浅色背景情况，字体颜色升四阶
+          obj[`--fx-front-color`] = colors[9]
+        }
+      }
+
+      return obj
+    })
+
     useGroupItem('button', uid)
 
     return {
       realFormType,
-      classNames
+      classNames,
+      styles
     }
   }
 })

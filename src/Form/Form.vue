@@ -8,7 +8,7 @@
 import { defineComponent, PropType, provide } from 'vue'
 import { inArray, isArray, isUndefined } from '@/helpers/util'
 import { useGroup } from '@/hooks/use-group'
-import { DataObject } from '../helpers/types'
+import type { AnyObject } from '../helpers/types'
 import type { EmitObject } from '../hooks/types'
 import type { FormRules, FormGroupItemOut, FormInputElement } from './types'
 
@@ -111,7 +111,7 @@ export default defineComponent({
       return false
     }
 
-    function validate(value: DataObject) {
+    function validate(value: AnyObject) {
       const retList: Promise<never>[] = []
 
       children.forEach(child => {

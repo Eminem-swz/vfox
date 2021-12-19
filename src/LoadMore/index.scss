@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '../style/var.scss';
 
 .fx-load-more {
@@ -49,7 +50,7 @@
   .fx-load-more:not(.loading) {
     &::before,
     &::after {
-      transform: scaleY($one-third);
+      transform: scaleY(math.div(1, 3));
     }
   }
 }

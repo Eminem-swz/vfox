@@ -2,10 +2,11 @@
 @import '../style/mixin.scss';
 
 .fx-tag {
-  --tag-icon-size: 16px;
-  --tag-color: #fff;
-  --tag-background-color: #{$background-color};
-  --tag-border-color: #{$border-color};
+  --fx-color: transparent;
+  --fx-black-color: transparent;
+  --fx-white-color: #{$white-color};
+  --fx-front-color: var(--fx-white-color);
+  --fx-icon-size: 16px;
 
   display: inline-flex;
   align-items: center;
@@ -13,11 +14,11 @@
   padding: 0 12px;
   border-radius: 2px;
   font-size: 12px;
-  color: var(--tag-color);
-  background-color: var(--tag-background-color);
+  color: var(--fx-front-color);
+  background-color: var(--fx-color);
   border-style: solid;
   border-width: 0;
-  border-color: var(--tag-border-color);
+  border-color: transparent;
   box-sizing: border-box;
   user-select: none;
 
@@ -26,8 +27,8 @@
   }
 
   .fx-icon {
-    --size: var(--tag-icon-size);
-    --color: var(--tag-color);
+    --size: var(--fx-icon-size);
+    --color: var(--fx-front-color);
     cursor: pointer;
     margin: 0 -2px 0 2px;
 
@@ -46,6 +47,16 @@
     opacity: 0.2;
   }
 
+  &.pattern--light {
+    --fx-front-color: var(--fx-black-color);
+  }
+
+  &.pattern--plain {
+    background-color: var(--fx-white-color);
+    border-color: var(--fx-color);
+    --fx-front-color: var(--fx-color);
+  }
+
   &.size--large {
     .fx-icon {
       margin: 0 -4px 0 4px;
@@ -61,7 +72,7 @@
     height: 18px;
     font-size: 10px;
     padding: 0 8px;
-    --tag-icon-size: 12px;
+    --fx-icon-size: 12px;
 
     &.pattern--plain {
       padding: 0 7px;
@@ -73,7 +84,7 @@
     height: 14px;
     font-size: 9px;
     padding: 0 4px;
-    --tag-icon-size: 10px;
+    --fx-icon-size: 10px;
 
     &.pattern--plain {
       padding: 0 3px;
@@ -81,77 +92,52 @@
     }
   }
 
-  &.type--default {
-    --tag-color: #{$font2-color};
-
-    &.pattern--dark {
-      --tag-background-color: #{$font2-color};
-      --tag-color: #fff;
-    }
-
-    &.pattern--plain {
-      --tag-background-color: #fff;
-      --tag-border-color: #{$border-color};
-    }
-  }
-
   &.type--primary {
-    --tag-color: #{$primary-color};
-    --tag-background-color: #{$primary-background-color};
+    --fx-color: #{$primary-color};
+    --fx-black-color: #{$primary-color};
 
-    &.pattern--dark {
-      --tag-background-color: #{$primary-color};
-      --tag-color: #fff;
-    }
-
-    &.pattern--plain {
-      --tag-background-color: #fff;
-      --tag-border-color: #{$primary-border-color};
+    &.pattern--light {
+      --fx-color: #{$primary-color-2};
     }
   }
 
   &.type--success {
-    --tag-color: #{$success-color};
-    --tag-background-color: #{$success-background-color};
+    --fx-color: #{$success-color};
+    --fx-black-color: #{$success-color};
 
-    &.pattern--dark {
-      --tag-background-color: #{$success-color};
-      --tag-color: #fff;
-    }
-
-    &.pattern--plain {
-      --tag-background-color: #fff;
-      --tag-border-color: #{$success-border-color};
+    &.pattern--light {
+      --fx-color: #{$success-color-2};
     }
   }
 
   &.type--warning {
-    --tag-color: #{$warning-color};
-    --tag-background-color: #{$warning-background-color};
+    --fx-color: #{$warning-color};
+    --fx-black-color: #{$warning-color};
 
-    &.pattern--dark {
-      --tag-background-color: #{$warning-color};
-      --tag-color: #fff;
-    }
-
-    &.pattern--plain {
-      --tag-background-color: #fff;
-      --tag-border-color: #{$warning-border-color};
+    &.pattern--light {
+      --fx-color: #{$warning-color-2};
     }
   }
 
   &.type--danger {
-    --tag-color: #{$danger-color};
-    --tag-background-color: #{$danger-background-color};
+    --fx-color: #{$danger-color};
+    --fx-black-color: #{$danger-color};
 
-    &.pattern--dark {
-      --tag-background-color: #{$danger-color};
-      --tag-color: #fff;
+    &.pattern--light {
+      --fx-color: #{$danger-color-2};
+    }
+  }
+
+  &.type--default {
+    --fx-color: #{$font-color};
+    --fx-black-color: #{$font-color};
+
+    &.pattern--light {
+      --fx-color: #{$background-color};
     }
 
     &.pattern--plain {
-      --tag-background-color: #fff;
-      --tag-border-color: #{$danger-border-color};
+      border-color: $border-color;
     }
   }
 }

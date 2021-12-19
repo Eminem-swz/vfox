@@ -135,11 +135,11 @@ import 'vfox/es/style/index.css'
 app.use(Vfox)
 ```
 
-> 引入所有组件会增大代码包体积，毕竟99+组件了，除非整个项目是基于此UI库开发。
+> 引入所有组件会增大代码包体积，毕竟 99+组件了，除非整个项目是基于此 UI 库开发。
 
 ## API 调用
 
-API调用需要先引入对应的组件，方可调用，引用方式同上。
+API 调用需要先引入对应的组件，方可调用，引用方式同上。
 
 ```
 export default {
@@ -155,58 +155,4 @@ export default {
 
 ## 主题定制
 
-Vfox 的样式是基于 SCSS 开发的，定义了一套默认样式变量，变量可参考 [var.scss](https://github.com/godxiaoji/vfox/blob/beta/src/style/var.scss)。
-
-1. 新建自定义 SCSS 文件 `my-var.scss`，定义一些变量，如：
-
-```
-$primary-color: #ff0000;
-$warning: #ffff00;
-...
-```
-
-2. 新建要入口 SCSS 文件 `my-style.scss`，引入自定义变量文件和默认主题文件。
-
-```
-@import 'path/to/my-var.scss';
-@import 'vfox/src/style/index.scss';
-```
-
-3. 更改原来引入的样式文件
-
-`import 'vfox/es/style/index.css'` => `import 'path/to/my-style.scss'`
-
-## 从 v1（基于 Vue2）版本升级
-
-### 升级 Vue 3
-
-升级问题请查看 [Vue3 文档](https://v3.vuejs.org/guide/introduction.html)。
-
-### 不兼容更新
-
-#### 弹窗组件 visible 字段变更
-
-由原来的 `visible.sync` 变更为 `v-model:visible`，涉及组件：
-
-- ActionSheet
-- CalendarPopup
-- Dialog
-- Drawer
-- Dropdown
-- ImagePreview
-- Modal
-- NoticeBar
-- Notify
-- PickerPopup
-- PopDialog
-- PopMenu
-- Popover
-- Toast
-
-#### 其他涉及 .sync、v-model 字段的变更
-
-- Tab/TabBar 组件 `active-value.sync` -> `v-model:active-value`
-- Swiper/Sticky 组件 `active-index.sync` -> `v-model:active-index`
-- Radio/Checkbox 组件 `v-model` -> `v-model:checked`
-- ImagePreview 组件 `current.sync` -> `v-model:current`
-- Collapse 组件 `active-names.sync` -> `v-model:active-names`
+见 [色彩-主题定制](./design/color.md#主题定制) 。

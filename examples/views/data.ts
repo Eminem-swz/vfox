@@ -1,15 +1,5 @@
 export const navConfig = [
   {
-    name: 'Design',
-    zhName: '设计',
-    list: [
-      {
-        name: 'Color',
-        zhName: '颜色'
-      }
-    ]
-  },
-  {
     name: 'Basic',
     zhName: '基础',
     list: [
@@ -247,6 +237,20 @@ export const navConfig = [
       {
         name: 'Copy',
         zhName: '复制'
+      }
+    ]
+  },
+  {
+    name: 'Design',
+    zhName: '设计',
+    list: [
+      {
+        name: 'CustomTheme',
+        zhName: '主题定制'
+      },
+      {
+        name: 'ColorCard',
+        zhName: '色卡'
       }
     ]
   }

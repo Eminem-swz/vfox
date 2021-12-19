@@ -35,6 +35,7 @@ module.exports = {
       }
     ],
     sidebar: {
+      '/design/': getDesignSidebar(),
       '/components/': getComponentsSidebar(),
       '/apis/': getApisSidebar()
     },
@@ -50,6 +51,13 @@ module.exports = {
       rightDelimiter: '}}'
     }
   }
+}
+
+function getDesignSidebar() {
+  return [
+    { text: '设计', link: '/design/' },
+    { text: '色彩', link: '/design/Color' }
+  ]
 }
 
 function getComponentsSidebar() {

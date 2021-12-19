@@ -33,6 +33,7 @@
         type="default"
         pattern="borderless"
         :ghost="ghost"
+        :transparent="!ghost"
         v-if="showCancel"
         @click="onCancel"
       >

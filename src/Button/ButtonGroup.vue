@@ -18,7 +18,11 @@ import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { SIZE_TYPES } from '@/helpers/constants'
 import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
 import type { SizeType } from '../helpers/types'
-import type { ButtonPatternType, ButtonShapeType } from './types'
+import type {
+  ButtonPatternType,
+  ButtonShapeType,
+  ButtonGroupOptions
+} from './types'
 import { useGroup } from '@/hooks/use-group'
 
 export default defineComponent({
@@ -43,11 +47,7 @@ export default defineComponent({
   setup(props) {
     const { children } = useGroup('button')
 
-    const options = reactive({
-      size: '',
-      pattern: '',
-      shape: ''
-    })
+    const options = reactive<Partial<ButtonGroupOptions>>({})
 
     watch(
       props,

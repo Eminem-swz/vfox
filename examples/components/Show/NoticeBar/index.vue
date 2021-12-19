@@ -51,13 +51,12 @@
         :title="text1"
       />
     </fx-group>
-    <fx-group title="自定义颜色">
+    <fx-group title="自定义颜色(#000000)">
       <fx-notice-bar
         class="notice-bar-item"
         left-icon="SoundOutlined"
         :title="text1"
-        color="#fff"
-        background-color="#262626"
+        color="#000000"
       />
     </fx-group>
   </div>

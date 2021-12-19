@@ -1,4 +1,5 @@
 import Color from 'colorfuls'
+import { ColorOptions } from 'colorfuls/lib/color'
 
 const hueStep = 2
 const saturationStep = 0.16
@@ -8,20 +9,28 @@ const brightnessStep2 = 0.15
 const lightColorCount = 5
 const darkColorCount = 4
 
-export function getColor(color: any, index: number) {
-  const isLight = index <= 6
-  const hsv = Color(color).hsv().toRawObject()
+export { Color }
 
-  const i = isLight ? lightColorCount + 1 - index : index - lightColorCount - 1
-  // i 为index与6的相对距离
+export function getColorGroups(primaryColor: ColorOptions) {
+  const colors: string[] = []
+  const hsv = Color(primaryColor).hsv().toRawObject()
 
-  return Color({
-    h: getHue(hsv.h * 360, i, isLight),
-    s: getSaturation(hsv.s, i, isLight) * 100 + '%',
-    v: getValue(hsv.v, i, isLight) * 100 + '%'
-  })
-    .hex()
-    .toHex()
+  for (let i = 1; i <= 10; i++) {
+    const isLight = i <= 6
+    const j = isLight ? lightColorCount + 1 - i : i - lightColorCount - 1
+
+    colors.push(
+      Color({
+        h: getHue(hsv.h * 360, j, isLight),
+        s: getSaturation(hsv.s, j, isLight) * 100 + '%',
+        v: getValue(hsv.v, j, isLight) * 100 + '%'
+      })
+        .hex()
+        .toHex()
+    )
+  }
+
+  return colors
 }
 
 // getHue 获取色相渐变
@@ -80,12 +89,53 @@ function getValue(v: number, i: number, isLight: boolean) {
     value = v + brightnessStep1 * i
   } else {
     // 加深变暗幅度更大
-    return v - brightnessStep2 * i
+    value = v - brightnessStep2 * i
   }
 
   if (value > 1) {
     value = 1
+  } else if (value < 0) {
+    value += 1
   }
 
   return value
+}
+
+export function isColorValue(value: ColorOptions) {
+  try {
+    Color(value)
+
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+export function isDarkColor(value: ColorOptions) {
+  return Color.isDark(value)
+}
+
+export function getColorObject(color?: ColorOptions) {
+  if (color && isColorValue(color)) {
+    const groups = getColorGroups(color)
+    const isDark = isDarkColor(color)
+
+    return {
+      hasColor: true,
+      groups,
+      isDark,
+      varColor: groups[5],
+      varBlackColor: groups[9],
+      varFrontColor: isDark ? '#ffffff' : groups[9]
+    }
+  }
+
+  return {
+    hasColor: false,
+    groups: [] as string[],
+    isDark: false,
+    varColor: '',
+    varBlackColor: '',
+    varFrontColor: ''
+  }
 }

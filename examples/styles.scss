@@ -1,1 +1,22 @@
-@import '@/style/index.scss';
+$primary-color-2: #c5c6d1;
+$primary-color-5: #6667ab;
+$primary-color-6: #4a4985;
+$primary-color-7: #312f5e;
+$primary-color: $primary-color-6;
+$success-color-2: #a3b6a6;
+$success-color-5: #3c9052;
+$success-color-6: #276a3b;
+$success-color-7: #154425;
+$success-color: $success-color-6;
+$warning-color-2: #e1d9bf;
+$warning-color-5: #bb9445;
+$warning-color-6: #95702f;
+$warning-color-7: #6e4e1e;
+$warning-color: $warning-color-6;
+$danger-color-2: #d79996;
+$danger-color-5: #b1262d;
+$danger-color-6: #8b1721;
+$danger-color-7: #650c16;
+$danger-color: $danger-color-6;
+
+@import '../src/style/index.scss';

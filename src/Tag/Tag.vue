@@ -2,6 +2,7 @@
   <div
     class="fx-tag"
     :class="[classNames, { disabled: !!disabled }]"
+    :style="styles"
     ref="root"
   >
     <slot></slot>
@@ -23,7 +24,8 @@ import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
 import { useLongPress } from '@/hooks/use-long-press'
 import { noop } from '@/helpers/util'
-import type { SizeType, StateType } from '../helpers/types'
+import type { SizeType, StateType, StyleObject } from '../helpers/types'
+import { isColorValue, getColorObject } from '@/helpers/color'
 
 type TagPatternType = 'light' | 'dark' | 'plain'
 const TAG_PATTERN_TYPES: TagPatternType[] = ['light', 'dark', 'plain']
@@ -57,6 +59,10 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
+    },
+    color: {
+      type: [String, Object],
+      validator: isColorValue
     }
   },
   emits: ['close', 'click', 'long-press'],
@@ -78,11 +84,32 @@ export default defineComponent({
     }
 
     const classNames = computed(() => {
+      const { hasColor, isDark } = getColorObject(props.color as string)
+
       return [
-        'type--' + getEnumsValue(STATE_TYPES, props.type),
+        'type--' +
+          (hasColor ? STATE_TYPES[1] : getEnumsValue(STATE_TYPES, props.type)),
         'size--' + getEnumsValue(SIZE_TYPES, props.size),
-        'pattern--' + getEnumsValue(TAG_PATTERN_TYPES, props.pattern)
+        'pattern--' +
+          (hasColor && props.pattern !== 'plain'
+            ? isDark
+              ? 'dark'
+              : 'light'
+            : getEnumsValue(TAG_PATTERN_TYPES, props.pattern))
       ]
+    })
+
+    const styles = computed(() => {
+      const obj: StyleObject = {}
+
+      const colorObj = getColorObject(props.color as string)
+
+      if (colorObj.hasColor) {
+        obj[`--fx-color`] = colorObj.varColor
+        obj[`--fx-black-color`] = colorObj.varBlackColor
+      }
+
+      return obj
     })
 
     useLongPress(root, onLongPress)
@@ -91,7 +118,8 @@ export default defineComponent({
       root,
       classNames,
       noop,
-      onClose
+      onClose,
+      styles
     }
   }
 })

@@ -23,6 +23,15 @@
         <fx-tag type="danger" pattern="plain">danger</fx-tag>
       </fx-cell>
     </fx-group>
+    <fx-group title="自定义颜色">
+      <fx-cell label="长春花色#6667AB">
+        <fx-tag type="default" pattern="plain" color="#6667AB">plain</fx-tag>
+      </fx-cell>
+      <fx-cell label="莲花色#E2C0BF">
+        <fx-tag type="default" color="#6667AB">dark</fx-tag>
+        <fx-tag type="default" closable color="#E2C0BF">light</fx-tag>
+      </fx-cell>
+    </fx-group>
     <fx-group title="标签大小">
       <fx-cell label="size=small">
         <fx-tag type="primary" pattern="light" size="small">标签</fx-tag>
@@ -45,12 +54,6 @@
         <fx-tag type="primary" pattern="dark" size="large" closable>
           标签
         </fx-tag>
-      </fx-cell>
-      <fx-cell label="自定义颜色">
-        <fx-tag class="tag-custom-color-1" type="default" pattern="plain">
-          标签
-        </fx-tag>
-        <fx-tag class="tag-custom-color-2" type="default" closable>标签</fx-tag>
       </fx-cell>
     </fx-group>
     <fx-group title="事件监听">
@@ -97,25 +100,6 @@ export default {
   &-compact-box {
     .fx-tag + .fx-tag {
       margin-left: 2px;
-    }
-  }
-
-  &-custom-color {
-    &-1 {
-      --tag-color: #{$title-color} !important;
-      --tag-background-color: #fff !important;
-      --tag-border-color: #{$title-color} !important;
-    }
-
-    &-2 {
-      --tag-color: #fff !important;
-      --tag-background-color: #{$title-color} !important;
-      --tag-border-color: transparent !important;
-      background-image: linear-gradient(
-        90deg,
-        $warning-color 0%,
-        $danger-color 100%
-      );
     }
   }
 }

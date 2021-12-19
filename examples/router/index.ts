@@ -1,10 +1,18 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
-import Color from '../views/Color.vue'
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: Home.name, component: Home },
-  { path: '/Color', name: Color.name, component: Color },
+  {
+    path: '/ColorCard',
+    name: 'ExpColorCard',
+    component: () => import('../views/Color/ColorCard.vue')
+  },
+  {
+    path: '/CustomTheme',
+    name: 'ExpCustomTheme',
+    component: () => import('../views/Color/CustomTheme.vue')
+  },
   {
     path: '/Button',
     name: 'ExpButton',
