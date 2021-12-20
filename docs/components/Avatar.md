@@ -17,7 +17,7 @@ import { Avatar, AvatarGroup } from 'vfox'
 | shape  | string               | 'circle' | 否   | 头像形状                                                                           |
 | badge  | string/number/object |          | 否   | 徽标，使用 [Badge](./Badge.md) 组件，可传入一个基于 Badge props 的对象             |
 | gender | string               |          | 否   | 显示男女角标，优先级高于 badge                                                     |
-| color  | string               |          | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/Color.md#自定义色彩) |
+| color  | string               |          | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
 
 ### size 的合法值
 
@@ -65,7 +65,7 @@ import { Avatar, AvatarGroup } from 'vfox'
 | ----------- | ------------- | -------- | ---- | ---------------------------------------------------------------------------------------------- |
 | size        | string/number | 'middle' | 否   | 组内头像尺寸，处除了预设值，还支持传入 number                                                  |
 | total-count | number        |          | 否   | 尾部显示头像数，如果数值过高，会对数值简化处理，如 1.1w                                        |
-| count-color | string        |          | 否   | 头像数模块的自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/Color.md#自定义色彩) |
+| count-color | string        |          | 否   | 头像数模块的自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
 
 ## AvatarGroup Slots
 

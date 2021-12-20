@@ -16,7 +16,7 @@ import { Button, ButtonGroup } from 'vfox'
 | type      | string  | 'default'   | 否   | 按钮类型                                                                           |
 | pattern   | string  | 'default'   | 否   | 按钮款式                                                                           |
 | shape     | string  | 'rectangle' | 否   | 按钮形状                                                                           |
-| color     | string  |             | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/Color.md#自定义色彩) |
+| color     | string  |             | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
 | ghost     | boolean | false       | 否   | 是否使用幽灵按钮，幽灵按钮将按钮的内容反色，背景变为透明                           |
 | disabled  | boolean | false       | 否   | 是否禁用                                                                           |
 | icon      | string  |             | 否   | 图标，使用 [Icon](./Icon.md) 组件                                                  |
