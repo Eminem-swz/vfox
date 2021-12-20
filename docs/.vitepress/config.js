@@ -56,7 +56,7 @@ module.exports = {
 function getDesignSidebar() {
   return [
     { text: '设计', link: '/design/' },
-    { text: '色彩', link: '/design/Color' }
+    { text: '色彩', link: '/design/color' }
   ]
 }
 

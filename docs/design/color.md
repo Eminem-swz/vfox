@@ -12,20 +12,20 @@
 
 其中 `default` 直接复用了 Ant Design 灰度色卡。其他颜色则是从 [潘通年度代表色](http://www.pantone.net.cn/pantone/coloryeardetail.htm?ID=c4b893fb5ad84fc99cb971d01a66584f&language=CN) 中选取。
 
-| type    | color                                |
-| ------- | ------------------------------------ |
-| primary | <font color="#0f4c82">#0f4c82</font> |
-| success | <font color="#3c9052">#3c9052</font> |
-| warning | <font color="#bb9445">#bb9445</font> |
-| danger  | <font color="#b1262d">#b1262d</font> |
+| type    | color   |
+| ------- | ------- |
+| primary | #0f4c82 |
+| success | #3c9052 |
+| warning | #bb9445 |
+| danger  | #b1262d |
 
 ## 主题定制
 
 组件库的样式是基于 SCSS 开发的，可以通过提供的工具完成主题的个性化定制，主要是色彩相关。
 
-在主题定制之前，推荐通过 <a href="../demo/#/ColorCard" target="_blank">色卡</a> 查看下你钟意的颜色在色卡中的效果。推荐颜色值在 HSV 模式下 **S > 70% 且 V > 70%**。
+在主题定制之前，推荐通过 [色卡](https://godxiaoji.github.io/vfox/demo/#/ColorCard) 查看下你钟意的颜色在色卡中的效果。推荐颜色值在 HSV 模式下 **S > 70% 且 V > 70%**。
 
-1. 打开 <a href="../demo/#/CustomTheme" target="_blank">主题定制</a> 工具，按操作完成定制并复制定制后的代码。
+1. 打开 [主题定制](https://godxiaoji.github.io/vfox/demo/#/CustomTheme) 工具，按操作完成定制并复制定制后的代码。
 2. 新建自定义 SCSS 文件 `my-style.scss`，粘贴定制代码。
 3. 在 `my-style.scss` 粘贴代码下面，引入 `@import 'vfox/src/style/index.scss';`，大体代码如下：
 
@@ -71,7 +71,7 @@ app.use(Vfox)
 
 前面提到了 Ant Design 的色卡算法，在部分组件都有相应的应用，比如 `Button`, `Tag`, `NoticeBar`, `Badge`, `Avatar`。
 
-除了主题自带的四种颜色，同时也支持单独颜色自定义，和其他 UI 库 不同的是，只需要传入一种颜色就可以完成整个组件的效果渲染。如：2022 年流行色 <font color="#6667AB">长春花色</font> 和 <font color="#E2C0BF">莲花色</font>。
+除了主题自带的四种颜色，同时也支持单独颜色自定义，和其他 UI 库 不同的是，只需要传入一种颜色就可以完成整个组件的效果渲染。如：2022 年流行色 **长春花色** 和 **莲花色**。
 
 `Button` :
 

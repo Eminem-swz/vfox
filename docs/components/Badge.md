@@ -22,7 +22,7 @@ import { Badge } from 'vfox'
 | show-zero | boolean       | false  | 否   | 消息数为 0 时是否显示                                                              |
 | offset    | number[]      | [0, 0] | 否   | 偏移量，格式为 [x, y]                                                              |
 | animated  | boolean       | false  | 否   | 是否开启动画                                                                       |
-| color     | string        |        | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/Color.md#自定义色彩) |
+| color     | string        |        | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
 
 ## Slots
 
