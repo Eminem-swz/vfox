@@ -1,3 +1,20 @@
+# [2.1.0](https://github.com/godxiaoji/vfox/compare/v2.0.7...v2.1.0) (2021-12-20)
+
+
+### Bug Fixes
+
+* 修复Vue模版不能使用parseFloat的bug ([5bed0f2](https://github.com/godxiaoji/vfox/commit/5bed0f2516ea9961fb01d250676a56510ee8b792))
+
+
+### Features
+
+* **color:** 使用全新的色彩体系 ([f0d0295](https://github.com/godxiaoji/vfox/commit/f0d0295204de412d81827c11d857de8106435233))
+* **color:** 全新的色彩体系 ([8915754](https://github.com/godxiaoji/vfox/commit/8915754ec4a58a88084aae08f800684f9cb71b3d))
+* **picker:** picker相关组件重构 ([699f7f3](https://github.com/godxiaoji/vfox/commit/699f7f37ba3c479ec70b100b26071e56c0b43e0a))
+* picker组件重构 ([156f0fb](https://github.com/godxiaoji/vfox/commit/156f0fb9a870d55c6e26a5840ae467fe0f74ff2d))
+* **picker:** 重构picker组件 ([248fd42](https://github.com/godxiaoji/vfox/commit/248fd4217041d127f9d173b17bf2b2bfaae0b529))
+* 日历组件优化 ([ffa38fe](https://github.com/godxiaoji/vfox/commit/ffa38fe6ef797d1250d9487a9cd820eb75a40907))
+
 ## [2.0.7](https://github.com/godxiaoji/vfox/compare/v2.0.6...v2.0.7) (2021-12-10)
 
 
