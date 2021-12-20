@@ -14,19 +14,14 @@ import { SwipeCell } from 'vfox'
 
 ## Props
 
-| 属性     | 类型    | 默认值 | 必填 | 说明                     |
-| -------- | ------- | ------ | ---- | ------------------------ |
-| name     | string  |        | 否   | [Form](./Form.md) 的标识 |
-| disabled | boolean | false  | 否   | 是否禁用                 |
-| v-model  | boolean | false  | 否   | 是否开启                 |
-
-## CSS
-
-| 属性               | 默认值  | 说明               |
-| ------------------ | ------- | ------------------ |
-| --switch-on-color  | #1890ff | 激活背景色         |
-| --switch-off-color | #d9d9d9 | 未激活背景色       |
-| --switch-size      | 32px    | 选择器大小，高度值 |
+| 属性        | 类型          | 默认值 | 必填 | 说明                            |
+| ----------- | ------------- | ------ | ---- | ------------------------------- |
+| name        | string        |        | 否   | [Form](./Form.md) 的标识        |
+| disabled    | boolean       | false  | 否   | 是否禁用                        |
+| v-model     | boolean       | false  | 否   | 是否开启                        |
+| color       | string        |        | 否   | 自定义默认态的背景色            |
+| activeColor | string        |        | 否   | 自定义激活态的背景色            |
+| size        | number/string |        | 否   | 自定义组件大小（高度），单位 px |
 
 ## Events
 

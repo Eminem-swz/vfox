@@ -1,18 +1,18 @@
 @import '../style/var.scss';
 
 .fx-rate {
-  --rate-size: 24px;
-  --rate-color: #{$border-color};
-  --rate-active-color: #{$danger-color};
+  --fx-size: 24px;
+  --fx-color: #{$border-color};
+  --fx-active-color: #{$danger-color};
 
   display: flex;
   align-items: center;
   height: 32px;
 
   &_item {
-    width: var(--rate-size);
-    height: var(--rate-size);
-    font-size: var(--rate-size);
+    width: var(--fx-size);
+    height: var(--fx-size);
+    font-size: var(--fx-size);
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -53,8 +53,8 @@
   }
 
   .fx-icon {
-    --size: var(--rate-size);
-    --color: var(--rate-color);
+    --size: var(--fx-size);
+    --color: var(--fx-color);
     flex-shrink: 0;
     display: block;
   }
@@ -73,7 +73,7 @@
     height: 100%;
 
     .fx-icon {
-      --color: var(--rate-active-color);
+      --color: var(--fx-active-color);
     }
   }
 

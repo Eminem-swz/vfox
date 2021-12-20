@@ -36,5 +36,11 @@ export const tabProps = {
   activeValue: {
     type: [String, Number],
     default: null
+  },
+  color: {
+    type: String
+  },
+  activeColor: {
+    type: String
   }
 }

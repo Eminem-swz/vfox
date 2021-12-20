@@ -2,6 +2,7 @@
   <label
     class="fx-checkbox fx-horizontal-hairline"
     :class="{ disabled: disabled2 }"
+    :style="styles"
   >
     <input
       class="fx-checkbox_input fx-form-input"
@@ -54,9 +55,8 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    color: {
-      type: String,
-      default: ''
+    activeColor: {
+      type: String
     },
     name: {
       type: String,

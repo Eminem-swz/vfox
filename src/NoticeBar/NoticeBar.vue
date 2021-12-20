@@ -196,7 +196,7 @@ export default defineComponent({
       const colorObj = getColorObject(props.color as string)
 
       if (colorObj.hasColor) {
-        obj[`--fx-color`] = colorObj.varColor
+        obj[`--fx-color`] = colorObj.varBackgroundColor
         obj[`--fx-front-color`] = colorObj.varFrontColor
       }
 

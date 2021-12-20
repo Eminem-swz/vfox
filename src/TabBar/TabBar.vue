@@ -1,5 +1,5 @@
 <template>
-  <div class="fx-tab-bar fx-horizontal-hairline">
+  <div class="fx-tab-bar fx-horizontal-hairline" :style="styles">
     <ul class="fx-tab-bar_list" ref="list">
       <li
         class="fx-tab-bar_item"

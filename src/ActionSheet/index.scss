@@ -2,10 +2,8 @@
 @import '../style/mixin.scss';
 
 .fx-action-sheet {
-  --action-sheet-highlight-color: #{$danger-color};
-
   &.fx-drawer .fx-nav-bar {
-    --nav-bar-height: 56px;
+    height: 56px;
 
     &_title {
       font-size: 14px;
@@ -84,7 +82,7 @@
       }
 
       &.highlight span {
-        color: var(--action-sheet-highlight-color);
+        color: #{$primary-color};
       }
     }
 

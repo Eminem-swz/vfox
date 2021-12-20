@@ -1,5 +1,5 @@
 <template>
-  <div class="fx-load-more" :class="{ loading }">
+  <div class="fx-load-more fx-horizontal-hairline" :class="{ loading }">
     <ActivityIndicator class="fx-load-more_icon" v-if="loading" />
     <slot>
       <i class="fx-load-more_dot"></i>

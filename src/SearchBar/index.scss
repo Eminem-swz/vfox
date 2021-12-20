@@ -25,8 +25,12 @@
 
     &.ghost {
       background-color: #fff;
-      --input-border-color: transparent;
-      --input-focus-border-color: transparent;
+      border-color: transparent;
+
+      &:focus {
+        border-color: transparent;
+      }
+
       @include box-shadow;
     }
   }

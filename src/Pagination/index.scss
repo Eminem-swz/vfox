@@ -2,11 +2,13 @@
 @import '../style/mixin.scss';
 
 .fx-pagination {
+  --fx-front-color: #{$font-color};
+
   display: flex;
   align-items: center;
   justify-content: center;
   height: 48px;
-  color: $font-color;
+  color: var(--fx-front-color);
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
@@ -24,21 +26,11 @@
     padding: 0 12px;
 
     .fx-icon {
-      --color: #{$font-color};
+      --color: var(--fx-front-color);
       --size: 16px;
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      box-sizing: border-box;
-    }
-
-    &:not(:disabled):active::after {
+    &:not(:disabled):active {
       @include background-active;
     }
 

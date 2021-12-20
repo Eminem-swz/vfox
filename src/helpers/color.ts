@@ -117,8 +117,9 @@ export function isDarkColor(value: ColorOptions) {
 
 export function getColorObject(color?: ColorOptions) {
   if (color && isColorValue(color)) {
-    const groups = getColorGroups(color)
-    const isDark = isDarkColor(color)
+    const hex = Color(color).hex()
+    const groups = getColorGroups(hex)
+    const isDark = isDarkColor(hex)
 
     return {
       hasColor: true,
@@ -126,7 +127,8 @@ export function getColorObject(color?: ColorOptions) {
       isDark,
       varColor: groups[5],
       varBlackColor: groups[9],
-      varFrontColor: isDark ? '#ffffff' : groups[9]
+      varFrontColor: isDark ? '#ffffff' : groups[9],
+      varBackgroundColor: groups[5]
     }
   }
 
@@ -136,6 +138,7 @@ export function getColorObject(color?: ColorOptions) {
     isDark: false,
     varColor: '',
     varBlackColor: '',
-    varFrontColor: ''
+    varFrontColor: '',
+    varBackgroundColor: ''
   }
 }

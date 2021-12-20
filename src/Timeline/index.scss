@@ -1,15 +1,7 @@
 @import '../style/var.scss';
 
-.fx-timeline {
-  --timeline-color: #{$border-color};
-  --timeline-active-color: #{$primary-color};
-}
-
 .fx-timeline-item {
-  --timeline-item-color: #{$border-color};
-  --timeline-item-active-color: #{$primary-color};
-  --timeline-item-color: var(--timeline-color);
-  --timeline-item-active-color: var(--timeline-active-color);
+  --fx-color: #{$border-color};
 
   position: relative;
 
@@ -31,17 +23,17 @@
     display: block;
     width: 10px;
     height: 10px;
-    border: 2px solid var(--timeline-item-color);
+    border: 2px solid var(--fx-color);
     box-sizing: border-box;
     border-radius: 50%;
-    color: var(--timeline-item-color);
+    color: var(--fx-color);
     background-color: #fff;
     overflow: hidden;
   }
 
   &_icon {
     --size: 12px;
-    --color: var(--timeline-item-color);
+    --color: var(--fx-color);
   }
 
   &_line {
@@ -50,7 +42,7 @@
     top: 24px;
     width: 1px;
     height: 100%;
-    background-color: var(--timeline-item-color);
+    background-color: var(--fx-color);
   }
 
   &_inner {
@@ -89,14 +81,6 @@
       color: $primary-color;
     }
   }
-
-  // &:first-child {
-  //   .fx-timeline-item {
-  //     &_dot {
-  //       border-color: var(--timeline-item-active-color);
-  //     }
-  //   }
-  // }
 
   &:last-child {
     .fx-timeline-item_line {

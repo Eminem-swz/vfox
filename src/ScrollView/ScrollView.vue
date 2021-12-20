@@ -54,7 +54,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted, watch, reactive } from 'vue'
+import {
+  defineComponent,
+  computed,
+  ref,
+  onMounted,
+  watch,
+  reactive,
+  provide
+} from 'vue'
 import { Icon } from '@/Icon'
 import { ActivityIndicator } from '@/ActivityIndicator'
 import {
@@ -95,11 +103,6 @@ interface ScrollCoords {
 export default defineComponent({
   name: 'fx-scroll-view',
   components: { Icon, ActivityIndicator },
-  provide() {
-    return {
-      disableFixed: true
-    }
-  },
   props: {
     // 允许横向滚动
     scrollX: {
@@ -583,6 +586,8 @@ export default defineComponent({
           behavior
         })
     }
+
+    provide('disableFixed', true)
 
     return {
       pullRefreshState,

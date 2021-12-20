@@ -22,8 +22,8 @@ exports[`Radio should render prop disabled=true correctly 1`] = `
 
 exports[`RadioGroup should render 2 Radio slot correctly 1`] = `
 <div class="fx-radio-group vertical">
-  <fx-radio-stub checked="false" disabled="false" color="" name="" value=""></fx-radio-stub>
-  <fx-radio-stub checked="false" disabled="false" color="" name="" value=""></fx-radio-stub>
+  <fx-radio-stub checked="false" disabled="false" name="" value=""></fx-radio-stub>
+  <fx-radio-stub checked="false" disabled="false" name="" value=""></fx-radio-stub>
 </div>
 `;
 

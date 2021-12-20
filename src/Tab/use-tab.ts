@@ -3,7 +3,8 @@ import {
   ComponentInternalInstance,
   reactive,
   ref,
-  watch
+  watch,
+  computed
 } from 'vue'
 import {
   isArray,
@@ -24,6 +25,7 @@ import type {
   HandleOptionItem,
   OptionList
 } from './types'
+import type { StyleObject } from '../helpers/types'
 
 interface TabProps extends UseProps {
   options: OptionList
@@ -240,6 +242,15 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
     immediate: true
   })
 
+  const styles = computed(() => {
+    const obj: StyleObject = {}
+
+    props.color && (obj['--fx-color'] = props.color)
+    props.activeColor && (obj['--fx-active-color'] = props.activeColor)
+
+    return obj
+  })
+
   return {
     list,
     activeIndex,
@@ -247,6 +258,7 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
     options2,
     switchTo,
     switchToIndex,
-    onChange
+    onChange,
+    styles
   }
 }

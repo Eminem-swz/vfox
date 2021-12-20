@@ -34,7 +34,7 @@ exports[`SearchBar should render prop showCancel=true correctly 1`] = `
 <div class="fx-search">
   <form class="fx-search_inner has--cancel">
     <input-stub name="" disabled="false" maxlength="100" placeholder="" type="search" modelvalue="" showclear="true" showlimit="false" class="fx-search_field"></input-stub><button class="fx-search_button">Search</button>
-    <button-stub size="large" type="default" pattern="borderless" loading="false" disabled="false" ghost="false" transparent="false" class="fx-search_cancel-button"></button-stub>
+    <button-stub size="large" type="default" pattern="borderless" loading="false" disabled="false" ghost="false" transparent="true" class="fx-search_cancel-button"></button-stub>
   </form>
   <!--v-if-->
 </div>

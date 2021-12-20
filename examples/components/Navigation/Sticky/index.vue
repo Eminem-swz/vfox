@@ -67,7 +67,7 @@ export default {
     background: $primary-color;
     background-image: linear-gradient(
       0,
-      $primary-background-color 0%,
+      $primary-color-2 0%,
       $primary-color 100%
     );
   }
@@ -77,7 +77,7 @@ export default {
     background: $success-color;
     background-image: linear-gradient(
       0,
-      $success-background-color 0%,
+      $success-color-2 0%,
       $success-color 100%
     );
   }
@@ -87,7 +87,7 @@ export default {
     background: $warning-color;
     background-image: linear-gradient(
       0,
-      $warning-background-color 0%,
+      $warning-color-2 0%,
       $warning-color 100%
     );
   }
@@ -97,7 +97,7 @@ export default {
     background: $danger-color;
     background-image: linear-gradient(
       0,
-      $danger-background-color 0%,
+      $danger-color-2 0%,
       $danger-color 100%
     );
   }

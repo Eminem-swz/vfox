@@ -245,8 +245,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import '@/style/var.scss';
-
 .popover {
   &-box2 {
     padding: 8px 16px;

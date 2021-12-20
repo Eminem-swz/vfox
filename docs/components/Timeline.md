@@ -8,13 +8,6 @@ import { Timeline, TimelineItem } from 'vfox'
 
 具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
-## Timeline CSS
-
-| 属性                    | 默认值  | 说明           |
-| ----------------------- | ------- | -------------- |
-| --timeline-color        | #8c8c8c | 步骤条默认颜色 |
-| --timeline-active-color | #1890ff | 步骤条激活颜色 |
-
 ## Timeline Slots
 
 ### 默认（#default）
@@ -35,13 +28,6 @@ import { Timeline, TimelineItem } from 'vfox'
 | -------- | ------ | ------ | ---- | -------------- |
 | title    | string |        | 否   | 时间轴子项标题 |
 | dotColor | string |        | 否   | 时间轴节点颜色 |
-
-## TimelineItem CSS
-
-| 属性                         | 默认值  | 说明                                                                   |
-| ---------------------------- | ------- | ---------------------------------------------------------------------- |
-| --timeline-item-color        | #8c8c8c | 步骤条默认颜色，不设置继承 [Timeline](./Timeline.md#timeline-css) 组件 |
-| --timeline-item-active-color | #1890ff | 步骤条激活颜色，不设置继承 [Timeline](./Timeline.md#timeline-css) 组件 |
 
 ## TimelineItem Slots
 

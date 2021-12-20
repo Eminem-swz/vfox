@@ -41,9 +41,9 @@
         </fx-progress>
       </div>
     </fx-group>
-    <fx-group title="自定义Color">
+    <fx-group title="自定义颜色">
       <div class="progress-box">
-        <fx-progress :percentage="50" show-text class="progress-custom-color" />
+        <fx-progress :percentage="50" show-text color="#8b1721" />
       </div>
     </fx-group>
   </div>
@@ -86,12 +86,6 @@ export default {
     &.fixed-bar li {
       width: 80%;
     }
-  }
-
-  &-custom-color {
-    --progress-color: #{$danger-color} !important;
-    --progress-text-color: #{$danger-color} !important;
-    --progress-background-color: #{$danger-background-color} !important;
   }
 }
 </style>

@@ -4,7 +4,7 @@
     :class="{ animated }"
     :size="size"
     :rate="0.2"
-    :strokeWidth="0.0537 * size"
+    :strokeWidth="0.0537 * parseFloat(size as string)"
     :color="color"
   />
 </template>
@@ -22,13 +22,12 @@ export default defineComponent({
       default: true
     },
     size: {
-      type: Number,
+      type: [Number, String],
       default: 20
     },
     // 主色
     color: {
-      type: String,
-      default: null
+      type: String
     }
   }
 })

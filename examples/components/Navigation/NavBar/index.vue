@@ -32,7 +32,7 @@
       />
     </fx-group>
     <fx-group title="固定顶部(配合 fixed 组件)">
-      <div class="navBar-fixed">上下滑动观察最顶部的导航</div>
+      <div class="exp-NavBar-fixed">上下滑动观察最顶部的导航</div>
     </fx-group>
     <fx-group title="事件监听">
       <fx-nav-bar
@@ -53,24 +53,24 @@
         :right-buttons="[{ icon: 'MenuOutlined', text: '菜单' }]"
       >
         <template #left>
-          <div class="navBar-left">Left Slot</div>
+          <div class="exp-NavBar-left">Left Slot</div>
         </template>
       </fx-nav-bar>
       <fx-nav-bar title="标题" :show-back="true" :show-home="true">
         <template #right>
-          <div class="navBar-right">Right Slot</div>
+          <div class="exp-NavBar-right">Right Slot</div>
         </template>
       </fx-nav-bar>
       <fx-nav-bar title="标题" :show-back="true" :show-home="true">
         <template #left>
-          <div class="navBar-left">
+          <div class="exp-NavBar-left">
             <fx-button type="primary" icon="LeftOutlined" size="small">
               返回
             </fx-button>
           </div>
         </template>
         <template #right>
-          <div class="navBar-right">
+          <div class="exp-NavBar-right">
             <fx-button type="primary" icon="MenuOutlined" size="small">
               菜单
             </fx-button>
@@ -115,7 +115,7 @@ export default {
 <style lang="scss">
 @import '@/style/var.scss';
 
-.navBar {
+.exp-NavBar {
   &-fixed {
     padding: 12px 16px;
     font-size: 14px;

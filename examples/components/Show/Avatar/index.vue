@@ -11,20 +11,20 @@
         <fx-avatar>曹</fx-avatar>
       </fx-cell>
     </fx-group>
-    <fx-group title="色彩（colorStyle）">
+    <fx-group title="色彩（color）">
       <div class="avatar-custom-list">
-        <fx-avatar colorStyle="DustRed">DR</fx-avatar>
-        <fx-avatar colorStyle="Volcano">V</fx-avatar>
-        <fx-avatar colorStyle="SunsetOrange">SO</fx-avatar>
-        <fx-avatar colorStyle="CalendulaGold">CG</fx-avatar>
-        <fx-avatar colorStyle="SunriseYellow">SY</fx-avatar>
-        <fx-avatar colorStyle="GeekBlue">GB</fx-avatar>
-        <fx-avatar colorStyle="DaybreakBlue">DB</fx-avatar>
-        <fx-avatar colorStyle="Cyan">C</fx-avatar>
-        <fx-avatar colorStyle="PolarGreen">PG</fx-avatar>
-        <fx-avatar colorStyle="Lime">L</fx-avatar>
-        <fx-avatar colorStyle="GoldenPurple">GP</fx-avatar>
-        <fx-avatar colorStyle="Magenta">M</fx-avatar>
+        <fx-avatar color="#ff4d4f">DR</fx-avatar>
+        <fx-avatar color="#ff7a45">V</fx-avatar>
+        <fx-avatar color="#fa8c16">SO</fx-avatar>
+        <fx-avatar color="#faad14">CG</fx-avatar>
+        <fx-avatar color="#fadb14">SY</fx-avatar>
+        <fx-avatar color="#597ef7">GB</fx-avatar>
+        <fx-avatar color="#1890ff">DB</fx-avatar>
+        <fx-avatar color="#36cfc9">C</fx-avatar>
+        <fx-avatar color="#52c41a">PG</fx-avatar>
+        <fx-avatar color="#a0d911">L</fx-avatar>
+        <fx-avatar color="#9254de">GP</fx-avatar>
+        <fx-avatar color="#f759ab">M</fx-avatar>
       </div>
     </fx-group>
     <fx-group title="形状（shape）">
@@ -84,7 +84,7 @@
         </fx-avatar-group>
       </fx-cell>
       <fx-cell label="totalCount=123456">
-        <fx-avatar-group size="small" :totalCount="123456">
+        <fx-avatar-group size="small" :totalCount="123456" countColor="#6667AB">
           <fx-avatar src="https://cdn.fox2.cn/vfox/avatar/1.png" />
           <fx-avatar src="https://cdn.fox2.cn/vfox/avatar/2.png" />
           <fx-avatar src="https://cdn.fox2.cn/vfox/avatar/3.png" />

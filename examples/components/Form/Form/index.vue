@@ -211,8 +211,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import '@/style/var.scss';
-
 .form-btns {
   padding: 12px 16px;
   display: flex;

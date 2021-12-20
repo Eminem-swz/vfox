@@ -19,14 +19,16 @@ import { Tab } from 'vfox'
 
 ### options 的结构
 
-| key        | 类型                 | 默认值 | 必填 | 说明                                                                    |
-| ---------- | -------------------- | ------ | ---- | ----------------------------------------------------------------------- |
-| value      | string/number        |        | 是   | 唯一值（v-model:active-value 使用）                                     |
-| label      | string               |        | 是   | 标签名                                                                  |
-| icon       | string/Component     |        | 否   | 设置图标，使用 [Icon](./Icon.md) 组件                                   |
-| activeIcon | string/Component     |        | 否   | 设置激活态图标，没有设置则沿用 `icon` 属性，使用 [Icon](./Icon.md) 组件 |
-| badge      | string/number/object |        | 否   | 徽标，使用 [Badge](./Badge.md) 组件，可传入一个基于 Badge props 的对象  |
-| subLabel   | string               |        | 否   | 副标签名，如果设置了该字段，则显示带有副标签的列表                      |
+| key         | 类型                 | 默认值 | 必填 | 说明                                                                    |
+| ----------- | -------------------- | ------ | ---- | ----------------------------------------------------------------------- |
+| value       | string/number        |        | 是   | 唯一值（v-model:active-value 使用）                                     |
+| label       | string               |        | 是   | 标签名                                                                  |
+| icon        | string/Component     |        | 否   | 设置图标，使用 [Icon](./Icon.md) 组件                                   |
+| activeIcon  | string/Component     |        | 否   | 设置激活态图标，没有设置则沿用 `icon` 属性，使用 [Icon](./Icon.md) 组件 |
+| badge       | string/number/object |        | 否   | 徽标，使用 [Badge](./Badge.md) 组件，可传入一个基于 Badge props 的对象  |
+| subLabel    | string               |        | 否   | 副标签名，如果设置了该字段，则显示带有副标签的列表                      |
+| color       | string               |        | 否   | 自定义默认态字体和图标颜色                                              |
+| activeColor | string               |        | 否   | 自定义激活态的字体和图标颜色                                            |
 
 ```
 [
@@ -74,13 +76,6 @@ import { Tab } from 'vfox'
 ```
 
 注：注意数组项要保持唯一性。
-
-## CSS
-
-| 属性               | 默认值  | 说明   |
-| ------------------ | ------- | ------ |
-| --tab-active-color | #262626 | 激活色 |
-| --tab-color        | #595959 | 默认色 |
 
 ## Events
 

@@ -22,11 +22,6 @@ import { useFixed } from '@/hooks/use-fixed'
 
 export default defineComponent({
   name: 'fx-sticky',
-  inject: {
-    disableFixed: {
-      default: false
-    }
-  },
   props: {
     containSelector: {
       validator: selectorValidator,
@@ -55,7 +50,7 @@ export default defineComponent({
     const disableFixed = inject('disableFixed', false)
     const fixed = ref(false)
 
-    const { toBody, backRoot } = useFixed({
+    useFixed({
       disableFixed,
       root,
       inner: content,

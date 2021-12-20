@@ -26,6 +26,7 @@ import {
 import { isNumber, isString, rangeInteger } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { AnimationFrameTask, frameTo } from '@/helpers/animation'
+import { getColorObject, isColorValue } from '@/helpers/color'
 
 export default defineComponent({
   name: 'fx-badge',
@@ -62,15 +63,9 @@ export default defineComponent({
         return [0, 0]
       }
     },
-    // 背景颜色
-    backgroundColor: {
-      type: String,
-      default: null
-    },
-    // 文字颜色
     color: {
-      type: String,
-      default: null
+      type: [String, Object],
+      validator: isColorValue
     }
   },
   setup(props) {
@@ -108,11 +103,11 @@ export default defineComponent({
         top: `${props.offset[1]}px`
       }
 
-      if (isString(props.backgroundColor)) {
-        obj.backgroundColor = props.backgroundColor
-      }
-      if (isString(props.color)) {
-        obj.color = props.color
+      const colorObj = getColorObject(props.color as string)
+
+      if (colorObj.hasColor) {
+        obj[`--fx-color`] = colorObj.varBackgroundColor
+        obj[`--fx-front-color`] = colorObj.varFrontColor
       }
 
       return obj

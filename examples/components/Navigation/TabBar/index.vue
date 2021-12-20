@@ -10,10 +10,15 @@
       <fx-tab-bar :options="customIconList" />
     </fx-group>
     <fx-group title="自定义颜色">
-      <fx-tab-bar class="tab-bar-custom-color" :options="baseList" />
+      <fx-tab-bar
+        color="#8B8DB8"
+        activeColor="#ffffff"
+        style="background-color: #6667ab"
+        :options="baseList"
+      />
     </fx-group>
     <fx-group title="自定义图片（icon=URL）">
-      <fx-tab-bar class="tab-bar-custom-image" :options="imageList" />
+      <fx-tab-bar activeColor="#262626" :options="imageList" />
     </fx-group>
     <fx-group title="配合 Fixed 实现置底">
       <fx-fixed>
@@ -67,20 +72,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-@import '@/style/var.scss';
-
-.tab-bar {
-  &-custom-color {
-    --tab-bar-color: #{$danger-border-color} !important;
-    --tab-bar-active-color: #fff !important;
-    --tab-bar-background-color: #{$danger-color} !important;
-  }
-
-  &-custom-image {
-    --tab-bar-active-color: #{$title-color} !important;
-  }
-}
-</style>

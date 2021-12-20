@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Avatar should render default correctly 1`] = `<badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-avatar size--middle shape--circle color--default"></badge-stub>`;
+exports[`Avatar should render default correctly 1`] = `<badge-stub content="0" maxcount="99" dot="false" showzero="false" animated="false" offset="0,0" class="fx-avatar size--middle shape--circle"></badge-stub>`;

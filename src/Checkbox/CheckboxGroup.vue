@@ -32,6 +32,9 @@ export default defineComponent({
     inline: {
       type: Boolean,
       default: false
+    },
+    activeColor: {
+      type: String
     }
   },
   emits: formItemEmits,

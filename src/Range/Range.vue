@@ -1,22 +1,23 @@
 <template>
-  <div class="fx-slider fx-range" :class="{ disabled: !!disabled }">
+  <div
+    class="fx-slider fx-range"
+    :class="{ disabled: !!disabled }"
+    :style="styles"
+  >
     <div class="fx-slider_inner" ref="slider">
       <div class="fx-slider_box">
         <div
           class="fx-slider_track"
-          :style="[
-            {
-              left: Math.min(progress[0], progress[1]) * 100 + '%',
-              width: Math.abs(progress[1] - progress[0]) * 100 + '%',
-              backgroundColor: color
-            }
-          ]"
+          :style="{
+            left: Math.min(progress[0], progress[1]) * 100 + '%',
+            width: Math.abs(progress[1] - progress[0]) * 100 + '%'
+          }"
         ></div>
         <div
           class="fx-slider_thumb"
           data-thumb="true"
           data-index="0"
-          :style="[{ left: progress[0] * 100 + '%', color }]"
+          :style="{ left: progress[0] * 100 + '%' }"
         >
           {{ showValue ? formValue[0] : '' }}
         </div>
@@ -24,7 +25,7 @@
           class="fx-slider_thumb"
           data-thumb="true"
           data-index="1"
-          :style="[{ left: progress[1] * 100 + '%', color }]"
+          :style="{ left: progress[1] * 100 + '%' }"
         >
           {{ showValue ? formValue[1] : '' }}
         </div>
@@ -84,7 +85,7 @@ export default defineComponent({
         }
       })
 
-    const { slider, toInteger, rangeValue, value2Progress, getMinMax } =
+    const { slider, toInteger, rangeValue, value2Progress, getMinMax, styles } =
       useSlide(props, {
         getValue($target) {
           const { thumb, index } = $target.dataset
@@ -201,7 +202,8 @@ export default defineComponent({
       progress,
       formName,
       formValue,
-      validateAfterEventTrigger
+      validateAfterEventTrigger,
+      styles
     }
   }
 })

@@ -1,12 +1,10 @@
 @import '../style/var.scss';
 
 .fx-input {
-  --input-font-size: 17px;
-  --input-icon-size: 20px;
-  --input-color: #{$title-color};
-  --input-secondary-color: #{$font3-color};
-  --input-border-color: #{$border-color};
-  --input-focus-border-color: #{$primary-color};
+  --fx-font-size: 17px;
+  --fx-icon-size: 20px;
+  --fx-front-color: #{$title-color};
+  --fx-secondary-color: #{$font3-color};
 
   height: 48px;
   width: 100%;
@@ -14,24 +12,23 @@
   display: flex;
   align-items: center;
 
-  border: 1px solid var(--input-border-color);
+  border: 1px solid $border-color;
   border-radius: 0;
   box-sizing: border-box;
   padding: 11px 16px;
-  font-size: var(--input-font-size);
+  font-size: var(--fx-font-size);
   background-color: #fff;
-  color: var(--input-color);
+  color: var(--fx-front-color);
 
   .fx-icon {
-    --size: var(--input-icon-size);
-    --color: var(--input-secondary-color);
+    --size: var(--fx-icon-size);
+    --color: var(--fx-secondary-color);
   }
 
   &.disabled {
-    background-color: $background2-color;
-    --input-color: #{$font3-color};
-    -webkit-text-fill-color: $font3-color;
-    opacity: 1;
+    background-color: $background-color;
+    opacity: 0.2;
+    cursor: not-allowed;
   }
 
   &_prepend,
@@ -39,7 +36,7 @@
     display: flex;
     align-items: center;
     padding: 0 8px 0 0;
-    color: var(--input-secondary-color);
+    color: var(--fx-secondary-color);
   }
 
   &_append,
@@ -51,7 +48,7 @@
   &.has--value {
     .fx-input {
       &_arrow {
-        --color: var(--input-color);
+        --color: var(--fx-front-color);
       }
     }
   }
@@ -74,9 +71,9 @@
     height: 100%;
     line-height: 1.412;
     padding: 0;
-    font-size: var(--input-font-size);
+    font-size: var(--fx-font-size);
     cursor: pointer;
-    color: $title-color;
+    color: var(--fx-front-color);
     background: none;
     box-sizing: border-box;
     box-shadow: none;
@@ -99,16 +96,12 @@
     }
 
     &:disabled {
-      color: $font3-color;
-      -webkit-text-fill-color: $font3-color;
-      opacity: 1;
-      cursor: not-allowed;
       user-select: none;
     }
   }
 
   &.focus {
-    border-color: var(--input-focus-border-color);
+    border-color: $primary-color;
   }
 
   &_cover {

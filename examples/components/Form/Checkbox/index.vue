@@ -11,6 +11,9 @@
       <fx-cell label="默认激活">
         <fx-checkbox checked>勾选</fx-checkbox>
       </fx-cell>
+      <fx-cell label="自定义颜色">
+        <fx-checkbox checked activeColor="#8b1721">勾选</fx-checkbox>
+      </fx-cell>
       <fx-cell label="禁用">
         <fx-checkbox disabled>勾选</fx-checkbox>
       </fx-cell>
@@ -24,7 +27,7 @@
         </fx-checkbox-group>
       </fx-cell>
       <fx-cell label="内联">
-        <fx-checkbox-group inline>
+        <fx-checkbox-group inline activeColor="#8b1721">
           <fx-checkbox v-for="item in groups" :key="item" :value="item">{{
             item
           }}</fx-checkbox>

@@ -1,8 +1,9 @@
 import type { UseProps } from '../hooks/types'
 import { rangeNumber } from '@/helpers/util'
 import { useTouch } from '@/hooks/use-touch'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { addClassName, getRelativeOffset, removeClassName } from '@/helpers/dom'
+import type { StyleObject } from '../helpers/types'
 
 interface Coords {
   prevValue: number // 滑动之前value值
@@ -79,6 +80,14 @@ export function useSlide(props: UseProps, { move, end, getValue }: UseOptions) {
 
     move({ value: tempValue, progress: value2Progress(newVal), $target })
   }
+
+  const styles = computed(() => {
+    const obj: StyleObject = {}
+
+    props.color && (obj['--fx-color'] = props.color)
+
+    return obj
+  })
 
   useTouch({
     el: slider,
@@ -164,6 +173,7 @@ export function useSlide(props: UseProps, { move, end, getValue }: UseOptions) {
     toInteger,
     rangeValue,
     value2Progress,
-    getMinMax
+    getMinMax,
+    styles
   }
 }

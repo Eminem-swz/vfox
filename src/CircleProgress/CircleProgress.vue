@@ -1,7 +1,7 @@
 <template>
   <div
     class="fx-circle-progress"
-    :style="{ fontSize: Math.max(9, size * 0.17 * 0.875) + 'px' }"
+    :style="{ fontSize: Math.max(9, parseFloat(size as string) * 0.17 * 0.875) + 'px' }"
   >
     <LoadingIcon
       class="fx-circle-progress_bar"
@@ -43,7 +43,7 @@ export default defineComponent({
       required: true
     },
     size: {
-      type: Number,
+      type: [Number, String],
       default: 100
     },
     strokeWidth: {
@@ -51,8 +51,7 @@ export default defineComponent({
       default: 5.37
     },
     color: {
-      type: String,
-      default: null
+      type: String
     }
   },
   setup(props) {

@@ -15,13 +15,6 @@ import { Steps, Step } from 'vfox'
 | v-model:active-index | number  | 0      | 否   | 当前步骤对应的索引值 |
 | dot                  | boolean | false  | 否   | 是否开启小点样式     |
 
-## Steps CSS
-
-| 属性                 | 默认值  | 说明           |
-| -------------------- | ------- | -------------- |
-| --steps-color        | #8c8c8c | 步骤条默认颜色 |
-| --steps-active-color | #1890ff | 步骤条激活颜色 |
-
 ## Steps Slots
 
 ### 默认（#default）
@@ -41,13 +34,6 @@ import { Steps, Step } from 'vfox'
 | 属性  | 类型   | 默认值 | 必填 | 说明         |
 | ----- | ------ | ------ | ---- | ------------ |
 | title | string |        | 否   | 步骤子项标题 |
-
-## Step CSS
-
-| 属性                | 默认值  | 说明                                                          |
-| ------------------- | ------- | ------------------------------------------------------------- |
-| --step-color        | #8c8c8c | 步骤条默认颜色，不设置继承 [Steps](./Steps.md#steps-css) 组件 |
-| --step-active-color | #1890ff | 步骤条激活颜色，不设置继承 [Steps](./Steps.md#steps-css) 组件 |
 
 ## Step Slots
 

@@ -10,19 +10,12 @@ import { Radio, RadioGroup } from 'vfox'
 
 ## Radio Props
 
-| 属性            | 类型          | 默认值 | 必填 | 说明                                                                                          |
-| --------------- | ------------- | ------ | ---- | --------------------------------------------------------------------------------------------- |
+| 属性            | 类型          | 默认值 | 必填 | 说明                                                                                         |
+| --------------- | ------------- | ------ | ---- | -------------------------------------------------------------------------------------------- |
 | value           | string/number | ''     | 否   | 该项值，[RadioGroup](./Radio.md#radiogroup-单项选择器) 的 change 事件会携带 `radio` 的 value |
-| disabled        | boolean       | false  | 否   | 是否禁用                                                                                      |
-| v-model:checked | boolean       | false  | 否   | 当前是否选中，可用来设置默认选中                                                              |
-
-## Radio CSS
-
-| 属性                 | 默认值  | 说明       |
-| -------------------- | ------- | ---------- |
-| --radio-color        | #d9d9d9 | 图标色     |
-| --radio-active-color | #1890ff | 图标激活色 |
-| --radio-font-color   | #262626 | 文本色     |
+| disabled        | boolean       | false  | 否   | 是否禁用                                                                                     |
+| v-model:checked | boolean       | false  | 否   | 当前是否选中，可用来设置默认选中                                                             |
+| activeColor     | string        |        | 否   | 自定义激活态的图标颜色                                                                       |
 
 ## Radio Events
 
@@ -46,11 +39,12 @@ import { Radio, RadioGroup } from 'vfox'
 
 ## RadioGroup Props
 
-| 属性    | 类型          | 默认值 | 必填 | 说明                           |
-| ------- | ------------- | ------ | ---- | ------------------------------ |
-| name    | string        |        | 否   | [Form](./Form.md) 的标识       |
-| inline  | boolean       | false  | 否   | 是否使用内联布局，默认纵向布局 |
-| v-model | string/number | ''     | 否   | 当前选择子项的 value 值        |
+| 属性        | 类型          | 默认值 | 必填 | 说明                           |
+| ----------- | ------------- | ------ | ---- | ------------------------------ |
+| name        | string        |        | 否   | [Form](./Form.md) 的标识       |
+| inline      | boolean       | false  | 否   | 是否使用内联布局，默认纵向布局 |
+| v-model     | string/number | ''     | 否   | 当前选择子项的 value 值        |
+| activeColor | string        |        | 否   | 自定义子项激活态的图标颜色     |
 
 ## RadioGroup Events
 

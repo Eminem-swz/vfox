@@ -2,6 +2,7 @@
   <div
     class="fx-rate"
     :class="{ disabled: !!disabled, readonly: !!readonly }"
+    :style="styles"
     ref="root"
   >
     <input
@@ -25,7 +26,7 @@
         <Icon :icon="iconPattern + 'Outlined'" />
       </i>
       <i class="fx-rate_active-icon">
-        <Icon :icon="iconPattern + 'Filled'" :style="iconStyles" />
+        <Icon :icon="iconPattern + 'Filled'" />
       </i>
     </div>
   </div>
@@ -84,13 +85,18 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    activeColor: {
-      type: String,
-      default: ''
-    },
     readonly: {
       type: Boolean,
       default: false
+    },
+    color: {
+      type: String
+    },
+    activeColor: {
+      type: String
+    },
+    size: {
+      type: [Number, String]
     }
   },
   emits: formItemEmits,
@@ -144,14 +150,16 @@ export default defineComponent({
       capitalize(getEnumsValue(ALLOW_ICONS, props.pattern))
     )
 
-    const iconStyles = computed(() => {
-      const styles: StyleObject = {}
+    const styles = computed(() => {
+      const obj: StyleObject = {}
 
-      if (props.activeColor && !props.disabled) {
-        styles.fill = props.activeColor
-      }
+      props.color && (obj['--fx-color'] = props.color)
+      props.activeColor && (obj['--fx-active-color'] = props.activeColor)
+      props.size != null &&
+        props.size > 0 &&
+        (obj['--fx-size'] = parseFloat(props.size as string) + 'px')
 
-      return styles
+      return obj
     })
 
     const max = computed(() => {
@@ -165,6 +173,10 @@ export default defineComponent({
     useTouch({
       el: root,
       onTouchStart(e) {
+        if (props.disabled) {
+          return
+        }
+
         const { clientX } = e.touchObject
 
         let $target = e.target as HTMLElement
@@ -259,7 +271,7 @@ export default defineComponent({
       hookFormValue,
       validateAfterEventTrigger,
       iconPattern,
-      iconStyles,
+      styles,
       max,
       onHalfClick,
       onItemClick

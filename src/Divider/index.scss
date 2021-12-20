@@ -1,14 +1,14 @@
 @import '../style/var.scss';
 
 .fx-divider {
-  --divider-font-color: #{$font3-color};
-  --divider-border-color: #{$divider-color};
+  --fx-font-color: #{$font3-color};
+  --fx-color: #{$divider-color};
 
   display: flex;
   align-items: center;
   margin: 12px 0;
-  border: 0 solid var(--divider-border-color);
-  color: var(--divider-font-color);
+  border: 0 solid var(--fx-color);
+  color: var(--fx-font-color);
 
   &.fx-horizontal-hairline {
     &::before,

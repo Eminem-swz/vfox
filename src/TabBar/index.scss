@@ -1,16 +1,15 @@
 @import '../style/var.scss';
 
 .fx-tab-bar {
-  --tab-bar-color: #{$font-color};
-  --tab-bar-active-color: #{$primary-color};
-  --tab-bar-background-color: #fff;
+  --fx-color: #{$font-color};
+  --fx-active-color: #{$primary-color};
+  --fx-front-color: var(--fx-color);
 
   height: 52px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  background-color: var(--tab-bar-background-color);
 
   &::before,
   &::after {
@@ -40,7 +39,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--tab-bar-color);
+    color: var(--fx-front-color);
     font-size: 10px;
     line-height: 14px;
 
@@ -58,15 +57,11 @@
 
     .fx-icon {
       --size: 28px;
-      --color: var(--tab-bar-color);
+      --color: var(--fx-front-color);
     }
 
     &.active {
-      color: var(--tab-bar-active-color);
-
-      .fx-icon {
-        --color: var(--tab-bar-active-color);
-      }
+      --fx-front-color: var(--fx-active-color);
     }
   }
 }

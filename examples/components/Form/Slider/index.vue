@@ -74,8 +74,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import '@/style/var.scss';
-
 .slider {
   &-box {
     .fx-cell_content {

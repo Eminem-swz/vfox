@@ -8,7 +8,6 @@
     }"
     @click="onClick"
   >
-    <div class="fx-cell_cover"></div>
     <div class="fx-cell_header">
       <div class="fx-cell_icon" v-if="$slots.icon">
         <slot name="icon"></slot>

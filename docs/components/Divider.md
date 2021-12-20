@@ -15,9 +15,9 @@ import { Divider } from 'vfox'
 | title  | string  |        | 否   | 标题，设置后中间显示标题文本 |
 | dashed | boolean | false  | 否   | 是否虚线显示                 |
 
-## CSS
+## CSSProperties
 
-| 属性                   | 默认值  | 说明       |
-| ---------------------- | ------- | ---------- |
-| --divider-font-color   | #bfbfbf | 文本颜色   |
-| --divider-border-color | #f0f0f0 | 分割线颜色 |
+| 属性         | 默认值  | 说明       |
+| ------------ | ------- | ---------- |
+| color        | #bfbfbf | 文本颜色   |
+| border-color | #f0f0f0 | 分割线颜色 |

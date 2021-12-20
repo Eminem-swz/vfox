@@ -143,7 +143,7 @@ export default {
       background-color: $primary-color;
 
       &.even {
-        background-color: $primary-border-color;
+        background-color: $primary-color-5;
       }
     }
   }

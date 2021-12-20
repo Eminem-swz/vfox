@@ -1,11 +1,7 @@
 <template>
   <Badge
     class="fx-avatar"
-    :class="[
-      'size--' + size2,
-      'shape--' + shape2,
-      'color--' + (colorStyle || 'default')
-    ]"
+    :class="['size--' + size2, 'shape--' + shape2]"
     :style="styles"
     v-bind="{ ...$attrs, ...badge2 }"
   >
@@ -37,14 +33,14 @@ import { Icon } from '@/Icon'
 import { Badge } from '@/Badge'
 import { Image } from '@/Image'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { COlOR_STYLES } from '@/helpers/constants'
 import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '@/Avatar/avatar'
 import type { AvatarShapeType } from './types'
 import { useGroupItem } from '@/hooks/use-group'
 import { isNumber, inArray } from '@/helpers/util'
-import type { ColorStyle, StyleObject } from '../helpers/types'
+import type { StyleObject } from '../helpers/types'
 import { handleBadge } from '@/Badge/badge'
 import type { BadgeOptions } from '../Badge/types'
+import { getColorObject, isColorValue } from '@/helpers/color'
 
 type Gender = 'man' | 'woman'
 const GenderNames = ['woman', 'man']
@@ -74,11 +70,9 @@ export default defineComponent({
       type: String as PropType<Gender>,
       default: null
     },
-    // 色彩风格
-    colorStyle: {
-      type: String as PropType<ColorStyle>,
-      validator: createEnumsValidator(COlOR_STYLES),
-      default: null
+    color: {
+      type: [String, Object],
+      validator: isColorValue
     }
   },
   setup(props) {
@@ -114,6 +108,12 @@ export default defineComponent({
         obj.fontSize = size / 2 + 'px'
       }
 
+      const colorObj = getColorObject(props.color as string)
+      if (colorObj.hasColor) {
+        obj[`--fx-color`] = colorObj.varBackgroundColor
+        obj[`--fx-front-color`] = colorObj.varFrontColor
+      }
+
       return obj
     })
 
@@ -122,7 +122,7 @@ export default defineComponent({
 
       if (inArray(props.gender, GenderNames)) {
         badge = {
-          backgroundColor: props.gender === 'man' ? '#1890FF' : '#F759AB',
+          color: props.gender === 'man' ? '#1890FF' : '#F759AB',
           content: 1
         }
       } else {

@@ -39,12 +39,6 @@ import { ActionSheet } from 'vfox'
 ]
 ```
 
-## CSS
-
-| 属性                           | 默认值  | 说明     |
-| ------------------------------ | ------- | -------- |
-| --action-sheet-highlight-color | #ff4d4f | 高亮颜色 |
-
 ## Events
 
 | 事件                 | 描述           | 回调函数参数                                                    |

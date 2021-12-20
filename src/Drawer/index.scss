@@ -15,8 +15,8 @@
     box-sizing: border-box;
 
     .fx-nav-bar {
-      --nav-bar-height: 48px;
-      --nav-bar-background: transparent;
+      height: 48px;
+      background-color: transparent;
 
       &_title {
         color: $font-color;

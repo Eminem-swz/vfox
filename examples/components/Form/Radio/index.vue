@@ -11,6 +11,9 @@
       <fx-cell label="默认激活">
         <fx-radio checked>勾选</fx-radio>
       </fx-cell>
+      <fx-cell label="自定义颜色">
+        <fx-radio checked activeColor="#8b1721">勾选</fx-radio>
+      </fx-cell>
       <fx-cell label="禁用">
         <fx-radio disabled>勾选</fx-radio>
       </fx-cell>
@@ -23,7 +26,7 @@
         </fx-radio-group>
       </fx-cell>
       <fx-cell label="内联">
-        <fx-radio-group inline v-model="groupValue">
+        <fx-radio-group inline v-model="groupValue" activeColor="#8b1721">
           <fx-radio value="man">男</fx-radio>
           <fx-radio value="woman">女</fx-radio>
         </fx-radio-group>

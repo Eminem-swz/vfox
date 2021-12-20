@@ -1,9 +1,4 @@
-import type {
-  StateType,
-  PlacementType,
-  ColorStyle,
-  SizeType
-} from './helpers/types'
+import type { StateType, PlacementType, SizeType } from './helpers/types'
 
 import type {
   PopupVisibleStateChangeArgs,
@@ -61,7 +56,6 @@ export {
   // type
   StateType,
   PlacementType,
-  ColorStyle,
   SizeType,
   // Popup
   PopupVisibleStateChangeArgs,

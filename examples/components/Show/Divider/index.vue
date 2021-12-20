@@ -26,7 +26,7 @@ export default {
 @import '@/style/var.scss';
 
 .divider-custom-color {
-  --divider-font-color: #{$primary-color} !important;
-  --divider-border-color: #{$primary-background-color} !important;
+  color: $primary-color;
+  border-color: $primary-color-2;
 }
 </style>

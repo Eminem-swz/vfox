@@ -1,4 +1,4 @@
-import type { PlacementType, SizeType, StateType, ColorStyle } from './types'
+import type { PlacementType, SizeType, StateType } from './types'
 
 export const PLACEMENT_TYPES: PlacementType[] = [
   'bottom',
@@ -14,17 +14,3 @@ export const STATE_TYPES: StateType[] = [
   'success'
 ]
 export const SIZE_TYPES: SizeType[] = ['large', 'middle', 'small']
-export const COlOR_STYLES: ColorStyle[] = [
-  'DustRed',
-  'Volcano',
-  'SunsetOrange',
-  'CalendulaGold',
-  'SunriseYellow',
-  'Lime',
-  'PolarGreen',
-  'Cyan',
-  'DaybreakBlue',
-  'GeekBlue',
-  'GoldenPurple',
-  'Magenta'
-]

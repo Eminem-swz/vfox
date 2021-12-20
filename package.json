@@ -48,6 +48,7 @@
   "homepage": "https://github.com/godxiaoji/vfox#readme",
   "dependencies": {
     "async-validator": "^3.4.0",
+    "colorfuls": "^1.0.1",
     "dayjs": "^1.10.4",
     "safe-area-insets": "^1.4.1",
     "timeago.js": "^4.0.2"
@@ -75,7 +76,6 @@
     "@vue/test-utils": "^2.0.0-rc.16",
     "babel-jest": "^26.0.0",
     "chalk": "^4.1.0",
-    "colorfuls": "^1.0.1",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.2.0",

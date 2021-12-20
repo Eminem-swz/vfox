@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DatePickerView should render default correctly 1`] = `<picker-view-stub modelvalue="" formatstring="false" initialseparator="/" options="" fieldnames="[object Object]" handlers="[object Object]" class="fx-date-picker-view"></picker-view-stub>`;
+exports[`DatePickerView should render default correctly 1`] = `<picker-view-stub options="" fieldnames="[object Object]" class="fx-date-picker-view"></picker-view-stub>`;

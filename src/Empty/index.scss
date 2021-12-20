@@ -1,8 +1,6 @@
 @import '../style/var.scss';
 
 .fx-empty {
-  --empty-font-color: #{$font2-color};
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +14,7 @@
   }
 
   &_description {
-    color: var(--empty-font-color);
+    color: $font2-color;
     text-align: center;
     word-break: break-all;
     word-wrap: break-word;

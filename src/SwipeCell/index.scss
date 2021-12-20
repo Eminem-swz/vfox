@@ -2,6 +2,9 @@
 @import '../style/mixin.scss';
 
 .fx-swipe-cell {
+  --fx-color: #{$primary-color};
+  --fx-dark-color: #{$primary-color-7};
+
   cursor: grab;
   overflow: hidden;
 
@@ -37,11 +40,15 @@
     outline: 0;
     border-radius: 0;
     cursor: pointer;
-    background-color: #fff;
-    color: $title-color;
+    background-color: var(--fx-color);
+    color: #fff;
     white-space: pre-line;
     overflow: visible;
     transition: transform 0s ease;
+
+    &:active {
+      background-color: var(--fx-dark-color);
+    }
 
     &::before {
       content: '';
@@ -51,41 +58,25 @@
       height: 100%;
       width: 100vw;
       transform: translate3d(100%, 0, 0);
-      background-color: #fff;
-    }
-
-    &:active::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      @include background-active;
-    }
-
-    &.type--primary,
-    &.type--primary::before {
-      background-color: $primary-color;
-      color: #fff;
+      background-color: var(--fx-color);
     }
 
     &.type--success,
     &.type--success::before {
-      background-color: $success-color;
-      color: #fff;
+      --fx-color: #{$success-color};
+      --fx-dark-color: #{$success-color-7};
     }
 
     &.type--warning,
     &.type--warning::before {
-      background-color: $warning-color;
-      color: #fff;
+      --fx-color: #{$warning-color};
+      --fx-dark-color: #{$warning-color-7};
     }
 
     &.type--danger,
     &.type--danger::before {
-      background-color: $danger-color;
-      color: #fff;
+      --fx-color: #{$danger-color};
+      --fx-dark-color: #{$danger-color-7};
     }
   }
 }

@@ -4,10 +4,11 @@
   display: inline-block;
   position: relative;
   vertical-align: top;
-  --badge-background-color: #{$danger-color};
-  --badge-color: #fff;
 
   &_badge {
+    --fx-color: #{$danger-color};
+    --fx-front-color: #fff;
+
     position: absolute;
     height: 17px;
     min-width: 17px;
@@ -20,15 +21,15 @@
     box-sizing: border-box;
     font-size: 11px;
     font-weight: 400;
-    color: var(--badge-color);
-    background-color: var(--badge-background-color);
+    color: var(--fx-front-color);
+    background-color: var(--fx-color);
     transform: scale(0);
     border: 1px solid #fff;
     box-sizing: border-box;
 
     .fx-icon {
       --size: 11px;
-      --color: var(--badge-color);
+      --color: var(--fx-front-color);
       margin: 0 -4px;
     }
 

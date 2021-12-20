@@ -1,16 +1,14 @@
 @import '../style/var.scss';
 
 .fx-radio {
-  --radio-color: #{$border-color};
-  --radio-active-color: #{$primary-color};
-  --radio-font-color: #{$title-color};
-  --radio-icon-size: 20px;
+  --fx-active-color: #{$primary-color};
+  --fx-icon-size: 20px;
 
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   font-size: 17px;
-  color: var(--radio-font-color);
+  color: $title-color;
   text-align: left;
   position: relative;
 
@@ -29,13 +27,13 @@
 
   &_icon,
   &_checked-icon {
-    --size: var(--radio-icon-size);
-    --color: var(--radio-color);
+    --size: var(--fx-icon-size);
+    --color: #{$border-color};
   }
 
   &_checked-icon {
     display: none;
-    --color: var(--radio-active-color);
+    --color: var(--fx-active-color);
   }
 
   &_input {

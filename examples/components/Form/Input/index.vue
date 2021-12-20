@@ -41,7 +41,7 @@
         <fx-input type="text" modelValue="只读文本" :readonly="true" />
       </fx-cell>
       <fx-cell label="禁用 disabled">
-        <fx-input type="text" modelValue="只读文本" :disabled="true" />
+        <fx-input type="text" modelValue="禁用文本" :disabled="true" />
       </fx-cell>
       <fx-cell label="可清除 showClear">
         <fx-input

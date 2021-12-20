@@ -9,10 +9,10 @@
         ><fx-rate pattern="heart" modelValue="3"
       /></fx-cell>
       <fx-cell label="换色（激活色#F5A511）"
-        ><fx-rate class="rate-custom-color" modelValue="3"
+        ><fx-rate modelValue="3" activeColor="#F5A511"
       /></fx-cell>
       <fx-cell label="变小（size=16px）"
-        ><fx-rate class="rate-custom-size" modelValue="3"
+        ><fx-rate modelValue="3" size="16"
       /></fx-cell>
     </fx-group>
     <fx-group title="自定义数量">
@@ -53,18 +53,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-@import '@/style/var.scss';
-
-.rate {
-  &-custom-color {
-    --rate-active-color: #{$warning-color} !important;
-  }
-
-  &-custom-size {
-    --rate-size: 16px !important;
-  }
-}
-</style>

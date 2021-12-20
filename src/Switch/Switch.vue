@@ -1,5 +1,5 @@
 <template>
-  <label class="fx-switch" :class="{ disabled }">
+  <label class="fx-switch" :class="{ disabled }" :style="styles">
     <input
       class="fx-switch_checkbox"
       type="checkbox"
@@ -13,9 +13,10 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref, watch, defineComponent } from 'vue'
+import { onMounted, ref, watch, defineComponent, computed } from 'vue'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import { useFormItem } from '@/Form/use-form'
+import type { StyleObject } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-switch',
@@ -24,6 +25,15 @@ export default defineComponent({
     modelValue: {
       type: Boolean,
       default: false
+    },
+    color: {
+      type: String
+    },
+    activeColor: {
+      type: String
+    },
+    size: {
+      type: [Number, String]
     }
   },
   emits: formItemEmits,
@@ -71,12 +81,25 @@ export default defineComponent({
       $input.defaultChecked = $input.checked = formValue.value
     })
 
+    const styles = computed(() => {
+      const obj: StyleObject = {}
+
+      props.color && (obj['--fx-color'] = props.color)
+      props.activeColor && (obj['--fx-active-color'] = props.activeColor)
+      props.size != null &&
+        props.size > 0 &&
+        (obj['--fx-size'] = parseFloat(props.size as string) + 'px')
+
+      return obj
+    })
+
     return {
       formName,
       formValue,
       onChange,
       hookFormValue,
-      validateAfterEventTrigger
+      validateAfterEventTrigger,
+      styles
     }
   }
 })

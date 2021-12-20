@@ -22,5 +22,6 @@
     "resolveJsonModule": true,
     "types": ["vite/client", "jest"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.vue"],
+  "exclude": ["**/*.spec.ts", "**/*.spec.js"]
 }

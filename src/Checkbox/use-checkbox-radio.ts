@@ -16,6 +16,7 @@ import { useGroup, useGroupItem } from '@/hooks/use-group'
 import type { UseProps, UseCtx } from '../hooks/types'
 import type { HookFormValue } from '../Form/types'
 import type { ModelValue } from './types'
+import type { StyleObject } from '../helpers/types'
 
 interface Options {
   formName: string
@@ -114,11 +115,24 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
     }
   })
 
+  const styles = computed(() => {
+    const { activeColor } = options?.props || props
+    const obj: StyleObject = {}
+
+    activeColor && (obj['--fx-active-color'] = activeColor)
+    // size != null &&
+    //   size > 0 &&
+    //   (obj['--fx-size'] = parseFloat(size as string) + 'px')
+
+    return obj
+  })
+
   return {
     input,
     formName,
     disabled2,
-    onChange
+    onChange,
+    styles
   }
 }
 

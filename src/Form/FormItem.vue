@@ -1,6 +1,5 @@
 <template>
   <label class="fx-form-item fx-cell fx-horizontal-hairline" @click="onClick">
-    <div class="fx-cell_cover"></div>
     <div class="fx-cell_header">
       <div class="fx-cell_label" v-if="label">
         {{ label }}

@@ -4,7 +4,6 @@ exports[`Form Form should render default correctly 1`] = `<form class="fx-form">
 
 exports[`Form FormItem should render default correctly 1`] = `
 <label class="fx-form-item fx-cell fx-horizontal-hairline">
-  <div class="fx-cell_cover"></div>
   <div class="fx-cell_header">
     <!--v-if-->
     <div class="fx-cell_content"></div>

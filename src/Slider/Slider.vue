@@ -1,15 +1,15 @@
 <template>
-  <div class="fx-slider" :class="{ disabled: !!disabled }">
+  <div class="fx-slider" :class="{ disabled: !!disabled }" :style="styles">
     <div class="fx-slider_inner" ref="slider">
       <div class="fx-slider_box">
         <div
           class="fx-slider_track"
-          :style="[{ width: progress * 100 + '%', backgroundColor: color }]"
+          :style="{ width: progress * 100 + '%' }"
         ></div>
         <div
           class="fx-slider_thumb"
           data-thumb="true"
-          :style="[{ left: progress * 100 + '%', color }]"
+          :style="{ left: progress * 100 + '%' }"
         >
           {{ showValue ? formValue : '' }}
         </div>
@@ -55,21 +55,24 @@ export default defineComponent({
         formValue
       })
 
-    const { slider, toInteger, rangeValue, value2Progress } = useSlide(props, {
-      getValue() {
-        return formValue.value
-      },
-      move({ value: newVal, progress: newProgress }) {
-        formValue.value = newVal
-        progress.value = newProgress
+    const { slider, toInteger, rangeValue, value2Progress, styles } = useSlide(
+      props,
+      {
+        getValue() {
+          return formValue.value
+        },
+        move({ value: newVal, progress: newProgress }) {
+          formValue.value = newVal
+          progress.value = newProgress
 
-        inputModel()
-        eventEmit('input')
-      },
-      end({ isChange }) {
-        isChange && eventEmit('change')
+          inputModel()
+          eventEmit('input')
+        },
+        end({ isChange }) {
+          isChange && eventEmit('change')
+        }
       }
-    })
+    )
 
     function inputModel() {
       if (
@@ -119,7 +122,8 @@ export default defineComponent({
       progress,
       formName,
       formValue,
-      validateAfterEventTrigger
+      validateAfterEventTrigger,
+      styles
     }
   }
 })

@@ -1,8 +1,8 @@
 @import '../style/var.scss';
 
 .fx-steps {
-  --steps-color: #{$border-color};
-  --steps-active-color: #{$primary-color};
+  --fx-color: #{$primary-color};
+  --fx-dot-color: #{$border-color};
 
   &.dot .fx-step_index {
     width: 10px;
@@ -30,11 +30,6 @@
 }
 
 .fx-step {
-  --step-color: #{$border-color};
-  --step-active-color: #{$primary-color};
-  --step-color: var(--steps-color);
-  --step-active-color: var(--steps-active-color);
-
   position: relative;
 
   + .fx-step {
@@ -55,10 +50,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--step-color);
+    border: 1px solid var(--fx-dot-color);
     box-sizing: border-box;
     border-radius: 50%;
-    color: var(--step-color);
+    color: var(--fx-dot-color);
     background-color: #fff;
     font-size: 13px;
     font-weight: 500;
@@ -66,7 +61,7 @@
 
     .fx-icon {
       --size: 14px;
-      --color: var(--step-color);
+      --color: var(--fx-dot-color);
     }
   }
 
@@ -76,12 +71,13 @@
     top: 24px;
     width: 1px;
     height: 100%;
-    background-color: var(--step-color);
+    background-color: $border-color;
   }
 
   &_inner {
     padding: 12px 16px 12px 44px;
     overflow: hidden;
+    color: $font-color;
   }
 
   &_title {
@@ -92,7 +88,6 @@
     word-wrap: break-word;
     overflow: hidden;
     font-weight: 500;
-    color: $font-color;
 
     + .fx-step_content {
       margin-top: 4px;
@@ -111,7 +106,7 @@
     word-break: break-all;
     word-wrap: break-word;
     overflow: hidden;
-    color: $font2-color;
+    opacity: 0.8;
 
     a {
       text-decoration: none;
@@ -126,31 +121,22 @@
   }
 
   &.finish {
+    --fx-dot-color: var(--fx-color);
+
     .fx-step {
       &_line {
-        background-color: var(--step-active-color);
-      }
-
-      &_index {
-        border-color: var(--step-active-color);
-        color: var(--step-active-color);
-
-        .fx-icon {
-          --color: var(--step-active-color);
-        }
+        background-color: var(--fx-color);
       }
     }
   }
 
   &.active {
-    .fx-step {
-      &_line {
-        background-color: var(--step-color);
-      }
+    --fx-dot-color: var(--fx-color);
 
+    .fx-step {
       &_index {
-        border-color: var(--step-active-color);
-        background-color: var(--step-active-color);
+        border-color: var(--fx-color);
+        background-color: var(--fx-color);
         color: #fff;
 
         .fx-icon {
@@ -158,9 +144,8 @@
         }
       }
 
-      &_title,
-      &_content {
-        color: var(--step-active-color);
+      &_inner {
+        color: var(--fx-color);
       }
     }
   }
@@ -190,7 +175,6 @@
       font-size: 15px;
       line-height: 21px;
       min-height: 21px;
-      color: $title-color;
 
       + .fx-step_content {
         margin-top: 4px;
@@ -206,7 +190,7 @@
       .fx-step {
         &_title,
         &_content {
-          color: var(--step-active-color);
+          color: var(--fx-color);
         }
       }
     }

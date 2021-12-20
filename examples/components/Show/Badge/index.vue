@@ -49,6 +49,35 @@
         </fx-row>
       </div>
     </fx-group>
+    <fx-group title="自定义颜色">
+      <div class="badge-flex">
+        <fx-row :gutter="[16, 16]">
+          <fx-col :span="6">
+            <fx-badge :content="99" color="#6667AB">
+              <div class="badge-slot"></div>
+            </fx-badge>
+          </fx-col>
+          <fx-col :span="6">
+            <fx-badge :content="1" dot color="#6667AB">
+              <div class="badge-slot"></div>
+            </fx-badge>
+          </fx-col>
+          <fx-col :span="6">
+            <fx-badge :content="1" color="#E2C0BF">
+              <div class="badge-slot"></div>
+              <template #badge>
+                <fx-icon icon="CheckOutlined"></fx-icon>
+              </template>
+            </fx-badge>
+          </fx-col>
+          <fx-col :span="6">
+            <fx-badge content="惠" color="#E2C0BF">
+              <div class="badge-slot"></div>
+            </fx-badge>
+          </fx-col>
+        </fx-row>
+      </div>
+    </fx-group>
     <fx-group title="限制最大数">
       <div class="badge-flex">
         <fx-row :gutter="[16, 16]">

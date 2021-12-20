@@ -2,6 +2,7 @@
   <label
     class="fx-radio fx-horizontal-hairline"
     :class="{ disabled: disabled2 }"
+    :style="styles"
   >
     <input
       class="fx-radio_input fx-form-input"
@@ -44,9 +45,8 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    color: {
-      type: String,
-      default: ''
+    activeColor: {
+      type: String
     },
     name: {
       type: String,

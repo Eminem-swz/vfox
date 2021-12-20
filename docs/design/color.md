@@ -69,7 +69,7 @@ app.use(Vfox)
 
 ## 自定义色彩
 
-前面提到了 Ant Design 的色卡算法，在组件库都有相应的应用，比如 `Button`, `Tag`, `NoticeBar`。
+前面提到了 Ant Design 的色卡算法，在部分组件都有相应的应用，比如 `Button`, `Tag`, `NoticeBar`, `Badge`, `Avatar`。
 
 除了主题自带的四种颜色，同时也支持单独颜色自定义，和其他 UI 库 不同的是，只需要传入一种颜色就可以完成整个组件的效果渲染。如：2022 年流行色 <font color="#6667AB">长春花色</font> 和 <font color="#E2C0BF">莲花色</font>。
 

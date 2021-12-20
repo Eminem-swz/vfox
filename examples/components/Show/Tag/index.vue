@@ -94,8 +94,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import '@/style/var.scss';
-
 .tag {
   &-compact-box {
     .fx-tag + .fx-tag {

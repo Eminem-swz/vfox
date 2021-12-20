@@ -161,7 +161,7 @@ export default {
     background-clip: content-box;
 
     &:nth-child(even) {
-      background-color: $primary-border-color;
+      background-color: $primary-color-5;
     }
   }
 }
