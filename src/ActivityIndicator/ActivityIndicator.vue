@@ -2,15 +2,15 @@
   <LoadingIcon
     class="fx-activity-indicator"
     :class="{ animated }"
-    :size="size"
+    :size="nSize"
     :rate="0.2"
-    :strokeWidth="0.0537 * parseFloat(size as string)"
+    :strokeWidth="0.0537 * nSize"
     :color="color"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { LoadingIcon } from '@/LoadingIcon'
 
 export default defineComponent({
@@ -28,6 +28,13 @@ export default defineComponent({
     // 主色
     color: {
       type: String
+    }
+  },
+  setup(props) {
+    return {
+      nSize: computed(() => {
+        return parseFloat(props.size as string)
+      })
     }
   }
 })

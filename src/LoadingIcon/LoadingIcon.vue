@@ -10,7 +10,7 @@
       r="448"
       cx="512"
       cy="512"
-      :stroke-width="(strokeWidth / parseFloat(size as string)) * 896"
+      :stroke-width="(strokeWidth / size) * 896"
       fill="none"
       :style="{ stroke: backgroundColor }"
     ></circle>
@@ -21,7 +21,7 @@
       cy="512"
       :stroke="color"
       :stroke-dasharray="314 * 8.96 * rate + ',' + 314 * 8.96"
-      :stroke-width="(strokeWidth / parseFloat(size as string)) * 896"
+      :stroke-width="(strokeWidth / size) * 896"
       fill="none"
       transform="rotate(-90,512,512)"
       stroke-linecap="round"
@@ -42,7 +42,7 @@ export default defineComponent({
       required: true
     },
     size: {
-      type: [Number, String],
+      type: Number,
       default: 100
     },
     strokeWidth: {

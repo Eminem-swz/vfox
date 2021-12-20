@@ -1,11 +1,11 @@
 <template>
   <div
     class="fx-circle-progress"
-    :style="{ fontSize: Math.max(9, parseFloat(size as string) * 0.17 * 0.875) + 'px' }"
+    :style="{ fontSize: Math.max(9, nSize * 0.17 * 0.875) + 'px' }"
   >
     <LoadingIcon
       class="fx-circle-progress_bar"
-      :size="size"
+      :size="nSize"
       :rate="rate"
       :strokeWidth="strokeWidth"
       :color="color"
@@ -56,6 +56,9 @@ export default defineComponent({
   },
   setup(props) {
     return {
+      nSize: computed(() => {
+        return parseFloat(props.size as string)
+      }),
       rate: computed(() => {
         return rangeInteger(props.percentage, 0, 100) / 100
       }),

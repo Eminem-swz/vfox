@@ -56,8 +56,8 @@ async function build() {
         tsconfigOverride: {
           compilerOptions: {
             declaration: true
-          }
-          // include: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.vue']
+          },
+          include: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.vue']
         },
         abortOnError: false,
         clean: true

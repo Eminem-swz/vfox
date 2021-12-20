@@ -3,7 +3,6 @@ import Notify from './Notify.vue'
 import { createAlertHook, createShowPopup, createHidePopup } from '@/popup/api'
 import type { PopupSuccessAlertArgs } from '../popup/types'
 import type { StateType } from '../helpers/types'
-import { options } from 'examples/components/Form/Picker/data'
 
 const showNotify = createShowPopup<
   | string
