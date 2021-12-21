@@ -1386,5 +1386,14 @@ const req =
     return req;
   })();
 
-const requireAll = requireContext => requireContext.keys().map(requireContext);
-requireAll(req);
+
+const obj = {};
+
+req
+  .keys()
+  .map(req)
+  .forEach(v => {
+    obj[v.default.id] = v.default;
+  });
+
+export { obj as default };
