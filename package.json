@@ -12,7 +12,7 @@
   "scripts": {
     "test:unit": "jest --detectOpenHandles",
     "build:umd": "rollup -c ./build/build.umd.js",
-    "build:svg": "svgjs -d ./assets/icons -o ./src/Icon/icons.js",
+    "build:svg": "svgjs -c ./build/build.svg.config.js",
     "lint": "eslint . --ext .js,.ts,.vue,.jsx,.tsx",
     "lint:fix": "eslint . --ext .js,.ts,.vue,.jsx,.tsx --fix",
     "build:css": "node ./build/build.css.js",
@@ -99,7 +99,7 @@
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.44.0",
     "semantic-release": "^18.0.1",
-    "svg-sprites-cli": "^0.0.3",
+    "svg-sprites-cli": "^0.1.0",
     "through2": "^4.0.2",
     "ts-jest": "^26.0.0",
     "tslib": "^2.3.1",

@@ -9940,13 +9940,14 @@ svg-baker@^1.7.0:
     query-string "^4.3.2"
     traverse "^0.6.6"
 
-svg-sprites-cli@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmmirror.com/svg-sprites-cli/download/svg-sprites-cli-0.0.3.tgz#727fd7f932f6a19574185982414de7391e1ce5f9"
-  integrity sha512-07ny6ABohz/tpBlQrMHLyWMURdbVS7C7B2RGQvAx0fzcOtI8/kUcgJ523R80tK/CvDqMxxIBh+czD2InrjkX8A==
+svg-sprites-cli@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmmirror.com/svg-sprites-cli/download/svg-sprites-cli-0.1.0.tgz#30a462e22052938e39df055567ee77a8ad1ab963"
+  integrity sha512-33EoiF89oZTg1VfLqTfQTm0WghI8p46gZW/sADm0khdFr1u6s2zcPvhCMVqX80shSQPH3l3s5ct0ejG3+NAOPg==
   dependencies:
     "@godxiaoji/rollup-plugin-require-context" "^1.0.1"
     commander "^8.3.0"
+    deepmerge "^4.2.2"
     rollup "^2.61.1"
     rollup-plugin-svg-sprites "^1.1.1"
 
