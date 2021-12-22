@@ -1,5 +1,49 @@
 <template>
   <div>
+    <FormProvider :form="form2">
+      <Field
+        name="input"
+        title="1111"
+        required
+        :component="[Input, { placeholder: '请输入2' }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="season"
+        title="季节"
+        required
+        :component="[
+          Picker,
+          { options: multiOptions, placeholder: '选择季节' }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="birthday"
+        title="生日"
+        required
+        :component="[Calendar, { placeholder: '选择生日' }]"
+        :decorator="[FormItem]"
+      />
+      <FormConsumer>
+        <template #default="{ form }">
+          <div style="white-space: pre; margin-bottom: 16px">
+            {{ JSON.stringify(form.values, null, 2) }}
+          </div>
+          <Button
+            type="primary"
+            @click="
+              () => {
+                form.submit(log)
+              }
+            "
+          >
+            Submit
+          </Button>
+        </template>
+      </FormConsumer>
+    </FormProvider>
+    <!-- 
     <fx-group title="基础用法">
       <fx-form @validate-submit="onSubmit" @reset="onReset" :rules="rules">
         <fx-form-item name="nickname" label="昵称" required>
@@ -93,18 +137,43 @@
           <fx-button type="primary" form-type="submit">提交</fx-button>
         </div>
       </fx-form>
-    </fx-group>
+    </fx-group> -->
   </div>
 </template>
 
 <script>
 import { multiOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
+import { Input } from '@/Input'
+import { Picker } from '@/Picker'
+import { Calendar } from '@/Calendar'
+import { FormItem } from '@/Form'
+import {
+  createForm,
+  registerValidateLocale,
+  setValidateLanguage
+} from '@formily/core'
+import { FormProvider, Field, FormConsumer } from '@formily/vue'
+
+setValidateLanguage('zh-CN')
+
+registerValidateLocale({
+  'zh-CN': {
+    required: '定制的必填校验文案'
+  }
+})
 
 export default {
   name: 'ExpForm',
+  components: { FormProvider, Field, FormConsumer },
   data() {
     return {
+      FormItem,
+      Input,
+      Picker,
+      Calendar,
+      form2: createForm({ validateFirst: true }),
+
       ageVisible: false,
       regionOptions,
       rules: {
@@ -204,6 +273,9 @@ export default {
         }
         fr.readAsDataURL(file)
       })
+    },
+    log(...args) {
+      console.log(...args)
     }
   }
 }

@@ -12,7 +12,7 @@
       :formLabelString="formLabelString"
       :formValueString="formValueString"
       :disabled="disabled"
-      :formName="formName"
+      :formName="name"
       :placeholder="placeholder"
       @field-click="onFieldClick"
     />
@@ -25,7 +25,7 @@
       :parser="parser"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
-      @change="onChange"
+      @confirm="onConfirm"
       ref="popup"
     />
   </div>

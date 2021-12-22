@@ -66,7 +66,7 @@ export const pickerPopupProps = {
   }
 }
 
-export const pickerViewEmits = ['change', 'update:modelValue', '_change']
+export const pickerViewEmits = ['change', 'update:modelValue']
 
 export const labelFormatter = (labelArray: string[]) => {
   return labelArray.join('/')

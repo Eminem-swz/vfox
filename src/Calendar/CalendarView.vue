@@ -104,7 +104,7 @@ const defaultWeekDays: WeekDay[] = [
 export default defineComponent({
   name: 'fx-calendar-view',
   props: { ...commonProps },
-  emits: ['select', 'update:modelValue'],
+  emits: ['select', 'update:modelValue', 'change'],
   setup(props, { emit }) {
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)
 
@@ -486,6 +486,7 @@ export default defineComponent({
 
     function onSelect() {
       emit('update:modelValue', getDetail().value)
+      emit('change', getDetail().value)
       emit('select', getDetail())
     }
 

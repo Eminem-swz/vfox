@@ -5,7 +5,7 @@
       'has--prepend': $slots.prepend,
       'has--append': $slots.append,
       'fx-textarea': type === 'textarea',
-      focus: focus2,
+      focus: active,
       disabled
     }"
   >
@@ -15,7 +15,7 @@
     <textarea
       v-if="type === 'textarea'"
       class="fx-input_input fx-input_textarea"
-      :name="formName"
+      :name="name"
       :disabled="disabled"
       :placeholder="placeholder"
       :readonly="readonly"
@@ -29,7 +29,7 @@
     <input
       v-else
       class="fx-input_input"
-      :name="formName"
+      :name="name"
       :type="inputType"
       :inputmode="inputMode"
       :disabled="disabled"
@@ -45,11 +45,11 @@
       ref="input"
     />
     <span class="fx-input_limit" v-if="showLimit && maxLength > 0"
-      >{{ formValue.length }}/{{ maxLength }}</span
+      >{{ inputValue.length }}/{{ maxLength }}</span
     >
     <Icon
       v-if="showClear"
-      v-show="formValue && focus2"
+      v-show="inputValue && active"
       class="fx-input_clear"
       icon="CloseCircleFilled"
       @mousedown.prevent="onClear"
@@ -67,7 +67,6 @@ import { isNumeric, isNumber, isStringNumberMix } from '@/helpers/util'
 import { formatInputDigit, formatInputNumber } from '@/helpers/input'
 import { getEnumsValue } from '@/helpers/validator'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
 
 const TYPE_NAMES = [
   'text',
@@ -124,19 +123,10 @@ export default defineComponent({
   },
   emits: [...formItemEmits, 'input', 'focus', 'blur'],
   setup(props, ctx) {
-    const focus2 = ref(false)
-    const formValue = ref('')
+    const inputEl = ref()
+    const active = ref(false)
+    const inputValue = ref('')
     const { emit } = ctx
-
-    const {
-      formName,
-      validateAfterEventTrigger,
-      getInputEl,
-      hookFormValue,
-      eventEmit
-    } = useFormItem<string>(props, ctx, {
-      formValue
-    })
 
     function updateValue(value: string | number) {
       value = value.toString() as string
@@ -154,22 +144,23 @@ export default defineComponent({
           break
       }
 
-      const $input = getInputEl()
       let isChange = false
 
-      if ($input.value != value) {
-        $input.value = value.toString()
+      const $input = getInputEl()
+      if ($input) {
+        if ($input.value != value) {
+          $input.value = value.toString()
+        }
+        value = $input.value
       }
 
-      value = $input.value
-
-      if (value !== formValue.value) {
-        formValue.value = value.toString()
+      if (value !== inputValue.value) {
+        inputValue.value = value.toString()
         isChange = true
       }
 
       if (value != props.modelValue) {
-        emit('update:modelValue', formValue.value)
+        emit('update:modelValue', inputValue.value)
       }
 
       return { value, isChange }
@@ -193,15 +184,13 @@ export default defineComponent({
     }
 
     function onFocus(e: Event) {
-      focus2.value = true
+      active.value = true
       emit(e.type, e)
     }
 
     function onBlur(e: Event) {
-      focus2.value = false
+      active.value = false
       emit(e.type, e)
-
-      validateAfterEventTrigger(e.type, formValue.value)
     }
 
     function onInput(e: Event) {
@@ -211,7 +200,7 @@ export default defineComponent({
     }
 
     function onChange(e: Event) {
-      eventEmit(e.type)
+      emit(e.type, inputValue.value)
     }
 
     function onClear() {
@@ -265,7 +254,7 @@ export default defineComponent({
     watch(
       () => props.modelValue,
       val => {
-        val != formValue.value && updateValue(val ?? '')
+        val != inputValue.value && updateValue(val ?? '')
       }
     )
 
@@ -274,9 +263,13 @@ export default defineComponent({
       val => {
         const $input = getInputEl()
 
-        $input && ($input as HTMLInputElement)[val ? 'focus' : 'blur']()
+        $input && $input[val ? 'focus' : 'blur']()
       }
     )
+
+    function getInputEl(): undefined | HTMLInputElement {
+      return inputEl.value
+    }
 
     const maxLength = computed(() => {
       if (isNumber(props.maxlength)) {
@@ -292,16 +285,17 @@ export default defineComponent({
     onMounted(() => {
       updateValue(props.modelValue ?? '')
 
-      const $input = getInputEl() as HTMLInputElement
+      const $input = getInputEl()
 
-      $input.defaultValue = $input.value
-      props.focus && $input.focus()
+      if ($input) {
+        $input.defaultValue = $input.value
+        props.focus && $input.focus()
+      }
     })
 
     return {
-      formName,
-      formValue,
-      focus2,
+      inputValue,
+      active,
       onCompositionStart,
       onCompositionEnd,
       onFocus,
@@ -309,7 +303,6 @@ export default defineComponent({
       onInput,
       onChange,
       onClear,
-      hookFormValue,
       inputType,
       inputMode,
       maxLength

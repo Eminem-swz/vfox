@@ -47,6 +47,8 @@
   ],
   "homepage": "https://github.com/godxiaoji/vfox#readme",
   "dependencies": {
+    "@formily/core": "^2.0.6",
+    "@formily/vue": "^2.0.6",
     "async-validator": "^3.4.0",
     "colorfuls": "^1.0.1",
     "dayjs": "^1.10.4",

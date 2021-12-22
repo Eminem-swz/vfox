@@ -1,12 +1,12 @@
 <template>
   <div class="fx-calendar" :class="{ disabled }" ref="root">
-    <PickerInput
-      :formLabelString="formLabelString"
-      :formValueString="formValueString"
+    <SelectorField
+      :label="fieldLabel"
+      :value="fieldValue"
       :disabled="disabled"
-      :formName="formName"
+      :name="name"
       :placeholder="placeholder"
-      @field-click="onFieldClick"
+      @fieldClick="onFieldClick"
     />
     <CalendarPopup
       :modelValue="modelValue"
@@ -29,21 +29,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, watch } from 'vue'
-import { PickerInput } from '@/PickerInput'
+import { defineComponent, ref, watch } from 'vue'
+import { SelectorField } from '@/SelectorField'
 import { CalendarPopup } from '@/CalendarPopup'
 import { getDefaultDetail, MODE_NAMES, commonProps } from '@/Calendar/calendar'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
 import { getEnumsValue } from '@/helpers/validator'
 import type { CalendarDetail } from './types'
 import { useHandlers } from '@/Calendar/use-calendar'
 import { cloneDetail, isSameValue } from '@/Picker/util'
-import type { PickerModelValue, PickerValue } from '../Picker/types'
+import type { PickerModelValue } from '../Picker/types'
 
 export default defineComponent({
   name: 'fx-calendar',
-  components: { PickerInput, CalendarPopup },
+  components: { SelectorField, CalendarPopup },
   props: {
     ...commonProps,
     ...formItemProps,
@@ -60,15 +59,15 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...formItemEmits],
+  emits: [...formItemEmits, 'focus', 'blur'],
   setup(props, ctx) {
     const { emit } = ctx
     const isInitPopup = ref(false)
     const popupVisible = ref(true)
-    const formLabelString = ref('')
-    const formValueString = ref('')
-    const formValue = reactive<number[]>([])
+    const fieldLabel = ref('')
+    const fieldValue = ref('')
     const popup = ref()
+    const root = ref<HTMLElement>()
 
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)
 
@@ -88,10 +87,11 @@ export default defineComponent({
     function updateDetail(_detail: CalendarDetail) {
       detail = _detail
 
-      formLabelString.value = _detail.label
-      formValueString.value =
-        detail.value != null ? detail.value.toString() : ''
-      formValue.splice(0, Infinity, ...parser(getDetail().value))
+      fieldLabel.value = _detail.label
+      fieldValue.value =
+        detail.value != null
+          ? detail.valueArray.map(v => v.join('-')).join(',')
+          : ''
 
       return getDetail()
     }
@@ -117,19 +117,10 @@ export default defineComponent({
 
       updateDetail(_detail)
 
-      _changeValue = hookFormValue()
-      emit('update:modelValue', hookFormValue())
-      emit('change', getDetail())
-
-      validateAfterEventTrigger('change', hookFormValue())
+      _changeValue = getDetail().value
+      emit('update:modelValue', getDetail().value)
+      emit('change', getDetail().value)
     }
-
-    const { formName, validateAfterEventTrigger, hookFormValue, root } =
-      useFormItem<PickerValue>(props, ctx, {
-        formValue,
-        hookFormValue: () => getDetail().value,
-        hookResetValue: () => updateValue(formatter([]).value).value
-      })
 
     watch(
       () => props.modelValue,
@@ -142,19 +133,23 @@ export default defineComponent({
       }
     )
 
+    watch([isInitPopup, popupVisible], vals => {
+      if (vals[0] && vals[1]) {
+        emit('focus')
+      } else if (!vals[1]) {
+        emit('blur')
+      }
+    })
+
     updateValue(props.modelValue)
 
     return {
       root,
       isInitPopup,
       popupVisible,
-      formName,
-      formLabelString,
-      formValue,
-      formValueString,
+      fieldLabel,
+      fieldValue,
       popup,
-      hookFormValue,
-      validateAfterEventTrigger,
       onFieldClick,
       onConfirm
     }

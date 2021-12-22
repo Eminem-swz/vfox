@@ -63,7 +63,7 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...popupExtendEmits, 'update:modelValue'],
+  emits: [...popupExtendEmits, 'update:modelValue', 'change'],
   setup(props, ctx) {
     const calendarView = ref()
     const valueSize = ref(0)
@@ -92,6 +92,7 @@ export default defineComponent({
       updateDetail(calendarView.value.getDetail())
 
       popup.emit('update:modelValue', getDetail().value)
+      popup.emit('change', getDetail().value)
       popup.customConfirm(getDetail())
     }
 

@@ -3,7 +3,7 @@
     class="fx-picker-popup"
     placement="bottom"
     :visible="visible"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
     @cancel="onCancel"
     @confirm="onConfirm"
     @update:visible="onUpdateVisible"
