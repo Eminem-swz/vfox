@@ -59,9 +59,8 @@ export interface CalendarValueParser {
   (value: unknown, mode: CalendarMode): Date[]
 }
 
-export interface CalendarChangeArgs extends CalendarDetail {
-  type: 'change'
-}
+export type CalendarChangeArgs = PickerModelValue
+
 export interface CalendarSelectArgs extends CalendarDetail {
   type: 'select'
 }

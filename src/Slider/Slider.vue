@@ -11,14 +11,14 @@
           data-thumb="true"
           :style="{ left: progress * 100 + '%' }"
         >
-          {{ showValue ? formValue : '' }}
+          {{ showValue ? inputValue : '' }}
         </div>
       </div>
       <input
         type="hidden"
-        :name="formName"
+        :name="name"
         :disabled="disabled"
-        :value="formValue"
+        :value="inputValue"
         ref="input"
       />
     </div>
@@ -29,7 +29,6 @@
 import { ref, defineComponent, watch, nextTick } from 'vue'
 import { isNumeric } from '@/helpers/util'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
 import { slideProps, slideEmits } from '@/Slider/slide'
 import { useSlide } from '@/Slider/use-slide'
 
@@ -47,39 +46,34 @@ export default defineComponent({
   emits: [...formItemEmits, ...slideEmits],
   setup(props, ctx) {
     const progress = ref(0)
-    const formValue = ref(0)
+    const inputValue = ref(0)
     const { emit } = ctx
-
-    const { formName, validateAfterEventTrigger, hookFormValue, eventEmit } =
-      useFormItem<number>(props, ctx, {
-        formValue
-      })
 
     const { slider, toInteger, rangeValue, value2Progress, styles } = useSlide(
       props,
       {
         getValue() {
-          return formValue.value
+          return inputValue.value
         },
         move({ value: newVal, progress: newProgress }) {
-          formValue.value = newVal
+          inputValue.value = newVal
           progress.value = newProgress
 
-          inputModel()
-          eventEmit('input')
+          emitModel()
+          emit('input', inputValue.value)
         },
         end({ isChange }) {
-          isChange && eventEmit('change')
+          isChange && emit('change', inputValue.value)
         }
       }
     )
 
-    function inputModel() {
+    function emitModel() {
       if (
         props.modelValue == null ||
-        formValue.value !== toInteger(props.modelValue)
+        inputValue.value !== toInteger(props.modelValue)
       ) {
-        emit('update:modelValue', hookFormValue())
+        emit('update:modelValue', inputValue.value)
       }
     }
 
@@ -96,8 +90,8 @@ export default defineComponent({
 
       newVal = rangeValue(newVal)
 
-      if (newVal !== formValue.value) {
-        formValue.value = newVal
+      if (newVal !== inputValue.value) {
+        inputValue.value = newVal
         progress.value = value2Progress(newVal)
       }
     }
@@ -109,20 +103,18 @@ export default defineComponent({
 
     watch([() => props.min, () => props.max], () => {
       nextTick(() => {
-        updateValue(formValue.value)
-        inputModel()
+        updateValue(inputValue.value)
+        emitModel()
       })
     })
 
     updateValue(props.modelValue || 0)
-    inputModel()
+    emitModel()
 
     return {
       slider,
       progress,
-      formName,
-      formValue,
-      validateAfterEventTrigger,
+      inputValue,
       styles
     }
   }

@@ -46,10 +46,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 
-export default {
+export default defineComponent({
   name: 'ExpRange',
   data() {
     return {
@@ -68,14 +69,14 @@ export default {
     }
   },
   methods: {
-    onInput({ value }) {
+    onInput(value: number[]) {
       showToast(`Input value: ${value}`)
     },
-    onChange({ value }) {
+    onChange(value: number[]) {
       showToast(`Change value: ${value}`)
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

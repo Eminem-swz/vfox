@@ -106,7 +106,7 @@ export default defineComponent({
     function onChangeEvent(e: DatePickerChangeArgs) {
       onChange(e)
 
-      showToast(`change: ${e.label}`)
+      showToast(`change: ${e}`)
     }
 
     return {

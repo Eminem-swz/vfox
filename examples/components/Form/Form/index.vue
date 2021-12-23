@@ -1,11 +1,43 @@
 <template>
-  <div>
+  <fx-group title="基础用法">
     <FormProvider :form="form2">
       <Field
-        name="input"
-        title="1111"
+        name="nickname"
+        title="昵称"
         required
-        :component="[Input, { placeholder: '请输入2' }]"
+        :component="[Input, { placeholder: '请输入昵称' }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="avatar"
+        title="头像"
+        required
+        :component="[
+          ImageUploader,
+          { uploadReady: onUpload, columnNumber: 1, maxCount: 1 }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="gender"
+        title="性别"
+        required
+        :component="[
+          RadioGroup,
+          {
+            options: [
+              { label: '男', value: 1 },
+              { label: '女', value: 2 }
+            ]
+          }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="weight"
+        title="体重Kg"
+        required
+        :component="[Slider, { showValue: true, min: 35, max: 120 }]"
         :decorator="[FormItem]"
       />
       <Field
@@ -25,34 +57,70 @@
         :component="[Calendar, { placeholder: '选择生日' }]"
         :decorator="[FormItem]"
       />
+      <Field
+        name="character"
+        title="性格"
+        required
+        :component="[CheckboxGroup, { options: characters }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="region"
+        title="地区"
+        required
+        :component="[
+          Cascader,
+          {
+            placeholder: '选择地区',
+            fieldNames: { value: 'label' },
+            options: regionOptions
+          }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="happinessIndex"
+        title="幸福指数"
+        required
+        :component="[Rate, { allowHalf: true }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="stepper"
+        title="步进器"
+        required
+        :component="[Stepper, { max: 10, step: 0.2, decimalLength: 1 }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="agree"
+        title="认可"
+        required
+        :component="[Switch]"
+        :decorator="[FormItem]"
+      />
       <FormConsumer>
         <template #default="{ form }">
-          <div style="white-space: pre; margin-bottom: 16px">
+          <div>
             {{ JSON.stringify(form.values, null, 2) }}
           </div>
-          <Button
+          <fx-button
             type="primary"
             @click="
               () => {
                 form.submit(log)
               }
             "
+            >提交</fx-button
           >
-            Submit
-          </Button>
         </template>
       </FormConsumer>
     </FormProvider>
-    <!-- 
+  </fx-group>
+  <!-- 
     <fx-group title="基础用法">
       <fx-form @validate-submit="onSubmit" @reset="onReset" :rules="rules">
-        <fx-form-item name="nickname" label="昵称" required>
-          <fx-input
-            v-model="form.nickname"
-            placeholder="请输入昵称"
-            @reset="onReset"
-          />
-        </fx-form-item>
+
         <fx-form-item name="avatar" label="头像" required>
           <fx-image-uploader
             v-model="form.avatar"
@@ -62,91 +130,33 @@
             :maxCount="1"
           />
         </fx-form-item>
-        <fx-form-item name="gender" label="性别" required>
-          <fx-radio-group v-model="form.gender" :inline="true" @reset="onReset">
-            <fx-radio value="1">男</fx-radio>
-            <fx-radio value="2">女</fx-radio>
-          </fx-radio-group>
-        </fx-form-item>
 
-        <fx-form-item name="season" label="季节" required>
-          <fx-picker
-            v-model="form.season"
-            :options="multiOptions"
-            placeholder="选择季节"
-            @reset="onReset"
-          />
-        </fx-form-item>
-        <fx-form-item name="birthday" label="生日" required>
-          <fx-calendar
-            v-model="form.birthday"
-            placeholder="选择生日"
-            @reset="onReset"
-          >
-          </fx-calendar>
-        </fx-form-item>
-        <fx-form-item name="region" label="地区" required>
-          <fx-cascader
-            :options="regionOptions"
-            :field-names="{ value: 'label' }"
-            v-model="form.region"
-            placeholder="选择地区"
-            :format-string="formatString"
-            @reset="onReset"
-          ></fx-cascader>
-        </fx-form-item>
-        <fx-form-item name="weight" label="体重Kg" required>
-          <fx-slider
-            v-model="form.weight"
-            :min="35"
-            :max="120"
-            :show-value="true"
-            @reset="onReset"
-          ></fx-slider>
-        </fx-form-item>
-        <fx-form-item name="character" label="性格" required>
-          <fx-checkbox-group v-model="form.character" @reset="onReset">
-            <fx-checkbox :value="char" v-for="char in characters" :key="char">{{
-              char
-            }}</fx-checkbox>
-          </fx-checkbox-group>
-        </fx-form-item>
-        <fx-form-item name="happinessIndex" label="幸福指数" required>
-          <fx-rate
-            v-model="form.happinessIndex"
-            :allow-half="true"
-            @reset="onReset"
-          >
-          </fx-rate>
-        </fx-form-item>
-        <fx-form-item name="stepper" label="步进器" required>
-          <fx-stepper
-            v-model.number="form.stepper"
-            :max="10"
-            :step="0.2"
-            :decimal-length="1"
-            @reset="onReset"
-          >
-          </fx-stepper>
-        </fx-form-item>
-        <fx-form-item name="agree" label="认可" required>
-          <fx-switch v-model="form.agree" @reset="onReset" />
-        </fx-form-item>
+        
         <div class="form-btns">
           <fx-button form-type="reset">重置</fx-button>
           <fx-button type="primary" form-type="submit">提交</fx-button>
         </div>
       </fx-form>
     </fx-group> -->
-  </div>
 </template>
 
 <script>
 import { multiOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
-import { Input } from '@/Input'
-import { Picker } from '@/Picker'
-import { Calendar } from '@/Calendar'
+import {
+  Input,
+  Picker,
+  Calendar,
+  Cascader,
+  Switch,
+  Rate,
+  Slider,
+  Range,
+  Stepper,
+  RadioGroup,
+  CheckboxGroup,
+  ImageUploader
+} from '@/index'
 import { FormItem } from '@/Form'
 import {
   createForm,
@@ -172,6 +182,15 @@ export default {
       Input,
       Picker,
       Calendar,
+      Cascader,
+      Switch,
+      Rate,
+      Slider,
+      Range,
+      Stepper,
+      RadioGroup,
+      CheckboxGroup,
+      ImageUploader,
       form2: createForm({ validateFirst: true }),
 
       ageVisible: false,

@@ -82,10 +82,10 @@ export default defineComponent({
       console.log('event', res)
     }
 
-    function onChangeEvent(e: PickerChangeArgs) {
-      onChange(e)
+    function onChangeEvent(res: PickerChangeArgs) {
+      onChange(res)
 
-      showToast(`change: ${e.label}`)
+      showToast(`change: ${res}`)
     }
 
     return {

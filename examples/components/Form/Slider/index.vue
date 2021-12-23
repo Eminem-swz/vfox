@@ -20,7 +20,7 @@
         <fx-slider show-value v-model="value4" step="5" />
       </fx-cell>
     </fx-group>
-    <fx-group title="限制范围 min=50 & max=150">
+    <fx-group title="限制范围 min=40 & max=140">
       <fx-cell class="slider-box" :label="'value: ' + value5">
         <fx-slider show-value :min="min" :max="max" v-model="value5" />
       </fx-cell>
@@ -41,10 +41,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 
-export default {
+export default defineComponent({
   name: 'ExpSlider',
   data() {
     return {
@@ -62,14 +63,14 @@ export default {
     }
   },
   methods: {
-    onInput({ value }) {
+    onInput(value: number) {
       showToast(`Input value: ${value}`)
     },
-    onChange({ value }) {
+    onChange(value: number) {
       showToast(`Change value: ${value}`)
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

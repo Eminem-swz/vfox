@@ -4,8 +4,8 @@
       class="fx-switch_checkbox"
       type="checkbox"
       :disabled="disabled"
-      :name="formName"
-      :value="formValue.toString()"
+      :name="name"
+      :value="checked.toString()"
       @change="onChange"
       ref="input"
     />
@@ -15,7 +15,7 @@
 <script lang="ts">
 import { onMounted, ref, watch, defineComponent, computed } from 'vue'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
+import { useInput } from '@/Form/use-form'
 import type { StyleObject } from '../helpers/types'
 
 export default defineComponent({
@@ -39,26 +39,18 @@ export default defineComponent({
   emits: formItemEmits,
   setup(props, ctx) {
     const { emit } = ctx
-    const formValue = ref(!!props.modelValue)
-
-    const {
-      formName,
-      validateAfterEventTrigger,
-      getInputEl,
-      hookFormValue,
-      eventEmit
-    } = useFormItem<boolean>(props, ctx, {
-      formValue,
-      hookResetValue: input => input?.checked || false
-    })
+    const checked = ref(!!props.modelValue)
+    const { input, setInputChecked } = useInput()
 
     watch(
       () => props.modelValue,
       val => {
         val = !!val
 
-        if (val !== formValue.value) {
-          getInputEl().checked = formValue.value = val
+        if (val !== checked.value) {
+          checked.value = val
+
+          setInputChecked(val)
         }
       }
     )
@@ -66,19 +58,17 @@ export default defineComponent({
     function onChange(e: Event) {
       const value = !!(e.target as HTMLInputElement).checked
 
-      formValue.value = value
+      checked.value = value
 
       if (props.modelValue !== value) {
         emit('update:modelValue', value)
       }
 
-      eventEmit(e.type)
+      emit('change', value)
     }
 
     onMounted(() => {
-      const $input = getInputEl()
-
-      $input.defaultChecked = $input.checked = formValue.value
+      setInputChecked(checked.value)
     })
 
     const styles = computed(() => {
@@ -94,11 +84,9 @@ export default defineComponent({
     })
 
     return {
-      formName,
-      formValue,
+      input,
+      checked,
       onChange,
-      hookFormValue,
-      validateAfterEventTrigger,
       styles
     }
   }

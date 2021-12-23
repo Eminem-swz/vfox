@@ -4,39 +4,41 @@
     :class="{ vertical: !inline, disabled: !!disabled }"
     ref="root"
   >
-    <slot></slot>
+    <slot>
+      <Radio v-for="item in options2" :key="item.value" :value="item.value">{{
+        item.label
+      }}</Radio>
+    </slot>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import Radio from './Radio.vue'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
 import type { ModelValue } from '../Checkbox/types'
+import { checkboxOrRadioGroupProps } from '@/Checkbox/checkbox-radio'
 
 export default defineComponent({
   name: 'fx-radio-group',
+  components: { Radio },
   props: {
     ...formItemProps,
+    ...checkboxOrRadioGroupProps,
     modelValue: {
       type: [Number, String],
       default: null
-    },
-    inline: {
-      type: Boolean,
-      default: false
-    },
-    activeColor: {
-      type: String
     }
   },
   emits: formItemEmits,
   setup(props, ctx) {
-    const formValue = ref<ModelValue>('')
+    const inputValue = ref<ModelValue>('')
+    const { emit } = ctx
 
     const group = useCheckboxOrRadioGroup(props, ctx, {
       name: 'radio',
-      updateValue({ isChange, uid, children, hookFormValue }) {
+      updateValue({ isChange, uid, children }) {
         let hasChecked = false
         let value: ModelValue = ''
 
@@ -52,10 +54,14 @@ export default defineComponent({
           }
         })
 
-        formValue.value = value
+        inputValue.value = value
 
-        if (isChange && formValue.value !== props.modelValue) {
-          ctx.emit('update:modelValue', hookFormValue())
+        if (isChange && inputValue.value !== props.modelValue) {
+          emit('update:modelValue', value)
+        }
+
+        if (isChange) {
+          emit('change', value)
         }
 
         return value
@@ -66,19 +72,17 @@ export default defineComponent({
         children.forEach(child => {
           if (!hasChecked && child.getValue() === value) {
             hasChecked = true
-            formValue.value = value
+            inputValue.value = value
             child.setChecked(true)
           } else {
             child.setChecked(false)
           }
         })
-      },
-      formValue
+      }
     })
 
     return {
-      ...group,
-      formValue
+      ...group
     }
   }
 })

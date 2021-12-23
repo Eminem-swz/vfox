@@ -41,6 +41,7 @@ import { Button } from '@/Button'
 import { getDefaultDetail, commonProps } from '@/Calendar/calendar'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { pickerPopupEmits } from '@/Picker/picker'
 import { cloneDetail } from '@/Picker/util'
 import type { CalendarDetail } from './types'
 
@@ -63,7 +64,7 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...popupExtendEmits, 'update:modelValue', 'change'],
+  emits: [...popupExtendEmits, ...pickerPopupEmits],
   setup(props, ctx) {
     const calendarView = ref()
     const valueSize = ref(0)

@@ -4,12 +4,20 @@
     :class="{ vertical: !inline, disabled: !!disabled }"
     ref="root"
   >
-    <slot></slot>
+    <slot>
+      <Checkbox
+        v-for="item in options2"
+        :key="item.value"
+        :value="item.value"
+        >{{ item.label }}</Checkbox
+      >
+    </slot>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, PropType } from 'vue'
+import Checkbox from './Checkbox.vue'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import {
   isStringNumberMixArray,
@@ -19,31 +27,28 @@ import {
 } from '@/helpers/util'
 import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
 import type { ModelValue } from './types'
+import { checkboxOrRadioGroupProps } from './checkbox-radio'
 
 export default defineComponent({
   name: 'fx-checkbox-group',
+  components: { Checkbox },
   props: {
     ...formItemProps,
+    ...checkboxOrRadioGroupProps,
     modelValue: {
       type: Array as PropType<ModelValue[]>,
       validator: isStringNumberMixArray,
       default: (): string[] => []
-    },
-    inline: {
-      type: Boolean,
-      default: false
-    },
-    activeColor: {
-      type: String
     }
   },
   emits: formItemEmits,
   setup(props, ctx) {
-    const formValue = reactive<ModelValue[]>([])
+    const inputValue = reactive<ModelValue[]>([])
+    const { emit } = ctx
 
     const group = useCheckboxOrRadioGroup(props, ctx, {
       name: 'checkbox',
-      updateValue({ isChange, children, hookFormValue }) {
+      updateValue({ isChange, children }) {
         const value: ModelValue[] = []
 
         children.forEach(child => {
@@ -52,34 +57,36 @@ export default defineComponent({
           }
         })
 
-        formValue.splice(0, Infinity, ...value)
+        inputValue.splice(0, Infinity, ...value)
 
         if (isChange && !isSameArray(value, props.modelValue)) {
-          ctx.emit('update:modelValue', hookFormValue())
+          ctx.emit('update:modelValue', cloneData(value))
         }
 
-        return hookFormValue()
+        if (isChange) {
+          emit('change', cloneData(value))
+        }
+
+        return value
       },
       watchValue({ children, value }) {
         if (
           isStringNumberMixArray(value) &&
-          !isSameArray(value as ModelValue[], formValue)
+          !isSameArray(value as ModelValue[], inputValue)
         ) {
-          formValue.length = 0
+          inputValue.length = 0
 
           children.forEach(child => {
             const checked = inArray(child.getValue(), value as ModelValue[])
             child.setChecked(checked)
-            checked && formValue.push(child.getValue())
+            checked && inputValue.push(child.getValue())
           })
         }
-      },
-      formValue
+      }
     })
 
     return {
-      ...group,
-      formValue
+      ...group
     }
   }
 })

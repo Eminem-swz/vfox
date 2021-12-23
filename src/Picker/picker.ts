@@ -57,7 +57,7 @@ export const pickerProps = {
   }
 }
 
-export const pickerEmits = ['value-change']
+export const pickerEmits = ['focus', 'blur']
 
 export const pickerPopupProps = {
   title: {
@@ -65,6 +65,8 @@ export const pickerPopupProps = {
     default: ''
   }
 }
+
+export const pickerPopupEmits = ['change', 'update:modelValue']
 
 export const pickerViewEmits = ['change', 'update:modelValue']
 

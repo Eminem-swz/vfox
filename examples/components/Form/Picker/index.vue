@@ -6,16 +6,16 @@
     >
     </fx-notice-bar>
     <fx-group title="Picker">
-      <fx-form-item name="picker" label="单列">
+      <fx-cell label="单列">
         <fx-picker :options="options" @change="onChange"></fx-picker>
-      </fx-form-item>
-      <fx-form-item name="picker" label="多列">
+      </fx-cell>
+      <fx-cell label="多列">
         <fx-picker :options="multiOptions" @change="onChange"></fx-picker>
-      </fx-form-item>
-      <fx-form-item name="picker" label="级联">
+      </fx-cell>
+      <fx-cell label="级联">
         <fx-picker :options="cascadeOptions" @change="onChange"></fx-picker>
-      </fx-form-item>
-      <fx-form-item name="picker" label="地区">
+      </fx-cell>
+      <fx-cell label="地区">
         <fx-picker
           :options="regionOptions"
           :field-names="{ value: 'label' }"
@@ -23,14 +23,14 @@
           v-model="regionValue"
           @change="onChange"
         />
-      </fx-form-item>
-      <fx-form-item name="picker" label="禁用">
+      </fx-cell>
+      <fx-cell label="禁用">
         <fx-picker
           :modelValue="disableValue"
           :options="multiOptions"
           disabled
         />
-      </fx-form-item>
+      </fx-cell>
     </fx-group>
     <fx-group title="PickerPopup">
       <fx-cell
@@ -135,7 +135,7 @@ export default defineComponent({
     function onChange(res: PickerChangeArgs) {
       if (changeEvent.value) {
         console.log('event', res)
-        showToast(`值改为 ${res.label}`)
+        showToast(`值改为 ${res}`)
       }
     }
 

@@ -38,6 +38,7 @@ import { getEnumsValue } from '@/helpers/validator'
 import type { CalendarDetail } from './types'
 import { useHandlers } from '@/Calendar/use-calendar'
 import { cloneDetail, isSameValue } from '@/Picker/util'
+import { pickerEmits } from '@/Picker/picker'
 import type { PickerModelValue } from '../Picker/types'
 
 export default defineComponent({
@@ -59,7 +60,7 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...formItemEmits, 'focus', 'blur'],
+  emits: [...formItemEmits, ...pickerEmits],
   setup(props, ctx) {
     const { emit } = ctx
     const isInitPopup = ref(false)
@@ -133,10 +134,10 @@ export default defineComponent({
       }
     )
 
-    watch([isInitPopup, popupVisible], vals => {
-      if (vals[0] && vals[1]) {
+    watch([isInitPopup, popupVisible], ([isInit, visible]) => {
+      if (isInit && visible) {
         emit('focus')
-      } else if (!vals[1]) {
+      } else if (!visible) {
         emit('blur')
       }
     })

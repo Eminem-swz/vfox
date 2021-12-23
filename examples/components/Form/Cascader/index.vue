@@ -49,7 +49,7 @@ import { cascadeOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
 import { showCascader } from '@/Cascader'
 import type {
-  CascaderConfirmArgs,
+  CascaderChangeArgs,
   PickerValueFormatter,
   PickerValueParser
 } from '@/types'
@@ -73,10 +73,10 @@ export default defineComponent({
       return value ? (value as string).split(separator) : []
     }
 
-    function onChange(res: CascaderConfirmArgs) {
+    function onChange(res: CascaderChangeArgs) {
       console.log('event', res)
 
-      showToast(`选择了 ${res.label}`)
+      showToast(`选择了 ${res}`)
     }
 
     function onCallApi() {

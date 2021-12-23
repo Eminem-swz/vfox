@@ -1,20 +1,12 @@
 <template>
-  <div
-    class="fx-picker"
-    :class="[
-      {
-        disabled
-      }
-    ]"
-    ref="root"
-  >
-    <PickerInput
-      :formLabelString="formLabelString"
-      :formValueString="formValueString"
+  <div class="fx-picker" :class="{ disabled }" ref="root">
+    <SelectorField
+      :label="fieldLabel"
+      :value="fieldValue"
       :disabled="disabled"
-      :formName="name"
+      :name="name"
       :placeholder="placeholder"
-      @field-click="onFieldClick"
+      @fieldClick="onFieldClick"
     />
     <PickerPopup
       :options="options"
@@ -33,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PickerInput } from '@/PickerInput'
+import { SelectorField } from '@/SelectorField'
 import { PickerPopup } from '@/PickerPopup'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import {
@@ -46,7 +38,7 @@ import { usePicker } from '@/Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-picker',
-  components: { PickerInput, PickerPopup },
+  components: { SelectorField, PickerPopup },
   props: { ...formItemProps, ...commonProps, ...pickerProps },
   emits: [...formItemEmits, ...pickerEmits],
   setup(props, ctx) {

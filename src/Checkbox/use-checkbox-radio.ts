@@ -1,4 +1,3 @@
-import { useFormItem } from '@/Form/use-form'
 import {
   computed,
   onMounted,
@@ -8,14 +7,12 @@ import {
   getCurrentInstance,
   ComponentInternalInstance,
   provide,
-  Ref,
-  isRef
+  Ref
 } from 'vue'
-import { capitalize, cloneData, inArray } from '@/helpers/util'
+import { capitalize, inArray, isArray, isStringNumberMix } from '@/helpers/util'
 import { useGroup, useGroupItem } from '@/hooks/use-group'
 import type { UseProps, UseCtx } from '../hooks/types'
-import type { HookFormValue } from '../Form/types'
-import type { ModelValue } from './types'
+import type { ModelValue, OptionItem, UserOptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
 
 interface Options {
@@ -33,16 +30,18 @@ interface GroupItem {
 
 export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
   const instance = getCurrentInstance() as ComponentInternalInstance
-  const options = inject<Options | null>(`fx${capitalize(name)}Options`, null)
+  const groupOptions = inject<Options | null>(
+    `fx${capitalize(name)}Options`,
+    null
+  )
   const input = ref<HTMLInputElement>()
   const { emit } = ctx
 
-  const formName = computed(() => {
-    return options?.formName || props.name || ''
+  const name2 = computed(() => {
+    return groupOptions?.props.name || props.name || ''
   })
-
   const disabled2 = computed(() => {
-    return options?.props.disabled ?? props.disabled
+    return groupOptions?.props.disabled ?? props.disabled
   })
 
   function getValue() {
@@ -62,8 +61,8 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
   }
 
   function onChange(e: Event) {
-    if (options) {
-      options.onChange(instance.uid)
+    if (groupOptions) {
+      groupOptions.onChange(instance.uid)
     } else {
       const checked = !!(e.target as HTMLInputElement).checked
       emit('update:checked', checked)
@@ -77,7 +76,7 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
   watch(
     () => props.checked,
     val => {
-      if (options) {
+      if (groupOptions) {
         return
       }
 
@@ -101,11 +100,11 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
     const $input = getInputEl()
 
     let checked: boolean
-    if (options) {
+    if (groupOptions) {
       checked =
         name === 'checkbox'
-          ? inArray(props.value, options.props.modelValue)
-          : props.value === options.props.modelValue
+          ? inArray(props.value, groupOptions.props.modelValue)
+          : props.value === groupOptions.props.modelValue
     } else {
       checked = !!props.checked
     }
@@ -116,7 +115,7 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
   })
 
   const styles = computed(() => {
-    const { activeColor } = options?.props || props
+    const { activeColor } = groupOptions?.props || props
     const obj: StyleObject = {}
 
     activeColor && (obj['--fx-active-color'] = activeColor)
@@ -129,7 +128,7 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
 
   return {
     input,
-    formName,
+    name2,
     disabled2,
     onChange,
     styles
@@ -140,7 +139,6 @@ interface UpdateValueOptions {
   isChange: boolean
   children: GroupItem[]
   uid: number | undefined
-  hookFormValue: HookFormValue<ModelValue>
 }
 
 interface WatchValueOptions {
@@ -152,39 +150,22 @@ interface UseGroupOptions {
   name: string
   updateValue: (options: UpdateValueOptions) => ModelValue | ModelValue[]
   watchValue: (options: WatchValueOptions) => void
-  formValue: Ref<ModelValue> | ModelValue[]
 }
 
 export function useCheckboxOrRadioGroup(
   props: UseProps,
-  ctx: UseCtx,
-  { name, updateValue, watchValue, formValue }: UseGroupOptions
+  { emit }: UseCtx,
+  { name, updateValue, watchValue }: UseGroupOptions
 ) {
+  const root = ref<HTMLElement>()
   const { children } = useGroup<GroupItem>(name)
 
-  function hookFormValue() {
-    return isRef(formValue) ? formValue.value : cloneData(formValue)
-  }
-
-  const { formName, validateAfterEventTrigger, eventEmit, root } =
-    useFormItem<ModelValue>(props, ctx, {
-      formValue,
-      hookFormValue,
-      hookResetValue: () => _updateValue(true)
-    })
-
   function _updateValue(isChange: boolean, uid?: number) {
-    return updateValue({ isChange, children, uid, hookFormValue })
+    return updateValue({ isChange, children, uid })
   }
 
   function onChange(uid: number) {
     _updateValue(true, uid)
-
-    eventEmit('change')
-  }
-
-  function reset() {
-    _updateValue(true)
   }
 
   watch(
@@ -197,6 +178,28 @@ export function useCheckboxOrRadioGroup(
     }
   )
 
+  const options2 = computed(() => {
+    const ret: OptionItem[] = []
+
+    if (props.options && isArray(props.options)) {
+      ;(props.options as UserOptionItem[]).forEach(v => {
+        if (isStringNumberMix(v)) {
+          ret.push({
+            value: v as string,
+            label: v.toString()
+          })
+        } else {
+          ret.push({
+            value: (v as OptionItem).value,
+            label: (v as OptionItem).label.toString()
+          })
+        }
+      })
+    }
+
+    return ret
+  })
+
   onMounted(() => _updateValue(false))
 
   provide(`fx${capitalize(name)}Options`, {
@@ -206,11 +209,7 @@ export function useCheckboxOrRadioGroup(
 
   return {
     root,
-    formName,
-    formValue,
-    validateAfterEventTrigger,
-    hookFormValue,
-    reset,
-    onChange
+    onChange,
+    options2
   }
 }

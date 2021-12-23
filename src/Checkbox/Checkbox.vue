@@ -7,7 +7,7 @@
     <input
       class="fx-checkbox_input fx-form-input"
       type="checkbox"
-      :name="formName"
+      :name="name2"
       :value="value"
       :disabled="disabled2"
       @change="onChange"

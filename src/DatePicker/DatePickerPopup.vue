@@ -32,7 +32,7 @@ import { Drawer } from '@/Drawer'
 import { NavBar } from '@/NavBar'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
-import { pickerPopupProps, pickerViewEmits } from '@/Picker/picker'
+import { pickerPopupProps, pickerPopupEmits } from '@/Picker/picker'
 import { usePickerPopup } from '@/Picker/use-picker'
 import { commonProps } from '@/DatePicker/date-picker'
 import { useHandlers } from './use-date-picker'
@@ -45,7 +45,7 @@ export default defineComponent({
     ...commonProps,
     ...pickerPopupProps
   },
-  emits: [...pickerViewEmits, ...popupExtendEmits],
+  emits: [...popupExtendEmits, ...pickerPopupEmits],
   setup(props, ctx) {
     useHandlers(props)
 

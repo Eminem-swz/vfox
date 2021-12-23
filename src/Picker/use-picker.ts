@@ -45,8 +45,8 @@ export function usePicker(
   const { emit } = ctx
   const isInitPopup = ref(false)
   const popupVisible = ref(true)
-  const formValueString = ref('')
-  const formLabelString = ref('')
+  const fieldValue = ref('')
+  const fieldLabel = ref('')
   const popup = ref()
 
   let detail = getDefaultDetail()
@@ -90,14 +90,10 @@ export function usePicker(
   }
 
   function updateDetail(newDetail: PickerDetail) {
-    if (!isSameDetail(newDetail, detail)) {
-      emit('value-change', cloneDetail(newDetail), cloneDetail(detail))
-    }
-
     detail = newDetail
 
-    formValueString.value = detail.value != null ? detail.value.toString() : ''
-    formLabelString.value = detail.label
+    fieldValue.value = detail.value != null ? detail.value.toString() : ''
+    fieldLabel.value = detail.label
     return getDetail()
   }
 
@@ -137,13 +133,21 @@ export function usePicker(
     }
   )
 
+  watch([isInitPopup, popupVisible], ([isInit, visible]) => {
+    if (isInit && visible) {
+      emit('focus')
+    } else if (!visible) {
+      emit('blur')
+    }
+  })
+
   return {
     root,
     popup,
     isInitPopup,
     popupVisible,
-    formValueString,
-    formLabelString,
+    fieldValue,
+    fieldLabel,
     updateValue,
     onFieldClick,
     onChange,

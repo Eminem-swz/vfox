@@ -22,10 +22,12 @@
       <fx-cell label="固定小数位">
         <fx-stepper :decimal-length="1" :step="0.2" />
       </fx-cell>
-      <fx-cell label="change事件监听">
+    </fx-group>
+    <fx-group title="事件监听">
+      <fx-cell label="change">
         <fx-stepper @change="onChange" v-model="value" />
       </fx-cell>
-      <fx-cell label="其他事件监听">
+      <fx-cell label="input/focus/blur/plus-click/minus-click">
         <fx-stepper
           @plus-click="onPlusClick"
           @minus-click="onMinusClick"
@@ -38,19 +40,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 
-export default {
+export default defineComponent({
   name: 'ExpStepper',
   data() {
     return { value: '1' }
   },
   methods: {
-    onChange({ value }) {
+    onChange(value: number) {
       showToast(`值改变为：${value}`)
     },
-    onInput({ value }) {
+    onInput(value: number) {
       showToast(`当前值为：${value}`)
     },
     onPlusClick() {
@@ -66,5 +69,5 @@ export default {
       showToast('失焦 blur')
     }
   }
-}
+})
 </script>

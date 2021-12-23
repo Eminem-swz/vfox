@@ -1,66 +1,63 @@
 <template>
   <div>
     <fx-group title="DatePicker initialMode">
-      <fx-form-item name="date-picker" label="日期 date">
+      <fx-cell label="日期 date">
         <fx-date-picker
           initialMode="date"
           v-model="dateValue"
           @change="onChange"
         />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="时间 time">
+      </fx-cell>
+      <fx-cell label="时间 time">
         <fx-date-picker
           initialMode="time"
           v-model="timeValue"
           @change="onChange"
         />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="日期时间 datetime">
+      </fx-cell>
+      <fx-cell label="日期时间 datetime">
         <fx-date-picker
           initialMode="datetime"
           v-model="dateTimeValue"
           @change="onChange"
         />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="分秒 minute-second">
+      </fx-cell>
+      <fx-cell label="分秒 minute-second">
         <fx-date-picker initialMode="minute-second" @change="onChange" />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="时分 hour-minute">
+      </fx-cell>
+      <fx-cell label="时分 hour-minute">
         <fx-date-picker initialMode="hour-minute" @change="onChange" />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="天时 day-hour">
+      </fx-cell>
+      <fx-cell label="天时 day-hour">
         <fx-date-picker initialMode="day-hour" @change="onChange" />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="月日 month-day">
+      </fx-cell>
+      <fx-cell label="月日 month-day">
         <fx-date-picker initialMode="month-day" @change="onChange" />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="月日时 month-day-hour">
+      </fx-cell>
+      <fx-cell label="月日时 month-day-hour">
         <fx-date-picker initialMode="month-day-hour" @change="onChange" />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="月日时分 month-day-hour-minute">
+      </fx-cell>
+      <fx-cell label="月日时分 month-day-hour-minute">
         <fx-date-picker
           initialMode="month-day-hour-minute"
           @change="onChange"
         />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="年月 year-month">
+      </fx-cell>
+      <fx-cell label="年月 year-month">
         <fx-date-picker initialMode="year-month" @change="onChange" />
-      </fx-form-item>
-      <fx-form-item name="date-picker" label="年月日时 year-month-day-hour">
+      </fx-cell>
+      <fx-cell label="年月日时 year-month-day-hour">
         <fx-date-picker initialMode="year-month-day-hour" @change="onChange" />
-      </fx-form-item>
-      <fx-form-item
-        name="date-picker"
-        label="年月日时分 year-month-day-hour-minute"
-      >
+      </fx-cell>
+      <fx-cell name="date-picker" label="年月日时分 year-month-day-hour-minute">
         <fx-date-picker
           initialMode="year-month-day-hour-minute"
           @change="onChange"
         />
-      </fx-form-item>
+      </fx-cell>
     </fx-group>
     <fx-group title="DatePicker minDate & maxDate">
-      <fx-form-item name="date-picker" label="-5year ~ 5year">
+      <fx-cell label="-5year ~ 5year">
         <fx-date-picker
           initialMode="date"
           :minDate="maxDate"
@@ -68,37 +65,37 @@
           v-model="minMaxValue"
           @change="onChange"
         />
-      </fx-form-item>
+      </fx-cell>
     </fx-group>
     <fx-group title="DatePicker filter">
-      <fx-form-item name="date-picker" label="秒步进5">
+      <fx-cell label="秒步进5">
         <fx-date-picker
           initialMode="datetime"
           :filter="filter"
           v-model="filterValue"
           @change="onChange"
         />
-      </fx-form-item>
+      </fx-cell>
     </fx-group>
     <fx-group title="DatePicker formatTemplate">
-      <fx-form-item name="date-picker" label="YYYY年MM月DD日">
+      <fx-cell label="YYYY年MM月DD日">
         <fx-date-picker
           initialMode="date"
           formatTemplate="YYYY年MM月DD日"
           v-model="formatValue"
           @change="onChange"
         />
-      </fx-form-item>
+      </fx-cell>
     </fx-group>
     <fx-group title="DatePicker disabled">
-      <fx-form-item name="date-picker" label="禁用">
+      <fx-cell label="禁用">
         <fx-date-picker
           initialMode="date"
           disabled
           :modelValue="disableValue"
           @change="onChange"
         />
-      </fx-form-item>
+      </fx-cell>
     </fx-group>
     <fx-group title="DatePickerPopup">
       <fx-cell
@@ -203,7 +200,7 @@ export default defineComponent({
     function onChange(res: DatePickerChangeArgs) {
       if (changeEvent.value) {
         console.log('event', res)
-        showToast(`值改为 ${res.label}`)
+        showToast(`值改为 ${res}`)
       }
     }
 

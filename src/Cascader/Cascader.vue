@@ -1,20 +1,12 @@
 <template>
-  <div
-    class="fx-cascader"
-    :class="[
-      {
-        disabled
-      }
-    ]"
-    ref="root"
-  >
-    <PickerInput
-      :formLabelString="formLabelString"
-      :formValueString="formValueString"
+  <div class="fx-cascader" :class="{ disabled }" ref="root">
+    <SelectorField
+      :label="fieldLabel"
+      :value="fieldValue"
       :disabled="disabled"
-      :formName="formName"
+      :name="name"
       :placeholder="placeholder"
-      @field-click="onFieldClick"
+      @fieldClick="onFieldClick"
     />
     <CascaderPopup
       :options="options"
@@ -25,7 +17,7 @@
       :parser="parser"
       v-model:visible="popupVisible"
       v-if="isInitPopup"
-      @change="onChange"
+      @confirm="onConfirm"
       ref="popup"
     />
   </div>
@@ -34,7 +26,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { CascaderPopup } from '@/CascaderPopup'
-import { PickerInput } from '@/PickerInput'
+import { SelectorField } from '@/SelectorField'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import {
   pickerEmits,
@@ -46,7 +38,7 @@ import { usePicker } from '@/Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-cascader',
-  components: { CascaderPopup, PickerInput },
+  components: { CascaderPopup, SelectorField },
   props: { ...formItemProps, ...commonProps, ...pickerProps },
   emits: [...formItemEmits, ...pickerEmits],
   setup(props, ctx) {

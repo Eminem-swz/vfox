@@ -70,6 +70,7 @@ import {
 import { getEnumsValue } from '@/helpers/validator'
 import type { DayInfo } from './types'
 import { useHandlers } from '@/Calendar/use-calendar'
+import { pickerViewEmits } from '@/Picker/picker'
 
 interface WeekDay {
   label: string
@@ -104,7 +105,7 @@ const defaultWeekDays: WeekDay[] = [
 export default defineComponent({
   name: 'fx-calendar-view',
   props: { ...commonProps },
-  emits: ['select', 'update:modelValue', 'change'],
+  emits: ['select', ...pickerViewEmits],
   setup(props, { emit }) {
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)
 
