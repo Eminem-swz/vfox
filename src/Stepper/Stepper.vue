@@ -95,8 +95,8 @@ export default defineComponent({
     'focus',
     'blur'
   ],
-  setup(props, ctx) {
-    const { emit } = ctx
+  setup(props, { emit }) {
+    const isValueNull = props.modelValue == null
     const inputValue = ref('1')
 
     const { input, setInputValue, getInputValue } = useInput()
@@ -114,19 +114,19 @@ export default defineComponent({
       emit(type, { type })
     }
 
-    function updateValue(value: number | string, eventChange = true) {
+    function updateValue(value: number | string, isEventChange = true) {
       const newValue = getRangeNumber(value)
 
       if (newValue !== inputValue.value) {
         inputValue.value = newValue
-        if (eventChange) {
+        if (isEventChange) {
           emit('change', newValue)
         }
       }
 
       setInputValue(newValue)
 
-      if (newValue !== props.modelValue) {
+      if (newValue != props.modelValue) {
         emit('update:modelValue', newValue)
       }
 
@@ -185,6 +185,9 @@ export default defineComponent({
     })
 
     updateValue(props.modelValue, false)
+    if (isValueNull) {
+      emit('change', inputValue.value)
+    }
 
     return {
       input,

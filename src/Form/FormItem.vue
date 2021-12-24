@@ -12,14 +12,17 @@
         <slot></slot>
       </div>
     </div>
-    <div class="fx-cell_body" v-if="errMsg">
-      {{ errMsg }}
-    </div>
+    <ol class="fx-cell_body" v-if="errors.length > 0">
+      <li v-for="(error, k) in errors" :key="error">
+        {{ errors.length > 1 ? k + 1 + '. ' : '' }}{{ error }}
+      </li>
+    </ol>
   </label>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { isArray } from '@/helpers/util'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'fx-form-item',
@@ -31,12 +34,29 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    errMsg: {
-      type: String
+    error: {
+      type: [String, Array]
     },
     validateStatus: {
       type: String
     }
+  },
+  setup(props) {
+    const errors = computed(() => {
+      const ret: string[] = []
+
+      if (isArray(props.error)) {
+        ;(props.error as string[]).forEach(v => {
+          ret.push(v.toString())
+        })
+      } else if (props.error != null) {
+        ret.push(props.error.toString())
+      }
+
+      return ret
+    })
+
+    return { errors }
   }
 })
 </script>

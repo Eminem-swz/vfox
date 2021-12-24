@@ -24,7 +24,7 @@ export default defineComponent({
     ...formItemProps,
     modelValue: {
       type: Boolean,
-      default: false
+      default: null
     },
     color: {
       type: String
@@ -37,10 +37,10 @@ export default defineComponent({
     }
   },
   emits: formItemEmits,
-  setup(props, ctx) {
-    const { emit } = ctx
+  setup(props, { emit }) {
+    const isValueNull = props.modelValue == null
     const checked = ref(!!props.modelValue)
-    const { input, setInputChecked } = useInput()
+    const { input, setInputChecked, getInputChecked } = useInput()
 
     watch(
       () => props.modelValue,
@@ -55,8 +55,8 @@ export default defineComponent({
       }
     )
 
-    function onChange(e: Event) {
-      const value = !!(e.target as HTMLInputElement).checked
+    function onChange() {
+      const value = getInputChecked()
 
       checked.value = value
 
@@ -82,6 +82,10 @@ export default defineComponent({
 
       return obj
     })
+
+    if (isValueNull) {
+      emit('change', checked.value)
+    }
 
     return {
       input,

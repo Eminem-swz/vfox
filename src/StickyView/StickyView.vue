@@ -120,7 +120,7 @@ export default defineComponent({
       const activeIndex = index.value
       const nextIndex = activeIndex + 1
       const offsetTops = getOffsetTops()
-      //   console.log(offsetTops, scrollTop)
+
       const current = offsetTops[activeIndex]
       const next =
         offsetTops[nextIndex] != null ? offsetTops[nextIndex] : Infinity

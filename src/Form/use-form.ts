@@ -7,6 +7,10 @@ export function useInput() {
     input.value && (input.value.checked = val)
   }
 
+  function getInputChecked() {
+    return input.value?.checked ? true : false
+  }
+
   function setInputValue(val: string | number) {
     input.value && (input.value.value = val.toString())
   }
@@ -19,6 +23,7 @@ export function useInput() {
     input,
     getInputValue,
     setInputValue,
+    getInputChecked,
     setInputChecked
   }
 }

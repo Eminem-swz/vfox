@@ -62,8 +62,7 @@ export default defineComponent({
     ...slideProps,
     modelValue: {
       type: Array as PropType<number[]>,
-      validator: isNumberArray,
-      default: null
+      validator: isNumberArray
     },
     allowSameValue: {
       type: Boolean,
@@ -144,7 +143,9 @@ export default defineComponent({
         getValue() !== valueHandler(props.modelValue)
       ) {
         emit('update:modelValue', getValue())
+        return true
       }
+      return false
     }
 
     function rangeValues(vals: number[]) {
@@ -178,7 +179,9 @@ export default defineComponent({
     watch([() => props.min, () => props.max], () => {
       nextTick(() => {
         updateValue(progressValue)
-        emitModel()
+        if (emitModel()) {
+          emit('change', inputValue.value)
+        }
       })
     })
 
@@ -190,7 +193,10 @@ export default defineComponent({
 
     updateValue([min, max])
     updateValue(props.modelValue)
-    emitModel()
+
+    if (emitModel()) {
+      emit('change', inputValue.value)
+    }
 
     return {
       inputValue,

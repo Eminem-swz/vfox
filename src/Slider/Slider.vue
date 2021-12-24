@@ -39,8 +39,7 @@ export default defineComponent({
     ...slideProps,
     modelValue: {
       type: [Number, String],
-      validator: isNumeric,
-      default: null
+      validator: isNumeric
     }
   },
   emits: [...formItemEmits, ...slideEmits],
@@ -74,7 +73,9 @@ export default defineComponent({
         inputValue.value !== toInteger(props.modelValue)
       ) {
         emit('update:modelValue', inputValue.value)
+        return true
       }
+      return false
     }
 
     function updateValue(val: unknown) {
@@ -104,12 +105,18 @@ export default defineComponent({
     watch([() => props.min, () => props.max], () => {
       nextTick(() => {
         updateValue(inputValue.value)
-        emitModel()
+
+        if (emitModel()) {
+          emit('change', inputValue.value)
+        }
       })
     })
 
     updateValue(props.modelValue || 0)
-    emitModel()
+
+    if (emitModel()) {
+      emit('change', inputValue.value)
+    }
 
     return {
       slider,
