@@ -6,8 +6,7 @@ import {
   inject,
   getCurrentInstance,
   ComponentInternalInstance,
-  provide,
-  Ref
+  provide
 } from 'vue'
 import { capitalize, inArray, isArray, isStringNumberMix } from '@/helpers/util'
 import { useGroup, useGroupItem } from '@/hooks/use-group'
@@ -16,7 +15,6 @@ import type { ModelValue, OptionItem, UserOptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
 
 interface Options {
-  formName: string
   props: UseProps
   onChange: (uid: number) => void
 }
@@ -205,7 +203,7 @@ export function useCheckboxOrRadioGroup(
   provide(`fx${capitalize(name)}Options`, {
     props,
     onChange
-  })
+  } as Options)
 
   return {
     root,
