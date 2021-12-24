@@ -24,6 +24,17 @@ import { Picker, PickerPopup, PickerView } from 'vfox'
 
 在不自定义 `formatter/parser` 的情况下，v-model 只有 `(string | number)[]` 这种情况。
 
+### PickerModelValue 的类型
+
+PickerModelValue 的类型为： `PickerValue | PickerValue[]`
+
+### PickerDetail 的结构
+
+| 字段  | 类型                                                    | 说明                                                  |
+| ----- | ------------------------------------------------------- | ----------------------------------------------------- |
+| value | [PickerModelValue](./Picker.md#pickermodelvalue-的类型) | ["zaolei", "lunzao"]；`formatter/parser` 的优先级更高 |
+| label | string                                                  | "藻类/轮藻"                                           |
+
 ### options 的结构
 
 组件会通过 options 值的结构来分析是否是级联模式。
@@ -205,28 +216,21 @@ interface PickerValueParser {
 
 注：
 
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+- 支持表单，具体可参考 [Form](./Form.md)。
 
 ## Picker Props
 
 | 属性        | 类型    | 默认值 | 必填 | 说明                                 |
 | ----------- | ------- | ------ | ---- | ------------------------------------ |
-| name        | string  |        | 否   | [Form](./Form.md) 的标识             |
+| name        | string  |        | 否   | 标识                                 |
 | placeholder | string  |        | 否   | 没有选中值的提示，也会用在弹窗标题上 |
 | disabled    | boolean | false  | 否   | 是否禁用                             |
 
 ## Picker Events
 
-| 事件   | 描述                       | 回调函数参数                                    |
-| ------ | -------------------------- | ----------------------------------------------- |
-| change | 选择后选中值发生变化时触发 | [PickerDetail](./Picker.md#pickerdetail-的结构) |
-
-### PickerDetail 的结构
-
-| 字段  | 类型                                                                                                 | 说明                                                  |
-| ----- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| value | [PickerValue](./Cascader.md#pickervalue-的类型) \| [PickerValue](./Cascader.md#pickervalue-的类型)[] | ["zaolei", "lunzao"]；`formatter/parser` 的优先级更高 |
-| label | string                                                                                               | "藻类/轮藻"                                           |
+| 事件   | 描述                       | 回调函数参数                                            |
+| ------ | -------------------------- | ------------------------------------------------------- |
+| change | 选择后选中值发生变化时触发 | [PickerModelValue](./Picker.md#pickermodelvalue-的类型) |
 
 ## PickerPopup
 
@@ -245,7 +249,7 @@ interface PickerValueParser {
 | -------------------- | -------------------- | -------------------------------------------------------------- |
 | cancel               | 点击取消按钮后触发   |                                                                |
 | confirm              | 点击确定按钮后触发   | [PickerDetail](./Picker.md#pickerdetail-的结构)                |
-| change               | 选中值发生变化时触发 | [PickerDetail](./Picker.md#pickerdetail-的结构)                |
+| change               | 选中值发生变化时触发 | [PickerModelValue](./Picker.md#pickermodelvalue-的类型)        |
 | visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./DatePicker.md#visiblestate-值说明) } |
 
 ### VisibleState 值说明
@@ -263,6 +267,6 @@ interface PickerValueParser {
 
 ## PickerView Events
 
-| 事件   | 描述                       | 回调函数参数                                    |
-| ------ | -------------------------- | ----------------------------------------------- |
-| change | 滑动后选中值发生变化时触发 | [PickerDetail](./Picker.md#pickerdetail-的结构) |
+| 事件   | 描述                       | 回调函数参数                                            |
+| ------ | -------------------------- | ------------------------------------------------------- |
+| change | 滑动后选中值发生变化时触发 | [PickerModelValue](./Picker.md#pickermodelvalue-的类型) |

@@ -3,7 +3,7 @@
 注：
 
 - 类似于微信朋友圈上传图片的组件。
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+- 支持表单，具体可参考 [Form](./Form.md)。
 
 ## Import
 
@@ -102,7 +102,7 @@ export default {
 | 事件   | 描述                        | 回调函数参数                                                         |
 | ------ | --------------------------- | -------------------------------------------------------------------- |
 | delete | 图片被删除时触发            | { index: number, item: { id: number, status: string, url: string } } |
-| change | 已上传的图片 URL 列表改变时 | { value: string[] }                                                  |
+| change | 已上传的图片 URL 列表改变时 | value: string[]                                                      |
 
 ### delete 的回调参数 item
 

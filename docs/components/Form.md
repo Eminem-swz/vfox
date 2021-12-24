@@ -1,86 +1,217 @@
-# Form/FormItem 表单
+# Form/FormFooter/FormItem 表单
+
+寄语：表单这块一直没有能深度去思考，之前做过一般跟其他 UI 库一样校验，但是都觉得不满意，现只保留最简单最布局功能。
 
 注：
 
-- 当点击 `Form` 中 form-type 为 submit 的 [Button](./Button.md) 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。
-- 配合 [FormItem](./Form.md#formitem) 组件可以完成一套带校验的表单。
+- 这几个组件主要聚焦于布局。
+- 如果想要复杂的表单设计或者校验功能，可以借助 [formilyjs](https://formilyjs.org/zh-CN/guide) 来实现。
 
 ## Import
 
 ```
-import { Form, FormItem } from 'vfox'
+import { Form, FormFooter, FormItem } from 'vfox'
 ```
 
 具体的引入方式可以参考[引入组件](../index.md#引入组件)。
 
-## Form Props
-
-| 属性  | 类型   | 默认值 | 必填 | 说明         |
-| ----- | ------ | ------ | ---- | ------------ |
-| rules | Object |        | 否   | 表单验证规则 |
-
-### rules 结构
-
-```
-{
-  nickname: [
-    { required: true, message: '请输入昵称', trigger: 'blur' },
-    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-  ],
-  agreement: [
-    {
-      validator(rule, value, callback) {
-        if (value === true) {
-          callback()
-        } else {
-          callback(new Error('你必须同意该协议'))
-        }
-      }
-    }
-  ]
-}
-```
-
-> 自定义校验 callback 必须被调用。 更多高级用法可参考 [async-validator](https://github.com/yiminghe/async-validator)。
-
-## Form Events
-
-| 事件            | 描述                               | 回调函数参数                             |
-| --------------- | ---------------------------------- | ---------------------------------------- |
-| submit          | 携带 form 中的数据触发 submit 事件 | { value : {'name': 'value'} }            |
-| reset           | 表单重置时会触发 reset 事件        | {}                                       |
-| validate-submit | 有检验情况下，表单 submit 触发时   | { valid: true, value : {'name': 'value'} |
-
-### 回调参数 value 的结构
-
-该数据汇集了所有设置 name 的表单标签数据（含原生标签），部分数据类型是 Array，如：`checbox`，`select multiple`等
-
 ## Form Slots
+
+### default
 
 ```
 <fx-form>
-  ...
   <fx-input type="text" />
-  <fx-button form-type="submit">提交</fx-button>
 </fx-form>
 ```
 
-## FormItem
+### footer
+
+```
+<fx-form>
+  <template #footer>
+    <fx-button form-type="submit">提交</fx-button>
+  </template>
+</fx-form>
+```
+
+## FormFooter Slots
+
+### default
+
+```
+<fx-form-footer>
+  <fx-button form-type="submit">提交</fx-button>
+</fx-form-footer>
+```
 
 ## FormItem Props
 
-| 属性     | 类型    | 默认值 | 必填 | 说明                                                                                              |
-| -------- | ------- | ------ | ---- | ------------------------------------------------------------------------------------------------- |
-| name     | string  |        | 是   | 为子表单组件设置相应的`name`值                                                                    |
-| rules    | Object  |        | 否   | 独立表单验证规则，如果没有设置，则根据`name`的值去外层`form`组件查找相应的规则                    |
-| label    | string  |        | 否   | 设置该行名称，比如 `昵称`                                                                         |
-| required | boolean | false  | 否   | 是否必填，设置 `true` 后 label 会展示必填`*`，在找不到自定义规则的情况下，会默认加入 1 条必填规则 |
+| 属性     | 类型            | 默认值 | 必填 | 说明                                         |
+| -------- | --------------- | ------ | ---- | -------------------------------------------- |
+| error    | string/string[] |        | 否   | 错误提示信息                                 |
+| label    | string          |        | 否   | 设置该行名称，比如 `昵称`                    |
+| required | boolean         | false  | 否   | 是否必填，设置 `true` 后 label 会展示必填`*` |
 
-### rules 结构
+## FormItem Slots
+
+### default
 
 ```
-[
-  { required: true, message: '请输入昵称', trigger: 'blur' },
-  { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-]
+<fx-form-item>
+  <fx-input type="text" />
+</fx-form-item>
 ```
+
+## 支持表单的组件
+
+- [Input](./Input.md)
+- [RadioGroup](./Radio.md#radiogroup)
+- [CheckboxGroup](./Checkbox.md#checkboxgroup)
+- [Switch](./Switch.md)
+- [Stepper](./Stepper.md)
+- [Slider](./Slider.md)
+- [Range](./Range.md)
+- [Rate](./Rate.md)
+- [Calendar](./Calendar.md)
+- [DatePicker](./DatePicker.md)
+- [Cascader](./Cascader.md)
+- [Picker](./Picker.md)
+- [ImageUploader](./ImageUploader.md)
+
+## 与 **Formily** 配合
+
+关于 **Formily** 的介绍可以查看阿里巴巴的[官网](https://formilyjs.org/zh-CN)。
+
+### 安装
+
+```
+npm install --save @formily/core @formily/vue
+```
+
+### 对 `FormItem` 做下适配
+
+`FormilyFormItem.ts`:
+
+```TypeScript
+import { FormItem } from 'vfox'
+import { connect, mapProps } from '@formily/vue'
+import { isVoidField } from '@formily/core'
+
+export default connect(
+  FormItem,
+  mapProps(
+    { validateStatus: true, title: 'label', required: true },
+    (props, field) => {
+      if (isVoidField(field)) return props
+      if (!field) return props
+
+      const getMessage = () => {
+        if (field.validating) return
+        if (props.error) return props.error
+        if (field.selfErrors.length) return field.selfErrors
+        // if (field.selfWarnings.length) return split(field.selfWarnings)
+        // if (field.selfSuccesses.length) return split(field.selfSuccesses)
+      }
+
+      return {
+        error: getMessage()
+      }
+    }
+  )
+)
+```
+
+### 设计表单
+
+```Vue
+<template>
+  <FormProvider :form="form">
+    <Field
+      name="nickname"
+      title="昵称"
+      required
+      :component="[Input, { placeholder: '请输入昵称' }]"
+      :decorator="[FormilyFormItem]"
+    />
+    <Field
+      name="gender"
+      title="性别"
+      required
+      :component="[
+        RadioGroup,
+        {
+          options: genderOptions
+        }
+      ]"
+      :decorator="[FormilyFormItem]"
+    />
+    <FormConsumer>
+      <template #default="{ form }">
+        <pre class="exp-form-json">{{
+          JSON.stringify(form.values, null, 2)
+        }}</pre>
+        <fx-form-footer>
+          <fx-button
+            type="primary"
+            @click="
+              () => {
+                form.submit(onSubmit)
+              }
+            "
+            >提交</fx-button
+          >
+        </fx-form-footer>
+      </template>
+    </FormConsumer>
+  </FormProvider>
+</template>
+
+<script>
+import { multiOptions, regionOptions } from '../Picker/data'
+import {
+  Input,
+  RadioGroup,
+  Dialog,
+} from 'vfox'
+import { createForm, setValidateLanguage } from '@formily/core'
+import { FormProvider, Field, FormConsumer } from '@formily/vue'
+import FormilyFormItem from './FormilyFormItem'
+
+setValidateLanguage('zh-CN')
+
+export default {
+  name: 'ExpForm',
+  components: { FormProvider, Field, FormConsumer },
+  data() {
+    return {
+      FormilyFormItem,
+      Input,
+      RadioGroup,
+      form: createForm({ validateFirst: true }),
+
+      genderOptions: [
+        { label: '男', value: 1 },
+        { label: '女', value: 2 }
+      ]
+    }
+  },
+  methods: {
+    onBaseSubmit() {
+      Dialog.showDialog({
+        showCancel: false,
+        content: `nickname: ${this.baseForm.nickname}
+        gender: ${this.baseForm.gender}
+        `
+      })
+    }
+  }
+}
+</script>
+```
+
+### 附录：
+
+- [Formily Vue Library](https://vue.formilyjs.org/)
+- [更多开发模式](https://vue.formilyjs.org/guide/concept.html#%E4%B8%89%E7%A7%8D%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F)
+- [表单校验](https://formilyjs.org/zh-CN/guide/advanced/validate)

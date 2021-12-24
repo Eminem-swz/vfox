@@ -36,22 +36,30 @@ import { Checkbox, CheckboxGroup } from 'vfox'
 注：
 
 - 内部由多个 [Checkbox](./Checkbox.md#Checkbox-多选项) 组成。
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+- 支持表单，具体可参考 [Form](./Form.md)。
 
 ## CheckboxGroup Props
 
-| 属性        | 类型                | 默认值 | 必填 | 说明                           |
-| ----------- | ------------------- | ------ | ---- | ------------------------------ |
-| name        | string              |        | 否   | [Form](./Form.md) 的标识       |
-| inline      | boolean             | false  | 否   | 是否使用内联布局，默认纵向布局 |
-| v-model     | string[\]/number[\] | []     | 否   | 当前选择子项的 value 列表      |
-| activeColor | string              |        | 否   | 自定义子项激活态的图标颜色     |
+| 属性        | 类型                                                  | 默认值 | 必填 | 说明                                           |
+| ----------- | ----------------------------------------------------- | ------ | ---- | ---------------------------------------------- |
+| name        | string                                                |        | 否   | 标识                                           |
+| inline      | boolean                                               | false  | 否   | 是否使用内联布局，默认纵向布局                 |
+| v-model     | string[\]/number[\]                                   | []     | 否   | 当前选择子项的 value 列表                      |
+| activeColor | string                                                |        | 否   | 自定义子项激活态的图标颜色                     |
+| options     | string[\]/number[\]/[Option](./Checkbox.md#option)[\] |        | 否   | 子项配置，优先级低于 slot 放入 `Checkbox` 组件 |
+
+### Option
+
+| Option Key | 类型          | 默认值 | 必填 | 说明                                  |
+| ---------- | ------------- | ------ | ---- | ------------------------------------- |
+| value      | string/string |        | 是   | 值， 同 `Checkbox` 组件 value         |
+| label      | string        |        | 是   | 描述，同 `Checkbox` 组件 slot default |
 
 ## CheckboxGroup Events
 
-| 事件名称 | 描述                 | 回调函数参数 |
-| -------- | -------------------- | ------------ |
-| change   | 选中项发生改变时触发 | { value }    |
+| 事件名称 | 描述                 | 回调函数参数                |
+| -------- | -------------------- | --------------------------- |
+| change   | 选中项发生改变时触发 | value: (string \| number)[] |
 
 ## CheckboxGroup Slots
 

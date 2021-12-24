@@ -2,7 +2,7 @@
 
 注：
 
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+- 支持表单，具体可参考 [Form](./Form.md)。
 
 ## Import
 
@@ -16,7 +16,7 @@ import { Cascader } from 'vfox'
 
 | 属性        | 类型                                                                                                 | 默认值                                                   | 必填 | 说明                                                 |
 | ----------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
-| name        | string                                                                                               |                                                          | 否   | [Form](./Form.md) 的标识                             |
+| name        | string                                                                                               |                                                          | 否   | 标识                                                 |
 | placeholder | string                                                                                               |                                                          | 否   | 没有选中值的提示，也会用在弹窗标题上                 |
 | disabled    | boolean                                                                                              | false                                                    | 否   | 是否禁用                                             |
 | options     | [Options](./Cascader.md#options-的结构)                                                              | []                                                       | 否   | 数据集                                               |
@@ -30,6 +30,10 @@ import { Cascader } from 'vfox'
 允许的类型为：`string | number | Date`
 
 在不自定义 `formatter/parser` 的情况下，v-model 只有 `(string | number)[]` 这种情况。
+
+### PickerModelValue 的类型
+
+PickerModelValue 的类型为： `PickerValue | PickerValue[]`
 
 ### options 的结构
 
@@ -135,7 +139,7 @@ interface PickerValueParser {
 
 | 事件                 | 描述                        | 回调函数参数                                                 |
 | -------------------- | --------------------------- | ------------------------------------------------------------ |
-| change               | 选择后 value 发生改变时触发 | [PickerDetail](./Cascader.md#pickerdetail-的结构)            |
+| change               | 选择后 value 发生改变时触发 | [PickerModelValue](./Cascader.md#pickermodelvalue-的类型)    |
 | visible-state-change | 展示隐藏时触发              | { state: [VisibleState](./Cascader.md#visiblestate-值说明) } |
 
 ### VisibleState 值说明
@@ -146,10 +150,3 @@ interface PickerValueParser {
 | shown  | 展示且动画结束后触发 |                                                   |
 | hide   | 隐藏时触发           | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 | hidden | 隐藏且动画结束后触发 | 可能携带其他参数 cancel, maskClick, closeClick 等 |
-
-### PickerDetail 的结构
-
-| 字段  | 类型                                                                                                 | 说明                                                  |
-| ----- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| value | [PickerValue](./Cascader.md#pickervalue-的类型) \| [PickerValue](./Cascader.md#pickervalue-的类型)[] | ["zaolei", "lunzao"]；`formatter/parser` 的优先级更高 |
-| label | string                                                                                               | "藻类/轮藻"                                           |

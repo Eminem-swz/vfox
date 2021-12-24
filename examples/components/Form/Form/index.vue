@@ -21,7 +21,7 @@
         name="nickname"
         title="昵称"
         required
-        :component="[Input, { placeholder: '请输入昵称' }]"
+        :component="[Input, { placeholder: '请输入昵称', showClear: true }]"
         :decorator="[FormItem]"
       />
       <Field

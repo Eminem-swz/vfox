@@ -28,6 +28,19 @@ import { Calendar, CalendarPopup, CalendarView } from 'vfox'
 
 在不自定义 `formatter/parser` 的情况下，v-model 只有 `Date[]` 这种情况。
 
+### PickerModelValue 的类型
+
+PickerModelValue 的类型为： `PickerValue | PickerValue[]`
+
+### CalendarDetail 的结构
+
+| 值         | 类型                                                      | 说明                                                                                      |
+| ---------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| value      | [PickerModelValue](./Calendar.md#pickermodelvalue-的类型) | 选择的值，`range` 模式下有开始 Date 和结束 Date 两个实例；`formatter/parser` 的优先级更高 |
+| label      | string                                                    | 选中值对应的描述文本                                                                      |
+| valueArray | number[][]                                                | 如：[[2021, 5, 1], [2021, 5, 30]]                                                         |
+| rangeCount | number                                                    | 选择区间持续的天数（含首尾）                                                              |
+
 ### CalendarMode
 
 ```
@@ -90,13 +103,13 @@ interface CalendarValueParser {
 
 注：
 
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+- 支持表单，具体可参考 [Form](./Form.md)。
 
 ## Calendar Props
 
 | 属性         | 类型    | 默认值 | 必填 | 说明                                 |
 | ------------ | ------- | ------ | ---- | ------------------------------------ |
-| name         | string  |        | 否   | [Form](./Form.md) 的标识             |
+| name         | string  |        | 否   | 标识                                 |
 | placeholder  | string  |        | 否   | 没有选中值的提示，也会用在弹窗标题上 |
 | disabled     | boolean | false  | 否   | 是否禁用                             |
 | show-confirm | boolean | false  | 否   | 弹窗是否展示确定按钮                 |
@@ -104,18 +117,9 @@ interface CalendarValueParser {
 
 ## Calendar Events
 
-| 事件   | 描述                   | 回调函数参数                                          |
-| ------ | ---------------------- | ----------------------------------------------------- |
-| change | 选择后值发生改变时触发 | [CalendarDetail](./Calendar.md#calendardetail-的结构) |
-
-### CalendarDetail 的结构
-
-| 值         | 类型                                                                                                 | 说明                                                                                      |
-| ---------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| value      | [PickerValue](./Calendar.md#pickervalue-的类型) \| [PickerValue](./Calendar.md#pickervalue-的类型)[] | 选择的值，`range` 模式下有开始 Date 和结束 Date 两个实例；`formatter/parser` 的优先级更高 |
-| label      | string                                                                                               | 选中值对应的描述文本                                                                      |
-| valueArray | number[][]                                                                                           | 如：[[2021, 5, 1], [2021, 5, 30]]                                                         |
-| rangeCount | number                                                                                               | 选择区间持续的天数（含首尾）                                                              |
+| 事件   | 描述                   | 回调函数参数                                              |
+| ------ | ---------------------- | --------------------------------------------------------- |
+| change | 选择后值发生改变时触发 | [PickerModelValue](./Calendar.md#pickermodelvalue-的类型) |
 
 ## CalendarPopup
 
