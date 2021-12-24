@@ -19,11 +19,26 @@ export function useInput() {
     return input.value?.value ?? ''
   }
 
+  function getInputEl() {
+    return input.value
+  }
+
+  function setFocus() {
+    input.value?.focus()
+  }
+
+  function setBlur() {
+    input.value?.blur()
+  }
+
   return {
     input,
     getInputValue,
     setInputValue,
     getInputChecked,
-    setInputChecked
+    setInputChecked,
+    getInputEl,
+    setFocus,
+    setBlur
   }
 }

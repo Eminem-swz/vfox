@@ -49,7 +49,7 @@
     >
     <Icon
       v-if="showClear"
-      v-show="inputValue && active"
+      v-show="isShowClear"
       class="fx-input_clear"
       icon="CloseCircleFilled"
       @mousedown.prevent="onClear"
@@ -67,6 +67,7 @@ import { isNumeric, isNumber, isStringNumberMix } from '@/helpers/util'
 import { formatInputDigit, formatInputNumber } from '@/helpers/input'
 import { getEnumsValue } from '@/helpers/validator'
 import { formItemEmits, formItemProps } from '@/Form/form'
+import { useInput } from '@/Form/use-form'
 
 const TYPE_NAMES = [
   'text',
@@ -123,21 +124,24 @@ export default defineComponent({
   },
   emits: [...formItemEmits, 'input', 'focus', 'blur'],
   setup(props, ctx) {
-    const inputEl = ref()
     const active = ref(false)
+    const isShowClear = ref(false)
     const inputValue = ref('')
     const { emit } = ctx
 
+    const { input, setFocus, setBlur, getInputValue, setInputValue } =
+      useInput()
+
     function updateValue(value: string | number) {
-      value = value.toString() as string
+      let newValue = value.toString()
 
       switch (props.type) {
         case 'digit':
-          value = formatInputDigit(value)
+          newValue = formatInputDigit(newValue)
           break
 
         case 'number':
-          value = formatInputNumber(value)
+          newValue = formatInputNumber(newValue)
           break
 
         default:
@@ -146,30 +150,26 @@ export default defineComponent({
 
       let isChange = false
 
-      const $input = getInputEl()
-      if ($input) {
-        if ($input.value != value) {
-          $input.value = value.toString()
-        }
-        value = $input.value
+      if (newValue !== getInputValue()) {
+        setInputValue(newValue)
       }
 
-      if (value !== inputValue.value) {
-        inputValue.value = value.toString()
+      if (newValue !== inputValue.value) {
+        inputValue.value = newValue
         isChange = true
       }
 
-      if (value != props.modelValue) {
-        emit('update:modelValue', inputValue.value)
+      if (newValue != props.modelValue) {
+        emit('update:modelValue', newValue)
       }
 
-      return { value, isChange }
+      return { value: newValue, isChange }
     }
 
     function updateInput(newVal: string) {
       const { value, isChange } = updateValue(newVal)
 
-      isChange && emit('input', { value, type: 'input' })
+      isChange && emit('input', value)
     }
 
     let isComposition = false
@@ -178,9 +178,9 @@ export default defineComponent({
       isComposition = true
     }
 
-    function onCompositionEnd(e: Event) {
+    function onCompositionEnd() {
       isComposition = false
-      updateInput((e.target as HTMLInputElement).value)
+      updateInput(getInputValue())
     }
 
     function onFocus(e: Event) {
@@ -193,9 +193,9 @@ export default defineComponent({
       emit(e.type, e)
     }
 
-    function onInput(e: Event) {
+    function onInput() {
       if (!isComposition) {
-        updateInput((e.target as HTMLInputElement).value)
+        updateInput(getInputValue())
       }
     }
 
@@ -205,6 +205,7 @@ export default defineComponent({
 
     function onClear() {
       updateInput('')
+      emit('change', inputValue.value)
     }
 
     const inputType = computed(() => {
@@ -261,15 +262,9 @@ export default defineComponent({
     watch(
       () => props.focus,
       val => {
-        const $input = getInputEl()
-
-        $input && $input[val ? 'focus' : 'blur']()
+        val ? setFocus() : setBlur()
       }
     )
-
-    function getInputEl(): undefined | HTMLInputElement {
-      return inputEl.value
-    }
 
     const maxLength = computed(() => {
       if (isNumber(props.maxlength)) {
@@ -282,18 +277,24 @@ export default defineComponent({
       return 140
     })
 
-    onMounted(() => {
-      updateValue(props.modelValue ?? '')
-
-      const $input = getInputEl()
-
-      if ($input) {
-        $input.defaultValue = $input.value
-        props.focus && $input.focus()
+    let timer: number
+    watch([inputValue, active], ([ipVal, isActive]) => {
+      clearTimeout(timer)
+      if (ipVal && isActive) {
+        timer = window.setTimeout(() => (isShowClear.value = true), 200)
+      } else {
+        isShowClear.value = false
       }
     })
 
+    onMounted(() => {
+      updateValue(props.modelValue ?? '')
+
+      props.focus && setFocus()
+    })
+
     return {
+      input,
       inputValue,
       active,
       onCompositionStart,
@@ -305,7 +306,8 @@ export default defineComponent({
       onClear,
       inputType,
       inputMode,
-      maxLength
+      maxLength,
+      isShowClear
     }
   }
 })
