@@ -1,8 +1,7 @@
 <template>
   <Drawer
     class="fx-cascader-popup"
-    :title="title2"
-    placement="right"
+    placement="bottom"
     :visible="visible"
     @visibleStateChange="onVisibleStateChange"
     @confirm="onConfirm"
@@ -10,11 +9,22 @@
     @update:visible="onUpdateVisible"
     ref="popup"
   >
+    <template #header>
+      <Tab
+        class="fx-cascader_tabs"
+        :options="tabOptions"
+        :scrollThreshold="0"
+        v-model:activeValue="tabIndex"
+      />
+    </template>
     <div ref="dropdown" class="fx-cascader_groups">
       <div
         class="fx-cascader_group fx-vertical-hairline"
         v-for="(list, listIndex) in cols"
         :key="listIndex"
+        :style="{
+          zIndex: tabColIndex == listIndex ? 2 : 1
+        }"
       >
         <ul class="fx-cascader_list" :data-index="listIndex">
           <li
@@ -39,24 +49,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref, computed, inject } from 'vue'
+import { defineComponent, ref, computed, inject, reactive } from 'vue'
 import { Drawer } from '@/Drawer'
-import { frameTo } from '@/helpers/animation'
+import { Tab } from '@/Tab'
 import { isSameArray } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import type { ColRow, PickerHandlers, PickerValue } from '../Picker/types'
-import {
-  pickerPopupEmits,
-  commonProps,
-  mergeHandlers,
-  labelFormatter
-} from '@/Picker/picker'
+import type { TabOptionItem } from '../Tab/types'
+import { pickerPopupEmits, commonProps, mergeHandlers } from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-cascader-popup',
-  components: { Drawer },
+  components: { Drawer, Tab },
   props: {
     ...popupExtendProps,
     ...commonProps,
@@ -67,76 +73,11 @@ export default defineComponent({
   },
   emits: [...popupExtendEmits, ...pickerPopupEmits],
   setup(props, ctx) {
+    const tabOptions = reactive<TabOptionItem[]>([])
+    const tabIndex = ref(0)
     const dropdown = ref<HTMLElement>()
 
     const popup = usePopupExtend(ctx)
-
-    function updateLayout() {
-      nextTick(() => {
-        const $dropdown = dropdown.value as HTMLElement
-
-        if (!$dropdown) {
-          return
-        }
-
-        const $lists = $dropdown.querySelectorAll(`.fx-cascader_list`)
-        const $selecteds = $dropdown.querySelectorAll('.selected')
-
-        if ($lists[1]) {
-          let $next: HTMLElement
-          if ($lists.length > $selecteds.length) {
-            // 还有未选择
-            $next = $lists[$selecteds.length] as HTMLElement
-          } else {
-            // 选择完毕
-            $next = $lists[$lists.length - 1] as HTMLElement
-          }
-
-          $next = $next.parentElement as HTMLElement
-          const $groups = $next.parentElement as HTMLElement
-
-          let to: number
-
-          if ($next.offsetWidth >= document.documentElement.offsetWidth * 0.9) {
-            to = $next.offsetLeft
-          } else {
-            to = $next.offsetLeft - ($groups.offsetWidth - $next.offsetWidth)
-          }
-
-          if (to >= 0) {
-            frameTo({
-              from: $groups.scrollLeft,
-              to,
-              duration: 100,
-              progress(res) {
-                $groups.scrollLeft = res.current
-              }
-            })
-          }
-
-          // $next.scrollIntoView(
-          //   $next.offsetWidth < document.documentElement.offsetWidth
-          // )
-        } else {
-          $dropdown.scrollLeft = 0
-        }
-
-        $lists.forEach(($list, index) => {
-          if ($selecteds[index]) {
-            frameTo({
-              from: $list.scrollTop,
-              to: ($selecteds[index] as HTMLElement).offsetTop,
-              duration: 100,
-              progress(res) {
-                $list.scrollTop = res.current
-              }
-            })
-          } else {
-            $list.scrollTop = 0
-          }
-        })
-      })
-    }
 
     function onItemClick(e: Event, item: ColRow) {
       if (item.disabled) {
@@ -174,7 +115,26 @@ export default defineComponent({
       onChange
     } = usePickerView(props, ctx, {
       name: 'cascader',
-      afterUpdate: updateLayout,
+      afterUpdate(valueArray, labelArray) {
+        tabOptions.splice(0, Infinity)
+
+        if (labelArray.length > 0) {
+          labelArray.forEach((v, k) => {
+            tabOptions.push({
+              label: v,
+              value: k
+            })
+          })
+
+          tabIndex.value = tabOptions.length - 1
+        } else {
+          tabOptions.push({
+            value: 0,
+            label: props.title
+          })
+          tabIndex.value = 0
+        }
+      },
       handlers: mergeHandlers(
         {
           formatter: props.formatter,
@@ -184,13 +144,19 @@ export default defineComponent({
       )
     })
 
-    const title2 = computed(() => {
-      return labelFormatter(cacheLabel) || props.title
+    const tabColIndex = computed(() => {
+      if (cols.length > tabOptions.length) {
+        return tabIndex.value + 1
+      }
+      return tabIndex.value
     })
 
     return {
+      tabIndex,
+      tabOptions,
+      tabColIndex,
+      cacheLabel,
       ...popup,
-      title2,
       dropdown,
       cols,
       getDetail,
@@ -198,14 +164,5 @@ export default defineComponent({
       onItemClick
     }
   }
-  // watch: {
-  //   visible: {
-  //     handler(val) {
-  //       if (val) {
-  //         this.update(this.formValue)
-  //       }
-  //     }
-  //   }
-  // }
 })
 </script>

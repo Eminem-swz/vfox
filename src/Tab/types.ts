@@ -3,7 +3,7 @@ import type { IconData } from '../Icon/types'
 
 export type OptionValue = number | string
 
-export interface OptionItem {
+export interface TabOptionItem {
   label: string
   value: OptionValue
   icon?: IconData
@@ -14,8 +14,8 @@ export interface OptionItem {
   subLabel?: string
 }
 
-export type OptionList = (OptionValue | OptionItem)[]
+export type OptionList = (OptionValue | TabOptionItem)[]
 
-export interface HandleOptionItem extends OptionItem {
+export interface HandleOptionItem extends TabOptionItem {
   badge: BadgeOptions
 }

@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import { isArray, isObject, isString, isStringNumberMix } from '@/helpers/util'
-import type { OptionItem, OptionList } from './types'
+import type { TabOptionItem, OptionList } from './types'
 
 export const tabEmits = ['update:activeValue', 'change']
 
@@ -16,8 +16,8 @@ export const tabProps = {
             //
           } else if (
             isObject(option) &&
-            isStringNumberMix((option as OptionItem).value) &&
-            isString((option as OptionItem).label)
+            isStringNumberMix((option as TabOptionItem).value) &&
+            isString((option as TabOptionItem).label)
           ) {
             //
           } else {
@@ -31,7 +31,7 @@ export const tabProps = {
       return true
     },
     required: true,
-    default: () => [] as OptionItem[]
+    default: () => [] as TabOptionItem[]
   },
   activeValue: {
     type: [String, Number],

@@ -21,7 +21,7 @@ import { handleBadge } from '@/Badge/badge'
 import type { UseProps, UseCtx } from '../hooks/types'
 import type {
   OptionValue,
-  OptionItem,
+  TabOptionItem,
   HandleOptionItem,
   OptionList
 } from './types'
@@ -48,7 +48,7 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
 
     if (isArray(props.options)) {
       props.options.forEach((item, index) => {
-        let option: OptionItem | null = null
+        let option: TabOptionItem | null = null
 
         if (isNumber(item)) {
           option = {
@@ -61,7 +61,7 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
             value: item as string
           }
         } else if (isObject(item)) {
-          item = item as OptionItem
+          item = item as TabOptionItem
 
           if (isStringNumberMix(item.value)) {
             option = {
@@ -92,7 +92,7 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
         }
 
         if (option) {
-          option = option as OptionItem
+          option = option as TabOptionItem
 
           if (option.value === value2) {
             activeIndex.value = index
