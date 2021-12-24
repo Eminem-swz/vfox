@@ -1,3 +1,17 @@
+# [2.2.0](https://github.com/godxiaoji/vfox/compare/v2.1.0...v2.2.0) (2021-12-24)
+
+
+### Bug Fixes
+
+* **input:** input showClear 容易误点问题修复 ([2611e34](https://github.com/godxiaoji/vfox/commit/2611e34d2cb31abf2bf135abe087e2ddf2dcfc8a))
+
+
+### Features
+
+* **formily:** form表单改为接入formily ([ef0e15f](https://github.com/godxiaoji/vfox/commit/ef0e15fa0645fe67c44e2d1434499fd668e824dd))
+* **formliy:** 适配formily主题创作 ([74b6ab3](https://github.com/godxiaoji/vfox/commit/74b6ab3bbb5bbbbe1551cbc075c2d3958c7a714a))
+* **svg:** sVG组件优化 ([ad39c58](https://github.com/godxiaoji/vfox/commit/ad39c5870b0b8afb5c8b24d4c99dfdf51d766760))
+
 # [2.1.0](https://github.com/godxiaoji/vfox/compare/v2.0.7...v2.1.0) (2021-12-20)
 
 
