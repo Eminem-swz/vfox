@@ -21,19 +21,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 
-export default {
+export default defineComponent({
   name: 'ExpSwitch',
   data() {
     return { value: false }
   },
   methods: {
-    onChange({ value }) {
-      console.log(value)
+    onChange(value: boolean) {
+      console.log('change', value)
       showToast(value ? '开' : '关')
     }
   }
-}
+})
 </script>

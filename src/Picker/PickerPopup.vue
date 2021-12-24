@@ -3,7 +3,7 @@
     class="fx-picker-popup"
     placement="bottom"
     :visible="visible"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
     @cancel="onCancel"
     @confirm="onConfirm"
     @update:visible="onUpdateVisible"
@@ -38,7 +38,11 @@ import { Drawer } from '@/Drawer'
 import { NavBar } from '@/NavBar'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
-import { pickerPopupProps, pickerViewEmits, commonProps } from '@/Picker/picker'
+import {
+  pickerPopupProps,
+  pickerPopupEmits,
+  commonProps
+} from '@/Picker/picker'
 import { usePickerPopup } from '@/Picker/use-picker'
 
 export default defineComponent({
@@ -49,7 +53,7 @@ export default defineComponent({
     ...commonProps,
     ...pickerPopupProps
   },
-  emits: [...pickerViewEmits, ...popupExtendEmits],
+  emits: [...popupExtendEmits, ...pickerPopupEmits],
   setup(props, ctx) {
     const popup = usePopupExtend(ctx)
     const pickerPopup = usePickerPopup(props, popup)

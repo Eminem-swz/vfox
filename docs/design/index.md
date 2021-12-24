@@ -8,10 +8,6 @@ sidebarDepth: 2
 
 该组件库便是在项目中实现 **可复用** 、 **一致性** 、 **高效率** 的目标之下孕育而生的。
 
-## 源稿
-
-[Figma](https://www.figma.com/file/x06EJ4ST3tQj9Ez9jeNNRS/%E7%BB%84%E4%BB%B6?node-id=14%3A2)
-
 ## 设计思路：从限制到规范
 
 针对不同平台的设计会面对不同的限制，而事实上几乎所有的设计都是在一定的限制之下，而此移动端组件库的设计同样如此，在设计中需要发现最小的限制，包括核心字号、最小间距单位，并基于此进行设计，才能在最后的呈现中保证所体现的效果。
@@ -63,3 +59,7 @@ sidebarDepth: 2
 本组件库中出现的圆角主要为 2、4、8，其中以 4 的圆角为基准，2 圆角用于界面中的小元素，8 圆角用于界面中的大元素和超大元素。
 
 ![8.png](./assets/8.png)
+
+## Figma 组件库
+
+[Figma](https://www.figma.com/file/R7SiJrftLA0Dv2VAXcZg2U/Vfox-UI?node-id=14%3A2)

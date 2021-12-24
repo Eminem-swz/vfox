@@ -1,20 +1,20 @@
 <template>
   <div
     class="fx-input"
-    :class="{ 'has--value': formLabelString, disabled }"
+    :class="{ 'has--value': label, disabled }"
     @click="onFieldClick"
   >
-    <div class="fx-input_input" :class="{ placeholder: !formLabelString }">
-      {{ formLabelString || placeholder }}
+    <div class="fx-input_input" :class="{ placeholder: !label }">
+      {{ label || placeholder }}
     </div>
     <Icon class="fx-input_arrow" icon="RightOutlined" />
     <input
       class="fx-input_cover fx-form-input"
       type="text"
       readonly
-      :name="formName"
+      :name="name"
       :disabled="disabled"
-      :value="formValueString"
+      :value="value"
     />
   </div>
 </template>
@@ -24,13 +24,13 @@ import { defineComponent } from 'vue'
 import { Icon } from '@/Icon'
 
 export default defineComponent({
-  name: 'fx-picker-input',
+  name: 'fx-selector-field',
   components: { Icon },
   props: {
     disabled: Boolean,
-    formValueString: String,
-    formLabelString: String,
-    formName: String,
+    value: String,
+    label: String,
+    name: String,
     placeholder: String
   },
   emits: ['field-click'],

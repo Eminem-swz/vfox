@@ -35,10 +35,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 
-export default {
+export default defineComponent({
   name: 'ExpRate',
   data() {
     return {
@@ -47,9 +48,9 @@ export default {
     }
   },
   methods: {
-    onChange({ value }) {
+    onChange(value: number) {
       showToast(`Value: ${value}`)
     }
   }
-}
+})
 </script>

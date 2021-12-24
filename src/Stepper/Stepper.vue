@@ -4,14 +4,14 @@
       icon="MinusOutlined"
       shape="square"
       size="small"
-      :disabled="disabled || disabledMinus || parseFloat(formValue) <= min"
+      :disabled="disabled || disabledMinus || parseFloat(inputValue) <= min"
       @click="onMinusOrPlusClick(false)"
     ></Button>
     <input
       class="fx-stepper_input"
       :type="allowDecimal ? 'text' : 'tel'"
       :inputmode="allowDecimal ? 'decimal' : 'numeric'"
-      :name="formName"
+      :name="name"
       :disabled="disabled"
       :readonly="disabledInput"
       @input="onInput"
@@ -24,7 +24,7 @@
       icon="PlusOutlined"
       shape="square"
       size="small"
-      :disabled="disabled || disabledPlus || parseFloat(formValue) >= max"
+      :disabled="disabled || disabledPlus || parseFloat(inputValue) >= max"
       @click="onMinusOrPlusClick(true)"
     ></Button>
   </div>
@@ -36,7 +36,7 @@ import { Button } from '@/Button'
 import { rangeInteger, rangeNumber } from '@/helpers/util'
 import { formatInputNumber } from '@/helpers/input'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
+import { useInput } from '@/Form/use-form'
 
 export default defineComponent({
   name: 'fx-stepper',
@@ -95,48 +95,38 @@ export default defineComponent({
     'focus',
     'blur'
   ],
-  setup(props, ctx) {
-    const { emit } = ctx
-    const formValue = ref('1')
+  setup(props, { emit }) {
+    const isValueNull = props.modelValue == null
+    const inputValue = ref('1')
 
-    const { formName, validateAfterEventTrigger, getInputEl, hookFormValue } =
-      useFormItem<string>(props, ctx, { formValue })
+    const { input, setInputValue, getInputValue } = useInput()
 
     function onMinusOrPlusClick(isPlus = true) {
       let type = 'plus-click'
 
       if (isPlus) {
-        updateValue(parseFloat(formValue.value) + props.step)
+        updateValue(parseFloat(inputValue.value) + props.step)
       } else {
-        updateValue(parseFloat(formValue.value) - props.step)
+        updateValue(parseFloat(inputValue.value) - props.step)
         type = 'minus-click'
       }
 
       emit(type, { type })
     }
 
-    function updateValue(value: any, eventChange = true) {
+    function updateValue(value: number | string, isEventChange = true) {
       const newValue = getRangeNumber(value)
 
-      if (newValue !== formValue.value) {
-        formValue.value = newValue
-        if (eventChange) {
-          const eventType = 'change'
-
-          emit(eventType, {
-            value: newValue
-          })
-
-          validateAfterEventTrigger(eventType, newValue)
+      if (newValue !== inputValue.value) {
+        inputValue.value = newValue
+        if (isEventChange) {
+          emit('change', newValue)
         }
       }
 
-      const $input = getInputEl()
-      if ($input) {
-        $input.value = newValue
-      }
+      setInputValue(newValue)
 
-      if (newValue !== props.modelValue) {
+      if (newValue != props.modelValue) {
         emit('update:modelValue', newValue)
       }
 
@@ -167,20 +157,15 @@ export default defineComponent({
       emit(e.type, e)
     }
 
-    function onChange(e: Event) {
-      updateValue((e.target as HTMLInputElement).value)
+    function onChange() {
+      updateValue(getInputValue())
     }
 
     function onInput(e: Event) {
-      const $input = e.target as HTMLInputElement
+      const value = formateNumber(getInputValue())
+      setInputValue(value)
 
-      const value = formateNumber($input.value)
-
-      $input.value = value
-
-      emit(e.type, {
-        value
-      })
+      emit(e.type, value)
     }
 
     watch(
@@ -188,7 +173,7 @@ export default defineComponent({
       val => {
         if (
           val != null &&
-          parseFloat(val.toString()) !== parseFloat(formValue.value)
+          parseFloat(val.toString()) !== parseFloat(inputValue.value)
         ) {
           updateValue(val, false)
         }
@@ -196,23 +181,22 @@ export default defineComponent({
     )
 
     onMounted(() => {
-      const $input = getInputEl()
-
-      $input.defaultValue = $input.value = formValue.value
+      setInputValue(inputValue.value)
     })
 
     updateValue(props.modelValue, false)
+    if (isValueNull) {
+      emit('change', inputValue.value)
+    }
 
     return {
-      formName,
-      formValue,
-      validateAfterEventTrigger,
+      input,
+      inputValue,
       onFocus: proxyEvent,
       onBlur: proxyEvent,
       onChange,
       onInput,
-      onMinusOrPlusClick,
-      hookFormValue
+      onMinusOrPlusClick
     }
   }
 })

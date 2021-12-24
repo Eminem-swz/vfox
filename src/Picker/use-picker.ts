@@ -13,8 +13,7 @@ import type {
   PickerOptionsHandler,
   PickerDetail,
   PickerHandlers,
-  PickerModelValue,
-  PickerChangeArgs
+  PickerModelValue
 } from './types'
 import type { Noop } from '../helpers/types'
 import {
@@ -31,7 +30,6 @@ import {
 } from '@/Picker/picker'
 import type { UseProps, UseCtx, UseEmit } from '../hooks/types'
 import { PopupCustomConfirm } from '@/popup/types'
-import { useFormItem } from '@/Form/use-form'
 
 interface UseOptions {
   name: string
@@ -43,25 +41,22 @@ export function usePicker(
   ctx: UseCtx,
   { name, handlers }: UseOptions
 ) {
+  const root = ref<HTMLElement>()
   const { emit } = ctx
   const isInitPopup = ref(false)
   const popupVisible = ref(true)
-  const formValueString = ref('')
-  const formLabelString = ref('')
-  const formValue = reactive<PickerValue[]>([])
+  const fieldValue = ref('')
+  const fieldLabel = ref('')
   const popup = ref()
 
   let detail = getDefaultDetail()
-  // const defaultDetail = getDefaultDetail()
-
-  const { formName, validateAfterEventTrigger, hookFormValue, root } =
-    useFormItem<PickerValue>(props, ctx, {
-      formValue,
-      hookFormValue: () => getDetail().value,
-      hookResetValue: () => updateValue(formatter([], [], handlers).value).value
-    })
 
   function updateValue(val: unknown) {
+    if (val == null) {
+      // 解决 formily 强制null的问题
+      return getDetail()
+    }
+
     if (isEmpty(val) && val !== 0) {
       return updateDetail(getDefaultDetail())
     }
@@ -95,14 +90,10 @@ export function usePicker(
   }
 
   function updateDetail(newDetail: PickerDetail) {
-    if (!isSameDetail(newDetail, detail)) {
-      emit('value-change', cloneDetail(newDetail), cloneDetail(detail))
-    }
-
     detail = newDetail
-    formValueString.value = detail.value != null ? detail.value.toString() : ''
-    formLabelString.value = detail.label
 
+    fieldValue.value = detail.value != null ? detail.value.toString() : ''
+    fieldLabel.value = detail.label
     return getDetail()
   }
 
@@ -120,13 +111,18 @@ export function usePicker(
     return cloneDetail(detail)
   }
 
-  function onChange(detail: PickerDetail) {
-    updateDetail(detail)
+  function onChange() {
+    popup.value && updateDetail(popup.value.getDetail())
 
-    emit('update:modelValue', hookFormValue())
-    emit('change', getChangeArgs(getDetail()))
+    emit('update:modelValue', getDetail().value)
+    emit('change', getDetail().value)
+  }
 
-    validateAfterEventTrigger('change', hookFormValue())
+  function onConfirm(_detail: PickerDetail) {
+    updateDetail(_detail)
+
+    emit('update:modelValue', getDetail().value)
+    emit('change', getDetail().value)
   }
 
   watch(
@@ -137,22 +133,25 @@ export function usePicker(
     }
   )
 
-  const defaultValue = getDetail().value
+  watch([isInitPopup, popupVisible], ([isInit, visible]) => {
+    if (isInit && visible) {
+      emit('focus')
+    } else if (!visible) {
+      emit('blur')
+    }
+  })
 
   return {
     root,
     popup,
-    formName,
     isInitPopup,
     popupVisible,
-    formValueString,
-    formLabelString,
+    fieldValue,
+    fieldLabel,
     updateValue,
     onFieldClick,
     onChange,
-    hookFormValue,
-    validateAfterEventTrigger,
-    defaultValue
+    onConfirm
   }
 }
 
@@ -180,7 +179,7 @@ export function usePickerPopup(
 
       // 跟picker-view不一样，改变数值时机是确定按钮
       emit('update:modelValue', getDetail().value)
-      emit('change', getChangeArgs(getDetail()))
+      emit('change', getDetail().value)
     }
 
     return getDetail()
@@ -622,7 +621,7 @@ export function usePickerView(
 
   function onChange() {
     emitValue()
-    emit('change', getChangeArgs(getDetail()))
+    emit('change', getDetail().value)
   }
 
   watch(
@@ -696,8 +695,4 @@ const formatter: PickerFormatter = (valueArray, labelArray, handlers) => {
 
 const parser: PickerParser = (val, handlers) => {
   return handlers.parser(val)
-}
-
-function getChangeArgs(detail: PickerDetail): PickerChangeArgs {
-  return Object.assign({ type: 'change' as const }, detail)
 }

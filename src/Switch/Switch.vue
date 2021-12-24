@@ -4,8 +4,8 @@
       class="fx-switch_checkbox"
       type="checkbox"
       :disabled="disabled"
-      :name="formName"
-      :value="formValue.toString()"
+      :name="name"
+      :value="checked.toString()"
       @change="onChange"
       ref="input"
     />
@@ -15,7 +15,7 @@
 <script lang="ts">
 import { onMounted, ref, watch, defineComponent, computed } from 'vue'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
+import { useInput } from '@/Form/use-form'
 import type { StyleObject } from '../helpers/types'
 
 export default defineComponent({
@@ -24,7 +24,7 @@ export default defineComponent({
     ...formItemProps,
     modelValue: {
       type: Boolean,
-      default: false
+      default: null
     },
     color: {
       type: String
@@ -37,48 +37,38 @@ export default defineComponent({
     }
   },
   emits: formItemEmits,
-  setup(props, ctx) {
-    const { emit } = ctx
-    const formValue = ref(!!props.modelValue)
-
-    const {
-      formName,
-      validateAfterEventTrigger,
-      getInputEl,
-      hookFormValue,
-      eventEmit
-    } = useFormItem<boolean>(props, ctx, {
-      formValue,
-      hookResetValue: input => input?.checked || false
-    })
+  setup(props, { emit }) {
+    const isValueNull = props.modelValue == null
+    const checked = ref(!!props.modelValue)
+    const { input, setInputChecked, getInputChecked } = useInput()
 
     watch(
       () => props.modelValue,
       val => {
         val = !!val
 
-        if (val !== formValue.value) {
-          getInputEl().checked = formValue.value = val
+        if (val !== checked.value) {
+          checked.value = val
+
+          setInputChecked(val)
         }
       }
     )
 
-    function onChange(e: Event) {
-      const value = !!(e.target as HTMLInputElement).checked
+    function onChange() {
+      const value = getInputChecked()
 
-      formValue.value = value
+      checked.value = value
 
       if (props.modelValue !== value) {
         emit('update:modelValue', value)
       }
 
-      eventEmit(e.type)
+      emit('change', value)
     }
 
     onMounted(() => {
-      const $input = getInputEl()
-
-      $input.defaultChecked = $input.checked = formValue.value
+      setInputChecked(checked.value)
     })
 
     const styles = computed(() => {
@@ -93,12 +83,14 @@ export default defineComponent({
       return obj
     })
 
+    if (isValueNull) {
+      emit('change', checked.value)
+    }
+
     return {
-      formName,
-      formValue,
+      input,
+      checked,
       onChange,
-      hookFormValue,
-      validateAfterEventTrigger,
       styles
     }
   }

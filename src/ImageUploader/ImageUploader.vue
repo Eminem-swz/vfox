@@ -50,12 +50,7 @@
         </div>
       </template>
     </Order>
-    <input
-      type="hidden"
-      :name="formName"
-      :value="formValue.join(',')"
-      ref="input"
-    />
+    <input type="hidden" :name="name" :value="formValue" ref="input" />
   </div>
   <ImagePreview
     class="fx-image-uploader_preview"
@@ -78,15 +73,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  PropType,
-  computed,
-  watch,
-  ref,
-  onMounted
-} from 'vue'
+import { defineComponent, reactive, PropType, computed, watch, ref } from 'vue'
 import { Image } from '@/Image'
 import { Button } from '@/Button'
 import { Icon } from '@/Icon'
@@ -105,7 +92,6 @@ import {
 } from '@/helpers/util'
 import { formatFileSize } from '@/helpers/file'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
 import type { ImageModes } from '../Image/types'
 
 type Accept = 'all' | 'png' | 'jpeg' | 'jpg' | 'webp'
@@ -250,17 +236,6 @@ export default defineComponent({
     const previewVisible = ref(false)
     const previewCurrent = ref('')
 
-    const {
-      formName,
-      validateAfterEventTrigger,
-      getInputEl,
-      hookFormValue,
-      eventEmit
-    } = useFormItem<string>(props, ctx, {
-      formValue,
-      hookResetValue: input => (input.value ? input.value.split(',') : [])
-    })
-
     function onAddFiles(e: Event) {
       const files = (e.target as HTMLInputElement).files || []
 
@@ -397,8 +372,8 @@ export default defineComponent({
       if (!isSameArray(value, formValue)) {
         formValue.splice(0, Infinity, ...value)
 
-        emit('update:modelValue', hookFormValue())
-        eventEmit('change')
+        emit('update:modelValue', cloneData(formValue))
+        emit('change', cloneData(formValue))
       }
     }
 
@@ -495,7 +470,7 @@ export default defineComponent({
     const urlIdCache: Record<string, number> = {}
 
     function urlId(url: string, id?: number) {
-      url = url.substr(-100)
+      url = url.substring(url.length - 100)
 
       if (id) {
         urlIdCache[url] = id
@@ -576,16 +551,8 @@ export default defineComponent({
 
     updateUploadButton()
 
-    onMounted(() => {
-      const $input = getInputEl() as HTMLInputElement
-
-      $input.defaultValue = $input.value
-    })
-
     return {
-      formName,
       formValue,
-      validateAfterEventTrigger,
       orderItems,
       accept2,
       onAddFiles,

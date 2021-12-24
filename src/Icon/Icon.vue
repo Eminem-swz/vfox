@@ -4,7 +4,7 @@
     class="fx-icon"
     :class="{ spin }"
     :style="iconStyles"
-    :icon-name="iconName"
+    :iconName="iconName"
   >
   </component>
 </template>
@@ -66,7 +66,8 @@ export default defineComponent({
     })
 
     const iconName = computed(() => {
-      return `#icon-${isSvgComponent(props.icon) ? 'component' : props.icon}`
+      return isSvgComponent(props.icon) ? null : props.icon
+      // return `#icon-${isSvgComponent(props.icon) ? 'component' : props.icon}`
     })
 
     return {

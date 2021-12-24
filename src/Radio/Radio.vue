@@ -7,7 +7,7 @@
     <input
       class="fx-radio_input fx-form-input"
       type="radio"
-      :name="formName"
+      :name="name2"
       :value="value"
       :disabled="disabled2"
       @change="onChange"

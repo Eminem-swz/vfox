@@ -76,7 +76,6 @@ export default defineComponent({
 
       const offsetTop = getRelativeOffset($root, $container).offsetTop
 
-      // console.log(scrollTop, offsetTop, getSizeValue(props.offsetTop), $root.offsetTop, $container)
       if (scrollTop >= offsetTop - getSizeValue(props.offsetTop)) {
         height.value = clientHeight
         width.value = clientWidth

@@ -40,6 +40,9 @@
           }}</fx-checkbox>
         </fx-checkbox-group>
       </fx-cell>
+      <fx-cell label="通过options设置">
+        <fx-checkbox-group v-model="groupValue" :options="groups" />
+      </fx-cell>
     </fx-group>
     <fx-group title="CheckboxGroup + Cell">
       <fx-checkbox-group v-model="groupValue">
@@ -62,18 +65,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 
-export default {
+export default defineComponent({
   name: 'ExpCheckbox',
   data() {
     return { checked: false, groupValue: ['A', 'C'], groups: ['A', 'B', 'C'] }
   },
   methods: {
-    onChange({ value }) {
+    onChange(value: string[]) {
+      console.log('change', value)
       showToast(`Change Value: ${value}`)
     }
   }
-}
+})
 </script>

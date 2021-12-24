@@ -69,8 +69,6 @@ export interface ShowPickerOptions {
   fieldNames?: UserFieldNames
 }
 
-export interface PickerChangeArgs extends PickerDetail {
-  type: 'change'
-}
+export type PickerChangeArgs = PickerModelValue
 export type PickerConfirmArgs = PopupConfirmArgs<PickerDetail>
 export type PickerCancelArgs = PopupCancelArgs

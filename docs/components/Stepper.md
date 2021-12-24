@@ -2,7 +2,7 @@
 
 注：
 
-- 可以配合 [Form](./Form.md) 和 [FormItem](./Form.md#formitem) 使用。
+- 支持表单，具体可参考 [Form](./Form.md)。
 
 ## Import
 
@@ -17,7 +17,7 @@ import { Stepper } from 'vfox'
 | 属性           | 类型    | 默认值   | 必填 | 说明                                   |
 | -------------- | ------- | -------- | ---- | -------------------------------------- |
 | v-model        | number  |          | 否   |
-| name           | string  |          | 否   | [Form](./Form.md) 的标识               |
+| name           | string  |          | 否   | 标识                                   |
 | min            | number  | 0        | 否   | 最小值                                 |
 | max            | number  | Infinity | 否   | 最大值                                 |
 | step           | number  | 1        | 否   | 步长                                   |
@@ -30,11 +30,11 @@ import { Stepper } from 'vfox'
 
 ## Events
 
-| 事件        | 描述               | 回调函数参数 |
-| ----------- | ------------------ | ------------ |
-| change      | 当绑定值变化时触发 | { value }    |
-| input       | 输入框输入时触发   | { value }    |
-| focus       | 输入框聚焦时触发   | FocusEvent   |
-| blur        | 输入框失焦时触发   | FocusEvent   |
-| plus-click  | 点击增加按钮时触发 | {}           |
-| minus-click | 点击减少按钮时触发 | {}           |
+| 事件        | 描述               | 回调函数参数            |
+| ----------- | ------------------ | ----------------------- |
+| change      | 当绑定值变化时触发 | value: number \| string |
+| input       | 输入框输入时触发   | value: number \| string |
+| focus       | 输入框聚焦时触发   | FocusEvent              |
+| blur        | 输入框失焦时触发   | FocusEvent              |
+| plus-click  | 点击增加按钮时触发 |                         |
+| minus-click | 点击减少按钮时触发 |                         |

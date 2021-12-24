@@ -1,12 +1,20 @@
 <template>
   <div>
     <fx-group title="基础用法">
-      <fx-input type="text" placeholder="请输入文本" />
+      <fx-input type="text" focus placeholder="请输入文本" />
       <fx-input type="text" modelValue="禁用" :disabled="true" />
       <fx-input type="text" placeholder="showLimit=true" showLimit showClear />
     </fx-group>
     <fx-group title="textarea">
       <fx-input type="textarea" placeholder="showLimit=true" showLimit />
+    </fx-group>
+    <fx-group title="Slot prepend/append">
+      <fx-input type="text" focus placeholder="请输入网址">
+        <template #prepend>https://</template>
+      </fx-input>
+      <fx-input type="text" focus placeholder="请输入网址">
+        <template #append>.com</template>
+      </fx-input>
     </fx-group>
     <fx-group title="与 Cell 组合">
       <fx-cell label="文本">
@@ -52,8 +60,8 @@
         />
       </fx-cell>
     </fx-group>
-    <fx-group title="input 事件监听">
-      <fx-cell label="文本">
+    <fx-group title="input">
+      <fx-cell label="input">
         <fx-input
           type="text"
           placeholder="请输入文本"
@@ -62,22 +70,38 @@
           @input="onInput"
         />
       </fx-cell>
+      <fx-cell label="change">
+        <fx-input
+          type="text"
+          placeholder="请输入文本"
+          :show-clear="true"
+          v-model="changeValue"
+          @change="onInput"
+        />
+      </fx-cell>
     </fx-group>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { showToast } from '@/Toast'
 
-export default {
+export default defineComponent({
   name: 'ExpInput',
-  data() {
-    return { value: '' }
-  },
-  methods: {
-    onInput({ value }) {
+  setup() {
+    const value = ref('')
+    const changeValue = ref('')
+
+    function onInput(value: string) {
       showToast(`当前值为：${value}`)
     }
+
+    return {
+      value,
+      changeValue,
+      onInput
+    }
   }
-}
+})
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <label class="fx-form-item fx-cell fx-horizontal-hairline" @click="onClick">
+  <label
+    class="fx-form-item fx-cell fx-horizontal-hairline"
+    :class="[validateStatus]"
+  >
     <div class="fx-cell_header">
       <div class="fx-cell_label" v-if="label">
         {{ label }}
@@ -9,165 +12,51 @@
         <slot></slot>
       </div>
     </div>
-    <div class="fx-cell_body" v-if="errMsg">
-      {{ errMsg }}
-    </div>
+    <ol class="fx-cell_body" v-if="errors.length > 0">
+      <li v-for="(error, k) in errors" :key="error">
+        {{ errors.length > 1 ? k + 1 + '. ' : '' }}{{ error }}
+      </li>
+    </ol>
   </label>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, PropType, provide, ref } from 'vue'
-import Schema from 'async-validator'
-import { isArray, isBoolean, isNumber } from '@/helpers/util'
-import type {
-  FormRuleValidate,
-  FormRuleItem,
-  FormRules,
-  FormGroupItemOut,
-  FormRuleType,
-  FormItemProvide,
-  FormValue
-} from './types'
-import { useGroupItem } from '@/hooks/use-group'
+import { isArray } from '@/helpers/util'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'fx-form-item',
   props: {
-    name: {
-      type: String,
-      required: true
+    label: {
+      type: String
     },
-    rules: Array as PropType<FormRuleItem[]>,
-    label: String,
     required: {
       type: Boolean,
       default: false
+    },
+    error: {
+      type: [String, Array]
+    },
+    validateStatus: {
+      type: String
     }
   },
-  setup(props, { emit }) {
-    const errMsg = ref('')
-    const formRules = inject<FormRules>('fxFormRules', {})
+  setup(props) {
+    const errors = computed(() => {
+      const ret: string[] = []
 
-    function getRulesByName(name: string, value: FormValue | FormValue[]) {
-      let rules: FormRuleItem[] = []
-
-      if (props.rules && props.rules[0]) {
-        rules = props.rules
-      } else if (isArray(formRules[name])) {
-        rules = formRules[name]
-      }
-
-      if (rules.length === 0 && props.required) {
-        // 如果没有规则，根据required情况默认规则
-        let valueType: FormRuleType = 'string'
-
-        if (isArray(value)) {
-          valueType = 'array'
-        } else if (isNumber(value)) {
-          valueType = 'number'
-        } else if (isBoolean(value)) {
-          valueType = 'boolean'
-        }
-
-        rules = [{ required: true, trigger: 'change', type: valueType }]
-      }
-
-      return rules
-    }
-
-    function validateAfterEventTrigger(
-      event: string,
-      value: FormValue | FormValue[]
-    ) {
-      if (!props.name) {
-        return
-      }
-
-      const name = props.name
-
-      const rules = getRulesByName(name, value).filter(v => {
-        if (v) {
-          if (v.trigger === event) {
-            return true
-          } else if (!v.trigger && event === 'change') {
-            return true
-          }
-        }
-
-        return false
-      })
-
-      if (rules[0]) {
-        validate(value, rules)
-      }
-    }
-
-    const validate: FormRuleValidate = (value, rules) => {
-      if (!props.name) {
-        return clearValidate()
-      }
-
-      const name = props.name
-
-      if (!rules) {
-        rules = getRulesByName(name, value)
-      }
-
-      if (rules[0]) {
-        const validator = new Schema({
-          [name]: rules
+      if (isArray(props.error)) {
+        ;(props.error as string[]).forEach(v => {
+          ret.push(v.toString())
         })
-
-        return validator.validate({ [name]: value }, {}, errors => {
-          if (errors) {
-            // validation failed, errors is an array of all errors
-            // fields is an object keyed by field name with an array of
-            // errors per field
-            // errMsg.value = errors
-            //   .map(v => {
-            //     return v.message
-            //   })
-            //   .join(' ')
-
-            errMsg.value = (errors[0] && errors[0].message) || 'error'
-          } else {
-            // validation passed
-            clearValidate()
-          }
-        })
-      } else {
-        return clearValidate()
+      } else if (props.error != null) {
+        ret.push(props.error.toString())
       }
-    }
 
-    function clearValidate() {
-      errMsg.value = ''
+      return ret
+    })
 
-      return Promise.resolve(true)
-    }
-
-    function onClick(e: Event) {
-      emit(e.type, e)
-    }
-
-    provide('fxFormItem', {
-      props,
-      validateAfterEventTrigger
-    } as FormItemProvide)
-
-    useGroupItem('form', {
-      getFormName() {
-        return props.name
-      },
-      validate
-    } as FormGroupItemOut)
-
-    return {
-      errMsg,
-      clearValidate,
-      onClick,
-      validateAfterEventTrigger
-    }
+    return { errors }
   }
 })
 </script>

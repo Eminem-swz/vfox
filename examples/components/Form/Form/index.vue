@@ -1,193 +1,209 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-form @validate-submit="onSubmit" @reset="onReset" :rules="rules">
-        <fx-form-item name="nickname" label="昵称" required>
-          <fx-input
-            v-model="form.nickname"
-            placeholder="请输入昵称"
-            @reset="onReset"
-          />
-        </fx-form-item>
-        <fx-form-item name="avatar" label="头像" required>
-          <fx-image-uploader
-            v-model="form.avatar"
-            @reset="onReset"
-            :uploadReady="onUpload"
-            :columnNumber="1"
-            :maxCount="1"
-          />
-        </fx-form-item>
-        <fx-form-item name="gender" label="性别" required>
-          <fx-radio-group v-model="form.gender" :inline="true" @reset="onReset">
-            <fx-radio value="1">男</fx-radio>
-            <fx-radio value="2">女</fx-radio>
-          </fx-radio-group>
-        </fx-form-item>
-
-        <fx-form-item name="season" label="季节" required>
-          <fx-picker
-            v-model="form.season"
-            :options="multiOptions"
-            placeholder="选择季节"
-            @reset="onReset"
-          />
-        </fx-form-item>
-        <fx-form-item name="birthday" label="生日" required>
-          <fx-calendar
-            v-model="form.birthday"
-            placeholder="选择生日"
-            @reset="onReset"
-          >
-          </fx-calendar>
-        </fx-form-item>
-        <fx-form-item name="region" label="地区" required>
-          <fx-cascader
-            :options="regionOptions"
-            :field-names="{ value: 'label' }"
-            v-model="form.region"
-            placeholder="选择地区"
-            :format-string="formatString"
-            @reset="onReset"
-          ></fx-cascader>
-        </fx-form-item>
-        <fx-form-item name="weight" label="体重Kg" required>
-          <fx-slider
-            v-model="form.weight"
-            :min="35"
-            :max="120"
-            :show-value="true"
-            @reset="onReset"
-          ></fx-slider>
-        </fx-form-item>
-        <fx-form-item name="character" label="性格" required>
-          <fx-checkbox-group v-model="form.character" @reset="onReset">
-            <fx-checkbox :value="char" v-for="char in characters" :key="char">{{
-              char
-            }}</fx-checkbox>
-          </fx-checkbox-group>
-        </fx-form-item>
-        <fx-form-item name="happinessIndex" label="幸福指数" required>
-          <fx-rate
-            v-model="form.happinessIndex"
-            :allow-half="true"
-            @reset="onReset"
-          >
-          </fx-rate>
-        </fx-form-item>
-        <fx-form-item name="stepper" label="步进器" required>
-          <fx-stepper
-            v-model.number="form.stepper"
-            :max="10"
-            :step="0.2"
-            :decimal-length="1"
-            @reset="onReset"
-          >
-          </fx-stepper>
-        </fx-form-item>
-        <fx-form-item name="agree" label="认可" required>
-          <fx-switch v-model="form.agree" @reset="onReset" />
-        </fx-form-item>
-        <div class="form-btns">
-          <fx-button form-type="reset">重置</fx-button>
-          <fx-button type="primary" form-type="submit">提交</fx-button>
-        </div>
-      </fx-form>
-    </fx-group>
-  </div>
+  <fx-group title="基础">
+    <fx-form>
+      <fx-form-item label="昵称">
+        <fx-input v-model="baseForm.nickname" placeholder="请输入昵称" />
+      </fx-form-item>
+      <fx-form-item label="性别">
+        <fx-radio-group
+          v-model="baseForm.gender"
+          :options="genderOptions"
+        ></fx-radio-group>
+      </fx-form-item>
+      <template #footer>
+        <fx-button type="primary" @click="onBaseSubmit">提交</fx-button>
+      </template>
+    </fx-form>
+  </fx-group>
+  <fx-group title="Formily">
+    <FormProvider :form="form">
+      <Field
+        name="nickname"
+        title="昵称"
+        required
+        :component="[Input, { placeholder: '请输入昵称', showClear: true }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="avatar"
+        title="头像"
+        required
+        :component="[
+          ImageUploader,
+          { uploadReady: onUpload, columnNumber: 1, maxCount: 1 }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="gender"
+        title="性别"
+        required
+        :component="[
+          RadioGroup,
+          {
+            options: genderOptions
+          }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="weight"
+        title="体重Kg"
+        required
+        :component="[Slider, { showValue: true, min: 35, max: 120 }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="season"
+        title="季节"
+        required
+        :component="[
+          Picker,
+          { options: multiOptions, placeholder: '选择季节' }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="birthday"
+        title="生日"
+        required
+        :component="[Calendar, { placeholder: '选择生日' }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="character"
+        title="性格"
+        required
+        :component="[CheckboxGroup, { options: characters }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="region"
+        title="地区"
+        required
+        :component="[
+          Cascader,
+          {
+            placeholder: '选择地区',
+            fieldNames: { value: 'label' },
+            options: regionOptions
+          }
+        ]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="happinessIndex"
+        title="幸福指数"
+        required
+        :component="[Rate, { allowHalf: true }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="stepper"
+        title="步进器"
+        required
+        :component="[Stepper, { max: 10, step: 0.2, decimalLength: 1 }]"
+        :decorator="[FormItem]"
+      />
+      <Field
+        name="agree"
+        title="认可"
+        required
+        :component="[Switch]"
+        :decorator="[FormItem]"
+      />
+      <FormConsumer>
+        <template #default="{ form }">
+          <pre class="exp-form-json">{{
+            JSON.stringify(form.values, null, 2)
+          }}</pre>
+          <fx-form-footer>
+            <fx-button
+              type="primary"
+              @click="
+                () => {
+                  form.submit(onSubmit)
+                }
+              "
+              >提交</fx-button
+            >
+          </fx-form-footer>
+        </template>
+      </FormConsumer>
+    </FormProvider>
+  </fx-group>
 </template>
 
 <script>
 import { multiOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
+import {
+  Input,
+  Picker,
+  Calendar,
+  Cascader,
+  Switch,
+  Rate,
+  Slider,
+  Range,
+  Stepper,
+  RadioGroup,
+  CheckboxGroup,
+  ImageUploader
+} from '@/index'
+import { createForm, setValidateLanguage } from '@formily/core'
+import { FormProvider, Field, FormConsumer } from '@formily/vue'
+import FormItem from './FormItem'
+import { showDialog } from '@/Dialog'
+
+setValidateLanguage('zh-CN')
 
 export default {
   name: 'ExpForm',
+  components: { FormProvider, Field, FormConsumer },
   data() {
     return {
-      ageVisible: false,
-      regionOptions,
-      rules: {
-        nickname: [
-          { required: true, message: '请输入昵称', trigger: 'blur' },
-          { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
-        ],
-        avatar: [{ required: true, type: 'array', message: '请选择头像' }],
-        gender: [{ required: true, message: '请选择性别' }],
-        age: [{ required: true, message: '请选择年龄' }],
-        region: [{ required: true, message: '请选择地区' }],
-        character: [{ required: true, type: 'array', message: '请选择性格' }],
-        season: [{ required: true, message: '请选择季节' }],
-        birthday: [{ required: true, message: '请选择生日' }],
-        weight: [
-          {
-            min: 42.5,
-            message: '太瘦的我们不要',
-            type: 'number',
-            trigger: 'change'
-          },
-          {
-            max: 80,
-            message: '太肥的我们不要',
-            type: 'number',
-            trigger: 'change'
-          }
-        ],
-        happinessIndex: [
-          {
-            min: 0.5,
-            message: '请选择幸福指数',
-            type: 'number',
-            trigger: 'change'
-          },
-          {
-            min: 3,
-            message: '你不幸福吗？',
-            type: 'number',
-            trigger: 'change'
-          }
-        ],
-        agree: [
-          {
-            validator(rule, value, callback) {
-              if (value === true) {
-                callback()
-              } else {
-                callback(new Error('你必须认可该表单'))
-              }
-            }
-          }
-        ]
-      },
-      form: {
+      baseForm: {
         nickname: '',
-        avatar: [],
-        gender: '',
-        happinessIndex: 0,
-        weight: 0,
-        character: ['活泼'],
-        season: [],
-        region: ['北京市', '北京市', '东城区'],
-        stepper: 0,
-        birthday: [new Date()],
-        agree: false
+        gender: ''
       },
+
+      FormItem,
+      Input,
+      Picker,
+      Calendar,
+      Cascader,
+      Switch,
+      Rate,
+      Slider,
+      Range,
+      Stepper,
+      RadioGroup,
+      CheckboxGroup,
+      ImageUploader,
+      form: createForm({ validateFirst: true }),
+
+      genderOptions: [
+        { label: '男', value: 1 },
+        { label: '女', value: 2 }
+      ],
+      regionOptions,
       multiOptions,
-      characters: ['活泼', '内向', '高冷'],
-      formatString: false,
-      birthdayFormatter(value, formatter) {
-        console.log(value, formatter('YYYY-MM-DD'))
-        return value[0] ? formatter('YYYY-MM-DD')[0] : ''
-      }
+      characters: ['活泼', '内向', '高冷']
     }
   },
   methods: {
-    onSubmit(res) {
-      console.log(res)
-      showToast(res.valid ? '校验通过' : '校验失败')
+    onBaseSubmit() {
+      showDialog({
+        showCancel: false,
+        content: `nickname: ${this.baseForm.nickname}
+        gender: ${this.baseForm.gender}
+        `
+      })
     },
-    onReset(res) {
-      console.log(res)
+    onSubmit(...args) {
+      console.log(...args)
+      showToast('校验通过')
     },
     onUpload(file, handlers) {
       console.log(file)
@@ -195,7 +211,6 @@ export default {
         handlers.success(url)
       })
     },
-
     getDataUrl(file) {
       return new Promise(resolve => {
         const fr = new FileReader()
@@ -211,9 +226,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.form-btns {
-  padding: 12px 16px;
-  display: flex;
-  background-color: #fff;
+@import '@/style/var.scss';
+
+.exp-form {
+  &-json {
+    margin: 0;
+    padding: 8px 16px;
+    background-color: $background-color;
+  }
 }
 </style>

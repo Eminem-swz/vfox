@@ -6,17 +6,17 @@
     ref="root"
   >
     <input
-      :name="formName"
+      :name="name"
       type="hidden"
-      :value="formValue"
+      :value="inputValue"
       :disabled="disabled"
       ref="input"
     />
     <div
       class="fx-rate_item"
       :class="{
-        active: num - 0.5 <= formValue,
-        half: formValue - num === -0.5
+        active: num - 0.5 <= inputValue,
+        half: inputValue - num === -0.5
       }"
       v-for="num in max"
       :key="num"
@@ -38,7 +38,6 @@ import { Icon } from '@/Icon'
 import { capitalize, isInteger, isNumeric, rangeInteger } from '@/helpers/util'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
 import type { StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 
@@ -103,26 +102,18 @@ export default defineComponent({
   setup(props, ctx) {
     const { emit } = ctx
     const root = ref<HTMLElement>()
-    const formValue = ref(0)
-    let defaultValue: number
-
-    const { formName, validateAfterEventTrigger, hookFormValue, eventEmit } =
-      useFormItem<number>(props, ctx, {
-        formValue,
-        hookResetValue: () => defaultValue
-      })
+    const inputValue = ref(0)
 
     function change(value: number, isHalf = false) {
       if (props.allowHalf && isHalf) {
         value -= 0.5
       }
 
-      if (value !== formValue.value) {
-        formValue.value = value
+      if (value !== inputValue.value) {
+        inputValue.value = value
 
         emit('update:modelValue', value)
-
-        eventEmit('change')
+        emit('change', value)
       }
     }
 
@@ -242,7 +233,7 @@ export default defineComponent({
 
       const value = parseFloat(props.modelValue as string)
 
-      if (value === formValue.value) {
+      if (value === inputValue.value) {
         return
       }
 
@@ -254,22 +245,16 @@ export default defineComponent({
         return
       }
 
-      formValue.value = value
+      inputValue.value = value
     }
 
     updateValue()
-    defaultValue = formValue.value
 
     watch(() => props.modelValue, updateValue)
 
-    watch(max, val => val < defaultValue && (defaultValue = 0))
-
     return {
       root,
-      formName,
-      formValue,
-      hookFormValue,
-      validateAfterEventTrigger,
+      inputValue,
       iconPattern,
       styles,
       max,

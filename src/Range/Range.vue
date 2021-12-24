@@ -19,7 +19,7 @@
           data-index="0"
           :style="{ left: progress[0] * 100 + '%' }"
         >
-          {{ showValue ? formValue[0] : '' }}
+          {{ showValue ? progressValue[0] : '' }}
         </div>
         <div
           class="fx-slider_thumb"
@@ -27,14 +27,14 @@
           data-index="1"
           :style="{ left: progress[1] * 100 + '%' }"
         >
-          {{ showValue ? formValue[1] : '' }}
+          {{ showValue ? progressValue[1] : '' }}
         </div>
       </div>
       <input
         type="hidden"
-        :name="formName"
+        :name="name"
         :disabled="disabled"
-        :value="formValueString"
+        :value="inputValue"
         ref="input"
       />
     </div>
@@ -52,7 +52,6 @@ import {
 } from 'vue'
 import { cloneData, isNumberArray, isSameArray, isString } from '@/helpers/util'
 import { formItemEmits, formItemProps } from '@/Form/form'
-import { useFormItem } from '@/Form/use-form'
 import { slideProps, slideEmits } from '@/Slider/slide'
 import { useSlide } from '@/Slider/use-slide'
 
@@ -63,8 +62,7 @@ export default defineComponent({
     ...slideProps,
     modelValue: {
       type: Array as PropType<number[]>,
-      validator: isNumberArray,
-      default: null
+      validator: isNumberArray
     },
     allowSameValue: {
       type: Boolean,
@@ -74,23 +72,15 @@ export default defineComponent({
   emits: [...formItemEmits, ...slideEmits],
   setup(props, ctx) {
     const progress = reactive<number[]>([0, 0])
-    const formValue = reactive<number[]>([0, 0])
+    const progressValue = reactive<number[]>([0, 0])
     const { emit } = ctx
-
-    const { formName, validateAfterEventTrigger, hookFormValue, eventEmit } =
-      useFormItem<number>(props, ctx, {
-        formValue,
-        hookFormValue() {
-          return valueHandler(formValue)
-        }
-      })
 
     const { slider, toInteger, rangeValue, value2Progress, getMinMax, styles } =
       useSlide(props, {
         getValue($target) {
           const { thumb, index } = $target.dataset
 
-          return thumb ? formValue[parseInt(index as string)] : 0
+          return thumb ? progressValue[parseInt(index as string)] : 0
         },
         move({ value: newVal, progress: newProgress, $target }) {
           const { thumb } = $target.dataset
@@ -100,23 +90,24 @@ export default defineComponent({
             index = parseInt($target.dataset.index as string)
           } else {
             if (
-              Math.abs(formValue[0] - newVal) > Math.abs(formValue[1] - newVal)
+              Math.abs(progressValue[0] - newVal) >
+              Math.abs(progressValue[1] - newVal)
             ) {
               index = 1
             }
           }
-          if (!props.allowSameValue && newVal === formValue[1 - index]) {
+          if (!props.allowSameValue && newVal === progressValue[1 - index]) {
             // 不允许重叠
           } else {
-            formValue[index] = newVal
+            progressValue[index] = newVal
             progress[index] = newProgress
 
-            inputModel()
-            eventEmit('input')
+            emitModel()
+            emit('input', getValue())
           }
         },
         end({ isChange }) {
-          isChange && eventEmit('change')
+          isChange && emit('change', getValue())
         }
       })
 
@@ -138,17 +129,23 @@ export default defineComponent({
       return newVal.slice(0, 2).sort(sortBy)
     }
 
+    function getValue() {
+      return valueHandler(progressValue)
+    }
+
     function sortBy(a: number, b: number) {
       return a - b
     }
 
-    function inputModel() {
+    function emitModel() {
       if (
         props.modelValue == null ||
-        valueHandler(formValue) !== valueHandler(props.modelValue)
+        getValue() !== valueHandler(props.modelValue)
       ) {
-        emit('update:modelValue', hookFormValue())
+        emit('update:modelValue', getValue())
+        return true
       }
+      return false
     }
 
     function rangeValues(vals: number[]) {
@@ -166,9 +163,9 @@ export default defineComponent({
       }
       newVal = rangeValues(newVal)
 
-      if (!isSameArray(newVal, valueHandler(formValue))) {
-        formValue[0] = newVal[0]
-        formValue[1] = newVal[1]
+      if (!isSameArray(newVal, getValue())) {
+        progressValue[0] = newVal[0]
+        progressValue[1] = newVal[1]
         progress[0] = value2Progress(newVal[0])
         progress[1] = value2Progress(newVal[1])
       }
@@ -181,28 +178,31 @@ export default defineComponent({
 
     watch([() => props.min, () => props.max], () => {
       nextTick(() => {
-        updateValue(formValue)
-        inputModel()
+        updateValue(progressValue)
+        if (emitModel()) {
+          emit('change', inputValue.value)
+        }
       })
     })
 
-    const formValueString = computed(() => {
-      return cloneData(formValue).sort(sortBy).join(',')
+    const inputValue = computed(() => {
+      return getValue().join(',')
     })
 
     const { min, max } = getMinMax()
 
     updateValue([min, max])
     updateValue(props.modelValue)
-    inputModel()
+
+    if (emitModel()) {
+      emit('change', inputValue.value)
+    }
 
     return {
-      formValueString,
+      inputValue,
       slider,
       progress,
-      formName,
-      formValue,
-      validateAfterEventTrigger,
+      progressValue,
       styles
     }
   }

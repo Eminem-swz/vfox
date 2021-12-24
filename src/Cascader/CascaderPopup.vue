@@ -47,7 +47,7 @@ import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import type { ColRow, PickerHandlers, PickerValue } from '../Picker/types'
 import {
-  pickerViewEmits,
+  pickerPopupEmits,
   commonProps,
   mergeHandlers,
   labelFormatter
@@ -65,7 +65,7 @@ export default defineComponent({
       default: ''
     }
   },
-  emits: [...pickerViewEmits, ...popupExtendEmits],
+  emits: [...popupExtendEmits, ...pickerPopupEmits],
   setup(props, ctx) {
     const dropdown = ref<HTMLElement>()
 
