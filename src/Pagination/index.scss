@@ -1,5 +1,4 @@
 @import '../style/var.scss';
-@import '../style/mixin.scss';
 
 .fx-pagination {
   --fx-front-color: #{$font-color};
@@ -24,6 +23,7 @@
     align-items: center;
     justify-content: center;
     padding: 0 12px;
+    outline: 0;
 
     .fx-icon {
       --color: var(--fx-front-color);
@@ -31,7 +31,7 @@
     }
 
     &:not(:disabled):active {
-      @include background-active;
+      background-color: $background-color;
     }
 
     &:disabled {

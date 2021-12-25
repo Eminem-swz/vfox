@@ -4,6 +4,10 @@
 .fx-number-keyboard {
   .fx-drawer_inner {
     background: $background2-color;
+
+    .fx-nav-bar::after {
+      content: none;
+    }
   }
 
   .fx-nav-bar {
@@ -57,7 +61,7 @@
     @include box-shadow;
 
     &:active {
-      @include background-active;
+      background-color: $background-color;
     }
 
     .fx-icon {

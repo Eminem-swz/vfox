@@ -155,13 +155,11 @@ export default defineComponent({
       )
     }
 
-    function onInput(e: { value: string; type: string }) {
-      const text = e.value
-
+    function onInput(text: string) {
       emit(
-        e.type as 'input',
+        'input',
         {
-          type: e.type,
+          type: 'input',
           text
         },
         (res: SuggestList) => {

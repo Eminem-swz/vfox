@@ -9,17 +9,28 @@
   min-height: 13px;
 
   &_bar {
+    position: relative;
     flex-grow: 1;
     height: 8px;
-    box-sizing: border-box;
-    border: 1px solid var(--fx-color);
-    background-color: #fff;
-    border-radius: 2px;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--fx-color);
+      border-radius: 2px;
+    }
   }
 
   &_track {
-    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
     background-color: var(--fx-color);
+    border-radius: 2px;
 
     &.animated {
       transition: width 0.2s ease;

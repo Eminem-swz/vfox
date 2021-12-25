@@ -13,7 +13,7 @@ import { selectorValidator, sizeValidator } from '@/helpers/validator'
 import { useScrollEvent } from '@/hooks/use-scroll'
 import {
   getRelativeOffset,
-  getScrollDom,
+  getScrollTop,
   getSizeValue,
   querySelector
 } from '@/helpers/dom'
@@ -68,7 +68,7 @@ export default defineComponent({
       }
 
       if (scrollTop == null) {
-        scrollTop = getScrollDom($container).scrollTop
+        scrollTop = getScrollTop($container)
       }
 
       const $root = root.value as HTMLElement

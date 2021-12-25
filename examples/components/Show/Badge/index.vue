@@ -168,10 +168,10 @@ export default {
     }
   },
   methods: {
-    onSwitch({ value }) {
+    onSwitch(value) {
       this.count = value ? 1000 : 0
     },
-    onSwitch2({ value }) {
+    onSwitch2(value) {
       this.count2 = value ? 1000 : 0
     }
   }

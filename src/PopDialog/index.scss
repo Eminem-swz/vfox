@@ -2,11 +2,17 @@
 
 .fx-pop-dialog {
   &_footer {
+    position: relative;
     display: flex;
     flex-direction: column;
 
-    &::before {
+    &::after {
       content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      border-color: $border-color;
     }
 
     &-inner {

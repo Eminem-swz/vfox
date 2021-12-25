@@ -1,21 +1,21 @@
 <template>
   <fx-group title="设置主题颜色">
-    <fx-form @validate-submit="onCreateColor" :rules="rules">
+    <fx-form>
       <fx-form-item name="primary" label="primary 色" required>
-        <fx-input modelValue="#0f4c82" />
+        <fx-input v-model="primary" />
       </fx-form-item>
       <fx-form-item name="success" label="success 色" required>
-        <fx-input modelValue="#3c9052" />
+        <fx-input v-model="success" />
       </fx-form-item>
       <fx-form-item name="warning" label="warning 色" required>
-        <fx-input modelValue="#bb9445" />
+        <fx-input v-model="warning" />
       </fx-form-item>
       <fx-form-item name="danger" label="danger 色" required>
-        <fx-input modelValue="#b1262d" />
+        <fx-input v-model="danger" />
       </fx-form-item>
-      <div class="exp-custom-theme-submit">
-        <fx-button type="primary" form-type="submit">生成主题</fx-button>
-      </div>
+      <template #footer>
+        <fx-button type="primary" @click="onCreateColor">生成主题</fx-button>
+      </template>
     </fx-form>
     <div class="exp-custom-theme-code" v-if="themeCode">
       <pre>
@@ -29,24 +29,9 @@
 </template>
 
 <script>
-import { Color, getColorGroups } from '@/helpers/color'
+import { getColorGroups } from '@/helpers/color'
 import { showToast } from '@/Toast'
-
-function colorValidator(rule, value) {
-  const errors = []
-
-  if (!value) {
-    errors.push(new Error(`${rule.field} is required.`))
-  } else {
-    try {
-      Color(value)
-    } catch (e) {
-      errors.push(e)
-    }
-  }
-
-  return errors
-}
+import { showNotify } from '@/Notify'
 
 function getThemeColorCode(name, color, isDefault = true) {
   const colors = getColorGroups(color)
@@ -65,32 +50,33 @@ export default {
   name: 'ExpCustomTheme',
   data() {
     return {
-      rules: {
-        primary: [colorValidator],
-        success: [colorValidator],
-        warning: [colorValidator],
-        danger: [colorValidator]
-      },
+      primary: '#0f4c82',
+      success: '#276a3b',
+      warning: '#bb9445',
+      danger: '#b1262d',
 
       themeCode: ''
     }
   },
   methods: {
     showToast,
-    onCreateColor(e) {
-      if (!e.valid) {
-        return
+    onCreateColor() {
+      try {
+        const code = [
+          getThemeColorCode('primary', this.primary, true),
+          getThemeColorCode('success', this.success, true),
+          getThemeColorCode('warning', this.warning, true),
+          getThemeColorCode('danger', this.danger, true)
+        ].join('')
+
+        this.themeCode = code
+        console.log(code)
+      } catch (e) {
+        showNotify({
+          type: 'danger',
+          title: e.message
+        })
       }
-
-      const code = [
-        getThemeColorCode('primary', e.value.primary, true),
-        getThemeColorCode('success', e.value.success, true),
-        getThemeColorCode('warning', e.value.warning, true),
-        getThemeColorCode('danger', e.value.danger, true)
-      ].join('')
-
-      this.themeCode = code
-      console.log(code)
     }
   }
 }
@@ -101,11 +87,6 @@ export default {
 @import '@/style/var.scss';
 
 .exp-custom-theme {
-  &-submit {
-    display: flex;
-    padding: 12px 16px;
-  }
-
   &-code {
     position: relative;
     background-color: $background-color;

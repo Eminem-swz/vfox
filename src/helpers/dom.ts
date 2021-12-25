@@ -148,6 +148,23 @@ export function getScrollDom($el: HTMLElement | Document = document) {
   return $el as HTMLElement
 }
 
+export function getScrollTop($el: HTMLElement | Document = document) {
+  if ($el === document || $el === document.documentElement) {
+    return document.documentElement.scrollTop || document.body.scrollTop
+  }
+
+  return ($el as HTMLElement).scrollTop
+}
+
+export function setScrollTop($el: HTMLElement | Document, scrollTop: number) {
+  if ($el === document || $el === document.documentElement) {
+    document.documentElement.scrollTop = scrollTop
+    document.body.scrollTop = scrollTop
+  } else {
+    ;($el as HTMLElement).scrollTop = scrollTop
+  }
+}
+
 interface StyleObject {
   [propName: string]: string
 }

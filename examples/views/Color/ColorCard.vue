@@ -1,17 +1,18 @@
 <template>
   <fx-group title="设置主色">
-    <fx-form @validate-submit="onSubmitColor" :rules="rules">
+    <fx-form>
       <fx-form-item name="color" label="颜色值" required>
-        <fx-input v-model="primaryColor" />
+        <fx-input v-model="primaryColor" focus placeholder="请输入颜色值" />
       </fx-form-item>
-      <div class="exp-color-submit">
+      <template #footer>
         <fx-button
           type="primary"
           form-type="submit"
           :color="(colors.length && primaryColor) || null"
+          @click="onSubmitColor"
           >生成色卡</fx-button
         >
-      </div>
+      </template>
     </fx-form>
   </fx-group>
   <fx-group title="色卡列表" v-if="colors.length">
@@ -30,44 +31,28 @@
 </template>
 
 <script>
-import { Color, getColorGroups } from '@/helpers/color'
+import { getColorGroups } from '@/helpers/color'
 import { showToast } from '@/Toast'
-
-function colorValidator(rule, value) {
-  const errors = []
-
-  if (!value) {
-    errors.push(new Error(`${rule.field} is required.`))
-  } else {
-    try {
-      Color(value)
-    } catch (e) {
-      errors.push(e)
-    }
-  }
-
-  return errors
-}
+import { showNotify } from '@/Notify'
 
 export default {
   name: 'ExpColor',
   data() {
     return {
-      rules: {
-        color: [colorValidator]
-      },
-
       primaryColor: '',
       colors: []
     }
   },
   methods: {
-    onSubmitColor(e) {
-      if (!e.valid) {
-        return
+    onSubmitColor() {
+      try {
+        this.colors = getColorGroups(this.primaryColor)
+      } catch (e) {
+        showNotify({
+          type: 'danger',
+          title: e.message
+        })
       }
-
-      this.colors = getColorGroups(this.primaryColor)
     },
     showToast
   }
@@ -79,11 +64,6 @@ export default {
 @import '@/style/var.scss';
 
 .exp-color {
-  &-submit {
-    display: flex;
-    padding: 12px 16px;
-  }
-
   &-item {
     display: block !important;
     height: 48px;

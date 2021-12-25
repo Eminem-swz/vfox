@@ -22,9 +22,10 @@ import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import { Sticky } from '@/Sticky'
 import {
   getRelativeOffset,
-  getScrollDom,
+  getScrollTop,
   getSizeValue,
-  querySelector
+  querySelector,
+  setScrollTop
 } from '@/helpers/dom'
 import { selectorValidator, sizeValidator } from '@/helpers/validator'
 import { useScrollEvent } from '@/hooks/use-scroll'
@@ -113,9 +114,7 @@ export default defineComponent({
       }
 
       scrollTop =
-        scrollTop == null
-          ? getScrollDom($container).scrollTop
-          : (scrollTop as number)
+        scrollTop == null ? getScrollTop($container) : (scrollTop as number)
 
       const activeIndex = index.value
       const nextIndex = activeIndex + 1
@@ -228,7 +227,7 @@ export default defineComponent({
       }
 
       isScrollTo = true
-      getScrollDom($container).scrollTop = offset
+      setScrollTop($container, offset)
     }
 
     function resetItems(res: HTMLElement[]) {

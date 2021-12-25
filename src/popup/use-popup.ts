@@ -1,6 +1,6 @@
 import { computed, onMounted, ref, watch, inject } from 'vue'
 import { inArray, isFunction, noop } from '@/helpers/util'
-import { addClassName, getScrollDom, removeClassName } from '@/helpers/dom'
+import { addClassName, getScrollTop, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
 import type { AnyObject, Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/use-blur'
@@ -75,7 +75,7 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
       addClassName(document.body, 'fx-overflow-hidden')
     } else {
       position.value = 'absolute'
-      top.value = getScrollDom().scrollTop + 'px'
+      top.value = getScrollTop() + 'px'
     }
     if (useOptions.useBlur) {
       visibleBlur.addEvent()

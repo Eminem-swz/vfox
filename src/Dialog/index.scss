@@ -41,12 +41,18 @@
   }
 
   &_footer {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-top: 16px;
 
-    &::before {
+    &::after {
       content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      border-color: $border-color;
     }
 
     &-inner {

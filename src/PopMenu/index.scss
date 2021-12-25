@@ -1,5 +1,4 @@
 @import '../style/var.scss';
-@import '../style/mixin.scss';
 
 .fx-pop-menu {
   .fx-mask {
@@ -17,7 +16,7 @@
     cursor: pointer;
 
     &:not(.disabled):active {
-      @include background-active;
+      background-color: $background-color;
     }
 
     &:not(:last-child)::after {
