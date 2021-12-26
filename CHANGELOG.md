@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/godxiaoji/vfox/compare/v2.2.1...v2.2.2) (2021-12-26)
+
+
+### Bug Fixes
+
+* **css:** 增加更多use-select none ([0b8d972](https://github.com/godxiaoji/vfox/commit/0b8d9725208f646210f70c1561665c3c2e6b41fa))
+
 ## [2.2.1](https://github.com/godxiaoji/vfox/compare/v2.2.0...v2.2.1) (2021-12-25)
 
 
