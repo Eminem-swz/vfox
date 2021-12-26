@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import svgSprites from 'rollup-plugin-svg-sprites'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import autoprefixer from 'autoprefixer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +13,11 @@ export default defineConfig({
       exclude: ['node_modules/**']
     })
   ],
+  css: {
+    postcss: {
+      plugins: [autoprefixer()]
+    }
+  },
   root: 'examples',
   base: '/vfox/demo/',
   resolve: {
