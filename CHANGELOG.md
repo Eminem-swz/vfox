@@ -1,3 +1,11 @@
+## [2.2.1](https://github.com/godxiaoji/vfox/compare/v2.2.0...v2.2.1) (2021-12-25)
+
+
+### Bug Fixes
+
+* **cascader:** 级联选择器布局优化 ([5c3faed](https://github.com/godxiaoji/vfox/commit/5c3faed1f4355147bda3388f0d2b63a1d6caf8e6))
+* 部分组件针对Andorid的显示bug修复 ([487f7c2](https://github.com/godxiaoji/vfox/commit/487f7c24ebf62c246448f0c0e78cf39304fb0b41))
+
 # [2.2.0](https://github.com/godxiaoji/vfox/compare/v2.1.0...v2.2.0) (2021-12-24)
 
 
