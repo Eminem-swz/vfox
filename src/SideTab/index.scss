@@ -38,6 +38,7 @@
     cursor: pointer;
     background-color: $background-color;
     padding: 10px 12px;
+    user-select: none;
 
     .fx-icon {
       --size: 17px;

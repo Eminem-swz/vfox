@@ -6,7 +6,7 @@
   --fx-front-color: var(--fx-color);
 
   background-color: #fff;
-  height: 36px;
+  height: 40px;
 
   &_list {
     padding: 0 4px;
@@ -29,6 +29,7 @@
     padding: 0 12px;
     position: relative;
     box-sizing: border-box;
+    user-select: none;
 
     .fx-icon {
       --size: 20px;

@@ -29,6 +29,8 @@
   }
 
   &_item {
+    user-select: none;
+
     &:not(.disabled):active {
       background-color: $background-color;
     }

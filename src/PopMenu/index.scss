@@ -14,6 +14,7 @@
 
   &_item {
     cursor: pointer;
+    user-select: none;
 
     &:not(.disabled):active {
       background-color: $background-color;

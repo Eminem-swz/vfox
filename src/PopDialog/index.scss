@@ -1,6 +1,10 @@
 @import '../style/var.scss';
 
 .fx-pop-dialog {
+  &_body {
+    user-select: none;
+  }
+
   &_footer {
     position: relative;
     display: flex;
