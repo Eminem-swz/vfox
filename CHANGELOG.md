@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/godxiaoji/vfox/compare/v2.2.2...v2.2.3) (2021-12-27)
+
+
+### Bug Fixes
+
+* **tab:** tab组件及其相关显示效果优化 ([c553548](https://github.com/godxiaoji/vfox/commit/c55354815a21541cf56cfc74478715683f59c4c4))
+
 ## [2.2.2](https://github.com/godxiaoji/vfox/compare/v2.2.1...v2.2.2) (2021-12-26)
 
 
