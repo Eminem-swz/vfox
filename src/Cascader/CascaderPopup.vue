@@ -23,7 +23,7 @@
         v-for="(list, listIndex) in cols"
         :key="listIndex"
         :style="{
-          zIndex: tabColIndex == listIndex ? 2 : 1
+          zIndex: tabIndex == listIndex ? 2 : 1
         }"
       >
         <ul class="fx-cascader_list" :data-index="listIndex">
@@ -115,25 +115,24 @@ export default defineComponent({
       onChange
     } = usePickerView(props, ctx, {
       name: 'cascader',
-      afterUpdate(valueArray, labelArray) {
+      afterUpdate(valueArray, labelArray, cols) {
         tabOptions.splice(0, Infinity)
 
-        if (labelArray.length > 0) {
-          labelArray.forEach((v, k) => {
-            tabOptions.push({
-              label: v,
-              value: k
-            })
-          })
-
-          tabIndex.value = tabOptions.length - 1
-        } else {
+        labelArray.forEach((v, k) => {
           tabOptions.push({
-            value: 0,
-            label: props.title
+            label: v,
+            value: k
           })
-          tabIndex.value = 0
+        })
+
+        if (labelArray.length < cols.length) {
+          tabOptions.push({
+            label: '请选择',
+            value: tabOptions.length
+          })
         }
+
+        tabIndex.value = tabOptions.length - 1
       },
       handlers: mergeHandlers(
         {
@@ -144,17 +143,9 @@ export default defineComponent({
       )
     })
 
-    const tabColIndex = computed(() => {
-      if (cols.length > tabOptions.length) {
-        return tabIndex.value + 1
-      }
-      return tabIndex.value
-    })
-
     return {
       tabIndex,
       tabOptions,
-      tabColIndex,
       cacheLabel,
       ...popup,
       dropdown,

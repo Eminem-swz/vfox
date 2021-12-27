@@ -47,7 +47,7 @@ export default defineComponent({
   emits: tabEmits,
   setup(props, ctx) {
     return {
-      ...useTab(props, ctx, 'TabBar')
+      ...useTab(props, ctx, { tabName: 'TabBar' })
     }
   }
 })

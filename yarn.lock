@@ -2866,19 +2866,7 @@ atob@^2.1.2:
   resolved "https://registry.npmmirror.com/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
-autoprefixer@^10.2.6:
-  version "10.4.0"
-  resolved "https://registry.npmmirror.com/autoprefixer/download/autoprefixer-10.4.0.tgz?cache=0&sync_timestamp=1635421704162&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fautoprefixer%2Fdownload%2Fautoprefixer-10.4.0.tgz#c3577eb32a1079a440ec253e404eaf1eb21388c8"
-  integrity sha1-w1d+syoQeaRA7CU+QE6vHrITiMg=
-  dependencies:
-    browserslist "^4.17.5"
-    caniuse-lite "^1.0.30001272"
-    fraction.js "^4.1.1"
-    normalize-range "^0.1.2"
-    picocolors "^1.0.0"
-    postcss-value-parser "^4.1.0"
-
-autoprefixer@^10.4.0:
+autoprefixer@^10.2.6, autoprefixer@^10.4.0:
   version "10.4.0"
   resolved "https://registry.npmmirror.com/autoprefixer/download/autoprefixer-10.4.0.tgz#c3577eb32a1079a440ec253e404eaf1eb21388c8"
   integrity sha512-7FdJ1ONtwzV1G43GDD0kpVMn/qbiNqyOPMFTX5nRffI+7vgWoFEc6DcXOxHJxrWNDXrZh18eDsZjvZGUljSRGA==

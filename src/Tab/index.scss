@@ -7,6 +7,15 @@
 
   background-color: #fff;
   height: 40px;
+  position: relative;
+
+  &_underline {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: var(--fx-active-color);
+    transition: all 0.2s;
+  }
 
   &_list {
     padding: 0 4px;
@@ -46,22 +55,6 @@
       line-height: 22px;
       font-weight: 500;
       color: var(--fx-front-color);
-
-      &::before {
-        content: none;
-        position: absolute;
-        top: 0;
-        left: -4px;
-        width: 16px;
-        height: 16px;
-        z-index: 0;
-        border-radius: 50%;
-        background: linear-gradient(
-          145deg,
-          rgba(24, 144, 255, 0.3) 13.5%,
-          rgba(24, 144, 255, 0.05) 86.5%
-        );
-      }
     }
 
     &-text {
@@ -88,10 +81,6 @@
       .fx-tab_item {
         &-inner {
           font-weight: 700;
-
-          &::before {
-            content: '';
-          }
         }
 
         &-sub-text {
@@ -129,6 +118,10 @@
     height: 48px;
 
     .fx-tab {
+      &_underline {
+        display: none;
+      }
+
       &_item {
         &::after {
           content: '';

@@ -1,9 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form Form should render default correctly 1`] = `<form class="fx-form"></form>`;
+exports[`Form Form should render default correctly 1`] = `
+<div class="fx-form">
+  <!---->
+  <!---->
+</div>
+`;
 
 exports[`Form FormItem should render default correctly 1`] = `
-<label class="fx-form-item fx-cell fx-horizontal-hairline">
+<label class="fx-form-item fx-cell fx-horizontal-hairline" name="test">
   <div class="fx-cell_header">
     <!--v-if-->
     <div class="fx-cell_content"></div>

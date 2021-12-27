@@ -4,7 +4,8 @@ import {
   reactive,
   ref,
   watch,
-  computed
+  computed,
+  nextTick
 } from 'vue'
 import {
   isArray,
@@ -31,9 +32,18 @@ interface TabProps extends UseProps {
   options: OptionList
 }
 
-export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
+interface UseOptions {
+  tabName: string
+}
+
+export function useTab(
+  props: TabProps,
+  { emit }: UseCtx,
+  { tabName }: UseOptions
+) {
   const instance = getCurrentInstance() as ComponentInternalInstance
   const list = ref<HTMLElement>()
+  const underline = ref<HTMLElement>()
   const options2 = reactive<HandleOptionItem[]>([])
   const activeIndex = ref(-1)
   const hasSub = ref(false)
@@ -111,6 +121,8 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
       // this.onChange(options[0].value)
       updateActive(options[0].value)
     }
+
+    updatePos()
   }
 
   function switchTo(value: OptionValue, isProp = false) {
@@ -193,41 +205,64 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
   }
 
   function updatePos() {
-    if (tabName === 'TabBar') {
-      return
-    }
+    nextTick(() => {
+      if (tabName === 'TabBar') {
+        return
+      }
 
-    const $list = list.value as HTMLElement
-    const $activeItem = $list.children[activeIndex.value] as HTMLElement
+      const $list = list.value as HTMLElement
+      const $activeItem = $list.children[activeIndex.value] as HTMLElement
 
-    if (!$activeItem) {
-      return
-    }
+      if (!$activeItem) {
+        return
+      }
 
-    const vertical = tabName === 'SideTab'
-    const sizeKey = !vertical ? 'Width' : 'Height'
-    const directionKey = !vertical ? 'Left' : 'Top'
-    const offsetSizeKey = ('offset' + sizeKey) as 'offsetWidth'
-    const scrollSizeKey = ('scroll' + sizeKey) as 'scrollWidth'
-    const offsetDirectionKey = ('offset' + directionKey) as 'offsetLeft'
-    const scrollDirectionKey = ('scroll' + directionKey) as 'scrollLeft'
+      const vertical = tabName === 'SideTab'
+      const sizeKey = !vertical ? 'Width' : 'Height'
+      const directionKey = !vertical ? 'Left' : 'Top'
+      const offsetSizeKey = ('offset' + sizeKey) as 'offsetWidth'
+      const scrollSizeKey = ('scroll' + sizeKey) as 'scrollWidth'
+      const offsetDirectionKey = ('offset' + directionKey) as 'offsetLeft'
+      const scrollDirectionKey = ('scroll' + directionKey) as 'scrollLeft'
 
-    frameTo({
-      from: $list[scrollDirectionKey],
-      to:
-        $activeItem[offsetSizeKey] > $list[offsetSizeKey]
-          ? $activeItem[offsetDirectionKey]
-          : Math.min(
-              $activeItem[offsetDirectionKey] -
-                ($list[offsetSizeKey] - $activeItem[offsetSizeKey]) / 2,
-              $list[scrollSizeKey] - $list[offsetSizeKey]
-            ),
-      duration: 200,
-      progress({ current }) {
-        $list[scrollDirectionKey] = current
-      },
-      complete({ current }) {
-        $list[scrollDirectionKey] = current
+      const w = $list[offsetSizeKey]
+      const ofs = $activeItem[offsetDirectionKey]
+      const from = $list[scrollDirectionKey]
+      const to =
+        $activeItem[offsetSizeKey] > w
+          ? ofs
+          : Math.max(
+              Math.min(
+                ofs - (w - $activeItem[offsetSizeKey]) / 2,
+                $list[scrollSizeKey] - w
+              ),
+              0
+            )
+
+      // console.log(from, to, w, ofs, ofs - to)
+
+      frameTo({
+        from,
+        to,
+        duration: 200,
+        progress({ current }) {
+          $list[scrollDirectionKey] = current
+        },
+        complete({ current }) {
+          $list[scrollDirectionKey] = current
+        }
+      })
+
+      if (tabName === 'Tab' && underline.value) {
+        const $underline = underline.value
+        const $inner = $activeItem.querySelector(
+          '.fx-tab_item-inner'
+        ) as HTMLElement
+
+        $underline.style.width = $inner.offsetWidth + 'px'
+        $underline.style.transform = `translate3d(${
+          ofs - to + ($activeItem.offsetWidth - $inner.offsetWidth) / 2
+        }px, 0, 0)`
       }
     })
   }
@@ -253,6 +288,7 @@ export function useTab(props: TabProps, { emit }: UseCtx, tabName: string) {
 
   return {
     list,
+    underline,
     activeIndex,
     hasSub,
     options2,

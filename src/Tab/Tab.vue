@@ -30,6 +30,7 @@
         }}</span>
       </li>
     </ul>
+    <span class="fx-tab_underline" ref="underline"></span>
   </div>
 </template>
 
@@ -53,7 +54,7 @@ export default defineComponent({
   emits: tabEmits,
   setup(props, ctx) {
     return {
-      ...useTab(props, ctx, 'Tab')
+      ...useTab(props, ctx, { tabName: 'Tab' })
     }
   }
 })

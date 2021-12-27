@@ -2,7 +2,7 @@
 
 exports[`Picker should render prop set options correctly 1`] = `
 <div class="fx-picker">
-  <picker-input-stub formlabelstring="" formvaluestring="" formname="" placeholder="" disabled="false"></picker-input-stub>
+  <selector-field-stub label="" name="" placeholder="" disabled="false" value=""></selector-field-stub>
   <!--v-if-->
 </div>
 `;

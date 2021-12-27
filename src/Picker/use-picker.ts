@@ -233,7 +233,11 @@ export function usePickerPopup(
 
 interface ViewUseOptions {
   name: 'cascader' | 'picker'
-  afterUpdate: (valueArray: PickerValue[], labelArray: string[]) => void
+  afterUpdate: (
+    valueArray: PickerValue[],
+    labelArray: string[],
+    cols: ColRow[][]
+  ) => void
   handlers: PickerHandlers
 }
 
@@ -320,7 +324,7 @@ export function usePickerView(
       updateArray(currentValues, cacheValue)
     }
 
-    afterUpdate(cacheValue, cacheLabel)
+    afterUpdate(cacheValue, cacheLabel, cols)
   }
 
   function clearCache() {

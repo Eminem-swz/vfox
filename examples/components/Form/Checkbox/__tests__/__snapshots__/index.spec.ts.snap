@@ -23,17 +23,17 @@ exports[`Checkbox should render prop disabled=true correctly 1`] = `
 exports[`CheckboxGroup should render 2 Checkbox slot correctly 1`] = `
 <div class="fx-checkbox-group vertical"><label class="fx-checkbox fx-horizontal-hairline"><input class="fx-checkbox_input fx-form-input" type="checkbox" name="" value="">
     <div class="fx-checkbox_box"><svg class="fx-icon fx-checkbox_icon">
-        <use xlink:href="#icon-BorderOutlined"></use>
+        <use xlink:href="#fx-BorderOutlined"></use>
       </svg><svg class="fx-icon fx-checkbox_checked-icon">
-        <use xlink:href="#icon-CheckSquareFilled"></use>
+        <use xlink:href="#fx-CheckSquareFilled"></use>
       </svg>
       <!--v-if-->
     </div>
   </label><label class="fx-checkbox fx-horizontal-hairline"><input class="fx-checkbox_input fx-form-input" type="checkbox" name="" value="">
     <div class="fx-checkbox_box"><svg class="fx-icon fx-checkbox_icon">
-        <use xlink:href="#icon-BorderOutlined"></use>
+        <use xlink:href="#fx-BorderOutlined"></use>
       </svg><svg class="fx-icon fx-checkbox_checked-icon">
-        <use xlink:href="#icon-CheckSquareFilled"></use>
+        <use xlink:href="#fx-CheckSquareFilled"></use>
       </svg>
       <!--v-if-->
     </div>
