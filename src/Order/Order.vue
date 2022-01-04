@@ -40,7 +40,11 @@
   >
     <div class="fx-order_delete-button" ref="deleteButton">
       <Icon icon="DeleteOutlined" />
-      <span>{{ deleting ? '松手即可删除' : '拖动到此处删除' }}</span>
+      <span>{{
+        deleting
+          ? locale.orderDeleteButtonActiveText
+          : locale.orderDeleteButtonText
+      }}</span>
     </div>
   </Drawer>
 </template>
@@ -68,6 +72,7 @@ import type { DataObject, Noop } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import type { PopupVisibleStateChangeArgs } from '../popup/types'
+import { locale } from '@/Locale'
 
 type Item = {
   id: string | number
@@ -516,7 +521,8 @@ export default defineComponent({
       deleting,
       orderHeight,
       positions,
-      onVisibleStateChange
+      onVisibleStateChange,
+      locale
     }
   }
 })

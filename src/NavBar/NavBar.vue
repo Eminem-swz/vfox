@@ -29,7 +29,7 @@
               transparent
               v-if="showBack"
               @click="onBack"
-              >返回</Button
+              >{{ locale.navBarBackButtonText }}</Button
             >
             <Button
               class="fx-nav-bar_button"
@@ -38,7 +38,7 @@
               transparent
               v-if="showHome"
               @click="onBackHome"
-              >首页</Button
+              >{{ locale.navBarHomeButtonText }}</Button
             >
           </template>
         </ButtonGroup>
@@ -83,6 +83,7 @@ import { isArray, isString, isObject } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
 import type { StateType } from '../helpers/types'
 import type { IconData } from '../Icon/types'
+import { locale } from '@/Locale'
 
 interface ButtonOptions {
   text: string
@@ -205,7 +206,8 @@ export default defineComponent({
       onBackHome,
       onLeftIconClick,
       onRightIconClick,
-      onTitleStart
+      onTitleStart,
+      locale
     }
   }
 })

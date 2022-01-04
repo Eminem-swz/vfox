@@ -27,7 +27,7 @@
     />
     <div class="fx-calendar-popup_confirm" v-if="showConfirm">
       <Button type="primary" @click="onConfirmClick" :disabled="valueSize == 0"
-        >确定
+        >{{ locale.calendarConfirmText }}
       </Button>
     </div>
   </Drawer>
@@ -44,6 +44,7 @@ import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import { pickerPopupEmits } from '@/Picker/picker'
 import { cloneDetail } from '@/Picker/util'
 import type { CalendarDetail } from './types'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-calendar-popup',
@@ -122,7 +123,8 @@ export default defineComponent({
       calendarView,
       onSelect,
       onConfirmClick,
-      updateValue
+      updateValue,
+      locale
     }
   }
 })

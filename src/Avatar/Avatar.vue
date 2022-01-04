@@ -55,17 +55,14 @@ export default defineComponent({
       validator: createEnumsValidator(AVATAR_SHAPE_TYPES),
       default: null
     },
-    // 头像URL
     src: {
       type: String,
       default: null
     },
-    // badge参数
     badge: {
       type: [Number, String, Object],
       default: null
     },
-    // 设置性别
     gender: {
       type: String as PropType<Gender>,
       default: null

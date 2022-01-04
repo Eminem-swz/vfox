@@ -21,10 +21,10 @@
               size="middle"
             >
               <Button v-if="showCancel" type="default" @click="onCancelClick">
-                {{ cancelText }}
+                {{ cancelText || locale.popDialogCancelText }}
               </Button>
               <Button type="primary" @click="onConfirmClick">
-                {{ confirmText }}
+                {{ confirmText || locale.popDialogConfirmText }}
               </Button>
             </ButtonGroup>
           </div>
@@ -39,6 +39,7 @@ import { defineComponent } from 'vue'
 import { usePopover } from '@/Popover/use-popover'
 import { popoverProps, popoverEmits } from '@/Popover/popover'
 import { Button, ButtonGroup } from '@/Button'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-pop-dialog',
@@ -57,13 +58,11 @@ export default defineComponent({
     },
     // 取消文本
     cancelText: {
-      type: String,
-      default: '取消'
+      type: String
     },
     // 确认文本
     confirmText: {
-      type: String,
-      default: '确定'
+      type: String
     }
   },
   emits: [...popoverEmits, 'confirm'],
@@ -76,7 +75,8 @@ export default defineComponent({
 
     return {
       ...popoverHook,
-      onConfirmClick
+      onConfirmClick,
+      locale
     }
   }
 })

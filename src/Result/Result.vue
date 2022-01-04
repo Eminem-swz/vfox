@@ -10,10 +10,10 @@
     <slot></slot>
     <div class="fx-result_footer">
       <Button type="primary" @click="onConfirmClick">
-        {{ confirmText }}
+        {{ confirmText || locale.resultConfirmText }}
       </Button>
       <Button v-if="showBack" type="default" @click="onCancelClick">
-        {{ backText }}
+        {{ backText || locale.resultBackText }}
       </Button>
     </div>
   </div>
@@ -24,6 +24,7 @@ import { computed, defineComponent, PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Button } from '@/Button'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
+import { locale } from '@/Locale'
 
 type ResultType = 'info' | 'warning' | 'success' | 'fail'
 
@@ -63,13 +64,11 @@ export default defineComponent({
     },
     // 返回文本文本
     backText: {
-      type: String,
-      default: '返回'
+      type: String
     },
     // 确认文本
     confirmText: {
-      type: String,
-      default: '确定'
+      type: String
     }
   },
   emits: ['confirm', 'back'],
@@ -94,7 +93,8 @@ export default defineComponent({
       type2,
       icon,
       onConfirmClick,
-      onCancelClick
+      onCancelClick,
+      locale
     }
   }
 })

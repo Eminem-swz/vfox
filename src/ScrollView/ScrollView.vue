@@ -39,10 +39,10 @@
               />
               <span>{{
                 pullRefreshState === PullRefreshState.Refreshing
-                  ? '正在刷新'
+                  ? locale.scrollViewRefreshingText
                   : pullRefreshState === PullRefreshState.Holding
-                  ? '松开刷新'
-                  : pullDirectionNames[pullDirection] + '拉刷新'
+                  ? locale.scrollViewHoldingText
+                  : locale.scrollViewPullingTexts[pullDirection]
               }}</span>
             </div></slot
           >
@@ -74,6 +74,7 @@ import {
 } from '@/helpers/util'
 import type { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
+import { locale } from '@/Locale'
 
 enum ScrollState {
   Center,
@@ -155,17 +156,6 @@ export default defineComponent({
     lowerLoading: {
       type: Boolean,
       default: false
-    }
-  },
-  data() {
-    return {
-      pullDirectionNames: {
-        '': '下',
-        up: '上',
-        down: '下',
-        left: '左',
-        right: '右'
-      }
     }
   },
   emits: ['scroll-to-upper', 'scroll-to-lower', 'scroll', 'refreshing'],
@@ -603,7 +593,8 @@ export default defineComponent({
         Holding: 1,
         Refreshing: 2
       },
-      scrollToOffset
+      scrollToOffset,
+      locale
     }
   }
 })

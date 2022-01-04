@@ -13,8 +13,10 @@
       <NavBar
         class="fx-drawer_header"
         :title="title"
-        :leftButtons="[{ text: '取消', type: 'primary' }]"
-        :rightButtons="[{ text: '确定', type: 'primary' }]"
+        :leftButtons="[{ text: locale.datePickerCancelText, type: 'primary' }]"
+        :rightButtons="[
+          { text: locale.datePickerConfirmText, type: 'primary' }
+        ]"
         :iconOnly="false"
         @leftButtonClick="onHeaderLeftClick"
         @rightButtonClick="onHeaderRightClick"
@@ -36,6 +38,7 @@ import { pickerPopupProps, pickerPopupEmits } from '@/Picker/picker'
 import { usePickerPopup } from '@/Picker/use-picker'
 import { commonProps } from '@/DatePicker/date-picker'
 import { useHandlers } from './use-date-picker'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-date-picker-popup',
@@ -54,7 +57,8 @@ export default defineComponent({
 
     return {
       ...popup,
-      ...pickerPopup
+      ...pickerPopup,
+      locale
     }
   }
 })

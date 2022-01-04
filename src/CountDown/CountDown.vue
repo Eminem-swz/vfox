@@ -12,7 +12,7 @@
     >
       {{
         showDays
-          ? countTime.days + '天 ' + countTime.hours
+          ? countTime.days + locale.countDownDayUnit + ' ' + countTime.hours
           : countTime.fullHours
       }}:{{ countTime.minutes }}:{{ countTime.seconds }}
     </slot>
@@ -22,6 +22,7 @@
 <script lang="ts">
 import { defineComponent, watch } from 'vue'
 import { useCountTime } from '@/CountDown/use-count-time'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-count-down',
@@ -113,7 +114,8 @@ export default defineComponent({
     )
 
     return {
-      countTime: countTime.times
+      countTime: countTime.times,
+      locale
     }
   }
 })

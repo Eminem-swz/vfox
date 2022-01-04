@@ -19,7 +19,7 @@
             class="fx-drawer_header"
             :title="title"
             :rightButtons="
-              showClose ? [{ icon: 'CloseOutlined', text: '关闭' }] : []
+              showClose ? [{ icon: 'CloseOutlined', text: 'close' }] : []
             "
             :icon-only="true"
             @rightButtonClick="onHeaderRightClick"

@@ -13,8 +13,8 @@
       <NavBar
         class="fx-drawer_header"
         :title="title"
-        :leftButtons="[{ text: '取消', type: 'primary' }]"
-        :rightButtons="[{ text: '确定', type: 'primary' }]"
+        :leftButtons="[{ text: locale.pickerCancelText, type: 'primary' }]"
+        :rightButtons="[{ text: locale.pickerConfirmText, type: 'primary' }]"
         :iconOnly="false"
         @leftButtonClick="onHeaderLeftClick"
         @rightButtonClick="onHeaderRightClick"
@@ -44,6 +44,7 @@ import {
   commonProps
 } from '@/Picker/picker'
 import { usePickerPopup } from '@/Picker/use-picker'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-picker-popup',
@@ -60,7 +61,8 @@ export default defineComponent({
 
     return {
       ...popup,
-      ...pickerPopup
+      ...pickerPopup,
+      locale
     }
   }
 })

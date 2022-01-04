@@ -22,17 +22,14 @@ export default defineComponent({
       type: Number,
       default: 200
     },
-    // 是否需要动画
     animated: {
       type: Boolean,
       default: true
     },
-    // 偏移量，格式为 [x, y]
     offset: {
       type: [Number, Array],
       default: 0
     },
-    // 是否开启安全区
     enableSafeAreaInsets: {
       type: Boolean,
       default: true

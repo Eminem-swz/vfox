@@ -93,6 +93,7 @@ import {
 import { formatFileSize } from '@/helpers/file'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import type { ImageModes } from '../Image/types'
+import { locale } from '@/Locale'
 
 type Accept = 'all' | 'png' | 'jpeg' | 'jpg' | 'webp'
 type UploadStatus = 'reading' | 'uploading' | 'uploaded' | 'failed'
@@ -449,7 +450,7 @@ export default defineComponent({
           id: urlId(url),
           status: 'uploaded',
           url: url,
-          message: '上传成功'
+          message: locale.value.imageUploaderUploadSuccessText
         })
 
         formValue.push(url)
@@ -516,8 +517,8 @@ export default defineComponent({
         if (optionItem.status === 'uploaded') {
           if (j === activeIndex && optionItem.url === current) {
             showDialog({
-              content: '要删除这张图片吗？',
-              confirmText: '删除'
+              content: locale.value.imageUploaderDeleteContent,
+              confirmText: locale.value.imageUploaderDeleteConfirmText
             }).then(res => {
               if (res.confirm) {
                 orderItems.splice(i, 1)

@@ -33,7 +33,7 @@
         @click="onCancelClick"
       >
         <div class="fx-action-sheet_item-inner align--center">
-          <span>{{ cancelText }}</span>
+          <span>{{ cancelText || locale.actionSheetCancelText }}</span>
         </div>
       </li>
     </ul>
@@ -47,6 +47,7 @@ import { isArray, isObject, cloneData } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import type { ActionSheetOption, ActionSheetDetail } from './types'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-action-sheet',
@@ -62,8 +63,7 @@ export default defineComponent({
       default: false
     },
     cancelText: {
-      type: String,
-      default: '取消'
+      type: String
     },
     options: {
       type: Array as PropType<ActionSheetOption[]>,
@@ -103,7 +103,8 @@ export default defineComponent({
     return {
       ...popup,
       options2,
-      onItemClick
+      onItemClick,
+      locale
     }
   }
 })

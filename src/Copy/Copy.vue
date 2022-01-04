@@ -1,12 +1,15 @@
 <template>
   <div class="fx-copy" @click="onCopy">
     <input type="text" :value="text" class="fx-copy_input" ref="input" />
-    <div class="fx-copy_box"><slot>复制</slot></div>
+    <div class="fx-copy_box">
+      <slot>{{ locale.copyText }}</slot>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-copy',
@@ -19,9 +22,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const input = ref<HTMLInputElement>()
-    /**
-     * 复制
-     */
+
     function onCopy(e: Event) {
       try {
         const $el = input.value as HTMLInputElement
@@ -41,7 +42,8 @@ export default defineComponent({
 
     return {
       input,
-      onCopy
+      onCopy,
+      locale
     }
   }
 })

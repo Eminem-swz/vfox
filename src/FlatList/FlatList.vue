@@ -43,7 +43,7 @@
       </li>
     </ul>
     <LoadMore class="fx-flat-list_indicator" v-show="lowerLoading" loading>
-      正在加载
+      {{ locale.flatListLoadingText }}
     </LoadMore>
     <div class="fx-flat-list_empty" v-show="list.length === 0">
       <slot name="empty"></slot>
@@ -85,6 +85,7 @@ import type {
   ScrollToOffsetOptions,
   StyleObject
 } from '../helpers/types'
+import { locale } from '@/Locale'
 
 interface FlatItemElement extends HTMLElement {
   _recycled?: boolean
@@ -585,7 +586,8 @@ export default defineComponent({
       onScrollToLower,
       scrollToOffset,
       scrollToIndex,
-      scrollToEnd
+      scrollToEnd,
+      locale
     }
   }
 })

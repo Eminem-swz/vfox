@@ -44,7 +44,7 @@
               class="fx-number-keyboard_confirm-button"
               @click="onConfirmClick"
             >
-              完成
+              {{ locale.numberKeyboardConfirmText }}
             </div>
           </div>
         </div>
@@ -62,6 +62,7 @@ import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import type { PopupVisibleStateChangeArgs } from '../popup/types'
 import { getEnumsValue } from '@/helpers/validator'
+import { locale } from '@/Locale'
 
 const TYPE_NAMES = ['default', 'rightColumn']
 
@@ -105,7 +106,7 @@ export default defineComponent({
     const { emit } = ctx
     let cacheValue = ''
     const backspaceItem: NumberKeyboardItem = {
-      text: '删除',
+      text: locale.value.numberKeyboardBackspaceText,
       type: 'backspace',
       icon: 'BackspaceOutlined'
     }
@@ -186,7 +187,11 @@ export default defineComponent({
           )
         } else {
           list.push(
-            { text: '完成', type: 'confirm', icon: 'KeyboardOutlined' },
+            {
+              text: locale.value.numberKeyboardConfirmText,
+              type: 'confirm',
+              icon: 'KeyboardOutlined'
+            },
             { text: '0', type: 'text' }
           )
         }
@@ -254,7 +259,8 @@ export default defineComponent({
       onConfirmClick,
       onConfirm,
       onCancel,
-      backspaceItem
+      backspaceItem,
+      locale
     }
   }
 })

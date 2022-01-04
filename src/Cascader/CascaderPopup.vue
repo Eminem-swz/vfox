@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, inject, reactive } from 'vue'
+import { defineComponent, ref, inject, reactive } from 'vue'
 import { Drawer } from '@/Drawer'
 import { Tab } from '@/Tab'
 import { isSameArray } from '@/helpers/util'
@@ -59,6 +59,7 @@ import type { ColRow, PickerHandlers, PickerValue } from '../Picker/types'
 import type { TabOptionItem } from '../Tab/types'
 import { pickerPopupEmits, commonProps, mergeHandlers } from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-cascader-popup',
@@ -127,7 +128,7 @@ export default defineComponent({
 
         if (labelArray.length < cols.length) {
           tabOptions.push({
-            label: '请选择',
+            label: locale.value.cascaderDefaultTitle,
             value: tabOptions.length
           })
         }

@@ -4,11 +4,11 @@
       <div class="fx-calendar-view_weekdays">
         <span
           class="fx-calendar-view_weekday"
-          :class="{ highlight: weekDay.value === 0 || weekDay.value === 6 }"
+          :class="{ highlight: weekDay === '0' || weekDay === '6' }"
           v-for="weekDay in weekDays"
-          :key="weekDay.value"
-          >{{ weekDay.label }}</span
-        >
+          :key="weekDay"
+          >{{ locale.calendarWeekDayTexts[weekDay] }}
+        </span>
       </div>
     </div>
     <div class="fx-calendar-view_body">
@@ -71,11 +71,9 @@ import { getEnumsValue } from '@/helpers/validator'
 import type { DayInfo } from './types'
 import { useHandlers } from '@/Calendar/use-calendar'
 import { pickerViewEmits } from '@/Picker/picker'
+import { locale } from '@/Locale'
 
-interface WeekDay {
-  label: string
-  value: number
-}
+type WeekDay = '0' | '1' | '2' | '3' | '4' | '5' | '6'
 
 interface SelectDay {
   dateString: string
@@ -92,15 +90,7 @@ interface Month {
   startDay: number
 }
 
-const defaultWeekDays: WeekDay[] = [
-  { label: '日', value: 0 },
-  { label: '一', value: 1 },
-  { label: '二', value: 2 },
-  { label: '三', value: 3 },
-  { label: '四', value: 4 },
-  { label: '五', value: 5 },
-  { label: '六', value: 6 }
-]
+const defaultWeekDays: WeekDay[] = ['0', '1', '2', '3', '4', '5', '6']
 
 export default defineComponent({
   name: 'fx-calendar-view',
@@ -442,7 +432,12 @@ export default defineComponent({
 
             if (!hasDisabled) {
               if (rangeCount > props.maxRange) {
-                showToast(`选择天数不能超过${props.maxRange}天`)
+                showToast(
+                  locale.value.calendarMaxRangeTips.replace(
+                    '{{maxRange}}',
+                    props.maxRange.toString()
+                  )
+                )
               } else {
                 setSelected('end', dayInfo2SelectDay(day, monthIndex, dayIndex))
                 // this.rangeCount = rangeCount
@@ -565,7 +560,8 @@ export default defineComponent({
       months,
       onDaysClick,
       getDetail,
-      updateValue
+      updateValue,
+      locale
     }
   }
 })

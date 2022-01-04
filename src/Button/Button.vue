@@ -15,7 +15,7 @@
   >
     <Icon v-if="loading" icon="LoadingOutlined" :spin="true" />
     <Icon v-else-if="icon" :icon="icon" />
-    <span><slot>按钮</slot></span>
+    <span><slot>button</slot></span>
   </button>
 </template>
 

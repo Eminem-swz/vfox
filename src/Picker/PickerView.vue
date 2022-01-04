@@ -22,7 +22,7 @@
           </li>
         </ul>
       </div>
-      <Empty description="暂无选项可选" v-if="cols.length === 0" />
+      <Empty :description="locale.pickerEmptyText" v-if="cols.length === 0" />
     </div>
   </div>
 </template>
@@ -35,6 +35,7 @@ import { hasClassName } from '@/helpers/dom'
 import { commonProps, pickerViewEmits, mergeHandlers } from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
 import type { PickerHandlers } from './types'
+import { locale } from '@/Locale'
 
 interface ScrollElement extends HTMLElement {
   scrolling?: boolean
@@ -180,7 +181,8 @@ export default defineComponent({
       getDetail,
       onListScroll,
       updateValue,
-      updatePos
+      updatePos,
+      locale
     }
   }
 })

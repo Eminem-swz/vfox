@@ -25,7 +25,6 @@ export default defineComponent({
       type: [Number, String],
       default: 20
     },
-    // 主色
     color: {
       type: String
     }

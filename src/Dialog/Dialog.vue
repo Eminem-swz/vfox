@@ -27,10 +27,10 @@
           type="default"
           @click="onCancelClick"
         >
-          {{ cancelText }}
+          {{ cancelText || locale.dialogCancelText }}
         </Button>
         <Button class="fx-dialog_button" type="primary" @click="onConfirmClick">
-          {{ confirmText }}
+          {{ confirmText || locale.dialogConfirmText }}
         </Button>
       </ButtonGroup>
     </div>
@@ -43,6 +43,7 @@ import { Button, ButtonGroup } from '@/Button'
 import { Modal } from '@/Modal'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-dialog',
@@ -54,12 +55,10 @@ export default defineComponent({
       default: null
     },
     cancelText: {
-      type: String,
-      default: '取消'
+      type: String
     },
     confirmText: {
-      type: String,
-      default: '确定'
+      type: String
     },
     maskClosable: {
       type: Boolean,
@@ -84,7 +83,8 @@ export default defineComponent({
 
     return {
       ...popup,
-      onConfirmClick
+      onConfirmClick,
+      locale
     }
   }
 })

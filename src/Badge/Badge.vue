@@ -31,32 +31,26 @@ import { getColorObject, isColorValue } from '@/helpers/color'
 export default defineComponent({
   name: 'fx-badge',
   props: {
-    // 消息条数
     content: {
       type: [String, Number],
       default: 0
     },
-    // 最大完全显示消息条数
     maxCount: {
       type: Number,
       default: 99
     },
-    // 是否显示为小红点
     dot: {
       type: Boolean,
       default: false
     },
-    // 消息数为0时是否显示
     showZero: {
       type: Boolean,
       default: false
     },
-    // 是否开启动画
     animated: {
       type: Boolean,
       default: false
     },
-    // 偏移量，格式为 [x, y]
     offset: {
       type: Array as PropType<number[]>,
       default: () => {

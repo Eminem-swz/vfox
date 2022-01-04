@@ -37,7 +37,7 @@
         v-if="showCancel"
         @click="onCancel"
       >
-        取消
+        {{ locale.searchBarCancelText }}
       </Button>
     </form>
     <Dropdown
@@ -83,6 +83,7 @@ import {
   isStringArray,
   isStringNumberMix
 } from '@/helpers/util'
+import { locale } from '@/Locale'
 
 type Placeholders = string | string[]
 
@@ -273,7 +274,8 @@ export default defineComponent({
       onSearch,
       onSuggestItemClick,
       onCancel,
-      onClick
+      onClick,
+      locale
     }
   }
 })
