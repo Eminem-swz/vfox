@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/godxiaoji/vfox/compare/v2.3.1...v2.3.2) (2022-01-05)
+
+
+### Bug Fixes
+
+* **theme:** fix custom theme bug ([e27230d](https://github.com/godxiaoji/vfox/commit/e27230d338b1a541e34676ff20af565110bab1f2))
+
 ## [2.3.1](https://github.com/godxiaoji/vfox/compare/v2.3.0...v2.3.1) (2022-01-05)
 
 
