@@ -16,6 +16,10 @@ function sass2Css() {
     .pipe(gulp.dest('../es'))
 }
 
+function copySass() {
+  return gulp.src('../src/**/*.scss').pipe(gulp.dest('../es'))
+}
+
 function copyStyle() {
   return gulp
     .src('../src/**/style/index.js')
@@ -63,6 +67,6 @@ function cacheTsPath() {
     .pipe(fs.createWriteStream('ts-files.txt'))
 }
 
-exports.build = gulp.series(sass2Css, copyStyle, compressCss)
+exports.build = gulp.series(sass2Css, copySass, copyStyle, compressCss)
 exports.dts = fixDts
 exports.cts = cacheTsPath

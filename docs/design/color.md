@@ -26,12 +26,11 @@
 在主题定制之前，推荐通过 [色卡](https://godxiaoji.github.io/vfox/demo/#/ColorCard) 查看下你钟意的颜色在色卡中的效果。推荐颜色值在 HSV 模式下 **S > 70% 且 V > 70%**。
 
 1. 打开 [主题定制](https://godxiaoji.github.io/vfox/demo/#/CustomTheme) 工具，按操作完成定制并复制定制后的代码。
-2. 新建自定义 SCSS 文件 `my-style.scss`，粘贴定制代码。
-3. 在 `my-style.scss` 粘贴代码下面，引入 `@import 'vfox/src/style/index.scss';`，大体代码如下：
+2. 新建自定义 SCSS 文件 `my-style.scss`，粘贴定制代码，如：
 
    `my-style.scss` :
 
-   ```scss
+   ```Scss
    $primary-color-2: #c5c6d1;
    $primary-color-5: #6667ab;
    $primary-color-6: #4a4985;
@@ -52,19 +51,32 @@
    $danger-color-6: #8b1721;
    $danger-color-7: #650c16;
    $danger-color: $danger-color-6;
-
-   @import '../src/style/index.scss';
    ```
 
-4. 更改原来引入的样式文件：
+3. 更改原来引入的样式文件：
 
-```
+```JavaScript
 import Vfox from 'vfox'
 
 // delete: vfox/es/style/index.css
 import 'path/to/my-style.scss'
+import 'vfox/es/style/index.scss'
 
 app.use(Vfox)
+```
+
+4. 安装 scss 依赖
+
+**Vite** 只需要预装 sass 预处理器，具体请参阅 [CSS Pre-processors](https://cn.vitejs.dev/guide/features.html#css-pre-processors)。
+
+```
+npm install -D sass
+```
+
+**Vue CLI** 还需要相应的 loader，具体请参阅 [预处理器](https://cli.vuejs.org/zh/guide/css.html#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)。
+
+```
+npm install -D sass-loader sass
 ```
 
 ## 自定义色彩
