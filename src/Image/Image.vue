@@ -45,7 +45,7 @@ import {
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
-import Exception from '@/helpers/exception'
+import type { TypeException } from '../helpers/types'
 import type { ImageModes, ImageOnLoadPayLoad } from './types'
 
 const MODE_NAMES = [
@@ -157,7 +157,7 @@ export default defineComponent({
       } as ImageOnLoadPayLoad)
     }
 
-    function onError(e: Exception) {
+    function onError(e: TypeException) {
       loading.value = false
       error.value = true
 

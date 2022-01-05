@@ -43,13 +43,14 @@ import {
 import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import {
+  colorValidator,
   createEnumsValidator,
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
 import type { StyleObject, StateType } from '../helpers/types'
 import { STATE_TYPES } from '@/helpers/constants'
-import { getColorObject, isColorValue } from '@/helpers/color'
+import { getColorObject } from '@/helpers/color'
 
 const modeMaps = new Map([
   ['default', ''],
@@ -90,7 +91,7 @@ export default defineComponent({
     },
     color: {
       type: [String, Object],
-      validator: isColorValue
+      validator: colorValidator
     },
     // 是否采用跑马灯显示
     marquee: {

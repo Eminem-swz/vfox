@@ -20,7 +20,8 @@ import type { PropType } from 'vue'
 import { isNumber, isString, rangeInteger } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { AnimationFrameTask, frameTo } from '@/helpers/animation'
-import { getColorObject, isColorValue } from '@/helpers/color'
+import { getColorObject } from '@/helpers/color'
+import { colorValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-badge',
@@ -53,7 +54,7 @@ export default defineComponent({
     },
     color: {
       type: [String, Object],
-      validator: isColorValue
+      validator: colorValidator
     }
   },
   setup(props) {

@@ -24,6 +24,7 @@ import { inject, defineComponent, computed, getCurrentInstance } from 'vue'
 import type { PropType, ComponentInternalInstance } from 'vue'
 import { Icon } from '@/Icon'
 import {
+  colorValidator,
   createEnumsValidator,
   getEnumsValue,
   iconValidator
@@ -37,7 +38,7 @@ import type {
   ButtonShapeType
 } from './types'
 import { useGroupItem } from '@/hooks/use-group'
-import { getColorGroups, isColorValue, isDarkColor } from '@/helpers/color'
+import { getColorGroups, isDarkColor } from '@/helpers/color'
 
 const FORM_TYPES = ['button', 'submit', 'reset']
 type FormTypes = 'button' | 'submit' | 'reset'
@@ -94,7 +95,7 @@ export default defineComponent({
     },
     color: {
       type: [String, Object],
-      validator: isColorValue
+      validator: colorValidator
     }
   },
   setup(props) {
@@ -109,7 +110,7 @@ export default defineComponent({
 
       return [
         'type--' +
-          (props.color && isColorValue(props.color as string)
+          (props.color && colorValidator(props.color as string)
             ? STATE_TYPES[1]
             : getEnumsValue(STATE_TYPES, props.type)),
         'pattern--' + getEnumsValue(BUTTON_PATTERN_TYPES, pattern),
@@ -125,7 +126,7 @@ export default defineComponent({
     const styles = computed(() => {
       const obj: StyleObject = {}
 
-      if (props.color && isColorValue(props.color as string)) {
+      if (props.color && colorValidator(props.color as string)) {
         const colors = getColorGroups(props.color as string)
         const isDark = isDarkColor(props.color as string)
         const pattern = getEnumsValue(

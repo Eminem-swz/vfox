@@ -21,12 +21,16 @@
 import { computed, defineComponent, ref } from 'vue'
 import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
-import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
+import {
+  colorValidator,
+  createEnumsValidator,
+  getEnumsValue
+} from '@/helpers/validator'
 import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
 import { useLongPress } from '@/hooks/use-long-press'
 import { noop } from '@/helpers/util'
 import type { SizeType, StateType, StyleObject } from '../helpers/types'
-import { isColorValue, getColorObject } from '@/helpers/color'
+import { getColorObject } from '@/helpers/color'
 
 type TagPatternType = 'light' | 'dark' | 'plain'
 const TAG_PATTERN_TYPES: TagPatternType[] = ['light', 'dark', 'plain']
@@ -63,7 +67,7 @@ export default defineComponent({
     },
     color: {
       type: [String, Object],
-      validator: isColorValue
+      validator: colorValidator
     }
   },
   emits: ['close', 'click', 'long-press'],

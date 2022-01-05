@@ -1,4 +1,5 @@
 import Exception from '@/helpers/exception'
+import type { TypeException } from '../helpers/types'
 
 export interface ImageLoadedResource {
   naturalHeight: number
@@ -12,7 +13,7 @@ export type ImageLoadObject = {
   src: string
   checkInView: () => boolean
   onLoad: (res: ImageLoadedResource) => void
-  onError: (e: Exception) => void
+  onError: (e: TypeException) => void
 }
 
 const DEFAULT_EVENTS = [
@@ -40,7 +41,7 @@ export function loadNow(vm: ImageLoadObject) {
 function loadImageAsync(
   item: ImageLoadObject,
   resolve: (res: ImageLoadedResource) => void,
-  reject: (e: Exception) => void
+  reject: (e: TypeException) => void
 ) {
   const image = new Image()
   if (!item || !item.src) {

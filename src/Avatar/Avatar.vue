@@ -26,7 +26,11 @@ import type { PropType, ComponentInternalInstance } from 'vue'
 import { Icon } from '@/Icon'
 import { Badge } from '@/Badge'
 import { Image } from '@/Image'
-import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
+import {
+  colorValidator,
+  createEnumsValidator,
+  getEnumsValue
+} from '@/helpers/validator'
 import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '@/Avatar/avatar'
 import type { AvatarShapeType } from './types'
 import { useGroupItem } from '@/hooks/use-group'
@@ -34,7 +38,7 @@ import { isNumber, inArray } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { handleBadge } from '@/Badge/badge'
 import type { BadgeOptions } from '../Badge/types'
-import { getColorObject, isColorValue } from '@/helpers/color'
+import { getColorObject } from '@/helpers/color'
 
 type Gender = 'man' | 'woman'
 const GenderNames = ['woman', 'man']
@@ -63,7 +67,7 @@ export default defineComponent({
     },
     color: {
       type: [String, Object],
-      validator: isColorValue
+      validator: colorValidator
     }
   },
   setup(props) {

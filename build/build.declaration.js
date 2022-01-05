@@ -44,7 +44,7 @@ async function build() {
       return false
     },
     plugins: [
-      replaceAlias('@/', '../'),
+      replaceAlias({ search: '@/', replace: '../' }),
       sass({
         output: true
       }),

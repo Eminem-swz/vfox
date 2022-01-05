@@ -1,12 +1,11 @@
-import type { Noop } from '../helpers/types'
-import Exception from '../helpers/exception'
+import type { Noop, TypeException } from '../helpers/types'
 
 export interface ApiOptionsSuccess {
   (...args: any[]): void
 }
 
 export interface ApiOptionsFail {
-  (e: Exception): void
+  (e: TypeException): void
 }
 
 export type ApiOptionsComplete = Noop

@@ -68,16 +68,16 @@ import {
   rangeNumber,
   cloneData
 } from '@/helpers/util'
-import type { DataObject, Noop } from '../helpers/types'
+import type { AnyObject, Noop } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import type { PopupVisibleStateChangeArgs } from '../popup/types'
 import { locale } from '@/Locale'
 
-type Item = {
+interface Item extends AnyObject {
   id: string | number
   draggable?: boolean
-} & DataObject
+}
 
 interface TargetObject {
   id: string | number

@@ -1,20 +1,12 @@
 import { App } from 'vue'
 
+export type { default as TypeException } from '../helpers/exception'
+
 export type SFCWithInstall<T> = T & { install(app: App): void }
 
 export type AnyObject = Record<string, any>
 export type EmptyObject = Record<string, never>
 export type StyleObject = Record<string, string>
-
-export type DataValue = Date | null | string | number | boolean | never
-
-export type DataObject = {
-  [propName: string]:
-    | DataValue
-    | DataObject
-    | (DataObject | DataValue)[]
-    | EmptyObject
-}
 
 /**
  * Scroll
@@ -34,7 +26,6 @@ export interface ScrollToOffsetOptions {
 
 export interface Validator {
   (value: unknown): boolean
-  _type: string
 }
 
 export type DomSelector = HTMLElement | string | Document
@@ -47,7 +38,7 @@ export interface FxEventCallback {
   (e: Event, $el: HTMLElement): void
 }
 export interface FxCustomEventCallback {
-  (res: { type: string } & DataObject): void
+  (res: { type: string } & AnyObject): void
 }
 
 export type EasingType = 'linear' | 'swing'
