@@ -1,3 +1,16 @@
+# [2.3.0](https://github.com/godxiaoji/vfox/compare/v2.2.3...v2.3.0) (2022-01-05)
+
+
+### Bug Fixes
+
+* fix packaging process type reference error ([be4fb49](https://github.com/godxiaoji/vfox/commit/be4fb49c23d25b5eea85eabdffb436e604d2be2b))
+
+
+### Features
+
+* **locale:** add locale support ([ef00fde](https://github.com/godxiaoji/vfox/commit/ef00fde27785cfcfe0ed66e0a83b24afffa7a985))
+* **locale:** complete components internationalization adaptation ([06ea6d0](https://github.com/godxiaoji/vfox/commit/06ea6d074ea96f73dd3f2f37551afa829ded6bd4))
+
 ## [2.2.3](https://github.com/godxiaoji/vfox/compare/v2.2.2...v2.2.3) (2021-12-27)
 
 
