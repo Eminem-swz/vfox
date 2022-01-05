@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/godxiaoji/vfox/compare/v2.3.0...v2.3.1) (2022-01-05)
+
+
+### Bug Fixes
+
+* **color:** optimized foreground color algorithm ([3ebe4de](https://github.com/godxiaoji/vfox/commit/3ebe4dea4549ccae6f346abe2958ea89aeac3364))
+
 # [2.3.0](https://github.com/godxiaoji/vfox/compare/v2.2.3...v2.3.0) (2022-01-05)
 
 
