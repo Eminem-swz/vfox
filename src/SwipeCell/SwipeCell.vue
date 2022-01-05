@@ -33,7 +33,8 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, computed, reactive, PropType } from 'vue'
+import { ref, defineComponent, computed, reactive } from 'vue'
+import type { PropType } from 'vue'
 import { getEnumsValue } from '@/helpers/validator'
 import {
   cloneData,

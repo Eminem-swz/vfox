@@ -24,7 +24,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onBeforeUnmount, PropType } from 'vue'
+import { defineComponent, computed, onBeforeUnmount } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { ActivityIndicator } from '@/ActivityIndicator'
 import { usePopup } from '@/popup/use-popup'

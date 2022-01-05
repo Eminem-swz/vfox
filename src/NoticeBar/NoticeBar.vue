@@ -38,9 +38,9 @@ import {
   onBeforeUnmount,
   inject,
   ref,
-  watch,
-  PropType
+  watch
 } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import {
   createEnumsValidator,

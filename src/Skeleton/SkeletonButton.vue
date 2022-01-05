@@ -6,11 +6,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { createEnumsValidator } from '@/helpers/validator'
 import { BUTTON_SHAPE_NAMES } from '@/Skeleton/skeleton'
 import { useSubSkeleton } from '@/Skeleton/use-skeleton'
-import { ButtonShapeNames } from './types'
+import type { ButtonShapeNames } from './types'
 
 export default defineComponent({
   name: 'fx-skeleton-button',

@@ -6,7 +6,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { createEnumsValidator } from '@/helpers/validator'
 import { AVATAR_SHAPE_NAMES } from '@/Skeleton/skeleton'
 import { useSubSkeleton } from '@/Skeleton/use-skeleton'

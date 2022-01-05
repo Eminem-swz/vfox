@@ -21,11 +21,11 @@ import {
   defineComponent,
   inject,
   onMounted,
-  PropType,
   ref,
   toRef,
   watch
 } from 'vue'
+import type { PropType } from 'vue'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
 import { capitalize } from '@/helpers/util'
 import { PLACEMENT_TYPES } from '@/helpers/constants'

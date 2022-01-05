@@ -155,10 +155,10 @@ export default defineComponent({
             const { rangeCount, hasDisabled } = getRangeInfo(_start, _end)
 
             if (hasDisabled) {
-              printError('"modelValue"值的范围包含有禁用的天数.')
+              printError('The range of "modelValue" contains disabled days.')
             } else if (rangeCount > props.maxRange) {
               printError(
-                `"modelValue"值得范围有${rangeCount}天，不能超过${props.maxRange}天.`
+                `The range of "modelValue" contains ${rangeCount} days, no more than ${props.maxRange} days.`
               )
             } else {
               start = _start as SelectDay
@@ -166,7 +166,9 @@ export default defineComponent({
               updateStates()
             }
           } else {
-            printError(`"modelValue"值不在可选范围内.`)
+            printError(
+              'The range of "modelValue" is not in the optional range.'
+            )
           }
         } else {
           const select = getSelectedInfo(timeArr[0])
@@ -176,7 +178,9 @@ export default defineComponent({
             setSelected('end', null)
             updateStates()
           } else {
-            printError(`"modelValue"值不在可选范围内.`)
+            printError(
+              'The range of "modelValue" is not in the optional range.'
+            )
           }
         }
       }
@@ -224,9 +228,9 @@ export default defineComponent({
         topHighlight: false,
         topText:
           state === 'startSelected'
-            ? '开始'
+            ? locale.value.calendarSelectedStartText
             : state === 'endSelected'
-            ? '结束'
+            ? locale.value.calendarSelectedEndText
             : '',
         state,
         bottomHighlight: false,
@@ -260,7 +264,7 @@ export default defineComponent({
 
     function getStartMonth(day: Dayjs) {
       const month: Month = {
-        caption: day.format('YYYY年MM月'),
+        caption: day.format(locale.value.calendarMonthCaption),
         monthString: day.format('YYYY-MM'),
         days: [],
         startDay: day.date()
@@ -308,13 +312,14 @@ export default defineComponent({
       if (isDate(props.minDate)) {
         minTimestamp = dayjs(props.minDate).startOf('day').valueOf()
       } else {
-        printError(`"minDate"必须是 Date 类型.`)
         minTimestamp = dayjs().startOf('day').valueOf()
       }
 
       if (isDate(props.maxDate)) {
         if ((props.maxDate as any).getTime() < minTimestamp) {
-          printError(`"maxDate"不能小于"minDate".`)
+          printError(
+            'The value of "maxDate" cannot be less than the value of "minDate".'
+          )
           maxTimestamp = dayjs(minTimestamp)
             .add(DEFAULT_MONTH_RANGE, 'month')
             .valueOf()
@@ -322,7 +327,6 @@ export default defineComponent({
           maxTimestamp = dayjs(props.maxDate).startOf('day').valueOf()
         }
       } else {
-        printError(`"maxDate"必须是 Date 类型.`)
         maxTimestamp = dayjs(minTimestamp)
           .add(DEFAULT_MONTH_RANGE, 'month')
           .valueOf()
@@ -550,6 +554,8 @@ export default defineComponent({
       () => props.modelValue,
       val => updateValue(val)
     )
+
+    watch(locale, () => updateOptions())
 
     updateOptions()
     !isEmpty(props.modelValue) && updateValue(props.modelValue)

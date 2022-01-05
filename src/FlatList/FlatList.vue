@@ -59,12 +59,12 @@ import {
   computed,
   defineComponent,
   onMounted,
-  PropType,
   reactive,
   ref,
   nextTick,
   watch
 } from 'vue'
+import type { PropType } from 'vue'
 import { LoadMore } from '@/LoadMore'
 import { ScrollView } from '@/ScrollView'
 import {

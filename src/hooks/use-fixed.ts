@@ -3,9 +3,9 @@ import {
   onBeforeUnmount,
   onDeactivated,
   onMounted,
-  Ref,
   watch
 } from 'vue'
+import type { Ref } from 'vue'
 
 interface UseOptions {
   fixed: Ref<boolean>

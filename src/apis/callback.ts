@@ -1,7 +1,11 @@
-import { ApiOptionsComplete, ApiOptionsFail, ApiOptionsSuccess } from './types'
+import type {
+  ApiOptionsComplete,
+  ApiOptionsFail,
+  ApiOptionsSuccess
+} from './types'
 import Exception from '@/helpers/exception'
 import { noop, isFunction } from '@/helpers/util'
-import { AnyObject } from '../helpers/types'
+import type { AnyObject } from '../helpers/types'
 
 /**
  * 获取回调函数

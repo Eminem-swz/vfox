@@ -9,7 +9,7 @@
 <script lang="ts">
 import { defineComponent, computed, toRef, ref } from 'vue'
 import { Icon } from '@/Icon'
-import { getScrollTop } from '@/helpers/dom'
+import { getScrollTop, scrollTo } from '@/helpers/dom'
 import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
 import { isNumber, isNumberArray } from '@/helpers/util'
 import { useScrollEvent } from '@/hooks/use-scroll'
@@ -39,14 +39,7 @@ export default defineComponent({
     const isShow = ref(getScrollTop() >= props.visibleHeight)
 
     function toTop() {
-      document.documentElement.scrollTo({
-        top: 0,
-        behavior: props.animated ? 'smooth' : 'auto'
-      })
-      document.body.scrollTo({
-        top: 0,
-        behavior: props.animated ? 'smooth' : 'auto'
-      })
+      scrollTo(document, 0, props.animated)
     }
 
     function onClick(e: Event) {

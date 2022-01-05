@@ -1,10 +1,13 @@
-import { ref, Ref } from 'vue'
+import { ref } from 'vue'
+import type { Ref } from 'vue'
 import type { LangPack } from './types'
-import zhCN from './lang/zh-CN'
+import zhCN from '@/Locale/lang/zh-CN'
 import Exception from '@/helpers/exception'
 
 export function useLocale() {
-  const packs: Record<string, LangPack> = {}
+  const packs: Record<string, LangPack> = {
+    'zh-CN': zhCN
+  }
   const locale: Ref<LangPack> = ref(zhCN)
 
   function langExist(lang: string) {
@@ -21,9 +24,13 @@ export function useLocale() {
     return true
   }
 
+  function add(lang: string, newPack: LangPack) {
+    packs[lang] = newPack
+  }
+
   function use(lang: string, newPack?: LangPack) {
     if (newPack && lang) {
-      packs[lang] = newPack
+      add(lang, newPack)
     } else if (!langExist(lang)) {
       return
     }
@@ -43,14 +50,13 @@ export function useLocale() {
   return {
     packs,
     locale,
+    add,
     use,
     merge
   }
 }
 
-const { packs, locale, use, merge } = useLocale()
+const { packs, locale, add, use, merge } = useLocale()
 
-use('zh-CN', zhCN)
-
-export { packs, locale, use, merge }
-export default { packs, locale, use, merge }
+export { packs, locale, add, use, merge }
+export default { packs, locale, add, use, merge }

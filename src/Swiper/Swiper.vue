@@ -164,7 +164,7 @@ export default defineComponent({
       } else {
         console.error(
           new Exception(
-            '"activeIndex"不在范围内',
+            'This value of "activeIndex" is out of range.',
             Exception.TYPE.PROP_ERROR,
             'Swiper'
           )

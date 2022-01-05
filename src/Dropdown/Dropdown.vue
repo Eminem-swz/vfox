@@ -46,7 +46,7 @@ export default defineComponent({
       if (!$target) {
         console.error(
           new Exception(
-            '通过"selector"找不到对应Element.',
+            'Cannot find element through "selector"',
             Exception.TYPE.PROP_ERROR,
             'Dropdown'
           )

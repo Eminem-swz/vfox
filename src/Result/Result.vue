@@ -20,7 +20,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Button } from '@/Button'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'

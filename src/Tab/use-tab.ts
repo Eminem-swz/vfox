@@ -130,7 +130,7 @@ export function useTab(
       // emit('update:activeValue', value2)
       console.error(
         new Exception(
-          '"value" is not in "options".',
+          'The value is not in "options".',
           isProp ? Exception.TYPE.PROP_ERROR : Exception.TYPE.PARAM_ERROR,
           tabName
         )
@@ -144,7 +144,7 @@ export function useTab(
     } else {
       console.error(
         new Exception(
-          '"options[index]" not found.',
+          'The "options[index]" not found.',
           Exception.TYPE.PARAM_ERROR,
           tabName
         )

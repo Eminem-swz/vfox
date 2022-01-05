@@ -23,7 +23,7 @@ module.exports = {
       },
       {
         text: 'API',
-        link: '/apis/LocalStorage',
+        link: '/apis/Toast',
         activeMatch: '^/apis/'
       },
       {
@@ -168,10 +168,8 @@ function getComponentsSidebar() {
 
 function getApisSidebar() {
   return [
-    { text: 'LocalStorage', link: '/apis/LocalStorage' },
-    { text: 'Notify', link: '/apis/Notify' },
     { text: 'Toast', link: '/apis/Toast' },
-    { text: 'Scroll', link: '/apis/Scroll' },
+    { text: 'Notify', link: '/apis/Notify' },
     { text: 'Preview', link: '/apis/Preview' },
     { text: 'Modal', link: '/apis/Modal' },
     { text: 'Drawer', link: '/apis/Drawer' },

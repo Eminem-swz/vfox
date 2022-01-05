@@ -1,4 +1,6 @@
 export default {
+  lang: 'zh-CN',
+
   actionSheetCancelText: '取消',
 
   calendarConfirmText: '确定',
@@ -12,6 +14,9 @@ export default {
     '6': '六'
   },
   calendarMaxRangeTips: '选择天数不能超过{{maxRange}}天',
+  calendarMonthCaption: 'YYYY年MM月',
+  calendarSelectedStartText: '开始',
+  calendarSelectedEndText: '结束',
 
   cascaderDefaultTitle: '请选择',
 
@@ -27,14 +32,12 @@ export default {
 
   flatListLoadingText: '正在加载',
 
-  imageUploaderUploadSuccessText: '上传成功',
   imageUploaderDeleteContent: '要删除这张图片吗？',
   imageUploaderDeleteConfirmText: '删除',
 
   navBarBackButtonText: '返回',
   navBarHomeButtonText: '首页',
 
-  numberKeyboardBackspaceText: '删除',
   numberKeyboardConfirmText: '完成',
 
   orderDeleteButtonText: '拖动到此处删除',
@@ -42,7 +45,7 @@ export default {
 
   pickerConfirmText: '确定',
   pickerCancelText: '取消',
-  pickerEmptyText: '取消',
+  pickerEmptyText: '暂无选择可选',
 
   popDialogConfirmText: '确定',
   popDialogCancelText: '取消',

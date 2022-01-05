@@ -15,14 +15,8 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onBeforeUnmount,
-  PropType,
-  ref,
-  watch
-} from 'vue'
+import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue'
+import type { PropType } from 'vue'
 import { isNumber, isString, rangeInteger } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { AnimationFrameTask, frameTo } from '@/helpers/animation'

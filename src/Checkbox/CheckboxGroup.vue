@@ -16,7 +16,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType } from 'vue'
+import { defineComponent, reactive } from 'vue'
+import type { PropType } from 'vue'
 import Checkbox from './Checkbox.vue'
 import { formItemEmits, formItemProps } from '@/Form/form'
 import {

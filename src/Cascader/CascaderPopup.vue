@@ -12,7 +12,7 @@
     <template #header>
       <Tab
         class="fx-cascader_tabs"
-        :options="tabOptions"
+        :options="tabs"
         :scrollThreshold="0"
         v-model:activeValue="tabIndex"
       />
@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, reactive } from 'vue'
+import { defineComponent, ref, inject, reactive, watch } from 'vue'
 import { Drawer } from '@/Drawer'
 import { Tab } from '@/Tab'
 import { isSameArray } from '@/helpers/util'
@@ -60,6 +60,11 @@ import type { TabOptionItem } from '../Tab/types'
 import { pickerPopupEmits, commonProps, mergeHandlers } from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
 import { locale } from '@/Locale'
+
+interface SelectedTabs {
+  label: string | null
+  value: number | string
+}
 
 export default defineComponent({
   name: 'fx-cascader-popup',
@@ -74,7 +79,8 @@ export default defineComponent({
   },
   emits: [...popupExtendEmits, ...pickerPopupEmits],
   setup(props, ctx) {
-    const tabOptions = reactive<TabOptionItem[]>([])
+    const selectedTabs = reactive<SelectedTabs[]>([])
+    const tabs = reactive<TabOptionItem[]>([])
     const tabIndex = ref(0)
     const dropdown = ref<HTMLElement>()
 
@@ -106,7 +112,6 @@ export default defineComponent({
 
     const {
       currentValues,
-      cacheLabel,
       getDetail,
       cols,
       update,
@@ -117,23 +122,23 @@ export default defineComponent({
     } = usePickerView(props, ctx, {
       name: 'cascader',
       afterUpdate(valueArray, labelArray, cols) {
-        tabOptions.splice(0, Infinity)
+        selectedTabs.splice(0, Infinity)
 
         labelArray.forEach((v, k) => {
-          tabOptions.push({
+          selectedTabs.push({
             label: v,
             value: k
           })
         })
 
         if (labelArray.length < cols.length) {
-          tabOptions.push({
-            label: locale.value.cascaderDefaultTitle,
-            value: tabOptions.length
+          selectedTabs.push({
+            label: null,
+            value: selectedTabs.length
           })
         }
 
-        tabIndex.value = tabOptions.length - 1
+        tabIndex.value = selectedTabs.length - 1
       },
       handlers: mergeHandlers(
         {
@@ -144,10 +149,26 @@ export default defineComponent({
       )
     })
 
+    watch(
+      [locale, selectedTabs],
+      ([newLocale, newOptions]) => {
+        tabs.splice(0, Infinity)
+        newOptions.forEach(v => {
+          tabs.push({
+            label: v.label == null ? newLocale.cascaderDefaultTitle : v.label,
+            value: v.value
+          })
+        })
+      },
+      {
+        deep: true,
+        immediate: true
+      }
+    )
+
     return {
       tabIndex,
-      tabOptions,
-      cacheLabel,
+      tabs,
       ...popup,
       dropdown,
       cols,

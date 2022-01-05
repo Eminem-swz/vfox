@@ -52,7 +52,6 @@
 <script lang="ts">
 import {
   defineComponent,
-  PropType,
   ref,
   reactive,
   onMounted,
@@ -60,6 +59,7 @@ import {
   watch,
   onBeforeUnmount
 } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Drawer } from '@/Drawer'
 import {

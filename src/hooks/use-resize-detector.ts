@@ -1,7 +1,8 @@
-import { ComponentPublicInstance, onBeforeUnmount, onMounted, Ref } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
+import type { Ref, ComponentPublicInstance } from 'vue'
 import { isElement } from '@/helpers/util'
 import { resizeDetector } from '@/helpers/resize-detector'
-import { Noop } from '../helpers/types'
+import type { Noop } from '../helpers/types'
 
 export function useResizeDetector(
   ctx: Ref<ComponentPublicInstance | HTMLElement | undefined>,

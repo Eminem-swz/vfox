@@ -1,4 +1,5 @@
-import { onMounted, reactive, onBeforeUnmount, Ref } from 'vue'
+import { onMounted, reactive, onBeforeUnmount } from 'vue'
+import type { Ref } from 'vue'
 import safeAreaInsets from 'safe-area-insets'
 
 export function useSafeAreaInsets(enable: Ref<boolean>) {

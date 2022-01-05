@@ -3,9 +3,13 @@ import App from './App.vue'
 import router from './router'
 
 import Vfox from '@/index'
+import { add as localeAdd } from '@/Locale'
+import enUS from '@/Locale/lang/en-US'
 import './styles.scss'
 // import '@/style/index'
 import { isIOS, isMobile } from '@/helpers/device'
+
+localeAdd('en-US', enUS)
 
 createApp(App).use(router).use(Vfox).mount('#app')
 

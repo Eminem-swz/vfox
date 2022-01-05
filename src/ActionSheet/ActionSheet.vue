@@ -41,7 +41,8 @@
 </template>
 
 <script lang="ts">
-import { computed, PropType, defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { Drawer } from '@/Drawer'
 import { isArray, isObject, cloneData } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'

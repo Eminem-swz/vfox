@@ -2,13 +2,8 @@ import dayjs from '@/helpers/day'
 import { isArray } from '@/helpers/util'
 import { getDefaultDetail } from '@/Calendar/calendar'
 import type { UseProps } from '../hooks/types'
+import type { PickerDetail, PickerModelValue } from '../Picker/types'
 import type {
-  PickerDetail,
-  PickerModelValue,
-  PickerValue
-} from '../Picker/types'
-import type {
-  DayHandler,
   CalendarMode,
   CalendarDetail,
   CalendarValueFormatter,

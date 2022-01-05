@@ -21,10 +21,16 @@ sidebarDepth: 2
 
 ## 安装
 
-### NPM
+### npm
 
 ```
 npm i -S vfox
+```
+
+### yarn
+
+```
+yarn add vfox
 ```
 
 ## 引入组件
@@ -142,6 +148,8 @@ app.use(Vfox)
 API 调用需要先引入对应的组件，方可调用，引用方式同上。
 
 ```
+import { Toast } from 'vfox'
+
 export default {
   mounted() {
     Toast.showToast({
@@ -151,6 +159,44 @@ export default {
     })
   }
 }
+```
+
+详情可见 [API](./apis/Toast.md) 。
+
+## 国际化
+
+### 简介
+
+组件库默认的文案语言是中文，支持多语言切换，目前支持 **中文** 和 **英文**。
+
+### Locale
+
+先引入 `Locale` 模块：
+
+```
+import { Locale } from 'vfox'
+```
+
+如果想要使用英文：
+
+```
+import enUS from 'vfox/es/Locale/lang/en-US'
+
+Locale.use('en-US', enUS)
+```
+
+切换回中文：
+
+```
+Locale.use('zh-CN')
+```
+
+如果想要其中的部分文案进行修改：
+
+```
+Locale.merge('zh-CN', {
+  pickerConfirmText: '完成'
+})
 ```
 
 ## 主题定制

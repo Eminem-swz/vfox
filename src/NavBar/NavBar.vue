@@ -17,7 +17,7 @@
               :icon="item.icon"
               v-for="(item, index) in leftButtons"
               :key="index"
-              @click="onLeftIconClick(item, index)"
+              @click="onLeftIconClick($event, item, index)"
               >{{ item.text }}</Button
             >
           </template>
@@ -66,7 +66,7 @@
               v-for="(item, index) in rightButtons"
               :key="index"
               transparent
-              @click="onRightIconClick(item, index)"
+              @click="onRightIconClick($event, item, index)"
               >{{ item.text }}</Button
             >
           </ButtonGroup>
@@ -77,11 +77,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { Button, ButtonGroup } from '@/Button'
 import { isArray, isString, isObject } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
-import type { StateType } from '../helpers/types'
+import type { AnyObject, StateType } from '../helpers/types'
 import type { IconData } from '../Icon/types'
 import { locale } from '@/Locale'
 
@@ -150,28 +151,36 @@ export default defineComponent({
     'title-dbclick'
   ],
   setup(props, { emit }) {
-    function onBack() {
-      eventEmit('back-click')
+    function onBack(e: Event) {
+      eventEmit('back-click', {}, e.currentTarget)
     }
 
-    function onBackHome() {
-      eventEmit('home-click')
+    function onBackHome(e: Event) {
+      eventEmit('home-click', {}, e.currentTarget)
     }
 
-    function onLeftIconClick(item: ButtonOptions, index: number) {
-      eventEmit('left-button-click', {
-        icon: item.icon,
-        text: item.text,
-        index
-      })
+    function onLeftIconClick(e: Event, item: ButtonOptions, index: number) {
+      eventEmit(
+        'left-button-click',
+        {
+          icon: item.icon,
+          text: item.text,
+          index
+        },
+        e.currentTarget
+      )
     }
 
-    function onRightIconClick(item: ButtonOptions, index: number) {
-      eventEmit('right-button-click', {
-        icon: item.icon,
-        text: item.text,
-        index
-      })
+    function onRightIconClick(e: Event, item: ButtonOptions, index: number) {
+      eventEmit(
+        'right-button-click',
+        {
+          icon: item.icon,
+          text: item.text,
+          index
+        },
+        e.currentTarget
+      )
     }
 
     let dbClickTag: string | null = null
@@ -185,11 +194,11 @@ export default defineComponent({
       } else if (dbClickTag === e.type) {
         clearTimeout(dbClickTimer)
         dbClickTag = null
-        eventEmit('title-dbclick')
+        eventEmit('title-dbclick', {}, e.currentTarget)
       }
     }
 
-    function eventEmit(type: string, res = {}) {
+    function eventEmit(type: string, res: AnyObject, $el: EventTarget | null) {
       emit(
         type as 'back-click',
         Object.assign(
@@ -197,7 +206,8 @@ export default defineComponent({
             type
           },
           res
-        )
+        ),
+        ($el as HTMLElement) || undefined
       )
     }
 

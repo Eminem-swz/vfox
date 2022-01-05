@@ -2,13 +2,12 @@ import {
   getCurrentInstance,
   ref,
   onBeforeUnmount,
-  ComponentInternalInstance,
   provide,
   onMounted,
   onUnmounted,
-  inject,
-  Ref
+  inject
 } from 'vue'
+import type { Ref, ComponentInternalInstance } from 'vue'
 import Exception from '@/helpers/exception'
 import { camelCase2KebabCase, capitalize } from '@/helpers/util'
 

@@ -75,6 +75,7 @@ import {
 import type { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { locale } from '@/Locale'
+import { scrollTo } from '@/helpers/dom'
 
 enum ScrollState {
   Center,
@@ -303,11 +304,14 @@ export default defineComponent({
       const { scrollY, scrollX } = props
 
       if ((scrollY || scrollX) && root.value) {
-        ;(root.value as HTMLElement).scrollTo({
-          top: scrollY ? props.scrollTop : 0,
-          left: scrollX ? props.scrollLeft : 0,
-          behavior: props.scrollAnimated ? 'smooth' : 'auto'
-        })
+        scrollTo(
+          root.value as HTMLElement,
+          {
+            top: scrollY ? props.scrollTop : 0,
+            left: scrollX ? props.scrollLeft : 0
+          },
+          props.scrollAnimated
+        )
       }
     }
 

@@ -107,5 +107,3 @@ export { default as ActivityIndicator } from '@/ActivityIndicator'
 
 /* Other */
 export { default as Copy } from '@/Copy'
-export { default as Scroll } from '@/Scroll'
-export { default as LocalStorage } from '@/LocalStorage'

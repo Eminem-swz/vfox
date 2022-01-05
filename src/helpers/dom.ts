@@ -130,11 +130,15 @@ export function querySelector(selector: any) {
   return $el == null ? null : ($el as HTMLElement)
 }
 
+function isDocument($el: HTMLElement | Document) {
+  return $el === document || $el === document.documentElement
+}
+
 /**
  * 获取兼容滚动DOM节点
  */
 export function getScrollDom($el: HTMLElement | Document = document) {
-  if ($el === document || $el === document.documentElement) {
+  if (isDocument($el)) {
     if (
       typeof document.compatMode !== 'undefined' &&
       document.compatMode !== 'BackCompat'
@@ -149,7 +153,7 @@ export function getScrollDom($el: HTMLElement | Document = document) {
 }
 
 export function getScrollTop($el: HTMLElement | Document = document) {
-  if ($el === document || $el === document.documentElement) {
+  if (isDocument($el)) {
     return document.documentElement.scrollTop || document.body.scrollTop
   }
 
@@ -157,11 +161,36 @@ export function getScrollTop($el: HTMLElement | Document = document) {
 }
 
 export function setScrollTop($el: HTMLElement | Document, scrollTop: number) {
-  if ($el === document || $el === document.documentElement) {
+  if (isDocument($el)) {
     document.documentElement.scrollTop = scrollTop
     document.body.scrollTop = scrollTop
   } else {
     ;($el as HTMLElement).scrollTop = scrollTop
+  }
+}
+
+export function scrollTo(
+  $el: HTMLElement | Document,
+  scrollNumber: number | { top: number; left: number },
+  animated = true
+) {
+  const options = Object.assign(
+    {
+      behavior: animated ? 'smooth' : 'auto'
+    },
+    typeof scrollNumber === 'number'
+      ? {
+          top: scrollNumber,
+          left: 0
+        }
+      : scrollNumber
+  ) as ScrollToOptions
+
+  if (isDocument($el)) {
+    document.documentElement.scrollTo(options)
+    document.body.scrollTo(options)
+  } else {
+    ;($el as HTMLElement).scrollTo(options)
   }
 }
 

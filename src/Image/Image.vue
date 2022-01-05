@@ -25,14 +25,13 @@
 import {
   defineComponent,
   onMounted,
-  PropType,
   ref,
   getCurrentInstance,
   watch,
   onBeforeUnmount,
-  computed,
-  ComponentInternalInstance
+  computed
 } from 'vue'
+import type { PropType, ComponentInternalInstance } from 'vue'
 import { Icon } from '@/Icon'
 import {
   addLazyQueue,

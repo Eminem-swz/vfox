@@ -57,7 +57,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, watch, PropType } from 'vue'
+import { defineComponent, reactive, ref, watch } from 'vue'
+import type { PropType } from 'vue'
 import { Button } from '@/Button'
 import { Image } from '@/Image'
 import { Swiper, SwiperItem } from '@/Swiper'

@@ -1,5 +1,6 @@
 <script lang="ts">
-import { defineComponent, h, provide, PropType } from 'vue'
+import { defineComponent, h, provide } from 'vue'
+import type { PropType } from 'vue'
 import SkeletonLayout from './SkeletonLayout.vue'
 import {
   paragraphDefaultRow,

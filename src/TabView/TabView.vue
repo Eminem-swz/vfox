@@ -33,6 +33,7 @@ import { Tab } from '@/Tab'
 import { SideTab } from '@/SideTab'
 import { Swiper } from '@/Swiper'
 import { useList } from '@/hooks/use-list'
+import { scrollTo } from '@/helpers/dom'
 
 interface SwiperCallbackRes {
   activeIndex: number
@@ -114,11 +115,7 @@ export default defineComponent({
           $firstChild.className.indexOf(`fx-scroll-view`) !== -1
         ) {
           // ScrollView
-          $firstChild.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'auto'
-          })
+          scrollTo($firstChild, { top: 0, left: 0 }, false)
         }
       }
     }

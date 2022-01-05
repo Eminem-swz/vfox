@@ -22,7 +22,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, PropType } from 'vue'
+import { defineComponent, onBeforeUnmount } from 'vue'
+import type { PropType } from 'vue'
 import { NoticeBar } from '@/NoticeBar'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'

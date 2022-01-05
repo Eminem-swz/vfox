@@ -11,7 +11,7 @@ import type { PlacementType } from '../helpers/types'
 export const popoverProps = {
   ...popupProps,
   selector: {
-    type: String as PropType<string | HTMLElement>,
+    type: [String, Object],
     validator: selectorValidator,
     required: true
   },

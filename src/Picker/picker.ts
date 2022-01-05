@@ -335,7 +335,11 @@ function validateCascadeCols(
 
 function printError(message: string) {
   console.error(
-    new Exception(message, Exception.TYPE.PROP_ERROR, 'MulitSelector')
+    new Exception(
+      message,
+      Exception.TYPE.PROP_ERROR,
+      'Picker/DatePicker/Cascader/Calendar'
+    )
   )
 }
 
@@ -365,9 +369,8 @@ export function validateValues(
     const ret = isCascade
       ? validateCascadeCols(values, options as OptionItem[], virtualHandler)
       : validateCols(values, options)
-
     if (!ret.valid) {
-      printError('"value" is not in "options".')
+      printError('The value is not in "options".')
     } else {
       return ret
     }

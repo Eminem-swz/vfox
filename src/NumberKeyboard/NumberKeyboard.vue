@@ -54,7 +54,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Drawer } from '@/Drawer'
 import { isStringArray, isString, noop } from '@/helpers/util'
@@ -106,7 +107,7 @@ export default defineComponent({
     const { emit } = ctx
     let cacheValue = ''
     const backspaceItem: NumberKeyboardItem = {
-      text: locale.value.numberKeyboardBackspaceText,
+      text: 'backspace',
       type: 'backspace',
       icon: 'BackspaceOutlined'
     }
@@ -188,7 +189,7 @@ export default defineComponent({
         } else {
           list.push(
             {
-              text: locale.value.numberKeyboardConfirmText,
+              text: 'confirm',
               type: 'confirm',
               icon: 'KeyboardOutlined'
             },

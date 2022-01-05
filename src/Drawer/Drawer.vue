@@ -35,7 +35,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, toRef, PropType, watch } from 'vue'
+import { defineComponent, computed, toRef, watch } from 'vue'
+import type { PropType } from 'vue'
 import { NavBar } from '@/NavBar'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'

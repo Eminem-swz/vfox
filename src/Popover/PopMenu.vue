@@ -38,7 +38,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { usePopover } from '@/Popover/use-popover'
 import { popoverProps, popoverEmits } from '@/Popover/popover'
 import { Icon } from '@/Icon'

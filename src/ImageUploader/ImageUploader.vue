@@ -73,7 +73,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType, computed, watch, ref } from 'vue'
+import { defineComponent, reactive, computed, watch, ref } from 'vue'
+import type { PropType } from 'vue'
 import { Image } from '@/Image'
 import { Button } from '@/Button'
 import { Icon } from '@/Icon'
@@ -450,7 +451,7 @@ export default defineComponent({
           id: urlId(url),
           status: 'uploaded',
           url: url,
-          message: locale.value.imageUploaderUploadSuccessText
+          message: 'Uploaded'
         })
 
         formValue.push(url)

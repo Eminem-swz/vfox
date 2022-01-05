@@ -251,8 +251,8 @@ export function usePickerView(
   const options2 = reactive<OptionItem[] | OptionItem[][]>([])
   const isCascade = ref(false)
 
-  const cacheLabel = reactive<string[]>([])
-  const cacheValue = reactive<PickerValue[]>([])
+  const selectedLabels: string[] = []
+  const selectedValues: PickerValue[] = []
 
   const currentLabels = reactive<string[]>([])
   const currentValues = reactive<PickerValue[]>([])
@@ -288,11 +288,11 @@ export function usePickerView(
 
       updateArray(
         currentLabels,
-        values.length > 0 || isPicker ? cacheLabel : []
+        values.length > 0 || isPicker ? selectedLabels : []
       )
       updateArray(
         currentValues,
-        values.length > 0 || isPicker ? cacheValue : []
+        values.length > 0 || isPicker ? selectedValues : []
       )
     }
 
@@ -312,24 +312,24 @@ export function usePickerView(
   }
 
   function addCache(item: { value: string | number; label: string }) {
-    cacheValue.push(item.value)
-    cacheLabel.push(item.label)
+    selectedValues.push(item.value)
+    selectedLabels.push(item.label)
   }
 
   function update(selecteds: PickerValue[]) {
     !isCascade.value ? updateCols(selecteds) : updateCascadeCols(selecteds)
 
     if (isPicker) {
-      updateArray(currentLabels, cacheLabel)
-      updateArray(currentValues, cacheValue)
+      updateArray(currentLabels, selectedLabels)
+      updateArray(currentValues, selectedValues)
     }
 
-    afterUpdate(cacheValue, cacheLabel, cols)
+    afterUpdate(selectedValues, selectedLabels, cols)
   }
 
   function clearCache() {
-    updateArray(cacheLabel, [])
-    updateArray(cacheValue, [])
+    updateArray(selectedLabels, [])
+    updateArray(selectedValues, [])
   }
 
   /**
@@ -659,8 +659,6 @@ export function usePickerView(
     cols,
     currentLabels,
     currentValues,
-    cacheLabel,
-    cacheValue,
     isCascade,
     getDetail,
     update,

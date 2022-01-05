@@ -20,14 +20,8 @@
 </template>
 
 <script lang="ts">
-import {
-  inject,
-  defineComponent,
-  computed,
-  getCurrentInstance,
-  PropType,
-  ComponentInternalInstance
-} from 'vue'
+import { inject, defineComponent, computed, getCurrentInstance } from 'vue'
+import type { PropType, ComponentInternalInstance } from 'vue'
 import { Icon } from '@/Icon'
 import {
   createEnumsValidator,

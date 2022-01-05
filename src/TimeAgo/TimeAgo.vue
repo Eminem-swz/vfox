@@ -12,6 +12,7 @@ import type { Dayjs } from 'dayjs'
 import { format } from 'timeago.js'
 import { addTimer } from '@/helpers/timer'
 import type { Noop } from '../helpers/types'
+import { locale } from '@/Locale'
 
 export default defineComponent({
   name: 'fx-time-ago',
@@ -54,7 +55,8 @@ export default defineComponent({
     function update() {
       const d = getDate()
 
-      timeAgo.value = d == null ? '' : format(d, 'zh_CN')
+      timeAgo.value =
+        d == null ? '' : format(d, locale.value.lang.replace('-', '_'))
     }
 
     watch([() => props.time, () => props.formatTemplate], update, {
@@ -72,6 +74,9 @@ export default defineComponent({
         immediate: true
       }
     )
+
+    watch(locale, () => update())
+
     onBeforeUnmount(() => removeTimer && removeTimer())
 
     return {

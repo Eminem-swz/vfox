@@ -1,6 +1,7 @@
 import { addLongPressEvent } from '@/helpers/events'
-import { onBeforeUnmount, onMounted, Ref } from 'vue'
-import { FxCustomEventCallback } from '../helpers/types'
+import { onBeforeUnmount, onMounted } from 'vue'
+import type { Ref } from 'vue'
+import type { FxCustomEventCallback } from '../helpers/types'
 
 interface OffFn {
   (): void

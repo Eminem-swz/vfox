@@ -7,8 +7,11 @@
       :show-home="true"
       @back-click="onBack"
       @home-click="onBackHome"
-      :right-buttons="[{ icon: 'MenuOutlined', text: '菜单' }]"
-      @right-button-click="menuVisible = true"
+      :right-buttons="[
+        { icon: 'LangOutlined', text: 'lang' },
+        { icon: 'MenuOutlined', text: 'menu' }
+      ]"
+      @rightButtonClick="onRightButtonClick"
     ></fx-nav-bar>
   </fx-fixed>
   <router-view v-slot="{ Component }">
@@ -32,7 +35,9 @@
 
 <script>
 import { getScrollDom } from '@/helpers/dom'
+import { showPopMenu } from '@/PopMenu'
 import { navConfig } from './views/data'
+import { use as localeUse } from '@/Locale'
 
 export default {
   name: 'App',
@@ -87,6 +92,21 @@ export default {
     },
     onBackHome() {
       this.$router.replace({ name: 'ExpHome' })
+    },
+    onRightButtonClick(e, $target) {
+      if (e.text === 'menu') {
+        this.menuVisible = true
+      } else if (e.text === 'lang') {
+        showPopMenu({
+          selector: $target,
+          options: [
+            { name: 'English', value: 'en-US' },
+            { name: '中文', value: 'zh-CN' }
+          ]
+        }).then(({ detail, confirm }) => {
+          confirm && localeUse(detail.index === 0 ? 'en-US' : 'zh-CN')
+        })
+      }
     }
   }
 }
