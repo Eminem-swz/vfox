@@ -111,8 +111,13 @@ export function isColorValue(value: ColorOptions) {
   }
 }
 
+/**
+ * @see https://www.cnblogs.com/nieqq/archive/2010/12/07/1899218.html
+ * @param value 颜色值
+ * @returns boolean
+ */
 export function isDarkColor(value: ColorOptions) {
-  return Color.isDark(value)
+  return Color.grayscale(value).getRed() < 192
 }
 
 export function getColorObject(color?: ColorOptions) {
