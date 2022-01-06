@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/godxiaoji/vfox/compare/v2.4.0...v2.4.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* **dark:** change gray to grey ([38c7445](https://github.com/godxiaoji/vfox/commit/38c744503a360458317e4cc5c340a9e42446c2e5))
+
 # [2.4.0](https://github.com/godxiaoji/vfox/compare/v2.3.2...v2.4.0) (2022-01-06)
 
 
