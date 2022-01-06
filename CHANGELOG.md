@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/godxiaoji/vfox/compare/v2.3.2...v2.4.0) (2022-01-06)
+
+
+### Features
+
+* **dark:** support dark mode ([a6705b4](https://github.com/godxiaoji/vfox/commit/a6705b42402b8b8c41eb6a9d62bf7faa041811a8))
+
 ## [2.3.2](https://github.com/godxiaoji/vfox/compare/v2.3.1...v2.3.2) (2022-01-05)
 
 
