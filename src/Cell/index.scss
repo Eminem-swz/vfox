@@ -98,7 +98,7 @@
   }
 
   &.disabled {
-    --fx-content-color: #{rgba(var(--fx-gray-8), 0.2)};
+    --fx-content-color: #{rgba(var(--fx-grey-8), 0.2)};
 
     .fx-cell {
       &_label,

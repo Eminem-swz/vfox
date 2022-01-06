@@ -18,7 +18,7 @@
   <fx-group title="色卡列表" v-if="colors.length">
     <fx-copy
       :text="color"
-      class="exp-color-item"
+      class="exp-colorCard-item"
       :class="['color-' + (index + 1)]"
       :style="{ backgroundColor: color }"
       v-for="(color, index) in colors"
@@ -61,9 +61,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import '@/style/var.scss';
-
-.exp-color {
+.exp-colorCard {
   &-item {
     display: block !important;
     height: 48px;
@@ -72,7 +70,7 @@ export default {
     text-align: right;
     font-size: 12px;
     padding: 0 16px;
-    text-shadow: 0px 1px 2px rgba($color: $black-color, $alpha: 0.4);
+    text-shadow: 0px 1px 2px rgba($color: #000, $alpha: 0.4);
   }
 }
 </style>
