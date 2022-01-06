@@ -1,5 +1,5 @@
 <template>
-  <fx-group title="基础用法">
+  <!-- <fx-group title="基础用法">
     <fx-image-uploader
       :uploadReady="onUploadOrFail"
       @change="onChange"
@@ -9,12 +9,12 @@
       v-model="imageList"
       multiple
     />
-  </fx-group>
+  </fx-group> -->
   <fx-group title="上传前置处理">
     <fx-image-uploader
       :beforeUpload="onBeforeUpload"
       :uploadReady="onUpload"
-      accept="png"
+      accept="png,jpg"
       :maxCount="9"
       v-model="imageList3"
       multiple

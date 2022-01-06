@@ -26,6 +26,7 @@
     background-color: var(--fx-color);
     transform: scale(0);
     box-sizing: border-box;
+    border: 1px solid $white-color;
 
     .fx-icon {
       --fx-icon-size: 11px;
@@ -47,19 +48,6 @@
         display: none;
       }
     }
-
-    &::after {
-      position: absolute;
-      box-sizing: border-box;
-      content: ' ';
-      pointer-events: none;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      border: 1px solid #ebedf0;
-      border-radius: 8.5px;
-    }
   }
 
   &.animated {
@@ -68,27 +56,5 @@
         transition: transform 0.2s;
       }
     }
-  }
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 2) {
-  .fx-badge_badge::after {
-    top: -50%;
-    right: -50%;
-    bottom: -50%;
-    left: -50%;
-    border-radius: 17px;
-    transform: scale(0.5);
-  }
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 3) {
-  .fx-badge_badge::after {
-    top: -100%;
-    right: -100%;
-    bottom: -100%;
-    left: -100%;
-    border-radius: 25.5px;
-    transform: scale(math.div(1, 3));
   }
 }

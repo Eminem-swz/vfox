@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getScrollDom } from '@/helpers/dom'
+import { getScrollTop, scrollTo } from '@/helpers/dom'
 import { navConfig } from './data'
 
 export default {
@@ -37,23 +37,19 @@ export default {
     }
   },
   activated() {
-    this.scrollTo(this.scrollTop, true)
+    scrollTo(document, this.scrollTop, false)
+  },
+  deactivated() {
+    scrollTo(document, 0, false)
   },
   beforeRouteLeave(to, from, next) {
-    this.scrollTop = getScrollDom().scrollTop
-    this.scrollTo(0)
+    this.scrollTop = getScrollTop(document)
 
     next()
   },
   methods: {
     onItemClick({ name }) {
       this.$router.push({ name: 'Exp' + name })
-    },
-    scrollTo(scrollTop, animated = false) {
-      getScrollDom().scrollTo({
-        top: scrollTop,
-        behavior: animated ? 'smooth' : 'auto'
-      })
     }
   }
 }

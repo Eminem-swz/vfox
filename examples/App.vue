@@ -15,7 +15,7 @@
     ></fx-nav-bar>
   </fx-fixed>
   <router-view v-slot="{ Component }">
-    <keep-alive include="Home">
+    <keep-alive include="ExpHome">
       <component :is="Component" />
     </keep-alive>
   </router-view>
