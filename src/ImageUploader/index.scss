@@ -22,8 +22,8 @@
     }
 
     .fx-icon {
-      --size: 40px;
-      --color: #{$font3-color};
+      --fx-icon-size: 40px;
+      --fx-icon-color: #{$font3-color};
     }
 
     input {
@@ -56,7 +56,6 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba($color: $black-color, $alpha: 0.45);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -64,10 +63,11 @@
       color: #fff;
       font-size: 14px;
       line-height: 20px;
+      background-color: rgba($color: #000, $alpha: 0.4);
 
       .fx-icon {
-        --color: #fff;
-        --size: 40px;
+        --fx-icon-color: #fff;
+        --fx-icon-size: 40px;
         margin-bottom: 4px;
       }
     }

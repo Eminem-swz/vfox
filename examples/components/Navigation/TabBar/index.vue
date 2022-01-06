@@ -18,7 +18,7 @@
       />
     </fx-group>
     <fx-group title="自定义图片（icon=URL）">
-      <fx-tab-bar activeColor="#262626" :options="imageList" />
+      <fx-tab-bar class="exp-tabBar-custom" :options="imageList" />
     </fx-group>
     <fx-group title="配合 Fixed 实现置底">
       <fx-fixed>
@@ -72,3 +72,12 @@ export default {
   }
 }
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss">
+@import '@/style/var.scss';
+
+.exp-tabBar-custom {
+  --fx-active-color: #{$title-color};
+}
+</style>

@@ -19,27 +19,45 @@ $danger-color-6: #8b1721 !default;
 $danger-color-7: #650c16 !default;
 $danger-color: $danger-color-6;
 
-$gray-1: #ffffff;
-$gray-2: #fafafa;
-$gray-3: #f5f5f5;
-$gray-4: #f0f0f0;
-$gray-5: #d9d9d9;
-$gray-6: #bfbfbf;
-$gray-7: #8c8c8c;
-$gray-8: #595959;
-$gray-9: #434343;
-$gray-10: #262626;
-$gray-11: #1f1f1f;
-$gray-12: #141414;
-$gray-13: #000000;
+body {
+  --fx-gray-1: 255, 255, 255;
+  --fx-gray-2: 250, 250, 250;
+  --fx-gray-3: 245, 245, 245;
+  --fx-gray-4: 240, 240, 240;
+  --fx-gray-5: 217, 217, 217;
+  --fx-gray-6: 191, 191, 191;
+  --fx-gray-7: 140, 140, 140;
+  --fx-gray-8: 89, 89, 89;
+  --fx-gray-9: 67, 67, 67;
+  --fx-gray-10: 38, 38, 38;
+  --fx-gray-11: 31, 31, 31;
+  --fx-gray-12: 20, 20, 20;
+  --fx-gray-13: 0, 0, 0;
 
-$white-color: $gray-1 !default;
-$background2-color: $gray-2 !default;
-$background-color: $gray-3 !default;
-$divider-color: $gray-4 !default;
-$border-color: $gray-5 !default;
-$font3-color: $gray-6 !default;
-$font2-color: $gray-7 !default;
-$font-color: $gray-8 !default;
-$title-color: $gray-10 !default;
-$black-color: $gray-13 !default;
+  &[fx-theme='dark'] {
+    --fx-gray-13: 255, 255, 255;
+    --fx-gray-12: 250, 250, 250;
+    --fx-gray-11: 245, 245, 245;
+    --fx-gray-10: 240, 240, 240;
+    --fx-gray-9: 217, 217, 217;
+    --fx-gray-8: 191, 191, 191;
+    --fx-gray-7: 140, 140, 140;
+    --fx-gray-6: 89, 89, 89;
+    --fx-gray-5: 67, 67, 67;
+    --fx-gray-4: 38, 38, 38;
+    --fx-gray-3: 31, 31, 31;
+    --fx-gray-2: 20, 20, 20;
+    --fx-gray-1: 0, 0, 0;
+  }
+}
+
+$white-color: #{rgb(var(--fx-gray-1))};
+$background2-color: #{rgb(var(--fx-gray-2))};
+$background-color: #{rgb(var(--fx-gray-3))};
+$divider-color: #{rgb(var(--fx-gray-4))};
+$border-color: #{rgb(var(--fx-gray-5))};
+$font3-color: #{rgb(var(--fx-gray-6))};
+$font2-color: #{rgb(var(--fx-gray-7))};
+$font-color: #{rgb(var(--fx-gray-8))};
+$title-color: #{rgb(var(--fx-gray-10))};
+$black-color: #{rgb(var(--fx-gray-13))};

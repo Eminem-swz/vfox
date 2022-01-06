@@ -14,7 +14,7 @@
           color="#ffffff"
           v-if="type === 'loading'"
         />
-        <Icon v v-else-if="iconName" class="fx-toast_icon" :icon="iconName" />
+        <Icon v-else-if="iconName" class="fx-toast_icon" :icon="iconName" />
         <div class="fx-toast_text">
           {{ title }}
         </div>

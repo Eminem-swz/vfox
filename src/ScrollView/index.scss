@@ -71,9 +71,10 @@
       }
     }
 
-    &-icon {
-      --size: 18px;
-      --color: #{$border-color};
+    .fx-icon,
+    .fx-loading-icon {
+      --fx-icon-size: 18px;
+      --fx-icon-color: #{$border-color};
       margin-right: 8px;
     }
 
@@ -103,7 +104,8 @@
         height: 100%;
         flex-direction: column;
 
-        .fx-icon {
+        .fx-icon,
+        .fx-loading-icon {
           margin: 0 0 8px 0;
         }
 

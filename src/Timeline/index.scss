@@ -27,13 +27,8 @@
     box-sizing: border-box;
     border-radius: 50%;
     color: var(--fx-color);
-    background-color: #fff;
+    background-color: $white-color;
     overflow: hidden;
-  }
-
-  &_icon {
-    --size: 12px;
-    --color: var(--fx-color);
   }
 
   &_line {

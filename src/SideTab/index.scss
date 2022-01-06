@@ -2,7 +2,7 @@
 
 .fx-side-tab {
   --fx-color: #{$font-color};
-  --fx-active-color: #{$title-color};
+  --fx-active-color: #{$primary-color};
   --fx-front-color: var(--fx-color);
 
   height: 100%;
@@ -18,7 +18,7 @@
     overflow-y: auto;
     max-height: 100%;
     height: auto;
-    background-color: #fff;
+    background-color: $white-color;
     padding: 0;
   }
 
@@ -41,13 +41,13 @@
     user-select: none;
 
     .fx-icon {
-      --size: 17px;
-      --color: var(--fx-front-color);
+      --fx-icon-size: 17px;
+      --fx-icon-color: var(--fx-front-color);
       margin-right: 4px;
     }
 
     &.active {
-      background-color: #fff;
+      background-color: $white-color;
     }
 
     &.active-prev {
@@ -63,22 +63,6 @@
       vertical-align: middle;
       position: relative;
       align-items: center;
-
-      &::before {
-        content: none;
-        position: absolute;
-        top: -1px;
-        left: -4px;
-        width: 16px;
-        height: 16px;
-        z-index: 0;
-        border-radius: 50%;
-        background: linear-gradient(
-          145deg,
-          rgba(24, 144, 255, 0.3) 13.5%,
-          rgba(24, 144, 255, 0.05) 86.5%
-        );
-      }
     }
 
     &-text {
@@ -90,10 +74,6 @@
     &.active {
       --fx-front-color: var(--fx-active-color);
       font-weight: 700;
-
-      .fx-side-tab_item-inner::before {
-        content: '';
-      }
     }
   }
 }

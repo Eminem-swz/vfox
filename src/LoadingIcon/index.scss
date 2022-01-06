@@ -2,7 +2,7 @@
 
 .fx-loading-icon {
   &_track {
-    stroke: rgba($color: $black-color, $alpha: 0.15);
+    stroke: rgba(#{var(--fx-gray-13)}, 0.15);
   }
 
   &_thumb {

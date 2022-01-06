@@ -22,11 +22,11 @@
       ></fx-picker-view>
     </fx-group>
     <fx-group title="formatter/parser">
-      <div class="exp-picker-view-box">
-        <div class="exp-picker-view-header">
+      <div class="exp-pickerView-box">
+        <div class="exp-pickerView-header">
           分割线“-”，v-model: {{ formatValue }}
         </div>
-        <div class="exp-picker-view-body">
+        <div class="exp-pickerView-body">
           <fx-picker-view
             v-model="formatValue"
             :formatter="formatter"
@@ -111,7 +111,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.exp-picker-view {
+.exp-pickerView {
   &-header {
     text-align: center;
     font-size: 17px;

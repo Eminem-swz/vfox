@@ -97,8 +97,8 @@ export default {
     align-items: center;
 
     .fx-icon {
-      --size: 13px;
-      --color: #fff;
+      --fx-icon-size: 13px;
+      --fx-icon-color: #fff;
     }
   }
 }

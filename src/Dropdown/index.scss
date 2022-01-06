@@ -1,4 +1,5 @@
 @import '../style/var.scss';
+@import '../style/mixin.scss';
 
 .fx-dropdown {
   &.fx-popup {
@@ -9,7 +10,7 @@
   }
 
   .fx-mask {
-    background-color: rgba($color: $black-color, $alpha: 0.1);
+    @include mask-background-1;
   }
 
   &_inner {
@@ -22,7 +23,7 @@
     border-radius: 0;
     transform: translate3d(0, -100%, 0);
     transition: transform 0.2s;
-    background-color: #fff;
+    background-color: $white-color;
   }
 
   &.visible {

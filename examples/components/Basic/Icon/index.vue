@@ -27,28 +27,32 @@
         <fx-row :gutter="[16, 16]" align="bottom">
           <fx-col :span="6">
             <fx-icon
-              class="icon-icon size-16"
+              class="icon-icon"
+              size="16"
               icon="CheckCircleOutlined"
             ></fx-icon>
             <span class="icon-text">16px</span>
           </fx-col>
           <fx-col :span="6">
             <fx-icon
-              class="icon-icon size-24"
+              class="icon-icon"
+              size="24"
               icon="CheckCircleOutlined"
             ></fx-icon>
             <span class="icon-text">24px</span>
           </fx-col>
           <fx-col :span="6">
             <fx-icon
-              class="icon-icon size-32"
+              class="icon-icon"
+              size="32"
               icon="CheckCircleOutlined"
             ></fx-icon>
             <span class="icon-text">32px</span>
           </fx-col>
           <fx-col :span="6">
             <fx-icon
-              class="icon-icon size-40"
+              class="icon-icon"
+              size="40"
               icon="CheckCircleOutlined"
             ></fx-icon>
             <span class="icon-text">40px</span>
@@ -148,42 +152,27 @@ export default {
 .icon {
   &-flex {
     padding: 16px 16px 0;
+    overflow: hidden;
   }
 
   &-icon {
     display: block !important;
     margin: 0 auto;
 
-    &.size-16 {
-      --size: 16px;
-    }
-
-    &.size-24 {
-      --size: 24px;
-    }
-
-    &.size-32 {
-      --size: 32px;
-    }
-
-    &.size-40 {
-      --size: 40px;
-    }
-
     &.color-primary {
-      --color: #{$primary-color};
+      --fx-icon-color: #{$primary-color};
     }
 
     &.color-success {
-      --color: #{$success-color};
+      --fx-icon-color: #{$success-color};
     }
 
     &.color-warning {
-      --color: #{$warning-color};
+      --fx-icon-color: #{$warning-color};
     }
 
     &.color-danger {
-      --color: #{$danger-color};
+      --fx-icon-color: #{$danger-color};
     }
   }
 

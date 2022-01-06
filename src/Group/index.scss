@@ -29,12 +29,12 @@
   }
 
   &.strong-header {
-    background-color: #fff;
+    background-color: $white-color;
 
     .fx-group {
       &_header {
         height: 48px;
-        background-color: #fff;
+        background-color: $white-color;
       }
 
       &_title {
@@ -56,7 +56,7 @@
     }
 
     &-inner {
-      background-color: #fff;
+      background-color: $white-color;
     }
   }
 }

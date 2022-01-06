@@ -2,7 +2,7 @@
 
 .fx-checkbox {
   --fx-active-color: #{$primary-color};
-  --fx-icon-size: 20px;
+  --fx-checkbox-icon-size: 20px;
 
   display: inline-flex;
   flex-direction: column;
@@ -27,13 +27,13 @@
 
   &_icon,
   &_checked-icon {
-    --size: var(--fx-icon-size);
-    --color: #{$border-color};
+    --fx-icon-size: var(--fx-checkbox-icon-size);
+    --fx-icon-color: #{$border-color};
   }
 
   &_checked-icon {
     display: none;
-    --color: var(--fx-active-color);
+    --fx-icon-color: var(--fx-active-color);
   }
 
   &_input {

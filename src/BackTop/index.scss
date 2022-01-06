@@ -23,8 +23,8 @@
   outline: 0;
 
   .fx-icon {
-    --size: 40px;
-    --color: var(--fx-color);
+    --fx-icon-size: 40px;
+    --fx-icon-color: var(--fx-color);
     display: block;
   }
 }

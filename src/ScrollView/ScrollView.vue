@@ -28,15 +28,10 @@
               :style="indicatorStyles"
             >
               <ActivityIndicator
-                class="fx-scroll-view_pull-refresh-icon"
                 v-if="pullRefreshState === PullRefreshState.Refreshing"
                 :size="18"
               />
-              <Icon
-                class="fx-scroll-view_pull-refresh-icon"
-                v-else
-                icon="CircleOutlined"
-              />
+              <Icon v-else icon="CircleOutlined" />
               <span>{{
                 pullRefreshState === PullRefreshState.Refreshing
                   ? locale.scrollViewRefreshingText

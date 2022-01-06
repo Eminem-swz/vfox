@@ -61,5 +61,5 @@ export const iconValidator: Validator = value => {
 }
 
 export const colorValidator: Validator = value => {
-  return isColorValue(value as string)
+  return value == null || value === '' || isColorValue(value as string)
 }

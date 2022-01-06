@@ -57,8 +57,8 @@
     }
 
     .fx-icon {
-      --size: 28px;
-      --color: var(--fx-front-color);
+      --fx-icon-size: 28px;
+      --fx-icon-color: var(--fx-front-color);
     }
 
     &.active {

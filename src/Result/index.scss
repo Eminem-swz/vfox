@@ -11,20 +11,20 @@
   }
 
   &_icon {
-    --size: 64px;
-    --color: #{$primary-color};
+    --fx-icon-size: 64px;
+    --fx-icon-color: #{$primary-color};
 
     &.type-- {
       &success {
-        --color: #{$success-color};
+        --fx-icon-color: #{$success-color};
       }
 
       &warning {
-        --color: #{$warning-color};
+        --fx-icon-color: #{$warning-color};
       }
 
       &fail {
-        --color: #{$danger-color};
+        --fx-icon-color: #{$danger-color};
       }
     }
   }

@@ -13,7 +13,7 @@
   &_box-inner {
     min-height: 100px;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: $white-color;
     overflow: hidden;
   }
 
@@ -39,8 +39,8 @@
     cursor: pointer;
 
     .fx-icon {
-      --size: 32px;
-      --color: #{$title-color};
+      --fx-icon-size: 32px;
+      --fx-icon-color: #{$font-color};
     }
   }
 }

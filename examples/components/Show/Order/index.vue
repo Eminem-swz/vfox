@@ -59,17 +59,17 @@ export default {
 .order {
   &-box {
     padding: 13px;
-    background-color: #fff;
+    background-color: $white-color;
   }
 
   &-item {
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: $white-color;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: $white-color;
     font-size: 17px;
 
     &.primary {

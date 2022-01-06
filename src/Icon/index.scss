@@ -2,15 +2,15 @@
 @import '../style/animation.scss';
 
 .fx-icon {
-  --size: 24px;
-  --color: #{$title-color};
+  --fx-icon-size: 24px;
+  --fx-icon-color: #{$title-color};
 
   display: inline-block;
-  width: var(--size);
-  height: var(--size);
+  width: var(--fx-icon-size);
+  height: var(--fx-icon-size);
   overflow: hidden;
   line-height: 0;
-  fill: var(--color);
+  fill: var(--fx-icon-color);
 
   &.spin {
     @include rotate-360-animation(800ms);

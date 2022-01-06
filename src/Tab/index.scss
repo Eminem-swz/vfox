@@ -5,7 +5,7 @@
   --fx-active-color: #{$primary-color};
   --fx-front-color: var(--fx-color);
 
-  background-color: #fff;
+  background-color: $white-color;
   height: 40px;
   position: relative;
 
@@ -41,8 +41,8 @@
     user-select: none;
 
     .fx-icon {
-      --size: 20px;
-      --color: var(--fx-front-color);
+      --fx-icon-size: 20px;
+      --fx-icon-color: var(--fx-front-color);
       margin-right: 4px;
     }
 

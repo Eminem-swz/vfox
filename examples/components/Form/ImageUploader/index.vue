@@ -4,7 +4,7 @@
       :uploadReady="onUploadOrFail"
       @change="onChange"
       @delete="onDelete"
-      accept="png"
+      accept="png,jpg"
       :maxCount="9"
       v-model="imageList"
       multiple

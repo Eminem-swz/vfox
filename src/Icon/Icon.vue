@@ -28,15 +28,15 @@ export default defineComponent({
       default: false
     },
     size: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     width: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     height: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     color: {
@@ -48,14 +48,13 @@ export default defineComponent({
     const iconStyles = computed(() => {
       const obj: StyleObject = {}
 
-      props.color && (obj.color = props.color)
+      props.color && (obj['--fx-icon-color'] = props.color)
 
       if (props.width > 0 && props.height > 0) {
         obj.width = props.width + 'px'
         obj.height = props.height + 'px'
       } else if (props.size > 0) {
-        obj.width = props.size + 'px'
-        obj.height = props.size + 'px'
+        obj['--fx-icon-size'] = props.size + 'px'
       }
 
       return obj

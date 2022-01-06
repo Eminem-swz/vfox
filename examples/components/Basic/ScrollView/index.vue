@@ -105,13 +105,13 @@ export default {
     height: 400px;
     display: flex;
     flex-direction: column;
-    border-top: 4px solid #8bc7ff;
-    border-bottom: 4px solid #8bc7ff;
+    border-top: 4px solid $primary-color;
+    border-bottom: 4px solid $primary-color;
   }
 
   &-w-750 {
-    border-left: 4px solid #8bc7ff;
-    border-right: 4px solid #8bc7ff;
+    border-left: 4px solid $primary-color;
+    border-right: 4px solid $primary-color;
     padding: 12px 12px;
     width: 750px;
     height: 400px;
@@ -121,7 +121,7 @@ export default {
   &-wh {
     width: 750px;
     height: 400px;
-    border: 4px solid #8bc7ff;
+    border: 4px solid $primary-color;
     padding: 8px 12px;
   }
 

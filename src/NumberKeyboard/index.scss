@@ -53,7 +53,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: $white-color;
     font-size: 26px;
     font-weight: 700;
     color: $font-color;
@@ -65,8 +65,8 @@
     }
 
     .fx-icon {
-      --size: 36px;
-      --color: #{$font-color};
+      --fx-icon-size: 36px;
+      --fx-icon-color: #{$font-color};
     }
   }
 

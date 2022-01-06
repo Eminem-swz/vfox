@@ -1,15 +1,11 @@
 @import '../style/var.scss';
 
 .fx-pop-menu {
-  .fx-mask {
-    background-color: rgba($color: $black-color, $alpha: 0.1);
-  }
-
   &_list {
     list-style: none;
     padding: 0;
     margin: 0;
-    background-color: #fff;
+    background-color: $white-color;
   }
 
   &_item {
@@ -38,8 +34,8 @@
       justify-content: center;
 
       .fx-icon {
-        --size: 18px;
-        --color: #{$title-color};
+        --fx-icon-size: 18px;
+        --fx-icon-color: #{$title-color};
         vertical-align: middle;
         margin: 0 12px 0 0;
         flex-shrink: 0;

@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '../style/var.scss';
 
 .fx-badge {
@@ -24,12 +25,11 @@
     color: var(--fx-front-color);
     background-color: var(--fx-color);
     transform: scale(0);
-    border: 1px solid #fff;
     box-sizing: border-box;
 
     .fx-icon {
-      --size: 11px;
-      --color: var(--fx-front-color);
+      --fx-icon-size: 11px;
+      --fx-icon-color: var(--fx-front-color);
       margin: 0 -4px;
     }
 
@@ -47,6 +47,19 @@
         display: none;
       }
     }
+
+    &::after {
+      position: absolute;
+      box-sizing: border-box;
+      content: ' ';
+      pointer-events: none;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid #ebedf0;
+      border-radius: 8.5px;
+    }
   }
 
   &.animated {
@@ -55,5 +68,27 @@
         transition: transform 0.2s;
       }
     }
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .fx-badge_badge::after {
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    border-radius: 17px;
+    transform: scale(0.5);
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+  .fx-badge_badge::after {
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
+    border-radius: 25.5px;
+    transform: scale(math.div(1, 3));
   }
 }

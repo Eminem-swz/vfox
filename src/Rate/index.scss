@@ -53,8 +53,8 @@
   }
 
   .fx-icon {
-    --size: var(--fx-size);
-    --color: var(--fx-color);
+    --fx-icon-size: var(--fx-size);
+    --fx-icon-color: var(--fx-color);
     flex-shrink: 0;
     display: block;
   }
@@ -73,7 +73,7 @@
     height: 100%;
 
     .fx-icon {
-      --color: var(--fx-active-color);
+      --fx-icon-color: var(--fx-active-color);
     }
   }
 

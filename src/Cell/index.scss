@@ -6,7 +6,7 @@
 
   display: block;
   min-height: 48px;
-  background-color: #fff;
+  background-color: $white-color;
   position: relative;
   width: 100%;
 
@@ -61,15 +61,15 @@
     margin: 0 12px 0 0;
 
     > .fx-icon {
-      --size: 20px;
-      --color: var(--fx-label-color);
+      --fx-icon-size: 20px;
+      --fx-icon-color: var(--fx-label-color);
     }
   }
 
   &_link-icon {
     margin-left: 4px;
-    --size: 20px;
-    --color: var(--fx-content-color);
+    --fx-icon-size: 20px;
+    --fx-icon-color: var(--fx-content-color);
   }
 
   &_body {
@@ -98,7 +98,7 @@
   }
 
   &.disabled {
-    --fx-content-color: #{rgba($font-color, 0.2)};
+    --fx-content-color: #{rgba(var(--fx-gray-8), 0.2)};
 
     .fx-cell {
       &_label,

@@ -173,13 +173,13 @@ export default {
 
 先引入 `Locale` 模块：
 
-```
+```JavaScript
 import { Locale } from 'vfox'
 ```
 
 如果想要使用英文：
 
-```
+```JavaScript
 import enUS from 'vfox/es/Locale/lang/en-US'
 
 Locale.use('en-US', enUS)
@@ -187,16 +187,56 @@ Locale.use('en-US', enUS)
 
 切换回中文：
 
-```
+```JavaScript
 Locale.use('zh-CN')
 ```
 
 如果想要其中的部分文案进行修改：
 
-```
+```JavaScript
 Locale.merge('zh-CN', {
   pickerConfirmText: '完成'
 })
+```
+
+## 黑暗模式
+
+### 介绍
+
+组件库内置黑暗主题，往 `body` 标签添加属性就可以便捷的切换。
+
+### DarkMode
+
+如果想要切换到黑暗模式：
+
+```JavaScript
+document.body.setAttribute('fx-theme', 'dark')
+```
+
+如果想要恢复明亮模式：
+
+```JavaScript
+document.body.removeAttribute('fx-theme')
+```
+
+如果要跟随系统切换：
+
+```JavaScript
+function setDark(dark) {
+  dark ? document.body.setAttribute('fx-theme', 'dark') : document.body.removeAttribute('fx-theme')
+}
+
+const mm =
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
+
+if (mm) {
+  mm.addEventListener('change', e => {
+    setDark(e.matches)
+  })
+
+  setDark(mm.matches)
+}
+
 ```
 
 ## 主题定制

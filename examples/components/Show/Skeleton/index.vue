@@ -22,7 +22,7 @@
         </div>
         <fx-skeleton avatar :loading="!loadingSwitch">
           <div class="skeleton-sub-component">
-            <fx-icon icon="HeartFilled" />
+            <fx-icon icon="HeartFilled" size="32" />
             <h4 class="title">hello World</h4>
             <p class="paragraph">简单不先于复杂，而是在复杂之后。</p>
           </div>
@@ -76,7 +76,6 @@ export default {
 
     .fx-icon {
       float: left;
-      --size: 32px;
     }
 
     .title {

@@ -8,7 +8,7 @@
       @back-click="onBack"
       @home-click="onBackHome"
       :right-buttons="[
-        { icon: 'LangOutlined', text: 'lang' },
+        { icon: themeIcon, text: 'theme' },
         { icon: 'MenuOutlined', text: 'menu' }
       ]"
       @rightButtonClick="onRightButtonClick"
@@ -34,21 +34,37 @@
 </template>
 
 <script>
+import { markRaw } from 'vue'
 import { getScrollDom } from '@/helpers/dom'
 import { showPopMenu } from '@/PopMenu'
 import { navConfig } from './views/data'
 import { use as localeUse } from '@/Locale'
+import LightSvg from './assets/icons/sun.svg'
+import DarkSvg from './assets/icons/moon.svg'
 
 export default {
   name: 'App',
   data() {
     return {
       menuVisible: false,
-      menuList: []
+      menuList: [],
+      isDarkTheme: false,
+      themeIcon: markRaw(LightSvg)
     }
   },
   created() {
     this.updateMenuList()
+
+    const mm =
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
+
+    if (mm) {
+      mm.addEventListener('change', e => {
+        this.switchTheme(e.matches)
+      })
+
+      this.switchTheme(mm.matches)
+    }
   },
   computed: {
     navBarTitle() {
@@ -106,18 +122,29 @@ export default {
         }).then(({ detail, confirm }) => {
           confirm && localeUse(detail.index === 0 ? 'en-US' : 'zh-CN')
         })
+      } else if (e.text === 'theme') {
+        this.switchTheme(!this.isDarkTheme)
       }
+    },
+    switchTheme(isDark) {
+      if (!isDark) {
+        this.themeIcon = markRaw(LightSvg)
+        document.body.removeAttribute('fx-theme', 'dark')
+      } else {
+        this.themeIcon = markRaw(DarkSvg)
+        document.body.setAttribute('fx-theme', 'dark')
+      }
+      this.isDarkTheme = isDark
     }
   }
 }
 </script>
 
-<style>
-html {
-  background: #f5f5f5;
-}
+<style lang="scss">
+@import '@/style/var.scss';
 
 body {
   margin: 0;
+  background: $background-color;
 }
 </style>

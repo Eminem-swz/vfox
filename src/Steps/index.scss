@@ -54,14 +54,14 @@
     box-sizing: border-box;
     border-radius: 50%;
     color: var(--fx-dot-color);
-    background-color: #fff;
+    background-color: $white-color;
     font-size: 13px;
     font-weight: 500;
     overflow: hidden;
 
     .fx-icon {
-      --size: 14px;
-      --color: var(--fx-dot-color);
+      --fx-icon-size: 14px;
+      --fx-icon-color: var(--fx-dot-color);
     }
   }
 
@@ -140,7 +140,7 @@
         color: #fff;
 
         .fx-icon {
-          --color: #fff;
+          --fx-icon-color: #fff;
         }
       }
 

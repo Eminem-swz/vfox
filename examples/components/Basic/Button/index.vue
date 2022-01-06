@@ -40,7 +40,7 @@
       </ul>
     </fx-group>
     <fx-group title="幽灵按钮">
-      <ul class="button-group" style="background: #262626">
+      <ul class="button-group" style="background: #000">
         <li>
           <fx-button type="default" ghost>默认</fx-button>
         </li>
@@ -266,12 +266,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+@import '@/style/var.scss';
+
 .button-group {
   padding: 0;
   margin: 0;
   list-style: none;
   overflow: hidden;
-  background-color: #fff;
+  background-color: $white-color;
 
   li {
     display: flex;

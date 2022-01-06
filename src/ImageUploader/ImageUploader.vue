@@ -84,7 +84,6 @@ import { showDialog } from '@/Dialog'
 import { ActivityIndicator } from '@/ActivityIndicator'
 import {
   isPromiseLike,
-  isString,
   isStringArray,
   isBoolean,
   isSameArray,
@@ -137,8 +136,8 @@ const ACCEPT_TYPES = new Map([
 function getAccepts(val: string | string[]) {
   const arr = isStringArray(val)
     ? (val as string[])
-    : isString(val)
-    ? [val as string]
+    : typeof val === 'string'
+    ? val.split(',')
     : []
   let ret: string[] = []
 

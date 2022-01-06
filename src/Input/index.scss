@@ -2,7 +2,7 @@
 
 .fx-input {
   --fx-font-size: 17px;
-  --fx-icon-size: 20px;
+  --fx-input-icon-size: 20px;
   --fx-front-color: #{$title-color};
   --fx-secondary-color: #{$font3-color};
 
@@ -17,12 +17,12 @@
   box-sizing: border-box;
   padding: 11px 16px;
   font-size: var(--fx-font-size);
-  background-color: #fff;
+  background-color: $white-color;
   color: var(--fx-front-color);
 
   .fx-icon {
-    --size: var(--fx-icon-size);
-    --color: var(--fx-secondary-color);
+    --fx-icon-size: var(--fx-input-icon-size);
+    --fx-icon-color: var(--fx-secondary-color);
   }
 
   &.disabled {
@@ -48,7 +48,7 @@
   &.has--value {
     .fx-input {
       &_arrow {
-        --color: var(--fx-front-color);
+        --fx-icon-color: var(--fx-front-color);
       }
     }
   }

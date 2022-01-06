@@ -23,28 +23,22 @@
         }"
       ></span>
     </div>
-    <Button
+    <button
       v-if="navigationButtons"
       v-show="pagination.length > 1"
       class="fx-swiper_prev"
-      @click.stop="prev(true)"
-      icon="LeftOutlined"
-      size="large"
-      pattern="borderless"
-      shape="circle"
-      :ghost="true"
-    ></Button>
-    <Button
+      @click="prev(true)"
+    >
+      <Icon icon="LeftOutlined" />
+    </button>
+    <button
       v-if="navigationButtons"
       v-show="pagination.length > 1"
       class="fx-swiper_next"
-      @click.stop="next(true)"
-      icon="RightOutlined"
-      size="large"
-      pattern="borderless"
-      shape="circle"
-      :ghost="true"
-    ></Button>
+      @click="next(true)"
+    >
+      <Icon icon="RightOutlined" />
+    </button>
   </div>
 </template>
 
@@ -58,7 +52,7 @@ import {
   onBeforeUnmount,
   provide
 } from 'vue'
-import { Button } from '@/Button'
+import { Icon } from '@/Icon'
 import Exception from '@/helpers/exception'
 import { isNumber } from '@/helpers/util'
 import { useList } from '@/hooks/use-list'
@@ -80,7 +74,7 @@ interface SwiperCoords {
 // export
 export default defineComponent({
   name: 'fx-swiper',
-  components: { Button },
+  components: { Icon },
   props: {
     // 是否显示面板指示点
     indicatorDots: {
