@@ -24,7 +24,8 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "demo:dev": "vite",
-    "demo:build": "vue-tsc --noEmit && vite build"
+    "demo:build": "vue-tsc --noEmit && vite build",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -127,10 +128,5 @@
     "*.css",
     "*.scss",
     "*.vue"
-  ],
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  }
+  ]
 }
