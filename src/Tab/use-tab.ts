@@ -5,7 +5,8 @@ import {
   ref,
   watch,
   computed,
-  nextTick
+  nextTick,
+  SetupContext
 } from 'vue'
 import {
   isArray,
@@ -19,7 +20,7 @@ import { frameTo } from '@/helpers/animation'
 import Exception from '@/helpers/exception'
 import { iconValidator } from '@/helpers/validator'
 import { handleBadge } from '@/Badge/badge'
-import type { UseProps, UseCtx } from '../hooks/types'
+import type { UseProps } from '../hooks/types'
 import type {
   OptionValue,
   TabOptionItem,
@@ -27,6 +28,7 @@ import type {
   OptionList
 } from './types'
 import type { StyleObject } from '../helpers/types'
+import type { tabEmits } from '@/Tab/tab'
 
 interface TabProps extends UseProps {
   options: OptionList
@@ -38,7 +40,7 @@ interface UseOptions {
 
 export function useTab(
   props: TabProps,
-  { emit }: UseCtx,
+  { emit }: SetupContext<typeof tabEmits>,
   { tabName }: UseOptions
 ) {
   const instance = getCurrentInstance() as ComponentInternalInstance

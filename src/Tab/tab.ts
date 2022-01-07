@@ -1,8 +1,16 @@
 import type { PropType } from 'vue'
 import { isArray, isObject, isString, isStringNumberMix } from '@/helpers/util'
-import type { TabOptionItem, OptionList } from './types'
+import type { TabOptionItem, OptionList, OptionValue } from './types'
 
-export const tabEmits = ['update:activeValue', 'change']
+// export const tabEmits = ['update:activeValue', 'change']
+export const tabEmits = {
+  'update:activeValue': (payload: OptionValue) => isStringNumberMix(payload),
+  change: (payload: { type: 'change'; index: number; value: OptionValue }) =>
+    payload &&
+    payload.type &&
+    typeof payload.index === 'number' &&
+    isStringNumberMix(payload.value)
+}
 
 export const tabProps = {
   options: {
