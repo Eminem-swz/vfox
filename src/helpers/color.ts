@@ -117,7 +117,7 @@ export function isColorValue(value: ColorOptions) {
  * @returns boolean
  */
 export function isDarkColor(value: ColorOptions) {
-  return Color.grayscale(value).getRed() < 192
+  return Color(value).isDark()
 }
 
 export function getColorObject(color?: ColorOptions) {

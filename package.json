@@ -47,7 +47,7 @@
   ],
   "homepage": "https://github.com/godxiaoji/vfox#readme",
   "dependencies": {
-    "colorfuls": "^1.0.1",
+    "colorfuls": "^1.0.2",
     "dayjs": "^1.10.4",
     "safe-area-insets": "^1.4.1",
     "timeago.js": "^4.0.2"
