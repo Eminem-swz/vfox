@@ -1,3 +1,10 @@
+## [2.4.3](https://github.com/godxiaoji/vfox/compare/v2.4.2...v2.4.3) (2022-01-08)
+
+
+### Bug Fixes
+
+* add global.d.ts to files ([e8b1d9a](https://github.com/godxiaoji/vfox/commit/e8b1d9ab922025d94cd3aee736c8d0888dbacdbf))
+
 ## [2.4.2](https://github.com/godxiaoji/vfox/compare/v2.4.1...v2.4.2) (2022-01-08)
 
 
