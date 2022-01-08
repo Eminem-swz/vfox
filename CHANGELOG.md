@@ -1,3 +1,10 @@
+## [2.4.2](https://github.com/godxiaoji/vfox/compare/v2.4.1...v2.4.2) (2022-01-08)
+
+
+### Bug Fixes
+
+* **ts:** add global ts ([9b1556b](https://github.com/godxiaoji/vfox/commit/9b1556b6e275fc1241488af2d4db22a3cb0759f4))
+
 ## [2.4.1](https://github.com/godxiaoji/vfox/compare/v2.4.0...v2.4.1) (2022-01-06)
 
 
