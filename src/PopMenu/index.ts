@@ -19,6 +19,6 @@ const showPopMenu = createShowPopup<
 })
 
 export { PopMenu, showPopMenu }
-export default withInstall(PopMenu, {
+export default Object.assign(withInstall(PopMenu), {
   showPopMenu
 })

@@ -22,6 +22,6 @@ const showPopDialog = createShowPopup<
 })
 
 export { PopDialog, showPopDialog }
-export default withInstall(PopDialog, {
+export default Object.assign(withInstall(PopDialog), {
   showPopDialog
 })

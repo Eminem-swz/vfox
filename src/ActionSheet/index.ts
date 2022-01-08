@@ -19,6 +19,6 @@ const showActionSheet = createShowPopup<
 })
 
 export { ActionSheet, showActionSheet }
-export default withInstall(ActionSheet, {
+export default Object.assign(withInstall(ActionSheet), {
   showActionSheet
 })

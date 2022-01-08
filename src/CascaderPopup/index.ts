@@ -15,4 +15,4 @@ const showCascader = createShowPopup<
 })
 
 export { CascaderPopup, showCascader }
-export default withInstall(CascaderPopup, { showCascader })
+export default Object.assign(withInstall(CascaderPopup), { showCascader })

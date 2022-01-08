@@ -35,9 +35,11 @@ module.exports = {
       }
     ],
     sidebar: {
+      '/guide/': getGuideSidebar(),
       '/design/': getDesignSidebar(),
       '/components/': getComponentsSidebar(),
-      '/apis/': getApisSidebar()
+      '/apis/': getApisSidebar(),
+      '/': getGuideSidebar()
     },
     smoothScroll: true
   },
@@ -51,6 +53,16 @@ module.exports = {
       rightDelimiter: '}}'
     }
   }
+}
+
+function getGuideSidebar() {
+  return [
+    { text: '介绍', link: '/' },
+    { text: '引入组件', link: '/guide/import' },
+    { text: '主题定制', link: '/guide/theme' },
+    { text: '黑暗模式', link: '/guide/dark' },
+    { text: '国际化', link: '/guide/locale' }
+  ]
 }
 
 function getDesignSidebar() {

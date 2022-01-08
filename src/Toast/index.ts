@@ -59,7 +59,7 @@ const hideLoading = createHidePopup({
 })
 
 export { Toast, showToast, hideToast, showLoading, hideLoading }
-export default withInstall(Toast, {
+export default Object.assign(withInstall(Toast), {
   showToast,
   hideToast,
   showLoading,

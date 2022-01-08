@@ -20,6 +20,6 @@ const previewImage = createShowPopup<
 })
 
 export { ImagePreview, previewImage }
-export default withInstall(ImagePreview, {
+export default Object.assign(withInstall(ImagePreview), {
   previewImage
 })

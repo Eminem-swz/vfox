@@ -14,4 +14,4 @@ const showCalendar = createShowPopup<
 })
 
 export { CalendarPopup, showCalendar }
-export default withInstall(CalendarPopup, { showCalendar })
+export default Object.assign(withInstall(CalendarPopup), { showCalendar })

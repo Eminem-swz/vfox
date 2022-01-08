@@ -3,4 +3,4 @@ import Calendar from './Calendar.vue'
 import { showCalendar } from '@/CalendarPopup'
 
 export { Calendar, showCalendar }
-export default withInstall(Calendar, { showCalendar })
+export default Object.assign(withInstall(Calendar), { showCalendar })

@@ -17,4 +17,4 @@ const showPopover = createShowPopup<ShowPopoverOptions, PopupSuccessAlertArgs>({
 })
 
 export { Popover, showPopover }
-export default withInstall(Popover, { showPopover })
+export default Object.assign(withInstall(Popover), { showPopover })
