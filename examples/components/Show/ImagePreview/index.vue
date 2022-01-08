@@ -28,7 +28,7 @@
       ></fx-cell>
     </fx-group>
     <fx-group title="API">
-      <fx-cell label="previewImage" isLink @click="onCallApi"></fx-cell>
+      <fx-cell label="showImagePreview" isLink @click="onCallApi"></fx-cell>
     </fx-group>
     <fx-image-preview
       v-model:visible="visible"
@@ -47,7 +47,7 @@
 import { defineComponent } from 'vue'
 import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/types'
 import { showToast } from '@/Toast'
-import { previewImage } from '@/ImagePreview'
+import { showImagePreview } from '@/ImagePreview'
 import type { ImagePreviewChangeArgs } from '@/types'
 
 interface showArgs {
@@ -76,7 +76,7 @@ export default defineComponent({
   },
   methods: {
     onCallApi() {
-      previewImage({
+      showImagePreview({
         urls: this.imageUrls,
         showClose: true,
         imageHighRendering: false,

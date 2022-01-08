@@ -3,4 +3,5 @@ import Checkbox from './Checkbox.vue'
 import CheckboxGroup from './CheckboxGroup.vue'
 
 export { Checkbox, CheckboxGroup }
-export default multiWithInstall(Checkbox, [CheckboxGroup])
+export default Checkbox
+export const install = multiWithInstall(Checkbox, [CheckboxGroup])

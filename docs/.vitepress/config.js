@@ -180,11 +180,53 @@ function getComponentsSidebar() {
 
 function getApisSidebar() {
   return [
-    { text: 'Toast', link: '/apis/Toast' },
-    { text: 'Notify', link: '/apis/Notify' },
-    { text: 'Preview', link: '/apis/Preview' },
-    { text: 'Modal', link: '/apis/Modal' },
-    { text: 'Drawer', link: '/apis/Drawer' },
-    { text: 'Popover', link: '/apis/Popover' }
+    {
+      text: '通知类弹窗',
+      frontmatter: {
+        sidebarDepth: 2
+      },
+      children: [
+        { text: 'Toast', link: '/apis/Toast' },
+        { text: 'Notify', link: '/apis/Notify' }
+      ]
+    },
+    {
+      text: '预览类弹窗',
+      frontmatter: {
+        sidebarDepth: 2
+      },
+      children: [{ text: 'Preview', link: '/apis/Preview' }]
+    },
+    {
+      text: '模态框类弹窗',
+      frontmatter: {
+        sidebarDepth: 2
+      },
+      children: [{ text: 'Dialog', link: '/apis/Dialog' }]
+    },
+    {
+      text: '抽屉类弹窗',
+      frontmatter: {
+        sidebarDepth: 2
+      },
+      children: [
+        { text: 'ActionSheet', link: '/apis/ActionSheet' },
+        { text: 'Picker', link: '/apis/Picker' },
+        { text: 'DatePicker', link: '/apis/DatePicker' },
+        { text: 'Cascader', link: '/apis/Cascader' },
+        { text: 'Calendar', link: '/apis/Calendar' }
+      ]
+    },
+    {
+      text: '气泡类弹窗',
+      frontmatter: {
+        sidebarDepth: 2
+      },
+      children: [
+        { text: 'Popover', link: '/apis/Popover' },
+        { text: 'PopDialog', link: '/apis/PopDialog' },
+        { text: 'PopMenu', link: '/apis/PopMenu' }
+      ]
+    }
   ]
 }

@@ -4,7 +4,7 @@ import { createConfirmHook, createShowPopup } from '@/popup/api'
 import type { EmptyObject } from '../helpers/types'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
 
-const previewImage = createShowPopup<
+const showImagePreview = createShowPopup<
   {
     urls: string[]
     content?: string
@@ -14,12 +14,11 @@ const previewImage = createShowPopup<
   },
   PopupSuccessConfirmArgs<EmptyObject>
 >({
-  apiName: 'previewImage',
+  apiName: 'showImagePreview',
   component: ImagePreview,
   createHook: createConfirmHook
 })
 
-export { ImagePreview, previewImage }
-export default Object.assign(withInstall(ImagePreview), {
-  previewImage
-})
+export { ImagePreview, showImagePreview }
+export default ImagePreview
+export const install = withInstall(ImagePreview)

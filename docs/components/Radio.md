@@ -6,7 +6,7 @@
 import { Radio, RadioGroup } from 'vfox'
 ```
 
-具体的引入方式可以参考[引入组件](../index.md#引入组件)。
+具体的引入方式可以参考[引入组件](../guide/import.md)。
 
 ## Radio Props
 

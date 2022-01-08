@@ -4,4 +4,5 @@ import FormFooter from './FormFooter.vue'
 import FormItem from './FormItem.vue'
 
 export { Form, FormItem, FormFooter }
-export default multiWithInstall(Form, [FormItem, FormFooter])
+export default Form
+export const install = multiWithInstall(Form, [FormItem, FormFooter])

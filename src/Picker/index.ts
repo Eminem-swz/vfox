@@ -3,4 +3,5 @@ import Picker from './Picker.vue'
 import { showPicker } from '@/PickerPopup'
 
 export { Picker, showPicker }
-export default Object.assign(withInstall(Picker), { showPicker })
+export default Picker
+export const install = withInstall(Picker)

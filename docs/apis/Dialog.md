@@ -1,12 +1,10 @@
-# Modal 模态框弹窗
+# Dialog 模态对话框
 
-## Dialog.showDialog(object)
+## showDialog(object)
 
 显示模态对话框。
 
-### Params
-
-Object object
+### object
 
 | 属性         | 类型     | 默认值 | 必填 | 说明                                                                     |
 | ------------ | -------- | ------ | ---- | ------------------------------------------------------------------------ |
@@ -29,10 +27,10 @@ Object object
 
 ### Usage
 
-```
-import { Dialog } from 'vfox'
+具体调用方式可以参考[API 调用](../guide/import.md#api-调用)。
 
-Dialog.showDialog({
+```JavaScript
+showDialog({
   title: '提示',
   content: '这是一个模态弹窗',
   success (res) {

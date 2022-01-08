@@ -15,4 +15,5 @@ const showDatePicker = createShowPopup<
 })
 
 export { DatePickerPopup, showDatePicker }
-export default Object.assign(withInstall(DatePickerPopup), { showDatePicker })
+export default DatePickerPopup
+export const install = withInstall(DatePickerPopup)

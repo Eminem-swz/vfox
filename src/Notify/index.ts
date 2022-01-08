@@ -36,7 +36,5 @@ const hideNotify = createHidePopup({
 })
 
 export { Notify, showNotify, hideNotify }
-export default Object.assign(withInstall(Notify), {
-  showNotify,
-  hideNotify
-})
+export default Notify
+export const install = withInstall(Notify)

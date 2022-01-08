@@ -2,4 +2,5 @@ import { withInstall } from '@/helpers/with-install'
 import TimeAgo from './TimeAgo.vue'
 
 export { TimeAgo }
-export default withInstall(TimeAgo)
+export const install = withInstall(TimeAgo)
+export default TimeAgo

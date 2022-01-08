@@ -22,4 +22,5 @@ const showDialog = createShowPopup<
 })
 
 export { Dialog, showDialog }
-export default Object.assign(withInstall(Dialog), { showDialog })
+export default Dialog
+export const install = withInstall(Dialog)

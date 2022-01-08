@@ -3,4 +3,5 @@ import Swiper from './Swiper.vue'
 import SwiperItem from './SwiperItem.vue'
 
 export { Swiper, SwiperItem }
-export default multiWithInstall(Swiper, [SwiperItem])
+export default Swiper
+export const install = multiWithInstall(Swiper, [SwiperItem])

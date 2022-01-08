@@ -14,4 +14,5 @@ const showPicker = createShowPopup<
 })
 
 export { PickerPopup, showPicker }
-export default Object.assign(withInstall(PickerPopup), { showPicker })
+export default PickerPopup
+export const install = withInstall(PickerPopup)

@@ -3,4 +3,5 @@ import Cascader from './Cascader.vue'
 import { showCascader } from '@/CascaderPopup'
 
 export { Cascader, showCascader }
-export default Object.assign(withInstall(Cascader), { showCascader })
+export default Cascader
+export const install = withInstall(Cascader)

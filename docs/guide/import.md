@@ -61,18 +61,45 @@ module.exports = {
 </template>
 ```
 
+> 这种方式不支持 API 方式的调用
+
 ## 手动按需引入组件
 
 在不使用插件的情况下，可以手动引入需要的组件。
 
+按需引入全局注册：
+
 ```JavaScript
-import Button from 'vfox/es/Button'
+import { install as Button } from 'vfox/es/Button'
 import 'vfox/es/Button/style'
 
 app.use(Button)
 ```
 
-## 全组件引入（不推荐）
+```HTML
+<template>
+  <fx-button>按钮</fx-button>
+</template>
+```
+
+按需引入局部注册：
+
+```Vue
+<script>
+import { Button } from 'vfox/es/Button'
+import 'vfox/es/Button/style'
+
+export default {
+  components: { 'fx-button': Button }
+}
+</script>
+
+<template>
+  <fx-button>按钮</fx-button>
+</template>
+```
+
+## 全组件引入
 
 ```JavaScript
 import Vfox from 'vfox'
@@ -81,20 +108,31 @@ import 'vfox/es/style/index.css'
 app.use(Vfox)
 ```
 
-> 引入所有组件会增大代码包体积，毕竟 99+组件了，除非项目对大小要求不高。
+> 引入所有组件会增大代码包体积，毕竟 70+ 组件了，除非项目对大小要求不高。
 
 ## API 调用
 
 API 调用需要先引入对应的组件，方可调用，引用方式同上。
 
-```JavaScript
-import { Toast } from 'vfox'
-// import Toast from 'vfox/es/Toast'
-// import 'vfox/es/ButToastton/style'
+如果是全组件引入：
 
+```JavaScript
+import { showToast } from 'vfox'
+```
+
+如果是按需引入：
+
+```JavaScript
+import { showToast } from 'vfox/es/Toast'
+import 'vfox/es/Toast/style'
+```
+
+调用方式：
+
+```JavaScript
 export default {
   mounted() {
-    Toast.showToast({
+    showToast({
       title: '成功',
       type: 'success',
       duration: 2000

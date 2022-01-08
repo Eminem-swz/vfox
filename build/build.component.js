@@ -39,8 +39,13 @@ const runBuild = async () => {
           return true
         }
 
-        if (id === './style' || id === './components') {
+        if (id === './style') {
           // 样式不做打包
+          return true
+        }
+
+        if (id.indexOf('./components') === 0) {
+          // 组件集合不打包
           return true
         }
 

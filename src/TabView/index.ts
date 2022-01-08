@@ -3,4 +3,5 @@ import TabView from './TabView.vue'
 import TabViewItem from './TabViewItem.vue'
 
 export { TabView, TabViewItem }
-export default multiWithInstall(TabView, [TabViewItem])
+export default TabView
+export const install = multiWithInstall(TabView, [TabViewItem])

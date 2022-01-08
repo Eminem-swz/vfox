@@ -1,12 +1,12 @@
-# Notify 通知类型弹窗
+# Notify 消息提示
 
 注：目前仅支持单例模式。
 
-## Notify.showNotify(object)
+## showNotify(object)
 
 显示消息提示。
 
-### Params
+### object
 
 | 属性            | 类型     | 默认值    | 必填 | 说明                                                                                |
 | --------------- | -------- | --------- | ---- | ----------------------------------------------------------------------------------- |
@@ -32,22 +32,20 @@
 
 ### Usage
 
-```
-import { Notify } from 'vfox'
+具体调用方式可以参考[API 调用](../guide/import.md#api-调用)。
 
-Notify.showNotify({
+```JavaScript
+showNotify({
   title: '提示内容',
   duration: 2000
 })
 ```
 
-## Notify.hideNotify([object])
+## hideNotify([object])
 
 隐藏消息提示框。
 
-### Params
-
-Object object
+### object
 
 | 属性     | 类型     | 默认值 | 必填 | 说明                                             |
 | -------- | -------- | ------ | ---- | ------------------------------------------------ |
@@ -57,8 +55,8 @@ Object object
 
 ### Usage
 
-```
-import { Notify } from 'vfox'
+具体调用方式可以参考[API 调用](../guide/import.md#api-调用)。
 
-Notify.hideNotify()
+```JavaScript
+hideNotify()
 ```

@@ -14,7 +14,8 @@ export {
   SkeletonButton,
   SkeletonImage
 }
-export default multiWithInstall(Skeleton, [
+export default Skeleton
+export const install = multiWithInstall(Skeleton, [
   SkeletonAvatar,
   SkeletonTitle,
   SkeletonParagraph,
