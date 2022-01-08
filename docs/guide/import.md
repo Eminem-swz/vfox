@@ -103,7 +103,7 @@ export default {
 }
 ```
 
-详情可见 [API](./apis/Toast.md) 。
+详情可见 [API](../apis/Toast.md) 。
 
 ## TypeScript 支持
 
