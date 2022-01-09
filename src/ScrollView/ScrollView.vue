@@ -71,6 +71,11 @@ import type { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { locale } from '@/Locale'
 import { scrollTo } from '@/helpers/dom'
+import {
+  emitRefreshingValidator,
+  emitScrollValidator
+} from '@/ScrollView/scrollView'
+import type { ScrollViewPullDirection } from './types'
 
 enum ScrollState {
   Center,
@@ -83,16 +88,15 @@ enum PullRefreshState {
   Refreshing
 }
 
-type PullDirection = 'up' | 'right' | 'down' | 'left'
-type PullDirectionOrDefault = '' | PullDirection
+type PullDirectionOrDefault = '' | ScrollViewPullDirection
 
 interface ScrollCoords {
   pageX: number
   pageY: number
   scrollX: boolean
   scrollY: boolean
-  directions?: PullDirection[]
-  direction?: PullDirection
+  directions?: ScrollViewPullDirection[]
+  direction?: ScrollViewPullDirection
   stop: boolean | null
   isSetSafeArea?: boolean
 }
@@ -139,7 +143,7 @@ export default defineComponent({
     // 下拉刷新方向
     enablePullDirections: {
       type: [String, Array],
-      validator: (val: PullDirection | PullDirection[]) => {
+      validator: (val: ScrollViewPullDirection | ScrollViewPullDirection[]) => {
         return isString(val) || isStringArray(val)
       },
       default: null
@@ -154,7 +158,14 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['scroll-to-upper', 'scroll-to-lower', 'scroll', 'refreshing'],
+  emits: {
+    'scroll-to-upper': (payload: { direction: 'top' | 'left' }) =>
+      payload && inArray(payload.direction, ['top', 'left']),
+    'scroll-to-lower': (payload: { direction: 'bottom' | 'right' }) =>
+      payload && inArray(payload.direction, ['bottom', 'right']),
+    scroll: emitScrollValidator,
+    refreshing: emitRefreshingValidator
+  },
   setup(props, ctx) {
     const { emit } = ctx
     let _isToLowerOrUpperY = ScrollState.Upper
@@ -183,7 +194,7 @@ export default defineComponent({
     /**
      * 滚动事件处理
      */
-    function onScroll(e: Event) {
+    function onScroll() {
       const { upperThreshold, lowerThreshold, scrollX, scrollY } = props
       const {
         scrollTop,
@@ -199,11 +210,8 @@ export default defineComponent({
       let isToLowerX = false
       let isToUpperX = false
 
-      const typeLower = 'scroll-to-lower'
-      const typeUpper = 'scroll-to-upper'
-
       // 滚动事件
-      emit(e.type as 'scroll', {
+      emit('scroll', {
         scrollTop,
         scrollLeft,
         scrollWidth,
@@ -259,6 +267,9 @@ export default defineComponent({
       } else {
         _isToLowerOrUpperX = ScrollState.Center
       }
+
+      const typeLower = 'scroll-to-lower'
+      const typeUpper = 'scroll-to-upper'
 
       if (isToUpperY) {
         // 触顶
@@ -371,7 +382,7 @@ export default defineComponent({
         pullDirection.value = ''
 
         // 猜想可能刷新的方向，0-4个都有可能
-        const directions: PullDirection[] = []
+        const directions: ScrollViewPullDirection[] = []
 
         if (scrollTop === 0 && inArray('down', allowPullDirections)) {
           directions.push('down')
@@ -536,7 +547,7 @@ export default defineComponent({
           emit(
             'refreshing',
             {
-              pullDirection: pullDirection.value
+              pullDirection: pullDirection.value as ScrollViewPullDirection
             },
             loadComplete
           )

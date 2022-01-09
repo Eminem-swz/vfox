@@ -19,7 +19,6 @@
 import { defineComponent, reactive } from 'vue'
 import type { PropType } from 'vue'
 import Checkbox from './Checkbox.vue'
-import { formItemEmits, formItemProps } from '@/Form/form'
 import {
   isStringNumberMixArray,
   cloneData,
@@ -30,24 +29,28 @@ import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
 import type { ModelValue } from './types'
 import { checkboxOrRadioGroupProps } from './checkbox-radio'
 
+const isValue = (value: ModelValue[]) => isStringNumberMixArray(value)
+
 export default defineComponent({
   name: 'fx-checkbox-group',
   components: { Checkbox },
   props: {
-    ...formItemProps,
     ...checkboxOrRadioGroupProps,
     modelValue: {
       type: Array as PropType<ModelValue[]>,
-      validator: isStringNumberMixArray,
+      validator: isValue,
       default: (): string[] => []
     }
   },
-  emits: formItemEmits,
+  emits: {
+    'update:modelValue': isValue,
+    change: isValue
+  },
   setup(props, ctx) {
     const inputValue = reactive<ModelValue[]>([])
     const { emit } = ctx
 
-    const group = useCheckboxOrRadioGroup(props, ctx, {
+    const group = useCheckboxOrRadioGroup(props, {
       name: 'checkbox',
       updateValue({ isChange, children }) {
         const value: ModelValue[] = []

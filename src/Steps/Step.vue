@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useStepItem } from '@/Steps/steps'
+import { computed, defineComponent, inject, ref } from 'vue'
+import { useListItem } from '@/hooks/use-list'
 
 export default defineComponent({
   name: 'fx-step',
@@ -34,8 +34,24 @@ export default defineComponent({
     }
   },
   setup() {
+    const activeIndex = inject(`fxStepsActiveIndex`, ref(0))
+    const root = ref<HTMLElement>()
+
+    const { index } = useListItem('steps', root)
+
+    const active = computed(() => {
+      return activeIndex.value === index.value
+    })
+
+    const finish = computed(() => {
+      return index.value < activeIndex.value
+    })
+
     return {
-      ...useStepItem('steps')
+      root,
+      index,
+      active,
+      finish
     }
   }
 })

@@ -19,6 +19,13 @@ import { Result } from 'vfox'
 | confirm-text | string  | '确定' | 否   | 确认按钮的文字                                                      |
 | back-text    | string  | '返回' | 否   | 返回按钮的文字                                                      |
 
+## Events
+
+| 事件    | 描述         | 回调函数参数 |
+| ------- | ------------ | ------------ |
+| confirm | 确认按钮点击 | e: Event     |
+| back    | 返回按钮点击 | e: Event     |
+
 ## Slots
 
 ### 附加内容（#default）

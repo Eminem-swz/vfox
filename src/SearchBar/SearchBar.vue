@@ -84,6 +84,7 @@ import {
   isStringNumberMix
 } from '@/helpers/util'
 import { locale } from '@/Locale'
+import { emitTypeValidator } from '@/helpers/validator'
 
 type Placeholders = string | string[]
 
@@ -92,6 +93,17 @@ interface SuggestItem {
   tags?: string[]
 }
 type SuggestList = (string | number | SuggestItem)[]
+
+const emitValidator = (
+  payload: {
+    type: string
+    text: string
+  },
+  setSuggestList: (res: SuggestList) => void
+) =>
+  payload &&
+  typeof payload.text === 'string' &&
+  typeof setSuggestList === 'function'
 
 export default defineComponent({
   name: 'fx-search-bar',
@@ -133,7 +145,18 @@ export default defineComponent({
       default: 5000
     }
   },
-  emits: ['input', 'click', 'search', 'cancel', 'focus', 'blur'],
+  emits: {
+    cancel: emitTypeValidator,
+    input: emitValidator,
+    focus: emitValidator,
+    blur: emitValidator,
+    search: (payload: { text: string; source: string }) =>
+      payload &&
+      typeof payload.text === 'string' &&
+      typeof payload.source === 'string',
+    click: (payload: { searchText: string; type: string }) =>
+      payload && typeof payload.searchText === 'string'
+  },
   setup(props, { emit }) {
     const placeholder = ref('')
     const searchText = ref('')
@@ -226,10 +249,10 @@ export default defineComponent({
       emit('cancel', { type: 'cancel' })
     }
 
-    function onClick(e: Event) {
-      emit(e.type as 'click', {
-        type: e.type,
-        searchText: searchText.value || placeholder.value
+    function onClick() {
+      emit('click', {
+        type: 'click',
+        searchText: searchText.value || placeholder.value || ''
       })
     }
 

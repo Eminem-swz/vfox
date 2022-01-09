@@ -1,7 +1,6 @@
 import type { PickerDetail, PickerModelValue } from './types'
 import {
   cloneData,
-  isArray,
   isDate,
   isDateArray,
   isSameArray,
@@ -13,7 +12,7 @@ export function updateArray(array: any[], newArray: any[]) {
 }
 
 export function isSameValue(aVal: unknown, bVal: unknown) {
-  if (isArray(aVal) && isArray(bVal)) {
+  if (Array.isArray(aVal) && Array.isArray(bVal)) {
     return isSameArray(aVal as string[], bVal as string[])
   }
 

@@ -65,12 +65,13 @@ import {
   DEFAULT_MONTH_RANGE,
   MODE_NAMES,
   commonProps,
-  printError
+  printError,
+  isCalendarDetail
 } from '@/Calendar/calendar'
 import { getEnumsValue } from '@/helpers/validator'
 import type { DayInfo } from './types'
 import { useHandlers } from '@/Calendar/use-calendar'
-import { pickerViewEmits } from '@/Picker/picker'
+import { pickerValueEmits } from '@/Picker/picker'
 import { locale } from '@/Locale'
 
 type WeekDay = '0' | '1' | '2' | '3' | '4' | '5' | '6'
@@ -95,7 +96,10 @@ const defaultWeekDays: WeekDay[] = ['0', '1', '2', '3', '4', '5', '6']
 export default defineComponent({
   name: 'fx-calendar-view',
   props: { ...commonProps },
-  emits: ['select', ...pickerViewEmits],
+  emits: {
+    ...pickerValueEmits,
+    select: isCalendarDetail
+  },
   setup(props, { emit }) {
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)
 

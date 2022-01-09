@@ -80,7 +80,6 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Button, ButtonGroup } from '@/Button'
-import { isArray, isString, isObject } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
 import type { AnyObject, StateType } from '../helpers/types'
 import type { IconData } from '../Icon/types'
@@ -92,22 +91,36 @@ interface ButtonOptions {
   type?: StateType
 }
 
-const validateButtons = (val: any[]) => {
-  if (isArray(val)) {
-    for (let i = 0; i < val.length; i++) {
-      if (
-        !(
-          isObject(val[i]) &&
-          (isString(val[i].text) || iconValidator(val[i].icon))
-        )
+const buttonsValidator = (items: ButtonOptions[]) => {
+  return (
+    Array.isArray(items) &&
+    items.filter(item => {
+      return !(
+        item &&
+        (typeof item.text === 'string' || iconValidator(item.icon))
       )
-        return false
-    }
-    return true
-  } else {
-    return false
-  }
+    }).length === 0
+  )
 }
+
+const isButtonEl = (buttonEl?: HTMLElement) =>
+  buttonEl == null || buttonEl instanceof HTMLElement
+
+const emitClickValidator = (
+  payload: {
+    type: string
+    index: number
+    item: {
+      text: string
+    }
+  },
+  buttonEl?: HTMLElement
+) =>
+  payload &&
+  typeof payload.index === 'number' &&
+  payload.item &&
+  typeof payload.item.text === 'string' &&
+  isButtonEl(buttonEl)
 
 export default defineComponent({
   name: 'fx-nav-bar',
@@ -130,12 +143,12 @@ export default defineComponent({
     },
     leftButtons: {
       type: Array as PropType<ButtonOptions[]>,
-      validator: validateButtons,
+      validator: buttonsValidator,
       default: () => [] as ButtonOptions[]
     },
     rightButtons: {
       type: Array as PropType<ButtonOptions[]>,
-      validator: validateButtons,
+      validator: buttonsValidator,
       default: () => [] as ButtonOptions[]
     },
     iconOnly: {
@@ -143,43 +156,51 @@ export default defineComponent({
       default: true
     }
   },
-  emits: [
-    'back-click',
-    'home-click',
-    'left-button-click',
-    'right-button-click',
-    'title-dbclick'
-  ],
+  emits: {
+    'back-click': isButtonEl,
+    'home-click': isButtonEl,
+    'title-dbclick': isButtonEl,
+    'left-button-click': emitClickValidator,
+    'right-button-click': emitClickValidator
+  },
   setup(props, { emit }) {
+    function emitClick(type: string, $el: EventTarget | null) {
+      emit(type as 'back-click', ($el as HTMLElement) || undefined)
+    }
+
     function onBack(e: Event) {
-      eventEmit('back-click', {}, e.currentTarget)
+      emitClick('back-click', e.currentTarget)
     }
 
     function onBackHome(e: Event) {
-      eventEmit('home-click', {}, e.currentTarget)
+      emitClick('home-click', e.currentTarget)
     }
 
     function onLeftIconClick(e: Event, item: ButtonOptions, index: number) {
-      eventEmit(
+      emit(
         'left-button-click',
         {
-          icon: item.icon,
-          text: item.text,
+          type: 'left-button-click',
+          item: {
+            text: item.text
+          },
           index
         },
-        e.currentTarget
+        (e.currentTarget as HTMLElement) || undefined
       )
     }
 
     function onRightIconClick(e: Event, item: ButtonOptions, index: number) {
-      eventEmit(
+      emit(
         'right-button-click',
         {
-          icon: item.icon,
-          text: item.text,
+          type: 'right-button-click',
+          item: {
+            text: item.text
+          },
           index
         },
-        e.currentTarget
+        (e.currentTarget as HTMLElement) || undefined
       )
     }
 
@@ -194,21 +215,8 @@ export default defineComponent({
       } else if (dbClickTag === e.type) {
         clearTimeout(dbClickTimer)
         dbClickTag = null
-        eventEmit('title-dbclick', {}, e.currentTarget)
+        emitClick('title-dbclick', e.currentTarget)
       }
-    }
-
-    function eventEmit(type: string, res: AnyObject, $el: EventTarget | null) {
-      emit(
-        type as 'back-click',
-        Object.assign(
-          {
-            type
-          },
-          res
-        ),
-        ($el as HTMLElement) || undefined
-      )
     }
 
     return {

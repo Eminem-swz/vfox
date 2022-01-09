@@ -36,6 +36,8 @@ import type {
   ScrollToIndexOptions,
   Noop
 } from '../helpers/types'
+import { emitChangeValidator } from '@/StickyView/stickyView'
+import { StickyViewItem } from './types'
 
 export default defineComponent({
   name: 'fx-sticky-view',
@@ -60,9 +62,26 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['reset-items', 'update:activeIndex', 'change'],
-  setup(props, ctx) {
-    const { emit } = ctx
+  emits: {
+    'update:activeIndex': (activeIndex: number) =>
+      typeof activeIndex === 'number',
+    change: emitChangeValidator,
+    'reset-items': (items: StickyViewItem[]) => {
+      if (Array.isArray(items)) {
+        return (
+          items.filter(item => {
+            return !(
+              item &&
+              typeof item.index === 'number' &&
+              typeof item.name === 'string'
+            )
+          }).length === 0
+        )
+      }
+      return false
+    }
+  },
+  setup(props, { emit }) {
     const root = ref<HTMLElement>()
     const fixed = ref<HTMLElement>()
     const sticky = ref()

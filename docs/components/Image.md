@@ -39,6 +39,5 @@ import { Image } from 'vfox'
 
 | 事件  | 描述                 | 回调函数参数                                   |
 | ----- | -------------------- | ---------------------------------------------- |
-| error | 当错误发生时触发     | Error                                          |
+| error | 当错误发生时触发     | e: Error                                       |
 | load  | 当图片载入完毕时触发 | { height: number, width: number, src: string } |
-| click | 点击时触发           | Event                                          |

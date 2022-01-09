@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { stepsEmits, useStepList } from '@/Steps/steps'
+import { defineComponent, provide, toRef } from 'vue'
+import { useList } from '@/hooks/use-list'
 
 export default defineComponent({
   name: 'fx-steps',
@@ -24,9 +24,20 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...stepsEmits],
-  setup(props, ctx) {
-    return { ...useStepList(props, ctx, 'steps') }
+  emits: {
+    'update:activeIndex': (activeIndex: number) =>
+      typeof activeIndex === 'number'
+  },
+  setup(props, { emit }) {
+    const { list } = useList('steps', $items => {
+      if (props.activeIndex >= $items.length) {
+        emit('update:activeIndex', $items.length - 1)
+      }
+    })
+
+    provide(`fxStepsActiveIndex`, toRef(props, 'activeIndex'))
+
+    return { list }
   }
 })
 </script>

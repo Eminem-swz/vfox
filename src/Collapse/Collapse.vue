@@ -6,7 +6,13 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, watch, provide } from 'vue'
-import { cloneData, isArray, inArray, isSameArray } from '@/helpers/util'
+import {
+  cloneData,
+  isArray,
+  inArray,
+  isSameArray,
+  isStringNumberMixArray
+} from '@/helpers/util'
 import { stringNumberArrayMixValidator } from '@/helpers/validator'
 import { useGroup } from '@/hooks/use-group'
 
@@ -24,7 +30,12 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['update:activeNames', 'change'],
+  emits: {
+    'update:activeNames': (payload: CollapseActiveNames) =>
+      stringNumberArrayMixValidator(payload),
+    change: (payload: { activeNames: CollapseActiveNames }) =>
+      payload && isStringNumberMixArray(payload.activeNames)
+  },
   setup(props, { emit }) {
     let activeNames2: CollapseActiveNames = []
 

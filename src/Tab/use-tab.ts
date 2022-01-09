@@ -6,10 +6,10 @@ import {
   watch,
   computed,
   nextTick,
-  SetupContext
+  SetupContext,
+  ExtractPropTypes
 } from 'vue'
 import {
-  isArray,
   isNumber,
   isObject,
   isString,
@@ -20,26 +20,16 @@ import { frameTo } from '@/helpers/animation'
 import Exception from '@/helpers/exception'
 import { iconValidator } from '@/helpers/validator'
 import { handleBadge } from '@/Badge/badge'
-import type { UseProps } from '../hooks/types'
-import type {
-  OptionValue,
-  TabOptionItem,
-  HandleOptionItem,
-  OptionList
-} from './types'
+import type { OptionValue, TabOptionItem, HandleOptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
-import type { tabEmits } from '@/Tab/tab'
-
-interface TabProps extends UseProps {
-  options: OptionList
-}
+import { tabEmits, tabProps } from '@/Tab/tab'
 
 interface UseOptions {
   tabName: string
 }
 
 export function useTab(
-  props: TabProps,
+  props: ExtractPropTypes<typeof tabProps>,
   { emit }: SetupContext<typeof tabEmits>,
   { tabName }: UseOptions
 ) {
@@ -58,7 +48,7 @@ export function useTab(
     let hasActive = false
     hasSub.value = false
 
-    if (isArray(props.options)) {
+    if (Array.isArray(props.options)) {
       props.options.forEach((item, index) => {
         let option: TabOptionItem | null = null
 

@@ -42,6 +42,7 @@ import {
 } from '@/Image/load-image'
 import {
   createEnumsValidator,
+  emitErrorValidator,
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
@@ -109,7 +110,14 @@ export default defineComponent({
       default: null
     }
   },
-  emits: ['load', 'error'],
+  emits: {
+    load: (payload: { width: number; height: number; src: string }) =>
+      payload &&
+      payload.width > 0 &&
+      payload.height > 0 &&
+      typeof payload.src === 'string',
+    error: emitErrorValidator
+  },
   setup(props, { emit }) {
     const instance = getCurrentInstance() as ComponentInternalInstance
     const loading = ref(true)

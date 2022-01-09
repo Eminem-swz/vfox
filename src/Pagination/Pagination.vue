@@ -43,7 +43,13 @@ export default defineComponent({
       default: 1
     }
   },
-  emits: ['update:current', 'change'],
+  emits: {
+    'update:current': (current: number) => typeof current === 'number',
+    change: (payload: { type: string; current: number; total: number }) =>
+      payload &&
+      typeof payload.current === 'number' &&
+      typeof payload.total === 'number'
+  },
   setup(props, { emit }) {
     function onClick(type: string) {
       const newPageNum = type === 'next' ? props.current + 1 : props.current - 1

@@ -56,7 +56,10 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['toggle'],
+  emits: {
+    toggle: (payload: { name: string; type: string; spread: boolean }) =>
+      payload && typeof payload.spread === 'boolean'
+  },
   setup(props, { emit }) {
     const active = ref(false)
     const body = ref<HTMLElement>()

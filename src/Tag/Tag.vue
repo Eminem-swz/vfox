@@ -24,6 +24,7 @@ import { Icon } from '@/Icon'
 import {
   colorValidator,
   createEnumsValidator,
+  emitTypeValidator,
   getEnumsValue
 } from '@/helpers/validator'
 import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
@@ -70,7 +71,11 @@ export default defineComponent({
       validator: colorValidator
     }
   },
-  emits: ['close', 'click', 'long-press'],
+  emits: {
+    close: emitTypeValidator,
+    click: emitTypeValidator,
+    'long-press': emitTypeValidator
+  },
   setup(props, { emit }) {
     const root = ref<HTMLElement>()
 
@@ -79,12 +84,6 @@ export default defineComponent({
         emit('close', {
           type: 'close'
         })
-      }
-    }
-
-    function onLongPress(e: { type: string }) {
-      if (!props.disabled) {
-        emit(e.type as 'click' | 'long-press', e)
       }
     }
 
@@ -117,7 +116,11 @@ export default defineComponent({
       return obj
     })
 
-    useLongPress(root, onLongPress)
+    useLongPress(root, e => {
+      if (!props.disabled) {
+        emit(e.type as 'long-press', e)
+      }
+    })
 
     return {
       root,

@@ -37,8 +37,9 @@ export type FxEventElement = HTMLElement | Document
 export interface FxEventCallback {
   (e: Event, $el: HTMLElement): void
 }
-export interface FxCustomEventCallback {
-  (res: { type: string } & AnyObject): void
+
+export interface LongPressEventCallback {
+  (res: { type: 'long-press' | 'click' }): void
 }
 
 export type EasingType = 'linear' | 'swing'

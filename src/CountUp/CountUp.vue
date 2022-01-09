@@ -9,6 +9,10 @@ import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import { AnimationFrameTask, frameTo } from '@/helpers/animation'
 import { thousands, isNumber } from '@/helpers/util'
 
+const emitValidator = (payload: { type: string; number: number }) => {
+  return payload && typeof payload.number === 'number'
+}
+
 type Speed = 'normal' | 'fast' | 'slow'
 
 const SpeedMap = new Map<Speed, number>([
@@ -46,7 +50,7 @@ export default defineComponent({
       default: 0
     }
   },
-  emits: ['animated', 'cancel'],
+  emits: { animated: emitValidator, cancel: emitValidator },
   setup(props, { emit }) {
     const content = ref('')
     let number = props.initialNumber as number
@@ -65,7 +69,7 @@ export default defineComponent({
     }
 
     function emitEvent(type: 'animated' | 'cancel') {
-      emit(type, { type, number })
+      emit(type as 'animated', { type, number })
     }
 
     let frameTask: AnimationFrameTask | null = null

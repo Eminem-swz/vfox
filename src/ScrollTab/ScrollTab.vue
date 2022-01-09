@@ -3,18 +3,18 @@
     <div class="fx-scroll-tab_sidebar">
       <Sticky
         ref="sidebar"
-        :offset-top="stickyOffsetTop"
-        :offset-bottom="stickyOffsetBottom"
+        :offsetTop="stickyOffsetTop"
+        :offsetBottom="stickyOffsetBottom"
       >
         <SideTab :options="tabList" v-model:activeValue="activeIndex" />
       </Sticky>
     </div>
     <div class="fx-scroll-tab_body">
       <StickyView
-        :offset-top="stickyOffsetTop"
+        :offsetTop="stickyOffsetTop"
         ref="body"
         v-model:activeIndex="activeIndex"
-        @reset-items="onResetItems"
+        @resetItems="onResetItems"
         @change="onChange"
       >
         <slot></slot>
@@ -30,6 +30,8 @@ import { Sticky } from '@/Sticky'
 import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
+import type { StickyViewChangeArgs } from '@/StickyView/types'
+import { emitChangeValidator } from '@/StickyView/stickyView'
 
 export default defineComponent({
   name: 'fx-scroll-tab',
@@ -44,7 +46,9 @@ export default defineComponent({
       default: 0
     }
   },
-  emits: ['change'],
+  emits: {
+    change: emitChangeValidator
+  },
   setup(props, { emit }) {
     const sidebar = ref()
     const body = ref()
@@ -74,7 +78,7 @@ export default defineComponent({
       )
     }
 
-    function onChange(res: { activeIndex: number }) {
+    function onChange(res: StickyViewChangeArgs) {
       emit('change', res)
     }
 

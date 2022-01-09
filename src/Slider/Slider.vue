@@ -28,8 +28,8 @@
 <script lang="ts">
 import { ref, defineComponent, watch, nextTick } from 'vue'
 import { isNumeric } from '@/helpers/util'
-import { formItemEmits, formItemProps } from '@/Form/form'
-import { slideProps, slideEmits } from '@/Slider/slide'
+import { formNumberValueEmits, formItemProps } from '@/Form/form'
+import { slideProps } from '@/Slider/slide'
 import { useSlide } from '@/Slider/use-slide'
 
 export default defineComponent({
@@ -42,7 +42,9 @@ export default defineComponent({
       validator: isNumeric
     }
   },
-  emits: [...formItemEmits, ...slideEmits],
+  emits: {
+    ...formNumberValueEmits
+  },
   setup(props, ctx) {
     const progress = ref(0)
     const inputValue = ref(0)

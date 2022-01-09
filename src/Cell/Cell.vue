@@ -35,6 +35,7 @@ import { Icon } from '@/Icon'
 import { capitalize } from '@/helpers/util'
 import {
   createEnumsValidator,
+  emitEventValidator,
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
@@ -84,7 +85,9 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['click'],
+  emits: {
+    click: emitEventValidator
+  },
   setup(props, { emit }) {
     const linkIconName = computed(() => {
       return `${capitalize(

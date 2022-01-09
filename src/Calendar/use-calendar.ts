@@ -1,5 +1,4 @@
 import dayjs from '@/helpers/day'
-import { isArray } from '@/helpers/util'
 import { getDefaultDetail } from '@/Calendar/calendar'
 import type { UseProps } from '../hooks/types'
 import type { PickerDetail, PickerModelValue } from '../Picker/types'
@@ -17,7 +16,7 @@ function valueParser(val: unknown, mode: CalendarMode) {
     return values
   }
 
-  if (isArray(val)) {
+  if (Array.isArray(val)) {
     const s = (val as string[])[0]
     const e = (val as string[])[1]
 

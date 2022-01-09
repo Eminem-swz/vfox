@@ -7,7 +7,7 @@
       :show-home="true"
       @back-click="onBack"
       @home-click="onBackHome"
-      :right-buttons="[
+      :rightButtons="[
         { icon: themeIcon, text: 'theme' },
         { icon: 'MenuOutlined', text: 'menu' }
       ]"
@@ -110,9 +110,9 @@ export default {
       this.$router.replace({ name: 'ExpHome' })
     },
     onRightButtonClick(e, $target) {
-      if (e.text === 'menu') {
+      if (e.item.text === 'menu') {
         this.menuVisible = true
-      } else if (e.text === 'lang') {
+      } else if (e.item.text === 'lang') {
         showPopMenu({
           selector: $target,
           options: [
@@ -122,7 +122,7 @@ export default {
         }).then(({ detail, confirm }) => {
           confirm && localeUse(detail.index === 0 ? 'en-US' : 'zh-CN')
         })
-      } else if (e.text === 'theme') {
+      } else if (e.item.text === 'theme') {
         this.switchTheme(!this.isDarkTheme)
       }
     },

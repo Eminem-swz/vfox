@@ -44,7 +44,7 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Drawer } from '@/Drawer'
-import { isArray, isObject, cloneData } from '@/helpers/util'
+import { isObject, cloneData } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
 import type { ActionSheetOption, ActionSheetDetail } from './types'
@@ -87,7 +87,7 @@ export default defineComponent({
     const options2 = computed(() => {
       const options: ActionSheetOption[] = []
 
-      if (isArray(props.options)) {
+      if (Array.isArray(props.options)) {
         props.options.forEach(v => {
           options.push(
             isObject(v)

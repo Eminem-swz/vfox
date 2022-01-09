@@ -11,7 +11,8 @@ import type {
   FieldNames,
   PickerOptionsHandler,
   OptionItem,
-  ColRow
+  ColRow,
+  PickerModelValue
 } from './types'
 import {
   isNumber,
@@ -24,6 +25,7 @@ import {
 } from '@/helpers/util'
 import Exception from '@/helpers/exception'
 import { cloneValue } from '@/Picker/util'
+import { formActiveEmits, formItemProps } from '@/Form/form'
 
 export const getDefaultFieldNames: () => FieldNames = () => {
   return { label: 'label', value: 'value', children: 'children' }
@@ -35,7 +37,7 @@ export const commonProps = {
     default: null
   },
   options: {
-    type: Array,
+    type: Array as PropType<UserOptionItem[]>,
     default: () => [] as UserOptionItem[]
   },
   fieldNames: {
@@ -51,13 +53,42 @@ export const commonProps = {
 }
 
 export const pickerProps = {
+  ...formItemProps,
   placeholder: {
     type: String,
     default: ''
   }
 }
 
-export const pickerEmits = ['focus', 'blur']
+const isValue = (value: PickerValue) => {
+  return isStringNumberMix(value) || value instanceof Date
+}
+
+const isModelValue = (payload: PickerModelValue) => {
+  if (Array.isArray(payload)) {
+    return (
+      payload.filter(v => {
+        return !isValue(v)
+      }).length === 0
+    )
+  }
+  return isValue(payload)
+}
+
+export const isPickerDetail = <T extends PickerDetail = PickerDetail>(
+  detail: T
+) => {
+  return (
+    detail && isModelValue(detail.value) && typeof detail.label === 'string'
+  )
+}
+
+export const pickerValueEmits = {
+  change: isModelValue,
+  'update:modelValue': isModelValue
+}
+
+export const pickerEmits = { ...pickerValueEmits, ...formActiveEmits }
 
 export const pickerPopupProps = {
   title: {
@@ -67,8 +98,6 @@ export const pickerPopupProps = {
 }
 
 export const pickerPopupEmits = ['change', 'update:modelValue']
-
-export const pickerViewEmits = ['change', 'update:modelValue']
 
 export const labelFormatter = (labelArray: string[]) => {
   return labelArray.join('/')

@@ -6,10 +6,12 @@ import type {
   CalendarMode,
   CalendarValueFormatter,
   CalendarValueParser,
-  CalendarOriginalDetail
+  CalendarOriginalDetail,
+  CalendarDetail
 } from './types'
 import { createEnumsValidator } from '@/helpers/validator'
 import Exception from '@/helpers/exception'
+import { isPickerDetail } from '@/Picker/picker'
 
 export const DEFAULT_MONTH_RANGE = 6
 export const MODE_NAMES: CalendarMode[] = ['single', 'range']
@@ -71,3 +73,8 @@ export const commonProps = {
 export function printError(message: string) {
   console.error(new Exception(message, Exception.TYPE.PROP_ERROR, 'Calendar'))
 }
+
+export const isCalendarDetail = (detail: CalendarDetail) =>
+  isPickerDetail(detail) &&
+  typeof detail.rangeCount === 'number' &&
+  Array.isArray(detail.valueArray)

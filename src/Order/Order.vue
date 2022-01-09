@@ -62,22 +62,15 @@ import {
 import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Drawer } from '@/Drawer'
-import {
-  isArray,
-  isStringNumberMix,
-  rangeNumber,
-  cloneData
-} from '@/helpers/util'
-import type { AnyObject, Noop } from '../helpers/types'
+import { isStringNumberMix, rangeNumber, cloneData } from '@/helpers/util'
+import type { Noop } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import type { PopupVisibleStateChangeArgs } from '../popup/types'
 import { locale } from '@/Locale'
+import type { OrderOnDeleteArgs } from './types'
 
-interface Item extends AnyObject {
-  id: string | number
-  draggable?: boolean
-}
+type Item = any
 
 interface TargetObject {
   id: string | number
@@ -97,8 +90,17 @@ interface Position {
   draggable: boolean
   top: number
   left: number
-  data: any
+  data: Item
   deleted: boolean
+}
+
+const itemsValidator = (items: Item[]) => {
+  return (
+    Array.isArray(items) &&
+    items.filter(item => {
+      return !(item && isStringNumberMix(item.id))
+    }).length === 0
+  )
 }
 
 export default defineComponent({
@@ -107,19 +109,7 @@ export default defineComponent({
   props: {
     items: {
       type: Array as PropType<Item[]>,
-      validator: (val: Item[]) => {
-        if (isArray(val)) {
-          for (let i = 0; i < val.length; i++) {
-            if (!isStringNumberMix(val[i].id)) {
-              return false
-            }
-          }
-        } else {
-          return false
-        }
-
-        return true
-      },
+      validator: itemsValidator,
       required: true,
       default: () => [] as Item[]
     },
@@ -138,7 +128,14 @@ export default defineComponent({
       default: 1
     }
   },
-  emits: ['delete', 'update:items'],
+  emits: {
+    'update:items': itemsValidator,
+    delete: (payload: OrderOnDeleteArgs) =>
+      payload &&
+      typeof payload.index === 'number' &&
+      payload.item &&
+      isStringNumberMix(payload.item.id)
+  },
   setup(props, { emit }) {
     const root = ref<HTMLElement>()
     const deleteButton = ref<HTMLElement>()
@@ -270,8 +267,11 @@ export default defineComponent({
 
           if (currentPosition) {
             emit('delete', {
+              type: 'delete',
               index,
-              item: cloneData(currentPosition.data)
+              item: {
+                id: currentPosition.data.id
+              }
             })
           }
 

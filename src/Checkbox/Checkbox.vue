@@ -32,38 +32,23 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { Icon } from '@/Icon'
-import { checkboxOrRadioEmits } from '@/Checkbox/checkbox-radio'
+import {
+  checkboxOrRadioEmits,
+  checkboxOrRadioProps
+} from '@/Checkbox/checkbox-radio'
 import { useCheckboxOrRadio } from '@/Checkbox/use-checkbox-radio'
 
 export default defineComponent({
   name: 'fx-checkbox',
   components: { Icon },
   props: {
-    value: {
-      type: [Number, String],
-      default: ''
-    },
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    ...checkboxOrRadioProps,
     circle: {
       type: Boolean,
       default: false
-    },
-    activeColor: {
-      type: String
-    },
-    name: {
-      type: String,
-      default: ''
     }
   },
-  emits: [...checkboxOrRadioEmits],
+  emits: { ...checkboxOrRadioEmits },
   setup(props, ctx) {
     return useCheckboxOrRadio(props, ctx, 'checkbox')
   }

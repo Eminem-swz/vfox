@@ -13,6 +13,7 @@ import { getScrollTop, scrollTo } from '@/helpers/dom'
 import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
 import { isNumber, isNumberArray } from '@/helpers/util'
 import { useScrollEvent } from '@/hooks/use-scroll'
+import { emitEventValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-back-top',
@@ -35,7 +36,10 @@ export default defineComponent({
       default: true
     }
   },
-  setup(props, ctx) {
+  emits: {
+    click: emitEventValidator
+  },
+  setup(props, { emit }) {
     const isShow = ref(getScrollTop() >= props.visibleHeight)
 
     function toTop() {
@@ -45,7 +49,7 @@ export default defineComponent({
     function onClick(e: Event) {
       toTop()
 
-      ctx.emit(e.type, e)
+      emit('click', e)
     }
 
     const safeAreaInsets = useSafeAreaInsets(

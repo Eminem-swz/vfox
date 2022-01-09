@@ -100,11 +100,13 @@ export default {
     onTitle() {
       showToast('标题双击')
     },
-    onRightButtonClick({ icon, text, index }) {
+    onRightButtonClick(res) {
+      console.log(res)
+
       showDialog({
         title: '右侧按钮点击',
         showCancel: false,
-        content: `icon: '${icon}'\ntext: '${text}'\nindex: ${index}`
+        content: `text: '${res.item.text}'\nindex: ${res.index}`
       })
     }
   }

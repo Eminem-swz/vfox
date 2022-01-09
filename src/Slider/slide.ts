@@ -25,5 +25,3 @@ export const slideProps = {
     default: null
   }
 }
-
-export const slideEmits = ['input']

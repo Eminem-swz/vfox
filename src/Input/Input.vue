@@ -66,7 +66,11 @@ import { Icon } from '@/Icon'
 import { isNumeric, isNumber, isStringNumberMix } from '@/helpers/util'
 import { formatInputDigit, formatInputNumber } from '@/helpers/input'
 import { getEnumsValue } from '@/helpers/validator'
-import { formItemEmits, formItemProps } from '@/Form/form'
+import {
+  formFocusEmits,
+  formItemProps,
+  formStringValueEmits
+} from '@/Form/form'
 import { useInput } from '@/Form/use-form'
 
 const TYPE_NAMES = [
@@ -122,7 +126,10 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...formItemEmits, 'input', 'focus', 'blur'],
+  emits: {
+    ...formStringValueEmits,
+    ...formFocusEmits
+  },
   setup(props, ctx) {
     const active = ref(false)
     const isShowClear = ref(false)
@@ -185,12 +192,12 @@ export default defineComponent({
 
     function onFocus(e: Event) {
       active.value = true
-      emit(e.type, e)
+      emit('focus', e)
     }
 
     function onBlur(e: Event) {
       active.value = false
-      emit(e.type, e)
+      emit('blur', e)
     }
 
     function onInput() {
@@ -199,8 +206,8 @@ export default defineComponent({
       }
     }
 
-    function onChange(e: Event) {
-      emit(e.type, inputValue.value)
+    function onChange() {
+      emit('change', inputValue.value)
     }
 
     function onClear() {

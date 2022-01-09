@@ -94,6 +94,7 @@ export default {
       padding: 12px 0;
       font-size: 48px;
       text-align: center;
+      color: $title-color;
     }
 
     &-body {

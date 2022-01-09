@@ -14,10 +14,10 @@
     </div>
     <div class="fx-index-view_body">
       <StickyView
-        :offset-top="stickyOffsetTop"
+        :offsetTop="stickyOffsetTop"
         ref="body"
         v-model:activeIndex="activeIndex"
-        @reset-items="onResetItems"
+        @resetItems="onResetItems"
         @change="onChange"
       >
         <slot></slot>
@@ -31,8 +31,10 @@ import { defineComponent, onMounted, reactive, ref } from 'vue'
 import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import { rangeInteger } from '@/helpers/util'
-import { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
+import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
+import type { StickyViewChangeArgs, StickyViewItem } from '@/StickyView/types'
+import { emitChangeValidator } from '@/StickyView/stickyView'
 
 export default defineComponent({
   name: 'fx-index-view',
@@ -43,7 +45,9 @@ export default defineComponent({
       default: 0
     }
   },
-  emits: ['change'],
+  emits: {
+    change: emitChangeValidator
+  },
   setup(props, { emit }) {
     const navigation = ref<HTMLElement>()
     const body = ref()
@@ -59,7 +63,7 @@ export default defineComponent({
       body.value && body.value.resetContainer(containSelector)
     }
 
-    function onResetItems(items: { name: string; index: number }[]) {
+    function onResetItems(items: StickyViewItem[]) {
       indexList.splice(
         0,
         Infinity,
@@ -72,7 +76,7 @@ export default defineComponent({
       )
     }
 
-    function onChange(res: { activeIndex: number }) {
+    function onChange(res: StickyViewChangeArgs) {
       emit('change', res)
     }
 

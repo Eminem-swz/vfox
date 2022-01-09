@@ -32,7 +32,7 @@ import { defineComponent, nextTick, ref, inject } from 'vue'
 import { Empty } from '@/Empty'
 import { frameTo } from '@/helpers/animation'
 import { hasClassName } from '@/helpers/dom'
-import { commonProps, pickerViewEmits, mergeHandlers } from '@/Picker/picker'
+import { commonProps, pickerValueEmits, mergeHandlers } from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
 import type { PickerHandlers } from './types'
 import { locale } from '@/Locale'
@@ -48,7 +48,7 @@ export default defineComponent({
   props: {
     ...commonProps
   },
-  emits: [...pickerViewEmits],
+  emits: { ...pickerValueEmits },
   setup(props, ctx) {
     const root = ref<HTMLElement>()
 

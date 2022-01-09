@@ -22,6 +22,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { Icon } from '@/Icon'
+import { emitEventValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-selector-field',
@@ -33,10 +34,10 @@ export default defineComponent({
     name: String,
     placeholder: String
   },
-  emits: ['field-click'],
+  emits: { 'field-click': emitEventValidator },
   setup(props, { emit }) {
-    function onFieldClick() {
-      emit('field-click', {})
+    function onFieldClick(e: Event) {
+      emit('field-click', e)
     }
 
     return {

@@ -27,6 +27,7 @@ import type { CountTime } from '../CountDown/types'
 import { getCountTime } from '@/CountDown/count-time'
 import { useCountTime } from '@/CountDown/use-count-time'
 import { cloneData } from '@/helpers/util'
+import { emitTypeValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-stopwatch',
@@ -42,7 +43,12 @@ export default defineComponent({
       default: true
     }
   },
-  emits: ['stop', 'start', 'reset'],
+  emits: {
+    start: emitTypeValidator,
+    reset: emitTypeValidator,
+    stop: (payload: { type: string; detail: CountTime; laps: CountTime[] }) =>
+      payload && payload.detail && Array.isArray(payload.laps)
+  },
   setup(props, { emit }) {
     let time = 0
     let startTime = 0
@@ -52,12 +58,6 @@ export default defineComponent({
       time = Date.now() - startTime
       update(time)
     })
-
-    function emitEvent(event: string) {
-      emit(event as 'start', {
-        type: event
-      })
-    }
 
     function doing() {
       return startTime > 0
@@ -84,7 +84,9 @@ export default defineComponent({
         startTime = Date.now() - time
       }
 
-      emitEvent('start')
+      emit('start', {
+        type: 'start'
+      })
 
       countTime.start()
     }
@@ -92,7 +94,10 @@ export default defineComponent({
     function reset() {
       doing() && stop()
 
-      emitEvent('reset')
+      emit('reset', {
+        type: 'reset'
+      })
+
       time = 0
       laps = []
       countTime.update(0)

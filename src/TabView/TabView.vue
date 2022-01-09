@@ -34,11 +34,8 @@ import { SideTab } from '@/SideTab'
 import { Swiper } from '@/Swiper'
 import { useList } from '@/hooks/use-list'
 import { scrollTo } from '@/helpers/dom'
-
-interface SwiperCallbackRes {
-  activeIndex: number
-  fromIndex: number
-}
+import type { SwiperChangeArgs } from '../Swiper/types'
+import { emitChangeValidator } from '@/Swiper/swiper'
 
 export default defineComponent({
   name: 'fx-tab-view',
@@ -58,7 +55,10 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['change', 'animated'],
+  emits: {
+    change: emitChangeValidator,
+    animated: emitChangeValidator
+  },
   setup(props, { emit }) {
     const vertical = ref(!!props.initialVertical)
     const swiper = ref()
@@ -89,7 +89,7 @@ export default defineComponent({
 
     const { list } = useList('tabView', resetItems)
 
-    function onChange(res: SwiperCallbackRes) {
+    function onChange(res: SwiperChangeArgs) {
       emit('change', res)
 
       if (props.backUpperWhenChange) {
@@ -120,7 +120,7 @@ export default defineComponent({
       }
     }
 
-    function onAnimated(res: SwiperCallbackRes) {
+    function onAnimated(res: SwiperChangeArgs) {
       emit('animated', res)
     }
 

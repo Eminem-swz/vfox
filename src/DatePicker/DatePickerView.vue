@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { PickerView } from '@/PickerView'
-import { pickerViewEmits } from '@/Picker/picker'
+import { pickerValueEmits } from '@/Picker/picker'
 import { commonProps } from '@/DatePicker/date-picker'
 import { useHandlers } from '@/DatePicker/use-date-picker'
 import type { DatePickerChangeArgs } from './types'
@@ -22,7 +22,7 @@ export default defineComponent({
   props: {
     ...commonProps
   },
-  emits: [...pickerViewEmits],
+  emits: { ...pickerValueEmits },
   setup(props, ctx) {
     const { emit } = ctx
 

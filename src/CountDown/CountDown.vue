@@ -43,7 +43,17 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['update:timestamp', 'pause', 'resume', 'end'],
+  emits: {
+    'update:timestamp': (timestamp: number) => typeof timestamp === 'number',
+    end: (payload: { type: string; startTime: number; endTime: number }) =>
+      payload &&
+      typeof payload.startTime === 'number' &&
+      typeof payload.endTime === 'number',
+    pause: (payload: { type: string; remainTime: number }) =>
+      payload && typeof payload.remainTime === 'number',
+    resume: (payload: { type: string; remainTime: number }) =>
+      payload && typeof payload.remainTime === 'number'
+  },
   setup(props, { emit }) {
     let startTime = 0
     let expiredTime = 0
@@ -60,6 +70,7 @@ export default defineComponent({
         update(remainTime)
         emit('update:timestamp', remainTime)
         emit('end', {
+          type: 'end',
           startTime,
           endTime: expiredTime
         })

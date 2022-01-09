@@ -35,8 +35,13 @@ import { onMounted, ref, defineComponent, watch } from 'vue'
 import { Button } from '@/Button'
 import { rangeInteger, rangeNumber } from '@/helpers/util'
 import { formatInputNumber } from '@/helpers/input'
-import { formItemEmits, formItemProps } from '@/Form/form'
+import {
+  formStringValueEmits,
+  formItemProps,
+  formFocusEmits
+} from '@/Form/form'
 import { useInput } from '@/Form/use-form'
+import { emitTypeValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-stepper',
@@ -87,14 +92,12 @@ export default defineComponent({
       default: null
     }
   },
-  emits: [
-    ...formItemEmits,
-    'plus-click',
-    'minus-click',
-    'input',
-    'focus',
-    'blur'
-  ],
+  emits: {
+    ...formStringValueEmits,
+    ...formFocusEmits,
+    'plus-click': emitTypeValidator,
+    'minus-click': emitTypeValidator
+  },
   setup(props, { emit }) {
     const isValueNull = props.modelValue == null
     const inputValue = ref('1')
@@ -111,7 +114,7 @@ export default defineComponent({
         type = 'minus-click'
       }
 
-      emit(type, { type })
+      emit(type as 'plus-click', { type })
     }
 
     function updateValue(value: number | string, isEventChange = true) {
@@ -154,18 +157,18 @@ export default defineComponent({
     }
 
     function proxyEvent(e: Event) {
-      emit(e.type, e)
+      emit(e.type as 'focus', e)
     }
 
     function onChange() {
       updateValue(getInputValue())
     }
 
-    function onInput(e: Event) {
+    function onInput() {
       const value = formateNumber(getInputValue())
       setInputValue(value)
 
-      emit(e.type, value)
+      emit('input', value)
     }
 
     watch(

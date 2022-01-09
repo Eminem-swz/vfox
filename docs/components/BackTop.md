@@ -32,7 +32,7 @@ import { BackTop } from 'vfox'
 
 | 事件  | 描述                   | 回调函数参数 |
 | ----- | ---------------------- | ------------ |
-| click | 回到顶部按钮点击时触发 | MouseEvent   |
+| click | 回到顶部按钮点击时触发 | e: Event     |
 
 ## Slots
 

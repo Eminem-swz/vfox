@@ -9,8 +9,9 @@ import {
   isURL
 } from '@/helpers/util'
 import { getSizeValue } from '@/helpers/dom'
-import type { AnyObject, Validator } from './types'
+import type { AnyObject, TypeException, Validator } from './types'
 import { isColorValue } from '@/helpers/color'
+import Exception from '@/helpers/exception'
 
 export const selectorValidator: Validator = value => {
   return isString(value) || isHTMLElement(value) || value === document
@@ -62,4 +63,26 @@ export const iconValidator: Validator = value => {
 
 export const colorValidator: Validator = value => {
   return value == null || value === '' || isColorValue(value as string)
+}
+
+export const emitEventValidator = (e: Event) => e instanceof Event
+
+export const emitErrorValidator = (e: TypeException) => e instanceof Exception
+
+export const emitTypeValidator = (payload: { type: string }) =>
+  payload && typeof payload.type === 'string'
+
+export const createListValidator = <T>(itemValidator: (item: T) => boolean) => {
+  const validator = (value: unknown) => {
+    if (Array.isArray(value)) {
+      return (
+        value.filter(v => {
+          return !itemValidator(v as T)
+        }).length === 0
+      )
+    }
+    return false
+  }
+
+  return validator as (payload: T[]) => boolean
 }

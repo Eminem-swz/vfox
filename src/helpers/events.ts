@@ -1,6 +1,10 @@
 import { isMobile } from '@/helpers/device'
 import { isFunction } from '@/helpers/util'
-import { FxEventElement, FxEventCallback, FxCustomEventCallback } from './types'
+import {
+  FxEventElement,
+  FxEventCallback,
+  LongPressEventCallback
+} from './types'
 
 type EventTargetWithUID = {
   _euid: number
@@ -175,7 +179,7 @@ interface LongPressCoords {
  */
 export function addLongPressEvent(
   $el: HTMLElement,
-  callback: FxCustomEventCallback
+  callback: LongPressEventCallback
 ) {
   let coords: LongPressCoords | null
 

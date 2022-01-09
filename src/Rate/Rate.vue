@@ -38,7 +38,7 @@ import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { capitalize, isInteger, isNumeric, rangeInteger } from '@/helpers/util'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { formItemEmits, formItemProps } from '@/Form/form'
+import { formItemProps, formNumberValueEmits } from '@/Form/form'
 import type { StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 
@@ -99,7 +99,7 @@ export default defineComponent({
       type: [Number, String]
     }
   },
-  emits: formItemEmits,
+  emits: { ...formNumberValueEmits },
   setup(props, ctx) {
     const { emit } = ctx
     const root = ref<HTMLElement>()

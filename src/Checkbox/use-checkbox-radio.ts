@@ -8,14 +8,23 @@ import {
   ComponentInternalInstance,
   provide
 } from 'vue'
-import { capitalize, inArray, isArray, isStringNumberMix } from '@/helpers/util'
+import type { SetupContext, ExtractPropTypes } from 'vue'
+import { capitalize, inArray, isStringNumberMix } from '@/helpers/util'
 import { useGroup, useGroupItem } from '@/hooks/use-group'
-import type { UseProps, UseCtx } from '../hooks/types'
-import type { ModelValue, OptionItem, UserOptionItem } from './types'
+import type { ModelValue, OptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
+import {
+  checkboxOrRadioEmits,
+  checkboxOrRadioGroupProps,
+  checkboxOrRadioProps
+} from '@/Checkbox/checkbox-radio'
 
-interface Options {
-  props: UseProps
+type GroupProps = ExtractPropTypes<typeof checkboxOrRadioGroupProps> & {
+  modelValue: ModelValue | ModelValue[]
+}
+
+interface GroupOptions {
+  props: GroupProps
   onChange: (uid: number) => void
 }
 
@@ -26,14 +35,17 @@ interface GroupItem {
   setChecked: (checked: boolean) => void
 }
 
-export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
+export function useCheckboxOrRadio(
+  props: ExtractPropTypes<typeof checkboxOrRadioProps>,
+  { emit }: SetupContext<typeof checkboxOrRadioEmits>,
+  name: string
+) {
   const instance = getCurrentInstance() as ComponentInternalInstance
-  const groupOptions = inject<Options | null>(
+  const groupOptions = inject<GroupOptions | null>(
     `fx${capitalize(name)}Options`,
     null
   )
   const input = ref<HTMLInputElement>()
-  const { emit } = ctx
 
   const name2 = computed(() => {
     return groupOptions?.props.name || props.name || ''
@@ -64,10 +76,7 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
     } else {
       const checked = !!(e.target as HTMLInputElement).checked
       emit('update:checked', checked)
-      emit('change', {
-        type: 'change',
-        checked
-      })
+      emit('change', checked)
     }
   }
 
@@ -101,7 +110,8 @@ export function useCheckboxOrRadio(props: UseProps, ctx: UseCtx, name: string) {
     if (groupOptions) {
       checked =
         name === 'checkbox'
-          ? inArray(props.value, groupOptions.props.modelValue)
+          ? Array.isArray(groupOptions.props.modelValue) &&
+            inArray(props.value, groupOptions.props.modelValue)
           : props.value === groupOptions.props.modelValue
     } else {
       checked = !!props.checked
@@ -151,8 +161,7 @@ interface UseGroupOptions {
 }
 
 export function useCheckboxOrRadioGroup(
-  props: UseProps,
-  { emit }: UseCtx,
+  props: GroupProps,
   { name, updateValue, watchValue }: UseGroupOptions
 ) {
   const root = ref<HTMLElement>()
@@ -179,8 +188,8 @@ export function useCheckboxOrRadioGroup(
   const options2 = computed(() => {
     const ret: OptionItem[] = []
 
-    if (props.options && isArray(props.options)) {
-      ;(props.options as UserOptionItem[]).forEach(v => {
+    if (Array.isArray(props.options)) {
+      props.options.forEach(v => {
         if (isStringNumberMix(v)) {
           ret.push({
             value: v as string,
@@ -203,7 +212,7 @@ export function useCheckboxOrRadioGroup(
   provide(`fx${capitalize(name)}Options`, {
     props,
     onChange
-  } as Options)
+  } as GroupOptions)
 
   return {
     root,

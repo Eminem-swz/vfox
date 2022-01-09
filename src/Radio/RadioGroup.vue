@@ -15,28 +15,33 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Radio from './Radio.vue'
-import { formItemEmits, formItemProps } from '@/Form/form'
 import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
 import type { ModelValue } from '../Checkbox/types'
 import { checkboxOrRadioGroupProps } from '@/Checkbox/checkbox-radio'
+import { isStringNumberMix } from '@/helpers/util'
+
+const isValue = (value: ModelValue) => isStringNumberMix(value)
 
 export default defineComponent({
   name: 'fx-radio-group',
   components: { Radio },
   props: {
-    ...formItemProps,
     ...checkboxOrRadioGroupProps,
     modelValue: {
       type: [Number, String],
+      validator: isValue,
       default: null
     }
   },
-  emits: formItemEmits,
+  emits: {
+    'update:modelValue': isValue,
+    change: isValue
+  },
   setup(props, ctx) {
     const inputValue = ref<ModelValue>('')
     const { emit } = ctx
 
-    const group = useCheckboxOrRadioGroup(props, ctx, {
+    const group = useCheckboxOrRadioGroup(props, {
       name: 'radio',
       updateValue({ isChange, uid, children }) {
         let hasChecked = false

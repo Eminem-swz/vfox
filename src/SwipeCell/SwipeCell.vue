@@ -67,20 +67,21 @@ export default defineComponent({
   props: {
     buttons: {
       type: Array as PropType<ButtonOptions[]>,
-      validator: (val: any[]) => {
-        if (isArray(val)) {
-          for (let i = 0; i < val.length; i++) {
-            if (!(isObject(val[i]) && isString(val[i].text))) return false
-          }
-          return true
-        } else {
-          return false
-        }
+      validator: (items: ButtonOptions[]) => {
+        return (
+          Array.isArray(items) &&
+          items.filter(item => {
+            return !(item && typeof item.text === 'string')
+          }).length === 0
+        )
       },
-      default: () => [] as ButtonOptions[]
+      default: () => []
     }
   },
-  emits: ['button-click'],
+  emits: {
+    'button-click': (payload: { item: ButtonOptions; index: number }) =>
+      payload && typeof payload.index === 'number'
+  },
   setup(props, ctx) {
     const root = ref<HTMLElement>()
     const buttonEls = ref<HTMLElement>()
@@ -129,7 +130,7 @@ export default defineComponent({
           if (isObject(v) && isString(v.text)) {
             buttons.push({
               text: v.text,
-              type: getEnumsValue(STATE_TYPES, v.type) as StateType
+              type: getEnumsValue(STATE_TYPES, v.type)
             })
           }
         })

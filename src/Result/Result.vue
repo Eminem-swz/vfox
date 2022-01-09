@@ -24,7 +24,11 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Button } from '@/Button'
-import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
+import {
+  createEnumsValidator,
+  emitEventValidator,
+  getEnumsValue
+} from '@/helpers/validator'
 import { locale } from '@/Locale'
 
 type ResultType = 'info' | 'warning' | 'success' | 'fail'
@@ -72,22 +76,21 @@ export default defineComponent({
       type: String
     }
   },
-  emits: ['confirm', 'back'],
+  emits: {
+    confirm: emitEventValidator,
+    back: emitEventValidator
+  },
   setup(props, { emit }) {
     const type2 = computed(() => getEnumsValue(RESULT_TYPES, props.type))
 
     const icon = computed(() => iconMap.get(type2.value))
 
-    function onConfirmClick() {
-      emit('confirm', {
-        type: 'confirm'
-      })
+    function onConfirmClick(e: Event) {
+      emit('confirm', e)
     }
 
-    function onCancelClick() {
-      emit('back', {
-        type: 'back'
-      })
+    function onCancelClick(e: Event) {
+      emit('back', e)
     }
 
     return {

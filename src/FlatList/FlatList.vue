@@ -86,11 +86,21 @@ import type {
   StyleObject
 } from '../helpers/types'
 import { locale } from '@/Locale'
+import type {
+  ScrollViewOnScrollArgs,
+  ScrollViewPullDirection
+} from '../ScrollView/types'
+import {
+  emitRefreshingValidator,
+  emitScrollValidator
+} from '@/ScrollView/scrollView'
 
 interface FlatItemElement extends HTMLElement {
   _recycled?: boolean
   _translateOffset?: number
 }
+
+type Item = any
 
 export default defineComponent({
   name: 'fx-flat-list',
@@ -101,9 +111,9 @@ export default defineComponent({
       default: null
     },
     data: {
-      type: Array as PropType<any[]>,
+      type: Array as PropType<Item[]>,
       required: true,
-      default: () => [] as any[]
+      default: () => [] as Item[]
     },
     getItemSize: {
       type: Function,
@@ -158,13 +168,25 @@ export default defineComponent({
       default: 0
     }
   },
-  emits: ['recycle-change', 'end-reached', 'scroll', 'refreshing'],
-  setup(props, ctx) {
-    const { emit } = ctx
+  emits: {
+    'recycle-change': (payload: {
+      recycled: boolean
+      index: number
+      item: Item
+    }) =>
+      payload &&
+      typeof payload.recycled === 'boolean' &&
+      typeof payload.index === 'number',
+    'end-reached': (payload: { distanceFromEnd: number }) =>
+      payload && typeof payload.distanceFromEnd === 'number',
+    scroll: emitScrollValidator,
+    refreshing: emitRefreshingValidator
+  },
+  setup(props, { emit }) {
     const cols = reactive<number[]>([])
     const list = reactive<
       {
-        data: any
+        data: Item
         recycled: boolean
       }[]
     >([])
@@ -199,8 +221,8 @@ export default defineComponent({
       return props.getItemSize != null || props.itemSize != null
     }
 
-    function dataToList(data: any[]) {
-      const newList: any[] = []
+    function dataToList(data: Item[]) {
+      const newList: Item[] = []
       const dataKey = props.dataKey
 
       data.forEach((v, k) => {
@@ -245,11 +267,11 @@ export default defineComponent({
 
     function onRefreshing(
       res: {
-        pullDirection: string
+        pullDirection: ScrollViewPullDirection
       },
-      done: Noop
+      loadComplete: Noop
     ) {
-      emit('refreshing', res, done)
+      emit('refreshing', res, loadComplete)
     }
 
     /**
@@ -425,7 +447,7 @@ export default defineComponent({
 
     let scrollTimer: number
 
-    function onScroll(res: { scrollLeft: number; scrollTop: number }) {
+    function onScroll(res: ScrollViewOnScrollArgs) {
       const scrollSize = res[scrollX ? 'scrollLeft' : 'scrollTop']
 
       if (scrollCount > 10) {

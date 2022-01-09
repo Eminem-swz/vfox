@@ -27,7 +27,6 @@
 import { defineComponent } from 'vue'
 import { SelectorField } from '@/SelectorField'
 import { PickerPopup } from '@/PickerPopup'
-import { formItemEmits, formItemProps } from '@/Form/form'
 import {
   pickerEmits,
   pickerProps,
@@ -39,8 +38,8 @@ import { usePicker } from '@/Picker/use-picker'
 export default defineComponent({
   name: 'fx-picker',
   components: { SelectorField, PickerPopup },
-  props: { ...formItemProps, ...commonProps, ...pickerProps },
-  emits: [...formItemEmits, ...pickerEmits],
+  props: { ...commonProps, ...pickerProps },
+  emits: { ...pickerEmits },
   setup(props, ctx) {
     return {
       ...usePicker(props, ctx, {

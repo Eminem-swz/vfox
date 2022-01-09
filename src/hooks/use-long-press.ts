@@ -1,7 +1,7 @@
 import { addLongPressEvent } from '@/helpers/events'
 import { onBeforeUnmount, onMounted } from 'vue'
 import type { Ref } from 'vue'
-import type { FxCustomEventCallback } from '../helpers/types'
+import type { LongPressEventCallback } from '../helpers/types'
 
 interface OffFn {
   (): void
@@ -9,7 +9,7 @@ interface OffFn {
 
 export function useLongPress(
   el: Ref<HTMLElement | undefined>,
-  callback: FxCustomEventCallback
+  callback: LongPressEventCallback
 ) {
   let longPressOff: OffFn
 

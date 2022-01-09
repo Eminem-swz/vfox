@@ -45,6 +45,7 @@ import { Icon } from '@/Icon'
 import {
   colorValidator,
   createEnumsValidator,
+  emitTypeValidator,
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
@@ -104,7 +105,12 @@ export default defineComponent({
       default: null
     }
   },
-  emits: ['update:visible', 'show', 'hide', 'close-click'],
+  emits: {
+    'update:visible': (visible: boolean) => typeof visible === 'boolean',
+    show: emitTypeValidator,
+    hide: emitTypeValidator,
+    'close-click': emitTypeValidator
+  },
   setup(props, ctx) {
     const { emit } = ctx
     const notifyExist = inject('fxNotifyExist', false)
@@ -157,7 +163,7 @@ export default defineComponent({
         emit('update:visible', true)
         visible2.value = true
 
-        emit('show', {})
+        emit('show', { type: 'show' })
       }
     }
     function hide() {
@@ -165,7 +171,7 @@ export default defineComponent({
         emit('update:visible', false)
         visible2.value = false
 
-        emit('hide', {})
+        emit('hide', { type: 'hide' })
       }
     }
 
@@ -175,7 +181,7 @@ export default defineComponent({
           hide()
         }
 
-        emit('close-click', {})
+        emit('close-click', { type: 'close-click' })
       }
     }
 

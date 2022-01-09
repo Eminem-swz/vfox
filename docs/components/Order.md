@@ -14,7 +14,7 @@ import { Order } from 'vfox'
 
 | 属性          | 类型    | 默认值 | 必填 | 说明       |
 | ------------- | ------- | ------ | ---- | ---------- |
-| v-model:items | Array   |        | 是   | 列表数组   |
+| v-model:items | Item[]  |        | 是   | 列表数组   |
 | column-number | number  | 3      | 否   | 渲染列数   |
 | aspect-ratio  | number  | 1      | 否   | 渲染宽高比 |
 | deletable     | boolean | false  | 否   | 支持删除   |
@@ -41,16 +41,9 @@ PS：要求一定要有 `id` 作为唯一键。
 
 ## Events
 
-| 事件   | 描述             | 回调函数参数    |
-| ------ | ---------------- | --------------- |
-| delete | 单项被删除时触发 | { item, index } |
-
-### delete 的参数
-
-| 值    | 类型   | 说明                                               |
-| ----- | ------ | -------------------------------------------------- |
-| index | number | 第 index 项                                        |
-| item  | any    | 传入 items[index] 的副本，修改不会影响 props.items |
+| 事件   | 描述             | 回调函数参数                                      |
+| ------ | ---------------- | ------------------------------------------------- |
+| delete | 单项被删除时触发 | { item: { id: string \| number }, index: number } |
 
 ## Slots
 

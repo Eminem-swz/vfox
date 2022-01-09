@@ -61,6 +61,8 @@ import { getStretchOffset } from '@/helpers/animation'
 import type { StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { styleObject2CssText } from '@/helpers/dom'
+import { emitChangeValidator } from '@/Swiper/swiper'
+import { emitEventValidator } from '@/helpers/validator'
 
 interface SwiperCoords {
   offset: boolean | null
@@ -71,7 +73,6 @@ interface SwiperCoords {
   timeStamp: number
 }
 
-// export
 export default defineComponent({
   name: 'fx-swiper',
   components: { Icon },
@@ -127,7 +128,13 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['update:activeIndex', 'change', 'animated', 'click'],
+  emits: {
+    'update:activeIndex': (activeIndex: number) =>
+      typeof activeIndex === 'number',
+    change: emitChangeValidator,
+    animated: emitChangeValidator,
+    click: emitEventValidator
+  },
   setup(props, ctx) {
     const root = ref<HTMLElement>()
     const { emit } = ctx

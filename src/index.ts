@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import * as ComponentPlugins from './components/install'
-export * from './types'
+// export * from './types'
 // import './style/index'
 
 const Vfox = {

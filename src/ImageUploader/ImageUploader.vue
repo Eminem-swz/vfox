@@ -91,9 +91,10 @@ import {
   noop
 } from '@/helpers/util'
 import { formatFileSize } from '@/helpers/file'
-import { formItemEmits, formItemProps } from '@/Form/form'
+import { formItemProps } from '@/Form/form'
 import type { ImageModes } from '../Image/types'
 import { locale } from '@/Locale'
+import type { OrderOnDeleteArgs } from '../Order/types'
 
 type Accept = 'all' | 'png' | 'jpeg' | 'jpg' | 'webp'
 type UploadStatus = 'reading' | 'uploading' | 'uploaded' | 'failed'
@@ -155,6 +156,8 @@ function getAccepts(val: string | string[]) {
   return ret
 }
 
+const isValue = (value: string[]) => isStringArray(value)
+
 export default defineComponent({
   name: 'fx-image-uploader',
   components: {
@@ -169,14 +172,13 @@ export default defineComponent({
     ...formItemProps,
     modelValue: {
       type: Array as PropType<string[]>,
+      validator: isValue,
       default: () => [] as string[]
     },
     // 允许上传的图片类型
     accept: {
       type: [String, Array],
-      validator: (val: Accept | Accept[]) => {
-        return getAccepts(val).length > 0
-      },
+      validator: (val: Accept | Accept[]) => getAccepts(val).length > 0,
       default: 'all'
     },
     // 多少列展示
@@ -227,7 +229,19 @@ export default defineComponent({
       // required: true
     }
   },
-  emits: [...formItemEmits, 'delete'],
+  emits: {
+    'update:modelValue': isValue,
+    change: isValue,
+    delete: (payload: {
+      type: string
+      index: number
+      item: {
+        id: number
+        status: UploadStatus
+        url: string | null
+      }
+    }) => payload && typeof payload.index === 'number'
+  },
   setup(props, ctx) {
     const { emit } = ctx
     let uid = 1
@@ -305,7 +319,7 @@ export default defineComponent({
     function getFileItemById(id: number) {
       for (let i = 0; i < orderItems.length; i++) {
         if (orderItems[i].id === id) {
-          return orderItems[i]
+          return orderItems[i] as FileItem
         }
       }
       return null
@@ -323,7 +337,7 @@ export default defineComponent({
         getUploadId: () => id,
         formatSize: formatFileSize,
         setUploading(message) {
-          const fileItem = getFileItemById(id) as FileItem
+          const fileItem = getFileItemById(id)
 
           if (fileItem && !isDone(fileItem)) {
             fileItem.status = 'uploading'
@@ -331,7 +345,7 @@ export default defineComponent({
           }
         },
         fail(e) {
-          const fileItem = getFileItemById(id) as FileItem
+          const fileItem = getFileItemById(id)
 
           if (fileItem && !isDone(fileItem)) {
             if (e instanceof Error) {
@@ -345,7 +359,7 @@ export default defineComponent({
           }
         },
         success(url) {
-          const fileItem = getFileItemById(id) as FileItem
+          const fileItem = getFileItemById(id)
 
           if (fileItem && !isDone(fileItem)) {
             fileItem.url = url
@@ -481,31 +495,39 @@ export default defineComponent({
       return urlIdCache[url] || (urlIdCache[url] = ++uid)
     }
 
-    function onItemClick(item: FileItem) {
-      if (item.status === 'uploaded') {
-        if (props.preview) {
-          previewCurrent.value = item.url as string
-          previewVisible.value = true
-        }
-      } else if (item.status === 'failed') {
-        for (let i = 0; i < orderItems.length; i++) {
-          if (orderItems[i].id === item.id) {
-            orderItems.splice(i, 1)
-            updateUploadButton()
+    function onItemClick(item: { id: number }) {
+      const fileItem = getFileItemById(item.id)
+
+      if (fileItem) {
+        if (fileItem.status === 'uploaded') {
+          if (props.preview) {
+            previewCurrent.value = fileItem.url as string
+            previewVisible.value = true
+          }
+        } else if (fileItem.status === 'failed') {
+          for (let i = 0; i < orderItems.length; i++) {
+            if (orderItems[i].id === fileItem.id) {
+              orderItems.splice(i, 1)
+              updateUploadButton()
+            }
           }
         }
       }
     }
 
-    function onDelete({ index, item }: { index: number; item: FileItem }) {
-      emit('delete', {
-        index,
-        item: {
-          id: item.id,
-          status: item.status,
-          url: item.url || null
-        }
-      })
+    function onDelete({ index, item }: OrderOnDeleteArgs) {
+      const fileItem = getFileItemById(item.id as number)
+
+      fileItem &&
+        emit('delete', {
+          type: 'delete',
+          index,
+          item: {
+            id: fileItem.id,
+            status: fileItem.status,
+            url: fileItem.url || null
+          }
+        })
     }
 
     function onPreviewDelete(activeIndex: number) {

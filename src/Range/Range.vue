@@ -45,9 +45,11 @@
 import { defineComponent, watch, nextTick, reactive, computed } from 'vue'
 import type { PropType } from 'vue'
 import { cloneData, isNumberArray, isSameArray, isString } from '@/helpers/util'
-import { formItemEmits, formItemProps } from '@/Form/form'
-import { slideProps, slideEmits } from '@/Slider/slide'
+import { formItemProps } from '@/Form/form'
+import { slideProps } from '@/Slider/slide'
 import { useSlide } from '@/Slider/use-slide'
+
+const isValue = (value: number[]) => isNumberArray(value)
 
 export default defineComponent({
   name: 'fx-range',
@@ -56,14 +58,18 @@ export default defineComponent({
     ...slideProps,
     modelValue: {
       type: Array as PropType<number[]>,
-      validator: isNumberArray
+      validator: isValue
     },
     allowSameValue: {
       type: Boolean,
       default: true
     }
   },
-  emits: [...formItemEmits, ...slideEmits],
+  emits: {
+    'update:modelValue': isValue,
+    change: isValue,
+    input: isValue
+  },
   setup(props, ctx) {
     const progress = reactive<number[]>([0, 0])
     const progressValue = reactive<number[]>([0, 0])
@@ -174,7 +180,7 @@ export default defineComponent({
       nextTick(() => {
         updateValue(progressValue)
         if (emitModel()) {
-          emit('change', inputValue.value)
+          emit('change', getValue())
         }
       })
     })
@@ -189,7 +195,7 @@ export default defineComponent({
     updateValue(props.modelValue)
 
     if (emitModel()) {
-      emit('change', inputValue.value)
+      emit('change', getValue())
     }
 
     return {

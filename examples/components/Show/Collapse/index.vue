@@ -96,10 +96,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { showToast } from '@/Toast'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'ExpCollapse',
   data() {
     return {
@@ -109,18 +110,26 @@ export default {
       activeNames4: []
     }
   },
-  methods: {
-    onChange({ activeNames }) {
+  setup() {
+    function onChange(res: { activeNames: string[] }) {
+      console.log('change', res)
       showToast(
-        activeNames.length > 0 ? activeNames.join('，') : '没有项' + '展开'
+        (res.activeNames.length > 0 ? res.activeNames.join('，') : '没有项') +
+          '展开'
       )
-    },
-    onToggle(res) {
-      console.log(res)
+    }
+
+    function onToggle(res: { spread: boolean }) {
+      console.log('toggle', res)
       showToast(res.spread ? '展开' : '收起')
     }
+
+    return {
+      onChange,
+      onToggle
+    }
   }
-}
+})
 </script>
 
 <style lang="scss">

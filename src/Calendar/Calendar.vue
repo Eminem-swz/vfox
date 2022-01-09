@@ -33,12 +33,11 @@ import { defineComponent, ref, watch } from 'vue'
 import { SelectorField } from '@/SelectorField'
 import { CalendarPopup } from '@/CalendarPopup'
 import { getDefaultDetail, MODE_NAMES, commonProps } from '@/Calendar/calendar'
-import { formItemEmits, formItemProps } from '@/Form/form'
 import { getEnumsValue } from '@/helpers/validator'
 import type { CalendarDetail } from './types'
 import { useHandlers } from '@/Calendar/use-calendar'
 import { cloneDetail, isSameValue } from '@/Picker/util'
-import { pickerEmits } from '@/Picker/picker'
+import { pickerEmits, pickerProps } from '@/Picker/picker'
 import type { PickerModelValue } from '../Picker/types'
 
 export default defineComponent({
@@ -46,11 +45,7 @@ export default defineComponent({
   components: { SelectorField, CalendarPopup },
   props: {
     ...commonProps,
-    ...formItemProps,
-    placeholder: {
-      type: String,
-      default: ''
-    },
+    ...pickerProps,
     showConfirm: {
       type: Boolean,
       default: false
@@ -60,7 +55,7 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...formItemEmits, ...pickerEmits],
+  emits: { ...pickerEmits },
   setup(props, ctx) {
     const { emit } = ctx
     const isInitPopup = ref(false)
@@ -136,9 +131,9 @@ export default defineComponent({
 
     watch([isInitPopup, popupVisible], ([isInit, visible]) => {
       if (isInit && visible) {
-        emit('focus')
+        emit('focus', { type: 'focus' })
       } else if (!visible) {
-        emit('blur')
+        emit('blur', { type: 'blur' })
       }
     })
 

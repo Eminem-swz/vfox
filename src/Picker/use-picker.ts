@@ -1,4 +1,6 @@
+import { AnyObject } from './../helpers/types'
 import { onMounted, reactive, ref, watch } from 'vue'
+import type { ExtractPropTypes, SetupContext } from 'vue'
 import {
   isArray,
   cloneData,
@@ -26,9 +28,12 @@ import {
   getDefaultDetail,
   validateValues,
   getColRows,
-  getFormatOptions
+  getFormatOptions,
+  pickerValueEmits,
+  commonProps,
+  pickerEmits
 } from '@/Picker/picker'
-import type { UseProps, UseCtx, UseEmit } from '../hooks/types'
+import type { UseProps, UseEmit } from '../hooks/types'
 import { PopupCustomConfirm } from '@/popup/types'
 
 interface UseOptions {
@@ -38,7 +43,7 @@ interface UseOptions {
 
 export function usePicker(
   props: UseProps,
-  ctx: UseCtx,
+  ctx: SetupContext<typeof pickerEmits>,
   { name, handlers }: UseOptions
 ) {
   const root = ref<HTMLElement>()
@@ -135,9 +140,9 @@ export function usePicker(
 
   watch([isInitPopup, popupVisible], ([isInit, visible]) => {
     if (isInit && visible) {
-      emit('focus')
+      emit('focus', { type: 'focus' })
     } else if (!visible) {
-      emit('blur')
+      emit('blur', { type: 'blur' })
     }
   })
 
@@ -242,8 +247,8 @@ interface ViewUseOptions {
 }
 
 export function usePickerView(
-  props: UseProps,
-  { emit }: UseCtx,
+  props: ExtractPropTypes<typeof commonProps>,
+  { emit }: SetupContext<typeof pickerValueEmits & AnyObject>,
   { name, afterUpdate, handlers }: ViewUseOptions
 ) {
   const cols = reactive<ColRow[][]>([])
