@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
-import { isDate, isString, isNumber } from '@/helpers/util'
 import dayjs from '@/helpers/day'
 import type { Dayjs } from 'dayjs'
 import { format } from 'timeago.js'
@@ -39,9 +38,9 @@ export default defineComponent({
     function getDate() {
       let djs: Dayjs | null = null
 
-      if (isDate(props.time) || isNumber(props.time)) {
+      if (props.time instanceof Date || typeof props.time === 'number') {
         djs = dayjs(props.time)
-      } else if (isString(props.time) && props.formatTemplate) {
+      } else if (typeof props.time === 'string' && props.formatTemplate) {
         djs = dayjs(props.time, props.formatTemplate)
       }
 

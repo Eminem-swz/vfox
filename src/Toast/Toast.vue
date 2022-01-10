@@ -30,7 +30,6 @@ import { Icon } from '@/Icon'
 import { ActivityIndicator } from '@/ActivityIndicator'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
-import { isUndefined } from '@/helpers/util'
 import { iconValidator } from '@/helpers/validator'
 
 const typeMaps = new Map([
@@ -52,7 +51,7 @@ export default defineComponent({
     type: {
       type: String as PropType<'default' | 'success' | 'loading' | 'fail'>,
       validator: (val: string) => {
-        return !isUndefined(typeMaps.get(val))
+        return typeof typeMaps.get(val) !== 'undefined'
       },
       default: 'default'
     },
@@ -71,7 +70,7 @@ export default defineComponent({
       default: 0
     }
   },
-  emits: popupEmits,
+  emits: { ...popupEmits },
   setup(props, ctx) {
     let durationTimer: number
 

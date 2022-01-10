@@ -45,7 +45,7 @@ export default defineComponent({
       default: true
     }
   },
-  emits: popupEmits,
+  emits: { ...popupEmits },
   setup(props, ctx) {
     const popup = usePopup(props, ctx, {})
 

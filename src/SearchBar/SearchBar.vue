@@ -69,20 +69,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, reactive, ref, watch } from 'vue'
+import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import { Icon } from '@/Icon'
 import { Input } from '@/Input'
 import { Button } from '@/Button'
 import { Dropdown } from '@/Dropdown'
 import { Cell } from '@/Cell'
 import { Tag } from '@/Tag'
-import {
-  isArray,
-  isObject,
-  isString,
-  isStringArray,
-  isStringNumberMix
-} from '@/helpers/util'
+import { isObject, isStringArray, isStringNumberMix } from '@/helpers/util'
 import { locale } from '@/Locale'
 import { emitTypeValidator } from '@/helpers/validator'
 
@@ -135,9 +129,8 @@ export default defineComponent({
       default: null
     },
     placeholders: {
-      validator: (val: Placeholders) => {
-        return isString(val) || isStringArray(val)
-      },
+      validator: (val: Placeholders) =>
+        typeof val === 'string' || isStringArray(val),
       default: () => [] as string[]
     },
     placeholderInterval: {
@@ -162,7 +155,7 @@ export default defineComponent({
     const searchText = ref('')
     const enableDropdown = ref(false)
     const suggestVisible = ref(false)
-    const suggestList = reactive<SuggestItem[]>([])
+    const suggestList = ref<SuggestItem[]>([])
 
     function proxyEvent(e: Event) {
       const text = searchText.value
@@ -197,12 +190,12 @@ export default defineComponent({
         return
       }
 
-      suggestList.length = 0
+      const newList: SuggestItem[] = []
 
-      if (isArray(res)) {
+      if (Array.isArray(res)) {
         res.forEach(v => {
           if (isStringNumberMix(v)) {
-            suggestList.push({
+            newList.push({
               text: (v as string | number).toString(),
               tags: []
             })
@@ -212,13 +205,15 @@ export default defineComponent({
             if (isStringNumberMix(v.text)) {
               v.text = v.text.toString()
               v.tags = isStringArray(v.tags) ? v.tags : []
-              suggestList.push(v)
+              newList.push(v)
             }
           }
         })
       }
 
-      if (suggestList.length > 0) {
+      suggestList.value = newList
+
+      if (newList.length > 0) {
         enableDropdown.value = true
         suggestVisible.value = true
       } else {
@@ -266,8 +261,8 @@ export default defineComponent({
       (val: Placeholders) => {
         clearInterval(placeholderTimer)
 
-        if (isString(val)) {
-          placeholder.value = val as string
+        if (typeof val === 'string') {
+          placeholder.value = val
         } else if (isStringArray(val)) {
           placeholderIndex = 0
           placeholder.value = val[placeholderIndex]

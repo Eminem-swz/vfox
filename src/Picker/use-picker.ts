@@ -1,13 +1,6 @@
-import { AnyObject } from './../helpers/types'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import type { ExtractPropTypes, SetupContext } from 'vue'
-import {
-  isArray,
-  cloneData,
-  isSameArray,
-  isFunction,
-  isEmpty
-} from '@/helpers/util'
+import { cloneData, isSameArray, isEmpty } from '@/helpers/util'
 import type {
   ColRow,
   OptionItem,
@@ -18,23 +11,18 @@ import type {
   PickerModelValue
 } from './types'
 import type { Noop } from '../helpers/types'
-import {
-  updateArray,
-  cloneDetail,
-  isSameDetail,
-  isSameValue
-} from '@/Picker/util'
+import { cloneDetail, isSameDetail, isSameValue } from '@/Picker/util'
 import {
   getDefaultDetail,
   validateValues,
   getColRows,
   getFormatOptions,
-  pickerValueEmits,
   commonProps,
-  pickerEmits
+  pickerEmits,
+  pickerPopupEmits
 } from '@/Picker/picker'
-import type { UseProps, UseEmit } from '../hooks/types'
-import { PopupCustomConfirm } from '@/popup/types'
+import type { UseProps } from '../hooks/types'
+import type { PopupCustomConfirm } from '../popup/types'
 
 interface UseOptions {
   name: string
@@ -162,12 +150,11 @@ export function usePicker(
 
 export function usePickerPopup(
   props: UseProps,
+  { emit }: SetupContext<typeof pickerPopupEmits>,
   {
-    emit,
     customConfirm,
     onCancelClick
   }: {
-    emit: UseEmit
     customConfirm: PopupCustomConfirm
     onCancelClick: Noop
   }
@@ -248,19 +235,19 @@ interface ViewUseOptions {
 
 export function usePickerView(
   props: ExtractPropTypes<typeof commonProps>,
-  { emit }: SetupContext<typeof pickerValueEmits & AnyObject>,
+  { emit }: SetupContext<any>,
   { name, afterUpdate, handlers }: ViewUseOptions
 ) {
-  const cols = reactive<ColRow[][]>([])
+  const cols = ref<ColRow[][]>([])
 
-  const options2 = reactive<OptionItem[] | OptionItem[][]>([])
+  const options2 = ref<OptionItem[] | OptionItem[][]>([])
   const isCascade = ref(false)
 
-  const selectedLabels: string[] = []
-  const selectedValues: PickerValue[] = []
+  let selectedLabels: string[] = []
+  let selectedValues: PickerValue[] = []
 
-  const currentLabels = reactive<string[]>([])
-  const currentValues = reactive<PickerValue[]>([])
+  const currentLabels = ref<string[]>([])
+  const currentValues = ref<PickerValue[]>([])
 
   const isPicker = name === 'picker'
 
@@ -275,7 +262,7 @@ export function usePickerView(
       !isPicker
     )
 
-    updateArray(options2, options)
+    options2.value = options
 
     isCascade.value = isCascade2
   }
@@ -283,22 +270,16 @@ export function usePickerView(
   function updateOriginalValue(val: PickerValue[], forceUpdate = false) {
     const { valid, value: values } = validateValues(
       val,
-      options2,
+      options2.value,
       isCascade.value,
       optionsHandler
     )
 
-    if ((valid && !isSameArray(values, currentValues)) || forceUpdate) {
+    if ((valid && !isSameArray(values, currentValues.value)) || forceUpdate) {
       update(values)
 
-      updateArray(
-        currentLabels,
-        values.length > 0 || isPicker ? selectedLabels : []
-      )
-      updateArray(
-        currentValues,
-        values.length > 0 || isPicker ? selectedValues : []
-      )
+      currentLabels.value = values.length > 0 || isPicker ? selectedLabels : []
+      currentValues.value = values.length > 0 || isPicker ? selectedValues : []
     }
 
     return getDetail()
@@ -310,8 +291,8 @@ export function usePickerView(
 
   function getDetail() {
     return formatter(
-      cloneData(currentValues),
-      cloneData(currentLabels),
+      cloneData(currentValues.value),
+      cloneData(currentLabels.value),
       handlers
     )
   }
@@ -325,16 +306,16 @@ export function usePickerView(
     !isCascade.value ? updateCols(selecteds) : updateCascadeCols(selecteds)
 
     if (isPicker) {
-      updateArray(currentLabels, selectedLabels)
-      updateArray(currentValues, selectedValues)
+      currentLabels.value = selectedLabels
+      currentValues.value = selectedValues
     }
 
-    afterUpdate(selectedValues, selectedLabels, cols)
+    afterUpdate(selectedValues, selectedLabels, cols.value)
   }
 
   function clearCache() {
-    updateArray(selectedLabels, [])
-    updateArray(selectedValues, [])
+    selectedLabels = []
+    selectedValues = []
   }
 
   /**
@@ -343,15 +324,14 @@ export function usePickerView(
   function updateCols(selecteds: PickerValue[]) {
     clearCache()
 
-    if (options2.length === 0) {
-      updateArray(cols, [])
+    cols.value = []
+
+    if (options2.value.length === 0) {
       return []
     }
 
-    cols.length = 0
-
     const options = (
-      isArray(options2[0]) ? options2 : [options2]
+      Array.isArray(options2.value[0]) ? options2.value : [options2.value]
     ) as OptionItem[][]
 
     options.forEach((subOptions, index) => {
@@ -385,7 +365,7 @@ export function usePickerView(
         }
       }
 
-      cols.push(rows)
+      cols.value.push(rows)
     })
   }
 
@@ -401,7 +381,7 @@ export function usePickerView(
       selecteds = getCascadeDefaultSelecteds()
     }
 
-    cols.length = 0
+    cols.value = []
 
     const getRows = optionsHandler as PickerOptionsHandler
     let colIndex = 0
@@ -435,7 +415,7 @@ export function usePickerView(
           }
         }
 
-        cols.push(rows)
+        cols.value.push(rows)
       }
 
       if (!nextParent) {
@@ -460,7 +440,7 @@ export function usePickerView(
         if (lastColFirstRow.hasChildren) {
           colIndex++
           rows = getRows(colIndex, lastColFirstRow)
-          cols.push(rows)
+          cols.value.push(rows)
 
           lastColFirstRow = rows[0]
         } else {
@@ -475,16 +455,16 @@ export function usePickerView(
    * @param selecteds 选择值
    */
   function updateCascadeCols(selecteds: PickerValue[]) {
-    if (isFunction(optionsHandler)) {
+    if (typeof optionsHandler === 'function') {
       updateVirtualOptionsCols(selecteds)
       return
     }
 
     clearCache()
 
-    cols.length = 0
+    cols.value = []
 
-    let optionList: OptionItem[] = options2 as OptionItem[]
+    let optionList: OptionItem[] = options2.value as OptionItem[]
     let rows = getColRows(optionList, [])
 
     if (selecteds.length === 0) {
@@ -520,7 +500,7 @@ export function usePickerView(
           }
         }
 
-        cols.push(rows)
+        cols.value.push(rows)
       }
 
       if (!nextParent) {
@@ -545,7 +525,7 @@ export function usePickerView(
           optionList = lastGroupFirstItem.children
           rows = getColRows(optionList, [...lastColFirstRow.indexes])
 
-          cols.push(rows)
+          cols.value.push(rows)
 
           lastGroupFirstItem = optionList[0]
         } else {
@@ -559,10 +539,10 @@ export function usePickerView(
    * 非级联更新选择项
    */
   function updateColSelected(colIndex: number, current: number) {
-    ;(cols as ColRow[][])[colIndex].forEach((row, index) => {
+    ;(cols.value as ColRow[][])[colIndex].forEach((row, index) => {
       if (index === current) {
-        currentValues[colIndex] = row.value
-        currentLabels[colIndex] = row.label
+        currentValues.value[colIndex] = row.value
+        currentLabels.value[colIndex] = row.label
         row.selected = true
       } else {
         row.selected = false
@@ -600,7 +580,7 @@ export function usePickerView(
       return values
     }
 
-    return !isPicker ? [] : getFirstSelected([], options2 as OptionItem[])
+    return !isPicker ? [] : getFirstSelected([], options2.value as OptionItem[])
   }
 
   function getValuesByRow(row: ColRow) {
@@ -611,7 +591,7 @@ export function usePickerView(
     const values: PickerValue[] = []
     const indexes = row.indexes
     let i = 0
-    let options = options2 as OptionItem[]
+    let options = options2.value as OptionItem[]
     let optionItem = options[indexes[i]]
 
     while (options.length > 0 && i < indexes.length && optionItem) {
@@ -637,7 +617,7 @@ export function usePickerView(
     [() => props.options, () => props.fieldNames],
     () => {
       updateOptions()
-      updateOriginalValue(currentValues, true)
+      updateOriginalValue(currentValues.value, true)
     },
     {
       deep: true

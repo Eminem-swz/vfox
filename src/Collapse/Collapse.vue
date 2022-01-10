@@ -8,7 +8,6 @@
 import { defineComponent, onMounted, watch, provide } from 'vue'
 import {
   cloneData,
-  isArray,
   inArray,
   isSameArray,
   isStringNumberMixArray
@@ -16,14 +15,14 @@ import {
 import { stringNumberArrayMixValidator } from '@/helpers/validator'
 import { useGroup } from '@/hooks/use-group'
 
-type CollapseActiveNames = (string | number)[]
+type ActiveName = string | number
 
 export default defineComponent({
   name: 'fx-collapse',
   props: {
     activeNames: {
       validator: stringNumberArrayMixValidator,
-      default: () => [] as CollapseActiveNames
+      default: () => [] as ActiveName[]
     },
     accordion: {
       type: Boolean,
@@ -31,27 +30,31 @@ export default defineComponent({
     }
   },
   emits: {
-    'update:activeNames': (payload: CollapseActiveNames) =>
+    'update:activeNames': (payload: ActiveName[]) =>
       stringNumberArrayMixValidator(payload),
-    change: (payload: { activeNames: CollapseActiveNames }) =>
+    change: (payload: { activeNames: ActiveName[] }) =>
       payload && isStringNumberMixArray(payload.activeNames)
   },
   setup(props, { emit }) {
-    let activeNames2: CollapseActiveNames = []
+    let activeNames2: ActiveName[] = []
 
     const { children } = useGroup('collapse')
 
-    function updateValue(val: string | number | CollapseActiveNames) {
+    function updateValue(val: ActiveName | ActiveName[]) {
       let values = cloneData(
-        stringNumberArrayMixValidator(val) ? (isArray(val) ? val : [val]) : []
-      ) as CollapseActiveNames
+        stringNumberArrayMixValidator(val)
+          ? Array.isArray(val)
+            ? val
+            : [val]
+          : []
+      )
 
       if (props.accordion) {
         // 手风琴模式只保留一个值
         values = values.slice(0, 1)
       }
 
-      if (isArray(values) && isSameArray(values, activeNames2)) {
+      if (Array.isArray(values) && isSameArray(values, activeNames2)) {
         return
       }
 

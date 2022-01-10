@@ -1,7 +1,6 @@
 import {
   getCurrentInstance,
   ComponentInternalInstance,
-  reactive,
   ref,
   watch,
   computed,
@@ -9,13 +8,7 @@ import {
   SetupContext,
   ExtractPropTypes
 } from 'vue'
-import {
-  isNumber,
-  isObject,
-  isString,
-  isStringNumberMix,
-  isURL
-} from '@/helpers/util'
+import { isNumber, isObject, isStringNumberMix, isURL } from '@/helpers/util'
 import { frameTo } from '@/helpers/animation'
 import Exception from '@/helpers/exception'
 import { iconValidator } from '@/helpers/validator'
@@ -36,7 +29,7 @@ export function useTab(
   const instance = getCurrentInstance() as ComponentInternalInstance
   const list = ref<HTMLElement>()
   const underline = ref<HTMLElement>()
-  const options2 = reactive<HandleOptionItem[]>([])
+  const options2 = ref<HandleOptionItem[]>([])
   const activeIndex = ref(-1)
   const hasSub = ref(false)
 
@@ -57,18 +50,21 @@ export function useTab(
             label: item.toString(),
             value: item as number
           }
-        } else if (isString(item)) {
+        } else if (typeof item === 'string') {
           option = {
-            label: item as string,
-            value: item as string
+            label: item,
+            value: item
           }
         } else if (isObject(item)) {
           item = item as TabOptionItem
 
           if (isStringNumberMix(item.value)) {
             option = {
-              label: isString(item.label) ? item.label : item.value.toString(),
-              subLabel: isString(item.subLabel) ? item.subLabel : '',
+              label:
+                typeof item.label === 'string'
+                  ? item.label
+                  : item.value.toString(),
+              subLabel: typeof item.subLabel === 'string' ? item.subLabel : '',
               value: item.value,
               icon: iconValidator(item.icon) ? item.icon : null
             }
@@ -106,8 +102,7 @@ export function useTab(
       })
     }
 
-    options2.length = 0
-    options2.push(...options)
+    options2.value = options
 
     if (!hasActive && options[0]) {
       // this.onChange(options[0].value)
@@ -131,8 +126,8 @@ export function useTab(
   }
 
   function switchToIndex(index: number) {
-    if (options2[index]) {
-      updateActive(options2[index].value)
+    if (options2.value[index]) {
+      updateActive(options2.value[index].value)
     } else {
       console.error(
         new Exception(
@@ -151,7 +146,7 @@ export function useTab(
 
     let hasValue = false
 
-    options2.forEach((option, index) => {
+    options2.value.forEach((option, index) => {
       if (option.value === value) {
         value2 = option.value
         activeIndex.value = index
@@ -203,7 +198,7 @@ export function useTab(
       }
 
       const $list = list.value as HTMLElement
-      const $activeItem = $list.children[activeIndex.value] as HTMLElement
+      const $activeItem = $list?.children[activeIndex.value] as HTMLElement
 
       if (!$activeItem) {
         return

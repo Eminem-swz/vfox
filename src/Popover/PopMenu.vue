@@ -43,7 +43,7 @@ import type { PropType } from 'vue'
 import { usePopover } from '@/Popover/use-popover'
 import { popoverProps, popoverEmits } from '@/Popover/popover'
 import { Icon } from '@/Icon'
-import { isArray, isObject } from '@/helpers/util'
+import { isObject } from '@/helpers/util'
 import type { PopMenuOption } from './types'
 
 export default defineComponent({
@@ -55,7 +55,7 @@ export default defineComponent({
       type: Array as PropType<PopMenuOption[]>
     }
   },
-  emits: [...popoverEmits, 'select'],
+  emits: { ...popoverEmits },
   setup(props, ctx) {
     const popoverHook = usePopover(props, ctx)
 
@@ -77,8 +77,8 @@ export default defineComponent({
     const options2 = computed(() => {
       const options: PopMenuOption[] = []
 
-      if (isArray(props.options)) {
-        props.options?.forEach((v: PopMenuOption) => {
+      if (Array.isArray(props.options)) {
+        props.options.forEach((v: PopMenuOption) => {
           isObject(v)
             ? options.push({
                 icon: v.icon || null,

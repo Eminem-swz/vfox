@@ -19,12 +19,10 @@ import {
   checkboxOrRadioProps
 } from '@/Checkbox/checkbox-radio'
 
-type GroupProps = ExtractPropTypes<typeof checkboxOrRadioGroupProps> & {
-  modelValue: ModelValue | ModelValue[]
-}
-
 interface GroupOptions {
-  props: GroupProps
+  props: ExtractPropTypes<typeof checkboxOrRadioGroupProps> & {
+    modelValue: ModelValue | ModelValue[]
+  }
   onChange: (uid: number) => void
 }
 
@@ -143,26 +141,23 @@ export function useCheckboxOrRadio(
   }
 }
 
-interface UpdateValueOptions {
-  isChange: boolean
-  children: GroupItem[]
-  uid: number | undefined
-}
-
-interface WatchValueOptions {
-  children: GroupItem[]
-  value: ModelValue | ModelValue[]
-}
-
-interface UseGroupOptions {
-  name: string
-  updateValue: (options: UpdateValueOptions) => ModelValue | ModelValue[]
-  watchValue: (options: WatchValueOptions) => void
-}
-
-export function useCheckboxOrRadioGroup(
-  props: GroupProps,
-  { name, updateValue, watchValue }: UseGroupOptions
+export function useCheckboxOrRadioGroup<T>(
+  props: ExtractPropTypes<typeof checkboxOrRadioGroupProps> & {
+    modelValue: T
+  },
+  {
+    name,
+    updateValue,
+    watchValue
+  }: {
+    name: string
+    updateValue: (options: {
+      isChange: boolean
+      children: GroupItem[]
+      uid: number | undefined
+    }) => T
+    watchValue: (options: { children: GroupItem[]; value: T }) => void
+  }
 ) {
   const root = ref<HTMLElement>()
   const { children } = useGroup<GroupItem>(name)
@@ -212,7 +207,7 @@ export function useCheckboxOrRadioGroup(
   provide(`fx${capitalize(name)}Options`, {
     props,
     onChange
-  } as GroupOptions)
+  })
 
   return {
     root,

@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import { SideTab } from '@/SideTab'
 import { Sticky } from '@/Sticky'
 import { StickyView } from '@/StickyView'
@@ -52,7 +52,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const sidebar = ref()
     const body = ref()
-    const tabList = reactive<
+    const tabList = ref<
       {
         value: number
         label: string
@@ -66,16 +66,12 @@ export default defineComponent({
     }
 
     function onResetItems(items: { name: string; index: number }[]) {
-      tabList.splice(
-        0,
-        Infinity,
-        ...items.map(item => {
-          return {
-            value: item.index,
-            label: item.name
-          }
-        })
-      )
+      tabList.value = items.map(item => {
+        return {
+          value: item.index,
+          label: item.name
+        }
+      })
     }
 
     function onChange(res: StickyViewChangeArgs) {

@@ -1,10 +1,11 @@
 import { computed, onMounted, ref, watch, inject } from 'vue'
-import { inArray, isFunction, noop } from '@/helpers/util'
+import type { SetupContext } from 'vue'
+import { inArray, noop } from '@/helpers/util'
 import { addClassName, getScrollTop, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
 import type { AnyObject, Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/use-blur'
-import type { UseEmit, UseProps, UseCtx } from '../hooks/types'
+import type { UseEmit, UseProps } from '../hooks/types'
 import type {
   PopupVisibleStateChangeArgs,
   PopupVisibleState,
@@ -18,10 +19,12 @@ import type {
 
 type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
 
-type UseOptions = {
-  forbidScroll?: boolean
-  useBlur?: boolean
-} & Partial<Record<LifeName, Noop>>
+type UseOptions = Partial<
+  Record<LifeName, Noop> & {
+    forbidScroll: boolean
+    useBlur: boolean
+  }
+>
 
 let zIndex = popupZIndex
 
@@ -33,7 +36,11 @@ function isTypeEvent(event: string) {
   return inArray(event, ['change', 'confirm', 'cancel', 'visible-state-change'])
 }
 
-export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
+export function usePopup(
+  props: UseProps,
+  ctx: SetupContext<any>,
+  useOptions: UseOptions
+) {
   const apis = inject<PopupBridge>('fxApis', {})
   // const isParent = inject<boolean>('fxPopupExtend', false)
 
@@ -127,8 +134,7 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
 
       position.value = null
       top.value = null
-
-      isFunction(callback) && (callback as Noop)()
+      callback && typeof callback === 'function' && callback()
     }, 210)
 
     if (props.visible) {
@@ -153,7 +159,7 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   }
 
   function afterCall(lifeName: LifeName) {
-    if (isFunction(useOptions[lifeName])) {
+    if (typeof useOptions[lifeName] === 'function') {
       ;(useOptions[lifeName] as Noop)()
     }
   }
@@ -227,7 +233,6 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   apis.out && apis.out('customCancel', customCancel)
 
   return {
-    emit,
     isShow,
     visible2,
     zIndex,
@@ -243,7 +248,7 @@ export function usePopup(props: UseProps, ctx: UseCtx, useOptions: UseOptions) {
   }
 }
 
-export function usePopupExtend(ctx: UseCtx) {
+export function usePopupExtend(ctx: SetupContext<any>) {
   const popup = ref()
   const apis = inject<PopupBridge>('fxApis', {})
 

@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, ref } from 'vue'
 import type { PropType } from 'vue'
 import Checkbox from './Checkbox.vue'
 import {
@@ -47,44 +47,46 @@ export default defineComponent({
     change: isValue
   },
   setup(props, ctx) {
-    const inputValue = reactive<ModelValue[]>([])
+    const inputValue = ref<ModelValue[]>([])
     const { emit } = ctx
 
     const group = useCheckboxOrRadioGroup(props, {
       name: 'checkbox',
       updateValue({ isChange, children }) {
-        const value: ModelValue[] = []
+        const newVal: ModelValue[] = []
 
         children.forEach(child => {
           if (child.getInputChecked()) {
-            value.push(cloneData(child.getValue()))
+            newVal.push(cloneData(child.getValue()))
           }
         })
 
-        inputValue.splice(0, Infinity, ...value)
+        inputValue.value = newVal
 
-        if (isChange && !isSameArray(value, props.modelValue)) {
-          ctx.emit('update:modelValue', cloneData(value))
+        if (isChange && !isSameArray(newVal, props.modelValue)) {
+          emit('update:modelValue', cloneData(newVal))
         }
 
         if (isChange) {
-          emit('change', cloneData(value))
+          emit('change', cloneData(newVal))
         }
 
-        return value
+        return newVal
       },
       watchValue({ children, value }) {
         if (
           isStringNumberMixArray(value) &&
-          !isSameArray(value as ModelValue[], inputValue)
+          !isSameArray(value, inputValue.value)
         ) {
-          inputValue.length = 0
+          const newVal: ModelValue[] = []
 
           children.forEach(child => {
-            const checked = inArray(child.getValue(), value as ModelValue[])
+            const checked = inArray(child.getValue(), value)
             child.setChecked(checked)
-            checked && inputValue.push(child.getValue())
+            checked && newVal.push(child.getValue())
           })
+
+          inputValue.value = newVal
         }
       }
     })

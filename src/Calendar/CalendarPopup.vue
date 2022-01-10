@@ -40,7 +40,7 @@ import { Drawer } from '@/Drawer'
 import { Button } from '@/Button'
 import { getDefaultDetail, commonProps } from '@/Calendar/calendar'
 import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { popupExtendProps } from '@/popup/popup'
 import { pickerPopupEmits } from '@/Picker/picker'
 import { cloneDetail } from '@/Picker/util'
 import type { CalendarDetail } from './types'
@@ -65,8 +65,11 @@ export default defineComponent({
       default: false
     }
   },
-  emits: [...popupExtendEmits, ...pickerPopupEmits],
+  emits: {
+    ...pickerPopupEmits
+  },
   setup(props, ctx) {
+    const { emit } = ctx
     const calendarView = ref()
     const valueSize = ref(0)
 
@@ -93,8 +96,8 @@ export default defineComponent({
 
       updateDetail(calendarView.value.getDetail())
 
-      popup.emit('update:modelValue', getDetail().value)
-      popup.emit('change', getDetail().value)
+      emit('update:modelValue', getDetail().value)
+      emit('change', getDetail().value)
       popup.customConfirm(getDetail())
     }
 

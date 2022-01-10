@@ -34,7 +34,7 @@ export default defineComponent({
       required: true
     }
   },
-  emits: popupEmits,
+  emits: { ...popupEmits },
   setup(props, ctx) {
     const top = ref(-1)
     const height = ref(0)

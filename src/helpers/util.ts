@@ -37,42 +37,6 @@ export function camelCase2KebabCase(name: string) {
 }
 
 /**
- * 是否undefined
- * @param object 值
- * @returns boolean
- */
-export function isUndefined(object: unknown) {
-  return typeof object === 'undefined'
-}
-
-/**
- * 是否布尔值
- * @param object 值
- * @returns boolean
- */
-export function isBoolean(object: unknown) {
-  return typeof object === 'boolean'
-}
-
-/**
- * 是否函数
- * @param object 值
- * @returns boolean
- */
-export function isFunction(object: unknown) {
-  return typeof object === 'function'
-}
-
-/**
- * 是否字符串
- * @param object 值
- * @returns boolean
- */
-export const isString = (object: unknown) => {
-  return typeof object === 'string'
-}
-
-/**
  * 是否对象，包含常见的{}/[]，不含null
  * @param object 值
  * @returns boolean
@@ -98,9 +62,7 @@ export function isNumber(object: unknown) {
 export const isNumeric = (object: unknown) => {
   return (
     isNumber(object) ||
-    (isString(object) &&
-      !isNaN(parseFloat(object as string)) &&
-      isFinite(parseFloat(object as string)))
+    (typeof object === 'string' && isNumber(parseFloat(object)))
   )
 }
 
@@ -111,51 +73,6 @@ export const isNumeric = (object: unknown) => {
  */
 export function isInteger(object: unknown) {
   return isNumber(object) && (object as number) % 1 === 0
-}
-
-/**
- * 是否数组
- * @param object 值
- * @returns boolean
- */
-export function isArray(object: unknown) {
-  return Array.isArray(object)
-}
-
-/**
- * 是否Date实例
- * @param object 值
- * @returns boolean
- */
-export function isDate(object: unknown) {
-  return object instanceof Date
-}
-
-/**
- * 是否DOM
- * @param object 值
- * @returns boolean
- */
-export function isElement(object: unknown) {
-  return object instanceof Element
-}
-
-/**
- * 是否HTML DOM
- * @param object 值
- * @returns boolean
- */
-export function isHTMLElement(object: unknown) {
-  return object instanceof HTMLElement
-}
-
-/**
- * 是否node节点
- * @param object 值
- * @returns boolean
- */
-export function isNode(object: unknown) {
-  return object instanceof Node
 }
 
 /**
@@ -176,24 +93,8 @@ export function isSymbol(object: unknown) {
  * @param object 值
  * @returns boolean
  */
-export function isEmptyObject(object: unknown) {
-  if (
-    isObject(object) &&
-    !isDate(object) &&
-    !isElement(object) &&
-    !(object instanceof Error)
-  ) {
-    let has = false
-    for (const i in object as AnyObject) {
-      if (hasOwnProperty(object as AnyObject, i)) {
-        has = true
-        break
-      }
-    }
-    return !has
-  }
-
-  return false
+export const isEmptyObject = (object: unknown) => {
+  return typeof object === 'object' && JSON.stringify(object) === '{}'
 }
 
 /**
@@ -202,7 +103,28 @@ export function isEmptyObject(object: unknown) {
  * @returns boolean
  */
 export const isStringNumberMix = (object: unknown) => {
-  return isString(object) || isNumber(object)
+  return typeof object === 'string' || typeof object === 'number'
+}
+
+const createArrayValidator = (itemValidator: (item: unknown) => boolean) => {
+  const validator = (object: unknown) => {
+    let is = false
+
+    if (Array.isArray(object)) {
+      is = true
+
+      for (let i = 0; i < object.length; i++) {
+        if (!itemValidator(object[i])) {
+          is = false
+          break
+        }
+      }
+    }
+
+    return is
+  }
+
+  return validator
 }
 
 /**
@@ -210,59 +132,29 @@ export const isStringNumberMix = (object: unknown) => {
  * @param object 值
  * @returns boolean
  */
-export const isNumberArray = (object: unknown) => {
-  let is = false
-
-  if (isArray(object)) {
-    is = true
-
-    const arr = object as number[]
-
-    for (let i = 0; i < arr.length; i++) {
-      if (!isNumber(arr[i])) {
-        is = false
-        break
-      }
-    }
-  }
-
-  return is
-}
+export const isNumberArray = createArrayValidator(
+  object => typeof object === 'number'
+)
 
 /**
  * 是否String[]
  * @param object 值
  * @returns boolean
  */
-export const isStringArray = (object: unknown) => {
-  let is = false
-
-  if (isArray(object)) {
-    is = true
-
-    const arr = object as string[]
-
-    for (let i = 0; i < arr.length; i++) {
-      if (!isString(arr[i])) {
-        is = false
-        break
-      }
-    }
-  }
-
-  return is
-}
+export const isStringArray = createArrayValidator(
+  object => typeof object === 'string'
+)
 
 /**
  * string/string[]统一转为string[]
  * @param object 值
  * @returns string[]
  */
-export function stringMix2StringArray(object: unknown) {
+export const stringMix2StringArray = (object: unknown) => {
   return isStringArray(object)
     ? (object as string[])
-    : isString(object)
-    ? [object as string]
+    : typeof object === 'string'
+    ? [object]
     : []
 }
 
@@ -271,48 +163,18 @@ export function stringMix2StringArray(object: unknown) {
  * @param object 值
  * @returns boolean
  */
-export const isStringNumberMixArray = (object: unknown) => {
-  let is = false
-
-  if (isArray(object)) {
-    is = true
-
-    const arr = object as (string | number)[]
-
-    for (let i = 0; i < arr.length; i++) {
-      if (!(isString(arr[i]) || isNumber(arr[i]))) {
-        is = false
-        break
-      }
-    }
-  }
-
-  return is
-}
+export const isStringNumberMixArray = createArrayValidator(object =>
+  isStringNumberMix(object)
+)
 
 /**
  * 是否Date[]
  * @param object 值
  * @returns boolean
  */
-export function isDateArray(object: unknown) {
-  let is = false
-
-  if (isArray(object)) {
-    is = true
-
-    const arr = object as Date[]
-
-    for (let i = 0; i < arr.length; i++) {
-      if (!isDate(arr[i])) {
-        is = false
-        break
-      }
-    }
-  }
-
-  return is
-}
+export const isDateArray = createArrayValidator(
+  object => object instanceof Date
+)
 
 /**
  * 是否相同的数组
@@ -323,7 +185,7 @@ export function isDateArray(object: unknown) {
 export function isSameArray(a: unknown[], b: unknown[]): boolean {
   if (a.length === b.length) {
     for (let i = 0; i < a.length; i++) {
-      if (isDate(a[i]) && isDate(b[i])) {
+      if (a[i] instanceof Date && b[i] instanceof Date) {
         // 增加处理时间
         if (!isSameDate(a[i] as Date, b[i] as Date)) {
           return false
@@ -368,15 +230,14 @@ export function isSameDate(a: Date, b: Date) {
  * - NaN
  * - {}
  */
-export function isEmpty(object: unknown) {
+export const isEmpty = (object: unknown) => {
   return (
     object == null ||
     object === '' ||
     object === '0' ||
     object === false ||
-    (isNumber(object) && object == 0) ||
-    (typeof object === 'number' && isNaN(object)) ||
-    (isArray(object) && (object as string[]).length === 0) ||
+    (typeof object === 'number' && (object == 0 || isNaN(object))) ||
+    (Array.isArray(object) && object.length === 0) ||
     isEmptyObject(object)
   )
 }
@@ -522,19 +383,19 @@ export function rangeInteger(
   min: number,
   max: number
 ) {
-  if (isString(number)) {
+  let num: number
+
+  if (typeof number === 'string') {
     if (isNumeric(number)) {
-      number = parseFloat(number as string)
+      num = parseFloat(number)
     } else {
-      number = min
+      num = min
     }
+  } else {
+    num = number
   }
 
-  return rangeNumber(
-    Math.round(number as number),
-    Math.ceil(min),
-    Math.floor(max)
-  )
+  return rangeNumber(Math.round(num), Math.ceil(min), Math.floor(max))
 }
 
 /**
@@ -557,8 +418,8 @@ export const isInNumberRange = (number: unknown, min: number, max: number) => {
  */
 export const isPromiseLike = (object: unknown) => {
   return (
-    (isObject(object) || isFunction(object)) &&
-    isFunction((object as Promise<never>).then)
+    (isObject(object) || typeof object === 'function') &&
+    typeof (object as Promise<never>).then === 'function'
   )
 }
 
@@ -569,7 +430,7 @@ export const isPromiseLike = (object: unknown) => {
  */
 export const isURL = (object: unknown) => {
   return (
-    isString(object) &&
+    typeof object === 'string' &&
     /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?(@?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i.test(
       object as string
     )

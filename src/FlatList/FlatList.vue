@@ -55,21 +55,12 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  reactive,
-  ref,
-  nextTick,
-  watch
-} from 'vue'
+import { computed, defineComponent, onMounted, ref, nextTick, watch } from 'vue'
 import type { PropType } from 'vue'
 import { LoadMore } from '@/LoadMore'
 import { ScrollView } from '@/ScrollView'
 import {
   cloneData,
-  isFunction,
   isInNumberRange,
   isInteger,
   isNumber,
@@ -183,8 +174,8 @@ export default defineComponent({
     refreshing: emitRefreshingValidator
   },
   setup(props, { emit }) {
-    const cols = reactive<number[]>([])
-    const list = reactive<
+    const cols = ref<number[]>([])
+    const list = ref<
       {
         data: Item
         recycled: boolean
@@ -206,7 +197,7 @@ export default defineComponent({
         i < len;
         i++
       ) {
-        cols.push(0)
+        cols.value.push(0)
       }
     } else if (props.initialHorizontal) {
       horizontal = true
@@ -226,7 +217,7 @@ export default defineComponent({
       const dataKey = props.dataKey
 
       data.forEach((v, k) => {
-        const oldItem = list[k]
+        const oldItem = list.value[k]
         // 如果没有固定高度（或宽度），默认不回收，因为需要展示以获取当前高度
         const newItem = { data: v, recycled: isSizeFixed() }
 
@@ -243,7 +234,7 @@ export default defineComponent({
         newList.push(newItem)
       })
 
-      list.splice(0, Infinity, ...newList)
+      list.value = newList
     }
 
     function getRootEl() {
@@ -254,7 +245,7 @@ export default defineComponent({
       const $root = getRootEl()
 
       wrapperSize = getElSize($root)
-      colSize = $root.offsetWidth / cols.length
+      colSize = $root.offsetWidth / cols.value.length
     }
 
     function getElSize($el: HTMLElement) {
@@ -283,7 +274,7 @@ export default defineComponent({
       // console.log('updateItems', source)
 
       const $list = listEl.value as HTMLElement
-      const newCols = cols.map(() => {
+      const newCols = cols.value.map(() => {
         return 0
       })
 
@@ -318,7 +309,7 @@ export default defineComponent({
           offset = $item[scrollX ? 'offsetLeft' : 'offsetTop']
         }
 
-        const item = list[index]
+        const item = list.value[index]
 
         const change = (recycled: boolean) => {
           $item._recycled = recycled
@@ -360,7 +351,7 @@ export default defineComponent({
 
       if (newCols.length > 1) {
         $list.style.height = Math.max.apply(null, newCols) + 'px'
-        cols.splice(0, Infinity, ...newCols)
+        cols.value = newCols
       }
     }
 
@@ -388,7 +379,7 @@ export default defineComponent({
     }
 
     function getItemLayout($el: HTMLElement, index: number) {
-      if (isFunction(props.getItemSize)) {
+      if (typeof props.getItemSize === 'function') {
         try {
           const size = props.getItemSize(cloneData(props.data[index]), index)
 

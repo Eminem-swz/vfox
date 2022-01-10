@@ -1,5 +1,5 @@
 import { createApp, Component } from 'vue'
-import { inArray, isObject, isString, objectForEach } from '@/helpers/util'
+import { inArray, isObject, objectForEach } from '@/helpers/util'
 import { getCallbackFns } from '@/apis/callback'
 import type { AnyObject, EmptyObject } from '../helpers/types'
 import type { PopupCustomCancel, PopupBridge, PopupHook } from '../popup/types'
@@ -57,9 +57,9 @@ export function createShowPopup<T, E = EmptyObject>({
   ) {
     let options: AnyObject
 
-    if (isString(object)) {
+    if (typeof object === 'string') {
       options = {
-        title: object as any
+        title: object
       }
     } else if (!isObject(object)) {
       options = {}

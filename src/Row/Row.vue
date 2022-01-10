@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, provide, reactive, watch } from 'vue'
-import { isNumber, isArray, isNumeric } from '@/helpers/util'
+import { isNumeric } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { createEnumsValidator } from '@/helpers/validator'
 
@@ -18,9 +18,9 @@ export default defineComponent({
     // 栅格间隔
     gutter: {
       validator: (value: PropGutter) => {
-        if (isNumeric(value)) {
+        if (Array.isArray(value) && typeof value[0] === 'number') {
           return true
-        } else if (isArray(value) && isNumber((value as number[])[0])) {
+        } else if (isNumeric(value)) {
           return true
         }
 
@@ -79,17 +79,11 @@ export default defineComponent({
       () => props.gutter,
       (val: PropGutter) => {
         if (isNumeric(val)) {
-          gutter[0] = Math.max(0, val as number)
+          gutter[0] = Math.max(0, parseFloat(val as string))
           gutter[1] = 0
-        } else if (isArray(val)) {
-          val = val as number[]
-
-          if (isNumber(val[0])) {
-            gutter[0] = Math.max(0, val[0])
-          }
-          if (isNumber(val[1])) {
-            gutter[1] = Math.max(0, val[1])
-          }
+        } else if (Array.isArray(val)) {
+          val[0] >= 0 && (gutter[0] = val[0])
+          val[1] >= 0 && (gutter[1] = val[1])
         }
       },
       {

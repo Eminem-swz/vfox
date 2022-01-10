@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { cascadeOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
 import { showCascader } from '@/Cascader'
@@ -59,7 +59,7 @@ export default defineComponent({
   setup() {
     const separator = '-'
 
-    const value = reactive(['bingxiang', 'duikaimen'])
+    const value = ref(['bingxiang', 'duikaimen'])
     const formatValue = ref(`bingxiang${separator}duikaimen`)
 
     const formatter: PickerValueFormatter = (valueArray, labelArray) => {

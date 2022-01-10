@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { isArray, isObject, isString, isStringNumberMix } from '@/helpers/util'
+import { isStringNumberMix } from '@/helpers/util'
 import type { TabOptionItem, OptionList, OptionValue } from './types'
 
 // export const tabEmits = ['update:activeValue', 'change']
@@ -16,16 +16,16 @@ export const tabProps = {
   options: {
     type: Array as PropType<OptionList>,
     validator: (val: OptionList) => {
-      if (isArray(val)) {
+      if (Array.isArray(val)) {
         for (let i = 0; i < val.length; i++) {
           const option = val[i]
 
-          if (isStringNumberMix(option)) {
+          if (typeof option === 'string' || typeof option === 'number') {
             //
           } else if (
-            isObject(option) &&
-            isStringNumberMix((option as TabOptionItem).value) &&
-            isString((option as TabOptionItem).label)
+            option &&
+            typeof option.label === 'string' &&
+            isStringNumberMix(option.value)
           ) {
             //
           } else {

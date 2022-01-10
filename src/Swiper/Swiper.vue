@@ -46,7 +46,6 @@
 import {
   ref,
   defineComponent,
-  reactive,
   onMounted,
   watch,
   onBeforeUnmount,
@@ -139,7 +138,7 @@ export default defineComponent({
     const root = ref<HTMLElement>()
     const { emit } = ctx
     const index = ref(0)
-    const pagination = reactive<number[]>([])
+    const pagination = ref<number[]>([])
     const direction = ref('x')
 
     let directionGroup: string[] = []
@@ -444,7 +443,7 @@ export default defineComponent({
 
       updateListStyle(-itemSize * index.value)
 
-      pagination.length = 0
+      pagination.value = []
 
       $items.forEach(($item, i) => {
         $item.dataset.index = i.toString()
@@ -458,7 +457,7 @@ export default defineComponent({
 
         $item.style.cssText = cssText
 
-        pagination.push(i)
+        pagination.value.push(i)
       })
     }
 

@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import { rangeInteger } from '@/helpers/util'
@@ -51,7 +51,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const navigation = ref<HTMLElement>()
     const body = ref()
-    const indexList = reactive<
+    const indexList = ref<
       {
         value: number
         label: string
@@ -64,16 +64,12 @@ export default defineComponent({
     }
 
     function onResetItems(items: StickyViewItem[]) {
-      indexList.splice(
-        0,
-        Infinity,
-        ...items.map(item => {
-          return {
-            value: item.index,
-            label: item.name
-          }
-        })
-      )
+      indexList.value = items.map(item => {
+        return {
+          value: item.index,
+          label: item.name
+        }
+      })
     }
 
     function onChange(res: StickyViewChangeArgs) {
@@ -150,7 +146,7 @@ export default defineComponent({
             activeIndex.value = rangeInteger(
               current + offsetCount,
               0,
-              indexList.length - 1
+              indexList.value.length - 1
             )
           }, 100)
         }

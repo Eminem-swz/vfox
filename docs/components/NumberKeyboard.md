@@ -20,12 +20,13 @@ import { NumberKeyboard } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述                           | 回调函数参数                                                       |
-| -------------------- | ------------------------------ | ------------------------------------------------------------------ |
-| input                | 点击按键时触发                 | { key: string }                                                    |
-| delete               | 点击删除键时触发               | { deleteKey: string }                                              |
-| close                | 点击关闭按钮或非键盘区域时触发 | { value: string }                                                  |
-| visible-state-change | 展示隐藏时触发                 | { state: [VisibleState](./NumberKeyboard.md#visiblestate-值说明) } |
+| 事件                 | 描述             | 回调函数参数                                                       |
+| -------------------- | ---------------- | ------------------------------------------------------------------ |
+| input                | 点击按键时触发   | key: string                                                        |
+| delete               | 点击删除键时触发 | { deleteKey: string }                                              |
+| change               | 键盘收回时触发   | value: string                                                      |
+| close                | 键盘收回时触发   | { source: 'confirm' \| 'blur' }                                    |
+| visible-state-change | 展示隐藏时触发   | { state: [VisibleState](./NumberKeyboard.md#visiblestate-值说明) } |
 
 ### VisibleState 值说明
 

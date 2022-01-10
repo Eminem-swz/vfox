@@ -46,7 +46,7 @@ import type { PropType } from 'vue'
 import { Drawer } from '@/Drawer'
 import { isObject, cloneData } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { popupEmits, popupExtendProps } from '@/popup/popup'
 import type { ActionSheetOption, ActionSheetDetail } from './types'
 import { locale } from '@/Locale'
 
@@ -71,7 +71,7 @@ export default defineComponent({
       default: () => [] as ActionSheetOption[]
     }
   },
-  emits: popupExtendEmits,
+  emits: { ...popupEmits },
   setup(props, ctx) {
     const popup = usePopupExtend(ctx)
 

@@ -1,5 +1,4 @@
 import { isMobile } from '@/helpers/device'
-import { isFunction } from '@/helpers/util'
 import {
   FxEventElement,
   FxEventCallback,
@@ -39,7 +38,7 @@ export function addEvent(
   callback: FxEventCallback,
   $el: FxEventElement = document
 ) {
-  if (!isFunction(callback) || !type) {
+  if (!(typeof callback === 'function') || !type) {
     return
   }
 
@@ -231,7 +230,7 @@ export function addLongPressEvent(
     },
     onEnd(e: Event) {
       if (coords) {
-        isFunction(callback) &&
+        typeof callback === 'function' &&
           callback({
             type: e.timeStamp - coords.timeStamp >= 800 ? 'long-press' : 'click'
           })

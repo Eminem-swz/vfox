@@ -44,7 +44,7 @@
 <script lang="ts">
 import { defineComponent, watch, nextTick, reactive, computed } from 'vue'
 import type { PropType } from 'vue'
-import { cloneData, isNumberArray, isSameArray, isString } from '@/helpers/util'
+import { cloneData, isNumberArray, isSameArray } from '@/helpers/util'
 import { formItemProps } from '@/Form/form'
 import { slideProps } from '@/Slider/slide'
 import { useSlide } from '@/Slider/use-slide'
@@ -116,8 +116,8 @@ export default defineComponent({
 
       if (isNumberArray(val) && (val as number[]).length > 1) {
         newVal = cloneData(val as number[])
-      } else if (isString(val)) {
-        newVal = (val as string).split(',').map(v => {
+      } else if (typeof val === 'string') {
+        newVal = val.split(',').map(v => {
           return toInteger(v)
         })
 

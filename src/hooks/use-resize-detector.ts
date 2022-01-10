@@ -1,19 +1,16 @@
 import { onBeforeUnmount, onMounted } from 'vue'
-import type { Ref, ComponentPublicInstance } from 'vue'
-import { isElement } from '@/helpers/util'
+import type { Ref } from 'vue'
 import { resizeDetector } from '@/helpers/resize-detector'
 import type { Noop } from '../helpers/types'
 
-export function useResizeDetector(
-  ctx: Ref<ComponentPublicInstance | HTMLElement | undefined>,
-  callback: Noop
-) {
+export function useResizeDetector(ctx: Ref, callback: Noop) {
   let stopHandle: Noop
 
   onMounted(() => {
-    const $el: HTMLElement = isElement(ctx.value)
-      ? (ctx.value as HTMLElement)
-      : (ctx as Ref<ComponentPublicInstance>).value.$el
+    const $el =
+      ctx.value instanceof HTMLElement
+        ? ctx.value
+        : (ctx.value.$el as HTMLElement)
 
     stopHandle = resizeDetector($el, callback)
   })

@@ -1,11 +1,13 @@
 import { computed, ref, nextTick, watch } from 'vue'
+import type { SetupContext } from 'vue'
 import { cloneData } from '@/helpers/util'
 import { getEnumsValue } from '@/helpers/validator'
 import { querySelector } from '@/helpers/dom'
 import { PLACEMENT_TYPES } from '@/helpers/constants'
-import type { UseProps, UseCtx } from '../hooks/types'
+import type { UseProps } from '../hooks/types'
 import { usePopup } from '@/popup/use-popup'
 import type { StyleObject } from '../helpers/types'
+import { popoverEmits } from '@/Popover/popover'
 
 type PopoverPos = {
   t: number | null
@@ -33,7 +35,10 @@ const DEFAULT_POS: PopoverPos = {
   mh: 0
 }
 
-export function usePopover(props: UseProps, ctx: UseCtx) {
+export function usePopover(
+  props: UseProps,
+  ctx: SetupContext<typeof popoverEmits>
+) {
   const padding = 8
   const inner = ref<HTMLElement>()
   const isShow = ref(false)

@@ -142,7 +142,7 @@ export default defineComponent({
 
       isChange = current !== oldSelectIndex
 
-      const item = cols[groupIndex][current]
+      const item = cols.value[groupIndex][current]
 
       if (current * itemHeight === $list.scrollTop && !isChange) {
         // 如果一致 就不需要修正了

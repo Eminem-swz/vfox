@@ -17,8 +17,6 @@ import type {
 import {
   isNumber,
   isStringNumberMixArray,
-  isString,
-  isArray,
   objectForEach,
   isObject,
   isStringNumberMix
@@ -26,6 +24,7 @@ import {
 import Exception from '@/helpers/exception'
 import { cloneValue } from '@/Picker/util'
 import { formActiveEmits, formItemProps } from '@/Form/form'
+import { popupEmits } from '@/popup/popup'
 
 export const getDefaultFieldNames: () => FieldNames = () => {
   return { label: 'label', value: 'value', children: 'children' }
@@ -97,7 +96,10 @@ export const pickerPopupProps = {
   }
 }
 
-export const pickerPopupEmits = ['change', 'update:modelValue']
+export const pickerPopupEmits = {
+  ...popupEmits,
+  ...pickerValueEmits
+}
 
 export const labelFormatter = (labelArray: string[]) => {
   return labelArray.join('/')
@@ -116,8 +118,8 @@ export const defaultFormatter: PickerValueFormatter = (
 export const defaultParser: PickerValueParser = value => {
   if (isNumber(value)) {
     return [value as number]
-  } else if (isString(value) && value) {
-    return [value as string]
+  } else if (typeof value === 'string' && value) {
+    return [value]
   } else if (isStringNumberMixArray(value)) {
     return cloneValue(value as (string | number)[]) as PickerValue[]
   }
@@ -172,9 +174,9 @@ export function parseOptions(
 ) {
   const newOptions: OptionItem[] | OptionItem[][] = []
 
-  if (isArray(options)) {
+  if (Array.isArray(options)) {
     options.forEach(option => {
-      if (isArray(option)) {
+      if (Array.isArray(option)) {
         // 二维数组
         const subOptions = parseOptions(
           option as UserOptionItem[],
@@ -184,7 +186,7 @@ export function parseOptions(
         if (subOptions.length > 0) {
           ;(newOptions as OptionItem[][]).push(subOptions)
         }
-      } else if (isNumber(option) || isString(option)) {
+      } else if (isNumber(option) || typeof option === 'string') {
         // 纯数值或者字符串
         ;(newOptions as OptionItem[]).push({
           label: option.toString(),
@@ -230,7 +232,7 @@ function validateCols(
   values: PickerValue[],
   options: OptionItem[] | OptionItem[][]
 ): ValidateReturn {
-  const optionList = isArray(options[0])
+  const optionList = Array.isArray(options[0])
     ? (options as OptionItem[][])
     : [options as OptionItem[]]
   let selectCount = 0
@@ -424,16 +426,16 @@ export function getFormatOptions(
   let isCascade = false
 
   if (virtualHandler == null) {
-    if (isObject(fieldNames)) {
-      isString(fieldNames.label) &&
+    if (fieldNames) {
+      typeof fieldNames.label === 'string' &&
         fieldNames.label &&
-        (newFieldNames.label = fieldNames.label as string)
-      isString(fieldNames.value) &&
+        (newFieldNames.label = fieldNames.label)
+      typeof fieldNames.value === 'string' &&
         fieldNames.value &&
-        (newFieldNames.value = fieldNames.value as string)
-      isString(fieldNames.children) &&
+        (newFieldNames.value = fieldNames.value)
+      typeof fieldNames.children === 'string' &&
         fieldNames.children &&
-        (newFieldNames.children = fieldNames.children as string)
+        (newFieldNames.children = fieldNames.children)
     }
 
     newOptions = parseOptions(options, newFieldNames)

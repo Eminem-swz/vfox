@@ -37,11 +37,11 @@ import { PickerView } from '@/PickerView'
 import { Drawer } from '@/Drawer'
 import { NavBar } from '@/NavBar'
 import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { popupExtendProps } from '@/popup/popup'
 import {
   pickerPopupProps,
-  pickerPopupEmits,
-  commonProps
+  commonProps,
+  pickerPopupEmits
 } from '@/Picker/picker'
 import { usePickerPopup } from '@/Picker/use-picker'
 import { locale } from '@/Locale'
@@ -54,10 +54,12 @@ export default defineComponent({
     ...commonProps,
     ...pickerPopupProps
   },
-  emits: [...popupExtendEmits, ...pickerPopupEmits],
+  emits: {
+    ...pickerPopupEmits
+  },
   setup(props, ctx) {
     const popup = usePopupExtend(ctx)
-    const pickerPopup = usePickerPopup(props, popup)
+    const pickerPopup = usePickerPopup(props, ctx, popup)
 
     return {
       ...popup,

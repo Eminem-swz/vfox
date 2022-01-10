@@ -58,12 +58,13 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Drawer } from '@/Drawer'
-import { isStringArray, isString, noop } from '@/helpers/util'
+import { isStringArray, noop } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { popupEmits, popupExtendProps } from '@/popup/popup'
 import type { PopupVisibleStateChangeArgs } from '../popup/types'
 import { getEnumsValue } from '@/helpers/validator'
 import { locale } from '@/Locale'
+import { formStringValueEmits } from '@/Form/form'
 
 const TYPE_NAMES = ['default', 'rightColumn']
 
@@ -102,7 +103,14 @@ export default defineComponent({
       default: () => [] as string[]
     }
   },
-  emits: [...popupExtendEmits, 'update:modelValue', 'close', 'input', 'delete'],
+  emits: {
+    ...popupEmits,
+    ...formStringValueEmits,
+    delete: (payload: { type: string; deleteKey: string }) =>
+      payload && typeof payload.deleteKey === 'string',
+    close: (payload: { type: string; source: string }) =>
+      payload && typeof payload.source === 'string'
+  },
   setup(props, ctx) {
     const { emit } = ctx
     let cacheValue = ''
@@ -118,7 +126,8 @@ export default defineComponent({
       popup.onVisibleStateChange(e)
 
       if (e.state === 'show') {
-        cacheValue = (isString(props.modelValue) && props.modelValue) || ''
+        cacheValue =
+          (typeof props.modelValue === 'string' && props.modelValue) || ''
       }
     }
 
@@ -132,7 +141,7 @@ export default defineComponent({
     const showHeaderConfirm = computed(() => {
       return (
         props.type !== 'rightColumn' &&
-        (isString(props.customKey) ||
+        (typeof props.customKey === 'string' ||
           (isStringArray(props.customKey) && props.customKey.length > 0))
       )
     })
@@ -147,11 +156,12 @@ export default defineComponent({
         })
       }
 
-      const customKey = isString(props.customKey)
-        ? [props.customKey as string]
-        : isStringArray(props.customKey)
-        ? (props.customKey as string[])
-        : []
+      const customKey =
+        typeof props.customKey === 'string'
+          ? [props.customKey]
+          : isStringArray(props.customKey)
+          ? (props.customKey as string[])
+          : []
 
       if (props.type === 'rightColumn') {
         if (customKey.length > 1) {
@@ -206,14 +216,15 @@ export default defineComponent({
     function onNumberClick(item: NumberKeyboardItem) {
       if (item.type === 'text') {
         cacheValue += item.text
-        emit('input', {
-          key: item.text
-        })
+        emit('input', item.text)
         emit('update:modelValue', cacheValue)
       } else if (item.type === 'backspace') {
         const deleteKey = cacheValue.substr(-1)
         cacheValue = cacheValue.substr(0, cacheValue.length - 1)
-        emit('delete', { deleteKey })
+        emit('delete', {
+          type: 'delete',
+          deleteKey
+        })
         emit('update:modelValue', cacheValue)
       } else if (item.type === 'confirm') {
         popup.customConfirm({})
@@ -225,28 +236,21 @@ export default defineComponent({
     }
 
     function onConfirm() {
-      close({}, true)
+      close('confirm')
     }
 
     function onCancel(res: PopupCancelArgs) {
-      close(res, false)
+      close(res.source)
     }
 
-    function close(
-      res: PopupCancelArgs | Record<string, never>,
-      isConfirm: boolean
-    ) {
-      const detail = Object.assign(
-        {
-          value: cacheValue
-        },
-        isConfirm ? { confirm: true } : { cancel: true },
-        res
-      )
-
+    function close(source: string) {
+      emit('change', cacheValue)
       cacheValue = ''
 
-      emit('close', detail)
+      emit('close', {
+        type: 'close',
+        source
+      })
     }
 
     return {

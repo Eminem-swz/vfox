@@ -1,9 +1,7 @@
 import {
   camelCase2KebabCase,
   inArray,
-  isHTMLElement,
   isNumber,
-  isString,
   objectForEach
 } from '@/helpers/util'
 
@@ -93,8 +91,8 @@ export function getRelativeOffset(
 export function getSizeValue(size: unknown, defaultValue = 0) {
   if (isNumber(size)) {
     return size as number
-  } else if (isString(size)) {
-    const matches = (size as string).match(/^([\d.]+)((px)|(vw)|(vh)|)$/)
+  } else if (typeof size === 'string') {
+    const matches = size.match(/^([\d.]+)((px)|(vw)|(vh)|)$/)
 
     if (matches) {
       let sizeNum = parseFloat(matches[1])
@@ -116,18 +114,18 @@ export function getSizeValue(size: unknown, defaultValue = 0) {
  * 指定条件获取 HTMLElement
  * @param selector 选择参数
  */
-export function querySelector(selector: any) {
-  let $el
+export function querySelector(selector: unknown) {
+  let $el: HTMLElement | null = null
 
-  if (isHTMLElement(selector)) {
+  if (selector instanceof HTMLElement) {
     $el = selector
-  } else if (isString(selector)) {
-    $el = document.querySelector(selector as string)
+  } else if (typeof selector === 'string') {
+    $el = document.querySelector(selector)
   } else if (selector === document) {
     $el = docEl
   }
 
-  return $el == null ? null : ($el as HTMLElement)
+  return $el ?? null
 }
 
 function isDocument($el: HTMLElement | Document) {

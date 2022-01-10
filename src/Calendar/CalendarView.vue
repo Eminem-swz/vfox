@@ -56,10 +56,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, watch } from 'vue'
+import { defineComponent, reactive, ref, watch } from 'vue'
 import dayjs from '@/helpers/day'
 import type { Dayjs } from 'dayjs'
-import { isDate, isInNumberRange, isEmpty, isSameArray } from '@/helpers/util'
+import { isInNumberRange, isEmpty, isSameArray } from '@/helpers/util'
 import { showToast } from '@/Toast'
 import {
   DEFAULT_MONTH_RANGE,
@@ -105,7 +105,7 @@ export default defineComponent({
 
     const { formatter, parser } = useHandlers(props, { mode })
 
-    const weekDays = reactive<WeekDay[]>([])
+    const weekDays = ref<WeekDay[]>([])
     const months = reactive<Month[]>([])
 
     let start: SelectDay = getDefaultSelectDay()
@@ -306,21 +306,21 @@ export default defineComponent({
         i = (i + 1) % 7
       }
 
-      weekDays.splice(0, Infinity, ...newWeekDays)
+      weekDays.value = newWeekDays
     }
 
     let minTimestamp = 0
     let maxTimestamp = 0
 
     function updateOptions() {
-      if (isDate(props.minDate)) {
+      if (props.minDate instanceof Date) {
         minTimestamp = dayjs(props.minDate).startOf('day').valueOf()
       } else {
         minTimestamp = dayjs().startOf('day').valueOf()
       }
 
-      if (isDate(props.maxDate)) {
-        if ((props.maxDate as any).getTime() < minTimestamp) {
+      if (props.maxDate instanceof Date) {
+        if (props.maxDate.getTime() < minTimestamp) {
           printError(
             'The value of "maxDate" cannot be less than the value of "minDate".'
           )

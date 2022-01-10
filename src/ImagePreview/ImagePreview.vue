@@ -122,7 +122,7 @@ export default defineComponent({
     ...popupProps,
     urls: {
       type: Array as PropType<string[]>,
-      validator: isStringArray,
+      validator: (val: string) => isStringArray(val),
       required: true
     },
     current: {
@@ -142,15 +142,22 @@ export default defineComponent({
       default: true
     }
   },
-  emits: [...popupEmits, 'update:current', 'change'],
+  emits: {
+    ...popupEmits,
+    'update:current': (current: string) => typeof current === 'string',
+    change: (payload: { type: string; activeIndex: number; current: string }) =>
+      payload &&
+      typeof payload.activeIndex === 'number' &&
+      typeof payload.current === 'string'
+  },
   setup(props, ctx) {
+    const { emit } = ctx
     const activeIndex = ref(0)
     const images = reactive<ImageObject[]>([])
     const zoomAnimated = ref(false)
     const swiperInit = ref(false)
 
     const popup = usePopup(props, ctx, {})
-    const emit = popup.emit
 
     let coords: ImageCoords | null
 
@@ -443,7 +450,7 @@ export default defineComponent({
 
         images.length = 0
 
-        props.urls.forEach((url, index) => {
+        props.urls.forEach(url => {
           if (map[url]) {
             images.push(map[url])
           } else {

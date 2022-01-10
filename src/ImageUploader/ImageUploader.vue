@@ -85,7 +85,6 @@ import { ActivityIndicator } from '@/ActivityIndicator'
 import {
   isPromiseLike,
   isStringArray,
-  isBoolean,
   isSameArray,
   cloneData,
   noop
@@ -156,7 +155,7 @@ function getAccepts(val: string | string[]) {
   return ret
 }
 
-const isValue = (value: string[]) => isStringArray(value)
+const isValue = (val: string[]) => isStringArray(val)
 
 export default defineComponent({
   name: 'fx-image-uploader',
@@ -247,7 +246,7 @@ export default defineComponent({
     let uid = 1
 
     const orderItems = reactive<Options>([])
-    const formValue = reactive<string[]>([])
+    const formValue = ref<string[]>([])
     const previewVisible = ref(false)
     const previewCurrent = ref('')
 
@@ -297,7 +296,7 @@ export default defineComponent({
     }
 
     function beforePromise(res: boolean | Promise<boolean>) {
-      if (isBoolean(res)) {
+      if (typeof res === 'boolean') {
         return Promise.resolve(res)
       } else if (isPromiseLike(res)) {
         return (res as Promise<boolean | File>)
@@ -374,21 +373,21 @@ export default defineComponent({
     }
 
     function updateValue() {
-      const value: string[] = []
+      const newVal: string[] = []
 
       orderItems.forEach(fileItem => {
         fileItem = fileItem as FileItem
 
         if (fileItem.status === 'uploaded' && fileItem.url) {
-          value.push(fileItem.url)
+          newVal.push(fileItem.url)
         }
       })
 
-      if (!isSameArray(value, formValue)) {
-        formValue.splice(0, Infinity, ...value)
+      if (!isSameArray(newVal, formValue.value)) {
+        formValue.value = newVal
 
-        emit('update:modelValue', cloneData(formValue))
-        emit('change', cloneData(formValue))
+        emit('update:modelValue', cloneData(newVal))
+        emit('change', cloneData(newVal))
       }
     }
 
@@ -457,7 +456,7 @@ export default defineComponent({
       })
 
       orderItems.splice(0, Infinity)
-      formValue.splice(0, Infinity)
+      formValue.value = []
 
       props.modelValue.forEach(url => {
         orderItems.push({
@@ -467,7 +466,7 @@ export default defineComponent({
           message: 'Uploaded'
         })
 
-        formValue.push(url)
+        formValue.value.push(url)
       })
 
       cache.length > 0 && orderItems.push(...cache)
@@ -531,7 +530,7 @@ export default defineComponent({
     }
 
     function onPreviewDelete(activeIndex: number) {
-      const current = formValue[activeIndex]
+      const current = formValue.value[activeIndex]
 
       for (let i = 0, j = 0; i < orderItems.length; i++) {
         const optionItem = orderItems[i] as FileItem
@@ -547,7 +546,7 @@ export default defineComponent({
                 updateUploadButton()
                 updateValue()
 
-                if (formValue.length === 0) {
+                if (formValue.value.length === 0) {
                   previewVisible.value = false
                 }
               }

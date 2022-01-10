@@ -26,4 +26,4 @@ export const popoverProps = {
   }
 }
 
-export const popoverEmits = [...popupEmits]
+export const popoverEmits = { ...popupEmits }

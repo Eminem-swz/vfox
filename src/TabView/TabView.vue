@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, reactive, provide } from 'vue'
+import { ref, defineComponent, provide } from 'vue'
 import { Tab } from '@/Tab'
 import { SideTab } from '@/SideTab'
 import { Swiper } from '@/Swiper'
@@ -62,7 +62,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const vertical = ref(!!props.initialVertical)
     const swiper = ref()
-    const tabList = reactive<
+    const tabList = ref<
       {
         value: number
         label: string
@@ -72,19 +72,15 @@ export default defineComponent({
     const activeIndex = ref(0)
 
     function resetItems($items: HTMLElement[]) {
-      tabList.splice(
-        0,
-        Infinity,
-        ...$items.map(($item, index) => {
-          const { name, subName } = $item.dataset
+      tabList.value = $items.map(($item, index) => {
+        const { name, subName } = $item.dataset
 
-          return {
-            value: index,
-            label: name || '',
-            subLabel: subName || ''
-          }
-        })
-      )
+        return {
+          value: index,
+          label: name || '',
+          subLabel: subName || ''
+        }
+      })
     }
 
     const { list } = useList('tabView', resetItems)

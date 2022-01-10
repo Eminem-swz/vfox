@@ -34,7 +34,7 @@ export default defineComponent({
       default: ''
     }
   },
-  emits: popoverEmits,
+  emits: { ...popoverEmits },
   setup(props, ctx) {
     const popoverHook = usePopover(props, ctx)
 

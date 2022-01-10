@@ -77,6 +77,7 @@
           title="键盘标题"
           v-model:visible="visible7"
           @input="onInput"
+          @change="onChange"
           @delete="onDelete"
           @close="onClose"
         ></fx-number-keyboard>
@@ -112,16 +113,19 @@ export default {
     }
   },
   methods: {
-    onInput({ key }) {
-      showToast(key)
+    onInput(value) {
+      showToast(value)
     },
-    onDelete() {
+    onDelete(res) {
+      console.log('delete', res)
       showToast('删除')
+    },
+    onChange(value) {
+      console.log('change', value)
+      showToast(`本次输入值为：${value}`)
     },
     onClose(res) {
       console.log('close', res)
-
-      showToast(`输入值为：${res.value}`)
     }
   }
 }

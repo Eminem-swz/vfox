@@ -33,12 +33,9 @@
       </fx-cell>
     </fx-group>
     <fx-group title="PickerPopup">
-      <fx-cell
-        label="基础"
-        isLink
-        @click="visible = true"
-        :content="popupValue.join('/')"
-      ></fx-cell>
+      <fx-cell label="基础" isLink @click="visible = true">{{
+        popupValue
+      }}</fx-cell>
     </fx-group>
     <fx-group title="PickerPopup Event">
       <fx-cell
@@ -75,7 +72,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { cascadeOptions, multiOptions, options, regionOptions } from './data'
 import { showToast } from '@/Toast'
 import { showPicker } from '@/Picker'
@@ -89,9 +86,9 @@ import type {
 export default defineComponent({
   name: 'ExpPicker',
   setup() {
-    const regionValue = reactive([])
-    const disableValue = reactive([2000, '春'])
-    const popupValue = reactive([2000, '夏'])
+    const regionValue = ref([])
+    const disableValue = ref([2000, '春'])
+    const popupValue = ref([2000, '夏'])
     const title = ref('Picker')
     const visible = ref(false)
     const clickEvent = ref(false)

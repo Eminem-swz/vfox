@@ -49,12 +49,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, reactive, watch } from 'vue'
+import { defineComponent, ref, inject, watch } from 'vue'
 import { Drawer } from '@/Drawer'
 import { Tab } from '@/Tab'
 import { isSameArray } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { popupExtendProps } from '@/popup/popup'
 import type { ColRow, PickerHandlers, PickerValue } from '../Picker/types'
 import type { TabOptionItem } from '../Tab/types'
 import { pickerPopupEmits, commonProps, mergeHandlers } from '@/Picker/picker'
@@ -77,10 +77,12 @@ export default defineComponent({
       default: ''
     }
   },
-  emits: [...popupExtendEmits, ...pickerPopupEmits],
+  emits: {
+    ...pickerPopupEmits
+  },
   setup(props, ctx) {
-    const selectedTabs = reactive<SelectedTabs[]>([])
-    const tabs = reactive<TabOptionItem[]>([])
+    const selectedTabs = ref<SelectedTabs[]>([])
+    const tabs = ref<TabOptionItem[]>([])
     const tabIndex = ref(0)
     const dropdown = ref<HTMLElement>()
 
@@ -96,7 +98,7 @@ export default defineComponent({
       if (item.hasChildren) {
         update(selecteds)
       } else {
-        if (!isSameArray(currentValues, selecteds)) {
+        if (!isSameArray(currentValues.value, selecteds)) {
           onSelect(selecteds)
           onChange()
         } else {
@@ -122,23 +124,23 @@ export default defineComponent({
     } = usePickerView(props, ctx, {
       name: 'cascader',
       afterUpdate(valueArray, labelArray, cols) {
-        selectedTabs.splice(0, Infinity)
+        selectedTabs.value = []
 
         labelArray.forEach((v, k) => {
-          selectedTabs.push({
+          selectedTabs.value.push({
             label: v,
             value: k
           })
         })
 
         if (labelArray.length < cols.length) {
-          selectedTabs.push({
+          selectedTabs.value.push({
             label: null,
-            value: selectedTabs.length
+            value: selectedTabs.value.length
           })
         }
 
-        tabIndex.value = selectedTabs.length - 1
+        tabIndex.value = selectedTabs.value.length - 1
       },
       handlers: mergeHandlers(
         {
@@ -152,12 +154,11 @@ export default defineComponent({
     watch(
       [locale, selectedTabs],
       ([newLocale, newOptions]) => {
-        tabs.splice(0, Infinity)
-        newOptions.forEach(v => {
-          tabs.push({
+        tabs.value = newOptions.map(v => {
+          return {
             label: v.label == null ? newLocale.cascaderDefaultTitle : v.label,
             value: v.value
-          })
+          }
         })
       },
       {

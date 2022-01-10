@@ -65,7 +65,7 @@ export default defineComponent({
       type: String
     }
   },
-  emits: [...popoverEmits, 'confirm'],
+  emits: { ...popoverEmits },
   setup(props, ctx) {
     const popoverHook = usePopover(props, ctx)
 

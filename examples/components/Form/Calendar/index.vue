@@ -133,7 +133,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
 import { showCalendar } from '@/Calendar'
@@ -151,12 +151,12 @@ export default defineComponent({
   setup() {
     const template = 'YYYY-MM-DD'
 
-    const value = reactive([new Date()])
-    const rangeValue = reactive([])
+    const value = ref([new Date()])
+    const rangeValue = ref([])
     const viewValue = ref('')
     const viewRangeValue = ref('')
     const popupValue = ref(dayjs().format(template))
-    const popupRangeValue = reactive([])
+    const popupRangeValue = ref([])
 
     const popupVisible = ref(false)
     const popupRangeVisible = ref(false)

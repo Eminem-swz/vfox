@@ -17,7 +17,7 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import type { PropType } from 'vue'
-import { isNumber, isString, rangeInteger } from '@/helpers/util'
+import { isNumber, rangeInteger } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { AnimationFrameTask, frameTo } from '@/helpers/animation'
 import { getColorObject } from '@/helpers/color'
@@ -59,7 +59,7 @@ export default defineComponent({
   },
   setup(props) {
     const content2 = ref<string | number>(
-      isString(props.content)
+      typeof props.content === 'string'
         ? props.content
         : isNumber(props.content)
         ? rangeInteger(props.content, 0, props.maxCount)
@@ -69,8 +69,8 @@ export default defineComponent({
     let frameTask: AnimationFrameTask
 
     const showCount = computed(() => {
-      if (isString(content2.value)) {
-        return content2.value as string
+      if (typeof content2.value === 'string') {
+        return content2.value
       }
 
       if (props.content > props.maxCount && content2.value === props.maxCount) {
@@ -82,7 +82,7 @@ export default defineComponent({
     const styles = computed(() => {
       const obj: StyleObject = {
         transform: `translate3d(50%, -50%, 0px) scale(${
-          (isString(props.content) && props.content) ||
+          (typeof props.content === 'string' && props.content) ||
           props.showZero ||
           props.content > 0
             ? 1
@@ -107,8 +107,8 @@ export default defineComponent({
       val => {
         frameTask && frameTask.stop()
 
-        if (isString(val)) {
-          content2.value = val as string
+        if (typeof val === 'string') {
+          content2.value = val
           return
         }
         if (!isNumber(val)) {

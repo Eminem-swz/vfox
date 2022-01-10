@@ -17,7 +17,7 @@ import {
   MODE_NAMES,
   parseRows
 } from '@/DatePicker/date'
-import { isDate, isString, rangeNumber } from '@/helpers/util'
+import { rangeNumber } from '@/helpers/util'
 
 export function useHandlers(props: UseProps) {
   const mode = getEnumsValue(MODE_NAMES, props.initialMode)
@@ -45,13 +45,13 @@ export function useHandlers(props: UseProps) {
 
     let djs: Dayjs | null = null
 
-    if (isDate(value)) {
-      djs = dayjs(value as Date)
+    if (value instanceof Date) {
+      djs = dayjs(value)
     } else if (
       props.formatTemplate &&
       value != null &&
       value !== '' &&
-      isString(value)
+      typeof value === 'string'
     ) {
       djs = dayjs(value as string, props.formatTemplate, true)
     }

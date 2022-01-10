@@ -73,7 +73,7 @@ export default defineComponent({
       default: true
     }
   },
-  emits: popupEmits,
+  emits: { ...popupEmits },
   setup(props, ctx) {
     const popupOptions = {
       useBlur: false

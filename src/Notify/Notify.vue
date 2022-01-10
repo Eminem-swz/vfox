@@ -27,7 +27,7 @@ import type { PropType } from 'vue'
 import { NoticeBar } from '@/NoticeBar'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
-import { iconValidator } from '@/helpers/validator'
+import { emitTypeValidator, iconValidator } from '@/helpers/validator'
 import type { StateType } from '../helpers/types'
 
 export default defineComponent({
@@ -74,8 +74,12 @@ export default defineComponent({
       default: null
     }
   },
-  emits: [...popupEmits, 'close-click'],
+  emits: {
+    ...popupEmits,
+    'close-click': emitTypeValidator
+  },
   setup(props, ctx) {
+    const { emit } = ctx
     let durationTimer: number
 
     const popup = usePopup(props, ctx, {
@@ -97,7 +101,9 @@ export default defineComponent({
     }
 
     function onClose() {
-      ctx.emit('close-click', {})
+      emit('close-click', {
+        type: 'close-click'
+      })
       popup.customCancel('activeClick', true)
     }
 

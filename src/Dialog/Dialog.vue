@@ -42,7 +42,7 @@ import { defineComponent } from 'vue'
 import { Button, ButtonGroup } from '@/Button'
 import { Modal } from '@/Modal'
 import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendEmits, popupExtendProps } from '@/popup/popup'
+import { popupEmits, popupExtendProps } from '@/popup/popup'
 import { locale } from '@/Locale'
 
 export default defineComponent({
@@ -73,7 +73,7 @@ export default defineComponent({
       default: null
     }
   },
-  emits: popupExtendEmits,
+  emits: { ...popupEmits },
   setup(props, ctx) {
     const popup = usePopupExtend(ctx)
 

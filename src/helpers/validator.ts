@@ -1,11 +1,8 @@
 import {
-  isString,
   inArray,
   isObject,
-  isHTMLElement,
   isStringNumberMixArray,
   isNumber,
-  isFunction,
   isURL
 } from '@/helpers/util'
 import { getSizeValue } from '@/helpers/dom'
@@ -14,11 +11,19 @@ import { isColorValue } from '@/helpers/color'
 import Exception from '@/helpers/exception'
 
 export const selectorValidator: Validator = value => {
-  return isString(value) || isHTMLElement(value) || value === document
+  return (
+    typeof value === 'string' ||
+    value instanceof HTMLElement ||
+    value instanceof Document
+  )
 }
 
 export const stringNumberArrayMixValidator: Validator = value => {
-  return isStringNumberMixArray(value) || isString(value) || isNumber(value)
+  return (
+    isStringNumberMixArray(value) ||
+    typeof value === 'string' ||
+    isNumber(value)
+  )
 }
 
 export const sizeValidator: Validator = value => {
@@ -45,7 +50,7 @@ export function isSvgComponent(value: unknown) {
   if (isObject(value)) {
     const obj = value as AnyObject
 
-    if (isString(obj.template) || isFunction(obj.render)) {
+    if (typeof obj.template === 'string' || typeof obj.render === 'function') {
       // vue component
       return true
     } else if (obj.__file && obj.__file.indexOf('.svg') > -1) {
@@ -58,7 +63,7 @@ export function isSvgComponent(value: unknown) {
 }
 
 export const iconValidator: Validator = value => {
-  return (isString(value) && !isURL(value)) || isSvgComponent(value)
+  return (typeof value === 'string' && !isURL(value)) || isSvgComponent(value)
 }
 
 export const colorValidator: Validator = value => {

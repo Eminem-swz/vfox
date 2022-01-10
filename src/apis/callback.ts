@@ -4,7 +4,7 @@ import type {
   ApiOptionsSuccess
 } from './types'
 import Exception from '@/helpers/exception'
-import { noop, isFunction } from '@/helpers/util'
+import { noop } from '@/helpers/util'
 import type { AnyObject } from '../helpers/types'
 
 /**
@@ -17,17 +17,17 @@ export function getCallbackFns(options: AnyObject): {
   complete: ApiOptionsComplete
 } {
   return {
-    success: (isFunction(options.success)
+    success: (typeof options.success === 'function'
       ? options.success
       : noop.bind(options)) as ApiOptionsSuccess,
     fail(error: Error | string) {
-      if (isFunction(options.fail)) {
+      if (typeof options.fail === 'function') {
         ;(options.fail as ApiOptionsFail)(new Exception(error))
       } else {
         console.error(error)
       }
     },
-    complete: (isFunction(options.complete)
+    complete: (typeof options.complete === 'function'
       ? options.complete
       : noop.bind(options)) as ApiOptionsComplete
   }

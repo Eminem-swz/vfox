@@ -64,7 +64,6 @@ import {
   inArray,
   stringMix2StringArray,
   isNumber,
-  isString,
   isStringArray
 } from '@/helpers/util'
 import type { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
@@ -143,9 +142,8 @@ export default defineComponent({
     // 下拉刷新方向
     enablePullDirections: {
       type: [String, Array],
-      validator: (val: ScrollViewPullDirection | ScrollViewPullDirection[]) => {
-        return isString(val) || isStringArray(val)
-      },
+      validator: (val: ScrollViewPullDirection | ScrollViewPullDirection[]) =>
+        typeof val === 'string' || isStringArray(val),
       default: null
     },
     // 下拉刷新阈值
@@ -597,7 +595,7 @@ export default defineComponent({
       contentStyles,
       indicatorStyles,
       onScroll,
-      pullIndicatorSafeArea: pullIndicatorSafeArea,
+      pullIndicatorSafeArea,
       PullRefreshState: {
         Pulling: 0,
         Holding: 1,

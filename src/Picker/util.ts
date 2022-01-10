@@ -1,23 +1,13 @@
 import type { PickerDetail, PickerModelValue } from './types'
-import {
-  cloneData,
-  isDate,
-  isDateArray,
-  isSameArray,
-  isSameDate
-} from '@/helpers/util'
-
-export function updateArray(array: any[], newArray: any[]) {
-  array.splice(0, Infinity, ...newArray)
-}
+import { cloneData, isDateArray, isSameArray, isSameDate } from '@/helpers/util'
 
 export function isSameValue(aVal: unknown, bVal: unknown) {
   if (Array.isArray(aVal) && Array.isArray(bVal)) {
-    return isSameArray(aVal as string[], bVal as string[])
+    return isSameArray(aVal, bVal)
   }
 
-  if (isDate(aVal) && isDate(bVal)) {
-    return isSameDate(aVal as Date, bVal as Date)
+  if (aVal instanceof Date && bVal instanceof Date) {
+    return isSameDate(aVal, bVal)
   }
 
   return aVal === bVal
@@ -28,8 +18,8 @@ export function isSameDetail(a: PickerDetail, b: PickerDetail) {
 }
 
 export function cloneValue(value: PickerModelValue) {
-  if (isDate(value)) {
-    return new Date(value as Date)
+  if (value instanceof Date) {
+    return new Date(value)
   } else if (isDateArray(value)) {
     const newValue: Date[] = []
     ;(value as Date[]).forEach(date => {

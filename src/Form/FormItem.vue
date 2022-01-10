@@ -21,7 +21,6 @@
 </template>
 
 <script lang="ts">
-import { isArray } from '@/helpers/util'
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
@@ -45,7 +44,7 @@ export default defineComponent({
     const errors = computed(() => {
       const ret: string[] = []
 
-      if (isArray(props.error)) {
+      if (Array.isArray(props.error)) {
         ;(props.error as string[]).forEach(v => {
           ret.push(v.toString())
         })

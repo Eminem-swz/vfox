@@ -4,14 +4,14 @@
       <fx-picker-view
         :options="options"
         @change="onChange"
-        v-model="value"
+        v-model="colValue"
       ></fx-picker-view>
     </fx-group>
     <fx-group title="多列">
       <fx-picker-view
         :options="multiOptions"
         @change="onChange"
-        v-model="multValue"
+        v-model="multiValue"
       ></fx-picker-view>
     </fx-group>
     <fx-group title="级联">
@@ -41,14 +41,14 @@
       <fx-picker-view
         :options="multiOptions"
         @change="onChangeEvent"
-        v-model="multValue"
+        v-model="multiValue"
       ></fx-picker-view>
     </fx-group>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { showToast } from '@/Toast'
 import type {
   PickerValueFormatter,
@@ -62,9 +62,9 @@ export default defineComponent({
   setup() {
     const separator = '-'
 
-    const value = reactive([])
-    const multValue = reactive([])
-    const cascadeValue = reactive([])
+    const colValue = ref([])
+    const multiValue = ref([])
+    const cascadeValue = ref([])
     const formatValue = ref(`2001${separator}夏`)
 
     const formatter: PickerValueFormatter = (valueArray, labelArray) => {
@@ -93,8 +93,8 @@ export default defineComponent({
       multiOptions,
       cascadeOptions,
 
-      value,
-      multValue,
+      colValue,
+      multiValue,
       cascadeValue,
       formatValue,
 

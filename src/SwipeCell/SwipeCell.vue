@@ -36,14 +36,7 @@
 import { ref, defineComponent, computed, reactive } from 'vue'
 import type { PropType } from 'vue'
 import { getEnumsValue } from '@/helpers/validator'
-import {
-  cloneData,
-  isArray,
-  isObject,
-  isString,
-  rangeNumber,
-  noop
-} from '@/helpers/util'
+import { cloneData, rangeNumber, noop } from '@/helpers/util'
 import { STATE_TYPES } from '@/helpers/constants'
 import type { StateType } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
@@ -125,9 +118,9 @@ export default defineComponent({
     const buttons2 = computed(() => {
       const buttons: ButtonOptions[] = []
 
-      if (isArray(props.buttons)) {
+      if (Array.isArray(props.buttons)) {
         props.buttons.forEach(v => {
-          if (isObject(v) && isString(v.text)) {
+          if (v && typeof v.text === 'string') {
             buttons.push({
               text: v.text,
               type: getEnumsValue(STATE_TYPES, v.type)
