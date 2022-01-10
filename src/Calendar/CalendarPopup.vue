@@ -67,7 +67,7 @@ export default defineComponent({
   },
   emits: [...popupExtendEmits, ...pickerPopupEmits],
   setup(props, ctx) {
-    const calendarView = ref()
+    const calendarView = ref<InstanceType<typeof CalendarView>>()
     const valueSize = ref(0)
 
     let detail: CalendarDetail = getDefaultDetail()

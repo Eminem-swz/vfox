@@ -84,7 +84,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const root = ref<HTMLElement>()
     const fixed = ref<HTMLElement>()
-    const sticky = ref()
+    const sticky = ref<InstanceType<typeof Sticky>>()
     const index = ref(0)
     const title = ref('')
     const titleY = ref<number | null>(0)
@@ -108,7 +108,7 @@ export default defineComponent({
         isSelfContainer.value = true
       }
 
-      sticky.value && sticky.value.resetContainer($container)
+      sticky.value?.resetContainer($container)
 
       scrollOff = useScrollEvent($container, (e: Event, { scrollTop }) => {
         updateFixed(scrollTop)

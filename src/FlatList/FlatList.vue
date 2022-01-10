@@ -190,7 +190,7 @@ export default defineComponent({
         recycled: boolean
       }[]
     >([])
-    const scrollView = ref()
+    const scrollView = ref<InstanceType<typeof ScrollView>>()
     const listEl = ref<HTMLElement>()
 
     let wrapperSize = 0

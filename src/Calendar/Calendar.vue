@@ -62,7 +62,7 @@ export default defineComponent({
     const popupVisible = ref(true)
     const fieldLabel = ref('')
     const fieldValue = ref('')
-    const popup = ref()
+    const popup = ref<InstanceType<typeof CalendarPopup>>()
     const root = ref<HTMLElement>()
 
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)

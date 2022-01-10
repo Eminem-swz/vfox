@@ -22,10 +22,10 @@ import { IndexView, IndexViewItem } from 'vfox'
 
 ## Methods
 
-| 方法名         | 说明                                                    | 参数                         |
-| -------------- | ------------------------------------------------------- | ---------------------------- |
-| scrollToIndex  | 将位于指定位置的 `IndexViewItem` 滚动到可视区的指定位置 | ({ index: number }) => void  |
-| scrollToOffset | 滚动列表到指定的偏移，单位 px                           | ({ offset: number }) => void |
+| 方法名        | 说明                                                    | 参数                         |
+| ------------- | ------------------------------------------------------- | ---------------------------- |
+| scrollToIndex | 将位于指定位置的 `IndexViewItem` 滚动到可视区的指定位置 | ({ index: number }) => void  |
+| scrollTo      | 滚动列表到指定的偏移，单位 px                           | ({ offset: number }) => void |
 
 ## IndexView Slots
 

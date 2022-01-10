@@ -177,7 +177,8 @@ export function usePickerPopup(
   let detail = getDefaultDetail()
 
   function beforeConfirm() {
-    const newDetail = view.value?.getDetail() || getDefaultDetail()
+    const newDetail =
+      (view.value?.getDetail() as PickerDetail) || getDefaultDetail()
 
     if (!isSameDetail(newDetail, detail)) {
       detail = newDetail
