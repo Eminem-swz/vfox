@@ -15,7 +15,7 @@
     <div class="fx-index-view_body">
       <StickyView
         :offsetTop="stickyOffsetTop"
-        ref="body"
+        ref="stickyView"
         v-model:activeIndex="activeIndex"
         @resetItems="onResetItems"
         @change="onChange"
@@ -50,7 +50,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const navigation = ref<HTMLElement>()
-    const body = ref()
+    const stickyView = ref<InstanceType<typeof StickyView>>()
     const indexList = ref<
       {
         value: number
@@ -60,7 +60,7 @@ export default defineComponent({
     const activeIndex = ref(0)
 
     function resetContainer(containSelector: any) {
-      body.value && body.value.resetContainer(containSelector)
+      stickyView.value?.resetContainer(containSelector)
     }
 
     function onResetItems(items: StickyViewItem[]) {
@@ -81,15 +81,15 @@ export default defineComponent({
      * @param index 索引
      */
     function scrollToIndex(index: number | ScrollToIndexOptions) {
-      body.value && body.value.scrollToIndex(index)
+      stickyView.value?.scrollToIndex(index)
     }
 
     /**
      * 滚到到指定位置
      * @param scrollTop 位置值
      */
-    function scrollToOffset(scrollTop: number | ScrollToOptions) {
-      body.value && body.value.scrollToOffset(scrollTop)
+    function scrollTo(scrollTop: number | ScrollToOptions) {
+      stickyView.value?.scrollTo(scrollTop)
     }
 
     let coords: any
@@ -171,12 +171,12 @@ export default defineComponent({
 
     return {
       navigation,
-      body,
+      stickyView,
       activeIndex,
       indexList,
       onChange,
       scrollToIndex,
-      scrollToOffset,
+      scrollTo,
       resetContainer,
       onResetItems
     }

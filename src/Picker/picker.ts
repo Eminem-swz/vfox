@@ -98,7 +98,8 @@ export const pickerPopupProps = {
 
 export const pickerPopupEmits = {
   ...popupEmits,
-  ...pickerValueEmits
+  ...pickerValueEmits,
+  confirm: (payload: PickerDetail) => isPickerDetail(payload)
 }
 
 export const labelFormatter = (labelArray: string[]) => {

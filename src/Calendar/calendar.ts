@@ -74,7 +74,7 @@ export function printError(message: string) {
   console.error(new Exception(message, Exception.TYPE.PROP_ERROR, 'Calendar'))
 }
 
-export const isCalendarDetail = (detail: CalendarDetail) =>
-  isPickerDetail(detail) &&
-  typeof detail.rangeCount === 'number' &&
-  Array.isArray(detail.valueArray)
+export const calendarDetailValidator = (payload: CalendarDetail) =>
+  isPickerDetail(payload) &&
+  typeof payload.rangeCount === 'number' &&
+  Array.isArray(payload.valueArray)

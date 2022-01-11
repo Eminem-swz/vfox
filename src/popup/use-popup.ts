@@ -1,11 +1,11 @@
 import { computed, onMounted, ref, watch, inject } from 'vue'
 import type { SetupContext } from 'vue'
-import { inArray, noop } from '@/helpers/util'
+import { noop } from '@/helpers/util'
 import { addClassName, getScrollTop, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import type { AnyObject, Noop } from '../helpers/types'
+import type { Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/use-blur'
-import type { UseEmit, UseProps } from '../hooks/types'
+import type { UseEmitFn, UseProps } from '../hooks/types'
 import type {
   PopupVisibleStateChangeArgs,
   PopupVisibleState,
@@ -13,9 +13,9 @@ import type {
   PopupCustomConfirm,
   PopupStyles,
   PopupBridge,
-  PopupCancelArgs,
-  PopupConfirmArgs
+  PopupCancelArgs
 } from './types'
+import { popupEmits, popupProps } from '@/popup/popup'
 
 type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
 
@@ -32,16 +32,29 @@ export function getNewZIndex() {
   return zIndex++
 }
 
-function isTypeEvent(event: string) {
-  return inArray(event, ['change', 'confirm', 'cancel', 'visible-state-change'])
+function useApiHook(emit: any) {
+  const apis = inject<PopupBridge>('fxApis', {})
+
+  const emitHook: UseEmitFn<typeof popupEmits> = (event, res) => {
+    apis.in ? apis.in(event, res) : emit(event, res)
+  }
+
+  function cancelHook(customCancel: PopupCustomCancel) {
+    apis.out && apis.out('customCancel', customCancel)
+  }
+
+  return {
+    emitHook,
+    cancelHook
+  }
 }
 
 export function usePopup(
-  props: UseProps,
+  props: UseProps<typeof popupProps>,
   ctx: SetupContext<any>,
   useOptions: UseOptions
 ) {
-  const apis = inject<PopupBridge>('fxApis', {})
+  const { emitHook, cancelHook } = useApiHook(ctx.emit)
   // const isParent = inject<boolean>('fxPopupExtend', false)
 
   const isShow = ref(false)
@@ -55,18 +68,6 @@ export function usePopup(
   let visibleTimer: number
 
   const visibleBlur = useBlur(onBlur)
-
-  const emit: UseEmit = (event, res) => {
-    if (!apis.in) {
-      ctx.emit(
-        event,
-        !isTypeEvent(event) ? res : Object.assign({ type: event }, res)
-      )
-    } else {
-      // api形式
-      apis.in(event, res)
-    }
-  }
 
   function doShow(callback: Noop) {
     if (isShowing) {
@@ -101,7 +102,7 @@ export function usePopup(
     }, 17)
 
     if (!props.visible) {
-      emit('update:visible', true)
+      emitHook('update:visible', true)
     }
 
     return true
@@ -138,7 +139,7 @@ export function usePopup(
     }, 210)
 
     if (props.visible) {
-      emit('update:visible', false)
+      emitHook('update:visible', false)
     }
 
     return true
@@ -165,7 +166,7 @@ export function usePopup(
   }
 
   function emitVisibleState(state: PopupVisibleState) {
-    emit('visible-state-change', {
+    emitHook('visible-state-change', {
       state
     })
   }
@@ -193,12 +194,12 @@ export function usePopup(
     if (isShowing && !focus) {
       return
     }
-    emit('cancel', { source: key })
+    emitHook('cancel', { source: key })
     hide('afterCancel')
   }
 
   const customConfirm: PopupCustomConfirm = detail => {
-    emit('confirm', detail)
+    emitHook('confirm', detail)
     hide('afterConfirm')
   }
 
@@ -230,7 +231,7 @@ export function usePopup(
     }
   )
 
-  apis.out && apis.out('customCancel', customCancel)
+  cancelHook(customCancel)
 
   return {
     isShow,
@@ -248,36 +249,20 @@ export function usePopup(
   }
 }
 
-export function usePopupExtend(ctx: SetupContext<any>) {
+export function usePopupExtend<T>(ctx: SetupContext<any>) {
   const popup = ref()
-  const apis = inject<PopupBridge>('fxApis', {})
-
-  const emit: UseEmit = (event, res) => {
-    if (!apis.in) {
-      ctx.emit(
-        event,
-        !isTypeEvent(res) ? res : Object.assign({ type: event }, res)
-      )
-    } else {
-      // api形式
-      if (isTypeEvent(res)) {
-        delete res.type
-      }
-
-      apis.in(event, res)
-    }
-  }
+  const { emitHook, cancelHook } = useApiHook(ctx.emit)
 
   const customCancel: PopupCustomCancel = (key, focus = false) => {
     popup.value && popup.value.customCancel(key, focus)
   }
 
-  const customConfirm: PopupCustomConfirm = detail => {
+  const customConfirm: PopupCustomConfirm<T> = detail => {
     popup.value && popup.value.customConfirm(detail)
   }
 
   function onVisibleStateChange(e: PopupVisibleStateChangeArgs) {
-    emit('visible-state-change', e)
+    emitHook('visible-state-change', e)
   }
 
   function onCancelClick() {
@@ -285,21 +270,21 @@ export function usePopupExtend(ctx: SetupContext<any>) {
   }
 
   function onCancel(res: PopupCancelArgs) {
-    emit('cancel', res)
+    emitHook('cancel', res)
   }
 
-  function onConfirm(res: PopupConfirmArgs<AnyObject>) {
-    emit('confirm', res)
+  function onConfirm(res: T) {
+    emitHook('confirm', res)
   }
 
   function onUpdateVisible(value: boolean) {
-    emit('update:visible', value)
+    emitHook('update:visible', value)
   }
 
   // provide('fxPopupExtend', true)
+  cancelHook(customCancel)
 
   return {
-    emit,
     popup,
     customCancel,
     customConfirm,

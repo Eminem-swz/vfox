@@ -61,7 +61,7 @@ export default defineComponent({
     const content2 = ref<string | number>(
       typeof props.content === 'string'
         ? props.content
-        : isNumber(props.content)
+        : typeof props.content === 'number'
         ? rangeInteger(props.content, 0, props.maxCount)
         : 0
     )

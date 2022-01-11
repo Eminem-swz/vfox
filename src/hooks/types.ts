@@ -1,9 +1,15 @@
-import type { SetupContext } from 'vue'
-import type { AnyObject } from '../helpers/types'
+import type { ExtractPropTypes } from 'vue'
+import type { AnyObject, UnionToIntersection } from '../helpers/types'
 
-export type UseProps = Readonly<AnyObject>
-export type UseCtx = SetupContext<string[]>
+export type UseProps<T = AnyObject> = Readonly<ExtractPropTypes<T>>
 
-export interface UseEmit {
-  (event: string, ...args: any[]): void
-}
+export type UseEmitFn<
+  Options,
+  Event extends keyof Options = keyof Options
+> = UnionToIntersection<
+  {
+    [key in Event]: Options[key] extends (...args: infer Args) => any
+      ? (event: key, ...args: Args) => void
+      : (event: key, ...args: any[]) => void
+  }[Event]
+>

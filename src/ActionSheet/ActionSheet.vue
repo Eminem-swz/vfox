@@ -73,7 +73,7 @@ export default defineComponent({
   },
   emits: { ...popupEmits },
   setup(props, ctx) {
-    const popup = usePopupExtend(ctx)
+    const popup = usePopupExtend<ActionSheetDetail>(ctx)
 
     function onItemClick(index: number) {
       popup.customConfirm({
@@ -81,7 +81,7 @@ export default defineComponent({
         item: {
           name: props.options[index].name
         }
-      } as ActionSheetDetail)
+      })
     }
 
     const options2 = computed(() => {

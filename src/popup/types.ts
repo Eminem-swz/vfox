@@ -3,8 +3,8 @@ import type { AnyObject, EmptyObject } from '../helpers/types'
 export interface PopupCustomCancel {
   (key: string, focus?: boolean): void
 }
-export interface PopupCustomConfirm {
-  (detail: AnyObject): void
+export interface PopupCustomConfirm<T = AnyObject> {
+  (detail: T): void
 }
 export type PopupStyles = Partial<{
   zIndex: number
@@ -13,14 +13,11 @@ export type PopupStyles = Partial<{
 }>
 export type PopupVisibleState = 'show' | 'shown' | 'hide' | 'hidden'
 export interface PopupVisibleStateChangeArgs {
-  type: 'visible-state-change'
   state: PopupVisibleState
 }
-export type PopupConfirmArgs<T = EmptyObject> = T & {
-  type: 'confirm'
-}
+export type PopupConfirmArgs = any
+
 export interface PopupCancelArgs {
-  type: 'cancel'
   source: string
 }
 

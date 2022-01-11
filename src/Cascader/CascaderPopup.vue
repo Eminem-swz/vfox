@@ -60,6 +60,7 @@ import type { TabOptionItem } from '../Tab/types'
 import { pickerPopupEmits, commonProps, mergeHandlers } from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
 import { locale } from '@/Locale'
+import type { PickerDetail } from '../Picker/types'
 
 interface SelectedTabs {
   label: string | null
@@ -86,7 +87,7 @@ export default defineComponent({
     const tabIndex = ref(0)
     const dropdown = ref<HTMLElement>()
 
-    const popup = usePopupExtend(ctx)
+    const popup = usePopupExtend<PickerDetail>(ctx)
 
     function onItemClick(e: Event, item: ColRow) {
       if (item.disabled) {

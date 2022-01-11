@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Icon should render prop icon="UpOutlined" correctly 1`] = `<fx-svg-icon-stub iconname="UpOutlined" class="fx-icon"></fx-svg-icon-stub>`;
+exports[`Icon should render prop icon="UpOutlined" correctly 1`] = `<component-stub iconname="UpOutlined" class="fx-icon"></component-stub>`;

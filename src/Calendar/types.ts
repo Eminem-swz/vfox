@@ -3,7 +3,7 @@ import type {
   PickerValue,
   PickerModelValue
 } from '../Picker/types'
-import type { PopupConfirmArgs, PopupCancelArgs } from '../popup/types'
+import type { PopupCancelArgs } from '../popup/types'
 
 export interface DetailObject {
   value: Date[]
@@ -64,5 +64,5 @@ export type CalendarChangeArgs = PickerModelValue
 export interface CalendarSelectArgs extends CalendarDetail {
   type: 'select'
 }
-export type CalendarConfirmArgs = PopupConfirmArgs<CalendarDetail>
+export type CalendarConfirmArgs = CalendarDetail
 export type CalendarCancelArgs = PopupCancelArgs

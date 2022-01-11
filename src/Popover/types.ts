@@ -1,4 +1,4 @@
-import type { PopupConfirmArgs, PopupCancelArgs } from '../popup/types'
+import type { PopupCancelArgs } from '../popup/types'
 import type { IconData } from '../Icon/types'
 
 export interface PopMenuOption {
@@ -14,5 +14,5 @@ export interface PopMenuDetail {
   index: number
 }
 
-export type PopMenuConfirmArgs = PopupConfirmArgs<PopMenuDetail>
+export type PopMenuConfirmArgs = PopMenuDetail
 export type PopMenuCancelArgs = PopupCancelArgs

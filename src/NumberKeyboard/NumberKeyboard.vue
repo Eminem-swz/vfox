@@ -65,6 +65,7 @@ import type { PopupVisibleStateChangeArgs } from '../popup/types'
 import { getEnumsValue } from '@/helpers/validator'
 import { locale } from '@/Locale'
 import { formStringValueEmits } from '@/Form/form'
+import type { EmptyObject } from '../helpers/types'
 
 const TYPE_NAMES = ['default', 'rightColumn']
 
@@ -120,7 +121,7 @@ export default defineComponent({
       icon: 'BackspaceOutlined'
     }
 
-    const popup = usePopupExtend(ctx)
+    const popup = usePopupExtend<EmptyObject>(ctx)
 
     function onVisibleStateChange2(e: PopupVisibleStateChangeArgs) {
       popup.onVisibleStateChange(e)

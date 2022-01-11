@@ -1,4 +1,4 @@
-import { PopupConfirmArgs, PopupCancelArgs } from '../popup/types'
+import { PopupCancelArgs } from '../popup/types'
 import type { AnyObject } from '../helpers/types'
 
 export type PickerValue = string | number | Date
@@ -70,5 +70,5 @@ export interface ShowPickerOptions {
 }
 
 export type PickerChangeArgs = PickerModelValue
-export type PickerConfirmArgs = PopupConfirmArgs<PickerDetail>
+export type PickerConfirmArgs = PickerDetail
 export type PickerCancelArgs = PopupCancelArgs

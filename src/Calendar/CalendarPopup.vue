@@ -38,7 +38,11 @@ import { defineComponent, onMounted, ref } from 'vue'
 import { CalendarView } from '@/CalendarView'
 import { Drawer } from '@/Drawer'
 import { Button } from '@/Button'
-import { getDefaultDetail, commonProps } from '@/Calendar/calendar'
+import {
+  getDefaultDetail,
+  commonProps,
+  calendarDetailValidator
+} from '@/Calendar/calendar'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendProps } from '@/popup/popup'
 import { pickerPopupEmits } from '@/Picker/picker'
@@ -66,16 +70,17 @@ export default defineComponent({
     }
   },
   emits: {
-    ...pickerPopupEmits
+    ...pickerPopupEmits,
+    confirm: calendarDetailValidator
   },
   setup(props, ctx) {
     const { emit } = ctx
-    const calendarView = ref()
+    const calendarView = ref<InstanceType<typeof CalendarView>>()
     const valueSize = ref(0)
 
     let detail: CalendarDetail = getDefaultDetail()
 
-    const popup = usePopupExtend(ctx)
+    const popup = usePopupExtend<CalendarDetail>(ctx)
 
     function onSelect(_detail: CalendarDetail) {
       updateDetail(_detail)

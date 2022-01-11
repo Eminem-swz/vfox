@@ -39,6 +39,7 @@ import { usePickerPopup } from '@/Picker/use-picker'
 import { commonProps } from '@/DatePicker/date-picker'
 import { useHandlers } from './use-date-picker'
 import { locale } from '@/Locale'
+import type { PickerDetail } from '../Picker/types'
 
 export default defineComponent({
   name: 'fx-date-picker-popup',
@@ -54,7 +55,7 @@ export default defineComponent({
   setup(props, ctx) {
     useHandlers(props)
 
-    const popup = usePopupExtend(ctx)
+    const popup = usePopupExtend<PickerDetail>(ctx)
     const pickerPopup = usePickerPopup(props, ctx, popup)
 
     return {

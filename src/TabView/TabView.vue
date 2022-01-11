@@ -61,7 +61,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const vertical = ref(!!props.initialVertical)
-    const swiper = ref()
+    const swiper = ref<InstanceType<typeof Swiper>>()
     const tabList = ref<
       {
         value: number
@@ -95,7 +95,7 @@ export default defineComponent({
           return
         }
 
-        const $viewItem = swiper.value.getItemEl[res.activeIndex]
+        const $viewItem = swiper.value?.getItemEl(res.activeIndex)
 
         if (!$viewItem) {
           return
@@ -111,7 +111,7 @@ export default defineComponent({
           $firstChild.className.indexOf(`fx-scroll-view`) !== -1
         ) {
           // ScrollView
-          scrollTo($firstChild, { top: 0, left: 0 }, false)
+          scrollTo($firstChild as HTMLElement, { top: 0, left: 0 }, false)
         }
       }
     }

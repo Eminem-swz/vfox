@@ -2,7 +2,7 @@
   <div class="fx-scroll-tab">
     <div class="fx-scroll-tab_sidebar">
       <Sticky
-        ref="sidebar"
+        ref="side"
         :offsetTop="stickyOffsetTop"
         :offsetBottom="stickyOffsetBottom"
       >
@@ -30,7 +30,7 @@ import { Sticky } from '@/Sticky'
 import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
-import type { StickyViewChangeArgs } from '@/StickyView/types'
+import type { StickyViewChangeArgs } from '../StickyView/types'
 import { emitChangeValidator } from '@/StickyView/stickyView'
 
 export default defineComponent({
@@ -50,8 +50,8 @@ export default defineComponent({
     change: emitChangeValidator
   },
   setup(props, { emit }) {
-    const sidebar = ref()
-    const body = ref()
+    const side = ref<InstanceType<typeof Sticky>>()
+    const body = ref<InstanceType<typeof StickyView>>()
     const tabList = ref<
       {
         value: number
@@ -61,8 +61,8 @@ export default defineComponent({
     const activeIndex = ref(0)
 
     function resetContainer(containSelector: any) {
-      sidebar.value && sidebar.value.resetContainer(containSelector)
-      body.value && body.value.resetContainer(containSelector)
+      side.value?.resetContainer(containSelector)
+      body.value?.resetContainer(containSelector)
     }
 
     function onResetItems(items: { name: string; index: number }[]) {
@@ -90,20 +90,20 @@ export default defineComponent({
      * 滚到到指定位置
      * @param scrollTop 位置值
      */
-    function scrollToOffset(scrollTop: number | ScrollToOptions) {
-      body.value && body.value.scrollToOffset(scrollTop)
+    function scrollTo(scrollTop: number | ScrollToOptions) {
+      body.value && body.value.scrollTo(scrollTop)
     }
 
     onMounted(() => resetContainer(document))
 
     return {
-      sidebar,
+      side,
       body,
       activeIndex,
       tabList,
       onChange,
       scrollToIndex,
-      scrollToOffset,
+      scrollTo,
       resetContainer,
       onResetItems
     }

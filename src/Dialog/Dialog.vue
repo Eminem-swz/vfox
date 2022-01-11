@@ -44,6 +44,7 @@ import { Modal } from '@/Modal'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupEmits, popupExtendProps } from '@/popup/popup'
 import { locale } from '@/Locale'
+import type { EmptyObject } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-dialog',
@@ -75,7 +76,7 @@ export default defineComponent({
   },
   emits: { ...popupEmits },
   setup(props, ctx) {
-    const popup = usePopupExtend(ctx)
+    const popup = usePopupExtend<EmptyObject>(ctx)
 
     function onConfirmClick() {
       popup.customConfirm({})

@@ -1,4 +1,4 @@
-import type { PopupCancelArgs, PopupConfirmArgs } from '../popup/types'
+import type { PopupCancelArgs } from '../popup/types'
 import type { PickerDetail, PickerChangeArgs } from '../Picker/types'
 
 export type ColName = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
@@ -24,7 +24,7 @@ export interface DatePickerFilter {
 }
 
 export type DatePickerChangeArgs = PickerChangeArgs
-export type DatePickerConfirmArgs = PopupConfirmArgs<PickerDetail>
+export type DatePickerConfirmArgs = PickerDetail
 export type DatePickerCancelArgs = PopupCancelArgs
 
 export type ShowDatePickerOptions = Partial<{

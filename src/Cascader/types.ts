@@ -1,4 +1,4 @@
-import type { PopupCancelArgs, PopupConfirmArgs } from '../popup/types'
+import type { PopupCancelArgs } from '../popup/types'
 import type { PickerDetail, PickerChangeArgs } from '../Picker/types'
 import type {
   UserFieldNames,
@@ -7,7 +7,7 @@ import type {
 } from '../Picker/types'
 
 export type CascaderChangeArgs = PickerChangeArgs
-export type CascaderConfirmArgs = PopupConfirmArgs<PickerDetail>
+export type CascaderConfirmArgs = PickerDetail
 export type CascaderCancelArgs = PopupCancelArgs
 
 export interface ShowCascaderOptions {

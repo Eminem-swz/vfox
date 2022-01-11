@@ -81,7 +81,7 @@ import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Button, ButtonGroup } from '@/Button'
 import { iconValidator } from '@/helpers/validator'
-import type { AnyObject, StateType } from '../helpers/types'
+import type { StateType } from '../helpers/types'
 import type { IconData } from '../Icon/types'
 import { locale } from '@/Locale'
 

@@ -66,7 +66,7 @@ import {
   MODE_NAMES,
   commonProps,
   printError,
-  isCalendarDetail
+  calendarDetailValidator
 } from '@/Calendar/calendar'
 import { getEnumsValue } from '@/helpers/validator'
 import type { DayInfo } from './types'
@@ -98,7 +98,7 @@ export default defineComponent({
   props: { ...commonProps },
   emits: {
     ...pickerValueEmits,
-    select: isCalendarDetail
+    select: calendarDetailValidator
   },
   setup(props, { emit }) {
     const mode = getEnumsValue(MODE_NAMES, props.initialMode)

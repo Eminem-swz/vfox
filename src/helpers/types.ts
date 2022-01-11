@@ -51,3 +51,9 @@ export interface Noop {
 export type PlacementType = 'bottom' | 'top' | 'left' | 'right'
 export type StateType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
 export type SizeType = 'large' | 'middle' | 'small'
+
+export type UnionToIntersection<T> = (
+  T extends any ? (x: T) => any : never
+) extends (x: infer R) => any
+  ? R
+  : never

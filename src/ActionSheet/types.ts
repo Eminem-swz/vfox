@@ -1,4 +1,4 @@
-import type { PopupConfirmArgs, PopupCancelArgs } from '../popup/types'
+import type { PopupCancelArgs } from '../popup/types'
 
 export interface ActionSheetOption {
   name: string
@@ -14,5 +14,5 @@ export interface ActionSheetDetail {
   index: number
 }
 
-export type ActionSheetConfirmArgs = PopupConfirmArgs<ActionSheetDetail>
+export type ActionSheetConfirmArgs = ActionSheetDetail
 export type ActionSheetCancelArgs = PopupCancelArgs
