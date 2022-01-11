@@ -31,24 +31,25 @@ export default defineComponent({
   props: {
     size: {
       type: String as PropType<SizeType>,
-      validator: createEnumsValidator(SIZE_TYPES),
-      default: null
+      validator: createEnumsValidator(SIZE_TYPES)
     },
     pattern: {
       type: String as PropType<ButtonPatternType>,
-      validator: createEnumsValidator(BUTTON_PATTERN_TYPES),
-      default: null
+      validator: createEnumsValidator(BUTTON_PATTERN_TYPES)
     },
     shape: {
       type: String as PropType<ButtonShapeType>,
-      validator: createEnumsValidator(BUTTON_SHAPE_TYPES),
-      default: null
+      validator: createEnumsValidator(BUTTON_SHAPE_TYPES)
     }
   },
   setup(props) {
     const { children } = useGroup('button')
 
-    const options = reactive<Partial<ButtonGroupOptions>>({})
+    const options = reactive<ButtonGroupOptions>({
+      size: getEnumsValue(SIZE_TYPES),
+      pattern: getEnumsValue(BUTTON_PATTERN_TYPES),
+      shape: getEnumsValue(BUTTON_SHAPE_TYPES)
+    })
 
     watch(
       props,

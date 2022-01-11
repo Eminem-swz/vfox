@@ -7,7 +7,7 @@ import { PLACEMENT_TYPES } from '@/helpers/constants'
 import type { UseProps } from '../hooks/types'
 import { usePopup } from '@/popup/use-popup'
 import type { StyleObject } from '../helpers/types'
-import { popoverEmits } from '@/Popover/popover'
+import { popoverEmits, popoverProps } from '@/Popover/popover'
 
 type PopoverPos = {
   t: number | null
@@ -36,7 +36,7 @@ const DEFAULT_POS: PopoverPos = {
 }
 
 export function usePopover(
-  props: UseProps,
+  props: UseProps<typeof popoverProps>,
   ctx: SetupContext<typeof popoverEmits>
 ) {
   const padding = 8
