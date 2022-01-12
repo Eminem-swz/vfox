@@ -80,7 +80,6 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Button, ButtonGroup } from '@/Button'
-import { iconValidator } from '@/helpers/validator'
 import type { StateType } from '../helpers/types'
 import type { IconData } from '../Icon/types'
 import { locale } from '@/Locale'
@@ -95,10 +94,7 @@ const buttonsValidator = (items: ButtonOptions[]) => {
   return (
     Array.isArray(items) &&
     items.filter(item => {
-      return !(
-        item &&
-        (typeof item.text === 'string' || iconValidator(item.icon))
-      )
+      return !(item && (typeof item.text === 'string' || item.icon))
     }).length === 0
   )
 }

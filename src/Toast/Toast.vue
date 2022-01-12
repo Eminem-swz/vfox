@@ -56,9 +56,8 @@ export default defineComponent({
       default: 'default'
     },
     icon: {
-      type: null,
-      validator: iconValidator,
-      default: null
+      type: [String, Object],
+      validator: iconValidator
     },
     mask: {
       type: Boolean,

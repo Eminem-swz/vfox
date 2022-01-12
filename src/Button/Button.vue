@@ -81,9 +81,8 @@ export default defineComponent({
       default: false
     },
     icon: {
-      type: null,
-      validator: iconValidator,
-      default: null
+      type: [String, Object],
+      validator: iconValidator
     },
     ghost: {
       type: Boolean,

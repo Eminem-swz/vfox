@@ -39,9 +39,8 @@ export default defineComponent({
   components: { Cell },
   props: {
     icon: {
-      type: null,
-      validator: iconValidator,
-      default: null
+      type: [String, Object],
+      validator: iconValidator
     },
     title: {
       type: String,

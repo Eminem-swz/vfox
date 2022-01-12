@@ -300,16 +300,6 @@ export function cloneData<T = any>(object: T): T {
 }
 
 /**
- * 判断值是否在数组中
- * @param value 值
- * @param array 数组
- * @returns boolean
- */
-export function inArray(value: unknown, array: unknown[]) {
-  return array.indexOf(value) !== -1
-}
-
-/**
  * 获取随机数
  * @param min 最小值
  * @param max 最大值

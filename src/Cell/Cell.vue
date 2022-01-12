@@ -47,9 +47,8 @@ export default defineComponent({
   components: { Icon },
   props: {
     icon: {
-      type: null,
-      validator: iconValidator,
-      default: null
+      type: [String, Object],
+      validator: iconValidator
     },
     label: {
       type: String,

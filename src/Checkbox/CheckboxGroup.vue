@@ -19,12 +19,7 @@
 import { defineComponent, ref } from 'vue'
 import type { PropType } from 'vue'
 import Checkbox from './Checkbox.vue'
-import {
-  isStringNumberMixArray,
-  cloneData,
-  isSameArray,
-  inArray
-} from '@/helpers/util'
+import { isStringNumberMixArray, cloneData, isSameArray } from '@/helpers/util'
 import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
 import type { ModelValue } from './types'
 import { checkboxOrRadioGroupProps } from './checkbox-radio'
@@ -81,7 +76,7 @@ export default defineComponent({
           const newVal: ModelValue[] = []
 
           children.forEach(child => {
-            const checked = inArray(child.getValue(), value)
+            const checked = value.includes(child.getValue())
             child.setChecked(checked)
             checked && newVal.push(child.getValue())
           })

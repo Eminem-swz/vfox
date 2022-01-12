@@ -11,7 +11,6 @@ import {
 import { isNumber, isObject, isStringNumberMix, isURL } from '@/helpers/util'
 import { frameTo } from '@/helpers/animation'
 import Exception from '@/helpers/exception'
-import { iconValidator } from '@/helpers/validator'
 import { handleBadge } from '@/Badge/badge'
 import type { OptionValue, TabOptionItem, HandleOptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
@@ -66,7 +65,7 @@ export function useTab(
                   : item.value.toString(),
               subLabel: typeof item.subLabel === 'string' ? item.subLabel : '',
               value: item.value,
-              icon: iconValidator(item.icon) ? item.icon : null
+              icon: item.icon ?? null
             }
 
             if (!option.icon && isURL(item.icon)) {
@@ -76,9 +75,7 @@ export function useTab(
                 ? (item.activeIcon as string)
                 : option.iconLink
             } else {
-              option.activeIcon = iconValidator(item.activeIcon)
-                ? item.activeIcon
-                : option.icon
+              option.activeIcon = item.activeIcon ?? option.icon
             }
 
             if (option.subLabel) {

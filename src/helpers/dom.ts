@@ -1,9 +1,4 @@
-import {
-  camelCase2KebabCase,
-  inArray,
-  isNumber,
-  objectForEach
-} from '@/helpers/util'
+import { camelCase2KebabCase, isNumber, objectForEach } from '@/helpers/util'
 
 const docEl = document.documentElement
 
@@ -24,7 +19,7 @@ export function removeClassName($el: Element, className: string) {
 }
 
 export function hasClassName($el: Element, className: string) {
-  return inArray(className, [].slice.call($el.classList, 0))
+  return ([].slice.call($el.classList, 0) as string[]).includes(className)
 }
 
 export function getRelativeOffset(

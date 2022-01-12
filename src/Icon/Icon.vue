@@ -19,7 +19,7 @@ export default defineComponent({
   name: 'fx-icon',
   props: {
     icon: {
-      type: null,
+      type: [String, Object],
       validator: iconValidator,
       required: true
     },

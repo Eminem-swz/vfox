@@ -49,9 +49,8 @@ export default defineComponent({
       default: null
     },
     icon: {
-      type: null,
-      validator: iconValidator,
-      default: null
+      type: [String, Object],
+      validator: iconValidator
     },
     // 背景颜色
     backgroundColor: {

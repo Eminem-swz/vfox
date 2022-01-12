@@ -24,8 +24,8 @@ export interface ScrollToOffsetOptions {
   animated?: boolean
 }
 
-export interface Validator {
-  (value: unknown): boolean
+export interface Validator<T = unknown> {
+  (value: T): boolean
 }
 
 export type DomSelector = HTMLElement | string | Document
