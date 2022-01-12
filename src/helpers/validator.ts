@@ -25,7 +25,7 @@ export const stringNumberArrayMixValidator: Validator = value => {
   )
 }
 
-export const sizeValidator: Validator = value => {
+export const sizeValidator: Validator<number | string> = value => {
   return getSizeValue(value, Infinity) !== Infinity
 }
 

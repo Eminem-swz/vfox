@@ -25,8 +25,7 @@ export default defineComponent({
   props: {
     ...formItemProps,
     modelValue: {
-      type: Boolean,
-      default: null
+      type: Boolean
     },
     color: {
       type: String

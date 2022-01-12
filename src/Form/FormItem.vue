@@ -22,6 +22,8 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import { isStringArray } from '@/helpers/util'
 
 export default defineComponent({
   name: 'fx-form-item',
@@ -34,7 +36,9 @@ export default defineComponent({
       default: false
     },
     error: {
-      type: [String, Array]
+      type: [String, Array] as PropType<string | string[]>,
+      validator: (val: string | string[]) =>
+        typeof val === 'string' || isStringArray(val)
     },
     validateStatus: {
       type: String

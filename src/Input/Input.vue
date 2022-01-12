@@ -89,7 +89,7 @@ export default defineComponent({
   props: {
     ...formItemProps,
     maxlength: {
-      type: [String, Number],
+      type: [Number, String],
       validator: (val: number | string) => {
         return isNumeric(val) || val === ''
       },
@@ -104,9 +104,8 @@ export default defineComponent({
       default: 'text'
     },
     modelValue: {
-      type: [String, Number],
-      validator: isStringNumberMix,
-      default: null
+      type: [Number, String],
+      validator: (val: number | string) => isStringNumberMix(val)
     },
     focus: {
       type: Boolean,

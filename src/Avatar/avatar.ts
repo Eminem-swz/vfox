@@ -8,7 +8,7 @@ const SIZE_TYPES = ['middle', 'large', 'small']
 
 export const avatarProps = {
   size: {
-    type: [String, Number] as PropType<SizeType | number>,
+    type: [Number, String] as PropType<SizeType | number>,
     default: SIZE_TYPES[0]
   }
 }

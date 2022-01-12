@@ -549,7 +549,7 @@ export default defineComponent({
       return styles
     })
 
-    const enablePullDirections = computed(() => {
+    const enablePullDirections = computed<ScrollViewPullDirection[]>(() => {
       if (props.enablePullRefresh) {
         return horizontal ? ['right'] : ['down']
       }

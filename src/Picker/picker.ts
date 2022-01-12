@@ -32,8 +32,7 @@ export const getDefaultFieldNames: () => FieldNames = () => {
 
 export const commonProps = {
   modelValue: {
-    type: [Date, String, Number, Array],
-    default: null
+    type: [Date, String, Number, Array] as PropType<PickerModelValue>
   },
   options: {
     type: Array as PropType<UserOptionItem[]>,

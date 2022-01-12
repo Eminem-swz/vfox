@@ -24,7 +24,7 @@ export default defineComponent({
   name: 'fx-progress',
   props: {
     percentage: {
-      type: [String, Number],
+      type: [Number, String],
       validator: (val: string | number) => {
         return (
           isNumeric(val) &&

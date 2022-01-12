@@ -2,12 +2,15 @@ import dayjs from '@/helpers/day'
 import type { PropType } from 'vue'
 import { MODE_NAMES } from '@/DatePicker/date'
 import type { ModeName, DatePickerFilter } from './types'
-import type { PickerValueFormatter, PickerValueParser } from '../Picker/types'
+import type {
+  PickerModelValue,
+  PickerValueFormatter,
+  PickerValueParser
+} from '../Picker/types'
 
 export const commonProps = {
   modelValue: {
-    type: [Date, String, Number, Array],
-    default: null
+    type: [Date, String, Number, Array] as PropType<PickerModelValue>
   },
   // 格式化模板
   formatTemplate: {

@@ -100,7 +100,7 @@ export default defineComponent({
     },
     // 自定义键盘额外的键
     customKey: {
-      type: [Array, String],
+      type: [Array, String] as PropType<string | string[]>,
       default: () => [] as string[]
     }
   },

@@ -27,7 +27,7 @@ export default defineComponent({
   name: 'fx-badge',
   props: {
     content: {
-      type: [String, Number],
+      type: [Number, String],
       default: 0
     },
     maxCount: {

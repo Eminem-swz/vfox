@@ -176,7 +176,7 @@ export default defineComponent({
     },
     // 允许上传的图片类型
     accept: {
-      type: [String, Array],
+      type: [String, Array] as PropType<Accept | Accept[]>,
       validator: (val: Accept | Accept[]) => getAccepts(val).length > 0,
       default: 'all'
     },

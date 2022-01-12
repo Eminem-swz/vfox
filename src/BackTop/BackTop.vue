@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, toRef, ref } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { getScrollTop, scrollTo } from '@/helpers/dom'
 import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
@@ -28,7 +29,7 @@ export default defineComponent({
       default: true
     },
     offset: {
-      type: [Number, Array],
+      type: [Number, Array] as PropType<number | number[]>,
       default: 0
     },
     enableSafeAreaInsets: {

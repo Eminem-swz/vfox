@@ -1,10 +1,6 @@
-import {
-  getCurrentInstance,
+import { getCurrentInstance, ref, watch, computed, nextTick } from 'vue'
+import type {
   ComponentInternalInstance,
-  ref,
-  watch,
-  computed,
-  nextTick,
   SetupContext,
   ExtractPropTypes
 } from 'vue'
@@ -32,7 +28,7 @@ export function useTab(
   const activeIndex = ref(-1)
   const hasSub = ref(false)
 
-  let value2: OptionValue | null = props.activeValue
+  let value2 = props.activeValue
 
   function updateOptions() {
     const options: HandleOptionItem[] = []
@@ -65,17 +61,19 @@ export function useTab(
                   : item.value.toString(),
               subLabel: typeof item.subLabel === 'string' ? item.subLabel : '',
               value: item.value,
-              icon: item.icon ?? null
+              icon: null
             }
 
-            if (!option.icon && isURL(item.icon)) {
-              option.iconLink = item.icon as string
-
-              option.activeIconLink = isURL(item.activeIcon)
-                ? (item.activeIcon as string)
-                : option.iconLink
-            } else {
-              option.activeIcon = item.activeIcon ?? option.icon
+            if (item.icon) {
+              if (isURL(item.icon)) {
+                option.iconLink = item.icon as string
+                option.activeIconLink = isURL(item.activeIcon)
+                  ? (item.activeIcon as string)
+                  : option.iconLink
+              } else {
+                option.icon = item.icon
+                option.activeIcon = item.activeIcon ?? option.icon
+              }
             }
 
             if (option.subLabel) {
@@ -253,7 +251,7 @@ export function useTab(
 
   watch(
     () => props.activeValue,
-    val => switchTo(val, true)
+    val => val && switchTo(val, true)
   )
 
   watch(() => props.options, updateOptions, {

@@ -58,12 +58,10 @@ export default defineComponent({
       default: null
     },
     badge: {
-      type: [Number, String, Object],
-      default: null
+      type: [Number, String, Object] as PropType<number | string | BadgeOptions>
     },
     gender: {
-      type: String as PropType<Gender>,
-      default: null
+      type: String as PropType<Gender>
     },
     color: {
       type: [String, Object],
@@ -115,7 +113,7 @@ export default defineComponent({
     const badge2 = computed(() => {
       let badge: BadgeOptions
 
-      if (GenderNames.includes(props.gender)) {
+      if (props.gender && GenderNames.includes(props.gender)) {
         badge = {
           color: props.gender === 'man' ? '#1890FF' : '#F759AB',
           content: 1

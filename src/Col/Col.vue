@@ -19,7 +19,7 @@ export default defineComponent({
     // 栅格占据的列数
     span: {
       type: [Number, String],
-      validator: isNumeric,
+      validator: (val: number | string) => isNumeric(val),
       default: 24
     },
     // 栅格左侧的间隔格数

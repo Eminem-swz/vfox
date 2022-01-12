@@ -42,8 +42,7 @@ export const tabProps = {
     default: () => [] as TabOptionItem[]
   },
   activeValue: {
-    type: [String, Number],
-    default: null
+    type: [Number, String] as PropType<OptionValue>
   },
   color: {
     type: String

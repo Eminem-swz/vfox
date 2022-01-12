@@ -78,7 +78,7 @@ export default defineComponent({
       default: null
     },
     count: {
-      type: [String, Number],
+      type: [Number, String],
       default: 5
     },
     allowHalf: {

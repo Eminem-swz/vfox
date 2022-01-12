@@ -83,7 +83,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const type2 = computed(() => getEnumsValue(RESULT_TYPES, props.type))
 
-    const icon = computed(() => iconMap.get(type2.value))
+    const icon = computed(() => iconMap.get(type2.value) as string)
 
     function onConfirmClick(e: Event) {
       emit('confirm', e)

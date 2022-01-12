@@ -12,6 +12,7 @@ import type {
 import { createEnumsValidator } from '@/helpers/validator'
 import Exception from '@/helpers/exception'
 import { isPickerDetail } from '@/Picker/picker'
+import type { PickerModelValue } from '../Picker/types'
 
 export const DEFAULT_MONTH_RANGE = 6
 export const MODE_NAMES: CalendarMode[] = ['single', 'range']
@@ -27,8 +28,7 @@ export function getDefaultDetail(): CalendarOriginalDetail {
 
 export const commonProps = {
   modelValue: {
-    type: [Date, String, Number, Array],
-    default: null
+    type: [Date, String, Number, Array] as PropType<PickerModelValue>
   },
   minDate: {
     type: Date,
@@ -53,8 +53,7 @@ export const commonProps = {
     default: Infinity
   },
   dayHandler: {
-    type: Function as PropType<DayHandler>,
-    default: null
+    type: Function as PropType<DayHandler>
   },
   firstDayOfWeek: {
     validator: (val: number) => {
