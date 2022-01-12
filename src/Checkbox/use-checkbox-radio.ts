@@ -9,7 +9,7 @@ import {
   provide
 } from 'vue'
 import type { SetupContext, ExtractPropTypes } from 'vue'
-import { capitalize, inArray, isStringNumberMix } from '@/helpers/util'
+import { capitalize, isStringNumberMix } from '@/helpers/util'
 import { useGroup, useGroupItem } from '@/hooks/use-group'
 import type { ModelValue, OptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
@@ -109,7 +109,7 @@ export function useCheckboxOrRadio(
       checked =
         name === 'checkbox'
           ? Array.isArray(groupOptions.props.modelValue) &&
-            inArray(props.value, groupOptions.props.modelValue)
+            groupOptions.props.modelValue.includes(props.value)
           : props.value === groupOptions.props.modelValue
     } else {
       checked = !!props.checked

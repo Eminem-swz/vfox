@@ -6,12 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, watch, provide } from 'vue'
-import {
-  cloneData,
-  inArray,
-  isSameArray,
-  isStringNumberMixArray
-} from '@/helpers/util'
+import { cloneData, isSameArray, isStringNumberMixArray } from '@/helpers/util'
 import { stringNumberArrayMixValidator } from '@/helpers/validator'
 import { useGroup } from '@/hooks/use-group'
 
@@ -63,7 +58,7 @@ export default defineComponent({
       children.forEach(child => {
         const childName = child.getName()
 
-        if (childName && inArray(childName, values)) {
+        if (childName && values.includes(childName)) {
           activeNames2.push(childName)
           child.show()
         } else {

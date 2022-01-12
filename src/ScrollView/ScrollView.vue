@@ -58,14 +58,10 @@ import {
   reactive,
   provide
 } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { ActivityIndicator } from '@/ActivityIndicator'
-import {
-  inArray,
-  stringMix2StringArray,
-  isNumber,
-  isStringArray
-} from '@/helpers/util'
+import { stringMix2StringArray, isNumber, isStringArray } from '@/helpers/util'
 import type { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { locale } from '@/Locale'
@@ -141,7 +137,9 @@ export default defineComponent({
     },
     // 下拉刷新方向
     enablePullDirections: {
-      type: [String, Array],
+      type: [String, Array] as PropType<
+        ScrollViewPullDirection | ScrollViewPullDirection[]
+      >,
       validator: (val: ScrollViewPullDirection | ScrollViewPullDirection[]) =>
         typeof val === 'string' || isStringArray(val),
       default: null
@@ -158,9 +156,9 @@ export default defineComponent({
   },
   emits: {
     'scroll-to-upper': (payload: { direction: 'top' | 'left' }) =>
-      payload && inArray(payload.direction, ['top', 'left']),
+      payload && ['top', 'left'].includes(payload.direction),
     'scroll-to-lower': (payload: { direction: 'bottom' | 'right' }) =>
-      payload && inArray(payload.direction, ['bottom', 'right']),
+      payload && ['bottom', 'right'].includes(payload.direction),
     scroll: emitScrollValidator,
     refreshing: emitRefreshingValidator
   },
@@ -325,7 +323,7 @@ export default defineComponent({
     const contentStyles = computed(() => {
       return {
         transition: `transform ${translateDuration.value}ms`,
-        transform: inArray(pullDirection.value, ['up', 'down'])
+        transform: ['up', 'down'].includes(pullDirection.value)
           ? `translate3d(0, ${pullDistance.value}px, 0)`
           : `translate3d(${pullDistance.value}px, 0, 0)`
       } as StyleObject
@@ -382,21 +380,21 @@ export default defineComponent({
         // 猜想可能刷新的方向，0-4个都有可能
         const directions: ScrollViewPullDirection[] = []
 
-        if (scrollTop === 0 && inArray('down', allowPullDirections)) {
+        if (scrollTop === 0 && allowPullDirections.includes('down')) {
           directions.push('down')
         }
         if (
           scrollTop + clientHeight >= scrollHeight &&
-          inArray('up', allowPullDirections)
+          allowPullDirections.includes('up')
         ) {
           directions.push('up')
         }
-        if (scrollLeft === 0 && inArray('right', allowPullDirections)) {
+        if (scrollLeft === 0 && allowPullDirections.includes('right')) {
           directions.push('right')
         }
         if (
           scrollLeft + clientWidth >= scrollWidth &&
-          inArray('left', allowPullDirections)
+          allowPullDirections.includes('left')
         ) {
           directions.push('left')
         }
@@ -454,14 +452,14 @@ export default defineComponent({
           if (Math.abs(offsetY) >= Math.abs(offsetX)) {
             coords.directions = coords.directions.filter(v => {
               return (
-                inArray(v, ['up', 'down']) &&
+                ['up', 'down'].includes(v) &&
                 ((v === 'down' && offsetY > 0) || (v === 'up' && offsetY < 0))
               )
             })
           } else {
             coords.directions = coords.directions.filter(v => {
               return (
-                inArray(v, ['left', 'right']) &&
+                ['left', 'right'].includes(v) &&
                 ((v === 'right' && offsetX > 0) ||
                   (v === 'left' && offsetX < 0))
               )
@@ -486,7 +484,7 @@ export default defineComponent({
           pullIndicatorSafeArea.bottom = 0
           pullIndicatorSafeArea.left = 0
 
-          if (inArray(_pullDirection, ['up', 'down'])) {
+          if (['up', 'down'].includes(_pullDirection)) {
             pullIndicatorSafeArea.left = $scroll.scrollLeft
             pullIndicatorSafeArea.right =
               $scroll.scrollWidth - $scroll.scrollLeft - $scroll.clientWidth
@@ -502,7 +500,7 @@ export default defineComponent({
         pullDirection.value = _pullDirection
 
         let distance
-        if (inArray(pullDirection.value, ['up', 'down'])) {
+        if (['up', 'down'].includes(pullDirection.value)) {
           distance = offsetY
         } else {
           distance = offsetX
@@ -523,7 +521,7 @@ export default defineComponent({
             ) // 除于2比不除更好拉一点
         }
 
-        pullDistance.value = inArray(pullDirection.value, ['down', 'right'])
+        pullDistance.value = ['down', 'right'].includes(pullDirection.value)
           ? distance
           : -distance
       },
@@ -538,7 +536,7 @@ export default defineComponent({
 
         if (pullRefreshState.value === PullRefreshState.Holding) {
           pullRefreshState.value = PullRefreshState.Refreshing
-          pullDistance.value = inArray(pullDirection.value, ['down', 'right'])
+          pullDistance.value = ['down', 'right'].includes(pullDirection.value)
             ? props.pullRefreshThreshold
             : -props.pullRefreshThreshold
 

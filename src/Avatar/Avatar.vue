@@ -34,7 +34,7 @@ import {
 import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '@/Avatar/avatar'
 import type { AvatarShapeType } from './types'
 import { useGroupItem } from '@/hooks/use-group'
-import { isNumber, inArray } from '@/helpers/util'
+import { isNumber } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { handleBadge } from '@/Badge/badge'
 import type { BadgeOptions } from '../Badge/types'
@@ -115,7 +115,7 @@ export default defineComponent({
     const badge2 = computed(() => {
       let badge: BadgeOptions
 
-      if (inArray(props.gender, GenderNames)) {
+      if (GenderNames.includes(props.gender)) {
         badge = {
           color: props.gender === 'man' ? '#1890FF' : '#F759AB',
           content: 1

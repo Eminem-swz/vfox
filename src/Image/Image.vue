@@ -97,11 +97,13 @@ export default defineComponent({
     },
     // 左侧图标名称
     loadingIcon: {
+      type: [String, Object],
       validator: iconValidator,
       default: 'ImageOutlined'
     },
     // 左侧图标名称
     errorIcon: {
+      type: [String, Object],
       validator: iconValidator,
       default: 'ImageBreakOutlined'
     },

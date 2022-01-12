@@ -1,5 +1,4 @@
 import {
-  inArray,
   isObject,
   isStringNumberMixArray,
   isNumber,
@@ -31,15 +30,15 @@ export const sizeValidator: Validator = value => {
 }
 
 export const createEnumsValidator = (enums: string[]) => {
-  const validator: Validator = function (value) {
-    return inArray(value, enums)
+  const validator: Validator<string> = value => {
+    return enums.includes(value)
   }
 
   return validator
 }
 
 export function getEnumsValue<T = string>(enums: T[], value?: unknown): T {
-  return inArray(value, enums) ? (value as T) : enums[0]
+  return enums.includes(value as T) ? (value as T) : enums[0]
 }
 
 /**

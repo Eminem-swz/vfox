@@ -1,5 +1,5 @@
 import { createApp, Component } from 'vue'
-import { inArray, isObject, objectForEach } from '@/helpers/util'
+import { isObject, objectForEach } from '@/helpers/util'
 import { getCallbackFns } from '@/apis/callback'
 import type { AnyObject, EmptyObject } from '../helpers/types'
 import type { PopupCustomCancel, PopupBridge, PopupHook } from '../popup/types'
@@ -89,7 +89,7 @@ export function createShowPopup<T, E = EmptyObject>({
         const propsData: AnyObject = {}
 
         objectForEach(options, (v, k) => {
-          if (!inArray(k, ['success', 'fail', 'complete'])) {
+          if (!['success', 'fail', 'complete'].includes(k)) {
             if (k === 'mode') {
               propsData.initialMode = v
             } else if (k === 'value') {

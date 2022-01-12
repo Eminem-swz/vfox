@@ -70,6 +70,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Input } from '@/Input'
 import { Button } from '@/Button'
@@ -79,21 +80,20 @@ import { Tag } from '@/Tag'
 import { isObject, isStringArray, isStringNumberMix } from '@/helpers/util'
 import { locale } from '@/Locale'
 import { emitTypeValidator } from '@/helpers/validator'
+import type {
+  SearchBarSetSuggestList,
+  SearchBarSuggestItem,
+  SearchBarSuggestList
+} from './types'
 
 type Placeholders = string | string[]
-
-interface SuggestItem {
-  text: string | number
-  tags?: string[]
-}
-type SuggestList = (string | number | SuggestItem)[]
 
 const emitValidator = (
   payload: {
     type: string
     text: string
   },
-  setSuggestList: (res: SuggestList) => void
+  setSuggestList: SearchBarSetSuggestList
 ) =>
   payload &&
   typeof payload.text === 'string' &&
@@ -129,6 +129,7 @@ export default defineComponent({
       default: null
     },
     placeholders: {
+      type: [String, Array] as PropType<Placeholders>,
       validator: (val: Placeholders) =>
         typeof val === 'string' || isStringArray(val),
       default: () => [] as string[]
@@ -155,7 +156,7 @@ export default defineComponent({
     const searchText = ref('')
     const enableDropdown = ref(false)
     const suggestVisible = ref(false)
-    const suggestList = ref<SuggestItem[]>([])
+    const suggestList = ref<SearchBarSuggestItem[]>([])
 
     function proxyEvent(e: Event) {
       const text = searchText.value
@@ -166,7 +167,7 @@ export default defineComponent({
           type: e.type,
           text
         },
-        (res: SuggestList) => {
+        res => {
           setSuggestList(res, text !== searchText.value)
         }
       )
@@ -179,18 +180,18 @@ export default defineComponent({
           type: 'input',
           text
         },
-        (res: SuggestList) => {
+        res => {
           setSuggestList(res, text !== searchText.value)
         }
       )
     }
 
-    function setSuggestList(res: SuggestList, expired: boolean) {
+    function setSuggestList(res: SearchBarSuggestList, expired: boolean) {
       if (expired) {
         return
       }
 
-      const newList: SuggestItem[] = []
+      const newList: SearchBarSuggestItem[] = []
 
       if (Array.isArray(res)) {
         res.forEach(v => {
@@ -200,7 +201,7 @@ export default defineComponent({
               tags: []
             })
           } else if (isObject(v)) {
-            v = v as SuggestItem
+            v = v as SearchBarSuggestItem
 
             if (isStringNumberMix(v.text)) {
               v.text = v.text.toString()

@@ -52,6 +52,8 @@ import { ImagePreviewChangeArgs } from './ImagePreview/types'
 
 import { IconData } from './Icon/types'
 
+import { SearchBarSetSuggestList, SearchBarOnInput } from './SearchBar/types'
+
 export {
   // type
   StateType,
@@ -94,5 +96,8 @@ export {
   PopMenuConfirmArgs,
   PopMenuCancelArgs,
   // Icon
-  IconData
+  IconData,
+  // SearchBar
+  SearchBarSetSuggestList,
+  SearchBarOnInput
 }

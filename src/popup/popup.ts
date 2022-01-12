@@ -1,4 +1,3 @@
-import { inArray } from '@/helpers/util'
 import type { PopupCancelArgs, PopupVisibleStateChangeArgs } from './types'
 
 const VISIBLE_STATE_TYPES = ['show', 'shown', 'hide', 'hidden']
@@ -16,7 +15,7 @@ export const popupProps = {
 
 export const popupEmits = {
   'visible-state-change': (payload: PopupVisibleStateChangeArgs) =>
-    payload && inArray(payload.state, VISIBLE_STATE_TYPES),
+    payload && VISIBLE_STATE_TYPES.includes(payload.state),
   'update:visible': (visible: boolean) => typeof visible === 'boolean',
   cancel: (payload: PopupCancelArgs) =>
     payload && typeof payload.source === 'string',

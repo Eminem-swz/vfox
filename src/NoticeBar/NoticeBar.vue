@@ -82,13 +82,13 @@ export default defineComponent({
     },
     // 左侧图标名称
     leftIcon: {
-      validator: iconValidator,
-      default: null
+      type: [String, Object],
+      validator: iconValidator
     },
     // 右边侧图标名称
     rightIcon: {
-      validator: iconValidator,
-      default: null
+      type: [String, Object],
+      validator: iconValidator
     },
     color: {
       type: [String, Object],
