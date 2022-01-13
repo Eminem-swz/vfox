@@ -1,3 +1,20 @@
+# [2.5.0](https://github.com/godxiaoji/vfox/compare/v2.4.3...v2.5.0) (2022-01-13)
+
+
+### Bug Fixes
+
+* **emits:** add emits validator ([a83c77b](https://github.com/godxiaoji/vfox/commit/a83c77b0f11d73b7f12cc3f5c37662841c312f8a))
+* **ref:** 给组件引用ref添加定义类型 ([84019b4](https://github.com/godxiaoji/vfox/commit/84019b4ad7e79d0315e894a9789f7ee383e5f2ca))
+* **ts:** 完善ts提示 ([5907dc7](https://github.com/godxiaoji/vfox/commit/5907dc7186fe91f8a32a4ab94e8211855f25f53d))
+* **ts:** 完善ts提示 ([bf7fed4](https://github.com/godxiaoji/vfox/commit/bf7fed438ca315124dc149bbb56558dcd78c2d49))
+* 优化ts提示 ([8c66f7d](https://github.com/godxiaoji/vfox/commit/8c66f7d8890f1902c251e2025db4694538857286))
+* 适配模版ts提示 ([e827bfe](https://github.com/godxiaoji/vfox/commit/e827bfe8cdabac0a80adae110f88524e81e97b94))
+
+
+### Features
+
+* **emits:** add emits validator ([59f917c](https://github.com/godxiaoji/vfox/commit/59f917cc1d6c4718f6235bb8553c5fae3f53ef2a))
+
 ## [2.4.3](https://github.com/godxiaoji/vfox/compare/v2.4.2...v2.4.3) (2022-01-08)
 
 
