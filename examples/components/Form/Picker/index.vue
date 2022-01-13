@@ -77,11 +77,11 @@ import { cascadeOptions, multiOptions, options, regionOptions } from './data'
 import { showToast } from '@/Toast'
 import { showPicker } from '@/Picker'
 import type {
-  PickerChangeArgs,
-  PickerConfirmArgs,
-  PickerCancelArgs,
-  PopupVisibleStateChangeArgs
-} from '@/types'
+  SelectorModelValue,
+  PickerOnConfirm,
+  PopupVisibleStateChangeArgs,
+  PopupCancelArgs
+} from '@/index'
 
 export default defineComponent({
   name: 'ExpPicker',
@@ -122,21 +122,21 @@ export default defineComponent({
       })
     }
 
-    function onConfirm(res: PickerConfirmArgs) {
+    const onConfirm: PickerOnConfirm = res => {
       if (clickEvent.value) {
         console.log('event', res)
         showToast(`点击确定按钮`)
       }
     }
 
-    function onChange(res: PickerChangeArgs) {
+    function onChange(res: SelectorModelValue) {
       if (changeEvent.value) {
         console.log('event', res)
         showToast(`值改为 ${res}`)
       }
     }
 
-    function onCancel(res: PickerCancelArgs) {
+    function onCancel(res: PopupCancelArgs) {
       if (clickEvent.value) {
         console.log('event', res)
 

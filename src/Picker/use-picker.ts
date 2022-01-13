@@ -4,13 +4,14 @@ import { cloneData, isSameArray, isEmpty } from '@/helpers/util'
 import type {
   ColRow,
   OptionItem,
-  PickerValue,
   PickerOptionsHandler,
-  PickerDetail,
-  PickerHandlers,
-  PickerModelValue
+  PickerHandlers
 } from './types'
-import type { Noop } from '../helpers/types'
+import type {
+  SelectorValue,
+  SelectorModelValue,
+  SelectorDetail
+} from '../SelectorField/types'
 import { cloneDetail, isSameDetail, isSameValue } from '@/Picker/util'
 import {
   getDefaultDetail,
@@ -82,7 +83,7 @@ export function usePicker(
     return getDetail()
   }
 
-  function updateDetail(newDetail: PickerDetail) {
+  function updateDetail(newDetail: SelectorDetail) {
     detail = newDetail
 
     fieldValue.value = detail.value != null ? detail.value.toString() : ''
@@ -111,7 +112,7 @@ export function usePicker(
     emit('change', getDetail().value)
   }
 
-  function onConfirm(_detail: PickerDetail) {
+  function onConfirm(_detail: SelectorDetail) {
     updateDetail(_detail)
 
     emit('update:modelValue', getDetail().value)
@@ -155,8 +156,8 @@ export function usePickerPopup(
     customConfirm,
     onCancelClick
   }: {
-    customConfirm: PopupCustomConfirm<PickerDetail>
-    onCancelClick: Noop
+    customConfirm: PopupCustomConfirm<SelectorDetail>
+    onCancelClick: () => void
   }
 ) {
   const view = ref()
@@ -165,7 +166,7 @@ export function usePickerPopup(
 
   function beforeConfirm() {
     const newDetail =
-      (view.value?.getDetail() as PickerDetail) || getDefaultDetail()
+      (view.value?.getDetail() as SelectorDetail) || getDefaultDetail()
 
     if (!isSameDetail(newDetail, detail)) {
       detail = newDetail
@@ -227,7 +228,7 @@ export function usePickerPopup(
 interface ViewUseOptions {
   name: 'cascader' | 'picker'
   afterUpdate: (
-    valueArray: PickerValue[],
+    valueArray: SelectorValue[],
     labelArray: string[],
     cols: ColRow[][]
   ) => void
@@ -245,10 +246,10 @@ export function usePickerView(
   const isCascade = ref(false)
 
   let selectedLabels: string[] = []
-  let selectedValues: PickerValue[] = []
+  let selectedValues: SelectorValue[] = []
 
   const currentLabels = ref<string[]>([])
-  const currentValues = ref<PickerValue[]>([])
+  const currentValues = ref<SelectorValue[]>([])
 
   const isPicker = name === 'picker'
 
@@ -268,7 +269,7 @@ export function usePickerView(
     isCascade.value = isCascade2
   }
 
-  function updateOriginalValue(val: PickerValue[], forceUpdate = false) {
+  function updateOriginalValue(val: SelectorValue[], forceUpdate = false) {
     const { valid, value: values } = validateValues(
       val,
       options2.value,
@@ -303,7 +304,7 @@ export function usePickerView(
     selectedLabels.push(item.label)
   }
 
-  function update(selecteds: PickerValue[]) {
+  function update(selecteds: SelectorValue[]) {
     !isCascade.value ? updateCols(selecteds) : updateCascadeCols(selecteds)
 
     if (isPicker) {
@@ -322,7 +323,7 @@ export function usePickerView(
   /**
    * 更新多列展示效果
    */
-  function updateCols(selecteds: PickerValue[]) {
+  function updateCols(selecteds: SelectorValue[]) {
     clearCache()
 
     cols.value = []
@@ -374,7 +375,7 @@ export function usePickerView(
    * 日期等更新模式
    * @param selecteds 选择值
    */
-  function updateVirtualOptionsCols(selecteds: PickerValue[]) {
+  function updateVirtualOptionsCols(selecteds: SelectorValue[]) {
     clearCache()
 
     if (selecteds.length === 0) {
@@ -455,7 +456,7 @@ export function usePickerView(
    * 级联更新模式
    * @param selecteds 选择值
    */
-  function updateCascadeCols(selecteds: PickerValue[]) {
+  function updateCascadeCols(selecteds: SelectorValue[]) {
     if (typeof optionsHandler === 'function') {
       updateVirtualOptionsCols(selecteds)
       return
@@ -565,9 +566,9 @@ export function usePickerView(
     }
 
     function getFirstSelected(
-      values: PickerValue[],
+      values: SelectorValue[],
       optionList: OptionItem[]
-    ): PickerValue[] {
+    ): SelectorValue[] {
       const optionItem = optionList[0]
 
       if (optionItem) {
@@ -586,10 +587,10 @@ export function usePickerView(
 
   function getValuesByRow(row: ColRow) {
     if (row.values) {
-      return row.values as PickerValue[]
+      return row.values as SelectorValue[]
     }
 
-    const values: PickerValue[] = []
+    const values: SelectorValue[] = []
     const indexes = row.indexes
     let i = 0
     let options = options2.value as OptionItem[]
@@ -657,26 +658,29 @@ export function usePickerView(
 }
 
 type PickerFormatter = (
-  valueArray: PickerValue[],
+  valueArray: SelectorValue[],
   labelArray: string[],
   handlers: PickerHandlers
-) => PickerDetail
+) => SelectorDetail
 
-type PickerParser = (value: unknown, handlers: PickerHandlers) => PickerValue[]
+type PickerParser = (
+  value: unknown,
+  handlers: PickerHandlers
+) => SelectorValue[]
 
 const formatter: PickerFormatter = (valueArray, labelArray, handlers) => {
   const defaultLabel = handlers.labelFormatter(labelArray)
   const ret = handlers.formatter(valueArray, labelArray)
 
-  if ((ret as PickerDetail)?.value) {
+  if ((ret as SelectorDetail)?.value) {
     return {
-      value: (ret as PickerDetail).value,
-      label: (ret as PickerDetail).label ?? ''
+      value: (ret as SelectorDetail).value,
+      label: (ret as SelectorDetail).label ?? ''
     }
   }
 
   return {
-    value: ret as PickerModelValue,
+    value: ret as SelectorModelValue,
     label: defaultLabel
   }
 }

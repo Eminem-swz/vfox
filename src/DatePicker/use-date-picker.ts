@@ -4,11 +4,13 @@ import type { Dayjs } from 'dayjs'
 import { getEnumsValue } from '@/helpers/validator'
 import type {
   PickerOptionsHandler,
-  PickerValueParser,
   PickerLabelFormatter,
-  PickerValueFormatter,
   PickerHandlers
 } from '../Picker/types'
+import type {
+  SelectorValueParser,
+  SelectorValueFormatter
+} from '../SelectorField/types'
 import type { UseProps } from '../hooks/types'
 import {
   array2Date,
@@ -38,7 +40,7 @@ export function useHandlers(props: UseProps) {
     })
   }
 
-  const parser: PickerValueParser = value => {
+  const parser: SelectorValueParser = value => {
     if (props.parser) {
       return props.parser(value)
     }
@@ -79,7 +81,7 @@ export function useHandlers(props: UseProps) {
         )
   }
 
-  const formatter: PickerValueFormatter = (valueArray, labelArray) => {
+  const formatter: SelectorValueFormatter = (valueArray, labelArray) => {
     if (props.formatter) {
       return props.formatter(valueArray, labelArray)
     }

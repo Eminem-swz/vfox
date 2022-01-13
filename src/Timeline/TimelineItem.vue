@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts">
+import { colorValidator } from '@/helpers/validator'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -27,7 +28,7 @@ export default defineComponent({
     // dot颜色
     dotColor: {
       type: String,
-      default: null
+      validator: colorValidator
     },
     title: {
       type: String,

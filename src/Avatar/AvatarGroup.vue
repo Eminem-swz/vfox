@@ -33,7 +33,7 @@ export default defineComponent({
       default: null
     },
     countColor: {
-      type: [String, Object]
+      type: String
     }
   },
   setup(props) {

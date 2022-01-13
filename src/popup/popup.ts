@@ -1,4 +1,4 @@
-import type { PopupCancelArgs, PopupVisibleStateChangeArgs } from './types'
+import type { OnCancel, OnVisibleStateChange } from './types'
 
 const VISIBLE_STATE_TYPES = ['show', 'shown', 'hide', 'hidden']
 
@@ -13,13 +13,17 @@ export const popupProps = {
   }
 }
 
-export const popupEmits = {
-  'visible-state-change': (payload: PopupVisibleStateChangeArgs) =>
+export const popupEmits: {
+  'visible-state-change': OnVisibleStateChange
+  'update:visible': (visible: boolean) => boolean
+  cancel: OnCancel
+  confirm: (payload: any) => boolean
+} = {
+  'visible-state-change': payload =>
     payload && VISIBLE_STATE_TYPES.includes(payload.state),
-  'update:visible': (visible: boolean) => typeof visible === 'boolean',
-  cancel: (payload: PopupCancelArgs) =>
-    payload && typeof payload.source === 'string',
-  confirm: (payload: any) => !!payload
+  'update:visible': visible => typeof visible === 'boolean',
+  cancel: payload => payload && typeof payload.source === 'string',
+  confirm: payload => !!payload
 }
 
 export const popupExtendProps = {

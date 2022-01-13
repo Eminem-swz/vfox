@@ -3,19 +3,19 @@ import { isInNumberRange, isInteger } from '@/helpers/util'
 import dayjs from '@/helpers/day'
 import type {
   DayHandler,
-  CalendarMode,
-  CalendarValueFormatter,
-  CalendarValueParser,
+  Mode,
+  ValueFormatter,
+  ValueParser,
   CalendarOriginalDetail,
   CalendarDetail
 } from './types'
 import { createEnumsValidator } from '@/helpers/validator'
 import Exception from '@/helpers/exception'
 import { isPickerDetail } from '@/Picker/picker'
-import type { PickerModelValue } from '../Picker/types'
+import type { SelectorModelValue } from '../SelectorField/types'
 
 export const DEFAULT_MONTH_RANGE = 6
-export const MODE_NAMES: CalendarMode[] = ['single', 'range']
+export const MODE_NAMES: Mode[] = ['single', 'range']
 
 export function getDefaultDetail(): CalendarOriginalDetail {
   return {
@@ -28,7 +28,7 @@ export function getDefaultDetail(): CalendarOriginalDetail {
 
 export const commonProps = {
   modelValue: {
-    type: [Date, String, Number, Array] as PropType<PickerModelValue>
+    type: [Date, String, Number, Array] as PropType<SelectorModelValue>
   },
   minDate: {
     type: Date,
@@ -40,7 +40,7 @@ export const commonProps = {
       dayjs().startOf('day').add(DEFAULT_MONTH_RANGE, 'month').toDate()
   },
   initialMode: {
-    type: String as PropType<CalendarMode>,
+    type: String as PropType<Mode>,
     validator: createEnumsValidator(MODE_NAMES),
     default: MODE_NAMES[0]
   },
@@ -62,10 +62,10 @@ export const commonProps = {
     default: 0
   },
   formatter: {
-    type: Function as PropType<CalendarValueFormatter>
+    type: Function as PropType<ValueFormatter>
   },
   parser: {
-    type: Function as PropType<CalendarValueParser>
+    type: Function as PropType<ValueParser>
   }
 }
 

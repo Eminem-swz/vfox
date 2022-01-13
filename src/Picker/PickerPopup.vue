@@ -45,7 +45,7 @@ import {
 } from '@/Picker/picker'
 import { usePickerPopup } from '@/Picker/use-picker'
 import { locale } from '@/Locale'
-import type { PickerDetail } from './types'
+import type { SelectorDetail } from '../SelectorField/types'
 
 export default defineComponent({
   name: 'fx-picker-popup',
@@ -59,7 +59,7 @@ export default defineComponent({
     ...pickerPopupEmits
   },
   setup(props, ctx) {
-    const popup = usePopupExtend<PickerDetail>(ctx)
+    const popup = usePopupExtend<SelectorDetail>(ctx)
     const pickerPopup = usePickerPopup(props, ctx, popup)
 
     return {

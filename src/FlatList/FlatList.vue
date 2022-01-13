@@ -71,16 +71,12 @@ import Exception from '@/helpers/exception'
 import { getRelativeOffset } from '@/helpers/dom'
 import { useResizeDetector } from '@/hooks/use-resize-detector'
 import type {
-  Noop,
   ScrollToIndexOptions,
   ScrollToOffsetOptions,
   StyleObject
 } from '../helpers/types'
 import { locale } from '@/Locale'
-import type {
-  ScrollViewOnScrollArgs,
-  ScrollViewPullDirection
-} from '../ScrollView/types'
+import type { OnRefreshing, OnScroll, PullDirection } from '../ScrollView/types'
 import {
   emitRefreshingValidator,
   emitScrollValidator
@@ -256,12 +252,7 @@ export default defineComponent({
       return getRootEl()[scrollX ? 'scrollLeft' : 'scrollTop']
     }
 
-    function onRefreshing(
-      res: {
-        pullDirection: ScrollViewPullDirection
-      },
-      loadComplete: Noop
-    ) {
+    const onRefreshing: OnRefreshing = (res, loadComplete) => {
       emit('refreshing', res, loadComplete)
     }
 
@@ -438,7 +429,7 @@ export default defineComponent({
 
     let scrollTimer: number
 
-    function onScroll(res: ScrollViewOnScrollArgs) {
+    const onScroll: OnScroll = res => {
       const scrollSize = res[scrollX ? 'scrollLeft' : 'scrollTop']
 
       if (scrollCount > 10) {
@@ -549,7 +540,7 @@ export default defineComponent({
       return styles
     })
 
-    const enablePullDirections = computed<ScrollViewPullDirection[]>(() => {
+    const enablePullDirections = computed<PullDirection[]>(() => {
       if (props.enablePullRefresh) {
         return horizontal ? ['right'] : ['down']
       }

@@ -53,7 +53,7 @@ export default defineComponent({
       }
     },
     color: {
-      type: [String, Object],
+      type: String,
       validator: colorValidator
     }
   },

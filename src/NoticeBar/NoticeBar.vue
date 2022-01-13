@@ -91,7 +91,7 @@ export default defineComponent({
       validator: iconValidator
     },
     color: {
-      type: [String, Object],
+      type: String,
       validator: colorValidator
     },
     // 是否采用跑马灯显示

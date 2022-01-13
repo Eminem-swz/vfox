@@ -49,10 +49,10 @@ import { cascadeOptions, regionOptions } from '../Picker/data'
 import { showToast } from '@/Toast'
 import { showCascader } from '@/Cascader'
 import type {
-  CascaderChangeArgs,
-  PickerValueFormatter,
-  PickerValueParser
-} from '@/types'
+  SelectorModelValue,
+  SelectorValueFormatter,
+  SelectorValueParser
+} from '@/index'
 
 export default defineComponent({
   name: 'ExpCascader',
@@ -62,18 +62,18 @@ export default defineComponent({
     const value = ref(['bingxiang', 'duikaimen'])
     const formatValue = ref(`bingxiang${separator}duikaimen`)
 
-    const formatter: PickerValueFormatter = (valueArray, labelArray) => {
+    const formatter: SelectorValueFormatter = (valueArray, labelArray) => {
       return {
         value: valueArray.join(separator),
         label: labelArray.join(separator)
       }
     }
 
-    const parser: PickerValueParser = value => {
+    const parser: SelectorValueParser = value => {
       return value ? (value as string).split(separator) : []
     }
 
-    function onChange(res: CascaderChangeArgs) {
+    function onChange(res: SelectorModelValue) {
       console.log('event', res)
 
       showToast(`选择了 ${res}`)

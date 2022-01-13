@@ -70,7 +70,7 @@ import {
   emitRefreshingValidator,
   emitScrollValidator
 } from '@/ScrollView/scrollView'
-import type { ScrollViewPullDirection } from './types'
+import type { PullDirection } from './types'
 
 enum ScrollState {
   Center,
@@ -83,15 +83,15 @@ enum PullRefreshState {
   Refreshing
 }
 
-type PullDirectionOrDefault = '' | ScrollViewPullDirection
+type PullDirectionOrDefault = '' | PullDirection
 
 interface ScrollCoords {
   pageX: number
   pageY: number
   scrollX: boolean
   scrollY: boolean
-  directions?: ScrollViewPullDirection[]
-  direction?: ScrollViewPullDirection
+  directions?: PullDirection[]
+  direction?: PullDirection
   stop: boolean | null
   isSetSafeArea?: boolean
 }
@@ -137,10 +137,8 @@ export default defineComponent({
     },
     // 下拉刷新方向
     enablePullDirections: {
-      type: [String, Array] as PropType<
-        ScrollViewPullDirection | ScrollViewPullDirection[]
-      >,
-      validator: (val: ScrollViewPullDirection | ScrollViewPullDirection[]) =>
+      type: [String, Array] as PropType<PullDirection | PullDirection[]>,
+      validator: (val: PullDirection | PullDirection[]) =>
         typeof val === 'string' || isStringArray(val),
       default: null
     },
@@ -378,7 +376,7 @@ export default defineComponent({
         pullDirection.value = ''
 
         // 猜想可能刷新的方向，0-4个都有可能
-        const directions: ScrollViewPullDirection[] = []
+        const directions: PullDirection[] = []
 
         if (scrollTop === 0 && allowPullDirections.includes('down')) {
           directions.push('down')
@@ -543,7 +541,7 @@ export default defineComponent({
           emit(
             'refreshing',
             {
-              pullDirection: pullDirection.value as ScrollViewPullDirection
+              pullDirection: pullDirection.value as PullDirection
             },
             loadComplete
           )

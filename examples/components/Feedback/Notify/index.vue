@@ -102,10 +102,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { showNotify, hideNotify } from '@/Notify'
-import type { PopupCancelArgs, StateType, IconData } from '@/types'
+import type { PopupCancelArgs, StateType } from '@/index'
 
 interface showArgs {
-  icon?: IconData
+  icon?: any
   title?: string
   backgroundColor?: string
   color?: string

@@ -64,7 +64,7 @@ export default defineComponent({
       type: String as PropType<Gender>
     },
     color: {
-      type: [String, Object],
+      type: String,
       validator: colorValidator
     }
   },

@@ -10,30 +10,30 @@ import { Picker, PickerPopup, PickerView } from 'vfox'
 
 ## 公共 Props
 
-| 属性        | 类型                                                                                             | 默认值                                                   | 必填 | 说明                                                 |
-| ----------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
-| v-model     | [PickerValue](./Picker.md#pickervalue-的类型) \| [PickerValue](./Picker.md#pickervalue-的类型)[] | []                                                       | 否   | 选中值                                               |
-| options     | [Options](./Picker.md#options-的结构)                                                            | []                                                       | 是   | 数据集                                               |
-| field-names | object                                                                                           | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key    |
-| formatter   | [PickerValueFormatter](./Picker.md#pickervalueformatter)                                         |                                                          | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
-| parser      | [PickerValueParser](./Picker.md#pickervalueparser)                                               |                                                          | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
+| 属性        | 类型                                                                                                     | 默认值                                                   | 必填 | 说明                                                 |
+| ----------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
+| v-model     | [SelectorValue](./Picker.md#selectorvalue-的类型) \| [SelectorValue](./Picker.md#selectorvalue-的类型)[] | []                                                       | 否   | 选中值                                               |
+| options     | [Options](./Picker.md#options-的结构)                                                                    | []                                                       | 是   | 数据集                                               |
+| field-names | object                                                                                                   | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key    |
+| formatter   | [SelectorValueFormatter](./Picker.md#selectorvalueformatter)                                             |                                                          | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
+| parser      | [SelectorValueParser](./Picker.md#selectorvalueparser)                                                   |                                                          | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
 
-### PickerValue 的类型
+### SelectorValue 的类型
 
 允许的类型为：`string | number | Date`
 
 在不自定义 `formatter/parser` 的情况下，v-model 只有 `(string | number)[]` 这种情况。
 
-### PickerModelValue 的类型
+### SelectorModelValue 的类型
 
-PickerModelValue 的类型为： `PickerValue | PickerValue[]`
+SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
-### PickerDetail 的结构
+### SelectorDetail 的结构
 
-| 字段  | 类型                                                    | 说明                                                  |
-| ----- | ------------------------------------------------------- | ----------------------------------------------------- |
-| value | [PickerModelValue](./Picker.md#pickermodelvalue-的类型) | ["zaolei", "lunzao"]；`formatter/parser` 的优先级更高 |
-| label | string                                                  | "藻类/轮藻"                                           |
+| 字段  | 类型                                                        | 说明                                                  |
+| ----- | ----------------------------------------------------------- | ----------------------------------------------------- |
+| value | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | ["zaolei", "lunzao"]；`formatter/parser` 的优先级更高 |
+| label | string                                                      | "藻类/轮藻"                                           |
 
 ### options 的结构
 
@@ -185,30 +185,30 @@ PickerModelValue 的类型为： `PickerValue | PickerValue[]`
 
 高阶配置，`formatter` 和 `parser` 需要一同设置，对 v-model 的值转为自定义值。
 
-#### PickerValueFormatter
+#### SelectorValueFormatter
 
 ```
-interface PickerValueFormatter {
-  (valueArray: PickerValue[], labelArray: string[]):
+interface SelectorValueFormatter {
+  (valueArray: SelectorValue[], labelArray: string[]):
     | {
-        value: PickerValue | PickerValue[]
+        value: SelectorValue | SelectorValue[]
         label: string
       }
-    | (PickerValue | PickerValue[])
+    | (SelectorValue | SelectorValue[])
 }
 ```
 
-将 v-model 的原始值转为需要的自定义值，值需要满足 `PickerValue | PickerValue[]` 的类型约束，可以返回 { value, label } 对两个数据进行修改，或者单独返回 value。
+将 v-model 的原始值转为需要的自定义值，值需要满足 `SelectorValue | SelectorValue[]` 的类型约束，可以返回 { value, label } 对两个数据进行修改，或者单独返回 value。
 
-#### PickerValueParser
+#### SelectorValueParser
 
 ```
-interface PickerValueParser {
-  (value: unknown): PickerValue[]
+interface SelectorValueParser {
+  (value: unknown): SelectorValue[]
 }
 ```
 
-跟 `PickerValueFormatter` 相反，将自定义 v-model 的值转为组件认识的原始数组。
+跟 `SelectorValueFormatter` 相反，将自定义 v-model 的值转为组件认识的原始数组。
 
 ## Picker
 
@@ -228,9 +228,9 @@ interface PickerValueParser {
 
 ## Picker Events
 
-| 事件   | 描述                       | 回调函数参数                                            |
-| ------ | -------------------------- | ------------------------------------------------------- |
-| change | 选择后选中值发生变化时触发 | [PickerModelValue](./Picker.md#pickermodelvalue-的类型) |
+| 事件   | 描述                       | 回调函数参数                                                | 函数 TypeScript  |
+| ------ | -------------------------- | ----------------------------------------------------------- | ---------------- |
+| change | 选择后选中值发生变化时触发 | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | SelectorOnChange |
 
 ## PickerPopup
 
@@ -245,12 +245,12 @@ interface PickerValueParser {
 
 ## PickerPopup Events
 
-| 事件                 | 描述                 | 回调函数参数                                                   |
-| -------------------- | -------------------- | -------------------------------------------------------------- |
-| cancel               | 点击取消按钮后触发   |                                                                |
-| confirm              | 点击确定按钮后触发   | [PickerDetail](./Picker.md#pickerdetail-的结构)                |
-| change               | 选中值发生变化时触发 | [PickerModelValue](./Picker.md#pickermodelvalue-的类型)        |
-| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./DatePicker.md#visiblestate-值说明) } |
+| 事件                 | 描述                 | 回调函数参数                                                   | 函数 TypeScript                      |
+| -------------------- | -------------------- | -------------------------------------------------------------- | ------------------------------------ |
+| cancel               | 点击取消按钮后触发   |                                                                | PopupOnCancel                        |
+| confirm              | 点击确定按钮后触发   | [SelectorDetail](./Picker.md#selectordetail-的结构)            | PickerOnConfirm \| SelectorOnConfirm |
+| change               | 选中值发生变化时触发 | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型)    | SelectorOnChange                     |
+| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./DatePicker.md#visiblestate-值说明) } | PopupOnVisibleStateChange            |
 
 ### VisibleState 值说明
 
@@ -267,6 +267,6 @@ interface PickerValueParser {
 
 ## PickerView Events
 
-| 事件   | 描述                       | 回调函数参数                                            |
-| ------ | -------------------------- | ------------------------------------------------------- |
-| change | 滑动后选中值发生变化时触发 | [PickerModelValue](./Picker.md#pickermodelvalue-的类型) |
+| 事件   | 描述                       | 回调函数参数                                                | 函数 TypeScript  |
+| ------ | -------------------------- | ----------------------------------------------------------- | ---------------- |
+| change | 滑动后选中值发生变化时触发 | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | SelectorOnChange |

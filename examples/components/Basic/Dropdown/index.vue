@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PopupVisibleStateChangeArgs } from '@/types'
+import type { PopupVisibleStateChangeArgs } from '@/index'
 import { showToast } from '@/Toast'
 
 export default defineComponent({

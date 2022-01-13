@@ -13,7 +13,7 @@
         :left-icon="icon"
         :title="title"
         :color="color"
-        :background-color="backgroundColor"
+        :backgroundColor="backgroundColor"
         :mode="closable ? 'closable' : 'default'"
         @close-click="onClose"
       />
@@ -54,13 +54,11 @@ export default defineComponent({
     },
     // 背景颜色
     backgroundColor: {
-      type: String,
-      default: null
+      type: String
     },
     // 字体颜色
     color: {
-      type: String,
-      default: null
+      type: String
     },
     // 展示时长(ms)，值为 0 时，notify 不会消失
     duration: {

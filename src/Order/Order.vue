@@ -63,10 +63,9 @@ import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { Drawer } from '@/Drawer'
 import { isStringNumberMix, rangeNumber, cloneData } from '@/helpers/util'
-import type { Noop } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
-import type { PopupVisibleStateChangeArgs } from '../popup/types'
+import type { OnVisibleStateChange } from '../popup/types'
 import { locale } from '@/Locale'
 import type { OrderOnDeleteArgs } from './types'
 
@@ -212,7 +211,7 @@ export default defineComponent({
 
     let lazyTimer: number
 
-    function exitDragDone(callback: Noop) {
+    function exitDragDone(callback: () => void) {
       lazyTimer = window.setTimeout(() => {
         callback()
         drag.on = false
@@ -377,7 +376,7 @@ export default defineComponent({
       }
     }
 
-    function onVisibleStateChange(e: PopupVisibleStateChangeArgs) {
+    const onVisibleStateChange: OnVisibleStateChange = e => {
       if (e.state === 'shown') {
         const rects = (deleteButton.value as HTMLElement).getClientRects()[0]
 

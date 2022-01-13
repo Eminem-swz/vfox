@@ -1,15 +1,10 @@
 import dayjs from '@/helpers/day'
 import { getDefaultDetail } from '@/Calendar/calendar'
 import type { UseProps } from '../hooks/types'
-import type { PickerDetail, PickerModelValue } from '../Picker/types'
-import type {
-  CalendarMode,
-  CalendarDetail,
-  CalendarValueFormatter,
-  CalendarValueParser
-} from './types'
+import type { Mode, CalendarDetail, ValueFormatter, ValueParser } from './types'
+import type { SelectorModelValue, SelectorDetail } from '../SelectorField/types'
 
-function valueParser(val: unknown, mode: CalendarMode) {
+function valueParser(val: unknown, mode: Mode) {
   const values: number[] = []
 
   if (val == null || val === 0 || val === '') {
@@ -44,7 +39,7 @@ function valueParser(val: unknown, mode: CalendarMode) {
   return values
 }
 
-function detailFormatter(timeArray: number[], mode: CalendarMode) {
+function detailFormatter(timeArray: number[], mode: Mode) {
   const detail = getDefaultDetail()
   const start = timeArray[0]
   const end = timeArray[1]
@@ -84,13 +79,13 @@ function detailFormatter(timeArray: number[], mode: CalendarMode) {
 
 export function useHandlers(
   props: UseProps & {
-    parser?: CalendarValueParser
-    formatter?: CalendarValueFormatter
+    parser?: ValueParser
+    formatter?: ValueFormatter
   },
   {
     mode
   }: {
-    mode: CalendarMode
+    mode: Mode
   }
 ) {
   const parser = function (val: unknown) {
@@ -111,11 +106,11 @@ export function useHandlers(
         mode
       )
 
-      if ((ret as PickerDetail)?.label) {
-        detail.label = (ret as PickerDetail).label
-        detail.value = (ret as PickerDetail).value
+      if ((ret as SelectorDetail)?.label) {
+        detail.label = (ret as SelectorDetail).label
+        detail.value = (ret as SelectorDetail).value
       } else {
-        detail.value = ret as PickerModelValue
+        detail.value = ret as SelectorModelValue
       }
     }
 

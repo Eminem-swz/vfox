@@ -75,7 +75,7 @@
 import { defineComponent, ref } from 'vue'
 import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
-import type { DatePickerFilter, DatePickerChangeArgs } from '@/types'
+import type { DatePickerOptionFilter, SelectorModelValue } from '@/index'
 
 export default defineComponent({
   name: 'ExpDatePickerView',
@@ -91,7 +91,7 @@ export default defineComponent({
     const minDate = dayjs().startOf('day').subtract(4, 'year').toDate()
     const maxDate = dayjs().startOf('day').add(5, 'year').toDate()
 
-    const filter: DatePickerFilter = (number, type) => {
+    const filter: DatePickerOptionFilter = (number, type) => {
       if (type === 'second' && number % 5 !== 0) {
         return false
       }
@@ -99,11 +99,11 @@ export default defineComponent({
       return true
     }
 
-    function onChange(e: DatePickerChangeArgs) {
+    function onChange(e: SelectorModelValue) {
       console.log('event', e)
     }
 
-    function onChangeEvent(e: DatePickerChangeArgs) {
+    function onChangeEvent(e: SelectorModelValue) {
       onChange(e)
 
       showToast(`change: ${e}`)

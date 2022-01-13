@@ -12,6 +12,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { LoadingIcon } from '@/LoadingIcon'
+import { colorValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-activity-indicator',
@@ -26,7 +27,8 @@ export default defineComponent({
       default: 20
     },
     color: {
-      type: String
+      type: String,
+      validator: colorValidator
     }
   },
   setup(props) {

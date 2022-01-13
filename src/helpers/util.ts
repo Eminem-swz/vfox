@@ -1,4 +1,4 @@
-import type { AnyObject, Noop } from './types'
+import type { AnyObject } from './types'
 
 /**
  * 将字段名转为驼峰式格式
@@ -254,7 +254,7 @@ export function arrayLike2Array(object: ArrayLike<unknown>) {
 /**
  * 不执行任何操作的函数
  */
-export const noop: Noop = function () {
+export const noop = function () {
   // empty
 }
 

@@ -45,10 +45,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/types'
+import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/index'
 import { showToast } from '@/Toast'
 import { showImagePreview } from '@/ImagePreview'
-import type { ImagePreviewChangeArgs } from '@/types'
+import type { ImagePreviewChangeArgs } from '@/index'
 
 interface showArgs {
   showClose?: boolean

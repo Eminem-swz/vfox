@@ -10,7 +10,6 @@ import dayjs from '@/helpers/day'
 import type { Dayjs } from 'dayjs'
 import { format } from 'timeago.js'
 import { addTimer } from '@/helpers/timer'
-import type { Noop } from '../helpers/types'
 import { locale } from '@/Locale'
 
 export default defineComponent({
@@ -62,7 +61,7 @@ export default defineComponent({
       immediate: true
     })
 
-    let removeTimer: Noop | null = null
+    let removeTimer: () => void
     watch(
       () => props.interval,
       () => {

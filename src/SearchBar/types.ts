@@ -1,16 +1,16 @@
-export interface SearchBarSuggestItem {
+export interface SuggestItem {
   text: string | number
   tags?: string[]
 }
 
-export type SearchBarSuggestList = (string | number | SearchBarSuggestItem)[]
+export type SuggestList = (string | number | SuggestItem)[]
 
-export type SearchBarSetSuggestList = (res: SearchBarSuggestList) => void
+export type SetSuggestList = (res: SuggestList) => void
 
-export type SearchBarOnInput = (
+export type OnInput = (
   payload: {
     type: string
     text: string
   },
-  setSuggestList: SearchBarSetSuggestList
+  setSuggestList: SetSuggestList
 ) => void

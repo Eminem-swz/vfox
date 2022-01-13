@@ -163,7 +163,7 @@ import type {
   PopMenuConfirmArgs,
   PopupCancelArgs,
   PopupVisibleStateChangeArgs
-} from '@/types'
+} from '@/index'
 
 export default defineComponent({
   name: 'ExpPopMenu',

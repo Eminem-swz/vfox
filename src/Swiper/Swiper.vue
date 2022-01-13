@@ -61,7 +61,7 @@ import type { StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { styleObject2CssText } from '@/helpers/dom'
 import { emitChangeValidator } from '@/Swiper/swiper'
-import { emitEventValidator } from '@/helpers/validator'
+import { colorValidator, emitEventValidator } from '@/helpers/validator'
 
 interface SwiperCoords {
   offset: boolean | null
@@ -84,12 +84,12 @@ export default defineComponent({
 
     indicatorColor: {
       type: String,
-      default: null
+      validator: colorValidator
     },
 
     indicatorActiveColor: {
       type: String,
-      default: null
+      validator: colorValidator
     },
 
     navigationButtons: {

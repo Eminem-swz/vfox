@@ -75,10 +75,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { showToast, showLoading, hideToast, hideLoading } from '@/Toast'
-import type { IconData } from '@/types'
 
 interface showArgs {
-  icon?: IconData
+  icon?: any
   title?: string
   mask?: boolean
   type?: ToastType

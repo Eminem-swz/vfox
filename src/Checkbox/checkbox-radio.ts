@@ -1,10 +1,12 @@
+import type { PropType } from 'vue'
 import type { UserOptionItem } from './types'
 import { formItemProps } from '@/Form/form'
+import { colorValidator } from '@/helpers/validator'
 
 export const checkboxOrRadioGroupProps = {
   ...formItemProps,
   options: {
-    type: Array,
+    type: Array as PropType<UserOptionItem[]>,
     default: () => [] as UserOptionItem[]
   },
   inline: {
@@ -35,7 +37,8 @@ export const checkboxOrRadioProps = {
     default: false
   },
   activeColor: {
-    type: String
+    type: String,
+    validator: colorValidator
   },
   name: {
     type: String,

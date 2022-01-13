@@ -1,9 +1,9 @@
-import { EasingType, Noop } from './types'
+import { EasingType } from './types'
 
 type TaskRef = {
   idle: number | null
   id: number
-  done: Noop
+  done: () => void
 }
 
 const Easing = {

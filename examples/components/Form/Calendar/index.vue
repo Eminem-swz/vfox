@@ -138,13 +138,13 @@ import dayjs from '@/helpers/day'
 import { showToast } from '@/Toast'
 import { showCalendar } from '@/Calendar'
 import {
-  CalendarChangeArgs,
-  CalendarConfirmArgs,
+  SelectorModelValue,
+  CalendarOnConfirm,
   CalendarValueFormatter,
   CalendarValueParser,
-  CalendarSelectArgs,
-  PopupVisibleStateChangeArgs
-} from '@/types'
+  PopupVisibleStateChangeArgs,
+  CalendarOnSelect
+} from '@/index'
 
 export default defineComponent({
   name: 'ExpCalendar',
@@ -203,22 +203,22 @@ export default defineComponent({
       }
     }
 
-    function onChange(res: CalendarChangeArgs) {
+    function onChange(res: SelectorModelValue) {
       console.log('change', res)
     }
 
-    function onSelect(res: CalendarSelectArgs) {
+    const onSelect: CalendarOnSelect = res => {
       console.log('select', res)
     }
 
-    function onConfirm(res: CalendarConfirmArgs) {
+    const onConfirm: CalendarOnConfirm = res => {
       if (confirmEvent.value) {
         console.log('event', res)
         showToast(`触发了确定事件`)
       }
     }
 
-    function onRangeConfirm(res: CalendarConfirmArgs) {
+    const onRangeConfirm: CalendarOnConfirm = res => {
       showToast(`选择了 ${res.label}`)
     }
 

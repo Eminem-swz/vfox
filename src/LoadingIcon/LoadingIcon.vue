@@ -32,6 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { colorValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-loading-icon',
@@ -51,11 +52,11 @@ export default defineComponent({
     },
     color: {
       type: String,
-      default: null
+      validator: colorValidator
     },
     backgroundColor: {
       type: String,
-      default: null
+      validator: colorValidator
     }
   }
 })

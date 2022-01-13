@@ -17,7 +17,7 @@ import {
   getSizeValue,
   querySelector
 } from '@/helpers/dom'
-import type { Noop, StyleObject } from '../helpers/types'
+import type { StyleObject } from '../helpers/types'
 import { useFixed } from '@/hooks/use-fixed'
 
 export default defineComponent({
@@ -113,7 +113,7 @@ export default defineComponent({
     }
 
     let $container: HTMLElement
-    let scrollOff: Noop
+    let scrollOff: () => void
 
     function resetContainer(containSelector: any) {
       scrollOff && scrollOff()

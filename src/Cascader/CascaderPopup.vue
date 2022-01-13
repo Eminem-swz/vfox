@@ -55,12 +55,12 @@ import { Tab } from '@/Tab'
 import { isSameArray } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupExtendProps } from '@/popup/popup'
-import type { ColRow, PickerHandlers, PickerValue } from '../Picker/types'
-import type { TabOptionItem } from '../Tab/types'
+import type { ColRow, PickerHandlers } from '../Picker/types'
+import type { SelectorValue, SelectorDetail } from '../SelectorField/types'
+import type { OptionItem as TabOptionItem } from '../Tab/types'
 import { pickerPopupEmits, commonProps, mergeHandlers } from '@/Picker/picker'
 import { usePickerView } from '@/Picker/use-picker'
 import { locale } from '@/Locale'
-import type { PickerDetail } from '../Picker/types'
 
 interface SelectedTabs {
   label: string | null
@@ -87,7 +87,7 @@ export default defineComponent({
     const tabIndex = ref(0)
     const dropdown = ref<HTMLElement>()
 
-    const popup = usePopupExtend<PickerDetail>(ctx)
+    const popup = usePopupExtend<SelectorDetail>(ctx)
 
     function onItemClick(e: Event, item: ColRow) {
       if (item.disabled) {
@@ -108,7 +108,7 @@ export default defineComponent({
       }
     }
 
-    function onSelect(selecteds: PickerValue[]) {
+    function onSelect(selecteds: SelectorValue[]) {
       const confirmDetail = updateOriginalValue(selecteds)
       popup.customConfirm(confirmDetail)
     }

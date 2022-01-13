@@ -80,21 +80,12 @@ import { Tag } from '@/Tag'
 import { isObject, isStringArray, isStringNumberMix } from '@/helpers/util'
 import { locale } from '@/Locale'
 import { emitTypeValidator } from '@/helpers/validator'
-import type {
-  SearchBarSetSuggestList,
-  SearchBarSuggestItem,
-  SearchBarSuggestList
-} from './types'
+import type { OnInput, SuggestItem, SuggestList } from './types'
+import type { VoidFnToBooleanFn } from '../helpers/types'
 
 type Placeholders = string | string[]
 
-const emitValidator = (
-  payload: {
-    type: string
-    text: string
-  },
-  setSuggestList: SearchBarSetSuggestList
-) =>
+const emitValidator: VoidFnToBooleanFn<OnInput> = (payload, setSuggestList) =>
   payload &&
   typeof payload.text === 'string' &&
   typeof setSuggestList === 'function'
@@ -156,7 +147,7 @@ export default defineComponent({
     const searchText = ref('')
     const enableDropdown = ref(false)
     const suggestVisible = ref(false)
-    const suggestList = ref<SearchBarSuggestItem[]>([])
+    const suggestList = ref<SuggestItem[]>([])
 
     function proxyEvent(e: Event) {
       const text = searchText.value
@@ -186,12 +177,12 @@ export default defineComponent({
       )
     }
 
-    function setSuggestList(res: SearchBarSuggestList, expired: boolean) {
+    function setSuggestList(res: SuggestList, expired: boolean) {
       if (expired) {
         return
       }
 
-      const newList: SearchBarSuggestItem[] = []
+      const newList: SuggestItem[] = []
 
       if (Array.isArray(res)) {
         res.forEach(v => {
@@ -201,7 +192,7 @@ export default defineComponent({
               tags: []
             })
           } else if (isObject(v)) {
-            v = v as SearchBarSuggestItem
+            v = v as SuggestItem
 
             if (isStringNumberMix(v.text)) {
               v.text = v.text.toString()

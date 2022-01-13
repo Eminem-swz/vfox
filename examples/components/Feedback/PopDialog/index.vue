@@ -192,9 +192,9 @@ import { showToast } from '@/Toast'
 import { showPopDialog } from '@/PopDialog'
 import {
   PopupVisibleStateChangeArgs,
-  PopupConfirmArgs,
+  PopDialogConfirmArgs,
   PopupCancelArgs
-} from '@/types'
+} from '@/index'
 
 export default defineComponent({
   name: 'ExpPopDialog',
@@ -238,7 +238,7 @@ export default defineComponent({
         showToast(`取消事件触发`)
       }
     },
-    onConfirm(res: PopupConfirmArgs) {
+    onConfirm(res: PopDialogConfirmArgs) {
       if (this.showEvent) {
         console.log('event', res)
         showToast(`确定事件触发`)

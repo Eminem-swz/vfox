@@ -1,5 +1,6 @@
-import type { ColRow, PickerValue } from '../Picker/types'
-import type { ColName, ModeName, DatePickerFilter } from './types'
+import type { ColRow } from '../Picker/types'
+import type { SelectorValue } from '../SelectorField/types'
+import type { ColName, ModeName, RowsParser } from './types'
 import dayjs from '@/helpers/day'
 import type { Dayjs } from 'dayjs'
 
@@ -20,19 +21,6 @@ export const MODE_NAMES: ModeName[] = [
   'year-month-day-hour-minute',
   'year-month-day-hour-minute-second'
 ]
-
-export interface RowsParser {
-  (
-    index: number,
-    parent: ColRow | null,
-    options: {
-      minDate: Date
-      maxDate: Date
-      mode: ModeName
-      filter: DatePickerFilter
-    }
-  ): ColRow[]
-}
 
 interface ColMapItem {
   colNames: ColName[]
@@ -281,7 +269,7 @@ export const parseRows: RowsParser = (
   return rows
 }
 
-export function array2Date(array: PickerValue[], mode: ModeName) {
+export function array2Date(array: SelectorValue[], mode: ModeName) {
   let djs = dayjs().millisecond(0)
 
   const { colNames } = getCopMapItem(mode)

@@ -1,18 +1,15 @@
-import type { PopupCancelArgs } from '../popup/types'
-
-export interface ActionSheetOption {
+export interface Option {
   name: string
   highlight?: boolean
   description?: string
   disabled?: boolean
 }
 
-export interface ActionSheetDetail {
+export interface Detail {
   item: {
     name: string
   }
   index: number
 }
 
-export type ActionSheetConfirmArgs = ActionSheetDetail
-export type ActionSheetCancelArgs = PopupCancelArgs
+export type OnConfirm = (payload: Detail) => void

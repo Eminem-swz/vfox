@@ -89,7 +89,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
-import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/types'
+import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/index'
 import { showToast } from '@/Toast'
 import { showDialog } from '@/Dialog'
 

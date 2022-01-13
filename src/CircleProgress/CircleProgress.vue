@@ -25,6 +25,7 @@
 import { computed, defineComponent } from 'vue'
 import { LoadingIcon } from '@/LoadingIcon'
 import { isNumeric, rangeInteger } from '@/helpers/util'
+import { colorValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-circle-progress',
@@ -51,7 +52,8 @@ export default defineComponent({
       default: 5.37
     },
     color: {
-      type: String
+      type: String,
+      validator: colorValidator
     }
   },
   setup(props) {

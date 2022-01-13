@@ -1,4 +1,5 @@
-import type { PickerDetail, PickerModelValue } from './types'
+import type { SelectorModelValue, SelectorDetail } from '../SelectorField/types'
+
 import { cloneData, isDateArray, isSameArray, isSameDate } from '@/helpers/util'
 
 export function isSameValue(aVal: unknown, bVal: unknown) {
@@ -13,11 +14,11 @@ export function isSameValue(aVal: unknown, bVal: unknown) {
   return aVal === bVal
 }
 
-export function isSameDetail(a: PickerDetail, b: PickerDetail) {
+export function isSameDetail(a: SelectorDetail, b: SelectorDetail) {
   return isSameValue(a.value, b.value)
 }
 
-export function cloneValue(value: PickerModelValue) {
+export function cloneValue(value: SelectorModelValue) {
   if (value instanceof Date) {
     return new Date(value)
   } else if (isDateArray(value)) {
@@ -31,7 +32,7 @@ export function cloneValue(value: PickerModelValue) {
   return cloneData(value)
 }
 
-export function cloneDetail<T extends PickerDetail>(detail: T) {
+export function cloneDetail<T extends SelectorDetail>(detail: T) {
   const newDetail = cloneData(detail)
   newDetail.value = cloneValue(detail.value)
 

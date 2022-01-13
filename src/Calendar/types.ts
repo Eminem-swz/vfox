@@ -1,26 +1,21 @@
 import type {
-  PickerDetail,
-  PickerValue,
-  PickerModelValue
-} from '../Picker/types'
-import type { PopupCancelArgs } from '../popup/types'
+  SelectorValue,
+  SelectorModelValue,
+  SelectorDetail
+} from '../SelectorField/types'
 
-export interface DetailObject {
-  value: Date[]
-  valueArray: number[][]
-  formatted: string
-  rangeCount: number
-}
-
-export interface CalendarDetail extends PickerDetail {
+export interface CalendarDetail extends SelectorDetail {
   valueArray: number[][]
   rangeCount: number
 }
 export interface CalendarOriginalDetail extends CalendarDetail {
-  value: PickerValue[]
+  value: SelectorValue[]
 }
 
-export type CalendarMode = 'single' | 'range'
+export type OnConfirm = (payload: CalendarDetail) => void
+export type OnSelect = (payload: CalendarDetail) => void
+
+export type Mode = 'single' | 'range'
 
 export interface DayInfo {
   cover?: boolean
@@ -37,32 +32,22 @@ export interface DayInfo {
 
 export type DayHandler = (dayInfo: DayInfo) => DayInfo
 
-export type CalendarValue = Date | Date[] | number[] | string[] | string
-
 export type ShowCalendarOptions = Partial<{
   title: string
-  value: CalendarValue
+  value: SelectorModelValue
   showConfirm: boolean
   showClose: boolean
   minDate: Date
   maxDate: Date
-  mode: CalendarMode
+  mode: Mode
   allowSameDay: boolean
   maxRange: number
   dayHandler: DayHandler
 }>
 
-export interface CalendarValueFormatter {
-  (valueArray: Date[], mode: CalendarMode): PickerDetail | PickerModelValue
+export interface ValueFormatter {
+  (valueArray: Date[], mode: Mode): SelectorDetail | SelectorModelValue
 }
-export interface CalendarValueParser {
-  (value: unknown, mode: CalendarMode): Date[]
+export interface ValueParser {
+  (value: unknown, mode: Mode): Date[]
 }
-
-export type CalendarChangeArgs = PickerModelValue
-
-export interface CalendarSelectArgs extends CalendarDetail {
-  type: 'select'
-}
-export type CalendarConfirmArgs = CalendarDetail
-export type CalendarCancelArgs = PopupCancelArgs

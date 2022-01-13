@@ -38,7 +38,7 @@ import type { CalendarDetail } from './types'
 import { useHandlers } from '@/Calendar/use-calendar'
 import { cloneDetail, isSameValue } from '@/Picker/util'
 import { pickerEmits, pickerProps } from '@/Picker/picker'
-import type { PickerModelValue } from '../Picker/types'
+import type { SelectorModelValue } from '../SelectorField/types'
 
 export default defineComponent({
   name: 'fx-calendar',
@@ -70,7 +70,7 @@ export default defineComponent({
     const { formatter, parser } = useHandlers(props, { mode })
 
     let detail: CalendarDetail = getDefaultDetail()
-    let _changeValue: PickerModelValue | null = null
+    let _changeValue: SelectorModelValue | null = null
 
     function updateValue(val: unknown) {
       if (popup.value) {

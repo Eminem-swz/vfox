@@ -3,24 +3,23 @@ import type { SetupContext } from 'vue'
 import { noop } from '@/helpers/util'
 import { addClassName, getScrollTop, removeClassName } from '@/helpers/dom'
 import { popupZIndex } from '@/helpers/layer'
-import type { Noop } from '../helpers/types'
 import { useBlur } from '@/hooks/use-blur'
 import type { UseEmitFn, UseProps } from '../hooks/types'
 import type {
-  PopupVisibleStateChangeArgs,
-  PopupVisibleState,
+  VisibleState,
   PopupCustomCancel,
   PopupCustomConfirm,
   PopupStyles,
   PopupBridge,
-  PopupCancelArgs
+  OnVisibleStateChange,
+  OnCancel
 } from './types'
 import { popupEmits, popupProps } from '@/popup/popup'
 
 type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
 
 type UseOptions = Partial<
-  Record<LifeName, Noop> & {
+  Record<LifeName, () => void> & {
     forbidScroll: boolean
     useBlur: boolean
   }
@@ -69,7 +68,7 @@ export function usePopup(
 
   const visibleBlur = useBlur(onBlur)
 
-  function doShow(callback: Noop) {
+  function doShow(callback: () => void) {
     if (isShowing) {
       return false
     }
@@ -119,7 +118,7 @@ export function usePopup(
     }
   }
 
-  function _doHide(callback?: Noop) {
+  function _doHide(callback?: () => void) {
     if (isHiding) {
       return false
     }
@@ -161,11 +160,11 @@ export function usePopup(
 
   function afterCall(lifeName: LifeName) {
     if (typeof useOptions[lifeName] === 'function') {
-      ;(useOptions[lifeName] as Noop)()
+      ;(useOptions[lifeName] as () => void)()
     }
   }
 
-  function emitVisibleState(state: PopupVisibleState) {
+  function emitVisibleState(state: VisibleState) {
     emitHook('visible-state-change', {
       state
     })
@@ -261,7 +260,7 @@ export function usePopupExtend<T>(ctx: SetupContext<any>) {
     popup.value && popup.value.customConfirm(detail)
   }
 
-  function onVisibleStateChange(e: PopupVisibleStateChangeArgs) {
+  const onVisibleStateChange: OnVisibleStateChange = e => {
     emitHook('visible-state-change', e)
   }
 
@@ -269,7 +268,7 @@ export function usePopupExtend<T>(ctx: SetupContext<any>) {
     customCancel('cancelClick')
   }
 
-  function onCancel(res: PopupCancelArgs) {
+  const onCancel: OnCancel = res => {
     emitHook('cancel', res)
   }
 

@@ -1,13 +1,16 @@
 import type { PropType } from 'vue'
 import { isStringNumberMix } from '@/helpers/util'
-import type { TabOptionItem, OptionList, OptionValue } from './types'
+import type { OptionItem, OptionList, OnChange } from './types'
+import { colorValidator } from '@/helpers/validator'
+import type { VoidFnToBooleanFn } from '../helpers/types'
 
-// export const tabEmits = ['update:activeValue', 'change']
-export const tabEmits = {
-  'update:activeValue': (payload: OptionValue) => isStringNumberMix(payload),
-  change: (payload: { type: 'change'; index: number; value: OptionValue }) =>
+export const tabEmits: {
+  'update:activeValue': (payload: number | string) => boolean
+  change: VoidFnToBooleanFn<OnChange>
+} = {
+  'update:activeValue': payload => isStringNumberMix(payload),
+  change: payload =>
     payload &&
-    payload.type &&
     typeof payload.index === 'number' &&
     isStringNumberMix(payload.value)
 }
@@ -39,15 +42,17 @@ export const tabProps = {
       return true
     },
     required: true,
-    default: () => [] as TabOptionItem[]
+    default: () => [] as OptionItem[]
   },
   activeValue: {
-    type: [Number, String] as PropType<OptionValue>
+    type: [Number, String] as PropType<number | string>
   },
   color: {
-    type: String
+    type: String,
+    validator: colorValidator
   },
   activeColor: {
-    type: String
+    type: String,
+    validator: colorValidator
   }
 }

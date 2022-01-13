@@ -51,10 +51,10 @@
 import { defineComponent, ref } from 'vue'
 import { showToast } from '@/Toast'
 import type {
-  PickerValueFormatter,
-  PickerValueParser,
-  PickerChangeArgs
-} from '@/types'
+  SelectorValueFormatter,
+  SelectorValueParser,
+  SelectorModelValue
+} from '@/index'
 import { cascadeOptions, multiOptions, options } from '../Picker/data'
 
 export default defineComponent({
@@ -67,22 +67,22 @@ export default defineComponent({
     const cascadeValue = ref([])
     const formatValue = ref(`2001${separator}夏`)
 
-    const formatter: PickerValueFormatter = (valueArray, labelArray) => {
+    const formatter: SelectorValueFormatter = (valueArray, labelArray) => {
       return {
         value: valueArray.join(separator),
         label: labelArray.join(separator)
       }
     }
 
-    const parser: PickerValueParser = value => {
+    const parser: SelectorValueParser = value => {
       return value ? (value as string).split(separator) : []
     }
 
-    function onChange(res: PickerChangeArgs) {
+    function onChange(res: SelectorModelValue) {
       console.log('event', res)
     }
 
-    function onChangeEvent(res: PickerChangeArgs) {
+    function onChangeEvent(res: SelectorModelValue) {
       onChange(res)
 
       showToast(`change: ${res}`)

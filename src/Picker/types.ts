@@ -1,12 +1,11 @@
-import { PopupCancelArgs } from '../popup/types'
 import type { AnyObject } from '../helpers/types'
-
-export type PickerValue = string | number | Date
-export type PickerModelValue = PickerValue | PickerValue[]
-export interface PickerDetail {
-  value: PickerModelValue
-  label: string
-}
+import type {
+  SelectorValue,
+  SelectorModelValue,
+  SelectorDetail,
+  SelectorValueParser,
+  SelectorValueFormatter
+} from '../SelectorField/types'
 
 export interface UserFieldNames {
   label?: string
@@ -32,7 +31,7 @@ export interface ColRow {
   value: string | number
   hasChildren: boolean
   indexes: number[]
-  values?: PickerValue[]
+  values?: SelectorValue[]
   disabled?: boolean
   selected?: boolean
 }
@@ -41,15 +40,7 @@ export interface PickerOptionsHandler {
   (index: number, parent?: ColRow): ColRow[]
 }
 export interface DefaultValueGetter {
-  (): PickerValue[]
-}
-export interface PickerValueFormatter {
-  (valueArray: PickerValue[], labelArray: string[]):
-    | PickerDetail
-    | PickerModelValue
-}
-export interface PickerValueParser {
-  (value: unknown): PickerValue[]
+  (): SelectorValue[]
 }
 export interface PickerLabelFormatter {
   (labelArray: string[]): string
@@ -57,18 +48,16 @@ export interface PickerLabelFormatter {
 export interface PickerHandlers {
   optionsHandler?: PickerOptionsHandler
   defaultValueGetter?: DefaultValueGetter
-  formatter: PickerValueFormatter
-  parser: PickerValueParser
+  formatter: SelectorValueFormatter
+  parser: SelectorValueParser
   labelFormatter: PickerLabelFormatter
 }
 
 export interface ShowPickerOptions {
   options: UserOptionItem[] | UserOptionItem[][]
   title?: string
-  value?: PickerModelValue
+  value?: SelectorModelValue
   fieldNames?: UserFieldNames
 }
 
-export type PickerChangeArgs = PickerModelValue
-export type PickerConfirmArgs = PickerDetail
-export type PickerCancelArgs = PopupCancelArgs
+export type OnConfirm = (payload: SelectorDetail) => void

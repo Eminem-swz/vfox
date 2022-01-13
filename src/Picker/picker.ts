@@ -1,19 +1,22 @@
 import type { PropType } from 'vue'
-import type { AnyObject } from '../helpers/types'
+import type { AnyObject, VoidFnToBooleanFn } from '../helpers/types'
 import type {
   UserFieldNames,
   UserOptionItem,
-  PickerValueParser,
-  PickerValueFormatter,
-  PickerDetail,
   PickerHandlers,
-  PickerValue,
   FieldNames,
   PickerOptionsHandler,
   OptionItem,
-  ColRow,
-  PickerModelValue
+  ColRow
 } from './types'
+import type {
+  SelectorValue,
+  SelectorModelValue,
+  SelectorDetail,
+  SelectorValueParser,
+  SelectorValueFormatter,
+  SelectorOnChange
+} from '../SelectorField/types'
 import {
   isNumber,
   isStringNumberMixArray,
@@ -32,7 +35,7 @@ export const getDefaultFieldNames: () => FieldNames = () => {
 
 export const commonProps = {
   modelValue: {
-    type: [Date, String, Number, Array] as PropType<PickerModelValue>
+    type: [Date, String, Number, Array] as PropType<SelectorModelValue>
   },
   options: {
     type: Array as PropType<UserOptionItem[]>,
@@ -43,10 +46,10 @@ export const commonProps = {
     default: getDefaultFieldNames
   },
   formatter: {
-    type: Function as PropType<PickerValueFormatter>
+    type: Function as PropType<SelectorValueFormatter>
   },
   parser: {
-    type: Function as PropType<PickerValueParser>
+    type: Function as PropType<SelectorValueParser>
   }
 }
 
@@ -58,22 +61,22 @@ export const pickerProps = {
   }
 }
 
-const isValue = (value: PickerValue) => {
+const isValue = (value: SelectorValue) => {
   return isStringNumberMix(value) || value instanceof Date
 }
 
-const isModelValue = (payload: PickerModelValue) => {
-  if (Array.isArray(payload)) {
+const isModelValue = (value: SelectorModelValue) => {
+  if (Array.isArray(value)) {
     return (
-      payload.filter(v => {
+      value.filter(v => {
         return !isValue(v)
       }).length === 0
     )
   }
-  return isValue(payload)
+  return isValue(value)
 }
 
-export const isPickerDetail = <T extends PickerDetail = PickerDetail>(
+export const isPickerDetail = <T extends SelectorDetail = SelectorDetail>(
   detail: T
 ) => {
   return (
@@ -81,7 +84,10 @@ export const isPickerDetail = <T extends PickerDetail = PickerDetail>(
   )
 }
 
-export const pickerValueEmits = {
+export const pickerValueEmits: {
+  change: VoidFnToBooleanFn<SelectorOnChange>
+  'update:modelValue': VoidFnToBooleanFn<SelectorOnChange>
+} = {
   change: isModelValue,
   'update:modelValue': isModelValue
 }
@@ -98,14 +104,14 @@ export const pickerPopupProps = {
 export const pickerPopupEmits = {
   ...popupEmits,
   ...pickerValueEmits,
-  confirm: (payload: PickerDetail) => isPickerDetail(payload)
+  confirm: (payload: SelectorDetail) => isPickerDetail(payload)
 }
 
 export const labelFormatter = (labelArray: string[]) => {
   return labelArray.join('/')
 }
 
-export const defaultFormatter: PickerValueFormatter = (
+export const defaultFormatter: SelectorValueFormatter = (
   valueArray,
   labelArray
 ) => {
@@ -115,19 +121,19 @@ export const defaultFormatter: PickerValueFormatter = (
   }
 }
 
-export const defaultParser: PickerValueParser = value => {
+export const defaultParser: SelectorValueParser = value => {
   if (isNumber(value)) {
     return [value as number]
   } else if (typeof value === 'string' && value) {
     return [value]
   } else if (isStringNumberMixArray(value)) {
-    return cloneValue(value as (string | number)[]) as PickerValue[]
+    return cloneValue(value as (string | number)[]) as SelectorValue[]
   }
 
   return []
 }
 
-export function getDefaultDetail(): PickerDetail {
+export function getDefaultDetail(): SelectorDetail {
   return {
     value: [],
     label: ''
@@ -145,7 +151,7 @@ export function mergeHandlers(...handlersArray: Partial<PickerHandlers>[]) {
     objectForEach(handlersItem, (value, key) => {
       if (value) {
         // 规避 undefined 问题
-        handlers[key as 'parser'] = value as PickerValueParser
+        handlers[key as 'parser'] = value as SelectorValueParser
       }
     })
   })
@@ -219,7 +225,7 @@ export function parseOptions(
 
 interface ValidateReturn {
   valid: boolean
-  value: PickerValue[]
+  value: SelectorValue[]
   label: string[]
 }
 
@@ -229,14 +235,14 @@ interface ValidateReturn {
  * @param options
  */
 function validateCols(
-  values: PickerValue[],
+  values: SelectorValue[],
   options: OptionItem[] | OptionItem[][]
 ): ValidateReturn {
   const optionList = Array.isArray(options[0])
     ? (options as OptionItem[][])
     : [options as OptionItem[]]
   let selectCount = 0
-  const value: PickerValue[] = []
+  const value: SelectorValue[] = []
   const label: string[] = []
 
   optionList.forEach((subOptionList, colIndex) => {
@@ -271,11 +277,11 @@ function validateCols(
  * @param options
  */
 function validateCascadeCols(
-  values: PickerValue[],
+  values: SelectorValue[],
   options: OptionItem[],
   virtualHandler?: PickerOptionsHandler | null
 ): ValidateReturn {
-  const value: PickerValue[] = []
+  const value: SelectorValue[] = []
   const label: string[] = []
 
   function addData(optionItem: OptionItem) {
@@ -384,7 +390,7 @@ function printError(message: string) {
  * @returns { valid, detail }
  */
 export function validateValues(
-  values: PickerValue[] | Error,
+  values: SelectorValue[] | Error,
   options: OptionItem[] | OptionItem[][],
   isCascade: boolean,
   virtualHandler?: PickerOptionsHandler | null

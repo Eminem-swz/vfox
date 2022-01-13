@@ -52,10 +52,6 @@ export default defineComponent({
       type: [Number, String],
       default: null
     },
-    color: {
-      type: String,
-      default: ''
-    },
     // 是否禁用减少按钮
     disabledMinus: {
       type: Boolean,

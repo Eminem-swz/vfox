@@ -12,7 +12,11 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import SvgIcon from './SvgIcon.vue'
-import { iconValidator, isSvgComponent } from '@/helpers/validator'
+import {
+  colorValidator,
+  iconValidator,
+  isSvgComponent
+} from '@/helpers/validator'
 import type { StyleObject } from '../helpers/types'
 
 export default defineComponent({
@@ -41,7 +45,7 @@ export default defineComponent({
     },
     color: {
       type: String,
-      default: null
+      validator: colorValidator
     }
   },
   setup(props) {

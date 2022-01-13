@@ -17,6 +17,7 @@ import { onMounted, ref, watch, defineComponent, computed } from 'vue'
 import { formItemProps } from '@/Form/form'
 import { useInput } from '@/Form/use-form'
 import type { StyleObject } from '../helpers/types'
+import { colorValidator } from '@/helpers/validator'
 
 const isValue = (value: boolean) => typeof value === 'boolean'
 
@@ -28,10 +29,12 @@ export default defineComponent({
       type: Boolean
     },
     color: {
-      type: String
+      type: String,
+      validator: colorValidator
     },
     activeColor: {
-      type: String
+      type: String,
+      validator: colorValidator
     },
     size: {
       type: [Number, String]

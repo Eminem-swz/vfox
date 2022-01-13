@@ -61,7 +61,7 @@ import { Drawer } from '@/Drawer'
 import { isStringArray, noop } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupEmits, popupExtendProps } from '@/popup/popup'
-import type { PopupVisibleStateChangeArgs } from '../popup/types'
+import type { OnCancel, OnVisibleStateChange } from '../popup/types'
 import { getEnumsValue } from '@/helpers/validator'
 import { locale } from '@/Locale'
 import { formStringValueEmits } from '@/Form/form'
@@ -74,10 +74,6 @@ interface NumberKeyboardItem {
   text: string
   type: 'text' | 'confirm' | 'backspace'
   span?: number
-}
-
-interface PopupCancelArgs {
-  source: string
 }
 
 export default defineComponent({
@@ -123,7 +119,7 @@ export default defineComponent({
 
     const popup = usePopupExtend<EmptyObject>(ctx)
 
-    function onVisibleStateChange2(e: PopupVisibleStateChangeArgs) {
+    const onVisibleStateChange2: OnVisibleStateChange = e => {
       popup.onVisibleStateChange(e)
 
       if (e.state === 'show') {
@@ -240,7 +236,7 @@ export default defineComponent({
       close('confirm')
     }
 
-    function onCancel(res: PopupCancelArgs) {
+    const onCancel: OnCancel = res => {
       close(res.source)
     }
 

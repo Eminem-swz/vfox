@@ -147,11 +147,11 @@ import { showToast } from '@/Toast'
 import { showDatePicker } from '@/DatePicker'
 import type {
   PopupVisibleStateChangeArgs,
-  DatePickerFilter,
-  DatePickerChangeArgs,
-  DatePickerCancelArgs,
-  DatePickerConfirmArgs
-} from '@/types'
+  DatePickerOptionFilter,
+  SelectorModelValue,
+  DatePickerOnConfirm,
+  PopupCancelArgs
+} from '@/index'
 
 export default defineComponent({
   name: 'ExpDatePicker',
@@ -176,7 +176,7 @@ export default defineComponent({
     const changeEvent = ref(false)
     const visibleEvent = ref(false)
 
-    const filter: DatePickerFilter = (number, type) => {
+    const filter: DatePickerOptionFilter = (number, type) => {
       if (type === 'second' && number % 5 !== 0) {
         return false
       }
@@ -197,21 +197,21 @@ export default defineComponent({
       }
     }
 
-    function onChange(res: DatePickerChangeArgs) {
+    function onChange(res: SelectorModelValue) {
       if (changeEvent.value) {
         console.log('event', res)
         showToast(`值改为 ${res}`)
       }
     }
 
-    function onConfirm(res: DatePickerConfirmArgs) {
+    const onConfirm: DatePickerOnConfirm = res => {
       if (clickEvent.value) {
         console.log('event', res)
         showToast(`点击确定按钮`)
       }
     }
 
-    function onCancel(res: DatePickerCancelArgs) {
+    function onCancel(res: PopupCancelArgs) {
       if (clickEvent.value) {
         console.log('event', res)
 

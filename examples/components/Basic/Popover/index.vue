@@ -170,7 +170,7 @@
 import { defineComponent } from 'vue'
 import { showToast } from '@/Toast'
 import { showPopover } from '@/Popover'
-import { PopupVisibleStateChangeArgs } from '@/types'
+import { PopupVisibleStateChangeArgs } from '@/index'
 
 export default defineComponent({
   name: 'ExpPopover',

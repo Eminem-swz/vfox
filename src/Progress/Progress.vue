@@ -19,6 +19,7 @@
 import { computed, defineComponent } from 'vue'
 import { isNumeric, rangeInteger } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
+import { colorValidator } from '@/helpers/validator'
 
 export default defineComponent({
   name: 'fx-progress',
@@ -48,7 +49,8 @@ export default defineComponent({
       default: false
     },
     color: {
-      type: String
+      type: String,
+      validator: colorValidator
     }
   },
   setup(props) {

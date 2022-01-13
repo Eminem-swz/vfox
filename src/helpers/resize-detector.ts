@@ -1,5 +1,4 @@
 import { removeEl } from '@/helpers/dom'
-import { Noop } from './types'
 
 /**
  * 监听元素大小变化
@@ -7,7 +6,10 @@ import { Noop } from './types'
  * @param callback 回调函数
  * @returns 终止监听方法
  */
-export function resizeDetector($el: HTMLElement, callback: Noop): Noop {
+export function resizeDetector(
+  $el: HTMLElement,
+  callback: () => void
+): () => void {
   // 监听
   const object = document.createElement('object') as any
   object.style.cssText =

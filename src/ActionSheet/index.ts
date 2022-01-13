@@ -2,16 +2,16 @@ import { withInstall } from '@/helpers/with-install'
 import ActionSheet from './ActionSheet.vue'
 import { createConfirmHook, createShowPopup } from '@/popup/api'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
-import type { ActionSheetOption, ActionSheetDetail } from './types'
+import type { Option, Detail } from './types'
 
 const showActionSheet = createShowPopup<
   {
-    options: ActionSheetOption[]
+    options: Option[]
     title?: string
     showCancel?: boolean
     cancelText?: string
   },
-  PopupSuccessConfirmArgs<ActionSheetDetail>
+  PopupSuccessConfirmArgs<Detail>
 >({
   apiName: 'showActionSheet',
   component: ActionSheet,

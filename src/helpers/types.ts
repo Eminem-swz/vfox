@@ -57,3 +57,11 @@ export type UnionToIntersection<T> = (
 ) extends (x: infer R) => any
   ? R
   : never
+
+export type VoidFnToBooleanFn<VoidFn> = VoidFn extends (
+  ...args: infer Args
+) => void
+  ? (...args: Args) => boolean
+  : never
+
+export type FnArgs<Fn> = Fn extends (...any: infer Args) => any ? Args : never

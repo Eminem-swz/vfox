@@ -47,8 +47,15 @@ import { Drawer } from '@/Drawer'
 import { isObject, cloneData } from '@/helpers/util'
 import { usePopupExtend } from '@/popup/use-popup'
 import { popupEmits, popupExtendProps } from '@/popup/popup'
-import type { ActionSheetOption, ActionSheetDetail } from './types'
+import type { Option, Detail, OnConfirm } from './types'
 import { locale } from '@/Locale'
+import type { VoidFnToBooleanFn } from '../helpers/types'
+
+const confirmValidator: VoidFnToBooleanFn<OnConfirm> = payload =>
+  payload &&
+  typeof payload.index === 'number' &&
+  payload.item &&
+  typeof payload.item.name === 'string'
 
 export default defineComponent({
   name: 'fx-action-sheet',
@@ -67,13 +74,13 @@ export default defineComponent({
       type: String
     },
     options: {
-      type: Array as PropType<ActionSheetOption[]>,
-      default: () => [] as ActionSheetOption[]
+      type: Array as PropType<Option[]>,
+      default: () => [] as Option[]
     }
   },
-  emits: { ...popupEmits },
+  emits: { ...popupEmits, confirm: confirmValidator },
   setup(props, ctx) {
-    const popup = usePopupExtend<ActionSheetDetail>(ctx)
+    const popup = usePopupExtend<Detail>(ctx)
 
     function onItemClick(index: number) {
       popup.customConfirm({
@@ -85,13 +92,13 @@ export default defineComponent({
     }
 
     const options2 = computed(() => {
-      const options: ActionSheetOption[] = []
+      const options: Option[] = []
 
       if (Array.isArray(props.options)) {
         props.options.forEach(v => {
           options.push(
             isObject(v)
-              ? cloneData<ActionSheetOption>(v)
+              ? cloneData<Option>(v)
               : {
                   name: v.toString()
                 }

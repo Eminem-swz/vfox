@@ -10,36 +10,36 @@ import { Calendar, CalendarPopup, CalendarView } from 'vfox'
 
 ## 公共 Props
 
-| 属性           | 类型                                                                                                 | 默认值             | 必填 | 说明                                                 |
-| -------------- | ---------------------------------------------------------------------------------------------------- | ------------------ | ---- | ---------------------------------------------------- |
-| v-model        | [PickerValue](./Calendar.md#pickervalue-的类型) \| [PickerValue](./Calendar.md#pickervalue-的类型)[] | []                 | 否   | 选中值                                               |
-| min-date       | Date                                                                                                 | 当前日期           | 否   | 可选最小值                                           |
-| max-date       | Date                                                                                                 | 当前日期的六个月后 | 否   | 可选最大值                                           |
-| initial-mode   | [CalendarMode](./Calendar.md#calendarmode)                                                           | 'single'           | 否   | 模式                                                 |
-| allow-same-day | boolean                                                                                              | false              | 否   | `range` 模式生效，设置开始结束时间是否可以同一天     |
-| max-range      | number                                                                                               | Infinity           | 否   | `range` 模式生效，选择区间的最长天数                 |
-| day-handler    | Function                                                                                             |                    | 否   | 日历每个日期处理函数                                 |
-| formatter      | [CalendarValueFormatter](./Calendar.md#calendarvalueformatter)                                       |                    | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
-| parser         | [CalendarValueParser](./Calendar.md#calendarvalueparser)                                             |                    | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
+| 属性           | 类型                                                                                                     | 默认值             | 必填 | 说明                                                 |
+| -------------- | -------------------------------------------------------------------------------------------------------- | ------------------ | ---- | ---------------------------------------------------- |
+| v-model        | [SelectorValue](./Calendar.md#selectorvalue-的类型) \| [SelectorValue](./Calendar.md#selectorvalue-的类型)[] | []                 | 否   | 选中值                                               |
+| min-date       | Date                                                                                                     | 当前日期           | 否   | 可选最小值                                           |
+| max-date       | Date                                                                                                     | 当前日期的六个月后 | 否   | 可选最大值                                           |
+| initial-mode   | [CalendarMode](./Calendar.md#calendarmode)                                                               | 'single'           | 否   | 模式                                                 |
+| allow-same-day | boolean                                                                                                  | false              | 否   | `range` 模式生效，设置开始结束时间是否可以同一天     |
+| max-range      | number                                                                                                   | Infinity           | 否   | `range` 模式生效，选择区间的最长天数                 |
+| day-handler    | Function                                                                                                 |                    | 否   | 日历每个日期处理函数                                 |
+| formatter      | [CalendarValueFormatter](./Calendar.md#calendarvalueformatter)                                           |                    | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
+| parser         | [CalendarValueParser](./Calendar.md#calendarvalueparser)                                                 |                    | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
 
-### PickerValue 的类型
+### SelectorValue 的类型
 
 允许的类型为：`string | number | Date`
 
 在不自定义 `formatter/parser` 的情况下，v-model 只有 `Date[]` 这种情况。
 
-### PickerModelValue 的类型
+### SelectorModelValue 的类型
 
-PickerModelValue 的类型为： `PickerValue | PickerValue[]`
+SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 ### CalendarDetail 的结构
 
-| 值         | 类型                                                      | 说明                                                                                      |
-| ---------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| value      | [PickerModelValue](./Calendar.md#pickermodelvalue-的类型) | 选择的值，`range` 模式下有开始 Date 和结束 Date 两个实例；`formatter/parser` 的优先级更高 |
-| label      | string                                                    | 选中值对应的描述文本                                                                      |
-| valueArray | number[][]                                                | 如：[[2021, 5, 1], [2021, 5, 30]]                                                         |
-| rangeCount | number                                                    | 选择区间持续的天数（含首尾）                                                              |
+| 值         | 类型                                                        | 说明                                                                                      |
+| ---------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| value      | [SelectorModelValue](./Calendar.md#selectormodelvalue-的类型) | 选择的值，`range` 模式下有开始 Date 和结束 Date 两个实例；`formatter/parser` 的优先级更高 |
+| label      | string                                                      | 选中值对应的描述文本                                                                      |
+| valueArray | number[][]                                                  | 如：[[2021, 5, 1], [2021, 5, 30]]                                                         |
+| rangeCount | number                                                      | 选择区间持续的天数（含首尾）                                                              |
 
 ### CalendarMode
 
@@ -78,14 +78,14 @@ dayHandler(Object: Day) => Day
 interface CalendarValueFormatter {
   (valueArray: Date[], mode: CalendarMode):
     | {
-        value: PickerValue | PickerValue[]
+        value: SelectorValue | SelectorValue[]
         label: string
       }
-    | (PickerValue | PickerValue[])
+    | (SelectorValue | SelectorValue[])
 }
 ```
 
-将 v-model 的原始值转为需要的自定义值，值需要满足 `PickerValue | PickerValue[]` 的类型约束，可以返回 { value, label } 对两个数据进行修改，或者单独返回 value。
+将 v-model 的原始值转为需要的自定义值，值需要满足 `SelectorValue | SelectorValue[]` 的类型约束，可以返回 { value, label } 对两个数据进行修改，或者单独返回 value。
 
 #### CalendarValueParser
 
@@ -117,9 +117,9 @@ interface CalendarValueParser {
 
 ## Calendar Events
 
-| 事件   | 描述                   | 回调函数参数                                              |
-| ------ | ---------------------- | --------------------------------------------------------- |
-| change | 选择后值发生改变时触发 | [PickerModelValue](./Calendar.md#pickermodelvalue-的类型) |
+| 事件   | 描述                   | 回调函数参数                                                | 函数 TypeScript  |
+| ------ | ---------------------- | ----------------------------------------------------------- | ---------------- |
+| change | 选择后值发生改变时触发 | [SelectorModelValue](./Calendar.md#selectormodelvalue-的类型) | SelectorOnChange |
 
 ## CalendarPopup
 
@@ -136,10 +136,10 @@ interface CalendarValueParser {
 
 ## CalendarPopup Events
 
-| 事件                 | 描述                                              | 回调函数参数                                                 |
-| -------------------- | ------------------------------------------------- | ------------------------------------------------------------ |
-| confirm              | 选择完毕后触发 / `showConfirm` 点击确定按钮后触发 | [CalendarDetail](./Calendar.md#calendardetail-的结构)        |
-| visible-state-change | 展示隐藏时触发                                    | { state: [VisibleState](./Calendar.md#visiblestate-值说明) } |
+| 事件                 | 描述                                              | 回调函数参数                                                 | 函数 TypeScript           |
+| -------------------- | ------------------------------------------------- | ------------------------------------------------------------ | ------------------------- |
+| confirm              | 选择完毕后触发 / `showConfirm` 点击确定按钮后触发 | [CalendarDetail](./Calendar.md#calendardetail-的结构)        | CalendarOnConfirm         |
+| visible-state-change | 展示隐藏时触发                                    | { state: [VisibleState](./Calendar.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 
@@ -156,6 +156,6 @@ interface CalendarValueParser {
 
 ## CalendarView Events
 
-| 事件   | 描述       | 回调函数参数                                          |
-| ------ | ---------- | ----------------------------------------------------- |
-| select | 选择后触发 | [CalendarDetail](./Calendar.md#calendardetail-的结构) |
+| 事件   | 描述       | 回调函数参数                                          | 函数 TypeScript  |
+| ------ | ---------- | ----------------------------------------------------- | ---------------- |
+| select | 选择后触发 | [CalendarDetail](./Calendar.md#calendardetail-的结构) | CalendarOnSelect |

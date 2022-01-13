@@ -1,18 +1,11 @@
-import type { PopupCancelArgs } from '../popup/types'
-import type { PickerDetail, PickerChangeArgs } from '../Picker/types'
-import type {
-  UserFieldNames,
-  PickerModelValue,
-  UserOptionItem
-} from '../Picker/types'
-
-export type CascaderChangeArgs = PickerChangeArgs
-export type CascaderConfirmArgs = PickerDetail
-export type CascaderCancelArgs = PopupCancelArgs
+import type { UserFieldNames, UserOptionItem } from '../Picker/types'
+import type { SelectorModelValue, SelectorDetail } from '../SelectorField/types'
 
 export interface ShowCascaderOptions {
   options: UserOptionItem[]
   title?: string
-  value?: PickerModelValue
+  value?: SelectorModelValue
   fieldNames?: UserFieldNames
 }
+
+export type OnConfirm = (payload: SelectorDetail) => void

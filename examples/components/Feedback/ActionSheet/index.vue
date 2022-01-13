@@ -94,10 +94,11 @@
 import { defineComponent } from 'vue'
 import type {
   ActionSheetOption,
-  ActionSheetConfirmArgs,
+  ActionSheetOnConfirm,
   PopupCancelArgs,
-  PopupVisibleStateChangeArgs
-} from '@/types'
+  PopupVisibleStateChangeArgs,
+  FnArgs
+} from '@/index'
 import { showToast } from '@/Toast'
 import { showDialog } from '@/Dialog'
 import { showActionSheet } from '@/ActionSheet'
@@ -156,7 +157,7 @@ export default defineComponent({
         this.showEvent = false
       }
     },
-    onConfirm(res: ActionSheetConfirmArgs) {
+    onConfirm(res: FnArgs<ActionSheetOnConfirm>[0]) {
       if (this.showEvent) {
         console.log('event', res)
         showDialog({

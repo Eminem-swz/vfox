@@ -8,7 +8,7 @@ import { isNumber, isObject, isStringNumberMix, isURL } from '@/helpers/util'
 import { frameTo } from '@/helpers/animation'
 import Exception from '@/helpers/exception'
 import { handleBadge } from '@/Badge/badge'
-import type { OptionValue, TabOptionItem, HandleOptionItem } from './types'
+import type { OptionItem, HandleOptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
 import { tabEmits, tabProps } from '@/Tab/tab'
 
@@ -38,7 +38,7 @@ export function useTab(
 
     if (Array.isArray(props.options)) {
       props.options.forEach((item, index) => {
-        let option: TabOptionItem | null = null
+        let option: OptionItem | null = null
 
         if (isNumber(item)) {
           option = {
@@ -51,7 +51,7 @@ export function useTab(
             value: item
           }
         } else if (isObject(item)) {
-          item = item as TabOptionItem
+          item = item as OptionItem
 
           if (isStringNumberMix(item.value)) {
             option = {
@@ -85,7 +85,7 @@ export function useTab(
         }
 
         if (option) {
-          option = option as TabOptionItem
+          option = option as OptionItem
 
           if (option.value === value2) {
             activeIndex.value = index
@@ -107,7 +107,7 @@ export function useTab(
     updatePos()
   }
 
-  function switchTo(value: OptionValue, isProp = false) {
+  function switchTo(value: number | string, isProp = false) {
     if (!updateActive(value)) {
       // emit('update:activeValue', value2)
       console.error(
@@ -134,7 +134,7 @@ export function useTab(
     }
   }
 
-  function updateActive(value: OptionValue) {
+  function updateActive(value: number | string) {
     if (value === value2) {
       return true
     }
@@ -170,7 +170,7 @@ export function useTab(
     hasValue && instance.isMounted && updatePos()
   }
 
-  function onChange(value: OptionValue) {
+  function onChange(value: number | string) {
     if (value === value2) {
       return
     }
@@ -178,9 +178,7 @@ export function useTab(
     updateActive(value)
     emit('update:activeValue', value)
 
-    const type = 'change'
-    emit(type, {
-      type,
+    emit('change', {
       value,
       index: activeIndex.value
     })

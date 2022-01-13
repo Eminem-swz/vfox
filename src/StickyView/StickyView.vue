@@ -31,11 +31,7 @@ import { selectorValidator, sizeValidator } from '@/helpers/validator'
 import { useScrollEvent } from '@/hooks/use-scroll'
 import { isNumber } from '@/helpers/util'
 import { useList } from '@/hooks/use-list'
-import type {
-  ScrollToOptions,
-  ScrollToIndexOptions,
-  Noop
-} from '../helpers/types'
+import type { ScrollToOptions, ScrollToIndexOptions } from '../helpers/types'
 import { emitChangeValidator } from '@/StickyView/stickyView'
 import { StickyViewItem } from './types'
 
@@ -98,7 +94,7 @@ export default defineComponent({
     }
 
     let $container: HTMLElement
-    let scrollOff: Noop
+    let scrollOff: () => void
 
     function resetContainer(containSelector: any) {
       scrollOff && scrollOff()

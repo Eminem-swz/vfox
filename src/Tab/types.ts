@@ -1,11 +1,9 @@
 import type { BadgeOptions } from '../Badge/types'
 import type { IconData } from '../Icon/types'
 
-export type OptionValue = number | string
-
-export interface TabOptionItem {
+export interface OptionItem {
   label: string
-  value: OptionValue
+  value: number | string
   icon?: IconData
   iconLink?: string
   activeIcon?: IconData
@@ -14,8 +12,13 @@ export interface TabOptionItem {
   subLabel?: string
 }
 
-export type OptionList = (OptionValue | TabOptionItem)[]
+export type OptionList = (number | string | OptionItem)[]
 
-export interface HandleOptionItem extends TabOptionItem {
+export interface HandleOptionItem extends OptionItem {
   badge: BadgeOptions
 }
+
+export type OnChange = (payload: {
+  index: number
+  value: number | string
+}) => void

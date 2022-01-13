@@ -37,7 +37,11 @@ import { computed, defineComponent, ref, watch } from 'vue'
 import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { capitalize, isInteger, isNumeric, rangeInteger } from '@/helpers/util'
-import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
+import {
+  colorValidator,
+  createEnumsValidator,
+  getEnumsValue
+} from '@/helpers/validator'
 import { formItemProps, formNumberValueEmits } from '@/Form/form'
 import type { StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
@@ -90,10 +94,12 @@ export default defineComponent({
       default: false
     },
     color: {
-      type: String
+      type: String,
+      validator: colorValidator
     },
     activeColor: {
-      type: String
+      type: String,
+      validator: colorValidator
     },
     size: {
       type: [Number, String]

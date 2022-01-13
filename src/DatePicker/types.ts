@@ -1,5 +1,5 @@
-import type { PopupCancelArgs } from '../popup/types'
-import type { PickerDetail, PickerChangeArgs } from '../Picker/types'
+import type { SelectorDetail } from '../SelectorField/types'
+import type { ColRow } from '../Picker/types'
 
 export type ColName = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
 export type ModeName =
@@ -19,13 +19,24 @@ export type ModeName =
   | 'year-month-day-hour-minute'
   | 'year-month-day-hour-minute-second'
 
-export interface DatePickerFilter {
+export interface OptionFilter {
   (number: number, type: ColName): boolean
 }
 
-export type DatePickerChangeArgs = PickerChangeArgs
-export type DatePickerConfirmArgs = PickerDetail
-export type DatePickerCancelArgs = PopupCancelArgs
+export interface RowsParser {
+  (
+    index: number,
+    parent: ColRow | null,
+    options: {
+      minDate: Date
+      maxDate: Date
+      mode: ModeName
+      filter: OptionFilter
+    }
+  ): ColRow[]
+}
+
+export type OnConfirm = (payload: SelectorDetail) => void
 
 export type ShowDatePickerOptions = Partial<{
   title: string
@@ -33,5 +44,5 @@ export type ShowDatePickerOptions = Partial<{
   minDate: Date
   maxDate: Date
   mode: ModeName
-  filter: DatePickerFilter
+  filter: OptionFilter
 }>
