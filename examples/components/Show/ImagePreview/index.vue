@@ -48,7 +48,7 @@ import { defineComponent } from 'vue'
 import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/index'
 import { showToast } from '@/Toast'
 import { showImagePreview } from '@/ImagePreview'
-import type { ImagePreviewChangeArgs } from '@/index'
+import type { ImagePreviewOnChange, FnArgs } from '@/index'
 
 interface showArgs {
   showClose?: boolean
@@ -104,7 +104,7 @@ export default defineComponent({
         this.visibleEvent = false
       }
     },
-    onChange(res: ImagePreviewChangeArgs) {
+    onChange(res: FnArgs<ImagePreviewOnChange>[0]) {
       if (this.changeEvent) {
         console.log('event', res)
         showToast(`切换到第 ${res.activeIndex + 1} 张`)

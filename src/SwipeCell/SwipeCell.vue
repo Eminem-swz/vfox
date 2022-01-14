@@ -38,15 +38,10 @@ import type { PropType } from 'vue'
 import { getEnumsValue } from '@/helpers/validator'
 import { cloneData, rangeNumber, noop } from '@/helpers/util'
 import { STATE_TYPES } from '@/helpers/constants'
-import type { StateType } from '../helpers/types'
+import type { ButtonOption, OnButtonClick } from './types'
 import { useTouch } from '@/hooks/use-touch'
 import { getStretchOffset } from '@/helpers/animation'
 import { useBlur } from '@/hooks/use-blur'
-
-interface ButtonOptions {
-  text: string
-  type?: StateType
-}
 
 interface SwipeCellCoords {
   startX: number
@@ -59,8 +54,8 @@ export default defineComponent({
   name: 'fx-swipe-cell',
   props: {
     buttons: {
-      type: Array as PropType<ButtonOptions[]>,
-      validator: (items: ButtonOptions[]) => {
+      type: Array as PropType<ButtonOption[]>,
+      validator: (items: ButtonOption[]) => {
         return (
           Array.isArray(items) &&
           items.filter(item => {
@@ -68,12 +63,13 @@ export default defineComponent({
           }).length === 0
         )
       },
-      default: () => []
+      default: () => [] as ButtonOption[]
     }
   },
   emits: {
-    'button-click': (payload: { item: ButtonOptions; index: number }) =>
-      payload && typeof payload.index === 'number'
+    'button-click': payload => payload && typeof payload.index === 'number'
+  } as {
+    'button-click': OnButtonClick
   },
   setup(props, ctx) {
     const root = ref<HTMLElement>()
@@ -107,7 +103,7 @@ export default defineComponent({
       swipeBlur.removeEvent()
     }
 
-    function onButtonClick(item: ButtonOptions, index: number) {
+    function onButtonClick(item: Required<ButtonOption>, index: number) {
       ctx.emit('button-click', {
         item: cloneData(item),
         index
@@ -116,7 +112,7 @@ export default defineComponent({
     }
 
     const buttons2 = computed(() => {
-      const buttons: ButtonOptions[] = []
+      const buttons: Required<ButtonOption>[] = []
 
       if (Array.isArray(props.buttons)) {
         props.buttons.forEach(v => {

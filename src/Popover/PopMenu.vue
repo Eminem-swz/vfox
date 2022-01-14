@@ -44,7 +44,7 @@ import { usePopover } from '@/Popover/use-popover'
 import { popoverProps, popoverEmits } from '@/Popover/popover'
 import { Icon } from '@/Icon'
 import { isObject } from '@/helpers/util'
-import type { MenuOption } from './types'
+import type { MenuOption, MenuDetail } from './types'
 
 export default defineComponent({
   name: 'fx-pop-menu',
@@ -55,7 +55,14 @@ export default defineComponent({
       type: Array as PropType<MenuOption[]>
     }
   },
-  emits: { ...popoverEmits },
+  emits: {
+    ...popoverEmits,
+    confirm: (payload: MenuDetail) =>
+      payload &&
+      typeof payload.index === 'number' &&
+      payload.item &&
+      typeof payload.item.name === 'string'
+  },
   setup(props, ctx) {
     const popoverHook = usePopover(props, ctx)
 
@@ -71,7 +78,7 @@ export default defineComponent({
           name: item.name
         },
         index
-      })
+      } as MenuDetail)
     }
 
     const options2 = computed(() => {

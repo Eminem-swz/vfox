@@ -15,7 +15,9 @@ export * from './components/api'
 export * from './components'
 export default Vfox
 
+export type { FnArgs } from './helpers/types'
 export type { StateType, PlacementType, SizeType } from './helpers/types'
+
 export type {
   VisibleStateChangeArgs as PopupVisibleStateChangeArgs,
   CancelArgs as PopupCancelArgs,
@@ -50,11 +52,10 @@ export type {
   OnConfirm as ActionSheetOnConfirm
 } from './ActionSheet/types'
 export type {
-  DialogConfirmArgs as PopDialogConfirmArgs,
   MenuOption as PopMenuOption,
-  MenuConfirmArgs as PopMenuConfirmArgs
+  MenuOnConfirm as PopMenuOnConfirm
 } from './Popover/types'
-export type { ImagePreviewChangeArgs } from './ImagePreview/types'
+export type { OnChange as ImagePreviewOnChange } from './ImagePreview/types'
 export type {
   SetSuggestList as SearchBarSetSuggestList,
   OnInput as SearchBarOnInput
@@ -68,4 +69,22 @@ export type {
   OptionList as TabOptions,
   OptionItem as TabOption
 } from './Tab/types'
-export type { FnArgs } from './helpers/types'
+export type {
+  OnChange as SwiperOnChange,
+  OnAnimated as SwiperOnAnimated
+} from './Swiper/types'
+export type { StateType as ToastType } from './Toast/types'
+export type {
+  ButtonOption as SwipeCellButtonOption,
+  OnButtonClick as SwipeCellOnButtonClick
+} from './SwipeCell/types'
+export type {
+  OnChange as StickyViewOnChange,
+  OnChange as IndexViewOnChange,
+  OnChange as ScrollTabOnChange
+} from './StickyView/types'
+export type {
+  ButtonOption as NavBarButtonOption,
+  OnButtonClick as NavBarOnButtonClick
+} from './NavBar/types'
+export type { OnChange as PaginationOnChange } from './Pagination/types'

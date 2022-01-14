@@ -66,7 +66,8 @@ import { isStringArray, rangeNumber } from '@/helpers/util'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
 import type { ImageOnLoadPayLoad } from '../Image/types'
-import type { ImagePreviewChangeArgs } from './types'
+import type { FnArgs } from '../helpers/types'
+import type { OnChange } from './types'
 
 interface ImageObject {
   src: string
@@ -145,7 +146,7 @@ export default defineComponent({
   emits: {
     ...popupEmits,
     'update:current': (current: string) => typeof current === 'string',
-    change: (payload: { type: string; activeIndex: number; current: string }) =>
+    change: (payload: FnArgs<OnChange>[0]) =>
       payload &&
       typeof payload.activeIndex === 'number' &&
       typeof payload.current === 'string'
@@ -397,10 +398,9 @@ export default defineComponent({
       emit('update:current', current)
 
       emit('change', {
-        type: 'change',
         activeIndex,
         current
-      } as ImagePreviewChangeArgs)
+      })
     }
 
     function onPreviewClick() {

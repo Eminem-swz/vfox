@@ -3,7 +3,7 @@ import PopMenu from '../Popover/PopMenu.vue'
 import { createConfirmHook, createShowPopup } from '@/popup/api'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
 import type { DomSelector, PlacementType } from '../helpers/types'
-import type { MenuOption, PopMenuDetail } from '../Popover/types'
+import type { MenuOption, MenuDetail } from '../Popover/types'
 
 const showPopMenu = createShowPopup<
   {
@@ -11,7 +11,7 @@ const showPopMenu = createShowPopup<
     options: MenuOption[]
     placement?: PlacementType
   },
-  PopupSuccessConfirmArgs<PopMenuDetail>
+  PopupSuccessConfirmArgs<MenuDetail>
 >({
   apiName: 'showPopMenu',
   component: PopMenu,

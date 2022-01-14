@@ -20,24 +20,24 @@ export default defineComponent({
       required: true
     }
   },
+  emits: {
+    success: (payload: string) => typeof payload === 'string',
+    error: (e: Error) => e instanceof Error
+  },
   setup(props, { emit }) {
     const input = ref<HTMLInputElement>()
 
-    function onCopy(e: Event) {
+    function onCopy() {
       try {
         const $el = input.value as HTMLInputElement
 
         $el.select()
         document.execCommand('Copy')
 
-        emit('success', {
-          text: $el.value
-        })
+        emit('success', $el.value ?? '')
       } catch (error) {
-        emit('error', error)
+        emit('error', error as Error)
       }
-
-      emit(e.type, e)
     }
 
     return {

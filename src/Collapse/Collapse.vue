@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, watch, provide } from 'vue'
+import type { PropType } from 'vue'
 import { cloneData, isSameArray, isStringNumberMixArray } from '@/helpers/util'
 import { stringNumberArrayMixValidator } from '@/helpers/validator'
 import { useGroup } from '@/hooks/use-group'
@@ -16,6 +17,7 @@ export default defineComponent({
   name: 'fx-collapse',
   props: {
     activeNames: {
+      type: [Number, String, Array] as PropType<ActiveName | ActiveName[]>,
       validator: stringNumberArrayMixValidator,
       default: () => [] as ActiveName[]
     },
@@ -27,8 +29,8 @@ export default defineComponent({
   emits: {
     'update:activeNames': (payload: ActiveName[]) =>
       stringNumberArrayMixValidator(payload),
-    change: (payload: { activeNames: ActiveName[] }) =>
-      payload && isStringNumberMixArray(payload.activeNames)
+    change: (activeNames: ActiveName[]) =>
+      activeNames && isStringNumberMixArray(activeNames)
   },
   setup(props, { emit }) {
     let activeNames2: ActiveName[] = []
@@ -89,9 +91,7 @@ export default defineComponent({
       }
 
       emit('update:activeNames', cloneData(activeNames2))
-      emit('change', {
-        activeNames: cloneData(activeNames2)
-      })
+      emit('change', cloneData(activeNames2))
     }
 
     onMounted(() => updateValue(props.activeNames))

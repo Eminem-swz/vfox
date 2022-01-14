@@ -27,6 +27,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { Icon } from '@/Icon'
+import type { FnArgs } from '../helpers/types'
+import type { OnChange } from './types'
 
 export default defineComponent({
   name: 'fx-pagination',
@@ -45,7 +47,7 @@ export default defineComponent({
   },
   emits: {
     'update:current': (current: number) => typeof current === 'number',
-    change: (payload: { type: string; current: number; total: number }) =>
+    change: (payload: FnArgs<OnChange>[0]) =>
       payload &&
       typeof payload.current === 'number' &&
       typeof payload.total === 'number'
@@ -56,7 +58,6 @@ export default defineComponent({
 
       emit('update:current', newPageNum)
       emit('change', {
-        type: 'change',
         current: newPageNum,
         total: props.total
       })

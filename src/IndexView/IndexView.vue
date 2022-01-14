@@ -33,7 +33,10 @@ import { sizeValidator } from '@/helpers/validator'
 import { rangeInteger } from '@/helpers/util'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
-import type { StickyViewChangeArgs, StickyViewItem } from '@/StickyView/types'
+import type {
+  OnChange as StickyViewOnChange,
+  StickyViewItem
+} from '../StickyView/types'
 import { emitChangeValidator } from '@/StickyView/stickyView'
 
 export default defineComponent({
@@ -72,7 +75,7 @@ export default defineComponent({
       })
     }
 
-    function onChange(res: StickyViewChangeArgs) {
+    const onChange: StickyViewOnChange = res => {
       emit('change', res)
     }
 

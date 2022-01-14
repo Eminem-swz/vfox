@@ -1,5 +1,4 @@
-export interface ImagePreviewChangeArgs {
-  type: 'change'
+export type OnChange = (payload: {
   activeIndex: number
   current: string
-}
+}) => void

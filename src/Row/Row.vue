@@ -6,18 +6,29 @@
 
 <script lang="ts">
 import { computed, defineComponent, provide, reactive, watch } from 'vue'
+import type { PropType } from 'vue'
 import { isNumeric } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { createEnumsValidator } from '@/helpers/validator'
 
-type PropGutter = number | string | number[]
+type JustifyType = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
+const JUSTIFY_TYPE: JustifyType[] = [
+  'start',
+  'end',
+  'center',
+  'space-around',
+  'space-between'
+]
+type AlignType = 'top' | 'middle' | 'bottom'
+const ALIGN_TYPE: AlignType[] = ['top', 'middle', 'bottom']
 
 export default defineComponent({
   name: 'fx-row',
   props: {
     // 栅格间隔
     gutter: {
-      validator: (value: PropGutter) => {
+      type: [Number, String, Array] as PropType<number | string | number[]>,
+      validator: (value: number | string | number[]) => {
         if (Array.isArray(value) && typeof value[0] === 'number') {
           return true
         } else if (isNumeric(value)) {
@@ -30,20 +41,14 @@ export default defineComponent({
     },
     // 水平排列方式
     justify: {
-      type: String,
-      validator: createEnumsValidator([
-        'start',
-        'end',
-        'center',
-        'space-around',
-        'space-between'
-      ]),
+      type: String as PropType<JustifyType>,
+      validator: createEnumsValidator(JUSTIFY_TYPE),
       default: 'start'
     },
     // 垂直对齐方式
     align: {
-      type: String,
-      validator: createEnumsValidator(['top', 'middle', 'bottom']),
+      type: String as PropType<AlignType>,
+      validator: createEnumsValidator(ALIGN_TYPE),
       default: 'top'
     }
   },
@@ -64,20 +69,17 @@ export default defineComponent({
     const classNames = computed(() => {
       const arr = [`fx-row`]
 
-      if (props.justify !== 'start') {
+      JUSTIFY_TYPE.includes(props.justify) &&
         arr.push(`justify--${props.justify}`)
-      }
 
-      if (props.align !== 'top') {
-        arr.push(`align--${props.align}`)
-      }
+      ALIGN_TYPE.includes(props.align) && arr.push(`align--${props.align}`)
 
       return arr
     })
 
     watch(
       () => props.gutter,
-      (val: PropGutter) => {
+      val => {
         if (isNumeric(val)) {
           gutter[0] = Math.max(0, parseFloat(val as string))
           gutter[1] = 0

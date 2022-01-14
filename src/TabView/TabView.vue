@@ -34,7 +34,10 @@ import { SideTab } from '@/SideTab'
 import { Swiper } from '@/Swiper'
 import { useList } from '@/hooks/use-list'
 import { scrollTo } from '@/helpers/dom'
-import type { SwiperChangeArgs } from '../Swiper/types'
+import type {
+  OnChange as SwiperOnChange,
+  OnAnimated as SwiperOnAnimated
+} from '../Swiper/types'
 import { emitChangeValidator } from '@/Swiper/swiper'
 
 export default defineComponent({
@@ -85,7 +88,7 @@ export default defineComponent({
 
     const { list } = useList('tabView', resetItems)
 
-    function onChange(res: SwiperChangeArgs) {
+    const onChange: SwiperOnChange = res => {
       emit('change', res)
 
       if (props.backUpperWhenChange) {
@@ -116,7 +119,7 @@ export default defineComponent({
       }
     }
 
-    function onAnimated(res: SwiperChangeArgs) {
+    const onAnimated: SwiperOnAnimated = res => {
       emit('animated', res)
     }
 

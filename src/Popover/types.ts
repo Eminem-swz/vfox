@@ -1,7 +1,4 @@
-import type { EmptyObject } from '../helpers/types'
 import type { IconData } from '../Icon/types'
-
-export type DialogConfirmArgs = EmptyObject
 
 export interface MenuOption {
   name: string
@@ -9,11 +6,11 @@ export interface MenuOption {
   disabled?: boolean
 }
 
-export interface PopMenuDetail {
+export interface MenuDetail {
   item: {
     name: string
   }
   index: number
 }
 
-export type MenuConfirmArgs = PopMenuDetail
+export type MenuOnConfirm = (payload: MenuDetail) => void

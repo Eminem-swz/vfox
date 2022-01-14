@@ -80,43 +80,29 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Button, ButtonGroup } from '@/Button'
-import type { StateType } from '../helpers/types'
-import type { IconData } from '../Icon/types'
+import type { ButtonOption, OnButtonClick } from './types'
 import { locale } from '@/Locale'
+import { iconValidator } from '@/helpers/validator'
 
-interface ButtonOptions {
-  text: string
-  icon?: IconData
-  type?: StateType
-}
-
-const buttonsValidator = (items: ButtonOptions[]) => {
+const buttonsValidator = (items: ButtonOption[]) => {
   return (
     Array.isArray(items) &&
     items.filter(item => {
-      return !(item && (typeof item.text === 'string' || item.icon))
+      return !(
+        item &&
+        typeof item.text === 'string' &&
+        iconValidator(item.icon)
+      )
     }).length === 0
   )
 }
 
-const isButtonEl = (buttonEl?: HTMLElement) =>
-  buttonEl == null || buttonEl instanceof HTMLElement
-
-const emitClickValidator = (
-  payload: {
-    type: string
-    index: number
-    item: {
-      text: string
-    }
-  },
-  buttonEl?: HTMLElement
-) =>
+const emitClickValidator: OnButtonClick = (payload, buttonEl) =>
   payload &&
   typeof payload.index === 'number' &&
   payload.item &&
   typeof payload.item.text === 'string' &&
-  isButtonEl(buttonEl)
+  buttonEl instanceof HTMLElement
 
 export default defineComponent({
   name: 'fx-nav-bar',
@@ -138,14 +124,14 @@ export default defineComponent({
       default: false
     },
     leftButtons: {
-      type: Array as PropType<ButtonOptions[]>,
+      type: Array as PropType<ButtonOption[]>,
       validator: buttonsValidator,
-      default: () => [] as ButtonOptions[]
+      default: () => [] as ButtonOption[]
     },
     rightButtons: {
-      type: Array as PropType<ButtonOptions[]>,
+      type: Array as PropType<ButtonOption[]>,
       validator: buttonsValidator,
-      default: () => [] as ButtonOptions[]
+      default: () => [] as ButtonOption[]
     },
     iconOnly: {
       type: Boolean,
@@ -153,50 +139,75 @@ export default defineComponent({
     }
   },
   emits: {
-    'back-click': isButtonEl,
-    'home-click': isButtonEl,
-    'title-dbclick': isButtonEl,
+    'back-click': emitClickValidator,
+    'home-click': emitClickValidator,
+    'title-dbclick': emitClickValidator,
     'left-button-click': emitClickValidator,
     'right-button-click': emitClickValidator
   },
   setup(props, { emit }) {
-    function emitClick(type: string, $el: EventTarget | null) {
-      emit(type as 'back-click', ($el as HTMLElement) || undefined)
+    function emitClick(
+      type: string,
+      item: {
+        item: {
+          text: string
+        }
+        index: number
+      },
+      $el: EventTarget | null
+    ) {
+      emit(type as 'back-click', item, $el as HTMLElement)
     }
 
     function onBack(e: Event) {
-      emitClick('back-click', e.currentTarget)
-    }
-
-    function onBackHome(e: Event) {
-      emitClick('home-click', e.currentTarget)
-    }
-
-    function onLeftIconClick(e: Event, item: ButtonOptions, index: number) {
-      emit(
-        'left-button-click',
+      emitClick(
+        'back-click',
         {
-          type: 'left-button-click',
+          index: 0,
           item: {
-            text: item.text
-          },
-          index
+            text: 'back'
+          }
         },
-        (e.currentTarget as HTMLElement) || undefined
+        e.currentTarget
       )
     }
 
-    function onRightIconClick(e: Event, item: ButtonOptions, index: number) {
-      emit(
-        'right-button-click',
+    function onBackHome(e: Event) {
+      emitClick(
+        'home-click',
         {
-          type: 'right-button-click',
+          item: {
+            text: 'home'
+          },
+          index: props.showBack ? 1 : 0
+        },
+        e.currentTarget
+      )
+    }
+
+    function onLeftIconClick(e: Event, item: ButtonOption, index: number) {
+      emitClick(
+        'left-button-click',
+        {
           item: {
             text: item.text
           },
           index
         },
-        (e.currentTarget as HTMLElement) || undefined
+        e.currentTarget
+      )
+    }
+
+    function onRightIconClick(e: Event, item: ButtonOption, index: number) {
+      emitClick(
+        'right-button-click',
+        {
+          item: {
+            text: item.text
+          },
+          index
+        },
+        e.currentTarget
       )
     }
 
@@ -211,7 +222,16 @@ export default defineComponent({
       } else if (dbClickTag === e.type) {
         clearTimeout(dbClickTimer)
         dbClickTag = null
-        emitClick('title-dbclick', e.currentTarget)
+        emitClick(
+          'title-dbclick',
+          {
+            item: {
+              text: (e.currentTarget as HTMLElement).textContent ?? ''
+            },
+            index: 0
+          },
+          e.currentTarget
+        )
       }
     }
 

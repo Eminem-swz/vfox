@@ -30,7 +30,7 @@ import { Sticky } from '@/Sticky'
 import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
-import type { StickyViewChangeArgs } from '../StickyView/types'
+import type { OnChange as StickyViewOnChange } from '../StickyView/types'
 import { emitChangeValidator } from '@/StickyView/stickyView'
 
 export default defineComponent({
@@ -74,7 +74,7 @@ export default defineComponent({
       })
     }
 
-    function onChange(res: StickyViewChangeArgs) {
+    const onChange: StickyViewOnChange = res => {
       emit('change', res)
     }
 

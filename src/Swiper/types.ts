@@ -1,4 +1,6 @@
-export interface SwiperChangeArgs {
+export type OnChange = (payload: {
   activeIndex: number
   fromIndex: number
-}
+}) => void
+
+export type OnAnimated = OnChange

@@ -31,8 +31,9 @@ import { ActivityIndicator } from '@/ActivityIndicator'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
 import { iconValidator } from '@/helpers/validator'
+import type { StateType } from './types'
 
-const typeMaps = new Map([
+const typeMaps = new Map<StateType, string | null>([
   ['default', null],
   ['success', 'CheckCircleOutlined'],
   ['loading', 'LoadingOutlined'],
@@ -49,8 +50,8 @@ export default defineComponent({
       required: true
     },
     type: {
-      type: String as PropType<'default' | 'success' | 'loading' | 'fail'>,
-      validator: (val: string) => {
+      type: String as PropType<StateType>,
+      validator: (val: StateType) => {
         return typeof typeMaps.get(val) !== 'undefined'
       },
       default: 'default'
