@@ -10,8 +10,7 @@ import type { PropType } from 'vue'
 import { cloneData, isSameArray, isStringNumberMixArray } from '@/helpers/util'
 import { stringNumberArrayMixValidator } from '@/helpers/validator'
 import { useGroup } from '@/hooks/use-group'
-
-type ActiveName = string | number
+import type { ActiveName } from './types'
 
 export default defineComponent({
   name: 'fx-collapse',
@@ -29,8 +28,8 @@ export default defineComponent({
   emits: {
     'update:activeNames': (payload: ActiveName[]) =>
       stringNumberArrayMixValidator(payload),
-    change: (activeNames: ActiveName[]) =>
-      activeNames && isStringNumberMixArray(activeNames)
+    change: (payload: ActiveName[]) =>
+      payload && isStringNumberMixArray(payload)
   },
   setup(props, { emit }) {
     let activeNames2: ActiveName[] = []
@@ -58,7 +57,7 @@ export default defineComponent({
       activeNames2 = []
 
       children.forEach(child => {
-        const childName = child.getName()
+        const childName = child.getName() as ActiveName
 
         if (childName && values.includes(childName)) {
           activeNames2.push(childName)

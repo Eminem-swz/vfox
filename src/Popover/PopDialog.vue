@@ -8,7 +8,7 @@
       v-show="isShow"
     >
       <div class="fx-mask" @click="onMaskClick"></div>
-      <div class="fx-popover_inner" ref="inner" :style="innerStyles">
+      <div class="fx-popover_inner" ref="innerEl" :style="innerStyles">
         <i class="fx-popover_arrow" :style="arrowStyles"></i>
         <div class="fx-popover_content">
           <div class="fx-pop-dialog_body">

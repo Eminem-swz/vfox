@@ -32,7 +32,7 @@ interface UseOptions {
 }
 
 export function useSlide(props: UseProps, { move, end, getValue }: UseOptions) {
-  const slider = ref<HTMLElement>()
+  const sliderEl = ref<HTMLElement>()
 
   const thumbW = 24
   let coords: Coords | null
@@ -90,7 +90,7 @@ export function useSlide(props: UseProps, { move, end, getValue }: UseOptions) {
   })
 
   useTouch({
-    el: slider,
+    el: sliderEl,
     onTouchStart(e) {
       if (props.disabled) {
         // 禁用
@@ -100,7 +100,7 @@ export function useSlide(props: UseProps, { move, end, getValue }: UseOptions) {
       const { clientX } = e.touchObject
 
       const $target = e.target as HTMLElement
-      const trackRects = (slider.value as HTMLElement).getClientRects()[0]
+      const trackRects = (sliderEl.value as HTMLElement).getClientRects()[0]
       const thumb = !!$target.dataset.thumb
 
       coords = {
@@ -108,7 +108,7 @@ export function useSlide(props: UseProps, { move, end, getValue }: UseOptions) {
         thumb,
         thumbW,
         clientStartX: clientX,
-        thumbXInTrack: getRelativeOffset($target, slider.value).offsetLeft,
+        thumbXInTrack: getRelativeOffset($target, sliderEl.value).offsetLeft,
         trackX: trackRects.left,
         trackW: trackRects.width - thumbW,
         moved: false,
@@ -169,7 +169,7 @@ export function useSlide(props: UseProps, { move, end, getValue }: UseOptions) {
   })
 
   return {
-    slider,
+    sliderEl,
     toInteger,
     rangeValue,
     value2Progress,

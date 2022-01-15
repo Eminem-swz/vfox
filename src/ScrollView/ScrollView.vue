@@ -62,15 +62,17 @@ import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
 import { ActivityIndicator } from '@/ActivityIndicator'
 import { stringMix2StringArray, isNumber, isStringArray } from '@/helpers/util'
-import type { ScrollToOffsetOptions, StyleObject } from '../helpers/types'
+import type { StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
 import { locale } from '@/Locale'
 import { scrollTo } from '@/helpers/dom'
 import {
   emitRefreshingValidator,
+  emitScrollToLowerValidator,
+  emitScrollToUpperValidator,
   emitScrollValidator
 } from '@/ScrollView/scrollView'
-import type { PullDirection } from './types'
+import type { PullDirection, ScrollToOptions } from './types'
 
 enum ScrollState {
   Center,
@@ -153,10 +155,8 @@ export default defineComponent({
     }
   },
   emits: {
-    'scroll-to-upper': (payload: { direction: 'top' | 'left' }) =>
-      payload && ['top', 'left'].includes(payload.direction),
-    'scroll-to-lower': (payload: { direction: 'bottom' | 'right' }) =>
-      payload && ['bottom', 'right'].includes(payload.direction),
+    'scroll-to-upper': emitScrollToUpperValidator,
+    'scroll-to-lower': emitScrollToLowerValidator,
     scroll: emitScrollValidator,
     refreshing: emitRefreshingValidator
   },
@@ -554,16 +554,15 @@ export default defineComponent({
     /**
      * 滚动列表到指定的偏移（以像素为单位）
      */
-    function scrollToOffset(options: number | ScrollToOffsetOptions) {
+    function scrollToOffset(options: number | ScrollToOptions) {
       let behavior: 'auto' | 'smooth' = 'smooth'
       let top = 0
       let left = 0
 
-      if (isNumber(options)) {
-        top = options as number
+      if (typeof options === 'number') {
+        top = options
         behavior = 'auto'
-      } else {
-        options = options as ScrollToOffsetOptions
+      } else if (options && typeof options.offset === 'number') {
         top = options.offset
         if (options.animated === false) behavior = 'auto'
       }
@@ -573,12 +572,11 @@ export default defineComponent({
         top = [left, (left = top)][0]
       }
 
-      root.value &&
-        (root.value as HTMLElement).scrollTo({
-          top,
-          left,
-          behavior
-        })
+      root.value?.scrollTo({
+        top,
+        left,
+        behavior
+      })
     }
 
     provide('disableFixed', true)
@@ -597,7 +595,7 @@ export default defineComponent({
         Holding: 1,
         Refreshing: 2
       },
-      scrollToOffset,
+      scrollTo: scrollToOffset,
       locale
     }
   }

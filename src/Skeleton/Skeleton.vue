@@ -1,14 +1,7 @@
 <script lang="ts">
 import { defineComponent, h, provide } from 'vue'
-import type { PropType } from 'vue'
 import SkeletonLayout from './SkeletonLayout.vue'
-import {
-  paragraphDefaultRow,
-  AVATAR_SHAPE_NAMES,
-  BUTTON_SHAPE_NAMES
-} from '@/Skeleton/skeleton'
-import type { ButtonShapeNames, AvatarShapeNames } from './types'
-import { createEnumsValidator } from '@/helpers/validator'
+import { rootProps } from '@/Skeleton/skeleton'
 
 export default defineComponent({
   name: 'fx-skeleton',
@@ -23,28 +16,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    // 是否显示动画
-    animated: {
-      type: Boolean,
-      default: false
-    },
-    // 指定头像的形状
-    avatarShape: {
-      type: String as PropType<AvatarShapeNames>,
-      validator: createEnumsValidator(AVATAR_SHAPE_NAMES),
-      default: null
-    },
-    // 指定按钮的形状
-    buttonShape: {
-      type: String as PropType<ButtonShapeNames>,
-      validator: createEnumsValidator(BUTTON_SHAPE_NAMES),
-      default: null
-    },
-    // 设置段落占位图的行数
-    paragraphRow: {
-      type: Number,
-      default: paragraphDefaultRow
-    }
+    ...rootProps
   },
   setup(props, { slots }) {
     provide('fxSkeletonProps', props)

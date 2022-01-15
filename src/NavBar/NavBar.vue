@@ -80,29 +80,35 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Button, ButtonGroup } from '@/Button'
-import type { ButtonOption, OnButtonClick } from './types'
+import type { ButtonOption, OnButtonClick, OnTitleDbClick } from './types'
 import { locale } from '@/Locale'
 import { iconValidator } from '@/helpers/validator'
+import type { VoidFnToBooleanFn } from '../helpers/types'
 
 const buttonsValidator = (items: ButtonOption[]) => {
   return (
     Array.isArray(items) &&
     items.filter(item => {
       return !(
-        item &&
-        typeof item.text === 'string' &&
+        (item && typeof item.text === 'string') ||
         iconValidator(item.icon)
       )
     }).length === 0
   )
 }
 
-const emitClickValidator: OnButtonClick = (payload, buttonEl) =>
+const emitClickValidator: VoidFnToBooleanFn<OnButtonClick> = (
+  payload,
+  buttonEl
+) =>
   payload &&
   typeof payload.index === 'number' &&
   payload.item &&
   typeof payload.item.text === 'string' &&
   buttonEl instanceof HTMLElement
+
+const emitTitleDbClickValidator: VoidFnToBooleanFn<OnTitleDbClick> = titleEl =>
+  titleEl instanceof HTMLElement
 
 export default defineComponent({
   name: 'fx-nav-bar',
@@ -141,7 +147,7 @@ export default defineComponent({
   emits: {
     'back-click': emitClickValidator,
     'home-click': emitClickValidator,
-    'title-dbclick': emitClickValidator,
+    'title-dbclick': emitTitleDbClickValidator,
     'left-button-click': emitClickValidator,
     'right-button-click': emitClickValidator
   },
@@ -222,16 +228,7 @@ export default defineComponent({
       } else if (dbClickTag === e.type) {
         clearTimeout(dbClickTimer)
         dbClickTag = null
-        emitClick(
-          'title-dbclick',
-          {
-            item: {
-              text: (e.currentTarget as HTMLElement).textContent ?? ''
-            },
-            index: 0
-          },
-          e.currentTarget
-        )
+        emit('title-dbclick', e.currentTarget as HTMLElement)
       }
     }
 

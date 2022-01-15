@@ -1,6 +1,6 @@
 <template>
   <div class="fx-slider" :class="{ disabled: !!disabled }" :style="styles">
-    <div class="fx-slider_inner" ref="slider">
+    <div class="fx-slider_inner" ref="sliderEl">
       <div class="fx-slider_box">
         <div
           class="fx-slider_track"
@@ -50,9 +50,8 @@ export default defineComponent({
     const inputValue = ref(0)
     const { emit } = ctx
 
-    const { slider, toInteger, rangeValue, value2Progress, styles } = useSlide(
-      props,
-      {
+    const { sliderEl, toInteger, rangeValue, value2Progress, styles } =
+      useSlide(props, {
         getValue() {
           return inputValue.value
         },
@@ -66,8 +65,7 @@ export default defineComponent({
         end({ isChange }) {
           isChange && emit('change', inputValue.value)
         }
-      }
-    )
+      })
 
     function emitModel() {
       if (
@@ -121,7 +119,7 @@ export default defineComponent({
     }
 
     return {
-      slider,
+      sliderEl,
       progress,
       inputValue,
       styles

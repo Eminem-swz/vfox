@@ -5,15 +5,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSubSkeleton } from '@/Skeleton/use-skeleton'
+import { propAnimated } from '@/Skeleton/skeleton'
 
 export default defineComponent({
   name: 'fx-skeleton-title',
   props: {
     // 是否显示动画
-    animated: {
-      type: Boolean,
-      default: false
-    }
+    animated: propAnimated
   },
   setup(props) {
     const { useAnimation } = useSubSkeleton(props, 'image')

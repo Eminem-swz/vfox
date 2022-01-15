@@ -8,8 +8,10 @@
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import { AnimationFrameTask, frameTo } from '@/helpers/animation'
 import { thousands, isNumber } from '@/helpers/util'
+import type { OnCancel } from './types'
+import type { VoidFnToBooleanFn } from '../helpers/types'
 
-const emitValidator = (payload: { type: string; number: number }) => {
+const emitValidator: VoidFnToBooleanFn<OnCancel> = payload => {
   return payload && typeof payload.number === 'number'
 }
 
@@ -68,16 +70,12 @@ export default defineComponent({
       )
     }
 
-    function emitEvent(type: 'animated' | 'cancel') {
-      emit(type as 'animated', { type, number })
-    }
-
     let frameTask: AnimationFrameTask | null = null
 
     function cancel() {
       if (frameTask) {
         frameTask.stop()
-        emitEvent('cancel')
+        emit('cancel', { number })
       }
     }
 
@@ -104,7 +102,7 @@ export default defineComponent({
             frameTask = null
           }
 
-          emitEvent('animated')
+          emit('animated', { number })
         }
       })
     }

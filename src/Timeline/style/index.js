@@ -1,2 +1,2 @@
-import '../../style/hairline.scss'
+import '../../style/common'
 import '../index.scss'

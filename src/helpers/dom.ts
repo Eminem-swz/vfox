@@ -1,4 +1,5 @@
 import { camelCase2KebabCase, isNumber, objectForEach } from '@/helpers/util'
+import type { ViewPosition } from './types'
 
 const docEl = document.documentElement
 
@@ -25,7 +26,7 @@ export function hasClassName($el: Element, className: string) {
 export function getRelativeOffset(
   $el: HTMLElement | Document,
   $relativeEl: Element | Document = document,
-  viewPosition: string | number = 0
+  viewPosition: ViewPosition = 0
 ) {
   if ($el === document) {
     return { offsetTop: 0, offsetLeft: 0 }
@@ -54,19 +55,19 @@ export function getRelativeOffset(
     offsetLeft += parent.offsetLeft
   }
 
-  const viewPositionMap = new Map([
+  const viewPositionMap = new Map<ViewPosition, number>([
     ['start', 0],
     ['center', 0.5],
     ['end', 1],
-    ['0', 0],
-    ['0.5', 0.5],
-    ['1', 1]
+    [0, 0],
+    [0.5, 0.5],
+    [1, 1]
   ])
 
-  viewPosition = (viewPositionMap.get(viewPosition.toString()) || 0) as number
+  const viewPosition2 = viewPositionMap.get(viewPosition) ?? 0
 
-  if (viewPosition) {
-    if (viewPosition === 1) {
+  if (viewPosition2) {
+    if (viewPosition2 === 1) {
       offsetTop -= $relativeEl.clientHeight - $el.clientHeight
       offsetLeft -= $relativeEl.clientWidth - $el.clientWidth
     } else {

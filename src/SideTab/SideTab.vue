@@ -1,6 +1,6 @@
 <template>
   <div class="fx-side-tab">
-    <ul class="fx-side-tab_list" ref="list">
+    <ul class="fx-side-tab_list" ref="listEl">
       <li
         class="fx-side-tab_item"
         :class="{

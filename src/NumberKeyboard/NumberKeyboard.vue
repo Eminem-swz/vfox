@@ -65,7 +65,8 @@ import type { OnCancel, OnVisibleStateChange } from '../popup/types'
 import { getEnumsValue } from '@/helpers/validator'
 import { locale } from '@/Locale'
 import { formStringValueEmits } from '@/Form/form'
-import type { EmptyObject } from '../helpers/types'
+import type { EmptyObject, FnArgs } from '../helpers/types'
+import type { OnDelete, OnClose } from './types'
 
 const TYPE_NAMES = ['default', 'rightColumn']
 
@@ -103,9 +104,9 @@ export default defineComponent({
   emits: {
     ...popupEmits,
     ...formStringValueEmits,
-    delete: (payload: { type: string; deleteKey: string }) =>
+    delete: (payload: FnArgs<OnDelete>[0]) =>
       payload && typeof payload.deleteKey === 'string',
-    close: (payload: { type: string; source: string }) =>
+    close: (payload: FnArgs<OnClose>[0]) =>
       payload && typeof payload.source === 'string'
   },
   setup(props, ctx) {
@@ -219,7 +220,6 @@ export default defineComponent({
         const deleteKey = cacheValue.substr(-1)
         cacheValue = cacheValue.substr(0, cacheValue.length - 1)
         emit('delete', {
-          type: 'delete',
           deleteKey
         })
         emit('update:modelValue', cacheValue)
@@ -245,7 +245,6 @@ export default defineComponent({
       cacheValue = ''
 
       emit('close', {
-        type: 'close',
         source
       })
     }

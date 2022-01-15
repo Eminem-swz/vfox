@@ -33,7 +33,7 @@ export function createUpdateInItem(name: string) {
  */
 export function useList(name: string, updateCallback: ListUpdateCallback) {
   const instance = getCurrentInstance()
-  const list = ref<HTMLElement>()
+  const listEl = ref<HTMLElement>()
   let updateTimer: number
 
   function doUpdate() {
@@ -68,9 +68,11 @@ export function useList(name: string, updateCallback: ListUpdateCallback) {
   provide(`fx${capitalize(name)}Update`, update)
 
   function getItems(): ListItemElement[] {
-    return list.value
+    return listEl.value
       ? [].slice.call(
-          list.value.querySelectorAll(`.fx-${camelCase2KebabCase(name)}-item`),
+          listEl.value.querySelectorAll(
+            `.fx-${camelCase2KebabCase(name)}-item`
+          ),
           0
         )
       : []
@@ -79,7 +81,7 @@ export function useList(name: string, updateCallback: ListUpdateCallback) {
   onBeforeUnmount(() => clearTimeout(updateTimer))
 
   return {
-    list,
+    listEl,
     getItems,
     update
   }

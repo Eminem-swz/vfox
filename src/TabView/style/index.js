@@ -1,4 +1,4 @@
-import '../../style/hairline.scss'
+import '../../style/common'
 import '../../Tab/style/index'
 import '../../SideTab/style/index'
 import '../../Swiper/style/index'

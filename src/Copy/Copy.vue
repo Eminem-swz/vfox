@@ -1,6 +1,6 @@
 <template>
   <div class="fx-copy" @click="onCopy">
-    <input type="text" :value="text" class="fx-copy_input" ref="input" />
+    <input type="text" :value="text" class="fx-copy_input" ref="inputEl" />
     <div class="fx-copy_box">
       <slot>{{ locale.copyText }}</slot>
     </div>
@@ -25,11 +25,11 @@ export default defineComponent({
     error: (e: Error) => e instanceof Error
   },
   setup(props, { emit }) {
-    const input = ref<HTMLInputElement>()
+    const inputEl = ref<HTMLInputElement>()
 
     function onCopy() {
       try {
-        const $el = input.value as HTMLInputElement
+        const $el = inputEl.value as HTMLInputElement
 
         $el.select()
         document.execCommand('Copy')
@@ -41,7 +41,7 @@ export default defineComponent({
     }
 
     return {
-      input,
+      inputEl,
       onCopy,
       locale
     }

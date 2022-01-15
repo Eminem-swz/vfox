@@ -1,3 +1,3 @@
-import '../../style/hairline.scss'
+import '../../style/common'
 import '../../Cell/style/index'
 import '../index.scss'

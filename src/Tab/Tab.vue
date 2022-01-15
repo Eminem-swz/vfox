@@ -6,7 +6,7 @@
       'has--sub': hasSub
     }"
   >
-    <ul class="fx-tab_list" ref="list">
+    <ul class="fx-tab_list" ref="listEl">
       <li
         class="fx-tab_item fx-vertical-hairline"
         :class="{
@@ -30,7 +30,7 @@
         }}</span>
       </li>
     </ul>
-    <span class="fx-tab_underline" ref="underline"></span>
+    <span class="fx-tab_underline" ref="underlineEl"></span>
   </div>
 </template>
 

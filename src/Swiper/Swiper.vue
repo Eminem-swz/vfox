@@ -5,7 +5,7 @@
     @click="onClick"
     ref="root"
   >
-    <div class="fx-swiper_list" ref="list">
+    <div class="fx-swiper_list" ref="listEl">
       <slot></slot>
     </div>
     <div
@@ -253,7 +253,7 @@ export default defineComponent({
     }
 
     function updateListStyle(transSize: number, duration = 0) {
-      const listStyle = (list.value as HTMLElement).style
+      const listStyle = (listEl.value as HTMLElement).style
 
       listStyle.transitionDuration = duration + 'ms'
       listStyle.transform = getTransformStyleValue(transSize)
@@ -376,7 +376,7 @@ export default defineComponent({
     ) {
       durationTimer = requestAnimationFrame(() => {
         const transform = window.getComputedStyle(
-          list.value as HTMLElement
+          listEl.value as HTMLElement
         ).transform
 
         const currentSize = transform
@@ -424,7 +424,7 @@ export default defineComponent({
      */
     function setSlideStyle() {
       const $root = root.value as HTMLElement
-      const $list = list.value as HTMLElement
+      const $list = listEl.value as HTMLElement
 
       const sizeName = directionGroup[2]
       itemSize = $root[('client' + sizeName) as 'clientWidth']
@@ -485,7 +485,7 @@ export default defineComponent({
       return $items[index] || null
     }
 
-    const { list, update } = useList('swiper', resetItems)
+    const { listEl, update } = useList('swiper', resetItems)
 
     useResizeDetector(root, () => update(50))
 
@@ -662,7 +662,7 @@ export default defineComponent({
 
     return {
       root,
-      list,
+      listEl,
       swipeTo,
       prev,
       next,

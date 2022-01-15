@@ -1,4 +1,4 @@
-export type ImageModes =
+export type ImageMode =
   | 'scaleToFill'
   | 'aspectFit'
   | 'aspectFill'

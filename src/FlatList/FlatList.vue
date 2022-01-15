@@ -64,23 +64,25 @@ import {
   isInNumberRange,
   isInteger,
   isNumber,
-  isNumberArray,
   rangeInteger
 } from '@/helpers/util'
 import Exception from '@/helpers/exception'
 import { getRelativeOffset } from '@/helpers/dom'
 import { useResizeDetector } from '@/hooks/use-resize-detector'
-import type {
-  ScrollToIndexOptions,
-  ScrollToOffsetOptions,
-  StyleObject
-} from '../helpers/types'
+import type { StyleObject, ViewPosition } from '../helpers/types'
+import type { ScrollToIndexOptions } from './types'
 import { locale } from '@/Locale'
-import type { OnRefreshing, OnScroll, PullDirection } from '../ScrollView/types'
+import type {
+  OnRefreshing,
+  OnScroll,
+  PullDirection,
+  ScrollToOptions
+} from '../ScrollView/types'
 import {
   emitRefreshingValidator,
   emitScrollValidator
 } from '@/ScrollView/scrollView'
+import { parseGutter, propGutter } from '@/Row/row'
 
 interface FlatItemElement extends HTMLElement {
   _recycled?: boolean
@@ -145,15 +147,7 @@ export default defineComponent({
       },
       default: 2
     },
-    itemGutter: {
-      validator: (val: number | number[]) => {
-        return (
-          isNumber(val) ||
-          (isNumberArray(val) && (val as number[]).length === 2)
-        )
-      },
-      default: 0
-    }
+    itemGutter: propGutter
   },
   emits: {
     'recycle-change': (payload: {
@@ -466,8 +460,8 @@ export default defineComponent({
     /**
      * 滚动列表到指定的偏移（以像素为单位）
      */
-    function scrollToOffset(options: ScrollToOffsetOptions) {
-      scrollView.value && scrollView.value.scrollToOffset(options)
+    function scrollToOffset(options: number | ScrollToOptions) {
+      scrollView.value?.scrollTo(options)
     }
 
     /**
@@ -476,25 +470,23 @@ export default defineComponent({
     function scrollToIndex(options: number | ScrollToIndexOptions) {
       let index: number
       let animated = true
+      let viewPosition: ViewPosition | undefined
 
-      if (isNumber(options)) {
-        index = options as number
+      if (typeof options === 'number') {
+        index = options
         options = {
           index
         }
       } else {
-        index = (options as ScrollToIndexOptions).index
-        animated = !((options as ScrollToIndexOptions).animated === false)
+        index = options.index
+        animated = !(options.animated === false)
+        viewPosition = options.viewPosition
       }
 
       const $view = getItemEls()[index]
 
       if ($view) {
-        const parentOffset = getRelativeOffset(
-          $view,
-          getRootEl(),
-          (options as ScrollToIndexOptions).viewPosition
-        )
+        const parentOffset = getRelativeOffset($view, getRootEl(), viewPosition)
 
         const offset =
           parentOffset[scrollX ? 'offsetLeft' : 'offsetTop'] +
@@ -529,13 +521,11 @@ export default defineComponent({
 
     const itemStyles = computed(() => {
       const styles: StyleObject = {}
-      const gutter: any = props.itemGutter
 
-      if (isNumberArray(gutter) && gutter.length === 2) {
-        styles.padding = `${gutter[1]}px ${gutter[0]}px`
-      } else if (isNumber(gutter) && gutter > 0) {
-        styles.padding = gutter + 'px'
-      }
+      styles.padding = parseGutter(props.itemGutter)
+        .reverse()
+        .map(v => `${v}px`)
+        .join(' ')
 
       return styles
     })
@@ -588,7 +578,7 @@ export default defineComponent({
       recordInteraction,
       onScroll,
       onScrollToLower,
-      scrollToOffset,
+      scrollTo: scrollToOffset,
       scrollToIndex,
       scrollToEnd,
       locale

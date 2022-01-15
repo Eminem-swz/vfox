@@ -1,7 +1,7 @@
 <template>
   <div class="fx-index-view">
     <div class="fx-index-view_sidebar">
-      <ul class="fx-index-view_list" ref="navigation">
+      <ul class="fx-index-view_list" ref="navEl">
         <li
           :class="{ active: item.value === activeIndex }"
           v-for="item in indexList"
@@ -31,7 +31,7 @@ import { defineComponent, onMounted, ref } from 'vue'
 import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
 import { rangeInteger } from '@/helpers/util'
-import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
+import type { ScrollToIndexOptions, ScrollToOptions } from '../StickyView/types'
 import { useTouch } from '@/hooks/use-touch'
 import type {
   OnChange as StickyViewOnChange,
@@ -52,7 +52,7 @@ export default defineComponent({
     change: emitChangeValidator
   },
   setup(props, { emit }) {
-    const navigation = ref<HTMLElement>()
+    const navEl = ref<HTMLElement>()
     const stickyView = ref<InstanceType<typeof StickyView>>()
     const indexList = ref<
       {
@@ -99,7 +99,7 @@ export default defineComponent({
     let changeTimer: number
 
     useTouch({
-      el: navigation,
+      el: navEl,
       onTouchStart(e) {
         const { clientY } = e.touchObject
 
@@ -173,7 +173,7 @@ export default defineComponent({
     onMounted(() => resetContainer(document))
 
     return {
-      navigation,
+      navEl,
       stickyView,
       activeIndex,
       indexList,

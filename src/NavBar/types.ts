@@ -3,9 +3,11 @@ import type { StateType } from '../helpers/types'
 
 export type ButtonOption = {
   text: string
-  icon: IconData
+  icon?: IconData
   type?: StateType
 }
+
+export type OnTitleDbClick = (titleEl: HTMLElement) => void
 
 export type OnButtonClick = (
   payload: {

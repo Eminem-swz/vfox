@@ -7,26 +7,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PropType } from 'vue'
-import { createEnumsValidator } from '@/helpers/validator'
-import { AVATAR_SHAPE_NAMES } from '@/Skeleton/skeleton'
+import { propAnimated, propAvatarShape } from '@/Skeleton/skeleton'
 import { useSubSkeleton } from '@/Skeleton/use-skeleton'
-import { AvatarShapeNames } from './types'
 
 export default defineComponent({
   name: 'fx-skeleton-avatar',
   props: {
     // 是否显示动画
-    animated: {
-      type: Boolean,
-      default: false
-    },
+    animated: propAnimated,
     // 指定头像的形状
-    shape: {
-      type: String as PropType<AvatarShapeNames>,
-      validator: createEnumsValidator(AVATAR_SHAPE_NAMES),
-      default: null
-    }
+    shape: propAvatarShape
   },
   setup(props) {
     const { shapeClassName, useAnimation } = useSubSkeleton(props, 'avatar')

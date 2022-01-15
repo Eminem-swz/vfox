@@ -61,8 +61,12 @@ export type {
   OnInput as SearchBarOnInput
 } from './SearchBar/types'
 export type {
+  OnScrollToUpper as ScrollViewOnScrollToUpper,
+  OnScrollToLower as ScrollViewOnScrollToLower,
   OnRefreshing as ScrollViewOnRefreshing,
-  OnScroll as ScrollViewOnScroll
+  OnScroll as ScrollViewOnScroll,
+  OnRefreshing as FlatListOnRefreshing,
+  OnScroll as FlatListOnScroll
 } from './ScrollView/types'
 export type {
   OnChange as TabOnChange,
@@ -85,6 +89,43 @@ export type {
 } from './StickyView/types'
 export type {
   ButtonOption as NavBarButtonOption,
-  OnButtonClick as NavBarOnButtonClick
+  OnButtonClick as NavBarOnButtonClick,
+  OnTitleDbClick as NavBarOnTitleDbClick
 } from './NavBar/types'
 export type { OnChange as PaginationOnChange } from './Pagination/types'
+export type {
+  AvatarShape as SkeletonAvatarShape,
+  ButtonShape as SkeletonButtonShape
+} from './Skeleton/types'
+export type {
+  ActiveName as CollapseActiveName,
+  OnChange as CollapseOnChange,
+  ItemOnToggle as CollapseItemOnToggle
+} from './Collapse/types'
+export type {
+  CountTime,
+  OnEnd as CountDownOnEnd,
+  OnPauseOrResume as CountDownOnPause,
+  OnPauseOrResume as CountDownOnResume
+} from './CountDown/types'
+export type {
+  OnCancel as CountUpOnCancel,
+  OnCancel as CountUpOnAnimated
+} from './CountUp/types'
+export type { OnStop as StopwatchOnStop } from './Stopwatch/types'
+export type {
+  OnEndReached as FlatListOnEndReached,
+  OnRecycleChange as FlatListOnRecycleChange
+} from './FlatList/types'
+export type {
+  OnDelete as NumberKeyboardOnDelete,
+  OnClose as NumberKeyboardOnClose
+} from './NumberKeyboard/types'
+export type {
+  Accept as ImageUploaderAccept,
+  BeforeUpload as ImageUploaderBeforeUpload,
+  UploadReady as ImageUploaderUploadReady,
+  OnDelete as ImageUploaderOnDelete
+} from './ImageUploader/types'
+export type { ImageMode } from './Image/types'
+export type { ViewPosition } from './helpers/types'

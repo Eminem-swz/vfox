@@ -4,7 +4,7 @@
     :class="{ disabled: !!disabled }"
     :style="styles"
   >
-    <div class="fx-slider_inner" ref="slider">
+    <div class="fx-slider_inner" ref="sliderEl">
       <div class="fx-slider_box">
         <div
           class="fx-slider_track"
@@ -75,41 +75,47 @@ export default defineComponent({
     const progressValue = reactive<number[]>([0, 0])
     const { emit } = ctx
 
-    const { slider, toInteger, rangeValue, value2Progress, getMinMax, styles } =
-      useSlide(props, {
-        getValue($target) {
-          const { thumb, index } = $target.dataset
+    const {
+      sliderEl,
+      toInteger,
+      rangeValue,
+      value2Progress,
+      getMinMax,
+      styles
+    } = useSlide(props, {
+      getValue($target) {
+        const { thumb, index } = $target.dataset
 
-          return thumb ? progressValue[parseInt(index as string)] : 0
-        },
-        move({ value: newVal, progress: newProgress, $target }) {
-          const { thumb } = $target.dataset
-          let index = 0
+        return thumb ? progressValue[parseInt(index as string)] : 0
+      },
+      move({ value: newVal, progress: newProgress, $target }) {
+        const { thumb } = $target.dataset
+        let index = 0
 
-          if (thumb) {
-            index = parseInt($target.dataset.index as string)
-          } else {
-            if (
-              Math.abs(progressValue[0] - newVal) >
-              Math.abs(progressValue[1] - newVal)
-            ) {
-              index = 1
-            }
+        if (thumb) {
+          index = parseInt($target.dataset.index as string)
+        } else {
+          if (
+            Math.abs(progressValue[0] - newVal) >
+            Math.abs(progressValue[1] - newVal)
+          ) {
+            index = 1
           }
-          if (!props.allowSameValue && newVal === progressValue[1 - index]) {
-            // 不允许重叠
-          } else {
-            progressValue[index] = newVal
-            progress[index] = newProgress
-
-            emitModel()
-            emit('input', getValue())
-          }
-        },
-        end({ isChange }) {
-          isChange && emit('change', getValue())
         }
-      })
+        if (!props.allowSameValue && newVal === progressValue[1 - index]) {
+          // 不允许重叠
+        } else {
+          progressValue[index] = newVal
+          progress[index] = newProgress
+
+          emitModel()
+          emit('input', getValue())
+        }
+      },
+      end({ isChange }) {
+        isChange && emit('change', getValue())
+      }
+    })
 
     function valueHandler(val: unknown) {
       let newVal: number[] = []
@@ -200,7 +206,7 @@ export default defineComponent({
 
     return {
       inputValue,
-      slider,
+      sliderEl,
       progress,
       progressValue,
       styles

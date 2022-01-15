@@ -7,26 +7,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PropType } from 'vue'
-import { createEnumsValidator } from '@/helpers/validator'
-import { BUTTON_SHAPE_NAMES } from '@/Skeleton/skeleton'
+import { propAnimated, propButtonShape } from '@/Skeleton/skeleton'
 import { useSubSkeleton } from '@/Skeleton/use-skeleton'
-import type { ButtonShapeNames } from './types'
 
 export default defineComponent({
   name: 'fx-skeleton-button',
   props: {
     // 是否显示动画
-    animated: {
-      type: Boolean,
-      default: false
-    },
+    animated: propAnimated,
     // 指定按钮的形状
-    shape: {
-      type: String as PropType<ButtonShapeNames>,
-      validator: createEnumsValidator(BUTTON_SHAPE_NAMES),
-      default: null
-    }
+    shape: propButtonShape
   },
   setup(props) {
     const { shapeClassName, useAnimation } = useSubSkeleton(props, 'button')

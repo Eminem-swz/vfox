@@ -1,4 +1,6 @@
+import { rootProps } from './skeleton'
 import { computed, ComputedRef, inject } from 'vue'
+import { ExtractPropTypes } from 'vue'
 import type { UseProps } from '../hooks/types'
 import { isNumber } from '@/helpers/util'
 import { getEnumsValue } from '@/helpers/validator'
@@ -8,14 +10,11 @@ import {
   paragraphDefaultRow
 } from '@/Skeleton/skeleton'
 
-interface SkeletonProps extends UseProps {
-  animated: boolean
-  avatarShape: string | null
-  buttonShape: string | null
-}
-
 export function useSubSkeleton(props: UseProps, subName: string) {
-  const skeletonProps = inject<SkeletonProps | null>('fxSkeletonProps', null)
+  const skeletonProps = inject<ExtractPropTypes<typeof rootProps> | null>(
+    'fxSkeletonProps',
+    null
+  )
 
   let shapeClassName: ComputedRef<string> | null = null
   let paragraphSize: ComputedRef<number> | null = null
@@ -51,7 +50,7 @@ export function useSubSkeleton(props: UseProps, subName: string) {
   }
 
   const useAnimation: ComputedRef<boolean> = computed(() => {
-    return skeletonProps?.animated ?? props.animated
+    return skeletonProps?.animated ?? !!props.animated
   })
 
   return {

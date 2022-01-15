@@ -10,7 +10,7 @@
     </div>
     <div class="fx-notice-bar_content">
       <div
-        ref="content"
+        ref="contentEl"
         class="fx-notice-bar_content-inner"
         :class="{ marquee: !!marquee }"
         :style="contentStyles"
@@ -117,7 +117,7 @@ export default defineComponent({
     const visible2 = ref(!!props.visible)
     const marqueeX = ref(0)
     const marqueeDuration = ref(0)
-    const content = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
     let marqueeTimer: number
 
     function marqueeStep(x: number, pW: number) {
@@ -144,7 +144,7 @@ export default defineComponent({
     function startMarquee() {
       stopMarquee()
 
-      const $content = content.value as HTMLElement
+      const $content = contentEl.value as HTMLElement
 
       const w = $content.offsetWidth
       const pW = ($content.parentElement as HTMLElement).offsetWidth
@@ -236,7 +236,7 @@ export default defineComponent({
     return {
       show,
       hide,
-      content,
+      contentEl,
       visible2,
       rightIcon2,
       styles,

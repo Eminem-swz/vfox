@@ -1,5 +1,5 @@
 <template>
-  <div class="fx-steps" :class="{ dot, horizontal }" ref="list">
+  <div class="fx-steps" :class="{ dot, horizontal }" ref="listEl">
     <slot></slot>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default defineComponent({
       typeof activeIndex === 'number'
   },
   setup(props, { emit }) {
-    const { list } = useList('steps', $items => {
+    const { listEl } = useList('steps', $items => {
       if (props.activeIndex >= $items.length) {
         emit('update:activeIndex', $items.length - 1)
       }
@@ -37,7 +37,7 @@ export default defineComponent({
 
     provide(`fxStepsActiveIndex`, toRef(props, 'activeIndex'))
 
-    return { list }
+    return { listEl }
   }
 })
 </script>

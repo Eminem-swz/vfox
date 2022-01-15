@@ -40,7 +40,7 @@ export function usePopover(
   ctx: SetupContext<typeof popoverEmits>
 ) {
   const padding = 8
-  const inner = ref<HTMLElement>()
+  const innerEl = ref<HTMLElement>()
   const isShow = ref(false)
   let pos = cloneData<PopoverPos>(DEFAULT_POS)
 
@@ -70,7 +70,7 @@ export function usePopover(
     const placement = getEnumsValue(PLACEMENT_TYPES, props.placement)
 
     const rect = $target.getBoundingClientRect()
-    const { clientWidth: iw, clientHeight: ih } = inner.value as HTMLElement
+    const { clientWidth: iw, clientHeight: ih } = innerEl.value as HTMLElement
     const { clientWidth: dw, clientHeight: dh } = document.documentElement
 
     pos = Object.assign(cloneData(DEFAULT_POS), { mw: dw - 16, mh: dh - 16 })
@@ -169,7 +169,7 @@ export function usePopover(
 
   return {
     ...popup,
-    inner,
+    innerEl,
     arrowStyles,
     innerStyles
   }

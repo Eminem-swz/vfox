@@ -5,9 +5,9 @@
       class="fx-fixed_inner"
       :class="[placementClassName]"
       :style="fixedStyles"
-      ref="inner"
+      ref="innerEl"
     >
-      <div class="fx-fixed_content-wrapper" ref="content">
+      <div class="fx-fixed_content-wrapper" ref="contentEl">
         <slot></slot>
       </div>
     </div>
@@ -74,8 +74,8 @@ export default defineComponent({
   },
   setup(props) {
     const root = ref<HTMLElement>()
-    const inner = ref<HTMLElement>()
-    const content = ref<HTMLElement>()
+    const innerEl = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
     const disableFixed = inject('disableFixed', false)
 
     const safeAreaInsets = useSafeAreaInsets(
@@ -83,16 +83,16 @@ export default defineComponent({
     )
 
     function updateSize() {
-      if (!(root.value && inner.value && content.value)) {
+      if (!(root.value && innerEl.value && contentEl.value)) {
         return
       }
 
-      const { offsetWidth, offsetHeight } = content.value
+      const { offsetWidth, offsetHeight } = contentEl.value
 
       if (offsetWidth === 0 || offsetHeight === 0) {
         root.value.style.width = ''
         root.value.style.height = ''
-        removeClassName(inner.value, 'fixed')
+        removeClassName(innerEl.value, 'fixed')
         return
       }
 
@@ -102,8 +102,8 @@ export default defineComponent({
         props.fixed && props.spaceHold ? offsetHeight + 'px' : ''
 
       props.fixed
-        ? addClassName(inner.value, 'fixed')
-        : removeClassName(inner.value, 'fixed')
+        ? addClassName(innerEl.value, 'fixed')
+        : removeClassName(innerEl.value, 'fixed')
     }
 
     const placementClassName = computed(
@@ -128,12 +128,12 @@ export default defineComponent({
       return styles
     })
 
-    useResizeDetector(content, updateSize)
+    useResizeDetector(contentEl, updateSize)
 
     useFixed({
       disableFixed,
       root,
-      inner,
+      inner: innerEl,
       fixed: computed(() => props.fixed)
     })
 
@@ -145,8 +145,8 @@ export default defineComponent({
 
     return {
       root,
-      inner,
-      content,
+      innerEl,
+      contentEl,
       placementClassName,
       fixedStyles,
       safeAreaInsets

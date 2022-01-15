@@ -29,7 +29,7 @@ import { SideTab } from '@/SideTab'
 import { Sticky } from '@/Sticky'
 import { StickyView } from '@/StickyView'
 import { sizeValidator } from '@/helpers/validator'
-import type { ScrollToIndexOptions, ScrollToOptions } from '../helpers/types'
+import type { ScrollToIndexOptions, ScrollToOptions } from '../StickyView/types'
 import type { OnChange as StickyViewOnChange } from '../StickyView/types'
 import { emitChangeValidator } from '@/StickyView/stickyView'
 

@@ -101,12 +101,12 @@ import { FlatList } from 'vfox'
 
 ## Methods
 
-| 方法名            | 说明                                                 | 参数                                                                 |
-| ----------------- | ---------------------------------------------------- | -------------------------------------------------------------------- |
-| scrollToIndex     | 将位于指定位置的元素滚动到可视区的指定位置           | ({ index: number, animated: boolean, viewPosition: string }) => void |
-| scrollToOffset    | 滚动列表到指定的偏移，单位 px                        | ({ offset: number, animated: boolean }) => void                      |
-| scrollToEnd       | 滚动到底部                                           | ({ animated: boolean }) => void                                      |
-| recordInteraction | 主动通知列表发生了一个事件，以使列表重新计算可视区域 | () => void                                                           |
+| 方法名            | 说明                                                 | 参数                                                                       |
+| ----------------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| scrollToIndex     | 将位于指定位置的元素滚动到可视区的指定位置           | ({ index: number, animated: boolean, viewPosition: ViewPosition }) => void |
+| scrollTo          | 滚动列表到指定的偏移，单位 px                        | ({ offset: number, animated: boolean }) => void                            |
+| scrollToEnd       | 滚动到底部                                           | ( animated: boolean ) => void                                              |
+| recordInteraction | 主动通知列表发生了一个事件，以使列表重新计算可视区域 | () => void                                                                 |
 
 ### scrollToIndex 的参数
 

@@ -1,3 +1,4 @@
+import '../../style/common'
 import '../../SideTab/style/index'
 import '../../Sticky/style/index'
 import '../../StickyView/style/index'

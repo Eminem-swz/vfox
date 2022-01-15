@@ -1,3 +1,4 @@
-import '../../style/hairline.scss'
+import '../../style/common'
+import '../../style/common'
 import '../../ActivityIndicator/style/index'
 import '../index.scss'

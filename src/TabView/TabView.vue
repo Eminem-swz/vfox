@@ -13,7 +13,7 @@
         :scroll-threshold="scrollThreshold"
       />
     </div>
-    <div class="fx-tab-view_body" ref="list">
+    <div class="fx-tab-view_body" ref="listEl">
       <Swiper
         v-model:activeIndex="activeIndex"
         @change="onChange"
@@ -86,7 +86,7 @@ export default defineComponent({
       })
     }
 
-    const { list } = useList('tabView', resetItems)
+    const { listEl } = useList('tabView', resetItems)
 
     const onChange: SwiperOnChange = res => {
       emit('change', res)
@@ -133,7 +133,7 @@ export default defineComponent({
       activeIndex,
       tabList,
       vertical,
-      list,
+      listEl,
       swiper,
       onChange,
       onAnimated,

@@ -22,8 +22,8 @@ export function useTab(
   { tabName }: UseOptions
 ) {
   const instance = getCurrentInstance() as ComponentInternalInstance
-  const list = ref<HTMLElement>()
-  const underline = ref<HTMLElement>()
+  const listEl = ref<HTMLElement>()
+  const underlineEl = ref<HTMLElement>()
   const options2 = ref<HandleOptionItem[]>([])
   const activeIndex = ref(-1)
   const hasSub = ref(false)
@@ -190,9 +190,11 @@ export function useTab(
         return
       }
 
-      const $list = list.value as HTMLElement
-      const $activeItem = $list?.children[activeIndex.value] as HTMLElement
-
+      if (!listEl.value) {
+        return
+      }
+      const $list = listEl.value
+      const $activeItem = $list.children[activeIndex.value] as HTMLElement
       if (!$activeItem) {
         return
       }
@@ -233,14 +235,13 @@ export function useTab(
         }
       })
 
-      if (tabName === 'Tab' && underline.value) {
-        const $underline = underline.value
+      if (tabName === 'Tab' && underlineEl.value) {
         const $inner = $activeItem.querySelector(
           '.fx-tab_item-inner'
         ) as HTMLElement
 
-        $underline.style.width = $inner.offsetWidth + 'px'
-        $underline.style.transform = `translate3d(${
+        underlineEl.value.style.width = $inner.offsetWidth + 'px'
+        underlineEl.value.style.transform = `translate3d(${
           ofs - to + ($activeItem.offsetWidth - $inner.offsetWidth) / 2
         }px, 0, 0)`
       }
@@ -249,7 +250,7 @@ export function useTab(
 
   watch(
     () => props.activeValue,
-    val => val && switchTo(val, true)
+    val => val != null && switchTo(val, true)
   )
 
   watch(() => props.options, updateOptions, {
@@ -267,8 +268,8 @@ export function useTab(
   })
 
   return {
-    list,
-    underline,
+    listEl,
+    underlineEl,
     activeIndex,
     hasSub,
     options2,

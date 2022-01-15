@@ -47,7 +47,7 @@ import {
   iconValidator
 } from '@/helpers/validator'
 import type { TypeException } from '../helpers/types'
-import type { ImageModes, ImageOnLoadPayLoad } from './types'
+import type { ImageMode, ImageOnLoadPayLoad } from './types'
 
 const MODE_NAMES = [
   'scaleToFill',
@@ -76,7 +76,7 @@ export default defineComponent({
       default: ''
     },
     mode: {
-      type: String as PropType<ImageModes>,
+      type: String as PropType<ImageMode>,
       validator: createEnumsValidator(MODE_NAMES),
       default: null
     },

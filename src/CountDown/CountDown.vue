@@ -23,6 +23,11 @@
 import { defineComponent, watch } from 'vue'
 import { useCountTime } from '@/CountDown/use-count-time'
 import { locale } from '@/Locale'
+import type { OnEnd, OnPauseOrResume } from './types'
+import type { VoidFnToBooleanFn, FnArgs } from '../helpers/types'
+
+const pauseOrResumeValidator: VoidFnToBooleanFn<OnPauseOrResume> = payload =>
+  payload && typeof payload.remainTime === 'number'
 
 export default defineComponent({
   name: 'fx-count-down',
@@ -45,14 +50,12 @@ export default defineComponent({
   },
   emits: {
     'update:timestamp': (timestamp: number) => typeof timestamp === 'number',
-    end: (payload: { type: string; startTime: number; endTime: number }) =>
+    end: (payload: FnArgs<OnEnd>[0]) =>
       payload &&
       typeof payload.startTime === 'number' &&
       typeof payload.endTime === 'number',
-    pause: (payload: { type: string; remainTime: number }) =>
-      payload && typeof payload.remainTime === 'number',
-    resume: (payload: { type: string; remainTime: number }) =>
-      payload && typeof payload.remainTime === 'number'
+    pause: pauseOrResumeValidator,
+    resume: pauseOrResumeValidator
   },
   setup(props, { emit }) {
     let startTime = 0
@@ -70,7 +73,6 @@ export default defineComponent({
         update(remainTime)
         emit('update:timestamp', remainTime)
         emit('end', {
-          type: 'end',
           startTime,
           endTime: expiredTime
         })
@@ -106,14 +108,12 @@ export default defineComponent({
       val => {
         if (val) {
           emit('pause', {
-            type: 'pause',
             remainTime
           })
 
           countTime.stop()
         } else {
           emit('resume', {
-            type: 'resume',
             remainTime
           })
 

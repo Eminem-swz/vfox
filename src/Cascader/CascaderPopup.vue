@@ -17,7 +17,7 @@
         v-model:activeValue="tabIndex"
       />
     </template>
-    <div ref="dropdown" class="fx-cascader_groups">
+    <div class="fx-cascader_groups">
       <div
         class="fx-cascader_group fx-vertical-hairline"
         v-for="(list, listIndex) in cols"
@@ -85,7 +85,6 @@ export default defineComponent({
     const selectedTabs = ref<SelectedTabs[]>([])
     const tabs = ref<TabOptionItem[]>([])
     const tabIndex = ref(0)
-    const dropdown = ref<HTMLElement>()
 
     const popup = usePopupExtend<SelectorDetail>(ctx)
 
@@ -172,7 +171,6 @@ export default defineComponent({
       tabIndex,
       tabs,
       ...popup,
-      dropdown,
       cols,
       getDetail,
       updateValue,

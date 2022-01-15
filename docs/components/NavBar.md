@@ -31,13 +31,22 @@ import { NavBar } from 'vfox'
 
 ## Events
 
-| 事件               | 描述                                 | 回调函数参数                        |
-| ------------------ | ------------------------------------ | ----------------------------------- |
-| back-click         | 返回按钮点击时出发                   |                                     |
-| home-click         | 到首页按钮点击时触发                 |                                     |
-| title-click        | 标题双击时触发，可配合做双击返回顶部 |                                     |
-| left-button-click  | 左侧按钮点击时触发                   | { index: number, { text: string } } |
-| right-button-click | 右侧按钮点击时触发                   | { index: number, { text: string } } |
+| 事件               | 描述                                 | 回调函数参数                            | TypeScript 函数      |
+| ------------------ | ------------------------------------ | --------------------------------------- | -------------------- |
+| back-click         | 返回按钮点击时出发                   | payload: Payload, buttonEl: HTMLElement | NavBarOnButtonClick  |
+| home-click         | 到首页按钮点击时触发                 | payload: Payload, buttonEl: HTMLElement | NavBarOnButtonClick  |
+| title-dbclick      | 标题双击时触发，可配合做双击返回顶部 | titleEl: HTMLElement                    | NavBarOnTitleDbClick |
+| left-button-click  | 左侧按钮点击时触发                   | payload: Payload, buttonEl: HTMLElement | NavBarOnButtonClick  |
+| right-button-click | 右侧按钮点击时触发                   | payload: Payload, buttonEl: HTMLElement | NavBarOnButtonClick  |
+
+```
+type Payload = {
+  item: {
+    text: string
+  }
+  index: number
+}
+```
 
 ### left-button-click/right-button-click 的回调参数
 

@@ -28,6 +28,8 @@ import { getCountTime } from '@/CountDown/count-time'
 import { useCountTime } from '@/CountDown/use-count-time'
 import { cloneData } from '@/helpers/util'
 import { emitTypeValidator } from '@/helpers/validator'
+import type { FnArgs } from '../helpers/types'
+import type { OnStop } from './types'
 
 export default defineComponent({
   name: 'fx-stopwatch',
@@ -46,7 +48,7 @@ export default defineComponent({
   emits: {
     start: emitTypeValidator,
     reset: emitTypeValidator,
-    stop: (payload: { type: string; detail: CountTime; laps: CountTime[] }) =>
+    stop: (payload: FnArgs<OnStop>[0]) =>
       payload && payload.detail && Array.isArray(payload.laps)
   },
   setup(props, { emit }) {
@@ -69,7 +71,6 @@ export default defineComponent({
         _laps.push(getNextLap())
 
         emit('stop', {
-          type: 'stop',
           detail: getCountTime(time),
           laps: _laps
         })

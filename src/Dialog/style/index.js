@@ -1,4 +1,4 @@
-import '../../style/hairline.scss'
+import '../../style/common'
 import '../../Button/style/index'
 import '../../ButtonGroup/style/index'
 import '../../Modal/style/index'

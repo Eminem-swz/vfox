@@ -4,3 +4,11 @@ export interface StickyViewItem {
 }
 
 export type OnChange = (payload: { activeIndex: number }) => void
+
+export interface ScrollToOptions {
+  offset: number
+}
+
+export interface ScrollToIndexOptions {
+  index: number
+}

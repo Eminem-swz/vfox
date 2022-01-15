@@ -15,3 +15,13 @@ export type OnRefreshing = (
   },
   loadComplete: () => void
 ) => void
+
+export type OnScrollToUpper = (payload: { direction: 'top' | 'left' }) => void
+export type OnScrollToLower = (payload: {
+  direction: 'bottom' | 'right'
+}) => void
+
+export interface ScrollToOptions {
+  offset: number
+  animated?: boolean
+}

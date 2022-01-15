@@ -1,6 +1,6 @@
 <template>
   <div class="fx-sticky" :style="styles" ref="root">
-    <div class="fx-sticky_content" ref="content">
+    <div class="fx-sticky_content" ref="contentEl">
       <slot></slot>
     </div>
   </div>
@@ -44,7 +44,7 @@ export default defineComponent({
   },
   setup(props) {
     const root = ref<HTMLElement>()
-    const content = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
     const width = ref<number | null>(null)
     const height = ref<number | null>(null)
     const disableFixed = inject('disableFixed', false)
@@ -53,7 +53,7 @@ export default defineComponent({
     useFixed({
       disableFixed,
       root,
-      inner: content,
+      inner: contentEl,
       fixed
     })
 
@@ -89,7 +89,7 @@ export default defineComponent({
 
     function updateStyles(isFixed: boolean) {
       const $root = root.value as HTMLElement
-      const styles = (content.value as HTMLElement).style
+      const styles = (contentEl.value as HTMLElement).style
 
       if (isFixed) {
         const { offsetTop } = getRelativeOffset($container)
@@ -146,7 +146,7 @@ export default defineComponent({
     return {
       root,
       fixed,
-      content,
+      contentEl,
       styles,
       resetContainer
     }

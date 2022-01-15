@@ -1,4 +1,5 @@
-import '../../style/popup.scss'
+import '../../style/common'
+import '../../style/popup'
 import '../../Icon/style/index'
 import '../../ActivityIndicator/style/index'
 import '../index.scss'

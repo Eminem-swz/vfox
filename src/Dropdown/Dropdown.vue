@@ -6,7 +6,7 @@
       :style="popupStyles"
       v-bind="$attrs"
       v-show="isShow"
-      ref="popup"
+      ref="popupEl"
     >
       <div class="fx-mask" @click="onMaskClick"></div>
       <div class="fx-dropdown_inner">
@@ -38,7 +38,7 @@ export default defineComponent({
   setup(props, ctx) {
     const top = ref(-1)
     const height = ref(0)
-    const popup = ref<HTMLElement>()
+    const popupEl = ref<HTMLElement>()
 
     function updatePos() {
       const $target = querySelector(props.selector as DomSelector)
@@ -58,7 +58,7 @@ export default defineComponent({
 
       top.value = bottom
       nextTick(() => {
-        height.value = popup.value ? popup.value.offsetHeight : 0
+        height.value = popupEl.value?.offsetHeight ?? 0
       })
     }
 
@@ -81,7 +81,7 @@ export default defineComponent({
       popupStyles,
       top,
       height,
-      popup
+      popupEl
     }
   }
 })

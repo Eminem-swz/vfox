@@ -8,7 +8,7 @@
       }"
     >
       <slot></slot>
-      <div class="fx-swipe-cell_buttons" ref="buttonEls">
+      <div class="fx-swipe-cell_buttons" ref="buttonsEl">
         <button
           class="fx-swipe-cell_button"
           :class="['type--' + item.type]"
@@ -73,7 +73,7 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const root = ref<HTMLElement>()
-    const buttonEls = ref<HTMLElement>()
+    const buttonsEl = ref<HTMLElement>()
     const translateX = ref(0)
     const duration = ref(0)
     const buttonTranslateXs = reactive<number[]>([])
@@ -137,7 +137,7 @@ export default defineComponent({
 
         coords = {
           startX: e.touchObject.clientX,
-          buttonsW: (buttonEls.value as HTMLElement).clientWidth,
+          buttonsW: (buttonsEl.value as HTMLElement).clientWidth,
           isShow: translateX.value > 0,
           isSwipe: false
         }
@@ -167,7 +167,7 @@ export default defineComponent({
 
         const max = rangeNumber(x, 0, buttonsW)
 
-        const $children = (buttonEls.value as HTMLElement).children
+        const $children = (buttonsEl.value as HTMLElement).children
 
         for (let i = 0, len = $children.length; i < len; i++) {
           buttonTranslateXs[i] =
@@ -200,7 +200,7 @@ export default defineComponent({
 
     return {
       root,
-      buttonEls,
+      buttonsEl,
       buttonTranslateXs,
       translateX,
       duration,

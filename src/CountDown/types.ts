@@ -8,3 +8,6 @@ export interface CountTime {
   seconds: string
   milliseconds: string
 }
+
+export type OnPauseOrResume = (payload: { remainTime: number }) => void
+export type OnEnd = (payload: { startTime: number; endTime: number }) => void

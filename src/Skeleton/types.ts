@@ -1,3 +1,3 @@
-export type AvatarShapeNames = 'default' | 'circle'
+export type AvatarShape = 'default' | 'circle'
 
-export type ButtonShapeNames = 'default' | 'round'
+export type ButtonShape = 'default' | 'round'

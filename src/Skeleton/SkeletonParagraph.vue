@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent, ComputedRef } from 'vue'
-import { paragraphDefaultRow } from '@/Skeleton/skeleton'
 import { useSubSkeleton } from '@/Skeleton/use-skeleton'
 
 export default defineComponent({
@@ -19,8 +18,7 @@ export default defineComponent({
     },
     // 设置段落占位图的行数
     row: {
-      type: Number,
-      default: paragraphDefaultRow
+      type: Number
     }
   },
   setup(props) {

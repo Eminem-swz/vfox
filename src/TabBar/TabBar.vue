@@ -1,6 +1,6 @@
 <template>
   <div class="fx-tab-bar fx-horizontal-hairline" :style="styles">
-    <ul class="fx-tab-bar_list" ref="list">
+    <ul class="fx-tab-bar_list" ref="listEl">
       <li
         class="fx-tab-bar_item"
         :class="{

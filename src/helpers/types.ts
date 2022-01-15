@@ -8,21 +8,7 @@ export type AnyObject = Record<string, any>
 export type EmptyObject = Record<string, never>
 export type StyleObject = Record<string, string>
 
-/**
- * Scroll
- */
-export interface ScrollToOptions {
-  offset: number
-}
-export interface ScrollToIndexOptions {
-  index: number
-  animated?: boolean
-  viewPosition?: string | number
-}
-export interface ScrollToOffsetOptions {
-  offset: number
-  animated?: boolean
-}
+export type ViewPosition = 'start' | 'center' | 'end' | 0 | 0.5 | 1
 
 export interface Validator<T = unknown> {
   (value: T): boolean

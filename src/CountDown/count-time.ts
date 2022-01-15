@@ -1,5 +1,5 @@
 import { thousands } from '@/helpers/util'
-import { CountTime } from './types'
+import type { CountTime } from './types'
 
 function formatNumber(num: number) {
   return (num > 9 ? '' : '0') + num

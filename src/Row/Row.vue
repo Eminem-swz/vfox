@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, provide, reactive, watch } from 'vue'
+import { computed, defineComponent, provide, ref, watch } from 'vue'
 import type { PropType } from 'vue'
-import { isNumeric } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { createEnumsValidator } from '@/helpers/validator'
+import { parseGutter, propGutter } from '@/Row/row'
 
 type JustifyType = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
 const JUSTIFY_TYPE: JustifyType[] = [
@@ -26,19 +26,7 @@ export default defineComponent({
   name: 'fx-row',
   props: {
     // 栅格间隔
-    gutter: {
-      type: [Number, String, Array] as PropType<number | string | number[]>,
-      validator: (value: number | string | number[]) => {
-        if (Array.isArray(value) && typeof value[0] === 'number') {
-          return true
-        } else if (isNumeric(value)) {
-          return true
-        }
-
-        return false
-      },
-      default: 0
-    },
+    gutter: propGutter,
     // 水平排列方式
     justify: {
       type: String as PropType<JustifyType>,
@@ -53,10 +41,10 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const gutter = reactive([0, 0])
+    const gutter = ref([0, 0])
 
     const styles = computed(() => {
-      const [gH, gV] = gutter
+      const [gH, gV] = gutter.value
       const styles: StyleObject = {}
 
       if (gH > 0 || gV > 0) {
@@ -80,13 +68,7 @@ export default defineComponent({
     watch(
       () => props.gutter,
       val => {
-        if (isNumeric(val)) {
-          gutter[0] = Math.max(0, parseFloat(val as string))
-          gutter[1] = 0
-        } else if (Array.isArray(val)) {
-          val[0] >= 0 && (gutter[0] = val[0])
-          val[1] >= 0 && (gutter[1] = val[1])
-        }
+        gutter.value = parseGutter(val)
       },
       {
         immediate: true

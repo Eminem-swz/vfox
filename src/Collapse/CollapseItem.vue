@@ -12,7 +12,7 @@
     <div
       class="fx-collapse-item_body fx-horizontal-hairline"
       style="display: none"
-      ref="body"
+      ref="bodyEl"
     >
       <div class="fx-collapse-item_content">
         <slot></slot>
@@ -33,6 +33,8 @@ import { Cell } from '@/Cell'
 import { iconValidator } from '@/helpers/validator'
 import { useGroupItem } from '@/hooks/use-group'
 import Exception from '@/helpers/exception'
+import type { ItemOnToggle } from './types'
+import type { FnArgs } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-collapse-item',
@@ -56,12 +58,12 @@ export default defineComponent({
     }
   },
   emits: {
-    toggle: (payload: { name: string; type: string; spread: boolean }) =>
+    toggle: (payload: FnArgs<ItemOnToggle>[0]) =>
       payload && typeof payload.spread === 'boolean'
   },
   setup(props, { emit }) {
     const active = ref(false)
-    const body = ref<HTMLElement>()
+    const bodyEl = ref<HTMLElement>()
     const onChange = inject('fxCollapseChange', collapseItemChange)
     const instance = getCurrentInstance() as ComponentInternalInstance
 
@@ -83,7 +85,7 @@ export default defineComponent({
 
       clearTimeout(visibleTimer)
 
-      const $body = body.value as HTMLElement
+      const $body = bodyEl.value as HTMLElement
 
       $body.style.cssText = 'position: absolute; opacity: 0;'
       const contentHeight = $body.getBoundingClientRect().height
@@ -110,7 +112,7 @@ export default defineComponent({
 
       clearTimeout(visibleTimer)
 
-      const $body = body.value as HTMLElement
+      const $body = bodyEl.value as HTMLElement
       $body.style.cssText = `height: ${$body.getBoundingClientRect().height}px;`
 
       visibleTimer = window.setTimeout(() => {
@@ -129,7 +131,6 @@ export default defineComponent({
     function emitToggle(spread: boolean) {
       emit('toggle', {
         name: props.name,
-        type: 'toggle',
         spread
       })
     }
@@ -148,7 +149,7 @@ export default defineComponent({
 
     return {
       active,
-      body,
+      bodyEl,
       onClick
     }
   }

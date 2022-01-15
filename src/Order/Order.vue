@@ -38,7 +38,7 @@
     :showMask="false"
     @visibleStateChange="onVisibleStateChange"
   >
-    <div class="fx-order_delete-button" ref="deleteButton">
+    <div class="fx-order_delete-button" ref="deleteButtonEl">
       <Icon icon="DeleteOutlined" />
       <span>{{
         deleting
@@ -137,7 +137,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const root = ref<HTMLElement>()
-    const deleteButton = ref<HTMLElement>()
+    const deleteButtonEl = ref<HTMLElement>()
     const positions = reactive<Position[]>([])
     const dragOn = ref(false)
     const dragCurrent = ref(-1)
@@ -378,7 +378,7 @@ export default defineComponent({
 
     const onVisibleStateChange: OnVisibleStateChange = e => {
       if (e.state === 'shown') {
-        const rects = (deleteButton.value as HTMLElement).getClientRects()[0]
+        const rects = (deleteButtonEl.value as HTMLElement).getClientRects()[0]
 
         deleteAreaY = rects.top
       }
@@ -512,7 +512,7 @@ export default defineComponent({
 
     return {
       root,
-      deleteButton,
+      deleteButtonEl,
       dragOn,
       dragCurrent,
       dragDelete,

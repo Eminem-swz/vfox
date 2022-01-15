@@ -1,4 +1,4 @@
-import '../../style/hairline.scss'
+import '../../style/common'
 import '../../Image/style/index'
 import '../../Icon/style/index'
 import '../../Badge/style/index'

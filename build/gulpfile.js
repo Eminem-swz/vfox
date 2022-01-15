@@ -22,7 +22,7 @@ function copySass() {
 
 function copyStyle() {
   return gulp
-    .src('../src/**/style/index.js')
+    .src(['../src/**/style/*.js'])
     .pipe(replace('.scss', '.css'))
     .pipe(gulp.dest('../es'))
 }

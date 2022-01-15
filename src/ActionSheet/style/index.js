@@ -1,3 +1,3 @@
-import '../../style/hairline.scss'
+import '../../style/common'
 import '../../Drawer/style/index'
 import '../index.scss'

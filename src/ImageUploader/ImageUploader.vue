@@ -91,12 +91,19 @@ import {
 } from '@/helpers/util'
 import { formatFileSize } from '@/helpers/file'
 import { formItemProps } from '@/Form/form'
-import type { ImageModes } from '../Image/types'
+import type { ImageMode } from '../Image/types'
 import { locale } from '@/Locale'
 import type { OrderOnDeleteArgs } from '../Order/types'
-
-type Accept = 'all' | 'png' | 'jpeg' | 'jpg' | 'webp'
-type UploadStatus = 'reading' | 'uploading' | 'uploaded' | 'failed'
+import type {
+  BeforeUpload,
+  UploadReady,
+  UploadHandlers,
+  Accept,
+  UploadStatus,
+  OnDelete,
+  BeforeUploadReturn
+} from './types'
+import type { FnArgs } from '../helpers/types'
 
 interface FileItem {
   id: number
@@ -112,18 +119,6 @@ interface AddButton {
 }
 
 type Options = (FileItem | AddButton)[]
-
-interface BeforeUploadHandlers {
-  formatSize(size: number): string
-}
-
-interface UploadHandlers {
-  getUploadId(): number
-  formatSize(size: number): string
-  setUploading(message: string): void
-  fail(e?: string | Error): void
-  success(url: string): void
-}
 
 const ACCEPT_TYPES = new Map([
   ['all', 'image/*'],
@@ -176,8 +171,8 @@ export default defineComponent({
     },
     // 允许上传的图片类型
     accept: {
-      type: [String, Array] as PropType<Accept | Accept[]>,
-      validator: (val: Accept | Accept[]) => getAccepts(val).length > 0,
+      type: [String, Array] as PropType<string | Accept[]>,
+      validator: (val: string | Accept[]) => getAccepts(val).length > 0,
       default: 'all'
     },
     // 多少列展示
@@ -206,24 +201,17 @@ export default defineComponent({
     },
     // 图片填充模式
     imageMode: {
-      type: String as PropType<ImageModes>,
+      type: String as PropType<ImageMode>,
       default: 'aspectFill'
     },
     // 上传前处理函数，主要是判断大小，压缩等
     beforeUpload: {
-      type: Function as PropType<
-        (
-          file: File,
-          handlers: BeforeUploadHandlers
-        ) => boolean | Promise<boolean>
-      >,
+      type: Function as PropType<BeforeUpload>,
       default: () => true
     },
     // 上传函数，在该函数内处理上传过程
     uploadReady: {
-      type: Function as PropType<
-        (file: File, handlers: UploadHandlers) => void
-      >,
+      type: Function as PropType<UploadReady>,
       default: () => true
       // required: true
     }
@@ -231,15 +219,8 @@ export default defineComponent({
   emits: {
     'update:modelValue': isValue,
     change: isValue,
-    delete: (payload: {
-      type: string
-      index: number
-      item: {
-        id: number
-        status: UploadStatus
-        url: string | null
-      }
-    }) => payload && typeof payload.index === 'number'
+    delete: (payload: FnArgs<OnDelete>[0]) =>
+      payload && typeof payload.index === 'number'
   },
   setup(props, ctx) {
     const { emit } = ctx
@@ -295,8 +276,10 @@ export default defineComponent({
       props.uploadReady(file, createUploadHandlers(fileItem.id))
     }
 
-    function beforePromise(res: boolean | Promise<boolean>) {
-      if (typeof res === 'boolean') {
+    function beforePromise(res: BeforeUploadReturn) {
+      if (res == null) {
+        return Promise.resolve(true)
+      } else if (typeof res === 'boolean') {
         return Promise.resolve(res)
       } else if (isPromiseLike(res)) {
         return (res as Promise<boolean | File>)
@@ -519,7 +502,6 @@ export default defineComponent({
 
       fileItem &&
         emit('delete', {
-          type: 'delete',
           index,
           item: {
             id: fileItem.id,

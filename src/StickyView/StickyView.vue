@@ -1,6 +1,6 @@
 <template>
   <div class="fx-sticky-view" ref="root">
-    <div class="fx-sticky-view_list" ref="list">
+    <div class="fx-sticky-view_list" ref="listEl">
       <slot></slot>
     </div>
     <Sticky
@@ -10,7 +10,7 @@
       class="fx-sticky-view_top"
       ref="sticky"
     >
-      <div ref="fixed" class="fx-sticky-view_fixed" :style="fixedStyles">
+      <div ref="fixedEl" class="fx-sticky-view_fixed" :style="fixedStyles">
         {{ title }}
       </div>
     </Sticky>
@@ -29,11 +29,9 @@ import {
 } from '@/helpers/dom'
 import { selectorValidator, sizeValidator } from '@/helpers/validator'
 import { useScrollEvent } from '@/hooks/use-scroll'
-import { isNumber } from '@/helpers/util'
 import { useList } from '@/hooks/use-list'
-import type { ScrollToOptions, ScrollToIndexOptions } from '../helpers/types'
 import { emitChangeValidator } from '@/StickyView/stickyView'
-import { StickyViewItem } from './types'
+import { StickyViewItem, ScrollToOptions, ScrollToIndexOptions } from './types'
 
 export default defineComponent({
   name: 'fx-sticky-view',
@@ -79,7 +77,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const root = ref<HTMLElement>()
-    const fixed = ref<HTMLElement>()
+    const fixedEl = ref<HTMLElement>()
     const sticky = ref<InstanceType<typeof Sticky>>()
     const index = ref(0)
     const title = ref('')
@@ -114,7 +112,7 @@ export default defineComponent({
     }
 
     function updateFixed(scrollTop: number | null) {
-      const $fixed = fixed.value as HTMLElement
+      const $fixed = fixedEl.value as HTMLElement
 
       if (!$fixed) {
         return
@@ -200,7 +198,7 @@ export default defineComponent({
 
     function getOffsetTops() {
       const offset =
-        getRelativeOffset(list.value as HTMLElement, $container).offsetTop -
+        getRelativeOffset(listEl.value as HTMLElement, $container).offsetTop -
         getSizeValue(props.offsetTop)
 
       return $items.map($el => {
@@ -213,12 +211,12 @@ export default defineComponent({
      * @param options
      */
     function scrollToIndex(options: number | ScrollToIndexOptions) {
-      let _index: number
+      let _index = 0
 
-      if (isNumber(options)) {
-        _index = options as number
-      } else {
-        _index = (options as ScrollToIndexOptions).index
+      if (typeof options === 'number') {
+        _index = options
+      } else if (options && typeof options.index === 'number') {
+        _index = options.index
       }
 
       if ($items[_index] && _index != index.value) {
@@ -233,12 +231,12 @@ export default defineComponent({
      * @param options
      */
     function scrollTo(options: number | ScrollToOptions) {
-      let offset: number
+      let offset = 0
 
-      if (isNumber(options)) {
-        offset = options as number
-      } else {
-        offset = (options as ScrollToOptions).offset
+      if (typeof options === 'number') {
+        offset = options
+      } else if (options && typeof options.offset === 'number') {
+        offset = options.offset
       }
 
       isScrollTo = true
@@ -261,7 +259,7 @@ export default defineComponent({
       )
     }
 
-    const { list } = useList('stickyView', resetItems)
+    const { listEl } = useList('stickyView', resetItems)
 
     const fixedStyles = computed(() => {
       return {
@@ -282,8 +280,8 @@ export default defineComponent({
 
     return {
       root,
-      list,
-      fixed,
+      listEl,
+      fixedEl,
       sticky,
       index,
       title,
