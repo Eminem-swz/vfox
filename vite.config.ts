@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     vue(),
     svgSprites({
-      // vueComponent: true,
+      vueComponent: true,
       exclude: ['node_modules/**']
     })
   ],

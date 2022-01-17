@@ -44,12 +44,6 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'ExpSearchBar',
   setup() {
-    return {
-      placeholders,
-      showToast
-    }
-  },
-  data() {
     const onCancel = () => {
       showToast('取消按钮点击')
     }
