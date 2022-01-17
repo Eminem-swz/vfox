@@ -22,26 +22,33 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { showToast } from '@/index'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'ExpCopy',
-  methods: {
-    onSuccess({ text }) {
+  setup() {
+    const onSuccess = (text: string) => {
       showToast({
         title: `${text}`,
         type: 'success'
       })
-    },
-    onError(error) {
+    }
+
+    const onError = (error: Error) => {
       showToast({
         title: error.message,
         type: 'fail'
       })
     }
+
+    return {
+      onSuccess,
+      onError
+    }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

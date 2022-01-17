@@ -10,10 +10,10 @@ import { Empty } from 'vfox'
 
 ## Props
 
-| 属性        | 类型   | 默认值    | 必填 | 说明                                                   |
-| ----------- | ------ | --------- | ---- | ------------------------------------------------------ |
-| description | string |           | 否   | 描述文字                                               |
-| type        | string | 'default' | 否   | 图片类型，可选 'default', 'error', 'network', 'search' |
+| 属性        | 类型      | 默认值    | 必填 | 说明                                                                            |
+| ----------- | --------- | --------- | ---- | ------------------------------------------------------------------------------- |
+| description | string    |           | 否   | 描述文字                                                                        |
+| type        | EmptyType | 'default' | 否   | 图片类型，可选 'default', 'error', 'network', 'search', 'permission', 'service' |
 
 ## Slots
 

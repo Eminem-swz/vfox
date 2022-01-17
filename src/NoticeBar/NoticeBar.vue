@@ -52,8 +52,9 @@ import {
 import type { StyleObject, StateType } from '../helpers/types'
 import { STATE_TYPES } from '@/helpers/constants'
 import { getColorObject } from '@/helpers/color'
+import type { Mode } from './types'
 
-const modeMaps = new Map([
+const modeMaps = new Map<Mode, string>([
   ['default', ''],
   ['clickable', 'RightOutlined'],
   ['closable', 'CloseOutlined']
@@ -74,11 +75,9 @@ export default defineComponent({
     },
     // 通知栏模式
     mode: {
-      type: String as PropType<'default' | 'clickable' | 'closable'>,
-      validator: (val: string) => {
-        return modeMaps.get(val) != null
-      },
-      default: 'default'
+      type: String as PropType<Mode>,
+      validator: (val: Mode) => modeMaps.get(val) != null,
+      default: 'default' as Mode
     },
     // 左侧图标名称
     leftIcon: {

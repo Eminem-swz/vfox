@@ -1,15 +1,13 @@
 import { isObject, isStringNumberMix } from '@/helpers/util'
-import type { BadgeOptions } from './types'
+import type { BadgeOption, Option } from './types'
 
-export function handleBadge(
-  badge?: number | string | BadgeOptions
-): BadgeOptions {
+export function handleBadge(badge?: BadgeOption): Option {
   if (isStringNumberMix(badge)) {
     return {
       content: badge as string
     }
   } else if (isObject(badge)) {
-    return badge as BadgeOptions
+    return badge as Option
   } else {
     return {}
   }

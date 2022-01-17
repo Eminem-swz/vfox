@@ -19,11 +19,14 @@ export type { FnArgs } from './helpers/types'
 export type { StateType, PlacementType, SizeType } from './helpers/types'
 
 export type {
-  VisibleStateChangeArgs as PopupVisibleStateChangeArgs,
-  CancelArgs as PopupCancelArgs,
+  VisibleState as PopupVisibleState,
   OnVisibleStateChange as PopupOnVisibleStateChange,
   OnCancel as PopupOnCancel
 } from './popup/types'
+export type {
+  ShapeType as ButtonShape,
+  PatternType as ButtonPattern
+} from './Button/types'
 export type {
   SelectorValueParser,
   SelectorValueFormatter,
@@ -61,6 +64,7 @@ export type {
   OnInput as SearchBarOnInput
 } from './SearchBar/types'
 export type {
+  PullDirection as ScrollViewPullDirection,
   OnScrollToUpper as ScrollViewOnScrollToUpper,
   OnScrollToLower as ScrollViewOnScrollToLower,
   OnRefreshing as ScrollViewOnRefreshing,
@@ -75,7 +79,9 @@ export type {
 } from './Tab/types'
 export type {
   OnChange as SwiperOnChange,
-  OnAnimated as SwiperOnAnimated
+  OnAnimated as SwiperOnAnimated,
+  OnChange as TabViewOnChange,
+  OnAnimated as TabViewOnAnimated
 } from './Swiper/types'
 export type { StateType as ToastType } from './Toast/types'
 export type {
@@ -109,6 +115,7 @@ export type {
   OnPauseOrResume as CountDownOnResume
 } from './CountDown/types'
 export type {
+  Speed as CountUpSpeed,
   OnCancel as CountUpOnCancel,
   OnCancel as CountUpOnAnimated
 } from './CountUp/types'
@@ -121,11 +128,29 @@ export type {
   OnDelete as NumberKeyboardOnDelete,
   OnClose as NumberKeyboardOnClose
 } from './NumberKeyboard/types'
+export type { OnDelete as OrderOnDelete } from './Order/types'
 export type {
   Accept as ImageUploaderAccept,
   BeforeUpload as ImageUploaderBeforeUpload,
   UploadReady as ImageUploaderUploadReady,
   OnDelete as ImageUploaderOnDelete
 } from './ImageUploader/types'
-export type { ImageMode } from './Image/types'
+export type { BadgeOption } from './Badge/types'
+export type { ImageMode, OnLoad as ImageOnLoad } from './Image/types'
+export type { ArrowDirection as CellArrowDirection } from './Cell/types'
+export type { Mode as NoticeBarMode } from './NoticeBar/types'
+export type { PatternType as TagPattern } from './Tag/types'
 export type { ViewPosition } from './helpers/types'
+export type {
+  UserOptionItem as CheckboxOptionItem,
+  UserOptionItem as RadioOptionItem
+} from './Checkbox/types'
+export type {
+  ShapeType as AvatarShape,
+  UserSizeType as AvatarSize
+} from './Avatar/types'
+export type { EmptyType } from './Empty/types'
+export type {
+  JustifyType as RowJustify,
+  AlignType as RowAlign
+} from './Row/types'

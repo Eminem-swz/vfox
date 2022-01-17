@@ -47,7 +47,8 @@ import {
   iconValidator
 } from '@/helpers/validator'
 import type { TypeException } from '../helpers/types'
-import type { ImageMode, ImageOnLoadPayLoad } from './types'
+import type { ImageMode, OnLoad } from './types'
+import type { FnArgs } from '../helpers/types'
 
 const MODE_NAMES = [
   'scaleToFill',
@@ -113,7 +114,7 @@ export default defineComponent({
     }
   },
   emits: {
-    load: (payload: { width: number; height: number; src: string }) =>
+    load: (payload: FnArgs<OnLoad>[0]) =>
       payload &&
       payload.width > 0 &&
       payload.height > 0 &&
@@ -164,7 +165,7 @@ export default defineComponent({
         width: res.naturalWidth,
         height: res.naturalHeight,
         src: res.src
-      } as ImageOnLoadPayLoad)
+      })
     }
 
     function onError(e: TypeException) {

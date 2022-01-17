@@ -44,18 +44,26 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { SkeletonAvatarShape, SkeletonButtonShape } from '@/index'
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
   name: 'ExpSkeleton',
-  data() {
+  setup() {
+    const animated = ref(true)
+    const avatarShape = ref<SkeletonAvatarShape>('circle')
+    const buttonShape = ref<SkeletonButtonShape>('default')
+    const loadingSwitch = ref(false)
+
     return {
-      animated: true,
-      avatarShape: 'circle',
-      buttonShape: 'default',
-      loadingSwitch: false
+      animated,
+      avatarShape,
+      buttonShape,
+      loadingSwitch
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

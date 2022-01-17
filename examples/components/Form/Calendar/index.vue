@@ -134,16 +134,16 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import dayjs from '@/helpers/day'
-import { showToast } from '@/Toast'
-import { showCalendar } from '@/Calendar'
+import dayjs from 'dayjs'
 import {
+  showToast,
+  showCalendar,
   SelectorModelValue,
   CalendarOnConfirm,
   CalendarValueFormatter,
   CalendarValueParser,
-  PopupVisibleStateChangeArgs,
-  CalendarOnSelect
+  CalendarOnSelect,
+  PopupOnVisibleStateChange
 } from '@/index'
 
 export default defineComponent({
@@ -189,11 +189,9 @@ export default defineComponent({
       }
     }
 
-    function onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
-      // console.log(`${type} 事件触发`)
-
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
       if (visibleEvent.value) {
-        console.log('event', res)
+        console.log('change', res)
         showToast(`${res.state} 事件触发`)
       }
 
@@ -213,7 +211,7 @@ export default defineComponent({
 
     const onConfirm: CalendarOnConfirm = res => {
       if (confirmEvent.value) {
-        console.log('event', res)
+        console.log('confirm', res)
         showToast(`触发了确定事件`)
       }
     }

@@ -29,28 +29,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import type { PopupVisibleStateChangeArgs } from '@/index'
-import { showToast } from '@/Toast'
+import { defineComponent, ref } from 'vue'
+import { PopupOnVisibleStateChange, showToast } from '@/index'
 
 export default defineComponent({
   name: 'ExpDropdown',
-  data() {
-    return {
-      visible: false,
-      selector: '',
-      visibleEvent: false
-    }
-  },
-  methods: {
-    onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
+  setup() {
+    const visible = ref(false)
+    const selector = ref('')
+    const visibleEvent = ref(false)
+
+    const onVisibleStateChange: PopupOnVisibleStateChange = ({ state }) => {
+      if (visibleEvent.value) {
         showToast(`${state} 事件触发`)
-        console.log(`${state} 事件触发`)
+        console.log('visible-state-change', state)
       }
       if (state === 'hidden') {
-        this.visibleEvent = false
+        visibleEvent.value = false
       }
+    }
+
+    return {
+      visible,
+      selector,
+      visibleEvent,
+
+      onVisibleStateChange
     }
   }
 })

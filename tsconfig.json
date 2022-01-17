@@ -20,7 +20,7 @@
     },
     "lib": ["esnext", "dom", "dom.iterable"],
     "resolveJsonModule": true,
-    "types": ["vite/client", "jest"]
+    "types": ["vite/client", "jest", "rollup-plugin-svg-sprites"]
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.vue"],
   "exclude": ["**/*.spec.ts", "**/*.spec.js"]

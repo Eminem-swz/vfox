@@ -89,9 +89,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
-import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/index'
-import { showToast } from '@/Toast'
-import { showDialog } from '@/Dialog'
+import {
+  showToast,
+  showDialog,
+  PopupOnVisibleStateChange,
+  PopupOnCancel
+} from '@/index'
 
 interface DialogArgs {
   title?: string
@@ -150,19 +153,19 @@ export default defineComponent({
       })
     }
 
-    function onConfirm(res: PopupCancelArgs) {
+    const onConfirm = (res: any) => {
       console.log('confirm', res)
       callbackEvent && showToast('点击确定按钮')
     }
 
-    function onCancel(res: PopupCancelArgs) {
+    const onCancel: PopupOnCancel = res => {
       console.log('cancel', res)
       callbackEvent && showToast('点击取消按钮')
     }
 
-    function onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
+    const onVisibleStateChange: PopupOnVisibleStateChange = ({ state }) => {
       if (visibleEvent) {
-        console.log(`${state} 事件触发`)
+        console.log('visible-state-change', state)
         showToast(`${state} 事件触发`)
       }
     }

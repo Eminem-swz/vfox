@@ -10,16 +10,16 @@ import { Toast } from 'vfox'
 
 ## Props
 
-| 属性            | 类型    | 默认值    | 必填 | 说明                                                                              |
-| --------------- | ------- | --------- | ---- | --------------------------------------------------------------------------------- |
-| v-model:visible | boolean | false     | 否   | 是否显示                                                                          |
-| title           | string  |           | 是   | 提示的内容                                                                        |
-| type            | string  | 'default' | 否   | 类型，'default'无图标, 可选 'success', 'loading', 'fail'                          |
-| image           | string  |           | 否   | 图标，优先级高于 type 自带的图标                                                  |
-| mask            | boolean | false     | 否   | 是否显示透明蒙层，防止触摸穿透                                                    |
-| duration        | number  | 0         | 否   | visible=true 展示后，duration 毫秒后消失，0 为不消失，在 `v-model:visible` 下生效 |
+| 属性            | 类型      | 默认值    | 必填 | 说明                                                                              |
+| --------------- | --------- | --------- | ---- | --------------------------------------------------------------------------------- |
+| v-model:visible | boolean   | false     | 否   | 是否显示                                                                          |
+| title           | string    |           | 是   | 提示的内容                                                                        |
+| type            | ToastType | 'default' | 否   | 类型，'default'无图标, 可选 'success', 'loading', 'fail'                          |
+| image           | string    |           | 否   | 图标，优先级高于 type 自带的图标                                                  |
+| mask            | boolean   | false     | 否   | 是否显示透明蒙层，防止触摸穿透                                                    |
+| duration        | number    | 0         | 否   | visible=true 展示后，duration 毫秒后消失，0 为不消失，在 `v-model:visible` 下生效 |
 
-### type 的合法值
+### ToastType 的合法值
 
 | 值      | 说明                                               |
 | ------- | -------------------------------------------------- |
@@ -29,9 +29,9 @@ import { Toast } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述           | 回调函数参数                                              |
-| -------------------- | -------------- | --------------------------------------------------------- |
-| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./Toast.md#visiblestate-值说明) } |
+| 事件                 | 描述           | 回调函数参数                                              | TypeScript 函数           |
+| -------------------- | -------------- | --------------------------------------------------------- | ------------------------- |
+| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./Toast.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

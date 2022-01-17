@@ -10,27 +10,27 @@ import { Button, ButtonGroup } from 'vfox'
 
 ## Button Props
 
-| 属性      | 类型    | 默认值      | 必填 | 说明                                                                               |
-| --------- | ------- | ----------- | ---- | ---------------------------------------------------------------------------------- |
-| size      | string  | 'large'     | 否   | 按钮尺寸                                                                           |
-| type      | string  | 'default'   | 否   | 按钮类型                                                                           |
-| pattern   | string  | 'default'   | 否   | 按钮款式                                                                           |
-| shape     | string  | 'rectangle' | 否   | 按钮形状                                                                           |
-| color     | string  |             | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
-| ghost     | boolean | false       | 否   | 是否使用幽灵按钮，幽灵按钮将按钮的内容反色，背景变为透明                           |
-| disabled  | boolean | false       | 否   | 是否禁用                                                                           |
-| icon      | string  |             | 否   | 图标，使用 [Icon](./Icon.md) 组件                                                  |
-| loading   | boolean | false       | 否   | 名称前是否带 loading 图标，优先级大于 icon                                         |
-| form-type | string  |             | 否   | 'submit' / 'reset'                                                                 |
+| 属性      | 类型          | 默认值      | 必填 | 说明                                                                               |
+| --------- | ------------- | ----------- | ---- | ---------------------------------------------------------------------------------- |
+| size      | SizeType      | 'large'     | 否   | 按钮尺寸                                                                           |
+| type      | StateType     | 'default'   | 否   | 按钮类型                                                                           |
+| pattern   | ButtonPattern | 'default'   | 否   | 按钮款式                                                                           |
+| shape     | ButtonShape   | 'rectangle' | 否   | 按钮形状                                                                           |
+| color     | string        |             | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
+| ghost     | boolean       | false       | 否   | 是否使用幽灵按钮，幽灵按钮将按钮的内容反色，背景变为透明                           |
+| disabled  | boolean       | false       | 否   | 是否禁用                                                                           |
+| icon      | string        |             | 否   | 图标，使用 [Icon](./Icon.md) 组件                                                  |
+| loading   | boolean       | false       | 否   | 名称前是否带 loading 图标，优先级大于 icon                                         |
+| form-type | string        |             | 否   | 'submit' / 'reset'                                                                 |
 
-### size 的合法值
+### SizeType 的合法值
 
 | 值    | 说明                                      |
 | ----- | ----------------------------------------- |
 | large | 默认大小，高度 48px，文字 17px，图标 21px |
 | small | 小尺寸，高度 28px，文字 12px，图标 18px   |
 
-### type 的合法值
+### StateType 的合法值
 
 | 值      | 说明 |
 | ------- | ---- |
@@ -40,7 +40,7 @@ import { Button, ButtonGroup } from 'vfox'
 | warning | 警告 |
 | danger  | 危险 |
 
-### pattern 的合法值
+### ButtonPattern 的合法值
 
 | 值         | 说明       |
 | ---------- | ---------- |
@@ -50,7 +50,7 @@ import { Button, ButtonGroup } from 'vfox'
 | borderless | 无边框按钮 |
 | gradient   | 渐变色按钮 |
 
-### shape 的合法值
+### ButtonShape 的合法值
 
 | 值        | 说明                                         |
 | --------- | -------------------------------------------- |
@@ -76,11 +76,11 @@ import { Button, ButtonGroup } from 'vfox'
 
 ## ButtonGroup Props
 
-| 属性    | 类型   | 默认值      | 必填 | 说明         |
-| ------- | ------ | ----------- | ---- | ------------ |
-| size    | string | 'large'     | 否   | 每个按钮尺寸 |
-| pattern | string | 'default'   | 否   | 每个按钮款式 |
-| shape   | string | 'rectangle' | 否   | 每个按钮形状 |
+| 属性    | 类型          | 默认值      | 必填 | 说明         |
+| ------- | ------------- | ----------- | ---- | ------------ |
+| size    | SizeType      | 'large'     | 否   | 每个按钮尺寸 |
+| pattern | ButtonPattern | 'default'   | 否   | 每个按钮款式 |
+| shape   | ButtonShape   | 'rectangle' | 否   | 每个按钮形状 |
 
 ## ButtonGroup Slots
 

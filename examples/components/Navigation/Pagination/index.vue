@@ -31,27 +31,34 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { showToast, PaginationOnChange } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpPagination',
-  props: {},
-  data() {
-    return {
-      current: 1,
-      current2: 1,
-      current3: 3,
-      current4: 3,
-      current5: 3,
-      total: 5
-    }
-  },
-  methods: {
-    onChange(e) {
+  setup() {
+    const current = ref(1)
+    const current2 = ref(1)
+    const current3 = ref(1)
+    const current4 = ref(1)
+    const current5 = ref(1)
+    const total = 5
+
+    const onChange: PaginationOnChange = e => {
       console.log(e)
       showToast(`跳转到第 ${e.current} 页`)
     }
+
+    return {
+      current,
+      current2,
+      current3,
+      current4,
+      current5,
+      total,
+      onChange
+    }
   }
-}
+})
 </script>

@@ -8,10 +8,10 @@
 import { computed, defineComponent, provide, ref, watch } from 'vue'
 import type { PropType } from 'vue'
 import type { StyleObject } from '../helpers/types'
+import type { JustifyType, AlignType } from './types'
 import { createEnumsValidator } from '@/helpers/validator'
 import { parseGutter, propGutter } from '@/Row/row'
 
-type JustifyType = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
 const JUSTIFY_TYPE: JustifyType[] = [
   'start',
   'end',
@@ -19,7 +19,6 @@ const JUSTIFY_TYPE: JustifyType[] = [
   'space-around',
   'space-between'
 ]
-type AlignType = 'top' | 'middle' | 'bottom'
 const ALIGN_TYPE: AlignType[] = ['top', 'middle', 'bottom']
 
 export default defineComponent({

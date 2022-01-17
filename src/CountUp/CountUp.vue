@@ -6,16 +6,15 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
+import type { PropType } from 'vue'
 import { AnimationFrameTask, frameTo } from '@/helpers/animation'
 import { thousands, isNumber } from '@/helpers/util'
-import type { OnCancel } from './types'
+import type { OnCancel, Speed } from './types'
 import type { VoidFnToBooleanFn } from '../helpers/types'
 
 const emitValidator: VoidFnToBooleanFn<OnCancel> = payload => {
   return payload && typeof payload.number === 'number'
 }
-
-type Speed = 'normal' | 'fast' | 'slow'
 
 const SpeedMap = new Map<Speed, number>([
   ['normal', 50],
@@ -38,8 +37,8 @@ export default defineComponent({
     },
     // 持续时间
     speed: {
-      type: [Number, String],
-      default: null
+      type: [Number, String] as PropType<Speed>,
+      validator: (val: Speed) => isNumber(val) || SpeedMap.get(val) != null
     },
     // 是否千分位展示
     thousands: {

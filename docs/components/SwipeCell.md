@@ -10,11 +10,11 @@ import { SwipeCell } from 'vfox'
 
 ## Props
 
-| 属性    | 类型            | 默认值 | 必填 | 说明     |
-| ------- | --------------- | ------ | ---- | -------- |
-| buttons | ButtonOptions[] |        | 是   | 按钮列表 |
+| 属性    | 类型                    | 默认值 | 必填 | 说明     |
+| ------- | ----------------------- | ------ | ---- | -------- |
+| buttons | SwipeCellButtonOption[] |        | 是   | 按钮列表 |
 
-### ButtonOptions 的结构
+### SwipeCellButtonOption 的结构
 
 ```
 {
@@ -23,7 +23,7 @@ import { SwipeCell } from 'vfox'
 }
 ```
 
-#### ButtonOptions 项中 type 的合法值
+#### SwipeCellButtonOption 项中 type 的合法值
 
 | 值      | 说明 |
 | ------- | ---- |
@@ -35,9 +35,9 @@ import { SwipeCell } from 'vfox'
 
 ## Events
 
-| 事件         | 描述           | 回调函数参数                           |
-| ------------ | -------------- | -------------------------------------- |
-| button-click | 点击按钮时触发 | { item: ButtonOptions, index: number } |
+| 事件         | 描述           | 回调函数参数                                   | TypeScript 函数        |
+| ------------ | -------------- | ---------------------------------------------- | ---------------------- |
+| button-click | 点击按钮时触发 | { item: SwipeCellButtonOption, index: number } | SwipeCellOnButtonClick |
 
 ## Slots
 

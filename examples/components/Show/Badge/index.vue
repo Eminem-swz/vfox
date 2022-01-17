@@ -158,24 +158,32 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
   name: 'ExpBadge',
-  data() {
-    return {
-      count: 0,
-      count2: 0
+  setup() {
+    const count = ref(0)
+    const count2 = ref(0)
+
+    function onSwitch(checked: boolean) {
+      count.value = checked ? 1000 : 0
     }
-  },
-  methods: {
-    onSwitch(value) {
-      this.count = value ? 1000 : 0
-    },
-    onSwitch2(value) {
-      this.count2 = value ? 1000 : 0
+
+    function onSwitch2(checked: boolean) {
+      count2.value = checked ? 1000 : 0
+    }
+
+    return {
+      count,
+      count2,
+
+      onSwitch,
+      onSwitch2
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

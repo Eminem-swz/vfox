@@ -74,13 +74,13 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { cascadeOptions, multiOptions, options, regionOptions } from './data'
-import { showToast } from '@/Toast'
-import { showPicker } from '@/Picker'
-import type {
+import {
+  showToast,
+  showPicker,
   SelectorModelValue,
   PickerOnConfirm,
-  PopupVisibleStateChangeArgs,
-  PopupCancelArgs
+  PopupOnVisibleStateChange,
+  PopupOnCancel
 } from '@/index'
 
 export default defineComponent({
@@ -95,9 +95,9 @@ export default defineComponent({
     const changeEvent = ref(false)
     const visibleEvent = ref(false)
 
-    function onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
       if (visibleEvent.value) {
-        console.log('event', res)
+        console.log('visible-state-change', res)
         showToast(`${res.state} 事件触发`)
       }
 
@@ -124,21 +124,21 @@ export default defineComponent({
 
     const onConfirm: PickerOnConfirm = res => {
       if (clickEvent.value) {
-        console.log('event', res)
+        console.log('confirm', res)
         showToast(`点击确定按钮`)
       }
     }
 
     function onChange(res: SelectorModelValue) {
       if (changeEvent.value) {
-        console.log('event', res)
+        console.log('change', res)
         showToast(`值改为 ${res}`)
       }
     }
 
-    function onCancel(res: PopupCancelArgs) {
+    const onCancel: PopupOnCancel = res => {
       if (clickEvent.value) {
-        console.log('event', res)
+        console.log('cancel', res)
 
         if (res.source === 'cancelClick') {
           showToast('点击了取消按钮')

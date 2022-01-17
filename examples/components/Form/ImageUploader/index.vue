@@ -1,7 +1,7 @@
 <template>
   <!-- <fx-group title="基础用法">
     <fx-image-uploader
-      :uploadReady="onUploadOrFail"
+      :uploadReady="hookUploadOrFail"
       @change="onChange"
       @delete="onDelete"
       accept="png,jpg"
@@ -12,8 +12,8 @@
   </fx-group> -->
   <fx-group title="上传前置处理">
     <fx-image-uploader
-      :beforeUpload="onBeforeUpload"
-      :uploadReady="onUpload"
+      :beforeUpload="hookBeforeUpload"
+      :uploadReady="hookUpload"
       accept="png,jpg"
       :maxCount="9"
       v-model="imageList3"
@@ -24,7 +24,7 @@
     <fx-image-uploader
       v-model="imageList2"
       :deletable="false"
-      :uploadReady="onUpload"
+      :uploadReady="hookUpload"
     >
     </fx-image-uploader>
   </fx-group>
@@ -33,36 +33,41 @@
   </fx-group>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent, reactive } from 'vue'
+import {
+  ImageUploaderBeforeUpload,
+  ImageUploaderOnDelete,
+  ImageUploaderUploadReady,
+  showToast
+} from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpImageUploader',
-  props: {},
-  data() {
-    return {
-      imageList: [],
-      imageList2: [
-        'https://cdn.fox2.cn/vfox/empty/default@2x.png',
-        'https://cdn.fox2.cn/vfox/empty/error@2x.png'
-      ],
-      imageList3: []
-    }
-  },
-  methods: {
-    onBeforeUpload(file, { formatSize }) {
+  setup() {
+    const imageList = reactive<string[]>([])
+    const imageList2 = reactive<string[]>([
+      'https://cdn.fox2.cn/vfox/empty/default@2x.png',
+      'https://cdn.fox2.cn/vfox/empty/error@2x.png'
+    ])
+    const imageList3 = reactive<string[]>([])
+
+    const hookBeforeUpload: ImageUploaderBeforeUpload = (
+      file,
+      { formatSize }
+    ) => {
       if (file.size > 1024 * 1024) {
         showToast(`上传图片不能大于 ${formatSize(1024 * 1024)}`)
         return false
       }
       showToast(`上传图片大小为 ${formatSize(file.size)}`)
-    },
+    }
 
-    onUploadOrFail(file, handlers) {
+    const hookUploadOrFail: ImageUploaderUploadReady = (file, handlers) => {
       handlers.setUploading('上传中...')
 
       setTimeout(() => {
-        this.getDataUrl(file).then(url => {
+        getDataUrl(file).then(url => {
           if (Math.random() > 0.5) {
             handlers.fail('模拟失败')
           } else {
@@ -70,31 +75,43 @@ export default {
           }
         })
       }, 2000)
-    },
+    }
 
-    onUpload(file, handlers) {
-      this.getDataUrl(file).then(url => {
-        handlers.success(url)
-      })
-    },
-
-    getDataUrl(file) {
-      return new Promise(resolve => {
+    function getDataUrl(file: File) {
+      return new Promise<string>(resolve => {
         const fr = new FileReader()
         fr.onload = function (e) {
-          resolve(e.target.result)
+          resolve((e.target?.result as string) ?? '')
         }
         fr.readAsDataURL(file)
       })
-    },
+    }
 
-    onChange(res) {
+    const hookUpload: ImageUploaderUploadReady = (file, handlers) => {
+      getDataUrl(file).then(url => {
+        handlers.success(url)
+      })
+    }
+
+    const onChange = (res: string[]) => {
       console.log('change', res)
-    },
+    }
 
-    onDelete(res) {
+    const onDelete: ImageUploaderOnDelete = res => {
       console.log('delete', res)
     }
+
+    return {
+      imageList,
+      imageList2,
+      imageList3,
+
+      hookBeforeUpload,
+      hookUploadOrFail,
+      hookUpload,
+      onChange,
+      onDelete
+    }
   }
-}
+})
 </script>

@@ -39,8 +39,9 @@ import {
   getEnumsValue,
   iconValidator
 } from '@/helpers/validator'
+import type { ArrowDirection } from './types'
 
-const LINK_ICON_NAMES = ['right', 'up', 'down', 'left']
+const LINK_ICON_NAMES: ArrowDirection[] = ['right', 'up', 'down', 'left']
 
 export default defineComponent({
   name: 'fx-cell',
@@ -75,7 +76,7 @@ export default defineComponent({
       default: false
     },
     arrowDirection: {
-      type: String as PropType<'right' | 'up' | 'down' | 'left'>,
+      type: String as PropType<ArrowDirection>,
       validator: createEnumsValidator(LINK_ICON_NAMES),
       default: LINK_ICON_NAMES[0]
     },

@@ -31,20 +31,26 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { StickyViewOnChange } from '@/index'
+
+export default defineComponent({
   name: 'ExpSticky',
-  data() {
-    return {
-      activeIndex: 0
-    }
-  },
-  methods: {
-    onChange(res) {
+  setup() {
+    const activeIndex = ref(0)
+
+    const onChange: StickyViewOnChange = res => {
       console.log('change', res)
     }
+
+    return {
+      activeIndex,
+
+      onChange
+    }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

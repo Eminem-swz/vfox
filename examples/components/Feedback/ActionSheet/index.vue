@@ -91,17 +91,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import type {
+import { defineComponent, ref } from 'vue'
+import {
   ActionSheetOption,
   ActionSheetOnConfirm,
-  PopupCancelArgs,
-  PopupVisibleStateChangeArgs,
-  FnArgs
+  showToast,
+  showDialog,
+  PopupOnCancel,
+  showActionSheet,
+  PopupOnVisibleStateChange
 } from '@/index'
-import { showToast } from '@/Toast'
-import { showDialog } from '@/Dialog'
-import { showActionSheet } from '@/ActionSheet'
 
 const defaultOptions: ActionSheetOption[] = [
   {
@@ -117,66 +116,53 @@ const defaultOptions: ActionSheetOption[] = [
 
 export default defineComponent({
   name: 'ExpActionSheet',
-  data() {
-    return {
-      visible: false,
-      title: '',
-      showCancel: false,
-      cancelText: '取消',
-      options: defaultOptions,
-      options2: [
-        {
-          name: '选项1',
-          description: '选项1的描述文案'
-        },
-        {
-          name: '选项2'
-        },
-        {
-          name: '选项3'
-        }
-      ] as ActionSheetOption[],
+  setup() {
+    const visible = ref(false)
+    const title = ref('')
+    const showCancel = ref(false)
+    const cancelText = ref('取消')
+    const options = ref(defaultOptions)
+    const showEvent = ref(false)
+    const visibleEvent = ref(false)
 
-      showEvent: false,
-      visibleEvent: false
-    }
-  },
-  methods: {
-    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
-        console.log('event', res)
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
+      if (visibleEvent.value) {
+        console.log('visible-state-change', res)
         showToast(`${res.state} 事件触发`)
       }
 
       if (res.state === 'hidden') {
-        this.showCancel = false
-        this.cancelText = '取消'
-        this.options = defaultOptions
-        this.title = ''
-        this.visibleEvent = false
-        this.showEvent = false
+        showCancel.value = false
+        cancelText.value = '取消'
+        options.value = defaultOptions
+        title.value = ''
+        visibleEvent.value = false
+        showEvent.value = false
       }
-    },
-    onConfirm(res: FnArgs<ActionSheetOnConfirm>[0]) {
-      if (this.showEvent) {
-        console.log('event', res)
+    }
+
+    const onConfirm: ActionSheetOnConfirm = res => {
+      if (showEvent.value) {
+        console.log('confirm', res)
         showDialog({
           title: '选择了',
           showCancel: false,
           content: `item.name: '${res.item.name}'\nindex: ${res.index}`
         })
       }
-    },
-    onCancel(res: PopupCancelArgs) {
-      if (this.showEvent) {
-        console.log('event', res)
+    }
+
+    const onCancel: PopupOnCancel = res => {
+      if (showEvent.value) {
+        console.log('cancel', res)
         showToast('取消了')
       }
-    },
-    onCallApi() {
+    }
+
+    function onCallApi() {
       showActionSheet({
         title: '标题',
-        options: this.options,
+        options: options.value,
         showCancel: true,
         success: res => {
           console.log('success', res)
@@ -193,6 +179,33 @@ export default defineComponent({
           }
         }
       })
+    }
+
+    return {
+      visible,
+      title,
+      showCancel,
+      cancelText,
+      options,
+      options2: [
+        {
+          name: '选项1',
+          description: '选项1的描述文案'
+        },
+        {
+          name: '选项2'
+        },
+        {
+          name: '选项3'
+        }
+      ] as ActionSheetOption[],
+      showEvent,
+      visibleEvent,
+
+      onVisibleStateChange,
+      onConfirm,
+      onCancel,
+      onCallApi
     }
   }
 })

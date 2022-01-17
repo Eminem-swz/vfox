@@ -73,7 +73,7 @@
       </fx-steps>
     </fx-group>
     <fx-fixed>
-      <div class="steps-next">
+      <div class="exp-steps-next">
         <fx-button
           @click="stepIndex = (stepIndex + 1) % steps.length"
           type="primary"
@@ -85,13 +85,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ExpSteps',
-  data() {
-    return {
-      stepIndex: 1,
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 
+export default defineComponent({
+  name: 'ExpSteps',
+  setup() {
+    const stepIndex = ref(1)
+
+    return {
+      stepIndex,
       steps: [
         {
           title: '已完成',
@@ -126,14 +129,14 @@ export default {
       ]
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 @import '@/style/var.scss';
 
-.steps {
+.exp-steps {
   &-next {
     width: 100vw;
     padding: 12px 16px;

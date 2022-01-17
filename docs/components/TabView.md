@@ -18,9 +18,10 @@ import { TabView, TabViewItem } from 'vfox'
 
 ## TabView Events
 
-| 事件   | 描述       | 回调函数参数               |
-| ------ | ---------- | -------------------------- |
-| change | 切换时触发 | { activeIndex } 当前项索引 |
+| 事件     | 描述           | 回调函数参数                                | TypeScript 函数   |
+| -------- | -------------- | ------------------------------------------- | ----------------- |
+| change   | 切换时触发     | payload: { activeIndex: number } 当前项索引 | TabViewOnChange   |
+| animated | 动画结束时触发 | payload: { activeIndex: number } 当前项索引 | TabViewOnAnimated |
 
 ## TabView Slots
 

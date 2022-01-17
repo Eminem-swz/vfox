@@ -15,23 +15,23 @@ import { ImageUploader } from 'vfox'
 
 ## Props
 
-| 属性          | 类型     | 默认值       | 必填 | 说明                                                                           |
-| ------------- | -------- | ------------ | ---- | ------------------------------------------------------------------------------ |
-| v-model       | string[] |              | 是   | 已上传的图片 URL 列表                                                          |
-| accept        | string   |              | 否   | 默认 'all', 可选 'jpg' 'jpeg' 'png' 'webp'，目前移动端图片类型不多，限制比较死 |
-| column-number | number   | 3            | 否   | 渲染列数，同 [Order](./Order.md) 组件                                          |
-| max-count     | number   | 9            | 否   | 文件上传数量限制，上传中/上传失败也会占一个坑位                                |
-| preview       | boolean  | true         | 否   | 是否在点击缩略图后展示全屏图片预览                                             |
-| disabled      | boolean  | false        | 否   | 是否禁用文件上传                                                               |
-| multiple      | boolean  | false        | 否   | 是否开启图片多选，部分安卓机型不支持                                           |
-| deletable     | boolean  | true         | 否   | 是否允许删除图片                                                               |
-| image-mode    | string   | 'aspectFill' | 否   | 图片的填充模式，通 [Image](./Image.md) 组件的 mode 属性                        |
-| before-upload | Function |              | 否   | 文件读取前的回调函数，返回 false 或 Promise<false\> 可终止文件上传             |
-| upload-ready  | Function |              | 否   | 转入上传文件操作的回调函数                                                     |
+| 属性          | 类型                      | 默认值       | 必填 | 说明                                                               |
+| ------------- | ------------------------- | ------------ | ---- | ------------------------------------------------------------------ |
+| v-model       | string[]                  |              | 是   | 已上传的图片 URL 列表                                              |
+| accept        | ImageUploaderAccept       |              | 否   | 默认 'all', 可选 'jpg' 'jpeg' 'png' 'webp'，支持多个数组           |
+| column-number | number                    | 3            | 否   | 渲染列数，同 [Order](./Order.md) 组件                              |
+| max-count     | number                    | 9            | 否   | 文件上传数量限制，上传中/上传失败也会占一个坑位                    |
+| preview       | boolean                   | true         | 否   | 是否在点击缩略图后展示全屏图片预览                                 |
+| disabled      | boolean                   | false        | 否   | 是否禁用文件上传                                                   |
+| multiple      | boolean                   | false        | 否   | 是否开启图片多选，部分安卓机型不支持                               |
+| deletable     | boolean                   | true         | 否   | 是否允许删除图片                                                   |
+| image-mode    | ImageMode                 | 'aspectFill' | 否   | 图片的填充模式，通 [Image](./Image.md) 组件的 mode 属性            |
+| before-upload | ImageUploaderBeforeUpload |              | 否   | 文件读取前的回调函数，返回 false 或 Promise<false\> 可终止文件上传 |
+| upload-ready  | ImageUploaderUploadReady  |              | 否   | 转入上传文件操作的回调函数                                         |
 
-### beforeUpload(file: File, handlers: Object) => boolean | file | Promise<boolean | file\>
+### beforeUpload(file: File, handlers: Object) => boolean | void | Promise<boolean | file>
 
-通过传入 beforeUpload 函数可以在上传前进行校验和处理，返回 false 或 Promise<false\> 表示校验失败。
+通过传入 beforeUpload 函数可以在上传前进行校验和处理，返回 false 或 Promise<false> 表示校验失败。
 
 也可以返回修改过的 file 对象，如果压缩图片等。
 
@@ -99,10 +99,10 @@ export default {
 
 ## Events
 
-| 事件   | 描述                        | 回调函数参数                                                         |
-| ------ | --------------------------- | -------------------------------------------------------------------- |
-| delete | 图片被删除时触发            | { index: number, item: { id: number, status: string, url: string } } |
-| change | 已上传的图片 URL 列表改变时 | value: string[]                                                      |
+| 事件   | 描述                        | 回调函数参数                                                         | TypeScript 函数       |
+| ------ | --------------------------- | -------------------------------------------------------------------- | --------------------- |
+| delete | 图片被删除时触发            | { index: number, item: { id: number, status: string, url: string } } | ImageUploaderOnDelete |
+| change | 已上传的图片 URL 列表改变时 | value: string[]                                                      |                       |
 
 ### delete 的回调参数 item
 

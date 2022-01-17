@@ -22,11 +22,11 @@ import { Dialog } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述               | 回调函数参数                                               |
-| -------------------- | ------------------ | ---------------------------------------------------------- |
-| cancel               | 取消按钮点击时触发 | { confirm: false, cancel: true }                           |
-| confirm              | 确认按钮点击时触发 | { confirm: true, cancel: false }                           |
-| visible-state-change | 展示隐藏时触发     | { state: [VisibleState](./Dialog.md#visiblestate-值说明) } |
+| 事件                 | 描述               | 回调函数参数                                               | 函数 TypeScript           |
+| -------------------- | ------------------ | ---------------------------------------------------------- | ------------------------- |
+| cancel               | 取消按钮点击时触发 | { source: string }                                         | PopupOnCancel             |
+| confirm              | 确认按钮点击时触发 | { }                                                        |                           |
+| visible-state-change | 展示隐藏时触发     | { state: [VisibleState](./Dialog.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

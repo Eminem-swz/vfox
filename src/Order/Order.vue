@@ -67,7 +67,8 @@ import { useTouch } from '@/hooks/use-touch'
 import { addClassName, getParentTarget, removeClassName } from '@/helpers/dom'
 import type { OnVisibleStateChange } from '../popup/types'
 import { locale } from '@/Locale'
-import type { OrderOnDeleteArgs } from './types'
+import type { OnDelete } from './types'
+import type { FnArgs } from '../helpers/types'
 
 type Item = any
 
@@ -129,7 +130,7 @@ export default defineComponent({
   },
   emits: {
     'update:items': itemsValidator,
-    delete: (payload: OrderOnDeleteArgs) =>
+    delete: (payload: FnArgs<OnDelete>[0]) =>
       payload &&
       typeof payload.index === 'number' &&
       payload.item &&

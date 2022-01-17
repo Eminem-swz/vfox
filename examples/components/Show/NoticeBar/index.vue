@@ -22,13 +22,13 @@
         mode="closable"
         v-model:visible="visible"
         :title="text1"
-        @close-click="onClose"
+        @close-click="showToast('点击了关闭按钮')"
       />
       <fx-notice-bar
         class="notice-bar-item"
         mode="clickable"
         :title="text1"
-        @click="onClick"
+        @click="showToast('点击了通告栏')"
       />
     </fx-group>
     <fx-group title="type=success/primary/danger">
@@ -62,28 +62,24 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { showToast } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpNoticeBar',
-  data() {
+  setup() {
+    const visible = ref(true)
+
     return {
-      visible: true,
+      visible,
       text1: '简单不先于复杂，而是在复杂之后。',
       text2:
-        '作为一个真正的程序员，首先应该尊重编程，热爱你所写下的程序，他是你的伙伴，而不是工具。'
-    }
-  },
-  methods: {
-    onClose() {
-      showToast('点击了关闭按钮')
-    },
-    onClick() {
-      showToast('点击了通告栏')
+        '作为一个真正的程序员，首先应该尊重编程，热爱你所写下的程序，他是你的伙伴，而不是工具。',
+      showToast
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -34,7 +34,7 @@ import { Stepper } from 'vfox'
 | ----------- | ------------------ | ----------------------- |
 | change      | 当绑定值变化时触发 | value: number \| string |
 | input       | 输入框输入时触发   | value: number \| string |
-| focus       | 输入框聚焦时触发   | FocusEvent              |
-| blur        | 输入框失焦时触发   | FocusEvent              |
+| focus       | 输入框聚焦时触发   | e: FocusEvent           |
+| blur        | 输入框失焦时触发   | e: FocusEvent           |
 | plus-click  | 点击增加按钮时触发 |                         |
 | minus-click | 点击减少按钮时触发 |                         |

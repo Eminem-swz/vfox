@@ -93,7 +93,7 @@ import { formatFileSize } from '@/helpers/file'
 import { formItemProps } from '@/Form/form'
 import type { ImageMode } from '../Image/types'
 import { locale } from '@/Locale'
-import type { OrderOnDeleteArgs } from '../Order/types'
+import type { OnDelete as OrderOnDelete } from '../Order/types'
 import type {
   BeforeUpload,
   UploadReady,
@@ -497,7 +497,7 @@ export default defineComponent({
       }
     }
 
-    function onDelete({ index, item }: OrderOnDeleteArgs) {
+    const onDelete: OrderOnDelete = ({ index, item }) => {
       const fileItem = getFileItemById(item.id as number)
 
       fileItem &&

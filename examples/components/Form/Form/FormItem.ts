@@ -1,4 +1,4 @@
-import { FormItem } from '@/Form'
+import { FormItem } from '@/index'
 import { connect, mapProps } from '@formily/vue'
 import { isVoidField } from '@formily/core'
 

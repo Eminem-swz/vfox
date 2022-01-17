@@ -14,20 +14,20 @@ import { CountUp } from 'vfox'
 
 ## Props
 
-| 属性           | 类型          | 默认值   | 必填 | 说明                                                 |
-| -------------- | ------------- | -------- | ---- | ---------------------------------------------------- |
-| number         | number        | 0        | 否   | 目标值，变化到该数值                                 |
-| initial-number | number        | 0        | 否   | 初始值，首次动画会基于 `number` 和该值的差值来做变化 |
-| speed          | string/number | 'normal' | 否   | 可选 'normal', 'fast', 'slow'，或者固定数字的时间    |
-| thousands      | boolean       | false    | 否   | 是否以千分号的形式显示，如：'1,234.56'               |
-| decimal-digits | number        | 0        | 否   | 保留 `decimalDigits` 小数位数                        |
+| 属性           | 类型         | 默认值   | 必填 | 说明                                                 |
+| -------------- | ------------ | -------- | ---- | ---------------------------------------------------- |
+| number         | number       | 0        | 否   | 目标值，变化到该数值                                 |
+| initial-number | number       | 0        | 否   | 初始值，首次动画会基于 `number` 和该值的差值来做变化 |
+| speed          | CountUpSpeed | 'normal' | 否   | 可选 'normal', 'fast', 'slow'，或者固定数字的时间    |
+| thousands      | boolean      | false    | 否   | 是否以千分号的形式显示，如：'1,234.56'               |
+| decimal-digits | number       | 0        | 否   | 保留 `decimalDigits` 小数位数                        |
 
 ## Events
 
-| 事件     | 描述                             | 回调函数参数                         |
-| -------- | -------------------------------- | ------------------------------------ |
-| animated | 动画结束后触发，主动取消也会触发 | { number: number } number 为当前数值 |
-| cancel   | 取消成功时触发                   | { number: number } number 为当前数值 |
+| 事件     | 描述                             | 回调函数参数                         | TypeScript 函数   |
+| -------- | -------------------------------- | ------------------------------------ | ----------------- |
+| animated | 动画结束后触发，主动取消也会触发 | { number: number } number 为当前数值 | CountUpOnAnimated |
+| cancel   | 取消成功时触发                   | { number: number } number 为当前数值 | CountUpOnCancel   |
 
 ## Methods
 

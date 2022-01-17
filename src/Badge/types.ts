@@ -1,4 +1,4 @@
-export type BadgeOptions = Partial<{
+export type Option = Partial<{
   color: string
   content: string | number
   offset: number[]
@@ -7,3 +7,5 @@ export type BadgeOptions = Partial<{
   maxCount: number
   showZero: boolean
 }>
+
+export type BadgeOption = number | string | Option

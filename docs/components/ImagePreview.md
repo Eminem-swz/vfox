@@ -21,10 +21,10 @@ import { ImagePreview } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述                 | 回调函数参数                                                     |
-| -------------------- | -------------------- | ---------------------------------------------------------------- |
-| change               | 隐藏且动画结束后触发 | { activeIndex: number, current: string }                         |
-| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./ImagePreview.md#visiblestate-值说明) } |
+| 事件                 | 描述                 | 回调函数参数                                                     | TypeScript 函数           |
+| -------------------- | -------------------- | ---------------------------------------------------------------- | ------------------------- |
+| change               | 隐藏且动画结束后触发 | { activeIndex: number, current: string }                         | ImagePreviewOnChange      |
+| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./ImagePreview.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

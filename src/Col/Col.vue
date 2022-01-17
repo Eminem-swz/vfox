@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, computed } from 'vue'
+import { defineComponent, inject, computed, ref } from 'vue'
 import { isNumeric, rangeInteger } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 
@@ -24,27 +24,30 @@ export default defineComponent({
     },
     // 栅格左侧的间隔格数
     offset: {
-      type: Number,
+      type: [Number, String],
+      validator: (val: number | string) => isNumeric(val),
       default: 0
     },
     // 栅格向右移动格数
     push: {
-      type: Number,
+      type: [Number, String],
+      validator: (val: number | string) => isNumeric(val),
       default: 0
     },
     // 栅格向左移动格数
     pull: {
-      type: Number,
+      type: [Number, String],
+      validator: (val: number | string) => isNumeric(val),
       default: 0
     }
   },
   setup(props) {
-    const rowGutter = inject('fxRowGutter', [0, 0])
+    const rowGutter = inject('fxRowGutter', ref([0, 0]))
 
     const styles = computed(() => {
       const styles: StyleObject = {}
 
-      const [gH, gV] = rowGutter
+      const [gH, gV] = rowGutter.value
 
       if (gH > 0 || gV > 0) {
         styles.padding = `${gV / 2}px ${gH / 2}px`

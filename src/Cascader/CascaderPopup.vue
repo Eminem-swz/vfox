@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, watch } from 'vue'
+import { defineComponent, ref, inject, watch, nextTick } from 'vue'
 import { Drawer } from '@/Drawer'
 import { Tab } from '@/Tab'
 import { isSameArray } from '@/helpers/util'
@@ -85,6 +85,7 @@ export default defineComponent({
     const selectedTabs = ref<SelectedTabs[]>([])
     const tabs = ref<TabOptionItem[]>([])
     const tabIndex = ref(0)
+    let tempTabIndex = -1
 
     const popup = usePopupExtend<SelectorDetail>(ctx)
 
@@ -140,7 +141,7 @@ export default defineComponent({
           })
         }
 
-        tabIndex.value = selectedTabs.value.length - 1
+        tempTabIndex = selectedTabs.value.length - 1
       },
       handlers: mergeHandlers(
         {
@@ -158,6 +159,13 @@ export default defineComponent({
           return {
             label: v.label == null ? newLocale.cascaderDefaultTitle : v.label,
             value: v.value
+          }
+        })
+
+        nextTick(() => {
+          if (tempTabIndex !== -1) {
+            tabIndex.value = tempTabIndex
+            tempTabIndex = -1
           }
         })
       },

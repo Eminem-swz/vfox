@@ -46,7 +46,7 @@
         description="描述信息"
         isLink
         checkbox
-        @click="onClick"
+        @click="showToast('点击事件')"
       ></fx-cell>
     </fx-group>
     <fx-group title="Slot default">
@@ -82,24 +82,24 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { showToast } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpCell',
-  data() {
-    return { checked: false }
-  },
-  methods: {
-    onClick() {
-      showToast('点击事件')
-    },
-    onCheckboxChange(e) {
-      console.log(e)
-      showToast(e.checked ? '勾选' : '取消勾选')
+  setup() {
+    const onCheckboxChange = (checked: boolean) => {
+      console.log('change', checked)
+      showToast(checked ? '勾选' : '取消勾选')
+    }
+
+    return {
+      showToast,
+      onCheckboxChange
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

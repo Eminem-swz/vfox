@@ -15,8 +15,9 @@
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
+import type { EmptyType } from './types'
 
-const TYPE_NAMES = [
+const TYPE_NAMES: EmptyType[] = [
   'default',
   'error',
   'network',
@@ -35,9 +36,7 @@ export default defineComponent({
     },
     // 类型
     type: {
-      type: String as PropType<
-        'default' | 'error' | 'network' | 'search' | 'permission' | 'service'
-      >,
+      type: String as PropType<EmptyType>,
       validator: createEnumsValidator(TYPE_NAMES),
       default: TYPE_NAMES[0]
     }

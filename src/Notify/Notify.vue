@@ -10,10 +10,9 @@
       <NoticeBar
         class="fx-notify_inner"
         :type="type"
-        :left-icon="icon"
+        :leftIcon="icon"
         :title="title"
         :color="color"
-        :backgroundColor="backgroundColor"
         :mode="closable ? 'closable' : 'default'"
         @close-click="onClose"
       />
@@ -45,18 +44,12 @@ export default defineComponent({
       default: false
     },
     title: {
-      type: String,
-      default: null
+      type: String
     },
     icon: {
       type: [String, Object],
       validator: iconValidator
     },
-    // 背景颜色
-    backgroundColor: {
-      type: String
-    },
-    // 字体颜色
     color: {
       type: String
     },
@@ -67,8 +60,7 @@ export default defineComponent({
     },
     // 类型
     type: {
-      type: String as PropType<StateType>,
-      default: null
+      type: String as PropType<StateType>
     }
   },
   emits: {

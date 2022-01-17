@@ -1,8 +1,8 @@
 <template>
   <div>
     <fx-group title="基础用法">
-      <div class="stopwatch-box">
-        <div class="stopwatch-box-header">
+      <div class="exp-stopwatch-box">
+        <div class="exp-stopwatch-box-header">
           <fx-stopwatch
             @stop="onStop"
             @start="onStart"
@@ -10,7 +10,7 @@
             ref="stopWatch"
           ></fx-stopwatch>
         </div>
-        <div class="stopwatch-box-body">
+        <div class="exp-stopwatch-box-body">
           <fx-button @click="resetOrLap">
             {{ paused ? '重置' : '计次' }}
           </fx-button>
@@ -33,62 +33,80 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { CountTime, Stopwatch, StopwatchOnStop } from '@/index'
+
+export default defineComponent({
   name: 'ExpStopwatch',
-  data() {
-    return {
-      paused: true,
-      laps: []
-    }
-  },
-  methods: {
-    setLaps(laps) {
-      this.laps = laps.reverse().map(countTime => {
+  setup() {
+    const paused = ref(true)
+    const laps = ref<string[]>([])
+    const stopWatch = ref<InstanceType<typeof Stopwatch>>()
+
+    const setLaps = (_laps: CountTime[] = []) => {
+      laps.value = _laps.reverse().map(countTime => {
         return `${
-          countTime.fullHours > 0 ? countTime.thousandsFullHours + ':' : ''
+          parseInt(countTime.fullHours) > 0
+            ? countTime.thousandsFullHours + ':'
+            : ''
         }${countTime.minutes}:${countTime.seconds}.${countTime.milliseconds}`
       })
-    },
-    resetOrLap() {
-      if (this.paused) {
-        this.$refs.stopWatch.reset()
-        this.laps = []
-      } else {
-        this.setLaps(this.$refs.stopWatch.lap())
-      }
-    },
-    startOrStop() {
-      if (this.paused) {
-        this.$refs.stopWatch.start()
-      } else {
-        this.$refs.stopWatch.stop()
-      }
-    },
-    onStop(e) {
-      this.paused = true
+    }
 
-      console.log(e)
+    const resetOrLap = () => {
+      if (paused.value) {
+        stopWatch.value?.reset()
+        laps.value = []
+      } else {
+        setLaps(stopWatch.value?.lap())
+      }
+    }
 
-      this.setLaps(e.laps)
-    },
-    onStart(e) {
-      this.paused = false
-      console.log(e)
-    },
-    onReset(e) {
-      this.paused = true
-      console.log(e)
+    const startOrStop = () => {
+      if (paused.value) {
+        stopWatch.value?.start()
+      } else {
+        stopWatch.value?.stop()
+      }
+    }
+
+    const onStop: StopwatchOnStop = e => {
+      paused.value = true
+
+      console.log('stop', e)
+
+      setLaps(e.laps)
+    }
+
+    const onStart = () => {
+      paused.value = false
+    }
+
+    const onReset = () => {
+      paused.value = true
+    }
+
+    return {
+      paused,
+      laps,
+      stopWatch,
+
+      resetOrLap,
+      startOrStop,
+      onStart,
+      onReset,
+      onStop
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 @import '@/style/var.scss';
 
-.stopwatch {
+.exp-stopwatch {
   &-box {
     &-header {
       padding: 12px 0;

@@ -10,12 +10,12 @@ import { CircleProgress } from 'vfox'
 
 ## Props
 
-| 属性         | 类型          | 默认值 | 必填 | 说明                |
-| ------------ | ------------- | ------ | ---- | ------------------- |
-| percentage   | number/string |        | 是   | 百分比，例如：50    |
-| size         | number/string | 100    | 否   | 宽高，单位 px       |
-| stroke-width | boolean       | 5.37   | 否   | 进度条宽度，单位 px |
-| color        | string        |        | 否   | 进度条激活色        |
+| 属性         | 类型             | 默认值 | 必填 | 说明                |
+| ------------ | ---------------- | ------ | ---- | ------------------- |
+| percentage   | string \| number |        | 是   | 百分比，例如：50    |
+| size         | string \| number | 100    | 否   | 宽高，单位 px       |
+| stroke-width | boolean          | 5.37   | 否   | 进度条宽度，单位 px |
+| color        | string           |        | 否   | 进度条激活色        |
 
 ## Slots
 

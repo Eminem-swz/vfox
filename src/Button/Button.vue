@@ -32,11 +32,7 @@ import {
 import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
 import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
 import type { SizeType, StateType, StyleObject } from '../helpers/types'
-import type {
-  ButtonGroupOptions,
-  ButtonPatternType,
-  ButtonShapeType
-} from './types'
+import type { ButtonGroupOptions, PatternType, ShapeType } from './types'
 import { useGroupItem } from '@/hooks/use-group'
 import { getColorGroups, isColorValue, isDarkColor } from '@/helpers/color'
 
@@ -58,12 +54,12 @@ export default defineComponent({
       default: null
     },
     pattern: {
-      type: String as PropType<ButtonPatternType>,
+      type: String as PropType<PatternType>,
       validator: createEnumsValidator(BUTTON_PATTERN_TYPES),
       default: null
     },
     shape: {
-      type: String as PropType<ButtonShapeType>,
+      type: String as PropType<ShapeType>,
       validator: createEnumsValidator(BUTTON_SHAPE_TYPES),
       default: null
     },

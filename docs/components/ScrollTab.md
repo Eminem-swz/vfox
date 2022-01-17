@@ -10,16 +10,16 @@ import { ScrollTab, ScrollTabItem } from 'vfox'
 
 ## ScrollTab Props
 
-| 属性                 | 类型          | 默认值 | 必填 | 说明                        |
-| -------------------- | ------------- | ------ | ---- | --------------------------- |
-| sticky-offset-top    | number/string | 0      | 否   | 数值默认是 px，也支持 vw/vh |
-| sticky-offset-buttom | number/string | 0      | 否   | 数值默认是 px，也支持 vw/vh |
+| 属性                 | 类型             | 默认值 | 必填 | 说明                        |
+| -------------------- | ---------------- | ------ | ---- | --------------------------- |
+| sticky-offset-top    | string \| number | 0      | 否   | 数值默认是 px，也支持 vw/vh |
+| sticky-offset-buttom | string \| number | 0      | 否   | 数值默认是 px，也支持 vw/vh |
 
 ## ScrollTab Events
 
-| 事件   | 描述       | 回调函数参数               |
-| ------ | ---------- | -------------------------- |
-| change | 切换时触发 | { activeIndex } 当前项索引 |
+| 事件   | 描述       | 回调函数参数                       | TypeScript 函数   |
+| ------ | ---------- | ---------------------------------- | ----------------- |
+| change | 切换时触发 | { activeIndex: number } 当前项索引 | ScrollTabOnChange |
 
 ## ScrollTab Slots
 

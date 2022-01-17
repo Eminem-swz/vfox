@@ -30,7 +30,8 @@
   </fx-group>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { cloneData } from '@/helpers/util'
 
 const items = [
@@ -40,16 +41,16 @@ const items = [
   { id: 4, type: 'danger' }
 ]
 
-export default {
+export default defineComponent({
   name: 'ExpOrder',
-  data() {
+  setup() {
     return {
-      items: cloneData(items),
-      items2: cloneData(items),
-      items3: cloneData(items)
+      items: ref(cloneData(items)),
+      items2: ref(cloneData(items)),
+      items3: ref(cloneData(items))
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

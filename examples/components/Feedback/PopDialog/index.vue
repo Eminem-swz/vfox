@@ -187,73 +187,93 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
-import { showPopDialog } from '@/PopDialog'
+import { defineComponent, ref } from 'vue'
 import {
-  PopupVisibleStateChangeArgs,
-  PopDialogConfirmArgs,
-  PopupCancelArgs
+  showToast,
+  showPopDialog,
+  PlacementType,
+  PopupOnVisibleStateChange,
+  PopupOnCancel
 } from '@/index'
 
 export default defineComponent({
   name: 'ExpPopDialog',
-  data() {
-    return {
-      visible: false,
-      content: '确定要删除该条数据？',
-      showCancel: true,
-      selector: '',
-      confirmText: '确定',
-      cancelText: '取消',
+  setup() {
+    const visible = ref(false)
+    const content = ref('确定要删除该条数据？')
+    const showCancel = ref(false)
+    const selector = ref('')
+    const confirmText = ref('确定')
+    const cancelText = ref('取消')
+    const placement2 = ref<PlacementType>('bottom')
+    const selector2 = ref('')
+    const visible2 = ref(false)
+    const visible3 = ref(false)
+    const showEvent = ref(false)
+    const visibleEvent = ref(false)
 
-      placement2: 'bottom',
-      visible2: false,
-      selector2: '',
-
-      visible3: false,
-
-      showEvent: false,
-      visibleEvent: false
-    }
-  },
-  methods: {
-    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
-        console.log('event', res)
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
+      if (visibleEvent.value) {
+        console.log('visible-state-change', res)
         showToast(`${res.state} 事件触发`)
       }
       if (res.state === 'hidden') {
-        this.showCancel = true
-        this.visibleEvent = false
-        this.showEvent = false
-        this.content = '确定要删除该条数据？'
-        this.confirmText = '确定'
-        this.cancelText = '取消'
+        showCancel.value = true
+        visibleEvent.value = false
+        showEvent.value = false
+        content.value = '确定要删除该条数据？'
+        confirmText.value = '确定'
+        cancelText.value = '取消'
       }
-    },
-    onCancel(res: PopupCancelArgs) {
-      if (this.showEvent) {
-        console.log('event', res)
+    }
+
+    const onCancel: PopupOnCancel = res => {
+      if (showEvent.value) {
+        console.log('cancel', res)
         showToast(`取消事件触发`)
       }
-    },
-    onConfirm(res: PopDialogConfirmArgs) {
-      if (this.showEvent) {
-        console.log('event', res)
+    }
+
+    const onConfirm = (res: any) => {
+      if (showEvent.value) {
+        console.log('confirm', res)
         showToast(`确定事件触发`)
       }
-    },
-    onCallApi(selector: string) {
+    }
+
+    function onCallApi(selector: string) {
       showPopDialog({
         selector,
         placement: 'top',
-        content: this.content,
+        content: content.value,
         success: res => {
           console.log('success', res)
           showToast(res.confirm ? `点击了确定` : `点击了取消`)
         }
       })
+    }
+
+    return {
+      visible,
+      content,
+      showCancel,
+      selector,
+      confirmText,
+      cancelText,
+
+      placement2,
+      visible2,
+      selector2,
+
+      visible3,
+
+      showEvent,
+      visibleEvent,
+
+      onVisibleStateChange,
+      onConfirm,
+      onCancel,
+      onCallApi
     }
   }
 })

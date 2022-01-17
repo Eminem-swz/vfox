@@ -1,24 +1,26 @@
 <template>
   <div>
     <fx-group title="基础用法">
-      <fx-cell label="默认" isLink @click="showModel({})"></fx-cell>
+      <fx-cell label="默认" isLink @click="visible = true"></fx-cell>
       <fx-cell
         label="蒙层可点击"
         isLink
         @click="
-          showModel({
-            maskClosable: true
-          })
+          () => {
+            maskClosable = true
+            visible = true
+          }
         "
       ></fx-cell>
       <fx-cell
         label="隐藏关闭按钮"
         isLink
         @click="
-          showModel({
-            maskClosable: true,
-            showClose: false
-          })
+          () => {
+            maskClosable = true
+            showClose = false
+            visible = true
+          }
         "
       ></fx-cell>
     </fx-group>
@@ -30,21 +32,20 @@
         label="close"
         isLink
         @click="
-          ;(callbackEvent = true) &&
-            showModel({
-              maskClosable: true
-            })
+          () => {
+            callbackEvent = true
+            maskClosable = true
+            visible = true
+          }
         "
       ></fx-cell>
       <fx-cell
         label="visible-state-change"
         isLink
         @click="
-          ;(visibleEvent = true) &&
-            showModel({
-              title: '标题',
-              content: '提示内容提示内容提示内容提示内容提示内容提示内容'
-            })
+          () => {
+            visibleEvent = true
+          }
         "
       ></fx-cell>
     </fx-group>
@@ -66,61 +67,58 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { PopupOnCancel, PopupOnVisibleStateChange, showToast } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpModal',
-  props: {},
-  data() {
-    return {
-      visible: false,
-      maskClosable: false,
-      showClose: true,
+  setup() {
+    const visible = ref(false)
+    const maskClosable = ref(false)
+    const showClose = ref(true)
+    const callbackEvent = ref(false)
+    const visibleEvent = ref(false)
+    const visible2 = ref(false)
 
-      callbackEvent: false,
-      visibleEvent: false,
-
-      visible2: false,
-      imageUrl: 'https://cdn.fox2.cn/vfox/swiper/center-2.jpg'
-    }
-  },
-  methods: {
-    showModel(obj) {
-      obj = Object.assign(
-        {
-          maskClosable: false,
-          showClose: true
-        },
-        obj
-      )
-
-      Object.keys(obj).forEach(k => {
-        this[k] = obj[k]
-      })
-
-      this.visible = true
-    },
-    onClose(res) {
-      console.log('cancel', res)
-      if (this.callbackEvent) {
-        if (res.closeClick) {
-          showToast('点击了关闭按钮')
-        } else if (res.maskClick) {
-          showToast('点击了蒙层')
-        }
-      }
-    },
-    onVisibleStateChange({ state }) {
-      if (this.visibleEvent) {
-        console.log(`${state} 事件触发`)
+    const onVisibleStateChange: PopupOnVisibleStateChange = ({ state }) => {
+      if (visibleEvent.value) {
+        console.log('visible-state-change', state)
         showToast(`${state} 事件触发`)
       }
       if (state === 'hidden') {
-        this.callbackEvent = false
-        this.visibleEvent = false
+        callbackEvent.value = false
+        visibleEvent.value = false
+        maskClosable.value = false
+        showClose.value = true
       }
     }
+
+    const onClose: PopupOnCancel = res => {
+      console.log('cancel', res)
+      if (callbackEvent.value) {
+        if (res.source === 'closeClick') {
+          showToast('点击了关闭按钮')
+        } else if (res.source === 'maskClick') {
+          showToast('点击了蒙层')
+        }
+      }
+    }
+
+    return {
+      visible,
+      maskClosable,
+      showClose,
+
+      callbackEvent,
+      visibleEvent,
+
+      visible2,
+      imageUrl: 'https://cdn.fox2.cn/vfox/swiper/center-2.jpg',
+
+      onVisibleStateChange,
+      onClose
+    }
   }
-}
+})
 </script>

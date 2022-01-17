@@ -62,9 +62,9 @@
           type="default"
           closable
           initialLongPress
-          @click="onClick"
-          @close="onClose"
-          @long-press="onLongPress"
+          @click="showToast('点击事件')"
+          @close="showToast('关闭事件')"
+          @long-press="showToast('长按事件')"
         >
           标签
         </fx-tag>
@@ -73,23 +73,18 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { showToast } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpTag',
-  methods: {
-    onClick() {
-      showToast('点击事件')
-    },
-    onClose() {
-      showToast('关闭事件')
-    },
-    onLongPress() {
-      showToast('长按事件')
+  setup() {
+    return {
+      showToast
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

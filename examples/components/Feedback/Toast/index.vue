@@ -56,10 +56,18 @@
       ></fx-cell>
     </fx-group>
     <fx-group title="API">
-      <fx-cell label="showToast" isLink @click="callShowToastApi"></fx-cell>
-      <fx-cell label="hideToast" isLink @click="callHideToastApi"></fx-cell>
-      <fx-cell label="showLoading" isLink @click="callShowLoadingApi"></fx-cell>
-      <fx-cell label="hideLoading" isLink @click="callHideLoadingApi"></fx-cell>
+      <fx-cell
+        label="showToast"
+        isLink
+        @click="showToast({ title: '提示文本', duration: 5000 })"
+      ></fx-cell>
+      <fx-cell label="hideToast" isLink @click="hideToast()"></fx-cell>
+      <fx-cell
+        label="showLoading"
+        isLink
+        @click="showLoading({ title: '加载中' })"
+      ></fx-cell>
+      <fx-cell label="hideLoading" isLink @click="hideLoading()"></fx-cell>
     </fx-group>
     <fx-toast
       v-model:visible="visible"
@@ -73,8 +81,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { showToast, showLoading, hideToast, hideLoading } from '@/Toast'
+import { defineComponent, ref } from 'vue'
+import {
+  showToast,
+  showLoading,
+  hideToast,
+  hideLoading,
+  ToastType
+} from '@/index'
 
 interface showArgs {
   icon?: any
@@ -84,40 +98,38 @@ interface showArgs {
   duration?: number
 }
 
-type ToastType = 'default' | 'success' | 'fail' | 'loading'
-
 export default defineComponent({
   name: 'ExpToast',
-  data() {
-    return {
-      visible: false,
-      title: '',
-      type: 'default',
-      mask: false,
-      icon: null,
-      duration: 0
+  setup() {
+    const visible = ref(false)
+    const title = ref('')
+    const type = ref<ToastType>('default')
+    const mask = ref(false)
+    const icon = ref()
+    const duration = ref(0)
+
+    function onShowToast(args: showArgs) {
+      icon.value = args.icon || undefined
+      title.value = args.title || ''
+      mask.value = args.mask || false
+      type.value = args.type || 'default'
+      duration.value = args.duration ?? 1500
+      visible.value = true
     }
-  },
-  methods: {
-    onShowToast({ title, mask, type, duration, icon }: showArgs) {
-      this.icon = icon || null
-      this.title = title || ''
-      this.mask = mask || false
-      this.type = type || 'default'
-      this.duration = duration != null ? duration : 1500
-      this.visible = true
-    },
-    callShowToastApi() {
-      showToast({ title: '提示文本', duration: 5000 })
-    },
-    callShowLoadingApi() {
-      showLoading({ title: '加载中' })
-    },
-    callHideLoadingApi() {
-      hideLoading()
-    },
-    callHideToastApi() {
-      hideToast()
+
+    return {
+      visible,
+      title,
+      type,
+      mask,
+      icon,
+      duration,
+
+      onShowToast,
+      showToast,
+      showLoading,
+      hideToast,
+      hideLoading
     }
   }
 })

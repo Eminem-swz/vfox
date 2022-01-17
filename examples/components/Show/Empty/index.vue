@@ -19,7 +19,7 @@
       <fx-empty description="网站被小猫咪吃了">
         <template #image>
           <fx-image
-            class="empty-custom-image"
+            class="exp-empty-custom-image"
             src="https://cdn.fox2.cn/vfox/swiper/different-1.jpg"
           />
         </template>
@@ -28,17 +28,19 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'ExpEmpty'
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 @import '@/style/var.scss';
 
-.empty-custom-image {
+.exp-empty-custom-image {
   width: 320px;
   height: 214px;
 }

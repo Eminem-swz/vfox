@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
+import { showToast } from '@/index'
 
 export default defineComponent({
   name: 'ExpRange',
@@ -57,15 +57,15 @@ export default defineComponent({
       min: 50,
       max: 150,
 
-      value: null,
+      value: undefined,
       value2: [10, 60],
       value3: [20, 70],
       value4: [30, 80],
       value5: [40, 90],
       value6: [0, 100],
       value7: [0, 100],
-      value8: null,
-      value9: null
+      value8: undefined,
+      value9: undefined
     }
   },
   methods: {

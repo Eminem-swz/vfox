@@ -95,10 +95,12 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'ExpAvatar'
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

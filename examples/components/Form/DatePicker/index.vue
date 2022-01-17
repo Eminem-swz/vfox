@@ -142,15 +142,15 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import dayjs from '@/helpers/day'
-import { showToast } from '@/Toast'
-import { showDatePicker } from '@/DatePicker'
-import type {
-  PopupVisibleStateChangeArgs,
+import dayjs from 'dayjs'
+import {
+  showToast,
+  showDatePicker,
   DatePickerOptionFilter,
   SelectorModelValue,
   DatePickerOnConfirm,
-  PopupCancelArgs
+  PopupOnVisibleStateChange,
+  PopupOnCancel
 } from '@/index'
 
 export default defineComponent({
@@ -184,9 +184,9 @@ export default defineComponent({
       return true
     }
 
-    function onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
       if (visibleEvent.value) {
-        console.log('event', res)
+        console.log('visible-state-change', res)
         showToast(`${res.state} 事件触发`)
       }
 
@@ -199,21 +199,21 @@ export default defineComponent({
 
     function onChange(res: SelectorModelValue) {
       if (changeEvent.value) {
-        console.log('event', res)
+        console.log('change', res)
         showToast(`值改为 ${res}`)
       }
     }
 
     const onConfirm: DatePickerOnConfirm = res => {
       if (clickEvent.value) {
-        console.log('event', res)
+        console.log('confirm', res)
         showToast(`点击确定按钮`)
       }
     }
 
-    function onCancel(res: PopupCancelArgs) {
+    const onCancel: PopupOnCancel = res => {
       if (clickEvent.value) {
-        console.log('event', res)
+        console.log('cancel', res)
 
         if (res.source === 'cancelClick') {
           showToast('点击了取消按钮')

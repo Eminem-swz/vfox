@@ -32,9 +32,9 @@ import { useLongPress } from '@/hooks/use-long-press'
 import { noop } from '@/helpers/util'
 import type { SizeType, StateType, StyleObject } from '../helpers/types'
 import { getColorObject } from '@/helpers/color'
+import type { PatternType } from './types'
 
-type TagPatternType = 'light' | 'dark' | 'plain'
-const TAG_PATTERN_TYPES: TagPatternType[] = ['light', 'dark', 'plain']
+const TAG_PATTERN_TYPES: PatternType[] = ['light', 'dark', 'plain']
 
 export default defineComponent({
   name: 'fx-tag',
@@ -42,19 +42,16 @@ export default defineComponent({
   props: {
     size: {
       type: String as PropType<SizeType>,
-      validator: createEnumsValidator(SIZE_TYPES),
-      default: null
+      validator: createEnumsValidator(SIZE_TYPES)
     },
     type: {
       type: String as PropType<StateType>,
-      validator: createEnumsValidator(STATE_TYPES),
-      default: null
+      validator: createEnumsValidator(STATE_TYPES)
     },
     // 款式
     pattern: {
-      type: String as PropType<TagPatternType>,
-      validator: createEnumsValidator(TAG_PATTERN_TYPES),
-      default: null
+      type: String as PropType<PatternType>,
+      validator: createEnumsValidator(TAG_PATTERN_TYPES)
     },
     // 可关闭的
     closable: {

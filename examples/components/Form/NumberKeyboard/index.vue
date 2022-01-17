@@ -93,40 +93,62 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import {
+  NumberKeyboardOnClose,
+  NumberKeyboardOnDelete,
+  showToast
+} from '@/index'
+import { defineComponent, ref } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'ExpNumberKeyboard',
-  data() {
-    return {
-      value: '',
+  setup() {
+    const value = ref('')
+    const visible1 = ref(false)
+    const visible2 = ref(false)
+    const visible3 = ref(false)
+    const visible4 = ref(false)
+    const visible5 = ref(false)
+    const visible6 = ref(false)
+    const visible7 = ref(false)
+    const visible8 = ref(false)
 
-      visible1: false,
-      visible2: false,
-      visible3: false,
-      visible4: false,
-      visible5: false,
-      visible6: false,
-      visible7: false,
-      visible8: false
-    }
-  },
-  methods: {
-    onInput(value) {
+    const onInput = (value: string) => {
       showToast(value)
-    },
-    onDelete(res) {
-      console.log('delete', res)
-      showToast('删除')
-    },
-    onChange(value) {
+    }
+
+    const onChange = (value: string) => {
       console.log('change', value)
       showToast(`本次输入值为：${value}`)
-    },
-    onClose(res) {
+    }
+
+    const onDelete: NumberKeyboardOnDelete = res => {
+      console.log('delete', res)
+      showToast('删除')
+    }
+
+    const onClose: NumberKeyboardOnClose = res => {
       console.log('close', res)
     }
+
+    return {
+      value,
+
+      visible1,
+      visible2,
+      visible3,
+      visible4,
+      visible5,
+      visible6,
+      visible7,
+      visible8,
+
+      onInput,
+      onChange,
+      onDelete,
+      onClose
+    }
   }
-}
+})
 </script>

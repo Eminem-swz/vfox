@@ -55,6 +55,10 @@
     user-select: none;
     color: #fff;
 
+    .fx-icon {
+      --fx-icon-color: #fff;
+    }
+
     &:active {
       background-color: rgba($color: #000, $alpha: 0.6);
     }

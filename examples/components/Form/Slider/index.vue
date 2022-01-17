@@ -43,7 +43,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
+import { showToast } from '@/index'
 
 export default defineComponent({
   name: 'ExpSlider',
@@ -52,7 +52,7 @@ export default defineComponent({
       min: 40,
       max: 140,
 
-      value: null,
+      value: undefined,
       value2: 10,
       value3: 20,
       value4: 30,

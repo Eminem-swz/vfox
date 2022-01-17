@@ -10,13 +10,13 @@ import { Icon } from 'vfox'
 
 ## Props
 
-| 属性   | 类型             | 默认值 | 必填 | 说明                           |
-| ------ | ---------------- | ------ | ---- | ------------------------------ |
-| icon   | string/Component |        | 是   | 设置图标的名称或者传入图标组件 |
-| size   | number           | 24     | 否   | icon 的大小                    |
-| width  | number           |        | 否   | icon 的宽度                    |
-| height | number           |        | 否   | icon 的高度                    |
-| color  | string           |        | 否   | icon 的颜色                    |
+| 属性   | 类型                | 默认值 | 必填 | 说明                           |
+| ------ | ------------------- | ------ | ---- | ------------------------------ |
+| icon   | string \| Component |        | 是   | 设置图标的名称或者传入图标组件 |
+| size   | number              | 24     | 否   | icon 的大小                    |
+| width  | number              |        | 否   | icon 的宽度                    |
+| height | number              |        | 否   | icon 的高度                    |
+| color  | string              |        | 否   | icon 的颜色                    |
 
 ## 自定义 SVG 图标
 

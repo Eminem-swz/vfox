@@ -31,12 +31,12 @@ import { FlatList } from 'vfox'
 
 ## Events
 
-| 事件           | 描述                 | 回调函数参数                                                                                           |
-| -------------- | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| recycle-change | 列表项回收变化时触发 | { item, index, recycled }                                                                              |
-| end-reached    | 滚动到末尾时触发     | { distanceFromEnd } 其中 distanceFromEnd 为距离末尾的距离，单位 px                                     |
-| scroll         | 滚动时触发           | { scrollLeft, scrollTop, scrollHeight, scrollWidth }                                                   |
-| refreshing     | 下拉刷新时触发       | ({ pullDirection: string }, done: Function) 其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数 |
+| 事件           | 描述                 | 回调函数参数                                                                                                                          | TypeScript 函数         |
+| -------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| recycle-change | 列表项回收变化时触发 | { item, index, recycled }                                                                                                             | FlatListOnRecycleChange |
+| end-reached    | 滚动到末尾时触发     | { distanceFromEnd } 其中 distanceFromEnd 为距离末尾的距离，单位 px                                                                    | FlatListOnEndReached    |
+| scroll         | 滚动时触发           | { scrollLeft: number, scrollTop: number, scrollWidth: number, scrollHeight: number }                                                  | OnScroll                |
+| refreshing     | 下拉刷新时触发       | ({ pullDirection: 'up' \| 'right' \| 'down' \| 'left' }, done: () =>void)，其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数 | OnRefreshing            |
 
 ### recycle-change 的参数
 

@@ -49,8 +49,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { showToast } from '@/Toast'
-import type {
+import {
+  showToast,
   SelectorValueFormatter,
   SelectorValueParser,
   SelectorModelValue
@@ -79,7 +79,7 @@ export default defineComponent({
     }
 
     function onChange(res: SelectorModelValue) {
-      console.log('event', res)
+      console.log('change', res)
     }
 
     function onChangeEvent(res: SelectorModelValue) {

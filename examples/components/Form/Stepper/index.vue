@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
+import { showToast } from '@/index'
 
 export default defineComponent({
   name: 'ExpStepper',
@@ -50,10 +50,12 @@ export default defineComponent({
     return { value: '1' }
   },
   methods: {
-    onChange(value: number) {
+    onChange(value: string) {
+      console.log('change', value)
       showToast(`值改变为：${value}`)
     },
-    onInput(value: number) {
+    onInput(value: string) {
+      console.log('input', value)
       showToast(`当前值为：${value}`)
     },
     onPlusClick() {

@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
+import { showToast } from '@/index'
 
 export default defineComponent({
   name: 'ExpSwitch',

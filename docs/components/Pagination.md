@@ -17,9 +17,9 @@ import { Pagination } from 'vfox'
 
 ## Events
 
-| 事件   | 描述               | 回调函数参数                       |
-| ------ | ------------------ | ---------------------------------- |
-| change | 点击翻页按钮时触发 | { current: number, total: number } |
+| 事件   | 描述               | 回调函数参数                       | TypeScript 函数    |
+| ------ | ------------------ | ---------------------------------- | ------------------ |
+| change | 点击翻页按钮时触发 | { current: number, total: number } | PaginationOnChange |
 
 ## Slots
 

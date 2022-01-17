@@ -1,7 +1,7 @@
 <template>
   <div>
     <fx-group title="基础用法">
-      <fx-cell label="预览图片" isLink @click="show"></fx-cell>
+      <fx-cell label="预览图片" isLink @click="show({})"></fx-cell>
       <fx-cell
         label="指定初始图片"
         isLink
@@ -44,11 +44,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import type { PopupVisibleStateChangeArgs, PopupCancelArgs } from '@/index'
-import { showToast } from '@/Toast'
-import { showImagePreview } from '@/ImagePreview'
-import type { ImagePreviewOnChange, FnArgs } from '@/index'
+import {
+  ImagePreviewOnChange,
+  PopupOnCancel,
+  PopupOnVisibleStateChange,
+  showImagePreview,
+  showToast
+} from '@/index'
+import { defineComponent, ref } from 'vue'
 
 interface showArgs {
   showClose?: boolean
@@ -59,62 +62,78 @@ interface showArgs {
 
 export default defineComponent({
   name: 'ExpImagePreview',
-  data() {
-    return {
-      visible: false,
-      showClose: false,
-      imageUrls: [
-        'https://cdn.fox2.cn/vfox/swiper/different-1.jpg',
-        'https://cdn.fox2.cn/vfox/swiper/different-2.jpg',
-        'https://cdn.fox2.cn/vfox/swiper/different-3.jpg'
-      ],
-      current: '',
+  setup() {
+    const visible = ref(false)
+    const showClose = ref(false)
+    const changeEvent = ref(false)
+    const visibleEvent = ref(false)
 
-      changeEvent: false,
-      visibleEvent: false
-    }
-  },
-  methods: {
-    onCallApi() {
+    const current = ref('')
+
+    const imageUrls = [
+      'https://cdn.fox2.cn/vfox/swiper/different-1.jpg',
+      'https://cdn.fox2.cn/vfox/swiper/different-2.jpg',
+      'https://cdn.fox2.cn/vfox/swiper/different-3.jpg'
+    ]
+
+    function onCallApi() {
       showImagePreview({
-        urls: this.imageUrls,
+        urls: imageUrls,
         showClose: true,
         imageHighRendering: false,
         success: res => {
           console.log('success', res)
         }
       })
-    },
-    show(res: showArgs) {
-      this.showClose = res.showClose || false
-      this.current = res.current || ''
-      this.changeEvent = res.changeEvent || false
-      this.visibleEvent = res.visibleEvent || false
-      this.visible = true
-    },
-    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
-        console.log('event', res)
+    }
+
+    function show(res: showArgs) {
+      showClose.value = res.showClose || false
+      current.value = res.current || ''
+      changeEvent.value = res.changeEvent || false
+      visibleEvent.value = res.visibleEvent || false
+      visible.value = true
+    }
+
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
+      if (visibleEvent.value) {
+        console.log('visible-state-change', res)
         showToast(`${res.state} 事件触发`)
       }
       if (res.state === 'hidden') {
-        this.showClose = false
-        this.current = ''
-        this.changeEvent = false
-        this.visibleEvent = false
+        showClose.value = false
+        current.value = ''
+        changeEvent.value = false
+        visibleEvent.value = false
       }
-    },
-    onChange(res: FnArgs<ImagePreviewOnChange>[0]) {
-      if (this.changeEvent) {
-        console.log('event', res)
+    }
+
+    const onChange: ImagePreviewOnChange = res => {
+      if (changeEvent.value) {
+        console.log('change', res)
         showToast(`切换到第 ${res.activeIndex + 1} 张`)
       }
-    },
-    onCancel(res: PopupCancelArgs) {
-      if (this.changeEvent) {
+    }
+
+    const onCancel: PopupOnCancel = res => {
+      if (changeEvent.value) {
         console.log('cancel', res)
         showToast(`关闭`)
       }
+    }
+
+    return {
+      visible,
+      showClose,
+
+      imageUrls,
+      current,
+
+      onCallApi,
+      show,
+      onVisibleStateChange,
+      onChange,
+      onCancel
     }
   }
 })

@@ -153,7 +153,7 @@
       :selector="selector"
       :placement="placement"
       :content="content"
-      @visible-state-change="onVisibleStateChange"
+      @visibleStateChange="onVisibleStateChange"
     >
     </fx-popover>
     <fx-popover
@@ -167,45 +167,45 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
-import { showPopover } from '@/Popover'
-import { PopupVisibleStateChangeArgs } from '@/index'
+import { defineComponent, ref } from 'vue'
+import {
+  showToast,
+  showPopover,
+  PlacementType,
+  PopupOnVisibleStateChange
+} from '@/index'
 
 export default defineComponent({
   name: 'ExpPopover',
-  props: {},
-  data() {
-    return {
-      visible: false,
-      selector: '',
-      placement: 'bottom',
-      content: '这是气泡内容',
-      noMaskVisible: false,
+  setup() {
+    const visible = ref(false)
+    const noMaskVisible = ref(false)
+    const visibleEvent = ref(false)
+    const selector = ref('')
+    const content = ref('这是气泡内容')
+    const placement = ref<PlacementType>('bottom')
 
-      visibleEvent: false
-    }
-  },
-  methods: {
-    onShowNoMask() {
-      this.noMaskVisible = true
+    function onShowNoMask() {
+      noMaskVisible.value = true
       setTimeout(() => {
-        this.noMaskVisible = false
+        noMaskVisible.value = false
       }, 5000)
-    },
-    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
-        console.log('event', res)
+    }
+
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
+      if (visibleEvent.value) {
+        console.log('visible-state-change', res)
         showToast(`${res.state} 事件触发`)
       }
       if (res.state === 'hidden') {
-        this.selector = ''
-        this.placement = 'bottom'
-        this.content = '这是气泡内容'
-        this.visibleEvent = false
+        selector.value = ''
+        placement.value = 'bottom'
+        content.value = '这是气泡内容'
+        visibleEvent.value = false
       }
-    },
-    onCallApi(selector: string) {
+    }
+
+    function onCallApi(selector: string) {
       showPopover({
         selector,
         content: '这是气泡内容',
@@ -214,6 +214,19 @@ export default defineComponent({
           console.log('success', res)
         }
       })
+    }
+    return {
+      visible,
+      noMaskVisible,
+      visibleEvent,
+
+      selector,
+      content,
+      placement,
+
+      onShowNoMask,
+      onVisibleStateChange,
+      onCallApi
     }
   }
 })

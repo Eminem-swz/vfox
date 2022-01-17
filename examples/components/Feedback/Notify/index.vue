@@ -100,9 +100,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { showNotify, hideNotify } from '@/Notify'
-import type { PopupCancelArgs, StateType } from '@/index'
+import { defineComponent, ref } from 'vue'
+import { showNotify, hideNotify, StateType, PopupOnCancel } from '@/index'
 
 interface showArgs {
   icon?: any
@@ -116,20 +115,17 @@ interface showArgs {
 
 export default defineComponent({
   name: 'ExpNotify',
-  data() {
-    return {
-      visible: false,
-      title: '浅色调',
-      icon: 'InfoCircleOutlined',
-      backgroundColor: '#8bc7ff',
-      color: '#292e36',
-      duration: 0,
-      type: 'primary',
-      closable: false
-    }
-  },
-  methods: {
-    callShowApi() {
+  setup() {
+    const visible = ref(false)
+    const title = ref('浅色调')
+    const icon = ref('InfoCircleOutlined')
+    const backgroundColor = ref('#8bc7ff')
+    const color = ref('#292e36')
+    const duration = ref(0)
+    const type = ref<StateType>('primary')
+    const closable = ref(false)
+
+    function callShowApi() {
       showNotify({
         title: '通知文本',
         duration: 5000,
@@ -138,34 +134,45 @@ export default defineComponent({
           console.log('success', res)
         }
       })
-    },
-    show({
-      title,
-      backgroundColor,
-      color,
-      type,
-      duration,
-      icon,
-      closable
-    }: showArgs) {
-      this.icon = icon || null
-      this.title = title || ''
-      this.backgroundColor = backgroundColor || ''
-      this.color = color || ''
-      this.type = type || 'primary'
-      this.closable = closable || false
-      this.duration = duration != null ? duration : 1500
-      this.visible = true
-    },
-    callHideApi() {
+    }
+
+    function callHideApi() {
       hideNotify({
         success(res) {
           console.log('success', res)
         }
       })
-    },
-    onCancel(res: PopupCancelArgs) {
+    }
+
+    function show(args: showArgs) {
+      icon.value = args.icon || null
+      title.value = args.title || ''
+      backgroundColor.value = args.backgroundColor || ''
+      color.value = args.color || ''
+      type.value = args.type || 'primary'
+      closable.value = args.closable || false
+      duration.value = args.duration ?? 1500
+      visible.value = true
+    }
+
+    const onCancel: PopupOnCancel = res => {
       console.log('cancel', res)
+    }
+
+    return {
+      visible,
+      title,
+      icon,
+      backgroundColor,
+      color,
+      duration,
+      type,
+      closable,
+
+      callShowApi,
+      callHideApi,
+      show,
+      onCancel
     }
   }
 })

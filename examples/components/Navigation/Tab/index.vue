@@ -23,25 +23,39 @@
         <fx-tab :options="subTabList"></fx-tab>
       </div>
     </fx-group>
+    <fx-group title="change 事件">
+      <div class="tab-box">
+        <fx-tab :options="shortTabList" @change="onChange"></fx-tab>
+      </div>
+    </fx-group>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { shortTabList, tabList, mixTabList, subTabList } from './data'
+import { TabOnChange, showToast } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpTab',
-  data() {
+  setup() {
+    const onChange: TabOnChange = res => {
+      console.log('change', res)
+      showToast(`切换到第${res.index + 1}个`)
+    }
+
     return {
-      shortActiveValue: 1,
-      activeValue: 1,
+      shortActiveValue: ref(1),
+      activeValue: ref(1),
       shortTabList,
       tabList,
       mixTabList,
-      subTabList
+      subTabList,
+
+      onChange
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

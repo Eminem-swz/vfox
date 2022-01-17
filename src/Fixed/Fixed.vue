@@ -51,8 +51,7 @@ export default defineComponent({
     // 固定方向
     placement: {
       type: String as PropType<PlacementType>,
-      validator: createEnumsValidator(PLACEMENT_TYPES),
-      default: null
+      validator: createEnumsValidator(PLACEMENT_TYPES)
     },
     // 是否开启安全区
     enableSafeAreaInsets: {

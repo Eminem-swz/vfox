@@ -30,7 +30,7 @@
         required
         :component="[
           ImageUploader,
-          { uploadReady: onUpload, columnNumber: 1, maxCount: 1 }
+          { uploadReady: hookUpload, columnNumber: 1, maxCount: 1 }
         ]"
         :decorator="[FormItem]"
       />
@@ -134,9 +134,9 @@
   </fx-group>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { multiOptions, regionOptions } from '../Picker/data'
-import { showToast } from '@/Toast'
 import {
   Input,
   Picker,
@@ -149,18 +149,41 @@ import {
   Stepper,
   RadioGroup,
   CheckboxGroup,
-  ImageUploader
+  ImageUploader,
+  showToast,
+  showDialog,
+  ImageUploaderUploadReady
 } from '@/index'
 import { createForm, setValidateLanguage } from '@formily/core'
 import { FormProvider, Field, FormConsumer } from '@formily/vue'
 import FormItem from './FormItem'
-import { showDialog } from '@/Dialog'
 
 setValidateLanguage('zh-CN')
 
-export default {
+export default defineComponent({
   name: 'ExpForm',
   components: { FormProvider, Field, FormConsumer },
+  setup() {
+    function getDataUrl(file: File) {
+      return new Promise<string>(resolve => {
+        const fr = new FileReader()
+        fr.onload = function (e) {
+          resolve((e.target?.result as string) ?? '')
+        }
+        fr.readAsDataURL(file)
+      })
+    }
+
+    const hookUpload: ImageUploaderUploadReady = (file, handlers) => {
+      getDataUrl(file).then(url => {
+        handlers.success(url)
+      })
+    }
+
+    return {
+      hookUpload
+    }
+  },
   data() {
     return {
       baseForm: {
@@ -201,27 +224,12 @@ export default {
         `
       })
     },
-    onSubmit(...args) {
+    onSubmit(...args: any[]) {
       console.log(...args)
       showToast('校验通过')
-    },
-    onUpload(file, handlers) {
-      console.log(file)
-      this.getDataUrl(file).then(url => {
-        handlers.success(url)
-      })
-    },
-    getDataUrl(file) {
-      return new Promise(resolve => {
-        const fr = new FileReader()
-        fr.onload = function (e) {
-          resolve(e.target.result)
-        }
-        fr.readAsDataURL(file)
-      })
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -10,16 +10,24 @@ import { NavBar } from 'vfox'
 
 ## Props
 
-| 属性          | 类型    | 默认值 | 必填 | 说明                                   |
-| ------------- | ------- | ------ | ---- | -------------------------------------- |
-| title         | string  | ''     | 否   | 标题                                   |
-| show-back     | boolean | false  | 否   | 是否展示返回按钮                       |
-| show-home     | boolean | false  | 否   | 是否展示首页按钮                       |
-| left-buttons  | array   | []     |      | 左侧按钮列表，优先级高于首页和返回按钮 |
-| right-buttons | array   | []     |      | 右侧按钮列表                           |
-| icon-only     | boolean | true   | 否   | 是否展示纯图标按钮                     |
+| 属性          | 类型           | 默认值 | 必填 | 说明                                   |
+| ------------- | -------------- | ------ | ---- | -------------------------------------- |
+| title         | string         | ''     | 否   | 标题                                   |
+| show-back     | boolean        | false  | 否   | 是否展示返回按钮                       |
+| show-home     | boolean        | false  | 否   | 是否展示首页按钮                       |
+| left-buttons  | ButtonOption[] | []     |      | 左侧按钮列表，优先级高于首页和返回按钮 |
+| right-buttons | ButtonOption[] | []     |      | 右侧按钮列表                           |
+| icon-only     | boolean        | true   | 否   | 是否展示纯图标按钮                     |
 
 ### left-buttons/right-buttons 的结构
+
+```TypeScript
+type ButtonOption = {
+  text: string
+  icon?: IconData
+  type?: StateType
+}
+```
 
 ```
 [

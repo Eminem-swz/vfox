@@ -1,21 +1,21 @@
-import type { BadgeOptions } from '../Badge/types'
+import type { BadgeOption, Option as HandleBadgeOption } from '../Badge/types'
 import type { IconData } from '../Icon/types'
 
 export interface OptionItem {
   label: string
   value: number | string
-  icon?: IconData
-  iconLink?: string
-  activeIcon?: IconData
-  activeIconLink?: string
-  badge?: BadgeOptions | number | string
+  icon?: string | IconData
+  activeIcon?: string | IconData
+  badge?: BadgeOption
   subLabel?: string
 }
 
 export type OptionList = (number | string | OptionItem)[]
 
 export interface HandleOptionItem extends OptionItem {
-  badge: BadgeOptions
+  badge?: HandleBadgeOption
+  iconLink?: string
+  activeIconLink?: string
 }
 
 export type OnChange = (payload: {

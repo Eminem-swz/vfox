@@ -40,10 +40,10 @@
         :show-back="true"
         :show-home="true"
         :right-buttons="[{ icon: 'MenuOutlined', text: '菜单' }]"
-        @back-click="onBack"
-        @home-click="onBackHome"
-        @title-dbclick="onTitle"
-        @right-button-click="onRightButtonClick"
+        @backClick="showToast('返回按钮点击')"
+        @homeClick="showToast('首页按钮点击')"
+        @titleDbclick="showToast('标题双击')"
+        @rightButtonClick="onRightButtonClick"
       >
       </fx-nav-bar>
     </fx-group>
@@ -81,26 +81,14 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
-import { showDialog } from '@/Dialog'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { showToast, showDialog, NavBarOnButtonClick } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpNavBar',
-  data() {
-    return { text: 1 }
-  },
-  methods: {
-    onBack() {
-      showToast('返回按钮点击')
-    },
-    onBackHome() {
-      showToast('首页按钮点击')
-    },
-    onTitle() {
-      showToast('标题双击')
-    },
-    onRightButtonClick(res) {
+  setup() {
+    const onRightButtonClick: NavBarOnButtonClick = res => {
       console.log(res)
 
       showDialog({
@@ -109,8 +97,10 @@ export default {
         content: `text: '${res.item.text}'\nindex: ${res.index}`
       })
     }
+
+    return { showToast, onRightButtonClick }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

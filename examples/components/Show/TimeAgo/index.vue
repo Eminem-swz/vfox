@@ -16,18 +16,19 @@
   </div>
 </template>
 
-<script>
-import dayjs from '@/helpers/day'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import dayjs from 'dayjs'
 
-export default {
-  name: 'ExpTimeAgo',
+export default defineComponent({
+  name: 'ExpTimeline',
   data() {
     return {
       time: new Date(),
       time2: dayjs('2021-05-01', 'YYYY-MM-DD').toDate()
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

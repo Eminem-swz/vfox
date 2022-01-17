@@ -16,19 +16,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { mixTabList, tabList } from '../Tab/data'
 
-export default {
+export default defineComponent({
   name: 'ExpSideTab',
-  data() {
+  setup() {
     return {
-      activeValue: 1,
+      activeValue: ref(1),
       mixTabList,
       tabList
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

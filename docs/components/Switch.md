@@ -14,14 +14,14 @@ import { Switch } from 'vfox'
 
 ## Props
 
-| 属性        | 类型          | 默认值 | 必填 | 说明                            |
-| ----------- | ------------- | ------ | ---- | ------------------------------- |
-| name        | string        |        | 否   | 标识                            |
-| disabled    | boolean       | false  | 否   | 是否禁用                        |
-| v-model     | boolean       | false  | 否   | 是否开启                        |
-| color       | string        |        | 否   | 自定义默认态的背景色            |
-| activeColor | string        |        | 否   | 自定义激活态的背景色            |
-| size        | number/string |        | 否   | 自定义组件大小（高度），单位 px |
+| 属性         | 类型             | 默认值 | 必填 | 说明                            |
+| ------------ | ---------------- | ------ | ---- | ------------------------------- |
+| name         | string           |        | 否   | 标识                            |
+| disabled     | boolean          | false  | 否   | 是否禁用                        |
+| v-model      | boolean          | false  | 否   | 是否开启                        |
+| color        | string           |        | 否   | 自定义默认态的背景色            |
+| active-color | string           |        | 否   | 自定义激活态的背景色            |
+| size         | string \| number |        | 否   | 自定义组件大小（高度），单位 px |
 
 ## Events
 

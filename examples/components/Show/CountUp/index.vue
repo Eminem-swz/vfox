@@ -76,43 +76,57 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { CountUp, CountUpOnAnimated, CountUpOnCancel, showToast } from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpCountUp',
-  data() {
-    return {
-      initialNumber: 1000,
-      number: 5000,
-      number2: 1000,
-      isCancel: false
-    }
-  },
-  methods: {
-    onAnimated(e) {
+  setup() {
+    const number = ref(5000)
+    const number2 = ref(1000)
+    const isCancel = ref(false)
+    const countUp = ref<InstanceType<typeof CountUp>>()
+
+    const onAnimated: CountUpOnAnimated = e => {
       console.log(e)
       showToast('动画结束')
-    },
-    onAnimated2(e) {
-      console.log(e)
-    },
-    onCancel(e) {
-      console.log(e)
-      this.number2 = e.number
-    },
-    cancel() {
-      if (!this.isCancel) {
-        this.$refs.countUp.cancel()
+    }
+
+    const onAnimated2: CountUpOnAnimated = e => {
+      console.log('animated', e)
+    }
+
+    const onCancel: CountUpOnCancel = e => {
+      console.log('cancel', e)
+      number2.value = e.number
+    }
+
+    function cancel() {
+      if (!isCancel.value) {
+        countUp.value?.cancel()
         showToast('已取消')
       } else {
-        this.number2 = this.number2 > 500 ? 0 : 1000
+        number2.value = number2.value > 500 ? 0 : 1000
       }
 
-      this.isCancel = !this.isCancel
+      isCancel.value = !isCancel.value
+    }
+
+    return {
+      initialNumber: 1000,
+      number,
+      number2,
+      isCancel,
+      countUp,
+
+      onAnimated,
+      onAnimated2,
+      onCancel,
+      cancel
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

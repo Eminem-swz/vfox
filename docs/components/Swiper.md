@@ -25,11 +25,11 @@ import { Swiper, SwiperItem } from 'vfox'
 
 ## Swiper Events
 
-| 事件     | 描述                         | 回调函数参数               |
-| -------- | ---------------------------- | -------------------------- |
-| change   | 切换时触发                   | { activeIndex } 当前项索引 |
-| animated | 动画结束时触发               | { activeIndex } 当前项索引 |
-| click    | 点击时触发，为了区分滑动情况 | {}                         |
+| 事件     | 描述                         | 回调函数参数                                | TypeScript 函数  |
+| -------- | ---------------------------- | ------------------------------------------- | ---------------- |
+| change   | 切换时触发                   | payload: { activeIndex: number } 当前项索引 | SwiperOnChange   |
+| animated | 动画结束时触发               | payload: { activeIndex: number } 当前项索引 | SwiperOnAnimated |
+| click    | 点击时触发，为了区分滑动情况 | payload: { }                                |                  |
 
 ## Swiper Slots
 

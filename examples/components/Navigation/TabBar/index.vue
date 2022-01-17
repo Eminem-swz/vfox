@@ -28,13 +28,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { baseList, badgeList, imageList } from './data'
-import { markRaw } from 'vue'
-import TaobaoSvg from '../../../assets/icons/taobao.svg'
-import QqSvg from '../../../assets/icons/qq.svg'
-import WechatSvg from '../../../assets/icons/wechat.svg'
-import WeiboSvg from '../../../assets/icons/weibo.svg'
+import { defineComponent, markRaw } from 'vue'
+import TaobaoSvg from '../../../assets/icons/taobao.svg?vueComponent'
+import QqSvg from '../../../assets/icons/qq.svg?vueComponent'
+import WechatSvg from '../../../assets/icons/wechat.svg?vueComponent'
+import WeiboSvg from '../../../assets/icons/weibo.svg?vueComponent'
 
 const customIconList = [
   {
@@ -59,7 +59,7 @@ const customIconList = [
   }
 ]
 
-export default {
+export default defineComponent({
   name: 'ExpTabBar',
   data() {
     return {
@@ -70,7 +70,7 @@ export default {
       imageList
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

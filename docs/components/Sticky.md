@@ -14,11 +14,11 @@ import { Sticky, StickyView, StickyViewItem } from 'vfox'
 
 ## Sticky Props
 
-| 属性             | 类型                    | 默认值   | 必填 | 说明                                                                            |
-| ---------------- | ----------------------- | -------- | ---- | ------------------------------------------------------------------------------- |
-| contain-selector | string/element/document | document | 否   | 基于哪个容器，如果是 string，则为可以被 document.querySelector(selector) 获取到 |
-| offset-top       | number/string           | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
-| offset-bottom    | number/string           | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
+| 属性             | 类型                              | 默认值   | 必填 | 说明                                                                            |
+| ---------------- | --------------------------------- | -------- | ---- | ------------------------------------------------------------------------------- |
+| contain-selector | string \| HTMLElement \| Document | document | 否   | 基于哪个容器，如果是 string，则为可以被 document.querySelector(selector) 获取到 |
+| offset-top       | string \| number                  | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
+| offset-bottom    | string \| number                  | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
 
 ## Sticky Slots
 
@@ -36,17 +36,17 @@ import { Sticky, StickyView, StickyViewItem } from 'vfox'
 
 ## StickyView Props
 
-| 属性                 | 类型                    | 默认值   | 必填 | 说明                                                                            |
-| -------------------- | ----------------------- | -------- | ---- | ------------------------------------------------------------------------------- |
-| v-model:active-index | number                  | 0        | 否   | 当前布局中展现的子项 index                                                      |
-| contain-selector     | string/element/document | document | 否   | 基于哪个容器，如果是 string，则为可以被 document.querySelector(selector) 获取到 |
-| offset-top           | number/string           | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
+| 属性                 | 类型                              | 默认值   | 必填 | 说明                                                                            |
+| -------------------- | --------------------------------- | -------- | ---- | ------------------------------------------------------------------------------- |
+| v-model:active-index | number                            | 0        | 否   | 当前布局中展现的子项 index                                                      |
+| contain-selector     | string \| HTMLElement \| Document | document | 否   | 基于哪个容器，如果是 string，则为可以被 document.querySelector(selector) 获取到 |
+| offset-top           | string \| number                  | 0        | 否   | 数值默认是 px，也支持 vw/vh                                                     |
 
 ## StickyView Events
 
-| 事件   | 描述       | 回调函数参数               |
-| ------ | ---------- | -------------------------- |
-| change | 切换时触发 | { activeIndex } 当前项索引 |
+| 事件   | 描述       | 回调函数参数                                | TypeScript 函数    |
+| ------ | ---------- | ------------------------------------------- | ------------------ |
+| change | 切换时触发 | payload: { activeIndex: number } 当前项索引 | StickyViewOnChange |
 
 ## StickyView Slots
 

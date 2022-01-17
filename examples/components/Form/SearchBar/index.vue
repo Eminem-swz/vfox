@@ -23,8 +23,8 @@
         show-cancel
         :placeholders="placeholders"
         @input="onInput2"
-        @focus="onEvent"
-        @blur="onEvent"
+        @focus="onFocus"
+        @blur="onBlur"
         @cancel="onCancel"
         @search="onSearch"
       >
@@ -36,23 +36,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { placeholders } from './data'
-import { showToast } from '@/Toast'
+import { SearchBarOnInput, showToast } from '@/index'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'ExpSearchBar',
-  data() {
-    return { text: 1, placeholders }
+  setup() {
+    return {
+      placeholders,
+      showToast
+    }
   },
-  methods: {
-    onCancel() {
+  data() {
+    const onCancel = () => {
       showToast('取消按钮点击')
-    },
-    onEvent({ type }) {
-      showToast(type)
-    },
-    onInput(e, fn) {
+    }
+
+    const onInput: SearchBarOnInput = (e, fn) => {
       fn(
         e.text
           ? 'ABCD'.split('').map(v => {
@@ -63,21 +65,36 @@ export default {
             })
           : []
       )
-    },
-    onInput2(e, fn) {
+    }
+
+    const onInput2: SearchBarOnInput = (e, fn) => {
       showToast(`输入了 ${e.text}`)
 
-      this.onInput(e, fn)
-    },
-    onSearch({ text }) {
+      onInput(e, fn)
+    }
+
+    const onSearch = ({ text }: { text: string }) => {
       showToast(`搜索了 ${text}`)
-    },
-    onClick(e) {
+    }
+
+    const onClick = (e: { searchText: string }) => {
       console.log(e)
       showToast(`搜索词 ${e.searchText}`)
     }
+
+    return {
+      text: 1,
+      placeholders,
+      onFocus: () => showToast('focus'),
+      onBlur: () => showToast('blur'),
+      onCancel,
+      onInput,
+      onInput2,
+      onSearch,
+      onClick
+    }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

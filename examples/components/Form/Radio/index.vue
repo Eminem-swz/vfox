@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
+import { showToast } from '@/index'
 
 export default defineComponent({
   name: 'ExpRadio',
@@ -72,7 +72,7 @@ export default defineComponent({
     }
   },
   methods: {
-    onChange(value: string) {
+    onChange(value: string | number) {
       console.log('change', value)
       showToast(`Change Value: ${value}`)
     }

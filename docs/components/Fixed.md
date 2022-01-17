@@ -10,13 +10,13 @@ import { Fixed } from 'vfox'
 
 ## Props
 
-| 属性                    | 类型    | 默认值   | 必填 | 说明                                                                               |
-| ----------------------- | ------- | -------- | ---- | ---------------------------------------------------------------------------------- |
-| placement               | string  | 'bottom' | 否   | 固定位置，可选 'bottom', 'top', 'left', 'right'                                    |
-| background              | string  |          | 否   | 固定背景色，同 CSS 值                                                              |
-| z-index                 | number  | 4        | 否   | 设定固定的 zIndex                                                                  |
-| space-hold              | boolean | true     | 否   | 是否预留占位元素，开启后元素位置预留跟固定元素一样大小的占位元素，防止挡住其他元素 |
-| enable-safe-area-insets | boolean | true     | 否   | 是否开启安全区适配                                                                 |
+| 属性                    | 类型          | 默认值   | 必填 | 说明                                                                               |
+| ----------------------- | ------------- | -------- | ---- | ---------------------------------------------------------------------------------- |
+| placement               | PlacementType | 'bottom' | 否   | 固定位置，可选 'bottom', 'top', 'left', 'right'                                    |
+| background              | string        |          | 否   | 固定背景色，同 CSS 值                                                              |
+| z-index                 | number        | 1        | 否   | 设定固定的 zIndex                                                                  |
+| space-hold              | boolean       | true     | 否   | 是否预留占位元素，开启后元素位置预留跟固定元素一样大小的占位元素，防止挡住其他元素 |
+| enable-safe-area-insets | boolean       | true     | 否   | 是否开启安全区适配                                                                 |
 
 注：
 

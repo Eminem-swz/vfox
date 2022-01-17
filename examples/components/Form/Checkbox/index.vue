@@ -67,7 +67,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { showToast } from '@/Toast'
+import { showToast } from '@/index'
 
 export default defineComponent({
   name: 'ExpCheckbox',
@@ -76,7 +76,7 @@ export default defineComponent({
     const groupValue = ref(['A', 'C'])
     const groups = ref(['A', 'B', 'C'])
 
-    function onChange(value: string[]) {
+    function onChange(value: (string | number)[]) {
       console.log('change', value)
       showToast(`Change Value: ${value}`)
     }

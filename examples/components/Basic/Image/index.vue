@@ -190,13 +190,15 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'ExpImage',
   data() {
     return { imageUrl: 'https://cdn.fox2.cn/vfox/swiper/center-2.jpg' }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -155,80 +155,78 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
-import { showDialog } from '@/Dialog'
-import { showPopMenu } from '@/PopMenu'
-import type {
-  PopMenuConfirmArgs,
-  PopupCancelArgs,
-  PopupVisibleStateChangeArgs
+import { defineComponent, ref } from 'vue'
+import {
+  showToast,
+  showDialog,
+  showPopMenu,
+  PopupOnVisibleStateChange,
+  PopMenuOnConfirm,
+  PopupOnCancel,
+  PlacementType
 } from '@/index'
 
 export default defineComponent({
   name: 'ExpPopMenu',
-  data() {
-    return {
-      visible: false,
-      selector: '',
+  setup() {
+    const visible = ref(false)
+    const selector = ref('')
+    const placement2 = ref<PlacementType>('bottom')
+    const visible2 = ref(false)
+    const selector2 = ref('')
+    const visible3 = ref(false)
+    const showEvent = ref(false)
+    const visibleEvent = ref(false)
 
-      placement2: 'bottom',
-      visible2: false,
-      selector2: '',
+    const options = [
+      {
+        icon: 'HeartOutlined',
+        name: '爱心'
+      },
+      {
+        icon: 'StarOutlined',
+        name: '星星'
+      },
+      {
+        icon: 'CircleOutlined',
+        name: '圈圈',
+        disabled: true
+      }
+    ]
 
-      visible3: false,
-
-      options: [
-        {
-          icon: 'HeartOutlined',
-          name: '爱心'
-        },
-        {
-          icon: 'StarOutlined',
-          name: '星星'
-        },
-        {
-          icon: 'CircleOutlined',
-          name: '圈圈',
-          disabled: true
-        }
-      ],
-
-      showEvent: false,
-      visibleEvent: false
-    }
-  },
-  methods: {
-    onVisibleStateChange(res: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
-        console.log('event', res)
+    const onVisibleStateChange: PopupOnVisibleStateChange = res => {
+      if (visibleEvent.value) {
+        console.log('visible-state-change', res)
         showToast(`${res.state} 事件触发`)
       }
       if (res.state === 'hidden') {
-        this.visibleEvent = false
-        this.showEvent = false
+        visibleEvent.value = false
+        showEvent.value = false
       }
-    },
-    onConfirm(res: PopMenuConfirmArgs) {
-      if (this.showEvent) {
-        console.log('event', res)
+    }
+
+    const onConfirm: PopMenuOnConfirm = res => {
+      if (showEvent.value) {
+        console.log('confirm', res)
         showDialog({
           title: '选择了',
           showCancel: false,
           content: `item.name: '${res.item.name}'\nindex: ${res.index}`
         })
       }
-    },
-    onCancel(res: PopupCancelArgs) {
-      if (this.showEvent) {
-        console.log('event', res)
+    }
+
+    const onCancel: PopupOnCancel = res => {
+      if (showEvent.value) {
+        console.log('cancel', res)
         showToast('取消了')
       }
-    },
-    onCallApi(selector: string) {
+    }
+
+    function onCallApi(selector: string) {
       showPopMenu({
         selector,
-        options: this.options,
+        options: options,
         placement: 'top',
         success: res => {
           console.log('success', res)
@@ -239,6 +237,27 @@ export default defineComponent({
           }
         }
       })
+    }
+
+    return {
+      visible,
+      selector,
+
+      placement2,
+      visible2,
+      selector2,
+
+      visible3,
+
+      options,
+
+      showEvent,
+      visibleEvent,
+
+      onVisibleStateChange,
+      onConfirm,
+      onCancel,
+      onCallApi
     }
   }
 })

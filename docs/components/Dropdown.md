@@ -10,16 +10,16 @@ import { Dropdown } from 'vfox'
 
 ## Props
 
-| 属性            | 类型           | 默认值 | 必填 | 说明                                                                              |
-| --------------- | -------------- | ------ | ---- | --------------------------------------------------------------------------------- |
-| v-model:visible | boolean        | false  | 否   | 是否显示                                                                          |
-| selector        | element/string |        | 是   | 从哪个元素展开，如果是 string，则为可以被 document.querySelector(selector) 获取到 |
+| 属性            | 类型                  | 默认值 | 必填 | 说明                                                                              |
+| --------------- | --------------------- | ------ | ---- | --------------------------------------------------------------------------------- |
+| v-model:visible | boolean               | false  | 否   | 是否显示                                                                          |
+| selector        | string \| HTMLElement |        | 是   | 从哪个元素展开，如果是 string，则为可以被 document.querySelector(selector) 获取到 |
 
 ## Events
 
-| 事件                 | 描述           | 回调函数参数                                                 |
-| -------------------- | -------------- | ------------------------------------------------------------ |
-| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./Dropdown.md#visiblestate-值说明) } |
+| 事件                 | 描述           | 回调函数参数                                                 | TypeScript 函数           |
+| -------------------- | -------------- | ------------------------------------------------------------ | ------------------------- |
+| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./Dropdown.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

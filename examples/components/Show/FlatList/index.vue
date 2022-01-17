@@ -144,17 +144,24 @@
         @click="scrollToIndex(49, 1)"
       ></fx-cell>
       <fx-cell
-        label="scrollToOffset({ offset: 200 })"
+        label="scrollTo({ offset: 200 })"
         isLink
-        @click="scrollToOffset(200)"
+        @click="scrollTo(200)"
       ></fx-cell>
     </fx-group>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { showToast } from '@/Toast'
+import { defineComponent, reactive, ref } from 'vue'
+import {
+  FlatList,
+  FlatListOnEndReached,
+  FlatListOnRecycleChange,
+  FlatListOnRefreshing,
+  showToast,
+  ViewPosition
+} from '@/index'
 
 interface ExpList {
   id: number
@@ -163,18 +170,8 @@ interface ExpList {
 
 export default defineComponent({
   name: 'ExpFlatList',
-  data() {
-    return {
-      list: [] as ExpList[],
-      lowerLoading: false,
-      loadList: [] as ExpList[],
-      getItemSize(item: any, index: number) {
-        return 50 + (index % 10) * 2
-      }
-    }
-  },
-  created() {
-    const list: ExpList[] = []
+  setup() {
+    const list = reactive<ExpList[]>([])
 
     for (let i = 0; i < 100; i++) {
       list.push({
@@ -183,19 +180,31 @@ export default defineComponent({
       })
     }
 
-    ;(this.list as ExpList[]) = list
+    const loadList = reactive<ExpList[]>([])
 
-    this.getLoadList()
-  },
-  methods: {
-    scrollToIndex(index: number, viewPosition = 0) {
-      ;(this.$refs.flatList as any).scrollToIndex({ index, viewPosition })
-    },
-    scrollToOffset(offset: number) {
-      ;(this.$refs.flatList as any).scrollToOffset({ offset })
-    },
+    function getLoadList() {
+      for (let i = loadList.length, len = loadList.length + 10; i < len; i++) {
+        loadList.push({
+          id: i + 1,
+          text: `第 ${i + 1} 个列表`
+        })
+      }
+    }
 
-    onRefreshing(res: any, done: () => void) {
+    getLoadList()
+
+    const lowerLoading = ref(false)
+    const flatList = ref<InstanceType<typeof FlatList>>()
+
+    function scrollToIndex(index: number, viewPosition: ViewPosition = 0) {
+      flatList.value?.scrollToIndex({ index, viewPosition })
+    }
+
+    function scrollTo(offset: number) {
+      flatList.value?.scrollTo({ offset })
+    }
+
+    const onRefreshing: FlatListOnRefreshing = (res, done) => {
       setTimeout(() => {
         showToast({
           title: `刷新成功`,
@@ -203,47 +212,56 @@ export default defineComponent({
         })
         done()
       }, 2000)
-    },
-    onEndReached() {
+    }
+
+    const onEndReached: FlatListOnEndReached = res => {
+      console.log('end-reached', res)
       showToast(`到底了`)
-    },
-    onLoadMore() {
-      if (this.loadList.length >= 100) {
+    }
+
+    const onLoadMore: FlatListOnEndReached = res => {
+      console.log('end-reached', res)
+
+      if (loadList.length >= 100) {
         return
       }
 
-      this.lowerLoading = true
+      lowerLoading.value = true
 
       setTimeout(() => {
-        this.getLoadList()
+        getLoadList()
         showToast({
           title: `加载成功`,
           type: 'success'
         })
-        this.lowerLoading = false
+        lowerLoading.value = false
       }, 500)
-    },
-    onRecycleChange({
+    }
+
+    const onRecycleChange: FlatListOnRecycleChange = ({
       item,
       index,
       recycled
-    }: {
-      item: any
-      index: number
-      recycled: boolean
-    }) {
+    }) => {
       index === 49 &&
         showToast(`${item.text} ${recycled ? '回收了' : '加入了'}`)
-    },
-    getLoadList() {
-      const loadList: ExpList[] = this.loadList
+    }
 
-      for (let i = loadList.length, len = loadList.length + 10; i < len; i++) {
-        loadList.push({
-          id: i + 1,
-          text: `第 ${i + 1} 个列表`
-        })
-      }
+    return {
+      list,
+      loadList,
+      lowerLoading,
+      getItemSize(item: any, index: number) {
+        return 50 + (index % 10) * 2
+      },
+
+      flatList,
+      scrollToIndex,
+      scrollTo,
+      onRefreshing,
+      onEndReached,
+      onLoadMore,
+      onRecycleChange
     }
   }
 })

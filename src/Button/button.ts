@@ -1,13 +1,13 @@
-import type { ButtonShapeType, ButtonPatternType } from './types'
+import type { ShapeType, PatternType } from './types'
 
-export const BUTTON_SHAPE_TYPES: ButtonShapeType[] = [
+export const BUTTON_SHAPE_TYPES: ShapeType[] = [
   'rectangle',
   'round',
   'circle',
   'square'
 ]
 
-export const BUTTON_PATTERN_TYPES: ButtonPatternType[] = [
+export const BUTTON_PATTERN_TYPES: PatternType[] = [
   'default',
   'solid',
   'dashed',

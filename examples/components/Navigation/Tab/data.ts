@@ -1,4 +1,6 @@
-export const shortTabList = [
+import { TabOptions } from '@/index'
+
+export const shortTabList: TabOptions = [
   {
     value: 1,
     label: '空调'
@@ -17,7 +19,7 @@ export const shortTabList = [
   }
 ]
 
-export const tabList = [
+export const tabList: TabOptions = [
   {
     value: 1,
     label: '空调'
@@ -88,7 +90,7 @@ export const tabList = [
   }
 ]
 
-export const mixTabList = [
+export const mixTabList: TabOptions = [
   {
     value: 1,
     label: '买过',
@@ -111,7 +113,7 @@ export const mixTabList = [
   }
 ]
 
-export const subTabList = [
+export const subTabList: TabOptions = [
   {
     value: 1,
     label: '精选',

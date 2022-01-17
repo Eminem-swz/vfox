@@ -64,53 +64,89 @@
           })
         "
       ></fx-cell>
+      <fx-cell
+        label="cancel"
+        isLink
+        @click="
+          show({
+            title: '标题',
+            placement: 'bottom',
+            showClose: true,
+            cancelEvent: true
+          })
+        "
+      ></fx-cell>
     </fx-group>
     <fx-drawer
       v-model:visible="drawerVisible"
       :title="title"
       :placement="placement"
       :showClose="showClose"
-      @visible-state-change="onVisibleStateChange"
+      @visibleStateChange="onVisibleStateChange"
+      @cancel="onCancel"
     ></fx-drawer>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import type { PopupVisibleStateChangeArgs, PlacementType } from '@/index'
-import { showToast } from '@/Toast'
+import { defineComponent, ref } from 'vue'
+import {
+  PlacementType,
+  showToast,
+  PopupOnVisibleStateChange,
+  PopupOnCancel
+} from '@/index'
 
 interface showArgs {
   title?: string
   placement?: PlacementType
   showClose?: boolean
   visibleEvent?: boolean
+  cancelEvent?: boolean
 }
 
 export default defineComponent({
   name: 'ExpDrawer',
-  data() {
-    return {
-      drawerVisible: false,
-      title: '',
-      placement: 'top',
-      showClose: false,
-      visibleEvent: false
+  setup() {
+    const drawerVisible = ref(false)
+    const title = ref('')
+    const placement = ref<PlacementType>('top')
+    const showClose = ref(false)
+    const visibleEvent = ref(false)
+    const cancelEvent = ref(false)
+
+    function show(args: showArgs) {
+      title.value = args.title || ''
+      placement.value = args.placement || 'top'
+      showClose.value = args.showClose || false
+      visibleEvent.value = !!args.visibleEvent
+      cancelEvent.value = !!args.cancelEvent
+      drawerVisible.value = true
     }
-  },
-  methods: {
-    show({ title, placement, showClose, visibleEvent }: showArgs) {
-      this.title = title || ''
-      this.placement = placement || 'top'
-      this.showClose = showClose || false
-      this.visibleEvent = !!visibleEvent
-      this.drawerVisible = true
-    },
-    onVisibleStateChange({ state }: PopupVisibleStateChangeArgs) {
-      if (this.visibleEvent) {
+
+    const onVisibleStateChange: PopupOnVisibleStateChange = ({ state }) => {
+      if (visibleEvent.value) {
         showToast(`${state} 事件触发`)
-        console.log(`${state} 事件触发`)
+        console.log('visible-state-change', state)
       }
+    }
+
+    const onCancel: PopupOnCancel = res => {
+      if (cancelEvent.value) {
+        showToast('取消')
+        console.log('cancel', res)
+      }
+    }
+
+    return {
+      drawerVisible,
+      title,
+      placement,
+      showClose,
+
+      show,
+      onVisibleStateChange,
+      onCancel
     }
   }
 })

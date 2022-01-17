@@ -32,12 +32,12 @@ import {
   getEnumsValue
 } from '@/helpers/validator'
 import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '@/Avatar/avatar'
-import type { AvatarShapeType } from './types'
+import type { ShapeType, UserSizeType } from './types'
 import { useGroupItem } from '@/hooks/use-group'
 import { isNumber } from '@/helpers/util'
 import type { StyleObject } from '../helpers/types'
 import { handleBadge } from '@/Badge/badge'
-import type { BadgeOptions } from '../Badge/types'
+import type { BadgeOption, Option as HandleBadgeOption } from '../Badge/types'
 import { getColorObject } from '@/helpers/color'
 
 type Gender = 'man' | 'woman'
@@ -49,7 +49,7 @@ export default defineComponent({
   props: {
     ...avatarProps,
     shape: {
-      type: String as PropType<AvatarShapeType>,
+      type: String as PropType<ShapeType>,
       validator: createEnumsValidator(AVATAR_SHAPE_TYPES),
       default: null
     },
@@ -58,7 +58,7 @@ export default defineComponent({
       default: null
     },
     badge: {
-      type: [Number, String, Object] as PropType<number | string | BadgeOptions>
+      type: [Number, String, Object] as PropType<BadgeOption>
     },
     gender: {
       type: String as PropType<Gender>
@@ -70,7 +70,7 @@ export default defineComponent({
   },
   setup(props) {
     const uid = (getCurrentInstance() as ComponentInternalInstance).uid
-    const groupOptions = inject<{ size: number | string } | null>(
+    const groupOptions = inject<{ size: UserSizeType } | null>(
       'fxAvatarGroupOptions',
       null
     )
@@ -111,7 +111,7 @@ export default defineComponent({
     })
 
     const badge2 = computed(() => {
-      let badge: BadgeOptions
+      let badge: HandleBadgeOption
 
       if (props.gender && GenderNames.includes(props.gender)) {
         badge = {

@@ -97,8 +97,8 @@
 </template>
 
 <script lang="ts">
-import { showToast } from '@/Toast'
 import { defineComponent } from 'vue'
+import { showToast, CollapseOnChange, CollapseItemOnToggle } from '@/index'
 
 export default defineComponent({
   name: 'ExpCollapse',
@@ -111,15 +111,14 @@ export default defineComponent({
     }
   },
   setup() {
-    function onChange(res: { activeNames: string[] }) {
-      console.log('change', res)
+    const onChange: CollapseOnChange = activeNames => {
+      console.log('change', activeNames)
       showToast(
-        (res.activeNames.length > 0 ? res.activeNames.join('，') : '没有项') +
-          '展开'
+        (activeNames.length > 0 ? activeNames.join('，') : '没有项') + '展开'
       )
     }
 
-    function onToggle(res: { spread: boolean }) {
+    const onToggle: CollapseItemOnToggle = res => {
       console.log('toggle', res)
       showToast(res.spread ? '展开' : '收起')
     }

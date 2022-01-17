@@ -38,7 +38,7 @@ export function useTab(
 
     if (Array.isArray(props.options)) {
       props.options.forEach((item, index) => {
-        let option: OptionItem | null = null
+        let option: HandleOptionItem | null = null
 
         if (isNumber(item)) {
           option = {
@@ -85,14 +85,12 @@ export function useTab(
         }
 
         if (option) {
-          option = option as OptionItem
-
           if (option.value === value2) {
             activeIndex.value = index
             hasActive = true
           }
 
-          options.push(option as HandleOptionItem)
+          options.push(option)
         }
       })
     }

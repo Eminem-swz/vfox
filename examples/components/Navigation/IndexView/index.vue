@@ -15,19 +15,23 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { IndexViewOnChange } from '@/index'
+
+export default defineComponent({
   name: 'ExpIndexView',
-  data() {
-    return {
-      offsetTop: 52,
-      indexList: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-    }
-  },
-  methods: {
-    onChange(res) {
+  setup() {
+    const onChange: IndexViewOnChange = res => {
       console.log('change', res)
     }
+
+    return {
+      offsetTop: 52,
+      indexList: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+
+      onChange
+    }
   }
-}
+})
 </script>

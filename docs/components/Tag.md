@@ -10,15 +10,15 @@ import { Tag } from 'vfox'
 
 ## Props
 
-| 属性     | 类型    | 默认值    | 必填 | 说明                                                                               |
-| -------- | ------- | --------- | ---- | ---------------------------------------------------------------------------------- |
-| type     | string  | 'default' | 否   | 标签类型                                                                           |
-| pattern  | string  | 'light'   | 否   | 标签款式                                                                           |
-| color    | string  |           | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
-| size     | string  | 'middle'  | 否   | 标签尺寸                                                                           |
-| closable | boolean | true      | 否   | 是否展示关闭按钮，只推荐在 size='large' 情况下开启                                 |
+| 属性     | 类型       | 默认值    | 必填 | 说明                                                                               |
+| -------- | ---------- | --------- | ---- | ---------------------------------------------------------------------------------- |
+| type     | StateType  | 'default' | 否   | 标签类型                                                                           |
+| pattern  | TagPattern | 'light'   | 否   | 标签款式                                                                           |
+| color    | string     |           | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
+| size     | SizeType   | 'middle'  | 否   | 标签尺寸                                                                           |
+| closable | boolean    | true      | 否   | 是否展示关闭按钮，只推荐在 size='large' 情况下开启                                 |
 
-### type 的合法值
+### StateType 的合法值
 
 | 值      | 说明 |
 | ------- | ---- |
@@ -28,7 +28,7 @@ import { Tag } from 'vfox'
 | warning | 警告 |
 | danger  | 危险 |
 
-### pattern 的合法值
+### TagPattern 的合法值
 
 | 值    | 说明                         |
 | ----- | ---------------------------- |
@@ -36,7 +36,7 @@ import { Tag } from 'vfox'
 | dark  | 深色标签，深色底，白色字     |
 | plain | 空心标签，白底，深色字，有边 |
 
-### size 的合法值
+### SizeType 的合法值
 
 | 值     | 说明     |
 | ------ | -------- |

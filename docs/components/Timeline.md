@@ -24,10 +24,10 @@ import { Timeline, TimelineItem } from 'vfox'
 
 ## TimelineItem Props
 
-| 属性     | 类型   | 默认值 | 必填 | 说明           |
-| -------- | ------ | ------ | ---- | -------------- |
-| title    | string |        | 否   | 时间轴子项标题 |
-| dotColor | string |        | 否   | 时间轴节点颜色 |
+| 属性      | 类型   | 默认值 | 必填 | 说明           |
+| --------- | ------ | ------ | ---- | -------------- |
+| title     | string |        | 否   | 时间轴子项标题 |
+| dot-color | string |        | 否   | 时间轴节点颜色 |
 
 ## TimelineItem Slots
 

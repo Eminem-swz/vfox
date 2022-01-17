@@ -46,9 +46,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { cascadeOptions, regionOptions } from '../Picker/data'
-import { showToast } from '@/Toast'
-import { showCascader } from '@/Cascader'
-import type {
+import {
+  showToast,
+  showCascader,
   SelectorModelValue,
   SelectorValueFormatter,
   SelectorValueParser
@@ -74,7 +74,7 @@ export default defineComponent({
     }
 
     function onChange(res: SelectorModelValue) {
-      console.log('event', res)
+      console.log('change', res)
 
       showToast(`选择了 ${res}`)
     }

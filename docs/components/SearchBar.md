@@ -26,13 +26,13 @@ import { SearchBar } from 'vfox'
 
 ## Events
 
-| 事件   | 描述                                             | 回调函数参数                                            |
-| ------ | ------------------------------------------------ | ------------------------------------------------------- |
-| input  | 输入值改变时触发，包括 clear 的                  | ({ text: string }, setSuggestList: suggestList => void) |
-| focus  | 输入框获取焦点时触发                             | ({ text: string }, setSuggestList: suggestList => void) |
-| blur   | 输入框移出焦点时触发                             | ({ text: string }, setSuggestList: suggestList => void) |
-| cancel | 取消按钮点击                                     | ({})                                                    |
-| click  | 输入框点击，配合 readonly 使用，获取到当前候选值 | ({ searchText: string})                                 |
+| 事件   | 描述                                             | 回调函数参数                                                       | TypeScript 函数  |
+| ------ | ------------------------------------------------ | ------------------------------------------------------------------ | ---------------- |
+| input  | 输入值改变时触发，包括 clear 的                  | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnInput |
+| focus  | 输入框获取焦点时触发                             | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnInput |
+| blur   | 输入框移出焦点时触发                             | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnInput |
+| cancel | 取消按钮点击                                     | payload: { }                                                       |                  |
+| click  | 输入框点击，配合 readonly 使用，获取到当前候选值 | payload: { searchText: string }                                    |                  |
 
 ### setSuggestList 的参数 suggestList 结构
 

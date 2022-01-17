@@ -9,37 +9,44 @@
       </fx-swipe-cell>
     </fx-group>
     <fx-group title=" 事件监听">
-      <fx-swipe-cell :buttons="buttons" @button-click="onButtonClick">
+      <fx-swipe-cell :buttons="buttons" @buttonClick="onButtonClick">
         <fx-cell label="单元格" content="向左划"></fx-cell>
       </fx-swipe-cell>
     </fx-group>
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {
+  showToast,
+  SwipeCellButtonOption,
+  SwipeCellOnButtonClick
+} from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpSwipeCell',
-  data() {
-    return {
-      buttons: [
-        {
-          text: '加入收藏',
-          type: 'warning'
-        },
-        {
-          text: '删除',
-          type: 'danger'
-        }
-      ]
-    }
-  },
-  methods: {
-    onButtonClick(e) {
-      console.log(e)
+  setup() {
+    const buttons: SwipeCellButtonOption[] = [
+      {
+        text: '加入收藏',
+        type: 'warning'
+      },
+      {
+        text: '删除',
+        type: 'danger'
+      }
+    ]
+
+    const onButtonClick: SwipeCellOnButtonClick = e => {
+      console.log('button-click', e)
       showToast(`点击了 ${e.item.text}`)
     }
+
+    return {
+      buttons,
+      onButtonClick
+    }
   }
-}
+})
 </script>

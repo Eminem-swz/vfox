@@ -47,11 +47,11 @@ import { Form, FormFooter, FormItem } from 'vfox'
 
 ## FormItem Props
 
-| 属性     | 类型            | 默认值 | 必填 | 说明                                         |
-| -------- | --------------- | ------ | ---- | -------------------------------------------- |
-| error    | string/string[] |        | 否   | 错误提示信息                                 |
-| label    | string          |        | 否   | 设置该行名称，比如 `昵称`                    |
-| required | boolean         | false  | 否   | 是否必填，设置 `true` 后 label 会展示必填`*` |
+| 属性     | 类型               | 默认值 | 必填 | 说明                                         |
+| -------- | ------------------ | ------ | ---- | -------------------------------------------- |
+| error    | string \| string[] |        | 否   | 错误提示信息                                 |
+| label    | string             |        | 否   | 设置该行名称，比如 `昵称`                    |
+| required | boolean            | false  | 否   | 是否必填，设置 `true` 后 label 会展示必填`*` |
 
 ## FormItem Slots
 

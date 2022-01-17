@@ -17,9 +17,9 @@ import { Collapse, CollapseItem } from 'vfox'
 
 ## Collapse Events
 
-| 事件   | 描述           | 回调函数参数                                          |
-| ------ | -------------- | ----------------------------------------------------- |
-| change | 切换面板时触发 | activeNames: 类型与 v-model:active-names 绑定的值一致 |
+| 事件   | 描述           | 回调函数参数          |
+| ------ | -------------- | --------------------- |
+| change | 切换面板时触发 | activeNames: string[] |
 
 ## Collapse Slots
 

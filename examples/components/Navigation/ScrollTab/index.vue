@@ -49,21 +49,25 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { ScrollTabOnChange } from '@/index'
+
+export default defineComponent({
   name: 'ExpScrollTab',
-  data() {
-    return {
-      offsetTop: 52,
-      offsetBottom: 12
-    }
-  },
-  methods: {
-    onChange(res) {
+  setup() {
+    const onChange: ScrollTabOnChange = res => {
       console.log('change', res)
     }
+
+    return {
+      offsetTop: 52,
+      offsetBottom: 12,
+
+      onChange
+    }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

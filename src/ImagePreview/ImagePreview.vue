@@ -65,7 +65,7 @@ import { Swiper, SwiperItem } from '@/Swiper'
 import { isStringArray, rangeNumber } from '@/helpers/util'
 import { usePopup } from '@/popup/use-popup'
 import { popupEmits, popupProps } from '@/popup/popup'
-import type { ImageOnLoadPayLoad } from '../Image/types'
+import type { OnLoad as ImageOnLoad } from '../Image/types'
 import type { FnArgs } from '../helpers/types'
 import type { OnChange } from './types'
 
@@ -407,7 +407,7 @@ export default defineComponent({
       popup.customCancel('previewClick')
     }
 
-    function onImageLoad({ width, height, src }: ImageOnLoadPayLoad) {
+    const onImageLoad: ImageOnLoad = ({ width, height, src }) => {
       if (props.imageHighRendering) {
         const dpr = window.devicePixelRatio || 1
         width = width / dpr

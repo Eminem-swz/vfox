@@ -10,17 +10,17 @@ import { Calendar, CalendarPopup, CalendarView } from 'vfox'
 
 ## 公共 Props
 
-| 属性           | 类型                                                                                                     | 默认值             | 必填 | 说明                                                 |
-| -------------- | -------------------------------------------------------------------------------------------------------- | ------------------ | ---- | ---------------------------------------------------- |
+| 属性           | 类型                                                                                                         | 默认值             | 必填 | 说明                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------ | ------------------ | ---- | ---------------------------------------------------- |
 | v-model        | [SelectorValue](./Calendar.md#selectorvalue-的类型) \| [SelectorValue](./Calendar.md#selectorvalue-的类型)[] | []                 | 否   | 选中值                                               |
-| min-date       | Date                                                                                                     | 当前日期           | 否   | 可选最小值                                           |
-| max-date       | Date                                                                                                     | 当前日期的六个月后 | 否   | 可选最大值                                           |
-| initial-mode   | [CalendarMode](./Calendar.md#calendarmode)                                                               | 'single'           | 否   | 模式                                                 |
-| allow-same-day | boolean                                                                                                  | false              | 否   | `range` 模式生效，设置开始结束时间是否可以同一天     |
-| max-range      | number                                                                                                   | Infinity           | 否   | `range` 模式生效，选择区间的最长天数                 |
-| day-handler    | Function                                                                                                 |                    | 否   | 日历每个日期处理函数                                 |
-| formatter      | [CalendarValueFormatter](./Calendar.md#calendarvalueformatter)                                           |                    | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
-| parser         | [CalendarValueParser](./Calendar.md#calendarvalueparser)                                                 |                    | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
+| min-date       | Date                                                                                                         | 当前日期           | 否   | 可选最小值                                           |
+| max-date       | Date                                                                                                         | 当前日期的六个月后 | 否   | 可选最大值                                           |
+| initial-mode   | [CalendarMode](./Calendar.md#calendarmode)                                                                   | 'single'           | 否   | 模式                                                 |
+| allow-same-day | boolean                                                                                                      | false              | 否   | `range` 模式生效，设置开始结束时间是否可以同一天     |
+| max-range      | number                                                                                                       | Infinity           | 否   | `range` 模式生效，选择区间的最长天数                 |
+| day-handler    | [CalendarDayHandler](./Calendar.md#calendardayhandler)                                                       |                    | 否   | 日历每个日期处理函数                                 |
+| formatter      | [CalendarValueFormatter](./Calendar.md#calendarvalueformatter)                                               |                    | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
+| parser         | [CalendarValueParser](./Calendar.md#calendarvalueparser)                                                     |                    | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
 
 ### SelectorValue 的类型
 
@@ -34,12 +34,12 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 ### CalendarDetail 的结构
 
-| 值         | 类型                                                        | 说明                                                                                      |
-| ---------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| 值         | 类型                                                          | 说明                                                                                      |
+| ---------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | value      | [SelectorModelValue](./Calendar.md#selectormodelvalue-的类型) | 选择的值，`range` 模式下有开始 Date 和结束 Date 两个实例；`formatter/parser` 的优先级更高 |
-| label      | string                                                      | 选中值对应的描述文本                                                                      |
-| valueArray | number[][]                                                  | 如：[[2021, 5, 1], [2021, 5, 30]]                                                         |
-| rangeCount | number                                                      | 选择区间持续的天数（含首尾）                                                              |
+| label      | string                                                        | 选中值对应的描述文本                                                                      |
+| valueArray | number[][]                                                    | 如：[[2021, 5, 1], [2021, 5, 30]]                                                         |
+| rangeCount | number                                                        | 选择区间持续的天数（含首尾）                                                              |
 
 ### CalendarMode
 
@@ -49,7 +49,7 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 `single` 表示选择一天，`range` 选择一个日期区间。
 
-### dayHandler 函数
+### CalendarDayHandler
 
 ```
 dayHandler(Object: Day) => Day
@@ -117,8 +117,8 @@ interface CalendarValueParser {
 
 ## Calendar Events
 
-| 事件   | 描述                   | 回调函数参数                                                | 函数 TypeScript  |
-| ------ | ---------------------- | ----------------------------------------------------------- | ---------------- |
+| 事件   | 描述                   | 回调函数参数                                                  | 函数 TypeScript  |
+| ------ | ---------------------- | ------------------------------------------------------------- | ---------------- |
 | change | 选择后值发生改变时触发 | [SelectorModelValue](./Calendar.md#selectormodelvalue-的类型) | SelectorOnChange |
 
 ## CalendarPopup

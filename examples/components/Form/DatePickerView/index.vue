@@ -73,9 +73,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import dayjs from '@/helpers/day'
-import { showToast } from '@/Toast'
-import type { DatePickerOptionFilter, SelectorModelValue } from '@/index'
+import dayjs from 'dayjs'
+import { showToast, DatePickerOptionFilter, SelectorModelValue } from '@/index'
 
 export default defineComponent({
   name: 'ExpDatePickerView',
@@ -100,7 +99,7 @@ export default defineComponent({
     }
 
     function onChange(e: SelectorModelValue) {
-      console.log('event', e)
+      console.log('change', e)
     }
 
     function onChangeEvent(e: SelectorModelValue) {

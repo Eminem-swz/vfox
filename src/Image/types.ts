@@ -12,8 +12,8 @@ export type ImageMode =
   | 'bottom left'
   | 'bottom right'
 
-export interface ImageOnLoadPayLoad {
+export type OnLoad = (payload: {
   width: number
   height: number
   src: string
-}
+}) => void

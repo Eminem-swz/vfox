@@ -59,36 +59,49 @@
   </div>
 </template>
 
-<script>
-import { showToast } from '@/Toast'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import {
+  CountDownOnEnd,
+  CountDownOnPause,
+  CountDownOnResume,
+  showToast
+} from '@/index'
 
-export default {
+export default defineComponent({
   name: 'ExpCountDown',
-  data() {
+  setup() {
+    const paused = ref(false)
+
+    const onPause: CountDownOnPause = e => {
+      console.log(e)
+      showToast('已暂停')
+    }
+
+    const onResume: CountDownOnResume = e => {
+      console.log(e)
+      showToast('继续计时')
+    }
+
+    const onEnd: CountDownOnEnd = e => {
+      console.log(e)
+      showToast('计时结束')
+    }
+
     return {
       time: 300 * 1000,
       time2: 1.5 * 24 * 3600 * 1000,
       time3: 300 * 1000,
       time4: 100 * 1000,
       time5: 300 * 1000,
-      paused: false
-    }
-  },
-  methods: {
-    onPause(e) {
-      console.log(e)
-      showToast('已暂停')
-    },
-    onResume(e) {
-      console.log(e)
-      showToast('继续计时')
-    },
-    onEnd(e) {
-      console.log(e)
-      showToast('计时结束')
+      paused,
+
+      onPause,
+      onResume,
+      onEnd
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

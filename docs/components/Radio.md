@@ -10,12 +10,12 @@ import { Radio, RadioGroup } from 'vfox'
 
 ## Radio Props
 
-| 属性            | 类型          | 默认值 | 必填 | 说明                                                                                         |
-| --------------- | ------------- | ------ | ---- | -------------------------------------------------------------------------------------------- |
-| value           | string/number | ''     | 否   | 该项值，[RadioGroup](./Radio.md#radiogroup-单项选择器) 的 change 事件会携带 `radio` 的 value |
-| disabled        | boolean       | false  | 否   | 是否禁用                                                                                     |
-| v-model:checked | boolean       | false  | 否   | 当前是否选中，可用来设置默认选中                                                             |
-| activeColor     | string        |        | 否   | 自定义激活态的图标颜色                                                                       |
+| 属性            | 类型             | 默认值 | 必填 | 说明                                                                                         |
+| --------------- | ---------------- | ------ | ---- | -------------------------------------------------------------------------------------------- |
+| value           | string \| number | ''     | 否   | 该项值，[RadioGroup](./Radio.md#radiogroup-单项选择器) 的 change 事件会携带 `radio` 的 value |
+| disabled        | boolean          | false  | 否   | 是否禁用                                                                                     |
+| v-model:checked | boolean          | false  | 否   | 当前是否选中，可用来设置默认选中                                                             |
+| active-color    | string           |        | 否   | 自定义激活态的图标颜色                                                                       |
 
 ## Radio Events
 
@@ -39,20 +39,20 @@ import { Radio, RadioGroup } from 'vfox'
 
 ## RadioGroup Props
 
-| 属性        | 类型                                               | 默认值 | 必填 | 说明                                        |
-| ----------- | -------------------------------------------------- | ------ | ---- | ------------------------------------------- |
-| name        | string                                             |        | 否   | 标识                                        |
-| inline      | boolean                                            | false  | 否   | 是否使用内联布局，默认纵向布局              |
-| v-model     | string/number                                      | ''     | 否   | 当前选择子项的 value 值                     |
-| activeColor | string                                             |        | 否   | 自定义子项激活态的图标颜色                  |
-| options     | string[\]/number[\]/[Option](./Radio.md#option)[\] |        | 否   | 子项配置，优先级低于 slot 放入 `Radio` 组件 |
+| 属性         | 类型              | 默认值 | 必填 | 说明                                        |
+| ------------ | ----------------- | ------ | ---- | ------------------------------------------- |
+| name         | string            |        | 否   | 标识                                        |
+| inline       | boolean           | false  | 否   | 是否使用内联布局，默认纵向布局              |
+| v-model      | string \| number  | ''     | 否   | 当前选择子项的 value 值                     |
+| active-color | string            |        | 否   | 自定义子项激活态的图标颜色                  |
+| options      | RadioOptionItem[] |        | 否   | 子项配置，优先级低于 slot 放入 `Radio` 组件 |
 
-### Option
+### RadioOptionItem
 
-| Option Key | 类型          | 默认值 | 必填 | 说明                               |
-| ---------- | ------------- | ------ | ---- | ---------------------------------- |
-| value      | string/string |        | 是   | 值， 同 `Radio` 组件 value         |
-| label      | string        |        | 是   | 描述，同 `Radio` 组件 slot default |
+| key   | 类型             | 默认值 | 必填 | 说明                               |
+| ----- | ---------------- | ------ | ---- | ---------------------------------- |
+| value | string \| number |        | 是   | 值， 同 `Radio` 组件 value         |
+| label | string           |        | 是   | 描述，同 `Radio` 组件 slot default |
 
 ```
 [

@@ -35,15 +35,17 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
   name: 'ExpCircleProgress',
-  data() {
+  setup() {
     return {
-      percentage: 50
+      percentage: ref(50)
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

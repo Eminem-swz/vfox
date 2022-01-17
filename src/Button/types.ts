@@ -1,7 +1,7 @@
 import { SizeType } from '../helpers/types'
 
-export type ButtonShapeType = 'rectangle' | 'round' | 'circle' | 'square'
-export type ButtonPatternType =
+export type ShapeType = 'rectangle' | 'round' | 'circle' | 'square'
+export type PatternType =
   | 'default'
   | 'solid'
   | 'dashed'
@@ -10,6 +10,6 @@ export type ButtonPatternType =
 
 export interface ButtonGroupOptions {
   size: SizeType
-  pattern: ButtonPatternType
-  shape: ButtonShapeType
+  pattern: PatternType
+  shape: ShapeType
 }
