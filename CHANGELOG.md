@@ -1,3 +1,12 @@
+## [2.5.1](https://github.com/godxiaoji/vfox/compare/v2.5.0...v2.5.1) (2022-01-17)
+
+
+### Bug Fixes
+
+* 完善ts提示 ([0cfdfa4](https://github.com/godxiaoji/vfox/commit/0cfdfa469be63617892e704fc0cb0ac04dd61a48))
+* 完善ts提示 ([af6aa9f](https://github.com/godxiaoji/vfox/commit/af6aa9f81f880197b173047d90693275499dc59b))
+* 完善ts提示 ([76720d9](https://github.com/godxiaoji/vfox/commit/76720d90e8cf4f5c6ac597cd158df357ce2be706))
+
 # [2.5.0](https://github.com/godxiaoji/vfox/compare/v2.4.3...v2.5.0) (2022-01-13)
 
 
