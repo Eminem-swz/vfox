@@ -25,12 +25,11 @@ const demoLink = computed(() => {
 <template>
   <Layout>
     <template #page-top>
-      <div>
+      <div class="demo">
         <iframe
           v-show="baseLink !== demoLink"
           :src="demoLink"
           frameborder="0"
-          style="width: 375px; height: 667px; margin-top: 1.5rem;"
         ></iframe>
       </div>
     </template>

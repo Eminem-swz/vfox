@@ -147,4 +147,8 @@ body {
   margin: 0;
   background: $background-color;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
 </style>
