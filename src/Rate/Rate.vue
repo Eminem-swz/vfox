@@ -23,10 +23,10 @@
       :data-value="num"
     >
       <i class="fx-rate_icon">
-        <Icon :icon="iconPattern + 'Outlined'" />
+        <Icon :icon="icon" />
       </i>
       <i class="fx-rate_active-icon">
-        <Icon :icon="iconPattern + 'Filled'" />
+        <Icon :icon="activeIcon" />
       </i>
     </div>
   </div>
@@ -34,14 +34,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from 'vue'
-import type { PropType } from 'vue'
 import { Icon } from '@/Icon'
-import { capitalize, isInteger, isNumeric, rangeInteger } from '@/helpers/util'
-import {
-  colorValidator,
-  createEnumsValidator,
-  getEnumsValue
-} from '@/helpers/validator'
+import { isInteger, isNumeric, rangeInteger } from '@/helpers/util'
+import { colorValidator, iconValidator } from '@/helpers/validator'
 import { formItemProps, formNumberValueEmits } from '@/Form/form'
 import type { StyleObject } from '../helpers/types'
 import { useTouch } from '@/hooks/use-touch'
@@ -54,8 +49,6 @@ interface RateCoords {
   isHalf: boolean
   isChange: boolean
 }
-
-const ALLOW_ICONS = ['star', 'heart']
 
 const isIntegerOrHalf = (val: number | string) => {
   if (isNumeric(val)) {
@@ -71,11 +64,6 @@ export default defineComponent({
   components: { Icon },
   props: {
     ...formItemProps,
-    pattern: {
-      type: String as PropType<'star' | 'heart'>,
-      validator: createEnumsValidator(ALLOW_ICONS),
-      default: null
-    },
     modelValue: {
       type: [Number, String],
       validator: isIntegerOrHalf,
@@ -92,6 +80,16 @@ export default defineComponent({
     readonly: {
       type: Boolean,
       default: false
+    },
+    icon: {
+      type: [String, Object],
+      validator: iconValidator,
+      default: 'StarOutlined'
+    },
+    activeIcon: {
+      type: [String, Object],
+      validator: iconValidator,
+      default: 'StarFilled'
     },
     color: {
       type: String,
@@ -143,10 +141,6 @@ export default defineComponent({
 
       change(num)
     }
-
-    const iconPattern = computed(() =>
-      capitalize(getEnumsValue(ALLOW_ICONS, props.pattern))
-    )
 
     const styles = computed(() => {
       const obj: StyleObject = {}
@@ -262,7 +256,6 @@ export default defineComponent({
     return {
       root,
       inputValue,
-      iconPattern,
       styles,
       max,
       onHalfClick,

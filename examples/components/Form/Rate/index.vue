@@ -5,13 +5,13 @@
       <fx-cell label="modelValue=3"><fx-rate modelValue="3" /></fx-cell>
     </fx-group>
     <fx-group title="风格">
-      <fx-cell label="爱心（pattern=heart）"
-        ><fx-rate pattern="heart" modelValue="3"
+      <fx-cell label="爱心 icon='HeartOutlined' activeIcon='HeartFilled'"
+        ><fx-rate icon="HeartOutlined" activeIcon="HeartFilled" modelValue="3"
       /></fx-cell>
-      <fx-cell label="换色（激活色#F5A511）"
+      <fx-cell label="换色 activeColor='#F5A511'"
         ><fx-rate modelValue="3" activeColor="#F5A511"
       /></fx-cell>
-      <fx-cell label="变小（size=16px）"
+      <fx-cell label="变小 size='16px'"
         ><fx-rate modelValue="3" size="16"
       /></fx-cell>
     </fx-group>
