@@ -29,9 +29,9 @@ import { ImageUploader } from 'vfox'
 | before-upload | ImageUploaderBeforeUpload |              | 否   | 文件读取前的回调函数，返回 false 或 Promise<false\> 可终止文件上传 |
 | upload-ready  | ImageUploaderUploadReady  |              | 否   | 转入上传文件操作的回调函数                                         |
 
-### beforeUpload(file: File, handlers: Object) => boolean | void | Promise<boolean | file>
+### beforeUpload(file: File, handlers: Object) => boolean \| void \| Promise<boolean | File\>
 
-通过传入 beforeUpload 函数可以在上传前进行校验和处理，返回 false 或 Promise<false> 表示校验失败。
+通过传入 beforeUpload 函数可以在上传前进行校验和处理，返回 false 或 Promise<false\> 表示校验失败。
 
 也可以返回修改过的 file 对象，如果压缩图片等。
 
