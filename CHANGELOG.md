@@ -1,3 +1,11 @@
+## [2.5.2](https://github.com/godxiaoji/vfox/compare/v2.5.1...v2.5.2) (2022-01-18)
+
+
+### Bug Fixes
+
+* **rate:** rate组件图标优化 ([e61a1f4](https://github.com/godxiaoji/vfox/commit/e61a1f4a4d9d93cef291f29176f3dd1f38617b76))
+* **searchbar:** search event 整体优化 ([54d8602](https://github.com/godxiaoji/vfox/commit/54d8602af6d77dc7a63a0d2dd0c4aa0f6e760e59))
+
 ## [2.5.1](https://github.com/godxiaoji/vfox/compare/v2.5.0...v2.5.1) (2022-01-17)
 
 
