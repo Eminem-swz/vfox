@@ -26,15 +26,16 @@ import { SearchBar } from 'vfox'
 
 ## Events
 
-| 事件   | 描述                                             | 回调函数参数                                                       | TypeScript 函数  |
-| ------ | ------------------------------------------------ | ------------------------------------------------------------------ | ---------------- |
-| input  | 输入值改变时触发，包括 clear 的                  | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnInput |
-| focus  | 输入框获取焦点时触发                             | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnInput |
-| blur   | 输入框移出焦点时触发                             | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnInput |
-| cancel | 取消按钮点击                                     | payload: { }                                                       |                  |
-| click  | 输入框点击，配合 readonly 使用，获取到当前候选值 | payload: { searchText: string }                                    |                  |
+| 事件        | 描述                                             | 回调函数参数                                                       | TypeScript 函数       |
+| ----------- | ------------------------------------------------ | ------------------------------------------------------------------ | --------------------- |
+| input       | 输入值改变时触发，包括 clear 的                  | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnInput      |
+| focus       | 输入框获取焦点时触发                             | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnFocus      |
+| blur        | 输入框移出焦点时触发                             | payload: { text: string }, setSuggestList: SearchBarSetSuggestList | SearchBarOnBlur       |
+| cancel      | 取消按钮点击                                     | e: Event                                                           |                       |
+| field-click | 输入框点击，配合 readonly 使用，获取到当前候选值 | payload: { text: string }                                          | SearchBarOnFieldClick |
+| search      | 触发搜索时                                       | payload: { text: string, source: string }                          | SearchBarOnSearch     |
 
-### setSuggestList 的参数 suggestList 结构
+### SearchBarSetSuggestList 结构
 
 ```
 ['suggest A', 'suggest B']

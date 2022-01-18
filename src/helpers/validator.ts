@@ -5,7 +5,7 @@ import {
   isURL
 } from '@/helpers/util'
 import { getSizeValue } from '@/helpers/dom'
-import type { AnyObject, TypeException, Validator } from './types'
+import type { AnyObject, EmptyObject, TypeException, Validator } from './types'
 import { isColorValue } from '@/helpers/color'
 import Exception from '@/helpers/exception'
 
@@ -75,6 +75,8 @@ export const emitErrorValidator = (e: TypeException) => e instanceof Exception
 
 export const emitTypeValidator = (payload: { type: string }) =>
   payload && typeof payload.type === 'string'
+
+export const emitEmptyValidator = (payload: EmptyObject) => !!payload
 
 export const createListValidator = <T>(itemValidator: (item: T) => boolean) => {
   const validator = (value: unknown) => {

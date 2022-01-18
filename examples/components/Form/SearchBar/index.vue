@@ -31,14 +31,23 @@
       </fx-search-bar>
     </fx-group>
     <fx-group title="事件监听（readonly=true）">
-      <fx-search-bar readonly :placeholders="placeholders" @click="onClick" />
+      <fx-search-bar
+        readonly
+        :placeholders="placeholders"
+        @field-click="onClick"
+      />
     </fx-group>
   </div>
 </template>
 
 <script lang="ts">
 import { placeholders } from './data'
-import { SearchBarOnInput, showToast } from '@/index'
+import {
+  SearchBarOnFieldClick,
+  SearchBarOnInput,
+  SearchBarOnSearch,
+  showToast
+} from '@/index'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -67,17 +76,17 @@ export default defineComponent({
       onInput(e, fn)
     }
 
-    const onSearch = ({ text }: { text: string }) => {
-      showToast(`搜索了 ${text}`)
+    const onSearch: SearchBarOnSearch = res => {
+      console.log('search', res)
+      showToast(`搜索了 ${res.text}`)
     }
 
-    const onClick = (e: { searchText: string }) => {
-      console.log(e)
-      showToast(`搜索词 ${e.searchText}`)
+    const onClick: SearchBarOnFieldClick = res => {
+      console.log('field-click', res)
+      showToast(`搜索词 ${res.text}`)
     }
 
     return {
-      text: 1,
       placeholders,
       onFocus: () => showToast('focus'),
       onBlur: () => showToast('blur'),

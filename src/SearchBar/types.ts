@@ -9,8 +9,11 @@ export type SetSuggestList = (res: SuggestList) => void
 
 export type OnInput = (
   payload: {
-    type: string
     text: string
   },
   setSuggestList: SetSuggestList
 ) => void
+
+export type OnSearch = (payload: { text: string; source: string }) => void
+
+export type OnFieldClick = (payload: { text: string }) => void

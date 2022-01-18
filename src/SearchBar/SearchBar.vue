@@ -77,11 +77,17 @@ import { Button } from '@/Button'
 import { Dropdown } from '@/Dropdown'
 import { Cell } from '@/Cell'
 import { Tag } from '@/Tag'
-import { isObject, isStringArray, isStringNumberMix } from '@/helpers/util'
+import { isStringArray } from '@/helpers/util'
 import { locale } from '@/Locale'
-import { emitTypeValidator } from '@/helpers/validator'
-import type { OnInput, SuggestItem, SuggestList } from './types'
-import type { VoidFnToBooleanFn } from '../helpers/types'
+import { emitEventValidator } from '@/helpers/validator'
+import type {
+  OnFieldClick,
+  OnInput,
+  OnSearch,
+  SuggestItem,
+  SuggestList
+} from './types'
+import type { VoidFnToBooleanFn, FnArgs } from '../helpers/types'
 
 type Placeholders = string | string[]
 
@@ -131,16 +137,16 @@ export default defineComponent({
     }
   },
   emits: {
-    cancel: emitTypeValidator,
+    cancel: emitEventValidator,
     input: emitValidator,
     focus: emitValidator,
     blur: emitValidator,
-    search: (payload: { text: string; source: string }) =>
+    search: (payload: FnArgs<OnSearch>[0]) =>
       payload &&
       typeof payload.text === 'string' &&
       typeof payload.source === 'string',
-    click: (payload: { searchText: string; type: string }) =>
-      payload && typeof payload.searchText === 'string'
+    'field-click': (payload: FnArgs<OnFieldClick>[0]) =>
+      payload && typeof payload.text === 'string'
   },
   setup(props, { emit }) {
     const placeholder = ref('')
@@ -150,25 +156,17 @@ export default defineComponent({
     const suggestList = ref<SuggestItem[]>([])
 
     function proxyEvent(e: Event) {
-      const text = searchText.value
-
-      emit(
-        e.type as 'focus',
-        {
-          type: e.type,
-          text
-        },
-        res => {
-          setSuggestList(res, text !== searchText.value)
-        }
-      )
+      emitHook(e.type, searchText.value)
     }
 
     function onInput(text: string) {
+      emitHook('input', text)
+    }
+
+    const emitHook = (type: string, text: string) => {
       emit(
-        'input',
+        type as 'input',
         {
-          type: 'input',
           text
         },
         res => {
@@ -186,15 +184,13 @@ export default defineComponent({
 
       if (Array.isArray(res)) {
         res.forEach(v => {
-          if (isStringNumberMix(v)) {
+          if (typeof v === 'string' || typeof v === 'number') {
             newList.push({
-              text: (v as string | number).toString(),
+              text: v.toString(),
               tags: []
             })
-          } else if (isObject(v)) {
-            v = v as SuggestItem
-
-            if (isStringNumberMix(v.text)) {
+          } else if (v) {
+            if (typeof v.text === 'string' || typeof v.text === 'number') {
               v.text = v.text.toString()
               v.tags = isStringArray(v.tags) ? v.tags : []
               newList.push(v)
@@ -232,14 +228,13 @@ export default defineComponent({
       onSearch(text.toString(), 'suggest')
     }
 
-    function onCancel() {
-      emit('cancel', { type: 'cancel' })
+    function onCancel(e: Event) {
+      emit('cancel', e)
     }
 
     function onClick() {
-      emit('click', {
-        type: 'click',
-        searchText: searchText.value || placeholder.value || ''
+      emit('field-click', {
+        text: searchText.value || placeholder.value || ''
       })
     }
 
@@ -285,7 +280,8 @@ export default defineComponent({
       onSuggestItemClick,
       onCancel,
       onClick,
-      locale
+      locale,
+      setSuggestList: (res: SuggestList) => setSuggestList(res, false)
     }
   }
 })
