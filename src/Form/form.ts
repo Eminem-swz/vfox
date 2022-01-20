@@ -1,4 +1,4 @@
-import { emitEventValidator, emitTypeValidator } from '@/helpers/validator'
+import { emitEventValidator, emitTypeValidator } from '../helpers/validator'
 
 export const formItemProps = {
   name: {

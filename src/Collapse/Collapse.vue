@@ -7,9 +7,9 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch, provide } from 'vue'
 import type { PropType } from 'vue'
-import { cloneData, isSameArray, isStringNumberMixArray } from '@/helpers/util'
-import { stringNumberArrayMixValidator } from '@/helpers/validator'
-import { useGroup } from '@/hooks/use-group'
+import { cloneData, isSameArray, isStringNumberMixArray } from '../helpers/util'
+import { stringNumberArrayMixValidator } from '../helpers/validator'
+import { useGroup } from '../hooks/use-group'
 import type { ActiveName } from './types'
 
 export default defineComponent({

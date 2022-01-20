@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { createEnumsValidator } from '@/helpers/validator'
+import { createEnumsValidator } from '../helpers/validator'
 import type { AvatarShape, ButtonShape } from './types'
 
 export const paragraphDefaultRow = 3

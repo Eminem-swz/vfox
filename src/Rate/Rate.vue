@@ -34,12 +34,12 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from 'vue'
-import { Icon } from '@/Icon'
-import { isInteger, isNumeric, rangeInteger } from '@/helpers/util'
-import { colorValidator, iconValidator } from '@/helpers/validator'
-import { formItemProps, formNumberValueEmits } from '@/Form/form'
+import { Icon } from '../Icon'
+import { isInteger, isNumeric, rangeInteger } from '../helpers/util'
+import { colorValidator, iconValidator } from '../helpers/validator'
+import { formItemProps, formNumberValueEmits } from '../Form/form'
 import type { StyleObject } from '../helpers/types'
-import { useTouch } from '@/hooks/use-touch'
+import { useTouch } from '../hooks/use-touch'
 
 interface RateCoords {
   size: number

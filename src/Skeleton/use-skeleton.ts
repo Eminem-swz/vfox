@@ -2,13 +2,13 @@ import { rootProps } from './skeleton'
 import { computed, ComputedRef, inject } from 'vue'
 import { ExtractPropTypes } from 'vue'
 import type { UseProps } from '../hooks/types'
-import { isNumber } from '@/helpers/util'
-import { getEnumsValue } from '@/helpers/validator'
+import { isNumber } from '../helpers/util'
+import { getEnumsValue } from '../helpers/validator'
 import {
   AVATAR_SHAPE_NAMES,
   BUTTON_SHAPE_NAMES,
   paragraphDefaultRow
-} from '@/Skeleton/skeleton'
+} from '../Skeleton/skeleton'
 
 export function useSubSkeleton(props: UseProps, subName: string) {
   const skeletonProps = inject<ExtractPropTypes<typeof rootProps> | null>(

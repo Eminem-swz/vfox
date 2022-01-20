@@ -50,17 +50,17 @@
 
 <script lang="ts">
 import { defineComponent, ref, inject, watch, nextTick } from 'vue'
-import { Drawer } from '@/Drawer'
-import { Tab } from '@/Tab'
-import { isSameArray } from '@/helpers/util'
-import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendProps } from '@/popup/popup'
+import { Drawer } from '../Drawer'
+import { Tab } from '../Tab'
+import { isSameArray } from '../helpers/util'
+import { usePopupExtend } from '../popup/use-popup'
+import { popupExtendProps } from '../popup/popup'
 import type { ColRow, PickerHandlers } from '../Picker/types'
 import type { SelectorValue, SelectorDetail } from '../SelectorField/types'
 import type { OptionItem as TabOptionItem } from '../Tab/types'
-import { pickerPopupEmits, commonProps, mergeHandlers } from '@/Picker/picker'
-import { usePickerView } from '@/Picker/use-picker'
-import { locale } from '@/Locale'
+import { pickerPopupEmits, commonProps, mergeHandlers } from '../Picker/picker'
+import { usePickerView } from '../Picker/use-picker'
+import { locale } from '../Locale'
 
 interface SelectedTabs {
   label: string | null

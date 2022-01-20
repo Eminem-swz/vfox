@@ -1,7 +1,7 @@
 import { provide } from 'vue'
-import dayjs from '@/helpers/day'
+import dayjs from '../helpers/day'
 import type { Dayjs } from 'dayjs'
-import { getEnumsValue } from '@/helpers/validator'
+import { getEnumsValue } from '../helpers/validator'
 import type {
   PickerOptionsHandler,
   PickerLabelFormatter,
@@ -18,8 +18,8 @@ import {
   getFormatTemplate,
   MODE_NAMES,
   parseRows
-} from '@/DatePicker/date'
-import { rangeNumber } from '@/helpers/util'
+} from '../DatePicker/date'
+import { rangeNumber } from '../helpers/util'
 
 export function useHandlers(props: UseProps) {
   const mode = getEnumsValue(MODE_NAMES, props.initialMode)

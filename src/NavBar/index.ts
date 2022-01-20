@@ -1,4 +1,4 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import NavBar from './NavBar.vue'
 
 export { NavBar }

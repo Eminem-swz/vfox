@@ -32,20 +32,20 @@ import {
   computed
 } from 'vue'
 import type { PropType, ComponentInternalInstance } from 'vue'
-import { Icon } from '@/Icon'
+import { Icon } from '../Icon'
 import {
   addLazyQueue,
   loadNow,
   removeComponentFromLazy,
   ImageLoadObject,
   ImageLoadedResource
-} from '@/Image/load-image'
+} from '../Image/load-image'
 import {
   createEnumsValidator,
   emitErrorValidator,
   getEnumsValue,
   iconValidator
-} from '@/helpers/validator'
+} from '../helpers/validator'
 import type { TypeException } from '../helpers/types'
 import type { ImageMode, OnLoad } from './types'
 import type { FnArgs } from '../helpers/types'

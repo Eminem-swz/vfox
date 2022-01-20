@@ -20,18 +20,18 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
+import { Icon } from '../Icon'
 import {
   colorValidator,
   createEnumsValidator,
   emitTypeValidator,
   getEnumsValue
-} from '@/helpers/validator'
-import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
-import { useLongPress } from '@/hooks/use-long-press'
-import { noop } from '@/helpers/util'
+} from '../helpers/validator'
+import { SIZE_TYPES, STATE_TYPES } from '../helpers/constants'
+import { useLongPress } from '../hooks/use-long-press'
+import { noop } from '../helpers/util'
 import type { SizeType, StateType, StyleObject } from '../helpers/types'
-import { getColorObject } from '@/helpers/color'
+import { getColorObject } from '../helpers/color'
 import type { PatternType } from './types'
 
 const TAG_PATTERN_TYPES: PatternType[] = ['light', 'dark', 'plain']

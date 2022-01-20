@@ -1,4 +1,4 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import Empty from './Empty.vue'
 
 export { Empty }

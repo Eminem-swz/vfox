@@ -8,17 +8,17 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted, inject, watch } from 'vue'
-import { widgetZIndex } from '@/helpers/layer'
-import { selectorValidator, sizeValidator } from '@/helpers/validator'
-import { useScrollEvent } from '@/hooks/use-scroll'
+import { widgetZIndex } from '../helpers/layer'
+import { selectorValidator, sizeValidator } from '../helpers/validator'
+import { useScrollEvent } from '../hooks/use-scroll'
 import {
   getRelativeOffset,
   getScrollTop,
   getSizeValue,
   querySelector
-} from '@/helpers/dom'
+} from '../helpers/dom'
 import type { StyleObject } from '../helpers/types'
-import { useFixed } from '@/hooks/use-fixed'
+import { useFixed } from '../hooks/use-fixed'
 
 export default defineComponent({
   name: 'fx-sticky',

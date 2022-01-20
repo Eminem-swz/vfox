@@ -23,10 +23,10 @@
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from 'vue'
 import type { PropType } from 'vue'
-import { NoticeBar } from '@/NoticeBar'
-import { usePopup } from '@/popup/use-popup'
-import { popupEmits, popupProps } from '@/popup/popup'
-import { emitTypeValidator, iconValidator } from '@/helpers/validator'
+import { NoticeBar } from '../NoticeBar'
+import { usePopup } from '../popup/use-popup'
+import { popupEmits, popupProps } from '../popup/popup'
+import { emitTypeValidator, iconValidator } from '../helpers/validator'
 import type { StateType } from '../helpers/types'
 
 export default defineComponent({

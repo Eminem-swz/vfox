@@ -44,10 +44,10 @@
 <script lang="ts">
 import { defineComponent, watch, nextTick, reactive, computed } from 'vue'
 import type { PropType } from 'vue'
-import { cloneData, isNumberArray, isSameArray } from '@/helpers/util'
-import { formItemProps } from '@/Form/form'
-import { slideProps } from '@/Slider/slide'
-import { useSlide } from '@/Slider/use-slide'
+import { cloneData, isNumberArray, isSameArray } from '../helpers/util'
+import { formItemProps } from '../Form/form'
+import { slideProps } from '../Slider/slide'
+import { useSlide } from '../Slider/use-slide'
 
 const isValue = (value: number[]) => isNumberArray(value)
 

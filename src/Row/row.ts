@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { isNumberArray, isNumeric } from '@/helpers/util'
+import { isNumberArray, isNumeric } from '../helpers/util'
 
 export const propGutter = {
   type: [Number, String, Array] as PropType<number | string | number[]>,

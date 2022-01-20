@@ -1,5 +1,5 @@
-import { withNoopInstall } from '@/helpers/with-install'
-import { IndexViewItem } from '@/IndexView'
+import { withNoopInstall } from '../helpers/with-install'
+import { IndexViewItem } from '../IndexView'
 
 export { IndexViewItem }
 export default IndexViewItem

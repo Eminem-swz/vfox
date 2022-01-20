@@ -75,48 +75,36 @@
 <script lang="ts">
 import { defineComponent, reactive, computed, watch, ref } from 'vue'
 import type { PropType } from 'vue'
-import { Image } from '@/Image'
-import { Button } from '@/Button'
-import { Icon } from '@/Icon'
-import { Order } from '@/Order'
-import { ImagePreview } from '@/ImagePreview'
-import { showDialog } from '@/Dialog'
-import { ActivityIndicator } from '@/ActivityIndicator'
+import { Image } from '../Image'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import { Order } from '../Order'
+import { ImagePreview } from '../ImagePreview'
+import { showDialog } from '../Dialog'
+import { ActivityIndicator } from '../ActivityIndicator'
 import {
   isPromiseLike,
   isStringArray,
   isSameArray,
   cloneData,
   noop
-} from '@/helpers/util'
-import { formatFileSize } from '@/helpers/file'
-import { formItemProps } from '@/Form/form'
+} from '../helpers/util'
+import { formatFileSize } from '../helpers/file'
+import { formItemProps } from '../Form/form'
 import type { ImageMode } from '../Image/types'
-import { locale } from '@/Locale'
+import { locale } from '../Locale'
 import type { OnDelete as OrderOnDelete } from '../Order/types'
 import type {
   BeforeUpload,
   UploadReady,
   UploadHandlers,
   Accept,
-  UploadStatus,
   OnDelete,
-  BeforeUploadReturn
+  BeforeUploadReturn,
+  FileItem,
+  AddButton
 } from './types'
 import type { FnArgs } from '../helpers/types'
-
-interface FileItem {
-  id: number
-  url?: string
-  status: UploadStatus
-  message: string
-}
-
-interface AddButton {
-  id: number
-  isAdd: boolean
-  draggable: boolean
-}
 
 type Options = (FileItem | AddButton)[]
 

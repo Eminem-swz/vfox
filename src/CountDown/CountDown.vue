@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { defineComponent, watch } from 'vue'
-import { useCountTime } from '@/CountDown/use-count-time'
-import { locale } from '@/Locale'
+import { useCountTime } from '../CountDown/use-count-time'
+import { locale } from '../Locale'
 import type { OnEnd, OnPauseOrResume } from './types'
 import type { VoidFnToBooleanFn, FnArgs } from '../helpers/types'
 

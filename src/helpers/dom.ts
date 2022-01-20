@@ -1,4 +1,4 @@
-import { camelCase2KebabCase, isNumber, objectForEach } from '@/helpers/util'
+import { camelCase2KebabCase, isNumber, objectForEach } from '../helpers/util'
 import type { ViewPosition } from './types'
 
 const docEl = document.documentElement

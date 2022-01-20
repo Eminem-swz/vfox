@@ -1,7 +1,7 @@
 import { onBeforeUnmount } from 'vue'
-import { addEvent, removeEvent } from '@/helpers/events'
+import { addEvent, removeEvent } from '../helpers/events'
 import { FxEventElement, FxEventCallback } from '../helpers/types'
-import { getScrollTop } from '@/helpers/dom'
+import { getScrollTop } from '../helpers/dom'
 
 interface OnScrollCallback {
   (

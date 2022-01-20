@@ -59,30 +59,30 @@ import {
   provide
 } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
-import { ActivityIndicator } from '@/ActivityIndicator'
-import { stringMix2StringArray, isNumber, isStringArray } from '@/helpers/util'
+import { Icon } from '../Icon'
+import { ActivityIndicator } from '../ActivityIndicator'
+import { stringMix2StringArray, isStringArray } from '../helpers/util'
 import type { StyleObject } from '../helpers/types'
-import { useTouch } from '@/hooks/use-touch'
-import { locale } from '@/Locale'
-import { scrollTo } from '@/helpers/dom'
+import { useTouch } from '../hooks/use-touch'
+import { locale } from '../Locale'
+import { scrollTo } from '../helpers/dom'
 import {
   emitRefreshingValidator,
   emitScrollToLowerValidator,
   emitScrollToUpperValidator,
   emitScrollValidator
-} from '@/ScrollView/scrollView'
+} from '../ScrollView/scrollView'
 import type { PullDirection, ScrollToOptions } from './types'
 
-enum ScrollState {
-  Center,
-  Upper,
-  Lower
+const ScrollState = {
+  Center: 0,
+  Upper: 1,
+  Lower: 2
 }
-enum PullRefreshState {
-  Pulling,
-  Holding,
-  Refreshing
+const PullRefreshState = {
+  Pulling: 0,
+  Holding: 1,
+  Refreshing: 2
 }
 
 type PullDirectionOrDefault = '' | PullDirection
@@ -590,11 +590,7 @@ export default defineComponent({
       indicatorStyles,
       onScroll,
       pullIndicatorSafeArea,
-      PullRefreshState: {
-        Pulling: 0,
-        Holding: 1,
-        Refreshing: 2
-      },
+      PullRefreshState,
       scrollTo: scrollToOffset,
       locale
     }

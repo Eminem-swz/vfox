@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import Checkbox from './Checkbox.vue'
 import CheckboxGroup from './CheckboxGroup.vue'
 

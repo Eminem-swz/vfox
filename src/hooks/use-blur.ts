@@ -1,7 +1,7 @@
 import {
   addEvent as _addEvent,
   removeEvent as _removeEvent
-} from '@/helpers/events'
+} from '../helpers/events'
 import { onBeforeUnmount } from 'vue'
 import { FxEventCallback } from '../helpers/types'
 

@@ -25,15 +25,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { SelectorField } from '@/SelectorField'
-import { PickerPopup } from '@/PickerPopup'
+import { SelectorField } from '../SelectorField'
+import { PickerPopup } from '../PickerPopup'
 import {
   pickerEmits,
   pickerProps,
   commonProps,
   mergeHandlers
-} from '@/Picker/picker'
-import { usePicker } from '@/Picker/use-picker'
+} from '../Picker/picker'
+import { usePicker } from '../Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-picker',

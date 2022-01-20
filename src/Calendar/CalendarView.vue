@@ -57,22 +57,22 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from 'vue'
-import dayjs from '@/helpers/day'
+import dayjs from '../helpers/day'
 import type { Dayjs } from 'dayjs'
-import { isInNumberRange, isEmpty, isSameArray } from '@/helpers/util'
-import { showToast } from '@/Toast'
+import { isInNumberRange, isEmpty, isSameArray } from '../helpers/util'
+import { showToast } from '../Toast'
 import {
   DEFAULT_MONTH_RANGE,
   MODE_NAMES,
   commonProps,
   printError,
   calendarDetailValidator
-} from '@/Calendar/calendar'
-import { getEnumsValue } from '@/helpers/validator'
+} from '../Calendar/calendar'
+import { getEnumsValue } from '../helpers/validator'
 import type { DayInfo } from './types'
-import { useHandlers } from '@/Calendar/use-calendar'
-import { pickerValueEmits } from '@/Picker/picker'
-import { locale } from '@/Locale'
+import { useHandlers } from '../Calendar/use-calendar'
+import { pickerValueEmits } from '../Picker/picker'
+import { locale } from '../Locale'
 
 type WeekDay = '0' | '1' | '2' | '3' | '4' | '5' | '6'
 

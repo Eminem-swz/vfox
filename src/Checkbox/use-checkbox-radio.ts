@@ -9,15 +9,15 @@ import {
   provide
 } from 'vue'
 import type { SetupContext, ExtractPropTypes } from 'vue'
-import { capitalize, isStringNumberMix } from '@/helpers/util'
-import { useGroup, useGroupItem } from '@/hooks/use-group'
+import { capitalize, isStringNumberMix } from '../helpers/util'
+import { useGroup, useGroupItem } from '../hooks/use-group'
 import type { ModelValue, OptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
 import {
   checkboxOrRadioEmits,
   checkboxOrRadioGroupProps,
   checkboxOrRadioProps
-} from '@/Checkbox/checkbox-radio'
+} from '../Checkbox/checkbox-radio'
 
 interface GroupOptions {
   props: ExtractPropTypes<typeof checkboxOrRadioGroupProps> & {

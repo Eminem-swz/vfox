@@ -59,28 +59,15 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from 'vue'
 import type { PropType } from 'vue'
-import { Button } from '@/Button'
-import { Image } from '@/Image'
-import { Swiper, SwiperItem } from '@/Swiper'
-import { isStringArray, rangeNumber } from '@/helpers/util'
-import { usePopup } from '@/popup/use-popup'
-import { popupEmits, popupProps } from '@/popup/popup'
+import { Button } from '../Button'
+import { Image } from '../Image'
+import { Swiper, SwiperItem } from '../Swiper'
+import { isStringArray, rangeNumber } from '../helpers/util'
+import { usePopup } from '../popup/use-popup'
+import { popupEmits, popupProps } from '../popup/popup'
 import type { OnLoad as ImageOnLoad } from '../Image/types'
 import type { FnArgs } from '../helpers/types'
-import type { OnChange } from './types'
-
-interface ImageObject {
-  src: string
-  width: number
-  height: number
-  initialWidth: number
-  initialHeight: number
-  naturalWidth: number
-  naturalHeight: number
-  offsetTop: number
-  offsetLeft: number
-  loaded: boolean
-}
+import type { OnChange, ImageObject } from './types'
 
 type ImageCoordsImage = {
   width: number

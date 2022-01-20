@@ -19,8 +19,8 @@
 import { defineComponent, ref } from 'vue'
 import type { PropType } from 'vue'
 import Checkbox from './Checkbox.vue'
-import { isStringNumberMixArray, cloneData, isSameArray } from '@/helpers/util'
-import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
+import { isStringNumberMixArray, cloneData, isSameArray } from '../helpers/util'
+import { useCheckboxOrRadioGroup } from '../Checkbox/use-checkbox-radio'
 import type { ModelValue } from './types'
 import { checkboxOrRadioGroupProps } from './checkbox-radio'
 

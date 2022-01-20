@@ -79,10 +79,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Button, ButtonGroup } from '@/Button'
+import { Button, ButtonGroup } from '../Button'
 import type { ButtonOption, OnButtonClick, OnTitleDbClick } from './types'
-import { locale } from '@/Locale'
-import { iconValidator } from '@/helpers/validator'
+import { locale } from '../Locale'
+import { iconValidator } from '../helpers/validator'
 import type { VoidFnToBooleanFn } from '../helpers/types'
 
 const buttonsValidator = (items: ButtonOption[]) => {

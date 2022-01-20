@@ -1,4 +1,4 @@
-import { removeEl } from '@/helpers/dom'
+import { removeEl } from '../helpers/dom'
 
 /**
  * 监听元素大小变化

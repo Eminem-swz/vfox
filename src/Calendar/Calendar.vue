@@ -30,14 +30,14 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { SelectorField } from '@/SelectorField'
-import { CalendarPopup } from '@/CalendarPopup'
-import { getDefaultDetail, MODE_NAMES, commonProps } from '@/Calendar/calendar'
-import { getEnumsValue } from '@/helpers/validator'
+import { SelectorField } from '../SelectorField'
+import { CalendarPopup } from '../CalendarPopup'
+import { getDefaultDetail, MODE_NAMES, commonProps } from '../Calendar/calendar'
+import { getEnumsValue } from '../helpers/validator'
 import type { CalendarDetail } from './types'
-import { useHandlers } from '@/Calendar/use-calendar'
-import { cloneDetail, isSameValue } from '@/Picker/util'
-import { pickerEmits, pickerProps } from '@/Picker/picker'
+import { useHandlers } from '../Calendar/use-calendar'
+import { cloneDetail, isSameValue } from '../Picker/util'
+import { pickerEmits, pickerProps } from '../Picker/picker'
 import type { SelectorModelValue } from '../SelectorField/types'
 
 export default defineComponent({

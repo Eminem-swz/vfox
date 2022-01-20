@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, provide, toRef } from 'vue'
-import { useList } from '@/hooks/use-list'
+import { useList } from '../hooks/use-list'
 
 export default defineComponent({
   name: 'fx-steps',

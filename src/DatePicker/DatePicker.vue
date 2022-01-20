@@ -22,12 +22,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { SelectorField } from '@/SelectorField'
-import { PickerPopup } from '@/PickerPopup'
-import { pickerEmits, pickerProps } from '@/Picker/picker'
-import { usePicker } from '@/Picker/use-picker'
-import { commonProps } from '@/DatePicker/date-picker'
-import { useHandlers } from '@/DatePicker/use-date-picker'
+import { SelectorField } from '../SelectorField'
+import { PickerPopup } from '../PickerPopup'
+import { pickerEmits, pickerProps } from '../Picker/picker'
+import { usePicker } from '../Picker/use-picker'
+import { commonProps } from '../DatePicker/date-picker'
+import { useHandlers } from '../DatePicker/use-date-picker'
 
 export default defineComponent({
   name: 'fx-date-picker',

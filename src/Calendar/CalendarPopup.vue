@@ -35,20 +35,20 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
-import { CalendarView } from '@/CalendarView'
-import { Drawer } from '@/Drawer'
-import { Button } from '@/Button'
+import { CalendarView } from '../CalendarView'
+import { Drawer } from '../Drawer'
+import { Button } from '../Button'
 import {
   getDefaultDetail,
   commonProps,
   calendarDetailValidator
-} from '@/Calendar/calendar'
-import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendProps } from '@/popup/popup'
-import { pickerPopupEmits } from '@/Picker/picker'
-import { cloneDetail } from '@/Picker/util'
+} from '../Calendar/calendar'
+import { usePopupExtend } from '../popup/use-popup'
+import { popupExtendProps } from '../popup/popup'
+import { pickerPopupEmits } from '../Picker/picker'
+import { cloneDetail } from '../Picker/util'
 import type { CalendarDetail } from './types'
-import { locale } from '@/Locale'
+import { locale } from '../Locale'
 
 export default defineComponent({
   name: 'fx-calendar-popup',

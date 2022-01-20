@@ -1,6 +1,6 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import PopDialog from '../Popover/PopDialog.vue'
-import { createConfirmHook, createShowPopup } from '@/popup/api'
+import { createConfirmHook, createShowPopup } from '../popup/api'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
 import type { DomSelector, PlacementType, EmptyObject } from '../helpers/types'
 

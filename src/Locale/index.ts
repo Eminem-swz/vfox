@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import type { LangPack } from './types'
-import zhCN from '@/Locale/lang/zh-CN'
-import Exception from '@/helpers/exception'
+import zhCN from '../Locale/lang/zh-CN'
+import Exception from '../helpers/exception'
 
 export function useLocale() {
   const packs: Record<string, LangPack> = {

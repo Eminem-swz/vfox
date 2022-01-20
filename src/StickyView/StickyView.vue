@@ -19,18 +19,18 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
-import { Sticky } from '@/Sticky'
+import { Sticky } from '../Sticky'
 import {
   getRelativeOffset,
   getScrollTop,
   getSizeValue,
   querySelector,
   setScrollTop
-} from '@/helpers/dom'
-import { selectorValidator, sizeValidator } from '@/helpers/validator'
-import { useScrollEvent } from '@/hooks/use-scroll'
-import { useList } from '@/hooks/use-list'
-import { emitChangeValidator } from '@/StickyView/stickyView'
+} from '../helpers/dom'
+import { selectorValidator, sizeValidator } from '../helpers/validator'
+import { useScrollEvent } from '../hooks/use-scroll'
+import { useList } from '../hooks/use-list'
+import { emitChangeValidator } from '../StickyView/stickyView'
 import { StickyViewItem, ScrollToOptions, ScrollToIndexOptions } from './types'
 
 export default defineComponent({

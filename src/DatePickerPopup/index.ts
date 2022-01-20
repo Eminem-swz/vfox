@@ -1,6 +1,6 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import DatePickerPopup from '../DatePicker/DatePickerPopup.vue'
-import { createConfirmHook, createShowPopup } from '@/popup/api'
+import { createConfirmHook, createShowPopup } from '../popup/api'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
 import type { SelectorDetail } from '../SelectorField/types'
 import type { ShowDatePickerOptions } from '../DatePicker/types'

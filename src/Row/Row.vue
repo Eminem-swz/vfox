@@ -9,8 +9,8 @@ import { computed, defineComponent, provide, ref, watch } from 'vue'
 import type { PropType } from 'vue'
 import type { StyleObject } from '../helpers/types'
 import type { JustifyType, AlignType } from './types'
-import { createEnumsValidator } from '@/helpers/validator'
-import { parseGutter, propGutter } from '@/Row/row'
+import { createEnumsValidator } from '../helpers/validator'
+import { parseGutter, propGutter } from '../Row/row'
 
 const JUSTIFY_TYPE: JustifyType[] = [
   'start',

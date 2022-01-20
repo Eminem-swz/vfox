@@ -1,5 +1,5 @@
-import { withNoopInstall } from '@/helpers/with-install'
-import { FormFooter } from '@/Form'
+import { withNoopInstall } from '../helpers/with-install'
+import { FormFooter } from '../Form'
 
 export { FormFooter }
 export default FormFooter

@@ -16,7 +16,7 @@ import {
   colorValidator,
   iconValidator,
   isSvgComponent
-} from '@/helpers/validator'
+} from '../helpers/validator'
 import type { StyleObject } from '../helpers/types'
 
 export default defineComponent({

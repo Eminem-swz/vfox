@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { propAnimated, propAvatarShape } from '@/Skeleton/skeleton'
-import { useSubSkeleton } from '@/Skeleton/use-skeleton'
+import { propAnimated, propAvatarShape } from '../Skeleton/skeleton'
+import { useSubSkeleton } from '../Skeleton/use-skeleton'
 
 export default defineComponent({
   name: 'fx-skeleton-avatar',

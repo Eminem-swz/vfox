@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import Swiper from './Swiper.vue'
 import SwiperItem from './SwiperItem.vue'
 

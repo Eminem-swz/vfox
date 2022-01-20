@@ -22,14 +22,14 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
-import { Button } from '@/Button'
+import { Icon } from '../Icon'
+import { Button } from '../Button'
 import {
   createEnumsValidator,
   emitEventValidator,
   getEnumsValue
-} from '@/helpers/validator'
-import { locale } from '@/Locale'
+} from '../helpers/validator'
+import { locale } from '../Locale'
 
 type ResultType = 'info' | 'warning' | 'success' | 'fail'
 

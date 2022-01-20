@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
-import { isInNumberRange, isInteger } from '@/helpers/util'
-import dayjs from '@/helpers/day'
+import { isInNumberRange, isInteger } from '../helpers/util'
+import dayjs from '../helpers/day'
 import type {
   DayHandler,
   Mode,
@@ -9,9 +9,9 @@ import type {
   CalendarOriginalDetail,
   CalendarDetail
 } from './types'
-import { createEnumsValidator } from '@/helpers/validator'
-import Exception from '@/helpers/exception'
-import { isPickerDetail } from '@/Picker/picker'
+import { createEnumsValidator } from '../helpers/validator'
+import Exception from '../helpers/exception'
+import { isPickerDetail } from '../Picker/picker'
 import type { SelectorModelValue } from '../SelectorField/types'
 
 export const DEFAULT_MONTH_RANGE = 6

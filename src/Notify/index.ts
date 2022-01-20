@@ -1,6 +1,6 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import Notify from './Notify.vue'
-import { createAlertHook, createShowPopup, createHidePopup } from '@/popup/api'
+import { createAlertHook, createShowPopup, createHidePopup } from '../popup/api'
 import type { PopupSuccessAlertArgs } from '../popup/types'
 import type { StateType } from '../helpers/types'
 

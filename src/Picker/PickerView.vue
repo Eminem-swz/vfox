@@ -29,13 +29,13 @@
 
 <script lang="ts">
 import { defineComponent, nextTick, ref, inject } from 'vue'
-import { Empty } from '@/Empty'
-import { frameTo } from '@/helpers/animation'
-import { hasClassName } from '@/helpers/dom'
-import { commonProps, pickerValueEmits, mergeHandlers } from '@/Picker/picker'
-import { usePickerView } from '@/Picker/use-picker'
+import { Empty } from '../Empty'
+import { frameTo } from '../helpers/animation'
+import { hasClassName } from '../helpers/dom'
+import { commonProps, pickerValueEmits, mergeHandlers } from '../Picker/picker'
+import { usePickerView } from '../Picker/use-picker'
 import type { PickerHandlers } from './types'
-import { locale } from '@/Locale'
+import { locale } from '../Locale'
 
 interface ScrollElement extends HTMLElement {
   scrolling?: boolean

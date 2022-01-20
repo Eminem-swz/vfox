@@ -1,4 +1,4 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import Switch from './Switch.vue'
 
 export { Switch }

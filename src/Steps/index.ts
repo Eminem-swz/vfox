@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import Steps from './Steps.vue'
 import Step from './Step.vue'
 

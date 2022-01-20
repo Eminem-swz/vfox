@@ -1,10 +1,10 @@
 import { createApp, Component } from 'vue'
-import { isObject, objectForEach } from '@/helpers/util'
-import { getCallbackFns } from '@/apis/callback'
+import { isObject, objectForEach } from '../helpers/util'
+import { getCallbackFns } from '../apis/callback'
 import type { AnyObject, EmptyObject } from '../helpers/types'
 import type { PopupCustomCancel, PopupBridge, PopupHook } from '../popup/types'
 import type { ApiOptionsComplete, ApiOptionsFail } from '../apis/types'
-import Exception from '@/helpers/exception'
+import Exception from '../helpers/exception'
 
 type PopupDone = (res: any) => void
 

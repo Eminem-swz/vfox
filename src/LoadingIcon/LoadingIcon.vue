@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { colorValidator } from '@/helpers/validator'
+import { colorValidator } from '../helpers/validator'
 
 export default defineComponent({
   name: 'fx-loading-icon',

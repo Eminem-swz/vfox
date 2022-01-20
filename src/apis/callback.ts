@@ -3,8 +3,8 @@ import type {
   ApiOptionsFail,
   ApiOptionsSuccess
 } from './types'
-import Exception from '@/helpers/exception'
-import { noop } from '@/helpers/util'
+import Exception from '../helpers/exception'
+import { noop } from '../helpers/util'
 import type { AnyObject } from '../helpers/types'
 
 /**

@@ -1,4 +1,4 @@
-import { addLongPressEvent } from '@/helpers/events'
+import { addLongPressEvent } from '../helpers/events'
 import { onBeforeUnmount, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import type { LongPressEventCallback } from '../helpers/types'

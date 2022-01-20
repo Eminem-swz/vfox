@@ -1,6 +1,6 @@
 import { onMounted, ref, watch } from 'vue'
 import type { ExtractPropTypes, SetupContext } from 'vue'
-import { cloneData, isSameArray, isEmpty } from '@/helpers/util'
+import { cloneData, isSameArray, isEmpty } from '../helpers/util'
 import type {
   ColRow,
   OptionItem,
@@ -12,7 +12,7 @@ import type {
   SelectorModelValue,
   SelectorDetail
 } from '../SelectorField/types'
-import { cloneDetail, isSameDetail, isSameValue } from '@/Picker/util'
+import { cloneDetail, isSameDetail, isSameValue } from '../Picker/util'
 import {
   getDefaultDetail,
   validateValues,
@@ -21,7 +21,7 @@ import {
   commonProps,
   pickerEmits,
   pickerPopupEmits
-} from '@/Picker/picker'
+} from '../Picker/picker'
 import type { UseProps } from '../hooks/types'
 import type { PopupCustomConfirm } from '../popup/types'
 

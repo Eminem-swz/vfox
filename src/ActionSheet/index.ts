@@ -1,6 +1,6 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import ActionSheet from './ActionSheet.vue'
-import { createConfirmHook, createShowPopup } from '@/popup/api'
+import { createConfirmHook, createShowPopup } from '../popup/api'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
 import type { Option, Detail } from './types'
 

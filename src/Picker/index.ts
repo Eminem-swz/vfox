@@ -1,6 +1,6 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import Picker from './Picker.vue'
-import { showPicker } from '@/PickerPopup'
+import { showPicker } from '../PickerPopup'
 
 export { Picker, showPicker }
 export default Picker

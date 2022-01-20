@@ -9,12 +9,12 @@
 <script lang="ts">
 import { defineComponent, computed, toRef, ref } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
-import { getScrollTop, scrollTo } from '@/helpers/dom'
-import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
-import { isNumber, isNumberArray } from '@/helpers/util'
-import { useScrollEvent } from '@/hooks/use-scroll'
-import { emitEventValidator } from '@/helpers/validator'
+import { Icon } from '../Icon'
+import { getScrollTop, scrollTo } from '../helpers/dom'
+import { useSafeAreaInsets } from '../hooks/use-safe-area-insets'
+import { isNumber, isNumberArray } from '../helpers/util'
+import { useScrollEvent } from '../hooks/use-scroll'
+import { emitEventValidator } from '../helpers/validator'
 
 export default defineComponent({
   name: 'fx-back-top',

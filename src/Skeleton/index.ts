@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import Skeleton from './Skeleton.vue'
 import SkeletonAvatar from './SkeletonAvatar.vue'
 import SkeletonTitle from './SkeletonTitle.vue'

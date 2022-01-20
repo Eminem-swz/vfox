@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { locale } from '@/Locale'
+import { locale } from '../Locale'
 
 export default defineComponent({
   name: 'fx-copy',

@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Icon } from '@/Icon'
-import { emitEventValidator } from '@/helpers/validator'
+import { Icon } from '../Icon'
+import { emitEventValidator } from '../helpers/validator'
 
 export default defineComponent({
   name: 'fx-selector-field',

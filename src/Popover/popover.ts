@@ -3,9 +3,9 @@ import {
   selectorValidator,
   createEnumsValidator,
   getEnumsValue
-} from '@/helpers/validator'
-import { PLACEMENT_TYPES } from '@/helpers/constants'
-import { popupEmits, popupProps } from '@/popup/popup'
+} from '../helpers/validator'
+import { PLACEMENT_TYPES } from '../helpers/constants'
+import { popupEmits, popupProps } from '../popup/popup'
 import type { PlacementType } from '../helpers/types'
 
 export const popoverProps = {

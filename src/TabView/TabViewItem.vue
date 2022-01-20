@@ -11,8 +11,8 @@
 
 <script lang="ts">
 import { ref, defineComponent, inject } from 'vue'
-import { useListItem } from '@/hooks/use-list'
-import { useTouch } from '@/hooks/use-touch'
+import { useListItem } from '../hooks/use-list'
+import { useTouch } from '../hooks/use-touch'
 
 interface TabViewItemCoords {
   vertical: boolean

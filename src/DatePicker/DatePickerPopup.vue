@@ -29,16 +29,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PickerView } from '@/PickerView'
-import { Drawer } from '@/Drawer'
-import { NavBar } from '@/NavBar'
-import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendProps } from '@/popup/popup'
-import { pickerPopupProps, pickerPopupEmits } from '@/Picker/picker'
-import { usePickerPopup } from '@/Picker/use-picker'
-import { commonProps } from '@/DatePicker/date-picker'
-import { useHandlers } from './use-date-picker'
-import { locale } from '@/Locale'
+import { PickerView } from '../PickerView'
+import { Drawer } from '../Drawer'
+import { NavBar } from '../NavBar'
+import { usePopupExtend } from '../popup/use-popup'
+import { popupExtendProps } from '../popup/popup'
+import { pickerPopupProps, pickerPopupEmits } from '../Picker/picker'
+import { usePickerPopup } from '../Picker/use-picker'
+import { commonProps } from '../DatePicker/date-picker'
+import { useHandlers } from '../DatePicker/use-date-picker'
+import { locale } from '../Locale'
 import type { SelectorDetail } from '../SelectorField/types'
 
 export default defineComponent({

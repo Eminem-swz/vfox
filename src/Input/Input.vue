@@ -62,16 +62,16 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
-import { Icon } from '@/Icon'
-import { isNumeric, isNumber, isStringNumberMix } from '@/helpers/util'
-import { formatInputDigit, formatInputNumber } from '@/helpers/input'
-import { getEnumsValue } from '@/helpers/validator'
+import { Icon } from '../Icon'
+import { isNumeric, isNumber, isStringNumberMix } from '../helpers/util'
+import { formatInputDigit, formatInputNumber } from '../helpers/input'
+import { getEnumsValue } from '../helpers/validator'
 import {
   formFocusEmits,
   formItemProps,
   formStringValueEmits
-} from '@/Form/form'
-import { useInput } from '@/Form/use-form'
+} from '../Form/form'
+import { useInput } from '../Form/use-form'
 
 const TYPE_NAMES = [
   'text',

@@ -1,9 +1,9 @@
 import { computed, onMounted, ref, watch, inject } from 'vue'
 import type { SetupContext } from 'vue'
-import { noop } from '@/helpers/util'
-import { addClassName, getScrollTop, removeClassName } from '@/helpers/dom'
-import { popupZIndex } from '@/helpers/layer'
-import { useBlur } from '@/hooks/use-blur'
+import { noop } from '../helpers/util'
+import { addClassName, getScrollTop, removeClassName } from '../helpers/dom'
+import { popupZIndex } from '../helpers/layer'
+import { useBlur } from '../hooks/use-blur'
 import type { UseEmitFn, UseProps } from '../hooks/types'
 import type {
   VisibleState,
@@ -14,7 +14,7 @@ import type {
   OnVisibleStateChange,
   OnCancel
 } from './types'
-import { popupEmits, popupProps } from '@/popup/popup'
+import { popupEmits, popupProps } from '../popup/popup'
 
 type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
 

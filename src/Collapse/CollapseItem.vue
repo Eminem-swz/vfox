@@ -29,10 +29,10 @@ import {
   inject,
   ComponentInternalInstance
 } from 'vue'
-import { Cell } from '@/Cell'
-import { iconValidator } from '@/helpers/validator'
-import { useGroupItem } from '@/hooks/use-group'
-import Exception from '@/helpers/exception'
+import { Cell } from '../Cell'
+import { iconValidator } from '../helpers/validator'
+import { useGroupItem } from '../hooks/use-group'
+import Exception from '../helpers/exception'
 import type { ItemOnToggle } from './types'
 import type { FnArgs } from '../helpers/types'
 

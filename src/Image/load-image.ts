@@ -1,4 +1,4 @@
-import Exception from '@/helpers/exception'
+import Exception from '../helpers/exception'
 import type { TypeException } from '../helpers/types'
 
 export interface ImageLoadedResource {

@@ -8,8 +8,8 @@ import {
   inject
 } from 'vue'
 import type { Ref, ComponentInternalInstance } from 'vue'
-import Exception from '@/helpers/exception'
-import { camelCase2KebabCase, capitalize } from '@/helpers/util'
+import Exception from '../helpers/exception'
+import { camelCase2KebabCase, capitalize } from '../helpers/util'
 
 type ListUpdateCallback = ($items: HTMLElement[]) => void
 

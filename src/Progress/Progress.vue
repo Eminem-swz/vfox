@@ -17,9 +17,9 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { isNumeric, rangeInteger } from '@/helpers/util'
+import { isNumeric, rangeInteger } from '../helpers/util'
 import type { StyleObject } from '../helpers/types'
-import { colorValidator } from '@/helpers/validator'
+import { colorValidator } from '../helpers/validator'
 
 export default defineComponent({
   name: 'fx-progress',

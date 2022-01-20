@@ -1,5 +1,5 @@
 import { onBeforeUnmount, reactive } from 'vue'
-import { getDefaultCountTime, getCountTime } from '@/CountDown/count-time'
+import { getDefaultCountTime, getCountTime } from '../CountDown/count-time'
 import type { CountTime } from './types'
 
 interface StepHandlers {

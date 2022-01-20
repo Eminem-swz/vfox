@@ -51,17 +51,17 @@ import {
   onBeforeUnmount,
   provide
 } from 'vue'
-import { Icon } from '@/Icon'
-import Exception from '@/helpers/exception'
-import { isNumber } from '@/helpers/util'
-import { useList } from '@/hooks/use-list'
-import { useResizeDetector } from '@/hooks/use-resize-detector'
-import { getStretchOffset } from '@/helpers/animation'
+import { Icon } from '../Icon'
+import Exception from '../helpers/exception'
+import { isNumber } from '../helpers/util'
+import { useList } from '../hooks/use-list'
+import { useResizeDetector } from '../hooks/use-resize-detector'
+import { getStretchOffset } from '../helpers/animation'
 import type { StyleObject } from '../helpers/types'
-import { useTouch } from '@/hooks/use-touch'
-import { styleObject2CssText } from '@/helpers/dom'
-import { emitChangeValidator } from '@/Swiper/swiper'
-import { colorValidator, emitEventValidator } from '@/helpers/validator'
+import { useTouch } from '../hooks/use-touch'
+import { styleObject2CssText } from '../helpers/dom'
+import { emitChangeValidator } from '../Swiper/swiper'
+import { colorValidator, emitEventValidator } from '../helpers/validator'
 
 interface SwiperCoords {
   offset: boolean | null

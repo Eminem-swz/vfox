@@ -1,4 +1,4 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import DatePickerView from '../DatePicker/DatePickerView.vue'
 
 export { DatePickerView }

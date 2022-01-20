@@ -35,13 +35,13 @@
 <script lang="ts">
 import { ref, defineComponent, computed, reactive } from 'vue'
 import type { PropType } from 'vue'
-import { getEnumsValue } from '@/helpers/validator'
-import { cloneData, rangeNumber, noop } from '@/helpers/util'
-import { STATE_TYPES } from '@/helpers/constants'
+import { getEnumsValue } from '../helpers/validator'
+import { cloneData, rangeNumber, noop } from '../helpers/util'
+import { STATE_TYPES } from '../helpers/constants'
 import type { ButtonOption, OnButtonClick } from './types'
-import { useTouch } from '@/hooks/use-touch'
-import { getStretchOffset } from '@/helpers/animation'
-import { useBlur } from '@/hooks/use-blur'
+import { useTouch } from '../hooks/use-touch'
+import { getStretchOffset } from '../helpers/animation'
+import { useBlur } from '../hooks/use-blur'
 
 interface SwipeCellCoords {
   startX: number

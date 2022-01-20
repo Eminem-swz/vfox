@@ -25,15 +25,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { CascaderPopup } from '@/CascaderPopup'
-import { SelectorField } from '@/SelectorField'
+import { CascaderPopup } from '../CascaderPopup'
+import { SelectorField } from '../SelectorField'
 import {
   pickerEmits,
   pickerProps,
   mergeHandlers,
   commonProps
-} from '@/Picker/picker'
-import { usePicker } from '@/Picker/use-picker'
+} from '../Picker/picker'
+import { usePicker } from '../Picker/use-picker'
 
 export default defineComponent({
   name: 'fx-cascader',

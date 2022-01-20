@@ -25,13 +25,13 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
-import { SideTab } from '@/SideTab'
-import { Sticky } from '@/Sticky'
-import { StickyView } from '@/StickyView'
-import { sizeValidator } from '@/helpers/validator'
+import { SideTab } from '../SideTab'
+import { Sticky } from '../Sticky'
+import { StickyView } from '../StickyView'
+import { sizeValidator } from '../helpers/validator'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../StickyView/types'
 import type { OnChange as StickyViewOnChange } from '../StickyView/types'
-import { emitChangeValidator } from '@/StickyView/stickyView'
+import { emitChangeValidator } from '../StickyView/stickyView'
 
 export default defineComponent({
   name: 'fx-scroll-tab',

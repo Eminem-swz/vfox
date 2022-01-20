@@ -9,10 +9,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PickerView } from '@/PickerView'
-import { pickerValueEmits } from '@/Picker/picker'
-import { commonProps } from '@/DatePicker/date-picker'
-import { useHandlers } from '@/DatePicker/use-date-picker'
+import { PickerView } from '../PickerView'
+import { pickerValueEmits } from '../Picker/picker'
+import { commonProps } from '../DatePicker/date-picker'
+import { useHandlers } from '../DatePicker/use-date-picker'
 import type { SelectorModelValue } from '../SelectorField/types'
 
 export default defineComponent({

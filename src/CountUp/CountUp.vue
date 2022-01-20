@@ -7,8 +7,8 @@
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import type { PropType } from 'vue'
-import { AnimationFrameTask, frameTo } from '@/helpers/animation'
-import { thousands, isNumber } from '@/helpers/util'
+import { AnimationFrameTask, frameTo } from '../helpers/animation'
+import { thousands, isNumber } from '../helpers/util'
 import type { OnCancel, Speed } from './types'
 import type { VoidFnToBooleanFn } from '../helpers/types'
 

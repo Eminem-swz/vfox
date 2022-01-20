@@ -23,22 +23,22 @@
 <script lang="ts">
 import { inject, defineComponent, computed, getCurrentInstance } from 'vue'
 import type { PropType, ComponentInternalInstance } from 'vue'
-import { Icon } from '@/Icon'
-import { Badge } from '@/Badge'
-import { Image } from '@/Image'
+import { Icon } from '../Icon'
+import { Badge } from '../Badge'
+import { Image } from '../Image'
 import {
   colorValidator,
   createEnumsValidator,
   getEnumsValue
-} from '@/helpers/validator'
-import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '@/Avatar/avatar'
+} from '../helpers/validator'
+import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '../Avatar/avatar'
 import type { ShapeType, UserSizeType } from './types'
-import { useGroupItem } from '@/hooks/use-group'
-import { isNumber } from '@/helpers/util'
+import { useGroupItem } from '../hooks/use-group'
+import { isNumber } from '../helpers/util'
 import type { StyleObject } from '../helpers/types'
-import { handleBadge } from '@/Badge/badge'
+import { handleBadge } from '../Badge/badge'
 import type { BadgeOption, Option as HandleBadgeOption } from '../Badge/types'
-import { getColorObject } from '@/helpers/color'
+import { getColorObject } from '../helpers/color'
 
 type Gender = 'man' | 'woman'
 const GenderNames = ['woman', 'man']

@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import Avatar from './Avatar.vue'
 import AvatarGroup from './AvatarGroup.vue'
 

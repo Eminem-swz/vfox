@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, h, provide } from 'vue'
 import SkeletonLayout from './SkeletonLayout.vue'
-import { rootProps } from '@/Skeleton/skeleton'
+import { rootProps } from '../Skeleton/skeleton'
 
 export default defineComponent({
   name: 'fx-skeleton',

@@ -1,4 +1,4 @@
-import { withNoopInstall } from '@/helpers/with-install'
+import { withNoopInstall } from '../helpers/with-install'
 import SelectorField from './SelectorField.vue'
 
 export { SelectorField }

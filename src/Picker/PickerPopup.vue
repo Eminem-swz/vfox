@@ -33,18 +33,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PickerView } from '@/PickerView'
-import { Drawer } from '@/Drawer'
-import { NavBar } from '@/NavBar'
-import { usePopupExtend } from '@/popup/use-popup'
-import { popupExtendProps } from '@/popup/popup'
+import { PickerView } from '../PickerView'
+import { Drawer } from '../Drawer'
+import { NavBar } from '../NavBar'
+import { usePopupExtend } from '../popup/use-popup'
+import { popupExtendProps } from '../popup/popup'
 import {
   pickerPopupProps,
   commonProps,
   pickerPopupEmits
-} from '@/Picker/picker'
-import { usePickerPopup } from '@/Picker/use-picker'
-import { locale } from '@/Locale'
+} from '../Picker/picker'
+import { usePickerPopup } from '../Picker/use-picker'
+import { locale } from '../Locale'
 import type { SelectorDetail } from '../SelectorField/types'
 
 export default defineComponent({

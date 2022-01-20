@@ -23,11 +23,11 @@ import {
   objectForEach,
   isObject,
   isStringNumberMix
-} from '@/helpers/util'
-import Exception from '@/helpers/exception'
-import { cloneValue } from '@/Picker/util'
-import { formActiveEmits, formItemProps } from '@/Form/form'
-import { popupEmits } from '@/popup/popup'
+} from '../helpers/util'
+import Exception from '../helpers/exception'
+import { cloneValue } from '../Picker/util'
+import { formActiveEmits, formItemProps } from '../Form/form'
+import { popupEmits } from '../popup/popup'
 
 export const getDefaultFieldNames: () => FieldNames = () => {
   return { label: 'label', value: 'value', children: 'children' }

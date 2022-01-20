@@ -56,26 +56,19 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
-import { Drawer } from '@/Drawer'
-import { isStringArray, noop } from '@/helpers/util'
-import { usePopupExtend } from '@/popup/use-popup'
-import { popupEmits, popupExtendProps } from '@/popup/popup'
+import { Icon } from '../Icon'
+import { Drawer } from '../Drawer'
+import { isStringArray, noop } from '../helpers/util'
+import { usePopupExtend } from '../popup/use-popup'
+import { popupEmits, popupExtendProps } from '../popup/popup'
 import type { OnCancel, OnVisibleStateChange } from '../popup/types'
-import { getEnumsValue } from '@/helpers/validator'
-import { locale } from '@/Locale'
-import { formStringValueEmits } from '@/Form/form'
+import { getEnumsValue } from '../helpers/validator'
+import { locale } from '../Locale'
+import { formStringValueEmits } from '../Form/form'
 import type { EmptyObject, FnArgs } from '../helpers/types'
-import type { OnDelete, OnClose } from './types'
+import type { OnDelete, OnClose, NumberKeyboardItem } from './types'
 
 const TYPE_NAMES = ['default', 'rightColumn']
-
-interface NumberKeyboardItem {
-  icon?: string
-  text: string
-  type: 'text' | 'confirm' | 'backspace'
-  span?: number
-}
 
 export default defineComponent({
   name: 'fx-number-keyboard',

@@ -36,10 +36,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { usePopover } from '@/Popover/use-popover'
-import { popoverProps, popoverEmits } from '@/Popover/popover'
-import { Button, ButtonGroup } from '@/Button'
-import { locale } from '@/Locale'
+import { usePopover } from '../Popover/use-popover'
+import { popoverProps, popoverEmits } from '../Popover/popover'
+import { Button, ButtonGroup } from '../Button'
+import { locale } from '../Locale'
 
 export default defineComponent({
   name: 'fx-pop-dialog',

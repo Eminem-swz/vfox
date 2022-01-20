@@ -1,4 +1,4 @@
-import { thousands } from '@/helpers/util'
+import { thousands } from '../helpers/util'
 import type { CountTime } from './types'
 
 function formatNumber(num: number) {

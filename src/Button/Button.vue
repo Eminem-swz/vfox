@@ -22,19 +22,19 @@
 <script lang="ts">
 import { inject, defineComponent, computed, getCurrentInstance } from 'vue'
 import type { PropType, ComponentInternalInstance } from 'vue'
-import { Icon } from '@/Icon'
+import { Icon } from '../Icon'
 import {
   colorValidator,
   createEnumsValidator,
   getEnumsValue,
   iconValidator
-} from '@/helpers/validator'
-import { SIZE_TYPES, STATE_TYPES } from '@/helpers/constants'
-import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
+} from '../helpers/validator'
+import { SIZE_TYPES, STATE_TYPES } from '../helpers/constants'
+import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '../Button/button'
 import type { SizeType, StateType, StyleObject } from '../helpers/types'
 import type { ButtonGroupOptions, PatternType, ShapeType } from './types'
-import { useGroupItem } from '@/hooks/use-group'
-import { getColorGroups, isColorValue, isDarkColor } from '@/helpers/color'
+import { useGroupItem } from '../hooks/use-group'
+import { getColorGroups, isColorValue, isDarkColor } from '../helpers/color'
 
 const FORM_TYPES = ['button', 'submit', 'reset']
 type FormTypes = 'button' | 'submit' | 'reset'

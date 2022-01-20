@@ -28,16 +28,16 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
-import { StickyView } from '@/StickyView'
-import { sizeValidator } from '@/helpers/validator'
-import { rangeInteger } from '@/helpers/util'
+import { StickyView } from '../StickyView'
+import { sizeValidator } from '../helpers/validator'
+import { rangeInteger } from '../helpers/util'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../StickyView/types'
-import { useTouch } from '@/hooks/use-touch'
+import { useTouch } from '../hooks/use-touch'
 import type {
   OnChange as StickyViewOnChange,
   StickyViewItem
 } from '../StickyView/types'
-import { emitChangeValidator } from '@/StickyView/stickyView'
+import { emitChangeValidator } from '../StickyView/stickyView'
 
 export default defineComponent({
   name: 'fx-index-view',

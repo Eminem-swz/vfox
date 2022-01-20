@@ -26,11 +26,11 @@
 <script lang="ts">
 import { defineComponent, computed, onBeforeUnmount } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
-import { ActivityIndicator } from '@/ActivityIndicator'
-import { usePopup } from '@/popup/use-popup'
-import { popupEmits, popupProps } from '@/popup/popup'
-import { iconValidator } from '@/helpers/validator'
+import { Icon } from '../Icon'
+import { ActivityIndicator } from '../ActivityIndicator'
+import { usePopup } from '../popup/use-popup'
+import { popupEmits, popupProps } from '../popup/popup'
+import { iconValidator } from '../helpers/validator'
 import type { StateType } from './types'
 
 const typeMaps = new Map<StateType, string | null>([

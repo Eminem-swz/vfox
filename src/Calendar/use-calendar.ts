@@ -1,5 +1,5 @@
-import dayjs from '@/helpers/day'
-import { getDefaultDetail } from '@/Calendar/calendar'
+import dayjs from '../helpers/day'
+import { getDefaultDetail } from '../Calendar/calendar'
 import type { UseProps } from '../hooks/types'
 import type { Mode, CalendarDetail, ValueFormatter, ValueParser } from './types'
 import type { SelectorModelValue, SelectorDetail } from '../SelectorField/types'

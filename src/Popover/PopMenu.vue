@@ -40,10 +40,10 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { usePopover } from '@/Popover/use-popover'
-import { popoverProps, popoverEmits } from '@/Popover/popover'
-import { Icon } from '@/Icon'
-import { isObject } from '@/helpers/util'
+import { usePopover } from '../Popover/use-popover'
+import { popoverProps, popoverEmits } from '../Popover/popover'
+import { Icon } from '../Icon'
+import { isObject } from '../helpers/util'
 import type { MenuOption, MenuDetail } from './types'
 
 export default defineComponent({

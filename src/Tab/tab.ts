@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
-import { isStringNumberMix } from '@/helpers/util'
+import { isStringNumberMix } from '../helpers/util'
 import type { OptionItem, OptionList, OnChange } from './types'
-import { colorValidator } from '@/helpers/validator'
+import { colorValidator } from '../helpers/validator'
 import type { VoidFnToBooleanFn } from '../helpers/types'
 
 export const tabEmits: {

@@ -32,16 +32,16 @@
 
 <script lang="ts">
 import { onMounted, ref, defineComponent, watch } from 'vue'
-import { Button } from '@/Button'
-import { rangeInteger, rangeNumber } from '@/helpers/util'
-import { formatInputNumber } from '@/helpers/input'
+import { Button } from '../Button'
+import { rangeInteger, rangeNumber } from '../helpers/util'
+import { formatInputNumber } from '../helpers/input'
 import {
   formStringValueEmits,
   formItemProps,
   formFocusEmits
-} from '@/Form/form'
-import { useInput } from '@/Form/use-form'
-import { emitTypeValidator } from '@/helpers/validator'
+} from '../Form/form'
+import { useInput } from '../Form/use-form'
+import { emitTypeValidator } from '../helpers/validator'
 
 export default defineComponent({
   name: 'fx-stepper',

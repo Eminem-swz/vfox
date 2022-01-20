@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject, ref } from 'vue'
-import { useListItem } from '@/hooks/use-list'
+import { useListItem } from '../hooks/use-list'
 
 export default defineComponent({
   name: 'fx-step',

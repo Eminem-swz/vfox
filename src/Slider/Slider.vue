@@ -27,10 +27,10 @@
 
 <script lang="ts">
 import { ref, defineComponent, watch, nextTick } from 'vue'
-import { isNumeric } from '@/helpers/util'
-import { formNumberValueEmits, formItemProps } from '@/Form/form'
-import { slideProps } from '@/Slider/slide'
-import { useSlide } from '@/Slider/use-slide'
+import { isNumeric } from '../helpers/util'
+import { formNumberValueEmits, formItemProps } from '../Form/form'
+import { slideProps } from '../Slider/slide'
+import { useSlide } from '../Slider/use-slide'
 
 export default defineComponent({
   name: 'fx-slider',

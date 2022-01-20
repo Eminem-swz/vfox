@@ -57,21 +57,21 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, nextTick, watch } from 'vue'
 import type { PropType } from 'vue'
-import { LoadMore } from '@/LoadMore'
-import { ScrollView } from '@/ScrollView'
+import { LoadMore } from '../LoadMore'
+import { ScrollView } from '../ScrollView'
 import {
   cloneData,
   isInNumberRange,
   isInteger,
   isNumber,
   rangeInteger
-} from '@/helpers/util'
-import Exception from '@/helpers/exception'
-import { getRelativeOffset } from '@/helpers/dom'
-import { useResizeDetector } from '@/hooks/use-resize-detector'
+} from '../helpers/util'
+import Exception from '../helpers/exception'
+import { getRelativeOffset } from '../helpers/dom'
+import { useResizeDetector } from '../hooks/use-resize-detector'
 import type { StyleObject, ViewPosition } from '../helpers/types'
 import type { ScrollToIndexOptions } from './types'
-import { locale } from '@/Locale'
+import { locale } from '../Locale'
 import type {
   OnRefreshing,
   OnScroll,
@@ -81,8 +81,8 @@ import type {
 import {
   emitRefreshingValidator,
   emitScrollValidator
-} from '@/ScrollView/scrollView'
-import { parseGutter, propGutter } from '@/Row/row'
+} from '../ScrollView/scrollView'
+import { parseGutter, propGutter } from '../Row/row'
 
 interface FlatItemElement extends HTMLElement {
   _recycled?: boolean

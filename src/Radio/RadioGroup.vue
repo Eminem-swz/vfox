@@ -15,10 +15,10 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Radio from './Radio.vue'
-import { useCheckboxOrRadioGroup } from '@/Checkbox/use-checkbox-radio'
+import { useCheckboxOrRadioGroup } from '../Checkbox/use-checkbox-radio'
 import type { ModelValue } from '../Checkbox/types'
-import { checkboxOrRadioGroupProps } from '@/Checkbox/checkbox-radio'
-import { isStringNumberMix } from '@/helpers/util'
+import { checkboxOrRadioGroupProps } from '../Checkbox/checkbox-radio'
+import { isStringNumberMix } from '../helpers/util'
 
 const isValue = (value: ModelValue) => isStringNumberMix(value)
 

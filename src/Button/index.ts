@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import Button from './Button.vue'
 import ButtonGroup from './ButtonGroup.vue'
 

@@ -31,12 +31,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Icon } from '@/Icon'
+import { Icon } from '../Icon'
 import {
   checkboxOrRadioEmits,
   checkboxOrRadioProps
-} from '@/Checkbox/checkbox-radio'
-import { useCheckboxOrRadio } from '@/Checkbox/use-checkbox-radio'
+} from '../Checkbox/checkbox-radio'
+import { useCheckboxOrRadio } from '../Checkbox/use-checkbox-radio'
 
 export default defineComponent({
   name: 'fx-checkbox',

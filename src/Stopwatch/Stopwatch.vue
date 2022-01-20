@@ -24,10 +24,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { CountTime } from '../CountDown/types'
-import { getCountTime } from '@/CountDown/count-time'
-import { useCountTime } from '@/CountDown/use-count-time'
-import { cloneData } from '@/helpers/util'
-import { emitTypeValidator } from '@/helpers/validator'
+import { getCountTime } from '../CountDown/count-time'
+import { useCountTime } from '../CountDown/use-count-time'
+import { cloneData } from '../helpers/util'
+import { emitTypeValidator } from '../helpers/validator'
 import type { FnArgs } from '../helpers/types'
 import type { OnStop } from './types'
 

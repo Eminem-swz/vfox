@@ -1,6 +1,6 @@
-import dayjs from '@/helpers/day'
+import dayjs from '../helpers/day'
 import type { PropType } from 'vue'
-import { MODE_NAMES } from '@/DatePicker/date'
+import { MODE_NAMES } from '../DatePicker/date'
 import type { ModeName, OptionFilter } from './types'
 import type {
   SelectorModelValue,

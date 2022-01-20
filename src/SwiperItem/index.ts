@@ -1,5 +1,5 @@
-import { withNoopInstall } from '@/helpers/with-install'
-import { SwiperItem } from '@/Swiper'
+import { withNoopInstall } from '../helpers/with-install'
+import { SwiperItem } from '../Swiper'
 
 export { SwiperItem }
 export default SwiperItem

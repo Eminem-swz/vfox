@@ -1,5 +1,5 @@
-import { isNumber } from '@/helpers/util'
-import { getEnumsValue } from '@/helpers/validator'
+import { isNumber } from '../helpers/util'
+import { getEnumsValue } from '../helpers/validator'
 import type { PropType } from 'vue'
 import type { ShapeType, SizeType, UserSizeType } from './types'
 

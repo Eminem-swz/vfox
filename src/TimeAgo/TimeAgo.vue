@@ -6,11 +6,11 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
-import dayjs from '@/helpers/day'
+import dayjs from '../helpers/day'
 import type { Dayjs } from 'dayjs'
 import { format } from 'timeago.js'
-import { addTimer } from '@/helpers/timer'
-import { locale } from '@/Locale'
+import { addTimer } from '../helpers/timer'
+import { locale } from '../Locale'
 
 export default defineComponent({
   name: 'fx-time-ago',

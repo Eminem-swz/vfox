@@ -71,15 +71,15 @@
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
-import { Input } from '@/Input'
-import { Button } from '@/Button'
-import { Dropdown } from '@/Dropdown'
-import { Cell } from '@/Cell'
-import { Tag } from '@/Tag'
-import { isStringArray } from '@/helpers/util'
-import { locale } from '@/Locale'
-import { emitEventValidator } from '@/helpers/validator'
+import { Icon } from '../Icon'
+import { Input } from '../Input'
+import { Button } from '../Button'
+import { Dropdown } from '../Dropdown'
+import { Cell } from '../Cell'
+import { Tag } from '../Tag'
+import { isStringArray } from '../helpers/util'
+import { locale } from '../Locale'
+import { emitEventValidator } from '../helpers/validator'
 import type {
   OnFieldClick,
   OnInput,

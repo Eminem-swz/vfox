@@ -1,8 +1,8 @@
 import type { UseProps } from '../hooks/types'
-import { rangeNumber } from '@/helpers/util'
-import { useTouch } from '@/hooks/use-touch'
+import { rangeNumber } from '../helpers/util'
+import { useTouch } from '../hooks/use-touch'
 import { computed, ref } from 'vue'
-import { addClassName, getRelativeOffset, removeClassName } from '@/helpers/dom'
+import { addClassName, getRelativeOffset, removeClassName } from '../helpers/dom'
 import type { StyleObject } from '../helpers/types'
 
 interface Coords {

@@ -1,5 +1,5 @@
-import { withNoopInstall } from '@/helpers/with-install'
-import { FormItem } from '@/Form'
+import { withNoopInstall } from '../helpers/with-install'
+import { FormItem } from '../Form'
 
 export { FormItem }
 export default FormItem

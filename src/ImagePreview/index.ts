@@ -1,6 +1,6 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import ImagePreview from './ImagePreview.vue'
-import { createConfirmHook, createShowPopup } from '@/popup/api'
+import { createConfirmHook, createShowPopup } from '../popup/api'
 import type { EmptyObject } from '../helpers/types'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
 

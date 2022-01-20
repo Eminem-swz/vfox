@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { isNumeric, thousands } from '@/helpers/util'
+import { isNumeric, thousands } from '../helpers/util'
 
 export default defineComponent({
   name: 'fx-price',

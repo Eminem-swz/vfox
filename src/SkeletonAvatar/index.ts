@@ -1,5 +1,5 @@
-import { withNoopInstall } from '@/helpers/with-install'
-import { SkeletonAvatar } from '@/Skeleton'
+import { withNoopInstall } from '../helpers/with-install'
+import { SkeletonAvatar } from '../Skeleton'
 
 export { SkeletonAvatar }
 export default SkeletonAvatar

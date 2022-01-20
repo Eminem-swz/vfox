@@ -37,12 +37,12 @@
 <script lang="ts">
 import { defineComponent, computed, toRef, watch } from 'vue'
 import type { PropType } from 'vue'
-import { NavBar } from '@/NavBar'
-import { usePopup } from '@/popup/use-popup'
-import { popupEmits, popupProps } from '@/popup/popup'
-import { useSafeAreaInsets } from '@/hooks/use-safe-area-insets'
-import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { PLACEMENT_TYPES } from '@/helpers/constants'
+import { NavBar } from '../NavBar'
+import { usePopup } from '../popup/use-popup'
+import { popupEmits, popupProps } from '../popup/popup'
+import { useSafeAreaInsets } from '../hooks/use-safe-area-insets'
+import { createEnumsValidator, getEnumsValue } from '../helpers/validator'
+import { PLACEMENT_TYPES } from '../helpers/constants'
 import type { PlacementType } from '../helpers/types'
 
 export default defineComponent({

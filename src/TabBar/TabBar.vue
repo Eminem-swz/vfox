@@ -28,11 +28,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Image } from '@/Image'
-import { Icon } from '@/Icon'
-import { Badge } from '@/Badge'
-import { tabEmits, tabProps } from '@/Tab/tab'
-import { useTab } from '@/Tab/use-tab'
+import { Image } from '../Image'
+import { Icon } from '../Icon'
+import { Badge } from '../Badge'
+import { tabEmits, tabProps } from '../Tab/tab'
+import { useTab } from '../Tab/use-tab'
 
 export default defineComponent({
   name: 'fx-tab-bar',

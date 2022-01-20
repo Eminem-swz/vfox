@@ -23,7 +23,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { isStringArray } from '@/helpers/util'
+import { isStringArray } from '../helpers/util'
 
 export default defineComponent({
   name: 'fx-form-item',

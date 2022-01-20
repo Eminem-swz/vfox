@@ -15,12 +15,12 @@
 <script lang="ts">
 import { defineComponent, provide, reactive, watch } from 'vue'
 import type { PropType } from 'vue'
-import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
-import { SIZE_TYPES } from '@/helpers/constants'
-import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '@/Button/button'
+import { createEnumsValidator, getEnumsValue } from '../helpers/validator'
+import { SIZE_TYPES } from '../helpers/constants'
+import { BUTTON_PATTERN_TYPES, BUTTON_SHAPE_TYPES } from '../Button/button'
 import type { SizeType } from '../helpers/types'
 import type { PatternType, ShapeType, ButtonGroupOptions } from './types'
-import { useGroup } from '@/hooks/use-group'
+import { useGroup } from '../hooks/use-group'
 
 export default defineComponent({
   name: 'fx-button-group',

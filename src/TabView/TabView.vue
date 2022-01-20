@@ -29,16 +29,16 @@
 
 <script lang="ts">
 import { ref, defineComponent, provide } from 'vue'
-import { Tab } from '@/Tab'
-import { SideTab } from '@/SideTab'
-import { Swiper } from '@/Swiper'
-import { useList } from '@/hooks/use-list'
-import { scrollTo } from '@/helpers/dom'
+import { Tab } from '../Tab'
+import { SideTab } from '../SideTab'
+import { Swiper } from '../Swiper'
+import { useList } from '../hooks/use-list'
+import { scrollTo } from '../helpers/dom'
 import type {
   OnChange as SwiperOnChange,
   OnAnimated as SwiperOnAnimated
 } from '../Swiper/types'
-import { emitChangeValidator } from '@/Swiper/swiper'
+import { emitChangeValidator } from '../Swiper/swiper'
 
 export default defineComponent({
   name: 'fx-tab-view',

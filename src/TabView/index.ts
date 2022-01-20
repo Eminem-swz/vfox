@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import TabView from './TabView.vue'
 import TabViewItem from './TabViewItem.vue'
 

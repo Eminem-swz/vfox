@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { colorValidator } from '@/helpers/validator'
+import { colorValidator } from '../helpers/validator'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

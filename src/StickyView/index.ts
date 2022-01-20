@@ -1,4 +1,4 @@
-import { multiWithInstall } from '@/helpers/with-install'
+import { multiWithInstall } from '../helpers/with-install'
 import StickyView from './StickyView.vue'
 import StickyViewItem from './StickyViewItem.vue'
 

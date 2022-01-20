@@ -3,11 +3,11 @@ import {
   isStringNumberMixArray,
   isNumber,
   isURL
-} from '@/helpers/util'
-import { getSizeValue } from '@/helpers/dom'
+} from '../helpers/util'
+import { getSizeValue } from '../helpers/dom'
 import type { AnyObject, EmptyObject, TypeException, Validator } from './types'
-import { isColorValue } from '@/helpers/color'
-import Exception from '@/helpers/exception'
+import { isColorValue } from '../helpers/color'
+import Exception from '../helpers/exception'
 
 export const selectorValidator: Validator = value => {
   return (

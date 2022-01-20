@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Icon } from '@/Icon'
+import { Icon } from '../Icon'
 import type { FnArgs } from '../helpers/types'
 import type { OnChange } from './types'
 

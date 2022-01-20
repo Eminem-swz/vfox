@@ -1,4 +1,4 @@
-import { isObject, isStringNumberMix } from '@/helpers/util'
+import { isObject, isStringNumberMix } from '../helpers/util'
 import type { BadgeOption, Option } from './types'
 
 export function handleBadge(badge?: BadgeOption): Option {

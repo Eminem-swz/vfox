@@ -43,12 +43,12 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Drawer } from '@/Drawer'
-import { isObject, cloneData } from '@/helpers/util'
-import { usePopupExtend } from '@/popup/use-popup'
-import { popupEmits, popupExtendProps } from '@/popup/popup'
+import { Drawer } from '../Drawer'
+import { isObject, cloneData } from '../helpers/util'
+import { usePopupExtend } from '../popup/use-popup'
+import { popupEmits, popupExtendProps } from '../popup/popup'
 import type { Option, Detail, OnConfirm } from './types'
-import { locale } from '@/Locale'
+import { locale } from '../Locale'
 import type { VoidFnToBooleanFn } from '../helpers/types'
 
 const confirmValidator: VoidFnToBooleanFn<OnConfirm> = payload =>

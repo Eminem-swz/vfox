@@ -1,6 +1,6 @@
-import { withInstall } from '@/helpers/with-install'
+import { withInstall } from '../helpers/with-install'
 import PopMenu from '../Popover/PopMenu.vue'
-import { createConfirmHook, createShowPopup } from '@/popup/api'
+import { createConfirmHook, createShowPopup } from '../popup/api'
 import type { PopupSuccessConfirmArgs } from '../popup/types'
 import type { DomSelector, PlacementType } from '../helpers/types'
 import type { MenuOption, MenuDetail } from '../Popover/types'

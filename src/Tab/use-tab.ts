@@ -4,13 +4,13 @@ import type {
   SetupContext,
   ExtractPropTypes
 } from 'vue'
-import { isNumber, isObject, isStringNumberMix, isURL } from '@/helpers/util'
-import { frameTo } from '@/helpers/animation'
-import Exception from '@/helpers/exception'
-import { handleBadge } from '@/Badge/badge'
+import { isNumber, isObject, isStringNumberMix, isURL } from '../helpers/util'
+import { frameTo } from '../helpers/animation'
+import Exception from '../helpers/exception'
+import { handleBadge } from '../Badge/badge'
 import type { OptionItem, HandleOptionItem } from './types'
 import type { StyleObject } from '../helpers/types'
-import { tabEmits, tabProps } from '@/Tab/tab'
+import { tabEmits, tabProps } from '../Tab/tab'
 
 interface UseOptions {
   tabName: string

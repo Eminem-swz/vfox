@@ -28,3 +28,16 @@ export type OnDelete = (payload: {
     url: string | null
   }
 }) => void
+
+export interface FileItem {
+  id: number
+  url?: string
+  status: UploadStatus
+  message: string
+}
+
+export interface AddButton {
+  id: number
+  isAdd: boolean
+  draggable: boolean
+}

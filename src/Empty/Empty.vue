@@ -14,7 +14,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { createEnumsValidator, getEnumsValue } from '@/helpers/validator'
+import { createEnumsValidator, getEnumsValue } from '../helpers/validator'
 import type { EmptyType } from './types'
 
 const TYPE_NAMES: EmptyType[] = [

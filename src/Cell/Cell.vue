@@ -31,14 +31,14 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { Icon } from '@/Icon'
-import { capitalize } from '@/helpers/util'
+import { Icon } from '../Icon'
+import { capitalize } from '../helpers/util'
 import {
   createEnumsValidator,
   emitEventValidator,
   getEnumsValue,
   iconValidator
-} from '@/helpers/validator'
+} from '../helpers/validator'
 import type { ArrowDirection } from './types'
 
 const LINK_ICON_NAMES: ArrowDirection[] = ['right', 'up', 'down', 'left']

@@ -17,11 +17,11 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import type { PropType } from 'vue'
-import { isNumber, rangeInteger } from '@/helpers/util'
+import { isNumber, rangeInteger } from '../helpers/util'
 import type { StyleObject } from '../helpers/types'
-import { AnimationFrameTask, frameTo } from '@/helpers/animation'
-import { getColorObject } from '@/helpers/color'
-import { colorValidator } from '@/helpers/validator'
+import { AnimationFrameTask, frameTo } from '../helpers/animation'
+import { getColorObject } from '../helpers/color'
+import { colorValidator } from '../helpers/validator'
 
 export default defineComponent({
   name: 'fx-badge',

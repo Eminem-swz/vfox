@@ -1,4 +1,4 @@
-import { isMobile } from '@/helpers/device'
+import { isMobile } from '../helpers/device'
 import {
   FxEventElement,
   FxEventCallback,

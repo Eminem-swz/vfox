@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import type { SFCWithInstall } from './types'
-import { noop } from '@/helpers/util'
+import { noop } from '../helpers/util'
 
 export const withInstall = function <T>(component: T) {
   const _component: SFCWithInstall<T> = Object.assign(component, {
