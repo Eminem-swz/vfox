@@ -34,9 +34,10 @@ jobs:
       - name: Build
         run: |
           npm run build:manifest
+          npm run build:svg
           npm run build:css
-          npm run build:full
-          npm run build:component
+          npm run build:declaration
+          npm run build:components
           npm run build:umd
 
       - name: Release

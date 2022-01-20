@@ -20,6 +20,10 @@ function copySass() {
   return gulp.src('../src/**/*.scss').pipe(gulp.dest('../es'))
 }
 
+function copyIcons() {
+  return gulp.src('../src/Icon/icons.js').pipe(gulp.dest('../es/Icon/'))
+}
+
 function copyStyle() {
   return gulp
     .src(['../src/**/style/*.js'])
@@ -28,7 +32,7 @@ function copyStyle() {
 }
 
 /**
- * 把 es/style/index.css 压缩放到 dist/bundle.css
+ * 把 es/style/index.css 压缩放到 dist/index.css
  * @returns
  */
 function compressCss() {
@@ -43,14 +47,7 @@ function compressCss() {
   )
 }
 
-function fixDts() {
-  return gulp
-    .src('../es/**/*.d.ts')
-    .pipe(replace('@/', '../'))
-    .pipe(gulp.dest('../es'))
-}
-
-function cacheTsPath() {
+function buildFilePathsCache() {
   const paths = []
 
   return gulp
@@ -68,5 +65,5 @@ function cacheTsPath() {
 }
 
 exports.build = gulp.series(sass2Css, copySass, copyStyle, compressCss)
-exports.dts = fixDts
-exports.cts = cacheTsPath
+exports.buildFilePathsCache = buildFilePathsCache
+exports.copyIcons = copyIcons
