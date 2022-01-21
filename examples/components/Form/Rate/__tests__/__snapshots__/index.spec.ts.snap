@@ -104,33 +104,3 @@ exports[`Rate should render prop disabled=true correctly 1`] = `
     </i></div>
 </div>
 `;
-
-exports[`Rate should render prop pattern="heart" correctly 1`] = `
-<div class="fx-rate"><input name="" type="hidden" value="0">
-  <div class="fx-rate_item" data-value="1"><i class="fx-rate_icon">
-      <icon-stub icon="HeartOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i><i class="fx-rate_active-icon">
-      <icon-stub icon="HeartFilled" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i></div>
-  <div class="fx-rate_item" data-value="2"><i class="fx-rate_icon">
-      <icon-stub icon="HeartOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i><i class="fx-rate_active-icon">
-      <icon-stub icon="HeartFilled" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i></div>
-  <div class="fx-rate_item" data-value="3"><i class="fx-rate_icon">
-      <icon-stub icon="HeartOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i><i class="fx-rate_active-icon">
-      <icon-stub icon="HeartFilled" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i></div>
-  <div class="fx-rate_item" data-value="4"><i class="fx-rate_icon">
-      <icon-stub icon="HeartOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i><i class="fx-rate_active-icon">
-      <icon-stub icon="HeartFilled" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i></div>
-  <div class="fx-rate_item" data-value="5"><i class="fx-rate_icon">
-      <icon-stub icon="HeartOutlined" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i><i class="fx-rate_active-icon">
-      <icon-stub icon="HeartFilled" spin="false" size="0" width="0" height="0"></icon-stub>
-    </i></div>
-</div>
-`;

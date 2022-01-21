@@ -18,16 +18,6 @@ describe('Rate', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  test('should render prop pattern="heart" correctly', () => {
-    const wrapper = shallowMount(Rate, {
-      props: {
-        pattern: 'heart'
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   test('should render prop disabled=true correctly', () => {
     const wrapper = shallowMount(Rate, {
       props: {
