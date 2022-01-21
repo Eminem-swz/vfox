@@ -17,7 +17,7 @@ const runBuild = async () => {
   await build({
     plugins: [vuePlugin()],
     entryPoints: entryPoints,
-    external: ['@/*', 'vue', '../*', './*', ...deps],
+    external: ['vue', '../*', './*', ...deps],
     outdir: `es/`,
     format: 'esm',
     bundle: true,

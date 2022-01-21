@@ -12,7 +12,7 @@ const VuePlugin = () => {
         build.initialOptions.absWorkingDir || ''
       )
 
-      const formatPath = (p, resolveDir) => {
+      const resolvePath = (p, resolveDir) => {
         if (p.startsWith('.')) {
           return path.resolve(resolveDir, p)
         }
@@ -32,7 +32,7 @@ const VuePlugin = () => {
 
       build.onLoad({ filter: /\.vue$/, namespace: 'vue' }, async args => {
         const { resolveDir } = args.pluginData
-        const filePath = formatPath(args.path, resolveDir)
+        const filePath = resolvePath(args.path, resolveDir)
         const content = await fs.promises.readFile(filePath, 'utf8')
         const sfc = compiler.parse(content)
         const isTS = sfc.descriptor.script?.lang === 'ts'
@@ -74,8 +74,7 @@ const VuePlugin = () => {
         return {
           contents,
           resolveDir,
-          loader: isTS ? 'ts' : 'js',
-          watchFiles: [filePath]
+          loader: isTS ? 'ts' : 'js'
         }
       })
     }
