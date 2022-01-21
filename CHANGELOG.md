@@ -1,3 +1,10 @@
+## [2.5.3](https://github.com/godxiaoji/vfox/compare/v2.5.2...v2.5.3) (2022-01-21)
+
+
+### Bug Fixes
+
+* @/ to ../ ([954dc53](https://github.com/godxiaoji/vfox/commit/954dc53d529f571b3656538b4d2579f4045619f3))
+
 ## [2.5.2](https://github.com/godxiaoji/vfox/compare/v2.5.1...v2.5.2) (2022-01-18)
 
 
