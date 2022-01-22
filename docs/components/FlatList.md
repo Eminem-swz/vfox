@@ -15,19 +15,19 @@ import { FlatList } from 'vfox'
 
 ## Props
 
-| 属性                  | 类型            | 默认值 | 必填 | 说明                                                                                                                                                                   |
-| --------------------- | --------------- | ------ | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| data                  | any[]           |        | 是   | 列表数组                                                                                                                                                               |
-| data-key              | string          | 'id'   | 否   | 表明每个 item 项的身份（data[index][datakey]），为了提升渲染性能，列表数组必须有唯一 key                                                                               |
-| horizontal            | boolean         | false  | 否   | 设置为 true 则变为水平布局模式                                                                                                                                         |
-| get-item-size         | Function        |        | 否   | 动态返回列表项尺寸（垂直布局下指高度，水平布局下指宽度），`getItemSize(item:any, index:number) => number`，item 是 data[index] 的副本                                  |
-| item-size             | number          |        | 否   | 设置列表项尺寸，优先使用 `get-item-size`                                                                                                                               |
-| end-reached-threshold | number          | 0.5    | 否   | 决定当距离内容最底部还有多远时触发 onEndReached 回调。注意此参数是一个比值而非像素单位。比如，0.5 表示距离内容最底部的距离为当前列表可见长度的一半时触发               |
-| enable-pull-refresh   | boolean         | false  | 否   | 是否开启下拉刷，如果时水平列表则为左拉刷新，搭配 `refreshing` 事件使用新                                                                                               |
-| lower-loading         | boolean         | false  | 否   | 是否展示底部加载更多状态，配合 `end-reached` 事件加载无无限列表                                                                                                        |
-| initial-waterfall     | boolean         | false  | 否   | 是否开启瀑布流展示方，仅初始化时生效式                                                                                                                                 |
-| waterfall-col-count   | number          | 2      | 否   | 瀑布流列数，`initial-waterfall=true` 时生效，支持 2 ~ 5 列                                                                                                             |
-| item-gutter           | number/number[] | false  | 否   | 项间隔，通过数值设置水平和垂直间隔，也可以通过数组的形式分别设置水平和垂直间隔 [水平间隔, 垂直间隔]，`getItemSize` 或者 `itemSize` 设定值需要把 `item-gutter` 考虑进去 |
+| 属性                  | 类型                      | 默认值 | 必填 | 说明                                                                                                                                                                   |
+| --------------------- | ------------------------- | ------ | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| data                  | any[]                     |        | 是   | 列表数组                                                                                                                                                               |
+| data-key              | string                    | 'id'   | 否   | 表明每个 item 项的身份（data[index][datakey]），为了提升渲染性能，列表数组必须有唯一 key                                                                               |
+| horizontal            | boolean                   | false  | 否   | 设置为 true 则变为水平布局模式                                                                                                                                         |
+| get-item-size         | (index: number) => number |        | 否   | 动态返回列表项尺寸（垂直布局下指高度，水平布局下指宽度），推荐设置，提升性能                                                                                                               |
+| item-size             | number                    |        | 否   | 设置列表项固定尺寸，优先级低于 `get-item-size`                                                                                                                         |
+| end-reached-threshold | number                    | 0.5    | 否   | 决定当距离内容最底部还有多远时触发 onEndReached 回调。注意此参数是一个比值而非像素单位。比如，0.5 表示距离内容最底部的距离为当前列表可见长度的一半时触发               |
+| enable-pull-refresh   | boolean                   | false  | 否   | 是否开启下拉刷，如果时水平列表则为左拉刷新，搭配 `refreshing` 事件使用新                                                                                               |
+| lower-loading         | boolean                   | false  | 否   | 是否展示底部加载更多状态，配合 `end-reached` 事件加载无无限列表                                                                                                        |
+| initial-waterfall     | boolean                   | false  | 否   | 是否开启瀑布流展示方，仅初始化时生效式                                                                                                                                 |
+| waterfall-col-count   | number                    | 2      | 否   | 瀑布流列数，`initial-waterfall=true` 时生效，支持 2 ~ 5 列                                                                                                             |
+| item-gutter           | number/number[]           | false  | 否   | 项间隔，通过数值设置水平和垂直间隔，也可以通过数组的形式分别设置水平和垂直间隔 [水平间隔, 垂直间隔]，`getItemSize` 或者 `itemSize` 设定值需要把 `item-gutter` 考虑进去 |
 
 ## Events
 
@@ -42,7 +42,7 @@ import { FlatList } from 'vfox'
 
 | item    | 类型    | 说明                                                                |
 | ------- | ------- | ------------------------------------------------------------------- |
-| visible | boolean | 这里的可视不是进入可视范围，指的是非 'display: none' 已渲染项 |
+| visible | boolean | 这里的可视不是指进入屏幕可视范围，指的是非 'display: none' 已渲染项 |
 | index   | number  | 第 index 项                                                         |
 
 ## Slots

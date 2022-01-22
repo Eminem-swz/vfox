@@ -42,6 +42,7 @@ import type { ButtonOption, OnButtonClick } from './types'
 import { useTouch } from '../hooks/use-touch'
 import { getStretchOffset } from '../helpers/animation'
 import { useBlur } from '../hooks/use-blur'
+import { VoidFnToBooleanFn } from '../helpers/types'
 
 interface SwipeCellCoords {
   startX: number
@@ -69,7 +70,7 @@ export default defineComponent({
   emits: {
     'button-click': payload => payload && typeof payload.index === 'number'
   } as {
-    'button-click': OnButtonClick
+    'button-click': VoidFnToBooleanFn<OnButtonClick>
   },
   setup(props, ctx) {
     const root = ref<HTMLElement>()

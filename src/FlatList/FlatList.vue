@@ -54,7 +54,6 @@ import type { PropType } from 'vue'
 import { LoadMore } from '../LoadMore'
 import { ScrollView } from '../ScrollView'
 import {
-  cloneData,
   isInNumberRange,
   isInteger,
   isNumber,
@@ -99,12 +98,10 @@ export default defineComponent({
       default: () => [] as Item[]
     },
     getItemSize: {
-      type: Function,
-      default: null
+      type: Function as PropType<(index: number) => number>
     },
     itemSize: {
-      type: Number,
-      default: null
+      type: Number
     },
     // 横向
     initialHorizontal: {
@@ -354,7 +351,7 @@ export default defineComponent({
     function getItemLayout($el: HTMLElement, index: number) {
       if (typeof props.getItemSize === 'function') {
         try {
-          const size = props.getItemSize(cloneData(props.data[index]), index)
+          const size = props.getItemSize(index)
 
           if (isNumber(size)) {
             return {

@@ -250,7 +250,7 @@ export default defineComponent({
       list,
       loadList,
       lowerLoading,
-      getItemSize(item: any, index: number) {
+      getItemSize(index: number) {
         return 50 + (index % 10) * 2
       },
 
