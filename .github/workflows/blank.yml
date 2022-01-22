@@ -36,7 +36,6 @@ jobs:
 
       - name: Install
         run: |
-          pnpm config set registry https://registry.npmmirror.com/
           pnpm install
 
       - name: Build
