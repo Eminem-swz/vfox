@@ -1,3 +1,10 @@
+## [2.5.6](https://github.com/godxiaoji/vfox/compare/v2.5.5...v2.5.6) (2022-01-22)
+
+
+### Bug Fixes
+
+* debug  registry ([310926d](https://github.com/godxiaoji/vfox/commit/310926d03a3f1e59b3c0bcbd4f915997a5fe6a06))
+
 ## [2.5.5](https://github.com/godxiaoji/vfox/compare/v2.5.4...v2.5.5) (2022-01-22)
 
 
