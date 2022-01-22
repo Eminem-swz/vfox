@@ -35,40 +35,46 @@ const VuePlugin = () => {
         const filePath = resolvePath(args.path, resolveDir)
         const content = await fs.promises.readFile(filePath, 'utf8')
         const sfc = compiler.parse(content)
-        const isTS = sfc.descriptor.script?.lang === 'ts'
+        const { script, scriptSetup, template } = sfc.descriptor
+        const isTS = script?.lang === 'ts' || scriptSetup?.lang === 'ts'
+        const id = md5(filePath)
 
         let contents = ``
+        let scriptContent = 'export default {}'
 
-        if (sfc.descriptor.script) {
-          contents += compiler.rewriteDefault(
-            sfc.descriptor.script.content,
-            '_sfc_script'
-          )
-        } else {
-          contents += `let _sfc_script = {};`
+        if (scriptSetup) {
+          scriptContent = compiler.compileScript(sfc.descriptor, {
+            id
+          }).content
+        } else if (script) {
+          scriptContent = script.content
         }
+        contents += compiler.rewriteDefault(scriptContent, '_sfc_script')
 
-        if (sfc.descriptor.template) {
-          contents += compiler.compileTemplate({
-            id: md5(filePath),
-            source: sfc.descriptor.template.content,
-            filename: filePath,
-            isProd:
-              process.env.NODE_ENV === 'production' ||
-              process.env.BUILD === 'production',
-            slotted: sfc.descriptor.slotted
-          }).code
+        if (template) {
+          contents += `
+            ${
+              compiler.compileTemplate({
+                id,
+                source: template.content,
+                filename: filePath,
+                isProd:
+                  process.env.NODE_ENV === 'production' ||
+                  process.env.BUILD === 'production',
+                slotted: sfc.descriptor.slotted
+              }).code
+            }`
 
           contents += `
-          _sfc_script.render = render;
+          _sfc_script.render = render
           _sfc_script.__file = '${path
             .relative(absPath, filePath)
-            .replace(/\\/g, '/')}';
+            .replace(/\\/g, '/')}'
           `
         }
 
         contents += `
-          export { _sfc_script as default };
+          export { _sfc_script as default }
           `
 
         return {
