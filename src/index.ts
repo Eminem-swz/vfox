@@ -125,7 +125,7 @@ export type {
 export type { OnStop as StopwatchOnStop } from './Stopwatch/types'
 export type {
   OnEndReached as FlatListOnEndReached,
-  OnRecycleChange as FlatListOnRecycleChange
+  OnVisibleItemsChange as FlatListOnVisibleItemsChange
 } from './FlatList/types'
 export type {
   OnDelete as NumberKeyboardOnDelete,

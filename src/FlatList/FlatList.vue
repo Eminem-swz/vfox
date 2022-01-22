@@ -19,13 +19,7 @@
       <li
         class="fx-flat-list_item"
         v-for="(item, index) in list"
-        :key="
-          dataKey
-            ? dataKey === '*this'
-              ? item.data
-              : item.data[dataKey]
-            : index
-        "
+        :key="item.data[dataKey]"
       >
         <div
           class="fx-flat-list_item-inner"
@@ -69,8 +63,8 @@ import {
 import Exception from '../helpers/exception'
 import { getRelativeOffset } from '../helpers/dom'
 import { useResizeDetector } from '../hooks/use-resize-detector'
-import type { StyleObject, ViewPosition } from '../helpers/types'
-import type { ScrollToIndexOptions } from './types'
+import type { StyleObject, ViewPosition, FnArgs } from '../helpers/types'
+import type { OnVisibleItemsChange, ScrollToIndexOptions } from './types'
 import { locale } from '../Locale'
 import type {
   OnRefreshing,
@@ -97,7 +91,7 @@ export default defineComponent({
   props: {
     dataKey: {
       type: String,
-      default: null
+      default: 'id'
     },
     data: {
       type: Array as PropType<Item[]>,
@@ -150,18 +144,12 @@ export default defineComponent({
     itemGutter: propGutter
   },
   emits: {
-    'recycle-change': (payload: {
-      recycled: boolean
-      index: number
-      item: Item
-    }) =>
-      payload &&
-      typeof payload.recycled === 'boolean' &&
-      typeof payload.index === 'number',
     'end-reached': (payload: { distanceFromEnd: number }) =>
       payload && typeof payload.distanceFromEnd === 'number',
     scroll: emitScrollValidator,
-    refreshing: emitRefreshingValidator
+    refreshing: emitRefreshingValidator,
+    'visible-items-change': (payload: FnArgs<OnVisibleItemsChange>[0]) =>
+      payload && Array.isArray(payload.items)
   },
   setup(props, { emit }) {
     const cols = ref<number[]>([])
@@ -211,14 +199,8 @@ export default defineComponent({
         // 如果没有固定高度（或宽度），默认不回收，因为需要展示以获取当前高度
         const newItem = { data: v, recycled: isSizeFixed() }
 
-        if (oldItem) {
-          if (dataKey === '*this' && v === oldItem.data) {
-            newItem.recycled = oldItem.recycled
-          } else if (dataKey && v[dataKey] === oldItem.data[dataKey]) {
-            newItem.recycled = oldItem.recycled
-          } else if (!dataKey) {
-            newItem.recycled = oldItem.recycled
-          }
+        if (oldItem && v[dataKey] === oldItem.data[dataKey]) {
+          newItem.recycled = oldItem.recycled
         }
 
         newList.push(newItem)
@@ -266,6 +248,8 @@ export default defineComponent({
       const _scrollSize =
         scrollSize == null ? getScrollSize() : (scrollSize as number)
 
+      const changeItems: { index: number; visible: boolean }[] = []
+
       getItemEls().forEach(($item, index) => {
         let offset = $list.offsetTop
         const sizeKey = scrollX ? 'width' : 'height'
@@ -299,10 +283,9 @@ export default defineComponent({
         const change = (recycled: boolean) => {
           $item._recycled = recycled
 
-          emit('recycle-change', {
-            recycled,
+          changeItems.push({
             index,
-            item: cloneData(item.data)
+            visible: !recycled
           })
         }
 
@@ -338,6 +321,11 @@ export default defineComponent({
         $list.style.height = Math.max.apply(null, newCols) + 'px'
         cols.value = newCols
       }
+
+      changeItems.length > 0 &&
+        emit('visible-items-change', {
+          items: changeItems
+        })
     }
 
     /**

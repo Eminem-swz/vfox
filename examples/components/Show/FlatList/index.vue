@@ -1,7 +1,7 @@
 <template>
   <div class="flat-list">
     <fx-group title="基础用法">
-      <fx-flat-list class="flat-list-box" :data="list" data-key="id">
+      <fx-flat-list class="flat-list-box" :data="list" dataKey="id">
         <template #default="{ item }">
           <div class="flat-list-item">
             {{ item.text }}
@@ -13,8 +13,8 @@
       <fx-flat-list
         class="flat-list-box"
         :data="list"
-        :item-size="130"
-        data-key="id"
+        :itemSize="130"
+        dataKey="id"
         initialHorizontal
       >
         <template #default="{ item }">
@@ -28,9 +28,9 @@
       <fx-flat-list
         class="flat-list-box"
         :data="loadList"
-        :item-size="50"
-        data-key="id"
-        :lower-loading="lowerLoading"
+        :itemSize="50"
+        dataKey="id"
+        :lowerLoading="lowerLoading"
         @end-reached="onLoadMore"
       >
         <template #default="{ item }">
@@ -44,7 +44,7 @@
       <fx-flat-list
         class="flat-list-box"
         :data="list"
-        data-key="id"
+        dataKey="id"
         :itemGutter="[16, 6]"
       >
         <template #default="{ item, index }">
@@ -59,7 +59,7 @@
         class="flat-list-box"
         :data="list"
         :getItemSize="getItemSize"
-        data-key="id"
+        dataKey="id"
         initialWaterfall
         :waterfallColCount="3"
         ref="demo"
@@ -71,14 +71,14 @@
         </template>
       </fx-flat-list>
     </fx-group>
-    <fx-group title="事件监听（end-reached/recycle-change）">
+    <fx-group title="事件监听（end-reached/visible-items-change）">
       <fx-flat-list
         class="flat-list-box"
         :data="list"
-        :item-size="50"
-        data-key="id"
-        @end-reached="onEndReached"
-        @recycle-change="onRecycleChange"
+        :itemSize="50"
+        dataKey="id"
+        @endReached="onEndReached"
+        @visibleItemsChange="onVisibleItemsChange"
       >
         <template #default="{ item }">
           <div class="flat-list-item">
@@ -91,9 +91,9 @@
       <fx-flat-list
         class="flat-list-box"
         :data="list"
-        :item-size="50"
-        data-key="id"
-        :enable-pull-refresh="true"
+        :itemSize="50"
+        dataKey="id"
+        :enablePullRefresh="true"
         @refreshing="onRefreshing"
       >
         <template #default="{ item }">
@@ -107,8 +107,8 @@
       <fx-flat-list
         class="flat-list-box"
         :data="[]"
-        :item-size="50"
-        data-key="id"
+        :itemSize="50"
+        dataKey="id"
       >
         <template #empty>
           <fx-empty description="暂无列表"></fx-empty>
@@ -119,7 +119,7 @@
       <fx-flat-list
         class="flat-list-box"
         :data="list"
-        data-key="id"
+        dataKey="id"
         ref="flatList"
       >
         <template #default="{ item, index }">
@@ -157,8 +157,8 @@ import { defineComponent, reactive, ref } from 'vue'
 import {
   FlatList,
   FlatListOnEndReached,
-  FlatListOnRecycleChange,
   FlatListOnRefreshing,
+  FlatListOnVisibleItemsChange,
   showToast,
   ViewPosition
 } from '@/index'
@@ -238,13 +238,12 @@ export default defineComponent({
       }, 500)
     }
 
-    const onRecycleChange: FlatListOnRecycleChange = ({
-      item,
-      index,
-      recycled
-    }) => {
-      index === 49 &&
-        showToast(`${item.text} ${recycled ? '回收了' : '加入了'}`)
+    const onVisibleItemsChange: FlatListOnVisibleItemsChange = ({ items }) => {
+      console.log('visible-items-change', items)
+
+      items.forEach(({ index, visible }) => {
+        index === 49 && showToast(`index: ${index}, visable: ${visible}`)
+      })
     }
 
     return {
@@ -261,7 +260,7 @@ export default defineComponent({
       onRefreshing,
       onEndReached,
       onLoadMore,
-      onRecycleChange
+      onVisibleItemsChange
     }
   }
 })
