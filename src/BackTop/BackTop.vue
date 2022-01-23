@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, toRef, ref } from 'vue'
+import { defineComponent, computed, toRef, ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import { Icon } from '../Icon'
 import { getScrollTop, scrollTo } from '../helpers/dom'
@@ -75,8 +75,10 @@ export default defineComponent({
       }
     })
 
-    useScrollEvent(document, (e: Event, { scrollTop }) => {
-      isShow.value = scrollTop >= props.visibleHeight
+    onMounted(() => {
+      useScrollEvent(document, (e: Event, { scrollTop }) => {
+        isShow.value = scrollTop >= props.visibleHeight
+      })
     })
 
     return {

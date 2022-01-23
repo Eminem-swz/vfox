@@ -76,7 +76,7 @@ export default defineComponent({
   emits: { ...popupEmits },
   setup(props, ctx) {
     const popupOptions = {
-      useBlur: false
+      enableUseBlur: false
     }
 
     const popup = usePopup(props, ctx, popupOptions)
@@ -123,7 +123,7 @@ export default defineComponent({
 
     watch(
       () => props.showMask,
-      val => (popupOptions.useBlur = !val),
+      val => (popupOptions.enableUseBlur = !val),
       { immediate: true }
     )
 

@@ -1,8 +1,6 @@
 import { camelCase2KebabCase, isNumber, objectForEach } from '../helpers/util'
 import type { ViewPosition } from './types'
 
-const docEl = document.documentElement
-
 export function appendToBody($el: Element) {
   document.body.appendChild($el)
 }
@@ -33,7 +31,9 @@ export function getRelativeOffset(
   }
 
   $el = $el as HTMLElement
-  $relativeEl = ($relativeEl === document ? docEl : $relativeEl) as HTMLElement
+  $relativeEl = (
+    $relativeEl === document ? document.documentElement : $relativeEl
+  ) as HTMLElement
 
   let offsetTop = $el.offsetTop
   let offsetLeft = $el.offsetLeft
@@ -94,9 +94,9 @@ export function getSizeValue(size: unknown, defaultValue = 0) {
       let sizeNum = parseFloat(matches[1])
 
       if (matches[2] === 'vw') {
-        sizeNum *= docEl.clientWidth / 100
+        sizeNum *= document.documentElement.clientWidth / 100
       } else if (matches[2] === 'vh') {
-        sizeNum *= docEl.clientHeight / 100
+        sizeNum *= document.documentElement.clientHeight / 100
       }
 
       return sizeNum
@@ -118,7 +118,7 @@ export function querySelector(selector: unknown) {
   } else if (typeof selector === 'string') {
     $el = document.querySelector(selector)
   } else if (selector === document) {
-    $el = docEl
+    $el = document.documentElement
   }
 
   return $el ?? null
@@ -137,7 +137,7 @@ export function getScrollDom($el: HTMLElement | Document = document) {
       typeof document.compatMode !== 'undefined' &&
       document.compatMode !== 'BackCompat'
     ) {
-      return docEl
+      return document.documentElement
     } else {
       return document.body
     }

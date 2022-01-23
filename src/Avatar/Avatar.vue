@@ -31,7 +31,11 @@ import {
   createEnumsValidator,
   getEnumsValue
 } from '../helpers/validator'
-import { AVATAR_SHAPE_TYPES, getAvatarSize, avatarProps } from '../Avatar/avatar'
+import {
+  AVATAR_SHAPE_TYPES,
+  getAvatarSize,
+  avatarProps
+} from '../Avatar/avatar'
 import type { ShapeType, UserSizeType } from './types'
 import { useGroupItem } from '../hooks/use-group'
 import { isNumber } from '../helpers/util'

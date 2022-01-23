@@ -57,7 +57,8 @@ import {
   onMounted,
   nextTick,
   watch,
-  onBeforeUnmount
+  onBeforeUnmount,
+  onBeforeMount
 } from 'vue'
 import type { PropType } from 'vue'
 import { Icon } from '../Icon'
@@ -173,7 +174,7 @@ export default defineComponent({
       shift: -1,
       moveSort: null
     }
-    let deleteAreaY = document.documentElement.clientHeight
+    let deleteAreaY = 0
     let onTimer: number
 
     function getNewIndex(sort: number[], index: number) {
@@ -500,6 +501,10 @@ export default defineComponent({
 
     watch(() => props.items, updateItemsData, {
       deep: true
+    })
+
+    onBeforeMount(() => {
+      deleteAreaY = document.documentElement.clientHeight
     })
 
     onMounted(() => {

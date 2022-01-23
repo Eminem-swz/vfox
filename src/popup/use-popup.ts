@@ -21,7 +21,7 @@ type LifeName = 'afterConfirm' | 'afterCancel' | 'afterShow' | 'afterHidden'
 type UseOptions = Partial<
   Record<LifeName, () => void> & {
     forbidScroll: boolean
-    useBlur: boolean
+    enableUseBlur: boolean
   }
 >
 
@@ -84,7 +84,7 @@ export function usePopup(
       position.value = 'absolute'
       top.value = getScrollTop() + 'px'
     }
-    if (useOptions.useBlur) {
+    if (useOptions.enableUseBlur) {
       visibleBlur.addEvent()
     }
 

@@ -5,6 +5,7 @@ import { getEnumsValue } from '../helpers/validator'
 import { querySelector } from '../helpers/dom'
 import { PLACEMENT_TYPES } from '../helpers/constants'
 import type { UseProps } from '../hooks/types'
+import { useResize } from '../hooks/use-resize'
 import { usePopup } from '../popup/use-popup'
 import type { StyleObject } from '../helpers/types'
 import { popoverEmits, popoverProps } from '../Popover/popover'
@@ -18,8 +19,6 @@ type PopoverPos = {
   ar: number | null
   ab: number | null
   al: number | null
-  mw: number
-  mh: number
 }
 
 const DEFAULT_POS: PopoverPos = {
@@ -30,9 +29,7 @@ const DEFAULT_POS: PopoverPos = {
   at: null,
   ar: null,
   ab: null,
-  al: null,
-  mw: 0,
-  mh: 0
+  al: null
 }
 
 export function usePopover(
@@ -55,10 +52,12 @@ export function usePopover(
       isShow.value = false
     },
     forbidScroll: true,
-    useBlur: false
+    enableUseBlur: false
   }
 
   const popup = usePopup(props, ctx, popupOptions)
+
+  const { client } = useResize()
 
   function updatePos() {
     const $target = querySelector(props.selector)
@@ -71,9 +70,9 @@ export function usePopover(
 
     const rect = $target.getBoundingClientRect()
     const { clientWidth: iw, clientHeight: ih } = innerEl.value as HTMLElement
-    const { clientWidth: dw, clientHeight: dh } = document.documentElement
+    const { width: dw, height: dh } = client.value
 
-    pos = Object.assign(cloneData(DEFAULT_POS), { mw: dw - 16, mh: dh - 16 })
+    pos = cloneData(DEFAULT_POS)
 
     if (placement === 'top' || placement === 'bottom') {
       pos.al = rect.left + rect.width / 2 - 5
@@ -132,22 +131,18 @@ export function usePopover(
   })
 
   const innerStyles = computed(() => {
-    const { clientWidth: dw, clientHeight: dh } = document.documentElement
-
-    if (!isShow.value) {
-      return {
-        left: '0px',
-        top: '0px',
-        maxWidth: dw - padding * 2 + 'px',
-        maxHeight: dh - padding * 2 + 'px'
-      } as StyleObject
-    }
+    const { width, height } = client.value
 
     const styles: StyleObject = {
-      maxWidth: pos.mw + 'px',
-      maxHeight: pos.mh + 'px'
+      maxWidth: width - padding * 2 + 'px',
+      maxHeight: height - padding * 2 + 'px'
     }
 
+    if (!isShow.value) {
+      return styles
+    }
+
+    // updatePos()
     pos.t != null && (styles.top = pos.t + 'px')
     pos.r != null && (styles.right = pos.r + 'px')
     pos.b != null && (styles.bottom = pos.b + 'px')
@@ -160,7 +155,7 @@ export function usePopover(
     () => props.showMask,
     val => {
       popupOptions.forbidScroll = !!val
-      popupOptions.useBlur = !val
+      popupOptions.enableUseBlur = !val
     },
     {
       immediate: true

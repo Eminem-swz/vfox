@@ -12,6 +12,12 @@ interface OnScrollCallback {
   ): void
 }
 
+/**
+ * @description must be use after beforeMount hook
+ * @param $el scroll element
+ * @param callback onScroll
+ * @returns off fn
+ */
 export function useScrollEvent(
   $el: FxEventElement,
   callback: OnScrollCallback

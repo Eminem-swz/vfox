@@ -182,7 +182,12 @@ export default defineComponent({
               pageX: e.touches[0].pageX,
               pageY: e.touches[0].pageY
             },
-            scroll: offset2Scroll(item)
+            scroll: {
+              top: (item.height - clientHeight) / 2 - item.offsetTop,
+              left: (item.width - clientWidth) / 2 - item.offsetLeft,
+              maxTop: item.height - clientHeight,
+              maxLeft: item.width - clientWidth
+            }
           }
         }
       }
@@ -328,17 +333,6 @@ export default defineComponent({
       return {
         offsetTop,
         offsetLeft
-      }
-    }
-
-    function offset2Scroll(item: ImageObject) {
-      const { clientWidth, clientHeight } = document.documentElement
-
-      return {
-        top: (item.height - clientHeight) / 2 - item.offsetTop,
-        left: (item.width - clientWidth) / 2 - item.offsetLeft,
-        maxTop: item.height - clientHeight,
-        maxLeft: item.width - clientWidth
       }
     }
 

@@ -1,6 +1,11 @@
 import type { SelectorModelValue, SelectorDetail } from '../SelectorField/types'
 
-import { cloneData, isDateArray, isSameArray, isSameDate } from '../helpers/util'
+import {
+  cloneData,
+  isDateArray,
+  isSameArray,
+  isSameDate
+} from '../helpers/util'
 
 export function isSameValue(aVal: unknown, bVal: unknown) {
   if (Array.isArray(aVal) && Array.isArray(bVal)) {
