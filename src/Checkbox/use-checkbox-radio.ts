@@ -145,7 +145,7 @@ export function useCheckboxOrRadioGroup<T>(
     updateValue: (options: {
       isChange: boolean
       children: GroupItem[]
-      uid: number | undefined
+      uid: symbol | undefined
     }) => T
     watchValue: (options: { children: GroupItem[]; value: T }) => void
   }
@@ -153,11 +153,11 @@ export function useCheckboxOrRadioGroup<T>(
   const root = ref<HTMLElement>()
   const { children } = useGroup<GroupItem>(name)
 
-  function _updateValue(isChange: boolean, uid?: number) {
+  function _updateValue(isChange: boolean, uid?: symbol) {
     return updateValue({ isChange, children, uid })
   }
 
-  function onChange(uid: number) {
+  function onChange(uid: symbol) {
     _updateValue(true, uid)
   }
 
