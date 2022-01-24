@@ -1,3 +1,11 @@
+## [2.5.7](https://github.com/godxiaoji/vfox/compare/v2.5.6...v2.5.7) (2022-01-24)
+
+
+### Bug Fixes
+
+* **ssr:** ssr 支持 ([f24710c](https://github.com/godxiaoji/vfox/commit/f24710c0f391fb5d8f5c47c61a5c0526a8b493d7))
+* **ssr:** ssr支持 ([7c2a86e](https://github.com/godxiaoji/vfox/commit/7c2a86e7d916c13a4e28663cdcb464d2cf4ae06d))
+
 ## [2.5.6](https://github.com/godxiaoji/vfox/compare/v2.5.5...v2.5.6) (2022-01-22)
 
 
