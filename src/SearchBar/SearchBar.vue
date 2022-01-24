@@ -69,7 +69,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
+import {
+  defineComponent,
+  onBeforeMount,
+  onBeforeUnmount,
+  ref,
+  watch
+} from 'vue'
 import type { PropType } from 'vue'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
@@ -238,28 +244,42 @@ export default defineComponent({
       })
     }
 
-    let placeholderTimer: number
-    let placeholderIndex = 0
+    let phTimer: number
+    let phIndex = 0
+    let phs: string[] = []
+    let isTimerReady = false
 
-    onBeforeUnmount(() => clearInterval(placeholderTimer))
+    const phsStart = () => {
+      phsStop()
+
+      if (isTimerReady && phs.length > 1) {
+        phTimer = window.setTimeout(() => {
+          phIndex = (phIndex + 1) % phs.length
+          placeholder.value = phs[phIndex]
+          phsStart()
+        }, props.placeholderInterval)
+      }
+    }
+
+    const phsStop = () => clearTimeout(phTimer)
 
     watch(
       () => props.placeholders,
       (val: Placeholders) => {
-        clearInterval(placeholderTimer)
+        phsStop()
 
         if (typeof val === 'string') {
           placeholder.value = val
-        } else if (isStringArray(val)) {
-          placeholderIndex = 0
-          placeholder.value = val[placeholderIndex]
+          phs = [val]
+        } else if (isStringArray(val) && val.length > 0) {
+          phIndex = 0
+          placeholder.value = val[phIndex]
+          phs = val
 
-          placeholderTimer = window.setInterval(() => {
-            placeholderIndex = (placeholderIndex + 1) % val.length
-            placeholder.value = val[placeholderIndex]
-          }, props.placeholderInterval)
+          phsStart()
         } else {
           placeholder.value = ''
+          phs = []
         }
       },
       {
@@ -267,6 +287,13 @@ export default defineComponent({
         immediate: true
       }
     )
+
+    onBeforeMount(() => {
+      isTimerReady = true
+      phsStart()
+    })
+
+    onBeforeUnmount(() => phsStop())
 
     return {
       placeholder,

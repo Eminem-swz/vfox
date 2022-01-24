@@ -17,7 +17,7 @@
     "lint:fix": "eslint . --ext .js,.ts,.vue,.jsx,.tsx --fix",
     "build:css": "node ./build/build.css.js",
     "build:components": "node ./build/build.components.js",
-    "build:declaration": "vue-tsc --project ./build/tsconfig.declaration.json",
+    "build:declaration": "node ./build/build.declaration.js",
     "build:manifest": "node ./build/build.manifest.js",
     "semantic-release": "semantic-release",
     "docs:dev": "vitepress dev docs",

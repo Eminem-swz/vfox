@@ -5,7 +5,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
+import {
+  defineComponent,
+  onBeforeMount,
+  onBeforeUnmount,
+  ref,
+  watch
+} from 'vue'
 import dayjs from '../helpers/day'
 import type { Dayjs } from 'dayjs'
 import { format } from 'timeago.js'
@@ -64,17 +70,15 @@ export default defineComponent({
     let removeTimer: () => void
     watch(
       () => props.interval,
-      () => {
+      val => {
         removeTimer && removeTimer()
-        removeTimer = addTimer(update, props.interval)
-      },
-      {
-        immediate: true
+        removeTimer = addTimer(update, val)
       }
     )
 
     watch(locale, () => update())
 
+    onBeforeMount(() => (removeTimer = addTimer(update, props.interval)))
     onBeforeUnmount(() => removeTimer && removeTimer())
 
     return {

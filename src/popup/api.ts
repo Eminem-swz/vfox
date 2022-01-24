@@ -21,19 +21,6 @@ const $refs: {
   }
 } = {}
 
-let puid = 1
-
-function createPopup() {
-  const $wrapper = document.createElement('div')
-
-  const id = puid++
-
-  return {
-    id,
-    $wrapper
-  }
-}
-
 export function createShowPopup<T, E = EmptyObject>({
   apiName,
   createHook,
@@ -100,8 +87,6 @@ export function createShowPopup<T, E = EmptyObject>({
           }
         })
 
-        const { $wrapper } = createPopup()
-
         const app = createApp(
           component,
           Object.assign(propsData, {
@@ -124,7 +109,10 @@ export function createShowPopup<T, E = EmptyObject>({
             fns[key] = value
           }
         } as PopupBridge)
-        app.mount($wrapper)
+
+        if (typeof document !== 'undefined') {
+          app.mount(document.createElement('div'))
+        }
 
         const $ref = {
           uid: app._uid,
