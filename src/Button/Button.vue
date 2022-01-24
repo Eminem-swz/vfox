@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts">
-import { inject, defineComponent, computed, getCurrentInstance } from 'vue'
-import type { PropType, ComponentInternalInstance } from 'vue'
+import { inject, defineComponent, computed } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '../Icon'
 import {
   colorValidator,
@@ -94,7 +94,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const uid = (getCurrentInstance() as ComponentInternalInstance).uid
     const buttonGroupOptions = inject<ButtonGroupOptions | null>(
       'fxButtonGroupOptions',
       null
@@ -142,7 +141,7 @@ export default defineComponent({
       return obj
     })
 
-    useGroupItem('button', uid)
+    useGroupItem('button', Symbol('uid'))
 
     return {
       realFormType,

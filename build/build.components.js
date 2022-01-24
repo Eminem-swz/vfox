@@ -21,7 +21,17 @@ const runBuild = async () => {
     outdir: `es/`,
     format: 'esm',
     bundle: true,
-    target: ['es2018']
+    target: ['es2019']
+  })
+
+  await build({
+    plugins: [vuePlugin()],
+    entryPoints: entryPoints,
+    external: ['vue', '../*', './*', ...deps],
+    outdir: `lib/`,
+    format: 'cjs',
+    bundle: true,
+    target: ['es2019']
   })
 }
 

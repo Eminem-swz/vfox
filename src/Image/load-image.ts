@@ -9,7 +9,7 @@ export interface ImageLoadedResource {
 }
 
 export type ImageLoadObject = {
-  uid: number
+  uid: number | symbol
   src: string
   checkInView: () => boolean
   onLoad: (res: ImageLoadedResource) => void
@@ -93,7 +93,7 @@ function lazyCheck(vm: ImageLoadObject) {
   }
 }
 
-export function removeComponentFromLazy(uid: number) {
+export function removeComponentFromLazy(uid: number | symbol) {
   const index = lazyQueueIndexOf(uid)
 
   if (index > -1) {
@@ -107,7 +107,7 @@ export function removeComponentFromLazy(uid: number) {
   }
 }
 
-function lazyQueueIndexOf(uid: number) {
+function lazyQueueIndexOf(uid: number | symbol) {
   for (let i = 0; i < ListenerQueue.length; i++) {
     if (ListenerQueue[i].uid === uid) {
       return i

@@ -5,8 +5,8 @@ import router from './router'
 import Vfox from '@/index'
 import { add as localeAdd } from '@/Locale'
 import enUS from '@/Locale/lang/en-US'
-import './styles.scss'
-// import '@/style/index'
+// import './styles.scss'
+import '@/style/index'
 import { isIOS, isMobile } from '@/helpers/device'
 
 localeAdd('en-US', enUS)

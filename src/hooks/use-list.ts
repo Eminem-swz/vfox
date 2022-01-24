@@ -7,7 +7,7 @@ import {
   onUnmounted,
   inject
 } from 'vue'
-import type { Ref, ComponentInternalInstance } from 'vue'
+import type { Ref } from 'vue'
 import Exception from '../helpers/exception'
 import { camelCase2KebabCase, capitalize } from '../helpers/util'
 
@@ -47,18 +47,18 @@ export function useList(name: string, updateCallback: ListUpdateCallback) {
   }
 
   function update(lazy = 17) {
-    if (!(instance as ComponentInternalInstance).isMounted) {
+    if (!instance?.isMounted) {
       return
     }
 
     if (lazy === 0) {
-      if (!(instance as ComponentInternalInstance).isUnmounted) {
+      if (!instance?.isUnmounted) {
         doUpdate()
       }
     } else {
       clearTimeout(updateTimer)
       updateTimer = window.setTimeout(() => {
-        if (!(instance as ComponentInternalInstance).isUnmounted) {
+        if (!instance?.isUnmounted) {
           doUpdate()
         }
       }, lazy)

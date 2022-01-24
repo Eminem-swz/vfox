@@ -21,10 +21,12 @@
 
 ## 支持环境
 
-Android 4.0+
+Android 5.0+
 
-iOS 8.0+
+iOS 10.0+
+
+Node.js 12.0+
 
 ## LICENSE
 
-[MIT](https://github.com/godxiaoji/vfox/blob/master/LICENSE)
+[MIT](https://github.com/godxiaoji/vfox/blob/next/LICENSE)

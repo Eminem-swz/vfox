@@ -103,7 +103,7 @@ export default {
 
 ```JavaScript
 import Vfox from 'vfox'
-import 'vfox/es/style/index.css'
+import 'vfox/es/style'
 
 app.use(Vfox)
 ```

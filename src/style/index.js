@@ -1,4 +1,3 @@
-// import './index.scss'
 import '../ActionSheet/style/index'
 import '../ActivityIndicator/style/index'
 import '../Avatar/style/index'

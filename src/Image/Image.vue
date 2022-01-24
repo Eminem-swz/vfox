@@ -26,12 +26,11 @@ import {
   defineComponent,
   onMounted,
   ref,
-  getCurrentInstance,
   watch,
   onBeforeUnmount,
   computed
 } from 'vue'
-import type { PropType, ComponentInternalInstance } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '../Icon'
 import {
   addLazyQueue,
@@ -122,16 +121,16 @@ export default defineComponent({
     error: emitErrorValidator
   },
   setup(props, { emit }) {
-    const instance = getCurrentInstance() as ComponentInternalInstance
     const loading = ref(true)
     const error = ref(false)
     const root = ref<HTMLElement>()
     const currentSrc = ref<string | null>(null)
+    const uid = Symbol()
 
     function load() {
       const loadObject: ImageLoadObject = {
         src: props.src,
-        uid: instance.uid,
+        uid,
         checkInView,
         onLoad,
         onError
@@ -183,7 +182,7 @@ export default defineComponent({
 
     onMounted(() => props.src && load())
 
-    onBeforeUnmount(() => removeComponentFromLazy(instance.uid))
+    onBeforeUnmount(() => removeComponentFromLazy(uid))
 
     watch(() => props.src, load)
 

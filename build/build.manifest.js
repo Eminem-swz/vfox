@@ -16,6 +16,7 @@ const buildJSON = async () => {
         v.indexOf('style/index.ts') === -1 &&
         v.indexOf('types.ts') === -1 &&
         v.indexOf('.d.ts') === -1 &&
+        v.indexOf('umd.ts') === -1 &&
         v !== ''
       )
     })

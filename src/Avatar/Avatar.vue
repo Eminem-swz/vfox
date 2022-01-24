@@ -21,8 +21,8 @@
 </template>
 
 <script lang="ts">
-import { inject, defineComponent, computed, getCurrentInstance } from 'vue'
-import type { PropType, ComponentInternalInstance } from 'vue'
+import { inject, defineComponent, computed } from 'vue'
+import type { PropType } from 'vue'
 import { Icon } from '../Icon'
 import { Badge } from '../Badge'
 import { Image } from '../Image'
@@ -73,13 +73,12 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const uid = (getCurrentInstance() as ComponentInternalInstance).uid
     const groupOptions = inject<{ size: UserSizeType } | null>(
       'fxAvatarGroupOptions',
       null
     )
 
-    useGroupItem('avatar', uid)
+    useGroupItem('avatar', Symbol('uid'))
 
     const size2 = computed(() => {
       const { size } = groupOptions || props

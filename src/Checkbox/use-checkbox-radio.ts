@@ -1,13 +1,4 @@
-import {
-  computed,
-  onMounted,
-  ref,
-  watch,
-  inject,
-  getCurrentInstance,
-  ComponentInternalInstance,
-  provide
-} from 'vue'
+import { computed, onMounted, ref, watch, inject, provide } from 'vue'
 import type { SetupContext, ExtractPropTypes } from 'vue'
 import { capitalize, isStringNumberMix } from '../helpers/util'
 import { useGroup, useGroupItem } from '../hooks/use-group'
@@ -23,11 +14,11 @@ interface GroupOptions {
   props: ExtractPropTypes<typeof checkboxOrRadioGroupProps> & {
     modelValue: ModelValue | ModelValue[]
   }
-  onChange: (uid: number) => void
+  onChange: (uid: symbol) => void
 }
 
 interface GroupItem {
-  uid: number
+  uid: symbol
   getInputChecked: () => boolean
   getValue: () => number | string
   setChecked: (checked: boolean) => void
@@ -38,7 +29,7 @@ export function useCheckboxOrRadio(
   { emit }: SetupContext<typeof checkboxOrRadioEmits>,
   name: string
 ) {
-  const instance = getCurrentInstance() as ComponentInternalInstance
+  const uid = Symbol()
   const groupOptions = inject<GroupOptions | null>(
     `fx${capitalize(name)}Options`,
     null
@@ -70,7 +61,7 @@ export function useCheckboxOrRadio(
 
   function onChange(e: Event) {
     if (groupOptions) {
-      groupOptions.onChange(instance.uid)
+      groupOptions.onChange(uid)
     } else {
       const checked = !!(e.target as HTMLInputElement).checked
       emit('update:checked', checked)
@@ -95,7 +86,7 @@ export function useCheckboxOrRadio(
   )
 
   useGroupItem<GroupItem>(name, {
-    uid: instance.uid,
+    uid,
     getInputChecked,
     getValue,
     setChecked

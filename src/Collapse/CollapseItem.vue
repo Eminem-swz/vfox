@@ -22,13 +22,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  getCurrentInstance,
-  inject,
-  ComponentInternalInstance
-} from 'vue'
+import { defineComponent, ref, inject } from 'vue'
 import { Cell } from '../Cell'
 import { iconValidator } from '../helpers/validator'
 import { useGroupItem } from '../hooks/use-group'
@@ -65,11 +59,11 @@ export default defineComponent({
     const active = ref(false)
     const bodyEl = ref<HTMLElement>()
     const onChange = inject('fxCollapseChange', collapseItemChange)
-    const instance = getCurrentInstance() as ComponentInternalInstance
+    const uid = Symbol()
 
-    function collapseItemChange(uid: number) {
+    function collapseItemChange(uid: symbol) {
       new Exception(
-        `CollapseItem uid=${uid} is not in Collapse`,
+        `CollapseItem is not in Collapse`,
         Exception.TYPE.DEFAULT,
         'CollapseItem'
       )
@@ -101,7 +95,7 @@ export default defineComponent({
 
       emitToggle(true)
 
-      isClick && onChange(instance.uid)
+      isClick && onChange(uid)
     }
 
     function hide(isClick = false) {
@@ -125,7 +119,7 @@ export default defineComponent({
 
       emitToggle(false)
 
-      isClick && onChange(instance.uid)
+      isClick && onChange(uid)
     }
 
     function emitToggle(spread: boolean) {
@@ -140,7 +134,7 @@ export default defineComponent({
     }
 
     useGroupItem('collapse', {
-      uid: instance.uid,
+      uid,
       getName: () => props.name,
       getActive: () => active.value,
       show,

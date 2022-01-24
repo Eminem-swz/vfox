@@ -42,7 +42,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const rowGutter = inject('fxRowGutter', ref([0, 0]))
+    const rowGutter = inject('fxRowGutter', null) || ref([0, 0])
 
     const styles = computed(() => {
       const styles: StyleObject = {}

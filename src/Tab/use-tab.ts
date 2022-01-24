@@ -1,9 +1,5 @@
 import { getCurrentInstance, ref, watch, computed, nextTick } from 'vue'
-import type {
-  ComponentInternalInstance,
-  SetupContext,
-  ExtractPropTypes
-} from 'vue'
+import type { SetupContext, ExtractPropTypes } from 'vue'
 import { isNumber, isObject, isStringNumberMix, isURL } from '../helpers/util'
 import { frameTo } from '../helpers/animation'
 import Exception from '../helpers/exception'
@@ -21,7 +17,7 @@ export function useTab(
   { emit }: SetupContext<typeof tabEmits>,
   { tabName }: UseOptions
 ) {
-  const instance = getCurrentInstance() as ComponentInternalInstance
+  const instance = getCurrentInstance()
   const listEl = ref<HTMLElement>()
   const underlineEl = ref<HTMLElement>()
   const options2 = ref<HandleOptionItem[]>([])
@@ -165,7 +161,7 @@ export function useTab(
     hasValue: boolean
     activeIndex: number
   }) {
-    hasValue && instance.isMounted && updatePos()
+    hasValue && instance?.isMounted && updatePos()
   }
 
   function onChange(value: number | string) {

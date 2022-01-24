@@ -1,8 +1,6 @@
 es/
 dist/
-dist
-docs/.vitepress/dist
-examples/dist
+lib/
 
 # Logs
 logs

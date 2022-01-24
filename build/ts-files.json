@@ -157,6 +157,7 @@
   "hooks/use-group",
   "hooks/use-list",
   "hooks/use-long-press",
+  "hooks/use-resize",
   "hooks/use-resize-detector",
   "hooks/use-safe-area-insets",
   "hooks/use-scroll",
@@ -164,6 +165,5 @@
   "index",
   "popup/api",
   "popup/popup",
-  "popup/use-popup",
-  "style/var"
+  "popup/use-popup"
 ]

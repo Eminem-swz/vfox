@@ -18,10 +18,15 @@ sidebarDepth: 2
 - 支持黑暗模式
 - 支持国际化
 - 支持 TypeScript
+- 只是 SSR
 
-### 附言
+## 支持环境
 
-该版本已使用 `Composition API` 和 `Typescript` 重构。
+Android 5.0+
+
+iOS 10.0+
+
+Node.js 12.0+
 
 ## 安装
 
