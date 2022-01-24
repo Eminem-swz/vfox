@@ -1,4 +1,4 @@
-import '../../style/common'
+import '../../style/common/style/index'
 import '../../Button/style/index'
 import '../../Drawer/style/index'
 import '../../CalendarView/style/index'

@@ -1,3 +1,3 @@
-import '../../style/common'
-import '../../style/popup'
+import '../../style/common/style/index'
+import '../../style/popup/style/index'
 import '../index.scss'
