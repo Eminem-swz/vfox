@@ -5,7 +5,18 @@ const vuePlugin = require('./esbuild-plugin-vue')
 const pkg = require('../package.json')
 const tss = require('./ts-files.json')
 
-const deps = Object.keys(pkg.dependencies)
+const deps = Object.keys(pkg.dependencies).concat(['vue'])
+
+const externalPlugin = () => {
+  return {
+    name: 'external',
+    setup(build) {
+      // Match an import called "./*" and mark it as external
+      build.onResolve({ filter: /^\.\// }, () => ({ external: true }))
+      build.onResolve({ filter: /^\.\.\// }, () => ({ external: true }))
+    }
+  }
+}
 
 const runBuild = async () => {
   const entryPoints = {}
@@ -15,9 +26,9 @@ const runBuild = async () => {
   })
 
   await build({
-    plugins: [vuePlugin()],
+    plugins: [vuePlugin(), externalPlugin()],
     entryPoints: entryPoints,
-    external: ['vue', '../*', './*', ...deps],
+    external: deps,
     outdir: `es/`,
     format: 'esm',
     bundle: true,
@@ -25,9 +36,9 @@ const runBuild = async () => {
   })
 
   await build({
-    plugins: [vuePlugin()],
+    plugins: [vuePlugin(), externalPlugin()],
     entryPoints: entryPoints,
-    external: ['vue', '../*', './*', ...deps],
+    external: deps,
     outdir: `lib/`,
     format: 'cjs',
     bundle: true,
