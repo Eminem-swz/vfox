@@ -1,3 +1,10 @@
+## [2.5.8](https://github.com/godxiaoji/vfox/compare/v2.5.7...v2.5.8) (2022-01-24)
+
+
+### Bug Fixes
+
+* fix use-checkbox-radio ts ([2ab3d05](https://github.com/godxiaoji/vfox/commit/2ab3d052cd7503c330328136dc4ba5cee3696ffd))
+
 ## [2.5.7](https://github.com/godxiaoji/vfox/compare/v2.5.6...v2.5.7) (2022-01-24)
 
 
