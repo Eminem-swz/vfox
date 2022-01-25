@@ -1,36 +1,31 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <div class="exp-stopwatch-box">
-        <div class="exp-stopwatch-box-header">
-          <fx-stopwatch
-            @stop="onStop"
-            @start="onStart"
-            @reset="onReset"
-            ref="stopWatch"
-          ></fx-stopwatch>
-        </div>
-        <div class="exp-stopwatch-box-body">
-          <fx-button @click="resetOrLap">
-            {{ paused ? '重置' : '计次' }}
-          </fx-button>
-          <fx-button
-            @click="startOrStop"
-            :type="!paused ? 'danger' : 'success'"
-          >
-            {{ paused ? '启动' : '停止' }}
-          </fx-button>
-        </div>
+  <fx-group title="基础用法">
+    <div class="exp-stopwatch-box">
+      <div class="exp-stopwatch-box-header">
+        <fx-stopwatch
+          @stop="onStop"
+          @start="onStart"
+          @reset="onReset"
+          ref="stopWatch"
+        ></fx-stopwatch>
       </div>
-      <fx-cell
-        :label="'计次 ' + (laps.length - index)"
-        v-for="(item, index) in laps"
-        :key="item"
-      >
-        {{ item }}
-      </fx-cell>
-    </fx-group>
-  </div>
+      <div class="exp-stopwatch-box-body">
+        <fx-button @click="resetOrLap">
+          {{ paused ? '重置' : '计次' }}
+        </fx-button>
+        <fx-button @click="startOrStop" :type="!paused ? 'danger' : 'success'">
+          {{ paused ? '启动' : '停止' }}
+        </fx-button>
+      </div>
+    </div>
+    <fx-cell
+      :label="'计次 ' + (laps.length - index)"
+      v-for="(item, index) in laps"
+      :key="item"
+    >
+      {{ item }}
+    </fx-cell>
+  </fx-group>
 </template>
 
 <script lang="ts">

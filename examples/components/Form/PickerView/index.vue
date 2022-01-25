@@ -1,50 +1,48 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-picker-view
-        :options="options"
-        @change="onChange"
-        v-model="colValue"
-      ></fx-picker-view>
-    </fx-group>
-    <fx-group title="多列">
-      <fx-picker-view
-        :options="multiOptions"
-        @change="onChange"
-        v-model="multiValue"
-      ></fx-picker-view>
-    </fx-group>
-    <fx-group title="级联">
-      <fx-picker-view
-        :options="cascadeOptions"
-        @change="onChange"
-        v-model="cascadeValue"
-      ></fx-picker-view>
-    </fx-group>
-    <fx-group title="formatter/parser">
-      <div class="exp-pickerView-box">
-        <div class="exp-pickerView-header">
-          分割线“-”，v-model: {{ formatValue }}
-        </div>
-        <div class="exp-pickerView-body">
-          <fx-picker-view
-            v-model="formatValue"
-            :formatter="formatter"
-            :parser="parser"
-            :options="multiOptions"
-            @change="onChange"
-          ></fx-picker-view>
-        </div>
+  <fx-group title="基础用法">
+    <fx-picker-view
+      :options="options"
+      @change="onChange"
+      v-model="colValue"
+    ></fx-picker-view>
+  </fx-group>
+  <fx-group title="多列">
+    <fx-picker-view
+      :options="multiOptions"
+      @change="onChange"
+      v-model="multiValue"
+    ></fx-picker-view>
+  </fx-group>
+  <fx-group title="级联">
+    <fx-picker-view
+      :options="cascadeOptions"
+      @change="onChange"
+      v-model="cascadeValue"
+    ></fx-picker-view>
+  </fx-group>
+  <fx-group title="formatter/parser">
+    <div class="exp-pickerView-box">
+      <div class="exp-pickerView-header">
+        分割线“-”，v-model: {{ formatValue }}
       </div>
-    </fx-group>
-    <fx-group title="change 事件">
-      <fx-picker-view
-        :options="multiOptions"
-        @change="onChangeEvent"
-        v-model="multiValue"
-      ></fx-picker-view>
-    </fx-group>
-  </div>
+      <div class="exp-pickerView-body">
+        <fx-picker-view
+          v-model="formatValue"
+          :formatter="formatter"
+          :parser="parser"
+          :options="multiOptions"
+          @change="onChange"
+        ></fx-picker-view>
+      </div>
+    </div>
+  </fx-group>
+  <fx-group title="change 事件">
+    <fx-picker-view
+      :options="multiOptions"
+      @change="onChangeEvent"
+      v-model="multiValue"
+    ></fx-picker-view>
+  </fx-group>
 </template>
 
 <script lang="ts">

@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-swipe-cell :buttons="buttons">
-        <fx-cell label="单元格" content="向左划"></fx-cell>
-      </fx-swipe-cell>
-      <fx-swipe-cell :buttons="buttons">
-        <fx-cell label="单元格" content="向左划"></fx-cell>
-      </fx-swipe-cell>
-    </fx-group>
-    <fx-group title=" 事件监听">
-      <fx-swipe-cell :buttons="buttons" @buttonClick="onButtonClick">
-        <fx-cell label="单元格" content="向左划"></fx-cell>
-      </fx-swipe-cell>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <fx-swipe-cell :buttons="buttons">
+      <fx-cell label="单元格" content="向左划"></fx-cell>
+    </fx-swipe-cell>
+    <fx-swipe-cell :buttons="buttons">
+      <fx-cell label="单元格" content="向左划"></fx-cell>
+    </fx-swipe-cell>
+  </fx-group>
+  <fx-group title=" 事件监听">
+    <fx-swipe-cell :buttons="buttons" @buttonClick="onButtonClick">
+      <fx-cell label="单元格" content="向左划"></fx-cell>
+    </fx-swipe-cell>
+  </fx-group>
 </template>
 
 <script lang="ts">

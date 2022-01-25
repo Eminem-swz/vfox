@@ -1,70 +1,64 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-cell label="默认" isLink @click="visible = true"></fx-cell>
-      <fx-cell
-        label="蒙层可点击"
-        isLink
-        @click="
-          () => {
-            maskClosable = true
-            visible = true
-          }
-        "
-      ></fx-cell>
-      <fx-cell
-        label="隐藏关闭按钮"
-        isLink
-        @click="
-          () => {
-            maskClosable = true
-            showClose = false
-            visible = true
-          }
-        "
-      ></fx-cell>
-    </fx-group>
-    <fx-group title="Slot default">
-      <fx-cell label="图片" isLink @click="visible2 = true"></fx-cell>
-    </fx-group>
-    <fx-group title="事件监听">
-      <fx-cell
-        label="close"
-        isLink
-        @click="
-          () => {
-            callbackEvent = true
-            maskClosable = true
-            visible = true
-          }
-        "
-      ></fx-cell>
-      <fx-cell
-        label="visible-state-change"
-        isLink
-        @click="
-          () => {
-            visibleEvent = true
-          }
-        "
-      ></fx-cell>
-    </fx-group>
-    <fx-modal
-      v-model:visible="visible"
-      :mask-closable="maskClosable"
-      :show-close="showClose"
-      @cancel="onClose"
-      @visible-state-change="onVisibleStateChange"
-    >
-    </fx-modal>
-    <fx-modal v-model:visible="visible2">
-      <fx-image
-        class="image-image"
-        :src="imageUrl"
-        :aspect-ratio="1"
-      ></fx-image>
-    </fx-modal>
-  </div>
+  <fx-group title="基础用法">
+    <fx-cell label="默认" isLink @click="visible = true"></fx-cell>
+    <fx-cell
+      label="蒙层可点击"
+      isLink
+      @click="
+        () => {
+          maskClosable = true
+          visible = true
+        }
+      "
+    ></fx-cell>
+    <fx-cell
+      label="隐藏关闭按钮"
+      isLink
+      @click="
+        () => {
+          maskClosable = true
+          showClose = false
+          visible = true
+        }
+      "
+    ></fx-cell>
+  </fx-group>
+  <fx-group title="Slot default">
+    <fx-cell label="图片" isLink @click="visible2 = true"></fx-cell>
+  </fx-group>
+  <fx-group title="事件监听">
+    <fx-cell
+      label="close"
+      isLink
+      @click="
+        () => {
+          callbackEvent = true
+          maskClosable = true
+          visible = true
+        }
+      "
+    ></fx-cell>
+    <fx-cell
+      label="visible-state-change"
+      isLink
+      @click="
+        () => {
+          visibleEvent = true
+        }
+      "
+    ></fx-cell>
+  </fx-group>
+  <fx-modal
+    v-model:visible="visible"
+    :mask-closable="maskClosable"
+    :show-close="showClose"
+    @cancel="onClose"
+    @visible-state-change="onVisibleStateChange"
+  >
+  </fx-modal>
+  <fx-modal v-model:visible="visible2">
+    <fx-image class="image-image" :src="imageUrl" :aspect-ratio="1"></fx-image>
+  </fx-modal>
 </template>
 
 <script lang="ts">

@@ -1,4 +1,3 @@
-import { cloneData } from '@/helpers/util'
 import regionOptions from './region'
 
 const options: number[] = []
@@ -6,7 +5,7 @@ for (let i = 2000; i <= 2020; i++) {
   options.push(i)
 }
 
-const multiOptions = [cloneData(options), ['春', '夏', '秋', '冬']]
+const multiOptions = [options, ['春', '夏', '秋', '冬']]
 
 const cascadeOptions = [
   {

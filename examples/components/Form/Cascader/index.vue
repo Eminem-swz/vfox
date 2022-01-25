@@ -1,46 +1,40 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-cell label="家电">
-        <fx-cascader :options="options" placeholder="选择家电" />
-      </fx-cell>
-      <fx-cell label="地区">
-        <fx-cascader
-          :options="regionOptions"
-          :field-names="{ value: 'label' }"
-          placeholder="选择地区"
-        />
-      </fx-cell>
-      <fx-cell label="v-model">
-        <fx-cascader
-          :options="options"
-          placeholder="选择家电"
-          v-model="value"
-        />
-      </fx-cell>
-      <fx-cell label="formatter/parser">
-        <fx-cascader
-          :options="options"
-          placeholder="选择家电"
-          v-model="formatValue"
-          :formatter="formatter"
-          :parser="parser"
-        />
-      </fx-cell>
-    </fx-group>
-    <fx-group title="事件监听">
-      <fx-cell label="change">
-        <fx-cascader
-          :options="options"
-          placeholder="选择家电"
-          @change="onChange"
-        />
-      </fx-cell>
-    </fx-group>
-    <fx-group title="API">
-      <fx-cell label="showCascader" isLink @click="onCallApi()"></fx-cell>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <fx-cell label="家电">
+      <fx-cascader :options="options" placeholder="选择家电" />
+    </fx-cell>
+    <fx-cell label="地区">
+      <fx-cascader
+        :options="regionOptions"
+        :field-names="{ value: 'label' }"
+        placeholder="选择地区"
+      />
+    </fx-cell>
+    <fx-cell label="v-model">
+      <fx-cascader :options="options" placeholder="选择家电" v-model="value" />
+    </fx-cell>
+    <fx-cell label="formatter/parser">
+      <fx-cascader
+        :options="options"
+        placeholder="选择家电"
+        v-model="formatValue"
+        :formatter="formatter"
+        :parser="parser"
+      />
+    </fx-cell>
+  </fx-group>
+  <fx-group title="事件监听">
+    <fx-cell label="change">
+      <fx-cascader
+        :options="options"
+        placeholder="选择家电"
+        @change="onChange"
+      />
+    </fx-cell>
+  </fx-group>
+  <fx-group title="API">
+    <fx-cell label="showCascader" isLink @click="onCallApi()"></fx-cell>
+  </fx-group>
 </template>
 
 <script lang="ts">

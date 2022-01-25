@@ -1,11 +1,11 @@
 <template>
   <div>
     <fx-group title="基础用法">
-      <div class="image-flex">
+      <div class="exp-image-flex">
         <fx-row :gutter="[16, 16]">
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               :aspect-ratio="1"
             ></fx-image>
@@ -14,158 +14,158 @@
       </div>
     </fx-group>
     <fx-group title="填充模式">
-      <div class="image-flex">
+      <div class="exp-image-flex">
         <fx-row :gutter="[16, 16]">
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="scaleToFill"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">scaleToFill</span>
+            <span class="exp-image-text">scaleToFill</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="aspectFit"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">aspectFit</span>
+            <span class="exp-image-text">aspectFit</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="aspectFill"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">aspectFill</span>
+            <span class="exp-image-text">aspectFill</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="widthFix"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">widthFix</span>
+            <span class="exp-image-text">widthFix</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="top"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">top</span>
+            <span class="exp-image-text">top</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="bottom"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">bottom</span>
+            <span class="exp-image-text">bottom</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="left"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">left</span>
+            <span class="exp-image-text">left</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="right"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">right</span>
+            <span class="exp-image-text">right</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="top left"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">top left</span>
+            <span class="exp-image-text">top left</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="top right"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">top right</span>
+            <span class="exp-image-text">top right</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="bottom left"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">bottom left</span>
+            <span class="exp-image-text">bottom left</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               mode="bottom right"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">bottom right</span>
+            <span class="exp-image-text">bottom right</span>
           </fx-col>
         </fx-row>
       </div>
     </fx-group>
     <fx-group title="设置宽高比（设置后高度按比例缩放）">
-      <div class="image-flex">
+      <div class="exp-image-flex">
         <fx-row :gutter="[16, 16]" align="bottom">
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               :aspect-ratio="1"
             ></fx-image>
-            <span class="image-text">aspect-ratio=1</span>
+            <span class="exp-image-text">aspect-ratio=1</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               :aspect-ratio="1.5"
             ></fx-image>
-            <span class="image-text">aspect-ratio=1.5</span>
+            <span class="exp-image-text">aspect-ratio=1.5</span>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               :aspect-ratio="0.5"
             ></fx-image>
-            <span class="image-text">aspect-ratio=0.5</span>
+            <span class="exp-image-text">aspect-ratio=0.5</span>
           </fx-col>
         </fx-row>
       </div>
     </fx-group>
     <fx-group title="加载/加载错误">
-      <div class="image-flex">
+      <div class="exp-image-flex">
         <fx-row :gutter="[16, 16]">
           <fx-col :span="8">
-            <fx-image class="image-image" :aspect-ratio="1"></fx-image>
+            <fx-image class="exp-image-image" :aspect-ratio="1"></fx-image>
           </fx-col>
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               src="error"
               :aspect-ratio="1"
             ></fx-image>
@@ -174,11 +174,11 @@
       </div>
     </fx-group>
     <fx-group title="懒加载">
-      <div class="image-flex">
+      <div class="exp-image-flex">
         <fx-row :gutter="[16, 16]">
           <fx-col :span="8">
             <fx-image
-              class="image-image"
+              class="exp-image-image"
               :src="imageUrl"
               :aspect-ratio="1"
               lazy-load
@@ -205,7 +205,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.image {
+.exp-image {
   &-flex {
     overflow: hidden;
     margin-bottom: -16px;

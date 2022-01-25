@@ -1,135 +1,133 @@
 <template>
-  <div>
-    <fx-group title="Calendar">
-      <fx-cell label="基础">
-        <fx-calendar />
-      </fx-cell>
-      <fx-cell label="v-model today">
-        <fx-calendar v-model="value" popup-show-confirm />
-      </fx-cell>
-      <fx-cell label="minDate/maxDate 11-11">
-        <fx-calendar
-          :min-date="new Date('2021-11-11')"
-          :max-date="new Date('2022-11-11')"
-          placeholder="选择日期"
-          popup-show-close
-        />
-      </fx-cell>
-      <fx-cell label="initialMode=range">
-        <fx-calendar
-          initialMode="range"
-          v-model="rangeValue"
-          @change="onChange"
-          popup-show-close
-        />
-      </fx-cell>
-      <fx-cell label="initialMode=range && allowSameDay">
-        <fx-calendar
-          initialMode="range"
-          allowSameDay
-          @change="onChange"
-          popup-show-close
-        />
-      </fx-cell>
-      <fx-cell label="禁用">
-        <fx-calendar v-model="value" disabled />
-      </fx-cell>
-    </fx-group>
-    <fx-group title="CalendarView">
-      <div class="calendar-view-box">
-        <div class="calendar-view-header">选择：{{ viewValue }}</div>
-        <div class="calendar-view-body">
-          <fx-calendar-view
-            initialMode="single"
-            v-model="viewValue"
-            :formatter="formatter"
-            :parser="parser"
-            @select="onSelect"
-          ></fx-calendar-view>
-        </div>
+  <fx-group title="Calendar">
+    <fx-cell label="基础">
+      <fx-calendar />
+    </fx-cell>
+    <fx-cell label="v-model today">
+      <fx-calendar v-model="value" popup-show-confirm />
+    </fx-cell>
+    <fx-cell label="minDate/maxDate 11-11">
+      <fx-calendar
+        :min-date="new Date('2021-11-11')"
+        :max-date="new Date('2022-11-11')"
+        placeholder="选择日期"
+        popup-show-close
+      />
+    </fx-cell>
+    <fx-cell label="initialMode=range">
+      <fx-calendar
+        initialMode="range"
+        v-model="rangeValue"
+        @change="onChange"
+        popup-show-close
+      />
+    </fx-cell>
+    <fx-cell label="initialMode=range && allowSameDay">
+      <fx-calendar
+        initialMode="range"
+        allowSameDay
+        @change="onChange"
+        popup-show-close
+      />
+    </fx-cell>
+    <fx-cell label="禁用">
+      <fx-calendar v-model="value" disabled />
+    </fx-cell>
+  </fx-group>
+  <fx-group title="CalendarView">
+    <div class="exp-calendarView-box">
+      <div class="exp-calendarView-header">选择：{{ viewValue }}</div>
+      <div class="exp-calendarView-body">
+        <fx-calendar-view
+          initialMode="single"
+          v-model="viewValue"
+          :formatter="formatter"
+          :parser="parser"
+          @select="onSelect"
+        ></fx-calendar-view>
       </div>
-    </fx-group>
-    <fx-group title="CalendarView initialMode=range">
-      <div class="calendar-view-box">
-        <div class="calendar-view-header">选择：{{ viewRangeValue }}</div>
-        <div class="calendar-view-body">
-          <fx-calendar-view
-            initialMode="range"
-            :first-day-of-week="1"
-            v-model="viewRangeValue"
-            :formatter="formatter"
-            :parser="parser"
-            @select="onSelect"
-          ></fx-calendar-view>
-        </div>
+    </div>
+  </fx-group>
+  <fx-group title="CalendarView initialMode=range">
+    <div class="exp-calendarView-box">
+      <div class="exp-calendarView-header">选择：{{ viewRangeValue }}</div>
+      <div class="exp-calendarView-body">
+        <fx-calendar-view
+          initialMode="range"
+          :first-day-of-week="1"
+          v-model="viewRangeValue"
+          :formatter="formatter"
+          :parser="parser"
+          @select="onSelect"
+        ></fx-calendar-view>
       </div>
-    </fx-group>
-    <fx-group title="CalendarPopup">
-      <fx-cell label="v-modal +1day" isLink @click="addOneDay">{{
-        popupValue
-      }}</fx-cell>
-      <fx-cell
-        label="showConfirm=true"
-        isLink
-        @click="
-          ;(confirmEvent = true),
-            (popupShowConfirm = true),
-            (popupShowClose = false),
-            (popupVisible = true)
-        "
-      ></fx-cell>
-      <fx-cell
-        label="initialMode=range && max-range=5"
-        isLink
-        @click="popupRangeVisible = true"
-      ></fx-cell>
-    </fx-group>
-    <fx-group title="CalendarPopup Event">
-      <fx-cell
-        label="confirm"
-        isLink
-        @click="
-          ;(confirmEvent = true),
-            (popupShowConfirm = false),
-            (popupShowClose = false),
-            (popupVisible = true)
-        "
-      ></fx-cell>
-      <fx-cell
-        label="visible-state-change"
-        isLink
-        @click="
-          ;(visibleEvent = true),
-            (popupShowConfirm = true),
-            (popupShowClose = true),
-            (popupVisible = true)
-        "
-      ></fx-cell>
-    </fx-group>
-    <fx-group title="API">
-      <fx-cell label="showCalendar" isLink @click="onCallApi()"></fx-cell>
-    </fx-group>
-    <fx-calendar-popup
-      v-model:visible="popupVisible"
-      :title="title"
-      :show-confirm="popupShowConfirm"
-      :show-close="popupShowClose"
-      v-model="popupValue"
-      :formatter="formatter"
-      :parser="parser"
-      @confirm="onConfirm"
-      @visible-state-change="onVisibleStateChange"
-    />
-    <fx-calendar-popup
-      v-model:visible="popupRangeVisible"
-      :title="title"
-      initialMode="range"
-      :max-range="5"
-      :show-confirm="true"
-      v-model="popupRangeValue"
-      @confirm="onRangeConfirm"
-    />
-  </div>
+    </div>
+  </fx-group>
+  <fx-group title="CalendarPopup">
+    <fx-cell label="v-modal +1day" isLink @click="addOneDay">{{
+      popupValue
+    }}</fx-cell>
+    <fx-cell
+      label="showConfirm=true"
+      isLink
+      @click="
+        ;(confirmEvent = true),
+          (popupShowConfirm = true),
+          (popupShowClose = false),
+          (popupVisible = true)
+      "
+    ></fx-cell>
+    <fx-cell
+      label="initialMode=range && max-range=5"
+      isLink
+      @click="popupRangeVisible = true"
+    ></fx-cell>
+  </fx-group>
+  <fx-group title="CalendarPopup Event">
+    <fx-cell
+      label="confirm"
+      isLink
+      @click="
+        ;(confirmEvent = true),
+          (popupShowConfirm = false),
+          (popupShowClose = false),
+          (popupVisible = true)
+      "
+    ></fx-cell>
+    <fx-cell
+      label="visible-state-change"
+      isLink
+      @click="
+        ;(visibleEvent = true),
+          (popupShowConfirm = true),
+          (popupShowClose = true),
+          (popupVisible = true)
+      "
+    ></fx-cell>
+  </fx-group>
+  <fx-group title="API">
+    <fx-cell label="showCalendar" isLink @click="onCallApi()"></fx-cell>
+  </fx-group>
+  <fx-calendar-popup
+    v-model:visible="popupVisible"
+    :title="title"
+    :show-confirm="popupShowConfirm"
+    :show-close="popupShowClose"
+    v-model="popupValue"
+    :formatter="formatter"
+    :parser="parser"
+    @confirm="onConfirm"
+    @visible-state-change="onVisibleStateChange"
+  />
+  <fx-calendar-popup
+    v-model:visible="popupRangeVisible"
+    :title="title"
+    initialMode="range"
+    :max-range="5"
+    :show-confirm="true"
+    v-model="popupRangeValue"
+    @confirm="onRangeConfirm"
+  />
 </template>
 
 <script lang="ts">
@@ -277,15 +275,13 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.calendar {
-  &-view {
-    &-header {
-      line-height: 32px;
-      padding: 0 16px;
-      font-size: 14px;
-      color: $primary-color;
-      border-bottom: 1px solid $border-color;
-    }
+.exp-calendarView {
+  &-header {
+    line-height: 32px;
+    padding: 0 16px;
+    font-size: 14px;
+    color: $primary-color;
+    border-bottom: 1px solid $border-color;
   }
 }
 </style>

@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <div class="activity-indicator-box">
-        <fx-activity-indicator />
-      </div>
-    </fx-group>
-    <fx-group title="颜色 color=#ff4d4f">
-      <div class="activity-indicator-box">
-        <fx-activity-indicator color="#ff4d4f" />
-      </div>
-    </fx-group>
-    <fx-group title="大小 size=48">
-      <div class="activity-indicator-box">
-        <fx-activity-indicator :size="48" />
-      </div>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <div class="exp-activityIndicator-box">
+      <fx-activity-indicator />
+    </div>
+  </fx-group>
+  <fx-group title="颜色 color=#ff4d4f">
+    <div class="exp-activityIndicator-box">
+      <fx-activity-indicator color="#ff4d4f" />
+    </div>
+  </fx-group>
+  <fx-group title="大小 size=48">
+    <div class="exp-activityIndicator-box">
+      <fx-activity-indicator :size="48" />
+    </div>
+  </fx-group>
 </template>
 
 <script lang="ts">
@@ -30,7 +28,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.activity-indicator {
+.exp-activityIndicator {
   &-box {
     padding: 12px 16px;
   }

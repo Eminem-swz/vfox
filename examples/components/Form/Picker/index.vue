@@ -1,74 +1,65 @@
 <template>
-  <div>
-    <fx-notice-bar
-      class="top-notice-bar"
-      title="具体展示参数可以参考 PickerView"
-    >
-    </fx-notice-bar>
-    <fx-group title="Picker">
-      <fx-cell label="单列">
-        <fx-picker :options="options" @change="onChange"></fx-picker>
-      </fx-cell>
-      <fx-cell label="多列">
-        <fx-picker :options="multiOptions" @change="onChange"></fx-picker>
-      </fx-cell>
-      <fx-cell label="级联">
-        <fx-picker :options="cascadeOptions" @change="onChange"></fx-picker>
-      </fx-cell>
-      <fx-cell label="地区">
-        <fx-picker
-          :options="regionOptions"
-          :field-names="{ value: 'label' }"
-          :format-string="true"
-          v-model="regionValue"
-          @change="onChange"
-        />
-      </fx-cell>
-      <fx-cell label="禁用">
-        <fx-picker
-          :modelValue="disableValue"
-          :options="multiOptions"
-          disabled
-        />
-      </fx-cell>
-    </fx-group>
-    <fx-group title="PickerPopup">
-      <fx-cell label="基础" isLink @click="visible = true">{{
-        popupValue
-      }}</fx-cell>
-    </fx-group>
-    <fx-group title="PickerPopup Event">
-      <fx-cell
-        label="change"
-        isLink
-        @click=";(changeEvent = true), (visible = true)"
-      ></fx-cell>
-      <fx-cell
-        label="confirm/cancel"
-        isLink
-        @click=";(clickEvent = true), (visible = true)"
-      ></fx-cell>
-      <fx-cell
-        label="visible-state-change"
-        isLink
-        @click=";(visibleEvent = true), (visible = true)"
-      ></fx-cell>
-    </fx-group>
-    <fx-group title="API">
-      <fx-cell label="showPicker" isLink @click="onCallApi"></fx-cell>
-    </fx-group>
-    <fx-picker-popup
-      v-model:visible="visible"
-      :title="title"
-      :options="multiOptions"
-      :format-string="true"
-      v-model="popupValue"
-      @change="onChange"
-      @confirm="onConfirm"
-      @cancel="onCancel"
-      @visibleStateChange="onVisibleStateChange"
-    />
-  </div>
+  <fx-notice-bar class="top-notice-bar" title="具体展示参数可以参考 PickerView">
+  </fx-notice-bar>
+  <fx-group title="Picker">
+    <fx-cell label="单列">
+      <fx-picker :options="options" @change="onChange"></fx-picker>
+    </fx-cell>
+    <fx-cell label="多列">
+      <fx-picker :options="multiOptions" @change="onChange"></fx-picker>
+    </fx-cell>
+    <fx-cell label="级联">
+      <fx-picker :options="cascadeOptions" @change="onChange"></fx-picker>
+    </fx-cell>
+    <fx-cell label="地区">
+      <fx-picker
+        :options="regionOptions"
+        :field-names="{ value: 'label' }"
+        :format-string="true"
+        v-model="regionValue"
+        @change="onChange"
+      />
+    </fx-cell>
+    <fx-cell label="禁用">
+      <fx-picker :modelValue="disableValue" :options="multiOptions" disabled />
+    </fx-cell>
+  </fx-group>
+  <fx-group title="PickerPopup">
+    <fx-cell label="基础" isLink @click="visible = true">{{
+      popupValue
+    }}</fx-cell>
+  </fx-group>
+  <fx-group title="PickerPopup Event">
+    <fx-cell
+      label="change"
+      isLink
+      @click=";(changeEvent = true), (visible = true)"
+    ></fx-cell>
+    <fx-cell
+      label="confirm/cancel"
+      isLink
+      @click=";(clickEvent = true), (visible = true)"
+    ></fx-cell>
+    <fx-cell
+      label="visible-state-change"
+      isLink
+      @click=";(visibleEvent = true), (visible = true)"
+    ></fx-cell>
+  </fx-group>
+  <fx-group title="API">
+    <fx-cell label="showPicker" isLink @click="onCallApi"></fx-cell>
+  </fx-group>
+  <fx-picker-popup
+    v-model:visible="visible"
+    :title="title"
+    :options="multiOptions"
+    :format-string="true"
+    v-model="popupValue"
+    @change="onChange"
+    @confirm="onConfirm"
+    @cancel="onCancel"
+    @visibleStateChange="onVisibleStateChange"
+  />
 </template>
 
 <script lang="ts">

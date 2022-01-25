@@ -1,79 +1,73 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-cell label="默认">
-        <fx-count-up :number="1000" />
-      </fx-cell>
-      <fx-cell label="千分位 thousands">
+  <fx-group title="基础用法">
+    <fx-cell label="默认">
+      <fx-count-up :number="1000" />
+    </fx-cell>
+    <fx-cell label="千分位 thousands">
+      <fx-count-up :initialNumber="initialNumber" :number="number" thousands />
+    </fx-cell>
+    <fx-cell label="小数位 decimalDigits=2">
+      <fx-count-up
+        :initialNumber="initialNumber"
+        :number="number"
+        :decimalDigits="2"
+      />
+    </fx-cell>
+  </fx-group>
+  <fx-group title="速度">
+    <fx-cell label="speed=slow">
+      <fx-count-up
+        :initialNumber="initialNumber"
+        :number="number"
+        :decimalDigits="2"
+        speed="slow"
+      />
+    </fx-cell>
+    <fx-cell label="speed=normal">
+      <fx-count-up
+        :initialNumber="initialNumber"
+        :number="number"
+        :decimalDigits="2"
+        speed="normal"
+      />
+    </fx-cell>
+    <fx-cell label="speed=fast">
+      <fx-count-up
+        :initialNumber="initialNumber"
+        :number="number"
+        :decimalDigits="2"
+        speed="fast"
+      />
+    </fx-cell>
+    <fx-cell label="speed=10000（固定10秒动画）">
+      <fx-count-up
+        :initialNumber="initialNumber"
+        :number="number"
+        :decimalDigits="2"
+        :speed="10000"
+      />
+    </fx-cell>
+  </fx-group>
+  <fx-group title="事件监听">
+    <fx-cell label="animated">
+      <fx-count-up :number="500" @animated="onAnimated" />
+    </fx-cell>
+    <fx-cell label="cancel" class="exp-countUp-box">
+      <div class="exp-countUp-r">
         <fx-count-up
-          :initialNumber="initialNumber"
-          :number="number"
+          :initialNumber="0"
+          :number="number2"
           thousands
+          ref="countUp"
+          @animated="onAnimated2"
+          @cancel="onCancel"
         />
-      </fx-cell>
-      <fx-cell label="小数位 decimalDigits=2">
-        <fx-count-up
-          :initialNumber="initialNumber"
-          :number="number"
-          :decimalDigits="2"
-        />
-      </fx-cell>
-    </fx-group>
-    <fx-group title="速度">
-      <fx-cell label="speed=slow">
-        <fx-count-up
-          :initialNumber="initialNumber"
-          :number="number"
-          :decimalDigits="2"
-          speed="slow"
-        />
-      </fx-cell>
-      <fx-cell label="speed=normal">
-        <fx-count-up
-          :initialNumber="initialNumber"
-          :number="number"
-          :decimalDigits="2"
-          speed="normal"
-        />
-      </fx-cell>
-      <fx-cell label="speed=fast">
-        <fx-count-up
-          :initialNumber="initialNumber"
-          :number="number"
-          :decimalDigits="2"
-          speed="fast"
-        />
-      </fx-cell>
-      <fx-cell label="speed=10000（固定10秒动画）">
-        <fx-count-up
-          :initialNumber="initialNumber"
-          :number="number"
-          :decimalDigits="2"
-          :speed="10000"
-        />
-      </fx-cell>
-    </fx-group>
-    <fx-group title="事件监听">
-      <fx-cell label="animated">
-        <fx-count-up :number="500" @animated="onAnimated" />
-      </fx-cell>
-      <fx-cell label="cancel" class="count-up-box">
-        <div class="count-up-r">
-          <fx-count-up
-            :initialNumber="0"
-            :number="number2"
-            thousands
-            ref="countUp"
-            @animated="onAnimated2"
-            @cancel="onCancel"
-          />
-        </div>
-        <fx-button @click="cancel" size="small">{{
-          isCancel ? '开始' : '取消'
-        }}</fx-button>
-      </fx-cell>
-    </fx-group>
-  </div>
+      </div>
+      <fx-button @click="cancel" size="small">{{
+        isCancel ? '开始' : '取消'
+      }}</fx-button>
+    </fx-cell>
+  </fx-group>
 </template>
 
 <script lang="ts">
@@ -131,7 +125,7 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.count-up {
+.exp-countUp {
   &-box {
     .fx-button {
       flex-grow: 0;

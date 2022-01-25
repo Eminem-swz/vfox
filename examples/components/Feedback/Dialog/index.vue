@@ -1,90 +1,88 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-cell
-        label="默认"
-        isLink
-        @click="
-          show({
+  <fx-group title="基础用法">
+    <fx-cell
+      label="默认"
+      isLink
+      @click="
+        show({
+          title: '标题',
+          content: '提示内容提示内容提示内容提示内容提示内容提示内容'
+        })
+      "
+    ></fx-cell>
+    <fx-cell
+      label="不带标题"
+      isLink
+      @click="
+        show({
+          content: '提示内容提示内容提示内容提示内容提示内容提示内容'
+        })
+      "
+    ></fx-cell>
+    <fx-cell
+      label="不显示取消按钮"
+      isLink
+      @click="
+        show({
+          title: '标题',
+          content: '提示内容提示内容提示内容提示内容提示内容提示内容',
+          showCancel: false
+        })
+      "
+    ></fx-cell>
+    <fx-cell
+      label="自定义按钮文案"
+      isLink
+      @click="
+        show({
+          title: '惊喜',
+          content: '这有一份关爱保险待你查收',
+          cancelText: '拒绝',
+          confirmText: '接受'
+        })
+      "
+    ></fx-cell>
+  </fx-group>
+  <fx-group title="事件监听">
+    <fx-cell
+      label="confirm/cancel"
+      isLink
+      @click="
+        show(
+          {
             title: '标题',
             content: '提示内容提示内容提示内容提示内容提示内容提示内容'
-          })
-        "
-      ></fx-cell>
-      <fx-cell
-        label="不带标题"
-        isLink
-        @click="
-          show({
-            content: '提示内容提示内容提示内容提示内容提示内容提示内容'
-          })
-        "
-      ></fx-cell>
-      <fx-cell
-        label="不显示取消按钮"
-        isLink
-        @click="
-          show({
+          },
+          true
+        )
+      "
+    ></fx-cell>
+    <fx-cell
+      label="visible-state-change"
+      isLink
+      @click="
+        show(
+          {
             title: '标题',
-            content: '提示内容提示内容提示内容提示内容提示内容提示内容',
-            showCancel: false
-          })
-        "
-      ></fx-cell>
-      <fx-cell
-        label="自定义按钮文案"
-        isLink
-        @click="
-          show({
-            title: '惊喜',
-            content: '这有一份关爱保险待你查收',
-            cancelText: '拒绝',
-            confirmText: '接受'
-          })
-        "
-      ></fx-cell>
-    </fx-group>
-    <fx-group title="事件监听">
-      <fx-cell
-        label="confirm/cancel"
-        isLink
-        @click="
-          show(
-            {
-              title: '标题',
-              content: '提示内容提示内容提示内容提示内容提示内容提示内容'
-            },
-            true
-          )
-        "
-      ></fx-cell>
-      <fx-cell
-        label="visible-state-change"
-        isLink
-        @click="
-          show(
-            {
-              title: '标题',
-              content: '提示内容提示内容提示内容提示内容提示内容提示内容'
-            },
-            false,
-            true
-          )
-        "
-      ></fx-cell>
-    </fx-group>
-    <fx-group title="API">
-      <fx-cell label="showDialog" isLink @click="onCallApi()"></fx-cell>
-    </fx-group>
-    <fx-dialog
-      v-model:visible="visible"
-      v-bind="dialogArgs"
-      @confirm="onConfirm"
-      @cancel="onCancel"
-      @visible-state-change="onVisibleStateChange"
-    >
-    </fx-dialog>
-  </div>
+            content: '提示内容提示内容提示内容提示内容提示内容提示内容'
+          },
+          false,
+          true
+        )
+      "
+    ></fx-cell>
+  </fx-group>
+  <fx-group title="API">
+    <fx-cell label="showDialog" isLink @click="onCallApi()"></fx-cell>
+  </fx-group>
+  <fx-dialog
+    v-model:visible="visible"
+    v-bind="dialogArgs"
+    @confirm="onConfirm"
+    @cancel="onCancel"
+    @visible-state-change="onVisibleStateChange"
+  >
+  </fx-dialog>
 </template>
 
 <script lang="ts">

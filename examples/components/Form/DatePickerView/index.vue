@@ -22,9 +22,9 @@
       />
     </fx-group>
     <fx-group title="minDate/maxDate">
-      <div class="date-picker-view-box">
-        <div class="date-picker-view-header">-5year ~ 5year</div>
-        <div class="date-picker-view-body">
+      <div class="exp-datePickerView-box">
+        <div class="exp-datePickerView-header">-5year ~ 5year</div>
+        <div class="exp-datePickerView-body">
           <fx-date-picker-view
             initialMode="date"
             :minDate="maxDate"
@@ -36,9 +36,9 @@
       </div>
     </fx-group>
     <fx-group title="filter">
-      <div class="date-picker-view-box">
-        <div class="date-picker-view-header">秒步进5</div>
-        <div class="date-picker-view-body">
+      <div class="exp-datePickerView-box">
+        <div class="exp-datePickerView-header">秒步进5</div>
+        <div class="exp-datePickerView-body">
           <fx-date-picker-view
             initialMode="datetime"
             :filter="filter"
@@ -49,9 +49,9 @@
       </div>
     </fx-group>
     <fx-group title="formatTemplate=YYYY年MM月DD日">
-      <div class="date-picker-view-box">
-        <div class="date-picker-view-header">v-model: {{ formatValue }}</div>
-        <div class="date-picker-view-body">
+      <div class="exp-datePickerView-box">
+        <div class="exp-datePickerView-header">v-model: {{ formatValue }}</div>
+        <div class="exp-datePickerView-body">
           <fx-date-picker-view
             initialMode="date"
             formatTemplate="YYYY年MM月DD日"
@@ -131,7 +131,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.date-picker-view {
+.exp-datePickerView {
   &-header {
     text-align: center;
     font-size: 17px;

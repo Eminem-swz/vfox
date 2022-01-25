@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <div class="side-tab-box">
-        <fx-side-tab
-          :options="tabList"
-          v-model:activeValue="activeValue"
-        ></fx-side-tab>
-      </div>
-    </fx-group>
-    <fx-group title="Mix">
-      <div class="side-tab-box">
-        <fx-side-tab :options="mixTabList"></fx-side-tab>
-      </div>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <div class="exp-sideTab-box">
+      <fx-side-tab
+        :options="tabList"
+        v-model:activeValue="activeValue"
+      ></fx-side-tab>
+    </div>
+  </fx-group>
+  <fx-group title="Mix">
+    <div class="exp-sideTab-box">
+      <fx-side-tab :options="mixTabList"></fx-side-tab>
+    </div>
+  </fx-group>
 </template>
 
 <script lang="ts">
@@ -36,7 +34,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.side-tab-box {
+.exp-sideTab-box {
   height: 220px;
   padding-right: 275px;
   border-top: 1px solid $border-color;

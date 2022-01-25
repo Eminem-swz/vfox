@@ -1,34 +1,32 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <div class="tab-box">
-        <fx-tab
-          :options="shortTabList"
-          v-model:activeValue="shortActiveValue"
-        ></fx-tab>
-      </div>
-    </fx-group>
-    <fx-group title="滚动（阈值 scrollThreshold = 4）">
-      <div class="tab-box">
-        <fx-tab :options="tabList" v-model:activeValue="activeValue"></fx-tab>
-      </div>
-    </fx-group>
-    <fx-group title="Mix">
-      <div class="tab-box">
-        <fx-tab :options="mixTabList"></fx-tab>
-      </div>
-    </fx-group>
-    <fx-group title="带副标签">
-      <div class="tab-box">
-        <fx-tab :options="subTabList"></fx-tab>
-      </div>
-    </fx-group>
-    <fx-group title="change 事件">
-      <div class="tab-box">
-        <fx-tab :options="shortTabList" @change="onChange"></fx-tab>
-      </div>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <div class="exp-tab-box">
+      <fx-tab
+        :options="shortTabList"
+        v-model:activeValue="shortActiveValue"
+      ></fx-tab>
+    </div>
+  </fx-group>
+  <fx-group title="滚动（阈值 scrollThreshold = 4）">
+    <div class="exp-tab-box">
+      <fx-tab :options="tabList" v-model:activeValue="activeValue"></fx-tab>
+    </div>
+  </fx-group>
+  <fx-group title="Mix">
+    <div class="exp-tab-box">
+      <fx-tab :options="mixTabList"></fx-tab>
+    </div>
+  </fx-group>
+  <fx-group title="带副标签">
+    <div class="exp-tab-box">
+      <fx-tab :options="subTabList"></fx-tab>
+    </div>
+  </fx-group>
+  <fx-group title="change 事件">
+    <div class="exp-tab-box">
+      <fx-tab :options="shortTabList" @change="onChange"></fx-tab>
+    </div>
+  </fx-group>
 </template>
 
 <script lang="ts">
@@ -62,7 +60,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.tab-box {
+.exp-tab-box {
   background-color: $background-color;
 }
 </style>

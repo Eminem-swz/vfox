@@ -1,43 +1,41 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-cell label="默认">
-        <fx-stepper />
-      </fx-cell>
-      <fx-cell label="步长设置">
-        <fx-stepper :step="2" />
-      </fx-cell>
-      <fx-cell label="限制输入范围">
-        <fx-stepper :min="5" :max="10" />
-      </fx-cell>
-      <fx-cell label="限制输入整数">
-        <fx-stepper :allow-decimal="false" />
-      </fx-cell>
-      <fx-cell label="禁用状态">
-        <fx-stepper :disabled="true" />
-      </fx-cell>
-      <fx-cell label="禁用输入框">
-        <fx-stepper :disabled-input="true" />
-      </fx-cell>
-      <fx-cell label="固定小数位">
-        <fx-stepper :decimal-length="1" :step="0.2" />
-      </fx-cell>
-    </fx-group>
-    <fx-group title="事件监听">
-      <fx-cell label="change">
-        <fx-stepper @change="onChange" v-model="value" />
-      </fx-cell>
-      <fx-cell label="input/focus/blur/plus-click/minus-click">
-        <fx-stepper
-          @plus-click="onPlusClick"
-          @minus-click="onMinusClick"
-          @focus="onFocus"
-          @blur="onBlur"
-          @input="onInput"
-        />
-      </fx-cell>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <fx-cell label="默认">
+      <fx-stepper />
+    </fx-cell>
+    <fx-cell label="步长设置">
+      <fx-stepper :step="2" />
+    </fx-cell>
+    <fx-cell label="限制输入范围">
+      <fx-stepper :min="5" :max="10" />
+    </fx-cell>
+    <fx-cell label="限制输入整数">
+      <fx-stepper :allow-decimal="false" />
+    </fx-cell>
+    <fx-cell label="禁用状态">
+      <fx-stepper :disabled="true" />
+    </fx-cell>
+    <fx-cell label="禁用输入框">
+      <fx-stepper :disabled-input="true" />
+    </fx-cell>
+    <fx-cell label="固定小数位">
+      <fx-stepper :decimal-length="1" :step="0.2" />
+    </fx-cell>
+  </fx-group>
+  <fx-group title="事件监听">
+    <fx-cell label="change">
+      <fx-stepper @change="onChange" v-model="value" />
+    </fx-cell>
+    <fx-cell label="input/focus/blur/plus-click/minus-click">
+      <fx-stepper
+        @plus-click="onPlusClick"
+        @minus-click="onMinusClick"
+        @focus="onFocus"
+        @blur="onBlur"
+        @input="onInput"
+      />
+    </fx-cell>
+  </fx-group>
 </template>
 
 <script lang="ts">

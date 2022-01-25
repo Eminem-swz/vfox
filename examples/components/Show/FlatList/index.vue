@@ -1,155 +1,153 @@
 <template>
-  <div class="flat-list">
-    <fx-group title="基础用法">
-      <fx-flat-list class="flat-list-box" :data="list" dataKey="id">
-        <template #default="{ item }">
-          <div class="flat-list-item">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="水平列表">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="list"
-        :itemSize="130"
-        dataKey="id"
-        initialHorizontal
-      >
-        <template #default="{ item }">
-          <div class="flat-list-item">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="展示底部加载更多提示">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="loadList"
-        :itemSize="50"
-        dataKey="id"
-        :lowerLoading="lowerLoading"
-        @end-reached="onLoadMore"
-      >
-        <template #default="{ item }">
-          <div class="flat-list-item">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="设置间隔（itemGutter=[16, 6]）">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="list"
-        dataKey="id"
-        :itemGutter="[16, 6]"
-      >
-        <template #default="{ item, index }">
-          <div class="flat-list-item" :class="['color-' + (index % 10)]">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="瀑布流">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="list"
-        :getItemSize="getItemSize"
-        dataKey="id"
-        initialWaterfall
-        :waterfallColCount="3"
-        ref="demo"
-      >
-        <template #default="{ item, index }">
-          <div class="flat-list-item" :class="['color-' + (index % 10)]">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="事件监听（end-reached/visible-items-change）">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="list"
-        :itemSize="50"
-        dataKey="id"
-        @endReached="onEndReached"
-        @visibleItemsChange="onVisibleItemsChange"
-      >
-        <template #default="{ item }">
-          <div class="flat-list-item">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="开启下拉刷新">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="list"
-        :itemSize="50"
-        dataKey="id"
-        :enablePullRefresh="true"
-        @refreshing="onRefreshing"
-      >
-        <template #default="{ item }">
-          <div class="flat-list-item">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="Slot empty">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="[]"
-        :itemSize="50"
-        dataKey="id"
-      >
-        <template #empty>
-          <fx-empty description="暂无列表"></fx-empty>
-        </template>
-      </fx-flat-list>
-    </fx-group>
-    <fx-group title="Method">
-      <fx-flat-list
-        class="flat-list-box"
-        :data="list"
-        dataKey="id"
-        ref="flatList"
-      >
-        <template #default="{ item, index }">
-          <div class="flat-list-item" :class="['color-' + (index % 10)]">
-            {{ item.text }}
-          </div>
-        </template>
-      </fx-flat-list>
-      <fx-cell
-        label="scrollToIndex({ index: 49 })"
-        isLink
-        @click="scrollToIndex(49)"
-      ></fx-cell>
-      <fx-cell
-        label="同上加 viewPosition=0.5"
-        isLink
-        @click="scrollToIndex(49, 0.5)"
-      ></fx-cell>
-      <fx-cell
-        label="同上加 viewPosition=1"
-        isLink
-        @click="scrollToIndex(49, 1)"
-      ></fx-cell>
-      <fx-cell
-        label="scrollTo({ offset: 200 })"
-        isLink
-        @click="scrollTo(200)"
-      ></fx-cell>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <fx-flat-list class="exp-flatList-box" :data="list" dataKey="id">
+      <template #default="{ item }">
+        <div class="exp-flatList-item">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="水平列表">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="list"
+      :itemSize="130"
+      dataKey="id"
+      initialHorizontal
+    >
+      <template #default="{ item }">
+        <div class="exp-flatList-item">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="展示底部加载更多提示">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="loadList"
+      :itemSize="50"
+      dataKey="id"
+      :lowerLoading="lowerLoading"
+      @end-reached="onLoadMore"
+    >
+      <template #default="{ item }">
+        <div class="exp-flatList-item">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="设置间隔（itemGutter=[16, 6]）">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="list"
+      dataKey="id"
+      :itemGutter="[16, 6]"
+    >
+      <template #default="{ item, index }">
+        <div class="exp-flatList-item" :class="['color-' + (index % 10)]">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="瀑布流">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="list"
+      :getItemSize="getItemSize"
+      dataKey="id"
+      initialWaterfall
+      :waterfallColCount="3"
+      ref="demo"
+    >
+      <template #default="{ item, index }">
+        <div class="exp-flatList-item" :class="['color-' + (index % 10)]">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="事件监听（end-reached/visible-items-change）">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="list"
+      :itemSize="50"
+      dataKey="id"
+      @endReached="onEndReached"
+      @visibleItemsChange="onVisibleItemsChange"
+    >
+      <template #default="{ item }">
+        <div class="exp-flatList-item">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="开启下拉刷新">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="list"
+      :itemSize="50"
+      dataKey="id"
+      :enablePullRefresh="true"
+      @refreshing="onRefreshing"
+    >
+      <template #default="{ item }">
+        <div class="exp-flatList-item">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="Slot empty">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="[]"
+      :itemSize="50"
+      dataKey="id"
+    >
+      <template #empty>
+        <fx-empty description="暂无列表"></fx-empty>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="Method">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="list"
+      dataKey="id"
+      ref="flatList"
+    >
+      <template #default="{ item, index }">
+        <div class="exp-flatList-item" :class="['color-' + (index % 10)]">
+          {{ item.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+    <fx-cell
+      label="scrollToIndex({ index: 49 })"
+      isLink
+      @click="scrollToIndex(49)"
+    ></fx-cell>
+    <fx-cell
+      label="同上加 viewPosition=0.5"
+      isLink
+      @click="scrollToIndex(49, 0.5)"
+    ></fx-cell>
+    <fx-cell
+      label="同上加 viewPosition=1"
+      isLink
+      @click="scrollToIndex(49, 1)"
+    ></fx-cell>
+    <fx-cell
+      label="scrollTo({ offset: 200 })"
+      isLink
+      @click="scrollTo(200)"
+    ></fx-cell>
+  </fx-group>
 </template>
 
 <script lang="ts">
@@ -270,7 +268,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.flat-list {
+.exp-flatList {
   &-box {
     height: 275px;
   }

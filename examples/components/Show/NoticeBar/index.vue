@@ -1,65 +1,63 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-notice-bar class="notice-bar-item" :title="text1" />
-      <fx-notice-bar class="notice-bar-item" :title="text2" />
-    </fx-group>
-    <fx-group title="跑马灯">
-      <fx-notice-bar class="notice-bar-item" marquee :title="text2">
-      </fx-notice-bar>
-    </fx-group>
-    <fx-group title="左侧图标">
-      <fx-notice-bar
-        class="notice-bar-item"
-        left-icon="SoundOutlined"
-        :title="text1"
-        marquee
-      />
-    </fx-group>
-    <fx-group title="mode closable/clickable">
-      <fx-notice-bar
-        class="notice-bar-item"
-        mode="closable"
-        v-model:visible="visible"
-        :title="text1"
-        @close-click="showToast('点击了关闭按钮')"
-      />
-      <fx-notice-bar
-        class="notice-bar-item"
-        mode="clickable"
-        :title="text1"
-        @click="showToast('点击了通告栏')"
-      />
-    </fx-group>
-    <fx-group title="type=success/primary/danger">
-      <fx-notice-bar
-        left-icon="SoundOutlined"
-        class="notice-bar-item"
-        type="success"
-        :title="text1"
-      />
-      <fx-notice-bar
-        left-icon="SoundOutlined"
-        class="notice-bar-item"
-        type="primary"
-        :title="text1"
-      />
-      <fx-notice-bar
-        left-icon="SoundOutlined"
-        class="notice-bar-item"
-        type="danger"
-        :title="text1"
-      />
-    </fx-group>
-    <fx-group title="自定义颜色(#000000)">
-      <fx-notice-bar
-        class="notice-bar-item"
-        left-icon="SoundOutlined"
-        :title="text1"
-        color="#000000"
-      />
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <fx-notice-bar class="exp-noticeBar-item" :title="text1" />
+    <fx-notice-bar class="exp-noticeBar-item" :title="text2" />
+  </fx-group>
+  <fx-group title="跑马灯">
+    <fx-notice-bar class="exp-noticeBar-item" marquee :title="text2">
+    </fx-notice-bar>
+  </fx-group>
+  <fx-group title="左侧图标">
+    <fx-notice-bar
+      class="exp-noticeBar-item"
+      left-icon="SoundOutlined"
+      :title="text1"
+      marquee
+    />
+  </fx-group>
+  <fx-group title="mode closable/clickable">
+    <fx-notice-bar
+      class="exp-noticeBar-item"
+      mode="closable"
+      v-model:visible="visible"
+      :title="text1"
+      @close-click="showToast('点击了关闭按钮')"
+    />
+    <fx-notice-bar
+      class="exp-noticeBar-item"
+      mode="clickable"
+      :title="text1"
+      @click="showToast('点击了通告栏')"
+    />
+  </fx-group>
+  <fx-group title="type=success/primary/danger">
+    <fx-notice-bar
+      left-icon="SoundOutlined"
+      class="exp-noticeBar-item"
+      type="success"
+      :title="text1"
+    />
+    <fx-notice-bar
+      left-icon="SoundOutlined"
+      class="exp-noticeBar-item"
+      type="primary"
+      :title="text1"
+    />
+    <fx-notice-bar
+      left-icon="SoundOutlined"
+      class="exp-noticeBar-item"
+      type="danger"
+      :title="text1"
+    />
+  </fx-group>
+  <fx-group title="自定义颜色(#000000)">
+    <fx-notice-bar
+      class="exp-noticeBar-item"
+      left-icon="SoundOutlined"
+      :title="text1"
+      color="#000000"
+    />
+  </fx-group>
 </template>
 
 <script lang="ts">
@@ -84,7 +82,7 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.notice-bar-item {
+.exp-noticeBar-item {
   margin-bottom: 12px;
 
   &:last-child {

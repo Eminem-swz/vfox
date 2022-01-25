@@ -1,157 +1,155 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-cell label="基础">
+  <fx-group title="基础用法">
+    <fx-cell label="基础">
+      <fx-button
+        size="small"
+        id="popMenu"
+        shape="circle"
+        icon="MenuOutlined"
+        @click=";(selector = '#popMenu'), (visible = true)"
+      >
+      </fx-button>
+    </fx-cell>
+    <fx-cell label="不展示蒙层">
+      <fx-button
+        size="small"
+        id="popMenuNoMask"
+        shape="circle"
+        icon="MenuOutlined"
+        @click="visible3 = true"
+      >
+      </fx-button>
+    </fx-cell>
+  </fx-group>
+  <fx-group title="方向 placement=top/bottom/left/right">
+    <div class="exp-popMenu-box2">
+      <div>
         <fx-button
           size="small"
-          id="popMenu"
+          id="popMenuTop2"
           shape="circle"
-          icon="MenuOutlined"
-          @click=";(selector = '#popMenu'), (visible = true)"
+          icon="UpOutlined"
+          @click="
+            ;(placement2 = 'top'),
+              (selector2 = '#popMenuTop2'),
+              (visible2 = true)
+          "
         >
+          上
         </fx-button>
-      </fx-cell>
-      <fx-cell label="不展示蒙层">
-        <fx-button
-          size="small"
-          id="popMenuNoMask"
-          shape="circle"
-          icon="MenuOutlined"
-          @click="visible3 = true"
-        >
-        </fx-button>
-      </fx-cell>
-    </fx-group>
-    <fx-group title="方向 placement=top/bottom/left/right">
-      <div class="popover-box2">
-        <div>
-          <fx-button
-            size="small"
-            id="popMenuTop2"
-            shape="circle"
-            icon="UpOutlined"
-            @click="
-              ;(placement2 = 'top'),
-                (selector2 = '#popMenuTop2'),
-                (visible2 = true)
-            "
-          >
-            上
-          </fx-button>
-        </div>
-        <div>
-          <fx-button
-            size="small"
-            id="popMenuLeft2"
-            shape="circle"
-            icon="LeftOutlined"
-            @click="
-              ;(placement2 = 'left'),
-                (selector2 = '#popMenuLeft2'),
-                (visible2 = true)
-            "
-          >
-            左
-          </fx-button>
-          <fx-button
-            size="small"
-            id="popMenuRight2"
-            shape="circle"
-            icon="RightOutlined"
-            @click="
-              ;(placement2 = 'right'),
-                (selector2 = '#popMenuRight2'),
-                (visible2 = true)
-            "
-          >
-            右
-          </fx-button>
-        </div>
-        <div>
-          <fx-button
-            size="small"
-            id="popMenuBottom2"
-            shape="circle"
-            icon="DownOutlined"
-            @click="
-              ;(placement2 = 'bottom'),
-                (selector2 = '#popMenuBottom2'),
-                (visible2 = true)
-            "
-          >
-            下
-          </fx-button>
-        </div>
       </div>
-    </fx-group>
-    <fx-group title="事件监听">
-      <fx-cell label="confirm/cancel">
+      <div>
         <fx-button
           size="small"
-          id="popMenuEvent"
+          id="popMenuLeft2"
           shape="circle"
-          icon="MenuOutlined"
+          icon="LeftOutlined"
           @click="
-            ;(selector = '#popMenuEvent'), (showEvent = true), (visible = true)
+            ;(placement2 = 'left'),
+              (selector2 = '#popMenuLeft2'),
+              (visible2 = true)
           "
         >
+          左
         </fx-button>
-      </fx-cell>
-      <fx-cell label="visible-state-change">
         <fx-button
           size="small"
-          id="popMenuPopupEvent"
+          id="popMenuRight2"
           shape="circle"
-          icon="MenuOutlined"
+          icon="RightOutlined"
           @click="
-            ;(selector = '#popMenuPopupEvent'),
-              (visibleEvent = true),
-              (visible = true)
+            ;(placement2 = 'right'),
+              (selector2 = '#popMenuRight2'),
+              (visible2 = true)
           "
         >
+          右
         </fx-button>
-      </fx-cell>
-    </fx-group>
-    <fx-group title="API">
-      <fx-cell label="showPopMenu">
+      </div>
+      <div>
         <fx-button
           size="small"
-          id="popMenuApi"
+          id="popMenuBottom2"
           shape="circle"
-          icon="MenuOutlined"
-          @click="onCallApi('#popMenuApi')"
+          icon="DownOutlined"
+          @click="
+            ;(placement2 = 'bottom'),
+              (selector2 = '#popMenuBottom2'),
+              (visible2 = true)
+          "
         >
+          下
         </fx-button>
-      </fx-cell>
-    </fx-group>
-    <fx-pop-menu
-      v-model:visible="visible"
-      :selector="selector"
-      :options="options"
-      @confirm="onConfirm"
-      @cancel="onCancel"
-      @visible-state-change="onVisibleStateChange"
-    >
-    </fx-pop-menu>
-    <fx-pop-menu
-      v-model:visible="visible2"
-      :selector="selector2"
-      :placement="placement2"
-      :options="options"
-      @confirm="onConfirm"
-      @cancel="onCancel"
-    >
-    </fx-pop-menu>
-    <fx-pop-menu
-      v-model:visible="visible3"
-      selector="#popMenuNoMask"
-      :options="options"
-      :show-mask="false"
-      @confirm="onConfirm"
-      @cancel="onCancel"
-    >
-    </fx-pop-menu>
-  </div>
+      </div>
+    </div>
+  </fx-group>
+  <fx-group title="事件监听">
+    <fx-cell label="confirm/cancel">
+      <fx-button
+        size="small"
+        id="popMenuEvent"
+        shape="circle"
+        icon="MenuOutlined"
+        @click="
+          ;(selector = '#popMenuEvent'), (showEvent = true), (visible = true)
+        "
+      >
+      </fx-button>
+    </fx-cell>
+    <fx-cell label="visible-state-change">
+      <fx-button
+        size="small"
+        id="popMenuPopupEvent"
+        shape="circle"
+        icon="MenuOutlined"
+        @click="
+          ;(selector = '#popMenuPopupEvent'),
+            (visibleEvent = true),
+            (visible = true)
+        "
+      >
+      </fx-button>
+    </fx-cell>
+  </fx-group>
+  <fx-group title="API">
+    <fx-cell label="showPopMenu">
+      <fx-button
+        size="small"
+        id="popMenuApi"
+        shape="circle"
+        icon="MenuOutlined"
+        @click="onCallApi('#popMenuApi')"
+      >
+      </fx-button>
+    </fx-cell>
+  </fx-group>
+  <fx-pop-menu
+    v-model:visible="visible"
+    :selector="selector"
+    :options="options"
+    @confirm="onConfirm"
+    @cancel="onCancel"
+    @visible-state-change="onVisibleStateChange"
+  >
+  </fx-pop-menu>
+  <fx-pop-menu
+    v-model:visible="visible2"
+    :selector="selector2"
+    :placement="placement2"
+    :options="options"
+    @confirm="onConfirm"
+    @cancel="onCancel"
+  >
+  </fx-pop-menu>
+  <fx-pop-menu
+    v-model:visible="visible3"
+    selector="#popMenuNoMask"
+    :options="options"
+    :show-mask="false"
+    @confirm="onConfirm"
+    @cancel="onCancel"
+  >
+  </fx-pop-menu>
 </template>
 
 <script lang="ts">
@@ -264,7 +262,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.popover {
+.exp-popMenu {
   &-box2 {
     padding: 8px 16px;
 

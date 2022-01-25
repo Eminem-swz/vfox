@@ -1,62 +1,60 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
-      <fx-cell label="默认" class="count-down-box">
-        <fx-count-down v-model:timestamp="time"></fx-count-down>
-      </fx-cell>
-      <fx-cell label="显示天数" class="count-down-box">
-        <fx-count-down v-model:timestamp="time2" showDays></fx-count-down>
-      </fx-cell>
-    </fx-group>
-    <fx-group title="Slot">
-      <fx-cell label="中文显示" class="count-down-box">
-        <fx-count-down v-model:timestamp="time3">
-          <template #default="countDown">
-            {{ countDown.fullHours }}时{{ countDown.minutes }}分{{
-              countDown.seconds
-            }}秒
-          </template>
-        </fx-count-down>
-      </fx-cell>
-      <fx-cell label="毫秒" class="count-down-box">
-        <fx-count-down v-model:timestamp="time5">
-          <template #default="countDown">
-            {{ countDown.fullHours }}:{{ countDown.minutes }}:{{
-              countDown.seconds
-            }}.{{ countDown.milliseconds }}
-          </template>
-        </fx-count-down>
-      </fx-cell>
-      <fx-cell label="自定义风格" class="count-down-box">
-        <fx-count-down v-model:timestamp="time3">
-          <template #default="countDown">
-            <span class="count-down-time-item">{{ countDown.fullHours }}</span
-            ><span class="count-down-time-item">{{ countDown.minutes }}</span
-            ><span class="count-down-time-item">{{ countDown.seconds }}</span>
-          </template>
-        </fx-count-down>
-      </fx-cell>
-    </fx-group>
-    <fx-group title="时间监听">
-      <fx-cell label="pause/resume/end" class="count-down-box">
-        <div class="count-down-time-r">
-          <fx-count-down
-            v-model:timestamp="time4"
-            :paused="paused"
-            @pause="onPause"
-            @resume="onResume"
-            @end="onEnd"
-          ></fx-count-down>
-        </div>
-        <fx-button @click="paused = !paused" size="small">{{
-          paused ? '恢复' : '暂停'
-        }}</fx-button>
-        <fx-button @click="time4 = 100 * 1000" size="small" type="danger">
-          重置
-        </fx-button>
-      </fx-cell>
-    </fx-group>
-  </div>
+  <fx-group title="基础用法">
+    <fx-cell label="默认" class="exp-countDown-box">
+      <fx-count-down v-model:timestamp="time"></fx-count-down>
+    </fx-cell>
+    <fx-cell label="显示天数" class="exp-countDown-box">
+      <fx-count-down v-model:timestamp="time2" showDays></fx-count-down>
+    </fx-cell>
+  </fx-group>
+  <fx-group title="Slot">
+    <fx-cell label="中文显示" class="exp-countDown-box">
+      <fx-count-down v-model:timestamp="time3">
+        <template #default="countDown">
+          {{ countDown.fullHours }}时{{ countDown.minutes }}分{{
+            countDown.seconds
+          }}秒
+        </template>
+      </fx-count-down>
+    </fx-cell>
+    <fx-cell label="毫秒" class="exp-countDown-box">
+      <fx-count-down v-model:timestamp="time5">
+        <template #default="countDown">
+          {{ countDown.fullHours }}:{{ countDown.minutes }}:{{
+            countDown.seconds
+          }}.{{ countDown.milliseconds }}
+        </template>
+      </fx-count-down>
+    </fx-cell>
+    <fx-cell label="自定义风格" class="exp-countDown-box">
+      <fx-count-down v-model:timestamp="time3">
+        <template #default="countDown">
+          <span class="exp-countDown-time-item">{{ countDown.fullHours }}</span
+          ><span class="exp-countDown-time-item">{{ countDown.minutes }}</span
+          ><span class="exp-countDown-time-item">{{ countDown.seconds }}</span>
+        </template>
+      </fx-count-down>
+    </fx-cell>
+  </fx-group>
+  <fx-group title="时间监听">
+    <fx-cell label="pause/resume/end" class="exp-countDown-box">
+      <div class="exp-countDown-time-r">
+        <fx-count-down
+          v-model:timestamp="time4"
+          :paused="paused"
+          @pause="onPause"
+          @resume="onResume"
+          @end="onEnd"
+        ></fx-count-down>
+      </div>
+      <fx-button @click="paused = !paused" size="small">{{
+        paused ? '恢复' : '暂停'
+      }}</fx-button>
+      <fx-button @click="time4 = 100 * 1000" size="small" type="danger">
+        重置
+      </fx-button>
+    </fx-cell>
+  </fx-group>
 </template>
 
 <script lang="ts">
@@ -108,7 +106,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/style/var.scss';
 
-.count-down {
+.exp-countDown {
   &-box {
     .fx-button {
       flex-grow: 0;

@@ -1,31 +1,29 @@
 <template>
-  <div>
-    <fx-group title="基础用法">
+  <fx-group title="基础用法">
+    <fx-tab-bar :options="baseList" v-model:activeValue="activeValue" />
+  </fx-group>
+  <fx-group title="徽标">
+    <fx-tab-bar :options="badgeList" />
+  </fx-group>
+  <fx-group title="自定义图标">
+    <fx-tab-bar :options="customIconList" />
+  </fx-group>
+  <fx-group title="自定义颜色">
+    <fx-tab-bar
+      color="#8B8DB8"
+      activeColor="#ffffff"
+      style="background-color: #6667ab"
+      :options="baseList"
+    />
+  </fx-group>
+  <fx-group title="自定义图片（icon=URL）">
+    <fx-tab-bar class="exp-tabBar-custom" :options="imageList" />
+  </fx-group>
+  <fx-group title="配合 Fixed 实现置底">
+    <fx-fixed>
       <fx-tab-bar :options="baseList" v-model:activeValue="activeValue" />
-    </fx-group>
-    <fx-group title="徽标">
-      <fx-tab-bar :options="badgeList" />
-    </fx-group>
-    <fx-group title="自定义图标">
-      <fx-tab-bar :options="customIconList" />
-    </fx-group>
-    <fx-group title="自定义颜色">
-      <fx-tab-bar
-        color="#8B8DB8"
-        activeColor="#ffffff"
-        style="background-color: #6667ab"
-        :options="baseList"
-      />
-    </fx-group>
-    <fx-group title="自定义图片（icon=URL）">
-      <fx-tab-bar class="exp-tabBar-custom" :options="imageList" />
-    </fx-group>
-    <fx-group title="配合 Fixed 实现置底">
-      <fx-fixed>
-        <fx-tab-bar :options="baseList" v-model:activeValue="activeValue" />
-      </fx-fixed>
-    </fx-group>
-  </div>
+    </fx-fixed>
+  </fx-group>
 </template>
 
 <script lang="ts">
