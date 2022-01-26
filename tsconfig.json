@@ -23,5 +23,5 @@
     "types": ["vite/client", "jest"]
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.vue"],
-  "exclude": ["**/*.spec.ts", "**/*.spec.js"]
+  "exclude": ["**/*.spec.ts"]
 }

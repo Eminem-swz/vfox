@@ -51,7 +51,7 @@
     <fx-cell
       label="展示透明蒙层"
       isLink
-      @click="onShowToast({ title: '不可穿透', mask: true })"
+      @click="onShowToast({ title: '不可穿透', showMask: true })"
     ></fx-cell>
   </fx-group>
   <fx-group title="API">
@@ -72,7 +72,7 @@
     v-model:visible="visible"
     :title="title"
     :type="type"
-    :mask="mask"
+    :showMask="showMask"
     :icon="icon"
     :duration="duration"
   ></fx-toast>
@@ -91,7 +91,7 @@ import {
 interface showArgs {
   icon?: any
   title?: string
-  mask?: boolean
+  showMask?: boolean
   type?: ToastType
   duration?: number
 }
@@ -102,14 +102,14 @@ export default defineComponent({
     const visible = ref(false)
     const title = ref('')
     const type = ref<ToastType>('default')
-    const mask = ref(false)
+    const showMask = ref(false)
     const icon = ref()
     const duration = ref(0)
 
     function onShowToast(args: showArgs) {
       icon.value = args.icon || undefined
       title.value = args.title || ''
-      mask.value = args.mask || false
+      showMask.value = args.showMask || false
       type.value = args.type || 'default'
       duration.value = args.duration ?? 1500
       visible.value = true
@@ -119,7 +119,7 @@ export default defineComponent({
       visible,
       title,
       type,
-      mask,
+      showMask,
       icon,
       duration,
 

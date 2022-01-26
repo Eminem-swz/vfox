@@ -35,7 +35,7 @@
     v-model:current="current"
     :showClose="showClose"
     :imageHighRendering="false"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
     @cancel="onCancel"
     @change="onChange"
   ></fx-image-preview>

@@ -1,10 +1,10 @@
 import type { ColRow } from '../Picker/types'
 import type { SelectorValue } from '../SelectorField/types'
-import type { ColName, ModeName, RowsParser } from './types'
+import type { ColName, Mode, RowsParser } from './types'
 import dayjs from '../helpers/day'
 import type { Dayjs } from 'dayjs'
 
-export const MODE_NAMES: ModeName[] = [
+export const MODE_NAMES: Mode[] = [
   'date',
   'time',
   'datetime',
@@ -28,7 +28,7 @@ interface ColMapItem {
   isDateTime: boolean
 }
 
-const ModeColMap = new Map<ModeName, ColMapItem>([
+const ModeColMap = new Map<Mode, ColMapItem>([
   [
     'date',
     {
@@ -131,7 +131,7 @@ const ModeColMap = new Map<ModeName, ColMapItem>([
   ]
 ])
 
-function getCopMapItem(mode: ModeName) {
+function getCopMapItem(mode: Mode) {
   return ModeColMap.get(mode) as ColMapItem
 }
 
@@ -269,7 +269,7 @@ export const parseRows: RowsParser = (
   return rows
 }
 
-export function array2Date(array: SelectorValue[], mode: ModeName) {
+export function array2Date(array: SelectorValue[], mode: Mode) {
   let djs = dayjs().millisecond(0)
 
   const { colNames } = getCopMapItem(mode)
@@ -308,7 +308,7 @@ export function array2Date(array: SelectorValue[], mode: ModeName) {
   return djs.toDate()
 }
 
-export function getFormatTemplate(template: string | null, mode: ModeName) {
+export function getFormatTemplate(template: string | null, mode: Mode) {
   let newTemplate: string | undefined = template || undefined
 
   if (newTemplate == null) {
@@ -318,7 +318,7 @@ export function getFormatTemplate(template: string | null, mode: ModeName) {
   return newTemplate
 }
 
-export function day2Array(djs: Dayjs | null, mode: ModeName) {
+export function day2Array(djs: Dayjs | null, mode: Mode) {
   const dNameIndexes: ColName[] = [
     'year',
     'month',

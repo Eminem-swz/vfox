@@ -21,7 +21,7 @@
   <fx-dropdown
     v-model:visible="visible"
     :selector="selector"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   >
   </fx-dropdown>
 </template>

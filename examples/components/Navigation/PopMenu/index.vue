@@ -129,7 +129,7 @@
     :options="options"
     @confirm="onConfirm"
     @cancel="onCancel"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   >
   </fx-pop-menu>
   <fx-pop-menu
@@ -145,7 +145,7 @@
     v-model:visible="visible3"
     selector="#popMenuNoMask"
     :options="options"
-    :show-mask="false"
+    :showMask="false"
     @confirm="onConfirm"
     @cancel="onCancel"
   >

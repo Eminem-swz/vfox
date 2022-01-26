@@ -2,7 +2,7 @@ import type { SelectorDetail } from '../SelectorField/types'
 import type { ColRow } from '../Picker/types'
 
 export type ColName = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
-export type ModeName =
+export type Mode =
   | 'date'
   | 'time'
   | 'datetime'
@@ -30,7 +30,7 @@ export interface RowsParser {
     options: {
       minDate: Date
       maxDate: Date
-      mode: ModeName
+      mode: Mode
       filter: OptionFilter
     }
   ): ColRow[]
@@ -43,6 +43,6 @@ export type ShowDatePickerOptions = Partial<{
   value: Date
   minDate: Date
   maxDate: Date
-  mode: ModeName
+  mode: Mode
   filter: OptionFilter
 }>

@@ -1,7 +1,7 @@
 import dayjs from '../helpers/day'
 import type { PropType } from 'vue'
 import { MODE_NAMES } from '../DatePicker/date'
-import type { ModeName, OptionFilter } from './types'
+import type { Mode, OptionFilter } from './types'
 import type {
   SelectorModelValue,
   SelectorValueParser,
@@ -19,7 +19,7 @@ export const commonProps = {
   },
   // 初始模式
   initialMode: {
-    type: String as PropType<ModeName>,
+    type: String as PropType<Mode>,
     default: MODE_NAMES[0]
   },
   // 最小日期

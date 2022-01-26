@@ -34,9 +34,14 @@ export type {
   SelectorOnChange,
   SelectorOnConfirm
 } from './SelectorField/types'
-export type { OnConfirm as PickerOnConfirm } from './Picker/types'
+export type {
+  OnConfirm as PickerOnConfirm,
+  UserFieldNames as PickerFieldNames,
+  UserFieldNames as CascaderFieldNames
+} from './Picker/types'
 export type { OnConfirm as CascaderOnConfirm } from './Cascader/types'
 export type {
+  Mode as DatePickerMode,
   OptionFilter as DatePickerOptionFilter,
   OnConfirm as DatePickerOnConfirm
 } from './DatePicker/types'
@@ -77,6 +82,8 @@ export type {
 } from './ScrollView/types'
 export type {
   OnChange as TabOnChange,
+  OnChange as TabBarOnChange,
+  OnChange as SideTabOnChange,
   OptionList as TabOptions,
   OptionItem as TabOption
 } from './Tab/types'

@@ -154,7 +154,7 @@
   <fx-popover
     v-model:visible="noMaskVisible"
     selector="#popoverNoMask"
-    :show-mask="false"
+    :showMask="false"
     content="无蒙层气泡内容"
   >
   </fx-popover>

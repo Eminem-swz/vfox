@@ -117,7 +117,7 @@
     :formatter="formatter"
     :parser="parser"
     @confirm="onConfirm"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   />
   <fx-calendar-popup
     v-model:visible="popupRangeVisible"

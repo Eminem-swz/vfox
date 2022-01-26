@@ -43,8 +43,8 @@ export default defineComponent({
       default: ''
     },
     name: {
-      type: String,
-      default: null
+      type: [Number, String],
+      default: ''
     },
     disabled: {
       type: Boolean,

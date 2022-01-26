@@ -161,7 +161,7 @@
     :cancel-text="cancelText"
     @cancel="onCancel"
     @confirm="onConfirm"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   >
   </fx-pop-dialog>
   <fx-pop-dialog
@@ -176,8 +176,8 @@
     v-model:visible="visible3"
     selector="#popDialogNoMask"
     content="这是气泡内容"
-    :show-cancel="false"
-    :show-mask="false"
+    :showCancel="false"
+    :showMask="false"
   >
   </fx-pop-dialog>
 </template>

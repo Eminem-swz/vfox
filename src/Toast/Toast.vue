@@ -2,7 +2,7 @@
   <teleport to="body">
     <div
       class="fx-toast fx-popup"
-      :class="{ visible: visible2, 'forbid-click': mask }"
+      :class="{ visible: visible2, 'forbid-click': showMask }"
       :style="popupStyles"
       v-bind="$attrs"
       v-show="isShow"
@@ -60,7 +60,7 @@ export default defineComponent({
       type: [String, Object],
       validator: iconValidator
     },
-    mask: {
+    showMask: {
       type: Boolean,
       default: false
     },

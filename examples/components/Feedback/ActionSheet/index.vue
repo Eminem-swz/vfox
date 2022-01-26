@@ -84,7 +84,7 @@
     :cancel-text="cancelText"
     @confirm="onConfirm"
     @cancel="onCancel"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   ></fx-action-sheet>
 </template>
 

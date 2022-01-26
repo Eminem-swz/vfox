@@ -11,7 +11,7 @@ const showToast = createShowPopup<
       type: 'default' | 'success' | 'loading' | 'fail'
       icon: string
       duration: number
-      mask: boolean
+      showMask: boolean
     }>),
   PopupSuccessAlertArgs
 >({
@@ -34,7 +34,7 @@ const showLoading = createShowPopup<
       title: string
     } & Partial<{
       duration: number
-      mask: boolean
+      showMask: boolean
     }>),
   PopupSuccessAlertArgs
 >({

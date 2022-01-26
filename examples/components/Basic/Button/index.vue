@@ -264,7 +264,7 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import '../../../components/var.scss';
+@import '@/style/var.scss';
 
 .exp-button-group {
   padding: 0;

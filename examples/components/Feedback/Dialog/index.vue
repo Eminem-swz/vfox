@@ -80,7 +80,7 @@
     v-bind="dialogArgs"
     @confirm="onConfirm"
     @cancel="onCancel"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   >
   </fx-dialog>
 </template>

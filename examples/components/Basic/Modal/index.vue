@@ -53,7 +53,7 @@
     :mask-closable="maskClosable"
     :show-close="showClose"
     @cancel="onClose"
-    @visible-state-change="onVisibleStateChange"
+    @visibleStateChange="onVisibleStateChange"
   >
   </fx-modal>
   <fx-modal v-model:visible="visible2">

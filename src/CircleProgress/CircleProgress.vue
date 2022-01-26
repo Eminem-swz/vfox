@@ -7,12 +7,12 @@
       class="fx-circle-progress_bar"
       :size="nSize"
       :rate="rate"
-      :strokeWidth="strokeWidth"
+      :strokeWidth="nStrokeWidth"
       :color="color"
     />
     <div
       class="fx-circle-progress_text"
-      :style="{ padding: strokeWidth + 'px' }"
+      :style="{ padding: nStrokeWidth + 'px' }"
     >
       <slot :progress="progress">
         {{ progress }}
@@ -48,7 +48,7 @@ export default defineComponent({
       default: 100
     },
     strokeWidth: {
-      type: Number,
+      type: [Number, String],
       default: 5.37
     },
     color: {
@@ -60,6 +60,9 @@ export default defineComponent({
     return {
       nSize: computed(() => {
         return parseFloat(props.size as string)
+      }),
+      nStrokeWidth: computed(() => {
+        return parseFloat(props.strokeWidth as string)
       }),
       rate: computed(() => {
         return rangeInteger(props.percentage, 0, 100) / 100
