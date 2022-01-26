@@ -1,3 +1,10 @@
+## [2.5.9](https://github.com/godxiaoji/vfox/compare/v2.5.8...v2.5.9) (2022-01-26)
+
+
+### Bug Fixes
+
+* fix mask bug ([61e29a7](https://github.com/godxiaoji/vfox/commit/61e29a78b630c94729ad2853303e3d94a7aa0724))
+
 ## [2.5.8](https://github.com/godxiaoji/vfox/compare/v2.5.7...v2.5.8) (2022-01-24)
 
 
