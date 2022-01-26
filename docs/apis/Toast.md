@@ -14,7 +14,7 @@
 | type     | string   | 'default' | 否   | 类型，可选 'success', 'loading', 'fail'                          |
 | icon     | string   |           | 否   | 图标，使用 [Icon](../components/Icon.md) 组件，优先级高于 `type` |
 | duration | number   | 1500      | 否   | 提示的延迟关闭时间                                               |
-| mask     | boolean  | false     | 否   | 是否显示透明蒙层，防止触摸穿透                                   |
+| showMask | boolean  | false     | 否   | 是否显示透明蒙层，防止触摸穿透                                   |
 | success  | function |           | 否   | 接口调用成功的回调函数                                           |
 | fail     | function |           | 否   | 接口调用失败的回调函数（不传入 fail 遇错误直接抛出）             |
 | complete | function |           | 否   | 接口调用结束的回调函数（调用成功、失败都会执行）                 |
@@ -69,7 +69,7 @@ hideToast()
 | 属性     | 类型     | 默认值 | 必填 | 说明                                             |
 | -------- | -------- | ------ | ---- | ------------------------------------------------ |
 | title    | string   |        | 是   | 提示的内容                                       |
-| mask     | boolean  | false  | 否   | 是否显示透明蒙层，防止触摸穿透                   |
+| showMask | boolean  | false  | 否   | 是否显示透明蒙层，防止触摸穿透                   |
 | success  | function |        | 否   | 接口调用成功的回调函数                           |
 | fail     | function |        | 否   | 接口调用失败的回调函数                           |
 | complete | function |        | 否   | 接口调用结束的回调函数（调用成功、失败都会执行） |

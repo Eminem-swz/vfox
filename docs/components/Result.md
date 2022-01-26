@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Result } from 'vfox'
 ```
 
@@ -30,7 +30,7 @@ import { Result } from 'vfox'
 
 ### 附加内容（#default）
 
-```
+```Vue
 <fx-result
   type="fail"
   title="支付失败"

@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Collapse, CollapseItem } from 'vfox'
 ```
 
@@ -10,16 +10,16 @@ import { Collapse, CollapseItem } from 'vfox'
 
 ## Collapse Props
 
-| 属性                 | 类型     | 默认值 | 必填 | 说明                                                                |
-| -------------------- | -------- | ------ | ---- | ------------------------------------------------------------------- |
-| v-model:active-names | string[] | []     | 否   | 当前展开面板的 `name` 列表，需要每个 `CollapseItem` 都设置上 `name` |
-| accordion            | boolean  | false  | 否   | 是否开启手风琴模式                                                  |
+| 属性                 | 类型                 | 默认值 | 必填 | 说明                                                                    |
+| -------------------- | -------------------- | ------ | ---- | ----------------------------------------------------------------------- |
+| v-model:active-names | (string \| number)[] | []     | 否   | 当前展开面板的 `name` 列表，需要每个 `CollapseItem` 组件都设置上 `name` |
+| accordion            | boolean              | false  | 否   | 是否开启手风琴模式                                                      |
 
 ## Collapse Events
 
-| 事件   | 描述           | 回调函数参数          |
-| ------ | -------------- | --------------------- |
-| change | 切换面板时触发 | activeNames: string[] |
+| 事件   | 描述           | 回调函数参数                      | TypeScript 函数  |
+| ------ | -------------- | --------------------------------- | ---------------- |
+| change | 切换面板时触发 | activeNames: (string \| number)[] | CollapseOnChange |
 
 ## Collapse Slots
 
@@ -27,7 +27,7 @@ import { Collapse, CollapseItem } from 'vfox'
 
 注：其中只可放置 [CollapseItem](./Collapse.md#collapseitem-折叠面板子项) 组件，否则会导致未定义的行为。
 
-```
+```Vue
 <fx-collapse>
   <fx-collapse-item title="标题1" name="row1">
     <div class="pad">
@@ -58,6 +58,6 @@ import { Collapse, CollapseItem } from 'vfox'
 
 ## CollapseItem Events
 
-| 事件   | 描述                    | 回调函数参数                                               |
-| ------ | ----------------------- | ---------------------------------------------------------- |
-| toggle | 面板子项展开/收起时触发 | {spread: boolean}，其中 spread=true 展开/spread=false 收起 |
+| 事件   | 描述                    | 回调函数参数                                                                                 | TypeScript 函数      |
+| ------ | ----------------------- | -------------------------------------------------------------------------------------------- | -------------------- |
+| toggle | 面板子项展开/收起时触发 | payload: { name: string \| number, spread: boolean } 其中 spread=true 展开/spread=false 收起 | CollapseItemOnToggle |

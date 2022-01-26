@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Progress } from 'vfox'
 ```
 
@@ -20,7 +20,7 @@ import { Progress } from 'vfox'
 
 ### 内容区（#default）
 
-```
+```Vue
 <fx-progress :percentage="5">
   <template #default="{ progress }"> 已抢{{ progress }} </template>
 </fx-progress>

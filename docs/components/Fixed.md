@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Fixed } from 'vfox'
 ```
 
@@ -22,7 +22,7 @@ import { Fixed } from 'vfox'
 
 在 iPhoneX 等机型开启 `enableSafeAreaInsets`，需要在 head 标签中添加 meta 标签，并设置 viewport-fit=cover 值
 
-```
+```HTML
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
@@ -33,7 +33,7 @@ import { Fixed } from 'vfox'
 
 ### 底部（#default）
 
-```
+```Vue
 <fx-fixed placement="bottom">
   固定内容
 </fx-fixed>

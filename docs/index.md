@@ -30,7 +30,7 @@ Node.js 12.0+
 
 ## 安装
 
-```
+```Shell
 # npm
 npm i -S vfox
 

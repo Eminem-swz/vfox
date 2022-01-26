@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Picker, PickerPopup, PickerView } from 'vfox'
 ```
 
@@ -14,7 +14,7 @@ import { Picker, PickerPopup, PickerView } from 'vfox'
 | ----------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
 | v-model     | [SelectorValue](./Picker.md#selectorvalue-的类型) \| [SelectorValue](./Picker.md#selectorvalue-的类型)[] | []                                                       | 否   | 选中值                                               |
 | options     | [Options](./Picker.md#options-的结构)                                                                    | []                                                       | 是   | 数据集                                               |
-| field-names | object                                                                                                   | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key    |
+| field-names | [PickerFieldNames](./Picker.md#pickerfieldnames)                                                         | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key    |
 | formatter   | [SelectorValueFormatter](./Picker.md#selectorvalueformatter)                                             |                                                          | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
 | parser      | [SelectorValueParser](./Picker.md#selectorvalueparser)                                                   |                                                          | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
 
@@ -35,7 +35,17 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 | value | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | ["zaolei", "lunzao"]；`formatter/parser` 的优先级更高 |
 | label | string                                                      | "藻类/轮藻"                                           |
 
-### options 的结构
+### PickerFieldNames
+
+```TypeScript
+interface PickerFieldNames {
+  label?: string
+  value?: string
+  children?: string
+}
+```
+
+### Options 的结构
 
 组件会通过 options 值的结构来分析是否是级联模式。
 
@@ -43,8 +53,8 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 #### 单列
 
-```
-[
+```JavaScript
+const options = [
   2016,
   2017,
   2018,
@@ -55,8 +65,8 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 或者完整写法：
 
-```
-[
+```JavaScript
+const options = [
   {
     "label": "2016",
     "value": 2016,
@@ -87,8 +97,8 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 #### 多列
 
-```
-[
+```JavaScript
+const options = [
   [
     2011,
     2012,
@@ -112,8 +122,8 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 #### 级联
 
-```
-[
+```JavaScript
+const options = [
   {
     label: '空调',
     value: 'kongtiao',
@@ -187,7 +197,7 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 #### SelectorValueFormatter
 
-```
+```TypeScript
 interface SelectorValueFormatter {
   (valueArray: SelectorValue[], labelArray: string[]):
     | {
@@ -202,7 +212,7 @@ interface SelectorValueFormatter {
 
 #### SelectorValueParser
 
-```
+```TypeScript
 interface SelectorValueParser {
   (value: unknown): SelectorValue[]
 }
@@ -228,9 +238,9 @@ interface SelectorValueParser {
 
 ## Picker Events
 
-| 事件   | 描述                       | 回调函数参数                                                | 函数 TypeScript  |
-| ------ | -------------------------- | ----------------------------------------------------------- | ---------------- |
-| change | 选择后选中值发生变化时触发 | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | SelectorOnChange |
+| 事件   | 描述                       | 回调函数参数                                                         | 函数 TypeScript  |
+| ------ | -------------------------- | -------------------------------------------------------------------- | ---------------- |
+| change | 选择后选中值发生变化时触发 | payload: [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | SelectorOnChange |
 
 ## PickerPopup
 
@@ -245,12 +255,12 @@ interface SelectorValueParser {
 
 ## PickerPopup Events
 
-| 事件                 | 描述                 | 回调函数参数                                                   | 函数 TypeScript                      |
-| -------------------- | -------------------- | -------------------------------------------------------------- | ------------------------------------ |
-| cancel               | 点击取消按钮后触发   |                                                                | PopupOnCancel                        |
-| confirm              | 点击确定按钮后触发   | [SelectorDetail](./Picker.md#selectordetail-的结构)            | PickerOnConfirm \| SelectorOnConfirm |
-| change               | 选中值发生变化时触发 | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型)    | SelectorOnChange                     |
-| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./DatePicker.md#visiblestate-值说明) } | PopupOnVisibleStateChange            |
+| 事件                 | 描述                 | 回调函数参数                                                            | 函数 TypeScript                      |
+| -------------------- | -------------------- | ----------------------------------------------------------------------- | ------------------------------------ |
+| cancel               | 点击取消按钮后触发   |                                                                         | PopupOnCancel                        |
+| confirm              | 点击确定按钮后触发   | payload: [SelectorDetail](./Picker.md#selectordetail-的结构)            | PickerOnConfirm \| SelectorOnConfirm |
+| change               | 选中值发生变化时触发 | payload: [SelectorModelValue](./Picker.md#selectormodelvalue-的类型)    | SelectorOnChange                     |
+| visible-state-change | 展示隐藏时触发       | payload: { state: [VisibleState](./DatePicker.md#visiblestate-值说明) } | PopupOnVisibleStateChange            |
 
 ### VisibleState 值说明
 
@@ -267,6 +277,6 @@ interface SelectorValueParser {
 
 ## PickerView Events
 
-| 事件   | 描述                       | 回调函数参数                                                | 函数 TypeScript  |
-| ------ | -------------------------- | ----------------------------------------------------------- | ---------------- |
-| change | 滑动后选中值发生变化时触发 | [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | SelectorOnChange |
+| 事件   | 描述                       | 回调函数参数                                                         | 函数 TypeScript  |
+| ------ | -------------------------- | -------------------------------------------------------------------- | ---------------- |
+| change | 滑动后选中值发生变化时触发 | payload: [SelectorModelValue](./Picker.md#selectormodelvalue-的类型) | SelectorOnChange |

@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Toast } from 'vfox'
 ```
 
@@ -16,7 +16,7 @@ import { Toast } from 'vfox'
 | title           | string    |           | 是   | 提示的内容                                                                        |
 | type            | ToastType | 'default' | 否   | 类型，'default'无图标, 可选 'success', 'loading', 'fail'                          |
 | image           | string    |           | 否   | 图标，优先级高于 type 自带的图标                                                  |
-| mask            | boolean   | false     | 否   | 是否显示透明蒙层，防止触摸穿透                                                    |
+| show-mask       | boolean   | false     | 否   | 是否显示透明蒙层，防止触摸穿透                                                    |
 | duration        | number    | 0         | 否   | visible=true 展示后，duration 毫秒后消失，0 为不消失，在 `v-model:visible` 下生效 |
 
 ### ToastType 的合法值
@@ -29,9 +29,9 @@ import { Toast } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述           | 回调函数参数                                              | TypeScript 函数           |
-| -------------------- | -------------- | --------------------------------------------------------- | ------------------------- |
-| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./Toast.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述           | 回调函数参数                                                       | TypeScript 函数           |
+| -------------------- | -------------- | ------------------------------------------------------------------ | ------------------------- |
+| visible-state-change | 展示隐藏时触发 | payload: { state: [VisibleState](./Toast.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

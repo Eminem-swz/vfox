@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Icon } from 'vfox'
 ```
 
@@ -51,19 +51,25 @@ export default defineConfig({
 </template>
 
 <script setup>
-import MyIcon from './my-icon.svg'
+import MyIcon from './my-icon.svg?vueComponent'
 </script>
 ```
 
-更多用法可以查看[文档](https://github.com/godxiaoji/rollup-plugin-svg-sprites)。
+TypeScript 支持和更多用法可以查看[文档](https://github.com/godxiaoji/rollup-plugin-svg-sprites)。
 
 ### 批量导入 SVG
 
 对于一个批量文件夹形式的图标集，可以通过 [svg-sprites-cli](https://github.com/godxiaoji/svg-sprites-cli) 转为 js。
 
-1. 通过指令执行：
+#### 1. 安装 svg-sprites-cli
 
+```Shell
+npm i -D svg-sprites-cli
 ```
+
+#### 2. 通过指令执行：
+
+```Shell
 svgjs -d ./icons -o path/to/lib/svg.js
 ```
 
@@ -80,11 +86,11 @@ svgjs -d ./icons -o path/to/lib/svg.js
 
 默认规则转出来的 id 为 `icon-homeTab`, `icon-findTab`, `icon-userTab`, `icon-loading`。
 
-1. 在入口中引入 js：
+#### 3. 在入口中引入 js：
 
 `main.ts`:
 
-```
+```JavaScript
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -96,9 +102,9 @@ createApp(App)
   .mount("#app");
 ```
 
-3. Icon 组件通过展示
+#### 4. Icon 组件通过展示
 
-```
+```Vue
 <fx-icon icon="icon-homeTab" />
 ```
 

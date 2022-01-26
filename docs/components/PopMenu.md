@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { PopMenu } from 'vfox'
 ```
 
@@ -34,8 +34,8 @@ interface MenuOption {
 | disabled | string | false  | 否   | 是否禁用                          |
 | icon     | string |        | 否   | 图标，使用 [Icon](./Icon.md) 组件 |
 
-```
-[
+```JavaScript
+const options = [
   {
     name: '选项1',
     disabled: false,
@@ -46,10 +46,10 @@ interface MenuOption {
 
 ## Events
 
-| 事件                 | 描述               | 回调函数参数                                                | TypeScript 函数           |
-| -------------------- | ------------------ | ----------------------------------------------------------- | ------------------------- |
-| confirm              | 确认按钮点击时触发 | {item: { name: string }: index: number}                     | PopMenuOnConfirm          |
-| visible-state-change | 展示隐藏时触发     | { state: [VisibleState](./PopMenu.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述               | 回调函数参数                                                         | TypeScript 函数           |
+| -------------------- | ------------------ | -------------------------------------------------------------------- | ------------------------- |
+| confirm              | 确认按钮点击时触发 | payload: { item: { name: string }, index: number }                   | PopMenuOnConfirm          |
+| visible-state-change | 展示隐藏时触发     | payload: { state: [VisibleState](./PopMenu.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

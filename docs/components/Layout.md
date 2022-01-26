@@ -4,7 +4,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Row, Col } from 'vfox'
 ```
 
@@ -15,12 +15,12 @@ import { Row, Col } from 'vfox'
 | 属性    | 类型                         | 默认值  | 必填 | 说明                                                                                        |
 | ------- | ---------------------------- | ------- | ---- | ------------------------------------------------------------------------------------------- |
 | gutter  | string \| number \| number[] | 0       | 否   | 栅格间隔，通过数值设置水平间隔，也可以通过数组的形式设置水平和垂直间隔 [水平间隔, 垂直间隔] |
-| justify | RowJustify                   | 'start' | 否   | 水平排列方式，可选值：'start' / 'end' / 'center' / 'space-around' / 'space-between'         |
-| align   | RowAlign                     | 'top'   | 否   | 水平排列方式，可选值：'top' / 'middle' / 'bottom'                                           |
+| justify | RowJustify                   | 'start' | 否   | 水平排列方式，可选值：'start', 'end', 'center', 'space-around', 'space-between'             |
+| align   | RowAlign                     | 'top'   | 否   | 水平排列方式，可选值：'top', 'middle', 'bottom'                                             |
 
 ## Row Slots
 
-```
+```Vue
 <fx-row :gutter="10">
   <fx-col :span="24">Layout</fx-col>
 </fx-row>
@@ -37,7 +37,7 @@ import { Row, Col } from 'vfox'
 
 ## Col Slots
 
-```
+```Vue
 <fx-row :gutter="10">
   <fx-col :span="24">Layout</fx-col>
 </fx-row>

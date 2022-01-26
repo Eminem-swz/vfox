@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Swiper, SwiperItem } from 'vfox'
 ```
 
@@ -13,8 +13,8 @@ import { Swiper, SwiperItem } from 'vfox'
 | 属性                   | 类型    | 默认值                     | 必填 | 说明                                     |
 | ---------------------- | ------- | -------------------------- | ---- | ---------------------------------------- |
 | indicator-dots         | boolean | false                      | 否   | 是否显示面板指示点                       |
-| indicator-color        | color   | 'rgba(255, 255, 255, 0.4)' | 否   | 指示点颜色                               |
-| indicator-active-color | color   | '#ffffff'                  | 否   | 当前选中的指示点颜色                     |
+| indicator-color        | color   | 'rgba(0, 0, 0, 0.4)'       | 否   | 指示点颜色                               |
+| indicator-active-color | color   | 'rgba(255, 255, 255, 0.8)' | 否   | 当前选中的指示点颜色                     |
 | autoplay               | boolean | false                      | 否   | 是否自动切换                             |
 | v-model:active-index   | number  | 0                          | 否   | 当前所在滑块的 index                     |
 | interval               | number  | 5000                       | 否   | 自动切换时间间隔                         |
@@ -33,9 +33,9 @@ import { Swiper, SwiperItem } from 'vfox'
 
 ## Swiper Slots
 
-注：其中只可放置 [SwiperItem](./Swiper.md#SwiperItem-slots) 组件，否则会导致未定义的行为。
+注：其中只可放置 [SwiperItem](./Swiper.md#swiperitem-slots) 组件，否则会导致未定义的行为。
 
-```
+```Vue
 <fx-swiper>
   <fx-swiper-item>
     <fx-image src="a.jpg" />
@@ -49,7 +49,7 @@ import { Swiper, SwiperItem } from 'vfox'
 
 ## SwiperItem Slots
 
-```
+```Vue
 <fx-swiper-item>
   <fx-image src="b.jpg" />
 </fx-swiper-item>

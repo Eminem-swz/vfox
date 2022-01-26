@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Checkbox, CheckboxGroup } from 'vfox'
 ```
 
@@ -14,6 +14,7 @@ import { Checkbox, CheckboxGroup } from 'vfox'
 | --------------- | ---------------- | ------ | ---- | -------------------------------------------------------------------------------------------------------- |
 | value           | string \| number | ''     | 否   | 该项值，[CheckboxGroup](./Checkbox.md#checkboxgroup-多项选择器) 的 change 事件会携带 `checkbox` 的 value |
 | disabled        | boolean          | false  | 否   | 是否禁用                                                                                                 |
+| circle          | boolean          | false  | 否   | 是否显示圆形的图标                                                                                       |
 | v-model:checked | boolean          | false  | 否   | 当前是否选中，可用来设置默认选中                                                                         |
 | active-color    | string           |        | 否   | 自定义激活态的图标颜色                                                                                   |
 
@@ -25,7 +26,7 @@ import { Checkbox, CheckboxGroup } from 'vfox'
 
 ## Checkbox Slots
 
-```
+```Vue
 <fx-checkbox>开朗</fx-checkbox>
 <fx-checkbox>活泼</fx-checkbox>
 ...
@@ -65,7 +66,7 @@ import { Checkbox, CheckboxGroup } from 'vfox'
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-checkbox-group>
   <fx-checkbox>开朗</fx-checkbox>
   <fx-checkbox>活泼</fx-checkbox>

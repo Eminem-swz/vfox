@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Empty } from 'vfox'
 ```
 
@@ -19,15 +19,15 @@ import { Empty } from 'vfox'
 
 ### 底部（#default）
 
-```
+```Vue
 <fx-empty description="网络错误" type="network">
   <fx-button>刷新试试</fx-button>
 </fx-empty>
 ```
 
-### 图片区域（image）
+### 图片区域（#image）
 
-```
+```Vue
 <fx-empty description="描述文字">
   <template #image>
     <fx-image src="xxx.jpg" />

@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { ScrollView } from 'vfox'
 ```
 
@@ -28,18 +28,18 @@ import { ScrollView } from 'vfox'
 
 ## Events
 
-| 事件            | 描述                  | 回调函数参数                                                                                                                          | TypeScript 函数 |
-| --------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| scroll-to-upper | 滚动到顶部/左边时触发 | { direction: 'top' \| 'left' }                                                                                                        | OnScrollToUpper |
-| scroll-to-lower | 滚动到底部/右边时触发 | { direction: 'bottom' \| 'right' }                                                                                                    | OnScrollToLower |
-| scroll          | 滚动时触发            | { scrollLeft: number, scrollTop: number, scrollWidth: number, scrollHeight: number }                                                  | OnScroll        |
-| refreshing      | 下拉刷新时触发        | ({ pullDirection: 'up' \| 'right' \| 'down' \| 'left' }, done: () =>void)，其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数 | OnRefreshing    |
+| 事件            | 描述                  | 回调函数参数                                                                                                                                 | TypeScript 函数           |
+| --------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| scroll-to-upper | 滚动到顶部/左边时触发 | payload: { direction: 'top' \| 'left' }                                                                                                      | ScrollViewOnScrollToUpper |
+| scroll-to-lower | 滚动到底部/右边时触发 | payload: { direction: 'bottom' \| 'right' }                                                                                                  | ScrollViewOnScrollToLower |
+| scroll          | 滚动时触发            | payload: { scrollLeft: number, scrollTop: number, scrollWidth: number, scrollHeight: number }                                                | ScrollViewOnScroll        |
+| refreshing      | 下拉刷新时触发        | payload: ( pullDirection: 'up' \| 'right' \| 'down' \| 'left', done: () => void ) 其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数 | ScrollViewOnRefreshing    |
 
 ## Slots
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-scroll-view>
   ...
 </fx-scroll-view>
@@ -47,7 +47,7 @@ import { ScrollView } from 'vfox'
 
 ### 下拉指示器（#indicator）
 
-```
+```Vue
 <fx-scroll-view>
   <template #indicator="slotProps">
     方向：{{ slotProps.pullDirection }} 状态：{{

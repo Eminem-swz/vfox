@@ -6,13 +6,13 @@
 
 1. 先安装插件：
 
-```
+```Shell
 npm i unplugin-vue-components -D
 ```
 
 2. 安装组件 Resolver：
 
-```
+```Shell
 npm i vfox-resolver -D
 ```
 
@@ -55,7 +55,7 @@ module.exports = {
 
 4. 现在就可以在模版中引入组件
 
-```HTML
+```Vue
 <template>
   <fx-button>提交</fx-button>
 </template>
@@ -76,7 +76,7 @@ import 'vfox/es/Button/style'
 app.use(Button)
 ```
 
-```HTML
+```Vue
 <template>
   <fx-button>按钮</fx-button>
 </template>
@@ -147,10 +147,24 @@ export default {
 
 在 `tsconfig.json` 中加入获得 `template` 类型提示：
 
-```
+```JSON
 {
   "compilerOptions": {
     "types": ["vfox/global"]
   }
 }
+```
+
+## CDN 方式
+
+如果是简单的应用，也提供了 CDN 的方式进行接入。
+
+该版本最低要求支持 ES6 的浏览器。
+
+```HTML
+<!-- CSS -->
+<link rel="stylesheet" href="https://unpkg.com/vfox/dist/index.css" />
+
+<!-- JavaScript -->
+<script src="https://unpkg.com/vfox/dist/index.js"></script>
 ```

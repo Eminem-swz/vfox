@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Rate } from 'vfox'
 ```
 

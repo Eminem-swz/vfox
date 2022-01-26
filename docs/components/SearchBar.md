@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { SearchBar } from 'vfox'
 ```
 
@@ -35,16 +35,17 @@ import { SearchBar } from 'vfox'
 | field-click | 输入框点击，配合 readonly 使用，获取到当前候选值 | payload: { text: string }                                          | SearchBarOnFieldClick |
 | search      | 触发搜索时                                       | payload: { text: string, source: string }                          | SearchBarOnSearch     |
 
-### SearchBarSetSuggestList 结构
+### SearchBarSetSuggestList
 
-```
-['suggest A', 'suggest B']
-```
+```TypeScript
+type SearchBarSetSuggestList = (res: (string | number | {
+  text: string | number
+  tags?: string[]
+})[]) => void
 
-或者
-
-```
-[{
+const suggestList = ['suggest A', 'suggest B']
+// Or
+const suggestList = [{
   text: '油烟机',
   tags: ['厨房', '电器']
 }]

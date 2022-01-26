@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { TabView, TabViewItem } from 'vfox'
 ```
 
@@ -27,7 +27,7 @@ import { TabView, TabViewItem } from 'vfox'
 
 注：其中只可放置 [TabViewItem](./TabView.md#tabviewitem-props) 组件，否则会导致未定义的行为。
 
-```
+```Vue
 <fx-tab-view>
   <fx-tab-view-item name="Tab 1">
     <fx-empty description="Tab 1"/>
@@ -46,7 +46,7 @@ import { TabView, TabViewItem } from 'vfox'
 
 ## TabViewItem Slots
 
-```
+```Vue
 <fx-tab-view-item name="Tab 1">
   <fx-empty description="Tab 1"/>
 </fx-tab-view-item>

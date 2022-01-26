@@ -7,7 +7,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Copy } from 'vfox'
 ```
 
@@ -28,8 +28,8 @@ import { Copy } from 'vfox'
 
 ## Slots
 
-```
-<fx-copy :text="'复制的内容'">
+```Vue
+<fx-copy text="复制的内容">
   <fx-button>复制</fx-button>
 </fx-copy>
 ```

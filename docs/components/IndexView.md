@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { IndexView, IndexViewItem } from 'vfox'
 ```
 
@@ -16,9 +16,9 @@ import { IndexView, IndexViewItem } from 'vfox'
 
 ## IndexView Events
 
-| 事件   | 描述       | 回调函数参数                       | TypeScript 函数   |
-| ------ | ---------- | ---------------------------------- | ----------------- |
-| change | 切换时触发 | { activeIndex: number } 当前项索引 | IndexViewOnChange |
+| 事件   | 描述       | 回调函数参数                                | TypeScript 函数   |
+| ------ | ---------- | ------------------------------------------- | ----------------- |
+| change | 切换时触发 | payload: { activeIndex: number } 当前项索引 | IndexViewOnChange |
 
 ## Methods
 
@@ -31,7 +31,7 @@ import { IndexView, IndexViewItem } from 'vfox'
 
 注：其中只可放置 [IndexViewItem](./IndexView.md#indexviewitem-索引子项) 组件，否则会导致未定义的行为。
 
-```
+```Vue
 <fx-index-view>
   <fx-index-view-item name="A">
     <fx-cell label="单元格"></fx-cell>
@@ -50,7 +50,7 @@ import { IndexView, IndexViewItem } from 'vfox'
 
 ## IndexViewItem Slots
 
-```
+```Vue
 <fx-index-view-item name="A">
   <fx-cell label="单元格"></fx-cell>
   <fx-cell label="单元格"></fx-cell>

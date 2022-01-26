@@ -48,12 +48,12 @@ app.use(Vfox)
 
 **Vite** 只需要预装 sass 预处理器，具体请参阅 [CSS Pre-processors](https://cn.vitejs.dev/guide/features.html#css-pre-processors)。
 
-```
+```Shell
 npm install -D sass
 ```
 
 **Vue CLI** 还需要相应的 loader，具体请参阅 [预处理器](https://cli.vuejs.org/zh/guide/css.html#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)。
 
-```
+```Shell
 npm install -D sass-loader sass
 ```

@@ -9,7 +9,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Form, FormFooter, FormItem } from 'vfox'
 ```
 
@@ -17,9 +17,9 @@ import { Form, FormFooter, FormItem } from 'vfox'
 
 ## Form Slots
 
-### default
+### 默认（#default）
 
-```
+```Vue
 <fx-form>
   <fx-input type="text" />
 </fx-form>
@@ -27,7 +27,7 @@ import { Form, FormFooter, FormItem } from 'vfox'
 
 ### footer
 
-```
+```Vue
 <fx-form>
   <template #footer>
     <fx-button form-type="submit">提交</fx-button>
@@ -37,9 +37,9 @@ import { Form, FormFooter, FormItem } from 'vfox'
 
 ## FormFooter Slots
 
-### default
+### 默认（#default）
 
-```
+```Vue
 <fx-form-footer>
   <fx-button form-type="submit">提交</fx-button>
 </fx-form-footer>

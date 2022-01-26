@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { CountDown } from 'vfox'
 ```
 
@@ -22,17 +22,17 @@ import { CountDown } from 'vfox'
 
 ## Events
 
-| 事件   | 描述           | 回调函数参数                                                                                     | TypeScript 函数   |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------ | ----------------- |
-| pause  | 计时暂停时触发 | { remainTime: number } remainTime 剩余时间，单位 ms                                              | CountDownOnPause  |
-| resume | 恢复计时时触发 | { remainTime: number } remainTime 剩余时间，单位 ms                                              | CountDownOnResume |
-| end    | 计时结束时触发 | { startTime: number, endTime: number } startTime 本地开始时间戳，endTime 本地结束时间戳，单位 ms | CountDownOnEnd    |
+| 事件   | 描述           | 回调函数参数                                                                                              | TypeScript 函数   |
+| ------ | -------------- | --------------------------------------------------------------------------------------------------------- | ----------------- |
+| pause  | 计时暂停时触发 | payload: { remainTime: number } remainTime 剩余时间，单位 ms                                              | CountDownOnPause  |
+| resume | 恢复计时时触发 | payload: { remainTime: number } remainTime 剩余时间，单位 ms                                              | CountDownOnResume |
+| end    | 计时结束时触发 | payload: { startTime: number, endTime: number } startTime 本地开始时间戳，endTime 本地结束时间戳，单位 ms | CountDownOnEnd    |
 
 ## Slots
 
 支持自定义风格显示
 
-```
+```Vue
 <fx-count-down v-model:timestamp="timestamp">
   <template #default="countTime">
     {{ countTime.fullHours }}:{{ countTime.minutes }}:{{

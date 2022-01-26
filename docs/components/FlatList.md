@@ -7,7 +7,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { FlatList } from 'vfox'
 ```
 
@@ -20,7 +20,7 @@ import { FlatList } from 'vfox'
 | data                  | any[]                     |        | 是   | 列表数组                                                                                                                                                               |
 | data-key              | string                    | 'id'   | 否   | 表明每个 item 项的身份（data[index][datakey]），为了提升渲染性能，列表数组必须有唯一 key                                                                               |
 | horizontal            | boolean                   | false  | 否   | 设置为 true 则变为水平布局模式                                                                                                                                         |
-| get-item-size         | (index: number) => number |        | 否   | 动态返回列表项尺寸（垂直布局下指高度，水平布局下指宽度），推荐设置，提升性能                                                                                                               |
+| get-item-size         | (index: number) => number |        | 否   | 动态返回列表项尺寸（垂直布局下指高度，水平布局下指宽度），推荐设置，提升性能                                                                                           |
 | item-size             | number                    |        | 否   | 设置列表项固定尺寸，优先级低于 `get-item-size`                                                                                                                         |
 | end-reached-threshold | number                    | 0.5    | 否   | 决定当距离内容最底部还有多远时触发 onEndReached 回调。注意此参数是一个比值而非像素单位。比如，0.5 表示距离内容最底部的距离为当前列表可见长度的一半时触发               |
 | enable-pull-refresh   | boolean                   | false  | 否   | 是否开启下拉刷，如果时水平列表则为左拉刷新，搭配 `refreshing` 事件使用新                                                                                               |
@@ -31,12 +31,12 @@ import { FlatList } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述                 | 回调函数参数                                                                                                                         | TypeScript 函数              |
-| -------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
-| visible-items-change | 列表项回收变化时触发 | { items: { index: number, visible: boolean }[] }                                                                                     | FlatListOnVisibleItemsChange |
-| end-reached          | 滚动到末尾时触发     | { distanceFromEnd: number } 其中 distanceFromEnd 为距离末尾的距离，单位 px                                                           | FlatListOnEndReached         |
-| scroll               | 滚动时触发           | { scrollLeft: number, scrollTop: number, scrollWidth: number, scrollHeight: number }                                                 | OnScroll                     |
-| refreshing           | 下拉刷新时触发       | ({ pullDirection: 'up' \| 'right' \| 'down' \| 'left' }, done: () =>void) 其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数 | OnRefreshing                 |
+| 事件                 | 描述                 | 回调函数参数                                                                                                                                  | TypeScript 函数              |
+| -------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| visible-items-change | 列表项回收变化时触发 | payload: { items: { index: number, visible: boolean }[] }                                                                                     | FlatListOnVisibleItemsChange |
+| end-reached          | 滚动到末尾时触发     | payload: { distanceFromEnd: number } 其中 distanceFromEnd 为距离末尾的距离，单位 px                                                           | FlatListOnEndReached         |
+| scroll               | 滚动时触发           | payload: { scrollLeft: number, scrollTop: number, scrollWidth: number, scrollHeight: number }                                                 | FlatListOnScroll             |
+| refreshing           | 下拉刷新时触发       | payload: ({ pullDirection: 'up' \| 'right' \| 'down' \| 'left' }, done: () =>void) 其中 pullDirection 指下拉的方向，done 指刷新完毕回调的函数 | FlatListOnRefreshing         |
 
 ### visible-items-change 的 items 参数
 
@@ -49,7 +49,7 @@ import { FlatList } from 'vfox'
 
 ### 列表项（#default）
 
-```
+```Vue
 <fx-flat-list>
  <template #default="{ item, index }">
   {{ index }} : {{ item }}
@@ -59,7 +59,7 @@ import { FlatList } from 'vfox'
 
 ### 列表为空（#empty）
 
-```
+```Vue
 <fx-flat-list>
   <template #empty>暂无数据</template>
   ...
@@ -68,7 +68,7 @@ import { FlatList } from 'vfox'
 
 ### 分割线（#separator）
 
-```
+```Vue
 <fx-flat-list>
   <template #separator>
     <div class="line"></div>
@@ -80,7 +80,7 @@ import { FlatList } from 'vfox'
 
 ### 前置（#header）
 
-```
+```Vue
 <fx-flat-list>
   <template #header></template>
   ...
@@ -91,7 +91,7 @@ import { FlatList } from 'vfox'
 
 ### 后置（#footer）
 
-```
+```Vue
 <fx-flat-list>
   ...
   <template #footer>暂时没有更多了</template>

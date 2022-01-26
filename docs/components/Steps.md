@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Steps, Step } from 'vfox'
 ```
 
@@ -21,7 +21,7 @@ import { Steps, Step } from 'vfox'
 
 注：其中只可放置 [Step](./Steps.md#step-props) 组件，否则会导致未定义的行为。
 
-```
+```Vue
 <fx-steps>
   <fx-step title="成功获得0.01元收益">搞半天就这点？</fx-step>
   <fx-step title="十天后到账">0.01元还要十天到账？</fx-step>
@@ -39,7 +39,7 @@ import { Steps, Step } from 'vfox'
 
 ### 内容（#default）
 
-```
+```Vue
 <fx-step title="标题">
   自定义内容
 </fx-step>
@@ -47,7 +47,7 @@ import { Steps, Step } from 'vfox'
 
 ### 标题（#title）
 
-```
+```Vue
 <fx-step>
   <template #title>
   【珠海市】【珠海一部】快递小哥正在派件（<a href="tel:10000">10000</a>）
@@ -56,11 +56,11 @@ import { Steps, Step } from 'vfox'
 </fx-step>
 ```
 
-PS：优先级高于 Props `title`。
+注：优先级高于 Props `title`。
 
 ### 步骤标（#step）
 
-```
+```Vue
 <fx-step>
   <template #step="{ finish, index, active }">
     <fx-icon v-if="finish" icon="CheckOutlined"></fx-icon>
@@ -68,4 +68,4 @@ PS：优先级高于 Props `title`。
 </fx-step>
 ```
 
-PS：只推荐写入 text 和 [Icon](./Icon.md) 组件，其他元素或组件可能会导致未定义的行为。
+注：只推荐写入 text 和 [Icon](./Icon.md) 组件，其他元素或组件可能会导致未定义的行为。

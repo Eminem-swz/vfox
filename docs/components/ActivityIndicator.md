@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { ActivityIndicator } from 'vfox'
 ```
 

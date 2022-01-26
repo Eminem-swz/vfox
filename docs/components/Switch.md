@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Switch } from 'vfox'
 ```
 

@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Input } from 'vfox'
 ```
 
@@ -50,7 +50,7 @@ import { Input } from 'vfox'
 
 ### 前置元素（#prepend）
 
-```
+```Vue
 <fx-input>
   <template #prepend>https://</template>
 </fx-input>
@@ -60,7 +60,7 @@ import { Input } from 'vfox'
 
 ### 后置元素（#append）
 
-```
+```Vue
 <fx-input>
   <template #append>.com</template>
 </fx-input>

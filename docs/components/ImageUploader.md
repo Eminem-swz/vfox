@@ -7,7 +7,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { ImageUploader } from 'vfox'
 ```
 
@@ -29,23 +29,28 @@ import { ImageUploader } from 'vfox'
 | before-upload | ImageUploaderBeforeUpload |              | 否   | 文件读取前的回调函数，返回 false 或 Promise<false\> 可终止文件上传 |
 | upload-ready  | ImageUploaderUploadReady  |              | 否   | 转入上传文件操作的回调函数                                         |
 
-### beforeUpload(file: File, handlers: Object) => boolean \| void \| Promise<boolean | File\>
+### ImageUploaderBeforeUpload
 
-通过传入 beforeUpload 函数可以在上传前进行校验和处理，返回 false 或 Promise<false\> 表示校验失败。
+```TypeScript
+type ImageUploaderBeforeUpload = (file: File, handlers: {
+  formatSize(size: number): string
+}) => boolean \| void \| Promise<boolean | File\>
+```
 
-也可以返回修改过的 file 对象，如果压缩图片等。
+上传前进行校验和处理，返回 `false` 或 `Promise<false>` 表示校验失败。也可以返回修改过的 File 对象，如果压缩图片等。
 
-#### beforeUpload 的 handlers 提供的方法
+#### handlers 提供的方法
 
 | handlers 方法       | 参数返回                 | 说明                                            |
 | ------------------- | ------------------------ | ----------------------------------------------- |
 | handlers.formatSize | (size: number) => string | 把图片的文件大小数值转为可读的，如 10MB, 10.5KB |
 
-```
-<fx-image-uploader :beforeUpload="onBeforeUpload" />
-```
+```Vue
+<template>
+  <fx-image-uploader :beforeUpload="onBeforeUpload" />
+</template>
 
-```
+<script>
 export default {
   methods: {
     onBeforeUpload(file, { formatSize }) {
@@ -57,11 +62,24 @@ export default {
     }
   }
 }
+</script>
 ```
 
-### uploadReady(file: File, handlers: Object) => void
+### ImageUploaderUploadReady
+
+```TypeScript
+type ImageUploaderUploadReady = (file: File, handlers: {
+  getUploadId(): number
+  formatSize(size: number): string
+  setUploading(message: string): void
+  fail(e?: string | Error): void
+  success(url: string): void
+}) => void
+```
 
 在该节点中将文件上传至服务器。
+
+#### handlers 提供的方法
 
 | handlers 方法         | 参数返回                      | 说明                                            |
 | --------------------- | ----------------------------- | ----------------------------------------------- |
@@ -69,15 +87,16 @@ export default {
 | handlers.formatSize   | (size: number) => string      | 把图片的文件大小数值转为可读的，如 10MB, 10.5KB |
 | handlers.setUploading | (message: string) => void     | 设置图片上传状态为上传中                        |
 | handlers.success      | (url: string) => void         | 设置图片上传状态为上传成功，传入接口返回的 URL  |
-| handlers.fail         | (e: Error \| string ) => void | 设置图片上传状态为上传失败，传入错误信息        |
+| handlers.fail         | (e?: string \| Error) => void | 设置图片上传状态为上传失败，传入错误信息        |
 
-PS：整个上传流程分为 3 个阶段：reading -> uploading -> uploaded | failed，handlers 提供的改变状态方法是不可逆的。
+注：整个上传流程分为 3 个阶段：reading -> uploading -> uploaded | failed，handlers 提供的改变状态方法是不可逆的。
 
-```
-<fx-image-uploader :uploadReady="onUpload" />
-```
+```Vue
+<template>
+  <fx-image-uploader :uploadReady="onUpload" />
+</template>
 
-```
+<script>
 export default {
   methods: {
     onUpload(file, handlers) {
@@ -95,19 +114,21 @@ export default {
     }
   }
 }
+</script>
 ```
 
 ## Events
 
-| 事件   | 描述                        | 回调函数参数                                                         | TypeScript 函数       |
-| ------ | --------------------------- | -------------------------------------------------------------------- | --------------------- |
-| delete | 图片被删除时触发            | { index: number, item: { id: number, status: string, url: string } } | ImageUploaderOnDelete |
-| change | 已上传的图片 URL 列表改变时 | value: string[]                                                      |                       |
+| 事件   | 描述                        | 回调函数参数                                                                  | TypeScript 函数       |
+| ------ | --------------------------- | ----------------------------------------------------------------------------- | --------------------- |
+| delete | 图片被删除时触发            | payload: { index: number, item: { id: number, status: string, url: string } } | ImageUploaderOnDelete |
+| change | 已上传的图片 URL 列表改变时 | value: string[]                                                               |                       |
 
-### delete 的回调参数 item
+### delete 的回调参数
 
-| 值     | 类型   | 说明                                                 |
-| ------ | ------ | ---------------------------------------------------- |
-| id     | number | 图片上传项分配的唯一值                               |
-| status | string | reading(uploadReady 后)，uploading，uploaded，failed |
-| url    | string | 图片 URL 地址                                        |
+| 值          | 类型   | 说明                                                 |
+| ----------- | ------ | ---------------------------------------------------- |
+| index       | number | 图片索引                                             |
+| item.id     | number | 图片上传项分配的唯一值                               |
+| item.status | string | reading(uploadReady 后)，uploading，uploaded，failed |
+| item.url    | string | 图片 URL 地址                                        |

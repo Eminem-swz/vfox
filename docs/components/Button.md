@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Button, ButtonGroup } from 'vfox'
 ```
 
@@ -70,7 +70,7 @@ import { Button, ButtonGroup } from 'vfox'
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-button form-type="submit">提交</fx-button>
 ```
 
@@ -86,7 +86,7 @@ import { Button, ButtonGroup } from 'vfox'
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-button-group shape="square" size="small">
   <fx-button type="default" icon="LeftOutlined"></fx-button>
   <fx-button type="default" icon="HomeOutlined"></fx-button>

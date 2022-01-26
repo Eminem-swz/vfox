@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Sticky, StickyView, StickyViewItem } from 'vfox'
 ```
 
@@ -24,7 +24,7 @@ import { Sticky, StickyView, StickyViewItem } from 'vfox'
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-sticky>
   自定义内容
 </fx-sticky>
@@ -52,7 +52,7 @@ import { Sticky, StickyView, StickyViewItem } from 'vfox'
 
 注：其中只可放置 [StickyViewItem](./Sticky.md#stickyviewitem-props) 组件，否则会导致未定义的行为。
 
-```
+```Vue
 <fx-sticky-view>
   <fx-sticky-view-item name="Sticky 1">
     <div class="sticky-box-1"></div>
@@ -80,7 +80,7 @@ import { Sticky, StickyView, StickyViewItem } from 'vfox'
 
 ## StickyViewItem Slots
 
-```
+```Vue
 <fx-sticky-view-item name="Sticky 1">
   <div class="sticky-box-1"></div>
 </fx-sticky-view-item>

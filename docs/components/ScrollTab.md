@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { ScrollTab, ScrollTabItem } from 'vfox'
 ```
 
@@ -13,19 +13,19 @@ import { ScrollTab, ScrollTabItem } from 'vfox'
 | 属性                 | 类型             | 默认值 | 必填 | 说明                        |
 | -------------------- | ---------------- | ------ | ---- | --------------------------- |
 | sticky-offset-top    | string \| number | 0      | 否   | 数值默认是 px，也支持 vw/vh |
-| sticky-offset-buttom | string \| number | 0      | 否   | 数值默认是 px，也支持 vw/vh |
+| sticky-offset-bottom | string \| number | 0      | 否   | 数值默认是 px，也支持 vw/vh |
 
 ## ScrollTab Events
 
-| 事件   | 描述       | 回调函数参数                       | TypeScript 函数   |
-| ------ | ---------- | ---------------------------------- | ----------------- |
-| change | 切换时触发 | { activeIndex: number } 当前项索引 | ScrollTabOnChange |
+| 事件   | 描述       | 回调函数参数                                | TypeScript 函数   |
+| ------ | ---------- | ------------------------------------------- | ----------------- |
+| change | 切换时触发 | payload: { activeIndex: number } 当前项索引 | ScrollTabOnChange |
 
 ## ScrollTab Slots
 
 注：其中只可放置 [ScrollTabItem](./ScrollTab.md#scrolltabitem-props) 组件，否则会导致未定义的行为。
 
-```
+```Vue
 <fx-scroll-tab>
   <fx-scroll-tab-item name="Dust Red">
     <div class="scroll-tab-box box-1"></div>
@@ -48,7 +48,7 @@ import { ScrollTab, ScrollTabItem } from 'vfox'
 
 ## ScrollTabItem Slots
 
-```
+```Vue
 <fx-scroll-tab-item name="Dust Red">
   <div class="scroll-tab-box box-1"></div>
 </fx-scroll-tab-item>

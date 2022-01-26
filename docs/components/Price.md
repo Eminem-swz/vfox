@@ -4,7 +4,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Price } from 'vfox'
 ```
 

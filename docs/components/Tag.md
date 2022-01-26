@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Tag } from 'vfox'
 ```
 
@@ -48,13 +48,13 @@ import { Tag } from 'vfox'
 | 事件       | 描述                                 | 回调函数参数 |
 | ---------- | ------------------------------------ | ------------ |
 | click      | 回到顶部按钮点击时触发               | MouseEvent   |
-| close      | 关闭按钮点击时触发                   | {}           |
-| long-press | initialLongPress=true 长按标签时触发 | {}           |
+| close      | 关闭按钮点击时触发                   |              |
+| long-press | initialLongPress=true 长按标签时触发 |              |
 
 ## Slots
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-tag>标签</fx-tag>
 ```

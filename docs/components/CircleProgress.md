@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { CircleProgress } from 'vfox'
 ```
 
@@ -14,14 +14,14 @@ import { CircleProgress } from 'vfox'
 | ------------ | ---------------- | ------ | ---- | ------------------- |
 | percentage   | string \| number |        | 是   | 百分比，例如：50    |
 | size         | string \| number | 100    | 否   | 宽高，单位 px       |
-| stroke-width | boolean          | 5.37   | 否   | 进度条宽度，单位 px |
+| stroke-width | string \| number | 5.37   | 否   | 进度条宽度，单位 px |
 | color        | string           |        | 否   | 进度条激活色        |
 
 ## Slots
 
 ### 内容区（#default）
 
-```
+```Vue
 <fx-circle-progress :percentage="5">
   <template #default="{ progress }"> 已抢{{ progress }} </template>
 </fx-circle-progress>

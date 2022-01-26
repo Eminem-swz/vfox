@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Stopwatch } from 'vfox'
 ```
 
@@ -21,11 +21,11 @@ import { Stopwatch } from 'vfox'
 
 ## Events
 
-| 事件  | 描述           | 回调函数参数                                                                                  |
-| ----- | -------------- | --------------------------------------------------------------------------------------------- |
-| start | 计时启动时触发 | payload: { }                                                                                  |
-| stop  | 计时停止时触发 | payload: { }                                                                                  |
-| reset | 计时复位时触发 | payload: { detail: CountTime, laps: CountTime[] } detail 周期总时间，laps，周期内所有计次时间 |
+| 事件  | 描述           | 回调函数参数                                                                                  | 函数 TypeScript |
+| ----- | -------------- | --------------------------------------------------------------------------------------------- | --------------- |
+| start | 计时启动时触发 |                                                                                               |                 |
+| stop  | 计时停止时触发 | payload: { detail: CountTime, laps: CountTime[] } detail 周期总时间，laps，周期内所有计次时间 | StopwatchOnStop |
+| reset | 计时复位时触发 |                                                                                               |                 |
 
 ### CountTime 的结构
 
@@ -51,9 +51,9 @@ import { Stopwatch } from 'vfox'
 
 ## Slots
 
-支持自定义风格显示
+### 自定义风格显示（#default）
 
-```
+```Vue
 <fx-stopwatch>
   <template #default="countTime">
     {{ countTime.fullHours }}:{{ countTime.minutes }}:{{

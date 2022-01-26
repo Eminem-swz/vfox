@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { NavBar } from 'vfox'
 ```
 
@@ -10,27 +10,25 @@ import { NavBar } from 'vfox'
 
 ## Props
 
-| 属性          | 类型           | 默认值 | 必填 | 说明                                   |
-| ------------- | -------------- | ------ | ---- | -------------------------------------- |
-| title         | string         | ''     | 否   | 标题                                   |
-| show-back     | boolean        | false  | 否   | 是否展示返回按钮                       |
-| show-home     | boolean        | false  | 否   | 是否展示首页按钮                       |
-| left-buttons  | ButtonOption[] | []     |      | 左侧按钮列表，优先级高于首页和返回按钮 |
-| right-buttons | ButtonOption[] | []     |      | 右侧按钮列表                           |
-| icon-only     | boolean        | true   | 否   | 是否展示纯图标按钮                     |
+| 属性          | 类型                 | 默认值 | 必填 | 说明                                   |
+| ------------- | -------------------- | ------ | ---- | -------------------------------------- |
+| title         | string               | ''     | 否   | 标题                                   |
+| show-back     | boolean              | false  | 否   | 是否展示返回按钮                       |
+| show-home     | boolean              | false  | 否   | 是否展示首页按钮                       |
+| left-buttons  | NavBarButtonOption[] | []     |      | 左侧按钮列表，优先级高于首页和返回按钮 |
+| right-buttons | NavBarButtonOption[] | []     |      | 右侧按钮列表                           |
+| icon-only     | boolean              | true   | 否   | 是否展示纯图标按钮                     |
 
-### left-buttons/right-buttons 的结构
+### NavBarButtonOption 的结构
 
 ```TypeScript
-type ButtonOption = {
+type NavBarButtonOption = {
   text: string
   icon?: IconData
   type?: StateType
 }
-```
 
-```
-[
+const options: NavBarButtonOption[] = [
   { icon: 'MenuOutlined', text: '菜单' }
 ]
 ```
@@ -47,7 +45,9 @@ type ButtonOption = {
 | left-button-click  | 左侧按钮点击时触发                   | payload: Payload, buttonEl: HTMLElement | NavBarOnButtonClick  |
 | right-button-click | 右侧按钮点击时触发                   | payload: Payload, buttonEl: HTMLElement | NavBarOnButtonClick  |
 
-```
+### Payload
+
+```TypeScript
 type Payload = {
   item: {
     text: string
@@ -55,8 +55,6 @@ type Payload = {
   index: number
 }
 ```
-
-### left-button-click/right-button-click 的回调参数
 
 | 参数      | 类型   | 描述             |
 | --------- | ------ | ---------------- |
@@ -67,7 +65,7 @@ type Payload = {
 
 ### 左侧区域自定义（#left）
 
-```
+```Vue
 <fx-nav-bar
   title="标题"
   :right-buttons="[{ icon: 'MenuOutlined', text: '菜单' }]"
@@ -78,7 +76,7 @@ type Payload = {
 
 ### 右侧区域自定义（#right）
 
-```
+```Vue
 <fx-nav-bar title="标题" :show-back="true" :show-home="true">
   <template #right>Right Slot</template>
 </fx-nav-bar>

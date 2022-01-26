@@ -4,7 +4,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Order } from 'vfox'
 ```
 
@@ -19,11 +19,11 @@ import { Order } from 'vfox'
 | aspect-ratio  | number  | 1      | 否   | 渲染宽高比 |
 | deletable     | boolean | false  | 否   | 支持删除   |
 
-PS： 由于该组件是宫格类排序，所以需要预设列数和每项固定宽高。
+注： 由于该组件是宫格类排序，所以需要预设列数和每项固定宽高。
 
 ### items 的结构
 
-```
+```TypeScript
 interface Item {
   id: string | number
   [propName: string]: any
@@ -37,19 +37,19 @@ const items: Item[] = [
 ]
 ```
 
-PS：要求一定要有 `id` 作为唯一键。
+注：要求一定要有 `id` 作为唯一键。
 
 ## Events
 
-| 事件   | 描述             | 回调函数参数                                      | TypeScript 函数 |
-| ------ | ---------------- | ------------------------------------------------- | --------------- |
-| delete | 单项被删除时触发 | { item: { id: string \| number }, index: number } | OrderOnDelete   |
+| 事件   | 描述             | 回调函数参数                                               | TypeScript 函数 |
+| ------ | ---------------- | ---------------------------------------------------------- | --------------- |
+| delete | 单项被删除时触发 | payload: { item: { id: string \| number }, index: number } | OrderOnDelete   |
 
 ## Slots
 
 ### 列表项（#default）
 
-```
+```Vue
 <fx-order>
  <template #default="{ item, index }">
   {{ index }} : {{ item }}

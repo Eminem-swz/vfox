@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Pagination } from 'vfox'
 ```
 
@@ -17,23 +17,23 @@ import { Pagination } from 'vfox'
 
 ## Events
 
-| 事件   | 描述               | 回调函数参数                       | TypeScript 函数    |
-| ------ | ------------------ | ---------------------------------- | ------------------ |
-| change | 点击翻页按钮时触发 | { current: number, total: number } | PaginationOnChange |
+| 事件   | 描述               | 回调函数参数                                | TypeScript 函数    |
+| ------ | ------------------ | ------------------------------------------- | ------------------ |
+| change | 点击翻页按钮时触发 | payload: { current: number, total: number } | PaginationOnChange |
 
 ## Slots
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-pagination>
-  <template #default="{current, total}"> 第 {{ current }} / {{total}} 页 </template>
+  <template #default="{ current, total }"> 第 {{ current }} / {{ total }} 页 </template>
 </fx-pagination>
 ```
 
 ### 翻页按钮（#prev/#next）
 
-```
+```Vue
 <fx-pagination>
   <template #prev> 上一页 </template>
   <template #next> 下一页 </template>

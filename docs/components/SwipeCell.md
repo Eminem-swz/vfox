@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { SwipeCell } from 'vfox'
 ```
 
@@ -16,14 +16,19 @@ import { SwipeCell } from 'vfox'
 
 ### SwipeCellButtonOption 的结构
 
-```
-{
+```TypeScript
+type SwipeCellButtonOption = {
+  text: string
+  type?: StateType
+}
+
+const buttons: SwipeCellButtonOption[] = [{
   text: '加入收藏',
   type: 'warning'
-}
+}]
 ```
 
-#### SwipeCellButtonOption 项中 type 的合法值
+#### StateType 的合法值
 
 | 值      | 说明 |
 | ------- | ---- |
@@ -35,15 +40,15 @@ import { SwipeCell } from 'vfox'
 
 ## Events
 
-| 事件         | 描述           | 回调函数参数                                   | TypeScript 函数        |
-| ------------ | -------------- | ---------------------------------------------- | ---------------------- |
-| button-click | 点击按钮时触发 | { item: SwipeCellButtonOption, index: number } | SwipeCellOnButtonClick |
+| 事件         | 描述           | 回调函数参数                                            | TypeScript 函数        |
+| ------------ | -------------- | ------------------------------------------------------- | ---------------------- |
+| button-click | 点击按钮时触发 | payload: { item: SwipeCellButtonOption, index: number } | SwipeCellOnButtonClick |
 
 ## Slots
 
 ### 被挂载元素（#default）
 
-```
+```Vue
 <fx-swipe-cell :buttons="buttons">
   <fx-cell label="单元格" content="向左划"></fx-cell>
 </fx-swipe-cell>

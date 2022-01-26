@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Dropdown } from 'vfox'
 ```
 
@@ -17,9 +17,9 @@ import { Dropdown } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述           | 回调函数参数                                                 | TypeScript 函数           |
-| -------------------- | -------------- | ------------------------------------------------------------ | ------------------------- |
-| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./Dropdown.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述           | 回调函数参数                                                          | TypeScript 函数           |
+| -------------------- | -------------- | --------------------------------------------------------------------- | ------------------------- |
+| visible-state-change | 展示隐藏时触发 | payload: { state: [VisibleState](./Dropdown.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 
@@ -32,7 +32,7 @@ import { Dropdown } from 'vfox'
 
 ## Slots
 
-```
+```Vue
 <fx-dropdown>
   展开的内容
 </fx-dropdown>

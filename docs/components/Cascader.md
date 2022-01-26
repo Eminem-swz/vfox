@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Cascader } from 'vfox'
 ```
 
@@ -14,16 +14,16 @@ import { Cascader } from 'vfox'
 
 ## Props
 
-| 属性        | 类型                                                                                                     | 默认值                                                   | 必填 | 说明                                                 |
-| ----------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
-| name        | string                                                                                                   |                                                          | 否   | 标识                                                 |
-| placeholder | string                                                                                                   |                                                          | 否   | 没有选中值的提示，也会用在弹窗标题上                 |
-| disabled    | boolean                                                                                                  | false                                                    | 否   | 是否禁用                                             |
-| options     | [Options](./Cascader.md#options-的结构)                                                                  | []                                                       | 否   | 数据集                                               |
+| 属性        | 类型                                                                                                         | 默认值                                                   | 必填 | 说明                                                 |
+| ----------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
+| name        | string                                                                                                       |                                                          | 否   | 标识                                                 |
+| placeholder | string                                                                                                       |                                                          | 否   | 没有选中值的提示，也会用在弹窗标题上                 |
+| disabled    | boolean                                                                                                      | false                                                    | 否   | 是否禁用                                             |
+| options     | [Options](./Cascader.md#options-的结构)                                                                      | []                                                       | 否   | 数据集                                               |
 | v-model     | [SelectorValue](./Cascader.md#selectorvalue-的类型) \| [SelectorValue](./Cascader.md#selectorvalue-的类型)[] | []                                                       | 否   | 选中值                                               |
-| field-names | object                                                                                                   | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key    |
-| formatter   | [SelectorValueFormatter](./Cascader.md#selectorvalueformatter)                                             |                                                          | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
-| parser      | [SelectorValueParser](./Cascader.md#selectorvalueparser)                                                   |                                                          | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
+| field-names | [CascaderFieldNames](./Cascader.md#cascaderfieldnames)                                                       | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key    |
+| formatter   | [SelectorValueFormatter](./Cascader.md#selectorvalueformatter)                                               |                                                          | 否   | 和 `parser` 成对设置，对于 v-model 的值进行转化      |
+| parser      | [SelectorValueParser](./Cascader.md#selectorvalueparser)                                                     |                                                          | 否   | 和 `formatter` 成对设置，对于 v-model 的值进行反转化 |
 
 ### SelectorValue 的类型
 
@@ -35,10 +35,20 @@ import { Cascader } from 'vfox'
 
 SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
-### options 的结构
+### CascaderFieldNames
 
+```TypeScript
+interface CascaderFieldNames {
+  label?: string
+  value?: string
+  children?: string
+}
 ```
-[
+
+### Options 的结构
+
+```JavaScript
+const options = [
   {
     label: '空调',
     value: 'kongtiao',
@@ -112,7 +122,7 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 #### SelectorValueFormatter
 
-```
+```TypeScript
 interface SelectorValueFormatter {
   (valueArray: SelectorValue[], labelArray: string[]):
     | {
@@ -127,7 +137,7 @@ interface SelectorValueFormatter {
 
 #### SelectorValueParser
 
-```
+```TypeScript
 interface SelectorValueParser {
   (value: unknown): SelectorValue[]
 }
@@ -137,6 +147,6 @@ interface SelectorValueParser {
 
 ## Events
 
-| 事件   | 描述                        | 回调函数参数                                                | 函数 TypeScript  |
-| ------ | --------------------------- | ----------------------------------------------------------- | ---------------- |
-| change | 选择后 value 发生改变时触发 | [SelectorModelValue](./Cascader.md#selectormodelvalue-的类型) | SelectorOnChange |
+| 事件   | 描述                        | 回调函数参数                                                           | 函数 TypeScript  |
+| ------ | --------------------------- | ---------------------------------------------------------------------- | ---------------- |
+| change | 选择后 value 发生改变时触发 | payload: [SelectorModelValue](./Cascader.md#selectormodelvalue-的类型) | SelectorOnChange |

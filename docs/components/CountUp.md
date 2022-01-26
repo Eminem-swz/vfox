@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { CountUp } from 'vfox'
 ```
 
@@ -22,12 +22,18 @@ import { CountUp } from 'vfox'
 | thousands      | boolean      | false    | 否   | 是否以千分号的形式显示，如：'1,234.56'               |
 | decimal-digits | number       | 0        | 否   | 保留 `decimalDigits` 小数位数                        |
 
+### CountUpSpeed
+
+```TypeScript
+type CountUpSpeed = 'normal' | 'fast' | 'slow' | number
+```
+
 ## Events
 
-| 事件     | 描述                             | 回调函数参数                         | TypeScript 函数   |
-| -------- | -------------------------------- | ------------------------------------ | ----------------- |
-| animated | 动画结束后触发，主动取消也会触发 | { number: number } number 为当前数值 | CountUpOnAnimated |
-| cancel   | 取消成功时触发                   | { number: number } number 为当前数值 | CountUpOnCancel   |
+| 事件     | 描述                             | 回调函数参数                                  | TypeScript 函数   |
+| -------- | -------------------------------- | --------------------------------------------- | ----------------- |
+| animated | 动画结束后触发，主动取消也会触发 | payload: { number: number } number 为当前数值 | CountUpOnAnimated |
+| cancel   | 取消成功时触发                   | payload: { number: number } number 为当前数值 | CountUpOnCancel   |
 
 ## Methods
 

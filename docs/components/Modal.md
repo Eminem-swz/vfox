@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Modal } from 'vfox'
 ```
 
@@ -19,9 +19,9 @@ import { Modal } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述           | 回调函数参数                                              | TypeScript 函数           |
-| -------------------- | -------------- | --------------------------------------------------------- | ------------------------- |
-| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./Modal.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述           | 回调函数参数                                                       | TypeScript 函数           |
+| -------------------- | -------------- | ------------------------------------------------------------------ | ------------------------- |
+| visible-state-change | 展示隐藏时触发 | payload: { state: [VisibleState](./Modal.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

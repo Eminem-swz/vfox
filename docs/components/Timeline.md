@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Timeline, TimelineItem } from 'vfox'
 ```
 
@@ -50,7 +50,7 @@ import { Timeline, TimelineItem } from 'vfox'
 </fx-timeline-item>
 ```
 
-PS：优先级高于 Props `title`。
+注：优先级高于 Props `title`。
 
 ### 节点（#dot）
 

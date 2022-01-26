@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { NumberKeyboard } from 'vfox'
 ```
 
@@ -20,13 +20,13 @@ import { NumberKeyboard } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述             | 回调函数参数                                                       | TypeScript 函数           |
-| -------------------- | ---------------- | ------------------------------------------------------------------ | ------------------------- |
-| input                | 点击按键时触发   | key: string                                                        |                           |
-| delete               | 点击删除键时触发 | { deleteKey: string }                                              | NumberKeyboardOnDelete    |
-| change               | 键盘收回时触发   | value: string                                                      |                           |
-| close                | 键盘收回时触发   | { source: 'confirm' \| 'blur' }                                    | NumberKeyboardOnClose     |
-| visible-state-change | 展示隐藏时触发   | { state: [VisibleState](./NumberKeyboard.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述             | 回调函数参数                                                                | TypeScript 函数           |
+| -------------------- | ---------------- | --------------------------------------------------------------------------- | ------------------------- |
+| input                | 点击按键时触发   | key: string                                                                 |                           |
+| delete               | 点击删除键时触发 | payload: { deleteKey: string }                                              | NumberKeyboardOnDelete    |
+| change               | 键盘收回时触发   | value: string                                                               |                           |
+| close                | 键盘收回时触发   | payload: { source: 'confirm' \| 'blur' }                                    | NumberKeyboardOnClose     |
+| visible-state-change | 展示隐藏时触发   | payload: { state: [VisibleState](./NumberKeyboard.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

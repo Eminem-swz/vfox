@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Tab } from 'vfox'
 ```
 
@@ -40,8 +40,8 @@ type TabOptions = (number | string | {
 | badge      | BadgeOption         |        | 否   | 徽标，使用 [Badge](./Badge.md) 组件                |
 | subLabel   | string              |        | 否   | 副标签名，如果设置了该字段，则显示带有副标签的列表 |
 
-```
-[
+```JavaScript
+const options = [
   {
     value: 1,
     label: '首页',
@@ -62,14 +62,14 @@ type TabOptions = (number | string | {
 
 也可以直接设置为 `string[]` 或 `number[]`，如：
 
-```
-['aaa', 'bbb', 'ccc']
+```JavaScript
+const options = ['aaa', 'bbb', 'ccc']
 ```
 
 将被转为：
 
-```
-[
+```JavaScript
+const options = [
   {
     value: 'aaa',
     label: 'aaa'
@@ -105,9 +105,9 @@ type BadgeOption = number | string | Partial<{
 
 ## Events
 
-| 事件   | 描述                | 回调函数参数                               |
-| ------ | ------------------- | ------------------------------------------ |
-| change | 点击切换 tab 时触发 | { value：string \| number, index: number } |
+| 事件   | 描述                | 回调函数参数                               | TypeScript 函数 |
+| ------ | ------------------- | ------------------------------------------ | --------------- |
+| change | 点击切换 tab 时触发 | { value：string \| number, index: number } | TabOnChange     |
 
 ### change 的回调参数
 

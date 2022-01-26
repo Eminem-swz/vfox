@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Calendar, CalendarPopup, CalendarView } from 'vfox'
 ```
 
@@ -43,19 +43,31 @@ SelectorModelValue 的类型为： `SelectorValue | SelectorValue[]`
 
 ### CalendarMode
 
-```
-'single' | 'range'
+```TypeScript
+type CalendarMode = 'single' | 'range'
 ```
 
 `single` 表示选择一天，`range` 选择一个日期区间。
 
 ### CalendarDayHandler
 
-```
-dayHandler(Object: Day) => Day
+```TypeScript
+type CalendarDayHandler = dayHandler(dayInfo: DayInfo) => DayInfo
+
+interface DayInfo {
+  topHighlight?: boolean
+  topText?: string
+  state: string
+  bottomHighlight?: boolean
+  bottomText?: string
+  text: string
+  dateString: string
+  date?: Date
+  timestamp: number
+}
 ```
 
-日历中的每个日期都对应一个 Day 对象，通过 `day-handler` 属性可以修改 Day 对象的内容后返回。
+日历中的每个日期都对应一个 DayInfo 对象，通过 `day-handler` 属性可以修改 DayInfo 对象的内容后返回。
 
 | 值              | 类型    | 说明                                                                                                                                                                                                                                         |
 | --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -74,7 +86,7 @@ dayHandler(Object: Day) => Day
 
 #### CalendarValueFormatter
 
-```
+```TypeScript
 interface CalendarValueFormatter {
   (valueArray: Date[], mode: CalendarMode):
     | {
@@ -89,7 +101,7 @@ interface CalendarValueFormatter {
 
 #### CalendarValueParser
 
-```
+```TypeScript
 interface CalendarValueParser {
   (value: unknown, mode: CalendarMode): Date[]
 }
@@ -117,9 +129,9 @@ interface CalendarValueParser {
 
 ## Calendar Events
 
-| 事件   | 描述                   | 回调函数参数                                                  | 函数 TypeScript  |
-| ------ | ---------------------- | ------------------------------------------------------------- | ---------------- |
-| change | 选择后值发生改变时触发 | [SelectorModelValue](./Calendar.md#selectormodelvalue-的类型) | SelectorOnChange |
+| 事件   | 描述                   | 回调函数参数                                                           | 函数 TypeScript  |
+| ------ | ---------------------- | ---------------------------------------------------------------------- | ---------------- |
+| change | 选择后值发生改变时触发 | payload: [SelectorModelValue](./Calendar.md#selectormodelvalue-的类型) | SelectorOnChange |
 
 ## CalendarPopup
 
@@ -136,10 +148,10 @@ interface CalendarValueParser {
 
 ## CalendarPopup Events
 
-| 事件                 | 描述                                              | 回调函数参数                                                 | 函数 TypeScript           |
-| -------------------- | ------------------------------------------------- | ------------------------------------------------------------ | ------------------------- |
-| confirm              | 选择完毕后触发 / `showConfirm` 点击确定按钮后触发 | [CalendarDetail](./Calendar.md#calendardetail-的结构)        | CalendarOnConfirm         |
-| visible-state-change | 展示隐藏时触发                                    | { state: [VisibleState](./Calendar.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述                                              | 回调函数参数                                                          | 函数 TypeScript           |
+| -------------------- | ------------------------------------------------- | --------------------------------------------------------------------- | ------------------------- |
+| confirm              | 选择完毕后触发 / `showConfirm` 点击确定按钮后触发 | payload: [CalendarDetail](./Calendar.md#calendardetail-的结构)        | CalendarOnConfirm         |
+| visible-state-change | 展示隐藏时触发                                    | payload: { state: [VisibleState](./Calendar.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 
@@ -156,6 +168,6 @@ interface CalendarValueParser {
 
 ## CalendarView Events
 
-| 事件   | 描述       | 回调函数参数                                          | 函数 TypeScript  |
-| ------ | ---------- | ----------------------------------------------------- | ---------------- |
-| select | 选择后触发 | [CalendarDetail](./Calendar.md#calendardetail-的结构) | CalendarOnSelect |
+| 事件   | 描述       | 回调函数参数                                                   | 函数 TypeScript  |
+| ------ | ---------- | -------------------------------------------------------------- | ---------------- |
+| select | 选择后触发 | payload: [CalendarDetail](./Calendar.md#calendardetail-的结构) | CalendarOnSelect |

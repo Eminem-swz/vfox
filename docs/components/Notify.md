@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Notify } from 'vfox'
 ```
 
@@ -19,7 +19,7 @@ import { Notify } from 'vfox'
 | duration        | number    | 0         | 否   | visible=true 展示后，duration 毫秒后消失，0 为不消失，在 `v-model:visible` 下生效  |
 | color           | string    |           | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
 
-### type 的合法值
+### StateType 的合法值
 
 | 值      | 说明             |
 | ------- | ---------------- |
@@ -31,10 +31,10 @@ import { Notify } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述               | 回调函数参数                                               | TypeScript 函数           |
-| -------------------- | ------------------ | ---------------------------------------------------------- | ------------------------- |
-| close-click          | 关闭按钮点击时触发 | { }                                                        |                           |
-| visible-state-change | 展示隐藏时触发     | { state: [VisibleState](./Notify.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述               | 回调函数参数                                                        | TypeScript 函数           |
+| -------------------- | ------------------ | ------------------------------------------------------------------- | ------------------------- |
+| close-click          | 关闭按钮点击时触发 |                                                                     |                           |
+| visible-state-change | 展示隐藏时触发     | payload: { state: [VisibleState](./Notify.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

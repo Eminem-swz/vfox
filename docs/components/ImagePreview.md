@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { ImagePreview } from 'vfox'
 ```
 
@@ -21,10 +21,17 @@ import { ImagePreview } from 'vfox'
 
 ## Events
 
-| 事件                 | 描述                 | 回调函数参数                                                     | TypeScript 函数           |
-| -------------------- | -------------------- | ---------------------------------------------------------------- | ------------------------- |
-| change               | 隐藏且动画结束后触发 | { activeIndex: number, current: string }                         | ImagePreviewOnChange      |
-| visible-state-change | 展示隐藏时触发       | { state: [VisibleState](./ImagePreview.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述                 | 回调函数参数                                                              | TypeScript 函数           |
+| -------------------- | -------------------- | ------------------------------------------------------------------------- | ------------------------- |
+| change               | 隐藏且动画结束后触发 | payload: { activeIndex: number, current: string }                         | ImagePreviewOnChange      |
+| visible-state-change | 展示隐藏时触发       | payload: { state: [VisibleState](./ImagePreview.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+
+### change 的回调参数
+
+| 参数        | 类型   | 描述           |
+| ----------- | ------ | -------------- |
+| activeIndex | number | 当前图片的索引 |
+| current     | string | 当前图片的 url |
 
 ### VisibleState 值说明
 
@@ -34,10 +41,3 @@ import { ImagePreview } from 'vfox'
 | shown  | 展示且动画结束后触发 |                                                   |
 | hide   | 隐藏时触发           | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 | hidden | 隐藏且动画结束后触发 | 可能携带其他参数 cancel, maskClick, closeClick 等 |
-
-### change 的回调参数
-
-| 参数        | 类型   | 描述           |
-| ----------- | ------ | -------------- |
-| activeIndex | number | 当前图片的索引 |
-| current     | string | 当前图片的 url |

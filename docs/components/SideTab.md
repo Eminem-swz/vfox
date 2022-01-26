@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { SideTab } from 'vfox'
 ```
 
@@ -37,8 +37,8 @@ type TabOptions = (number | string | {
 | activeIcon | string \| Component |        | 否   | 设置激活态图标，也支持图像 URL，没有设置则沿用 `icon` 属性 |
 | badge      | BadgeOption         |        | 否   | 徽标，使用 [Badge](./Badge.md) 组件                        |
 
-```
-[
+```JavaScript
+const options = [
   {
     value: 1,
     label: '首页',
@@ -59,14 +59,14 @@ type TabOptions = (number | string | {
 
 也可以直接设置为 `string[]` 或 `number[]`，如：
 
-```
-['aaa', 'bbb', 'ccc']
+```JavaScript
+const options = ['aaa', 'bbb', 'ccc']
 ```
 
 将被转为：
 
-```
-[
+```JavaScript
+const options = [
   {
     value: 'aaa',
     label: 'aaa'
@@ -102,9 +102,9 @@ type BadgeOption = number | string | Partial<{
 
 ## Events
 
-| 事件   | 描述                | 回调函数参数                               |
-| ------ | ------------------- | ------------------------------------------ |
-| change | 点击切换 tab 时触发 | { value：string \| number, index: number } |
+| 事件   | 描述                | 回调函数参数                               | TypeScript 函数 |
+| ------ | ------------------- | ------------------------------------------ | --------------- |
+| change | 点击切换 tab 时触发 | { value：string \| number, index: number } | SideTabOnChange |
 
 ### change 的回调参数
 

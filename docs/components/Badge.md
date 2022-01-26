@@ -6,7 +6,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Badge } from 'vfox'
 ```
 
@@ -28,7 +28,7 @@ import { Badge } from 'vfox'
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-badge :count="1" show-zero>
   <fx-button>badge</fx-button>
 </fx-badge>

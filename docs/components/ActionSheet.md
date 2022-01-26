@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { ActionSheet } from 'vfox'
 ```
 
@@ -14,7 +14,7 @@ import { ActionSheet } from 'vfox'
 | --------------- | ------------------- | ------ | ---- | -------------------------- |
 | v-model:visible | boolean             | false  | 否   | 是否显示                   |
 | title           | string              |        | 否   | 标题，不设置则不展示标题栏 |
-| options         | ActionSheetOption[] |        | 否   | 选项列表                   |
+| options         | ActionSheetOption[] |        | 是   | 选项列表                   |
 | mask-closable   | boolean             | true   | 否   | 点击蒙层是否触发关闭操作   |
 | show-cancel     | boolean             | false  | 否   | 是否显示取消按钮           |
 | cancel-text     | string              | '取消' | 否   | 取消按钮的文本             |
@@ -29,6 +29,13 @@ import { ActionSheet } from 'vfox'
 | highlight   | string | false  | 否   | 是否高亮显示 |
 
 ```TypeScript
+interface ActionSheetOption {
+  name: string
+  highlight?: boolean
+  description?: string
+  disabled?: boolean
+}
+
 const options: ActionSheetOption[] = [
   {
     name: '选项1',
@@ -41,10 +48,10 @@ const options: ActionSheetOption[] = [
 
 ## Events
 
-| 事件                 | 描述           | 回调函数参数                                                    | 函数 TypeScript           |
-| -------------------- | -------------- | --------------------------------------------------------------- | ------------------------- |
-| confirm              | 点击选项时触发 | { item: { name: string }: index: number }                       | ActionSheetOnConfirm      |
-| visible-state-change | 展示隐藏时触发 | { state: [VisibleState](./ActionSheet.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
+| 事件                 | 描述           | 回调函数参数                                                             | 函数 TypeScript           |
+| -------------------- | -------------- | ------------------------------------------------------------------------ | ------------------------- |
+| confirm              | 点击选项时触发 | payload: { item: { name: string }, index: number }                       | ActionSheetOnConfirm      |
+| visible-state-change | 展示隐藏时触发 | payload: { state: [VisibleState](./ActionSheet.md#visiblestate-值说明) } | PopupOnVisibleStateChange |
 
 ### VisibleState 值说明
 

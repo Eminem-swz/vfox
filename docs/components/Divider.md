@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Divider } from 'vfox'
 ```
 

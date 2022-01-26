@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { LoadMore } from 'vfox'
 ```
 
@@ -18,6 +18,6 @@ import { LoadMore } from 'vfox'
 
 ### 附加内容（#default）
 
-```
+```Vue
 <fx-load-more loading>加载中...</fx-load-more>
 ```

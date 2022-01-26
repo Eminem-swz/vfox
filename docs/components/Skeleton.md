@@ -2,13 +2,13 @@
 
 ## Import
 
-```
+```JavaScript
 import { Skeleton } from 'vfox'
 ```
 
 如果想要自定义布局，可以再引入子组件：
 
-```
+```JavaScript
 import { SkeletonAvatar, SkeletonImage, SkeletonTitle, SkeletonParagraph, SkeletonButton } from 'vfox'
 ```
 
@@ -39,7 +39,7 @@ import { SkeletonAvatar, SkeletonImage, SkeletonTitle, SkeletonParagraph, Skelet
 
 还可以在 layout 插槽中重新组合骨架屏，目前提供 [SkeletonAvatar](./Skeleton.md#skeletonavatar-props)、[SkeletonImage](./Skeleton.md#skeletonimage-props)、[SkeletonTitle](./Skeleton.md#skeletontitle-props)、[SkeletonParagraph](./Skeleton.md#skeletonparagraph-props)、[SkeletonButton](./Skeleton.md#skeletonbutton-props) 5 款子组件。
 
-```
+```Vue
 <fx-skeleton>
   <template #layout>
     <fx-skeleton-image></fx-skeleton-image>

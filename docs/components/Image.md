@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Image } from 'vfox'
 ```
 
@@ -37,7 +37,7 @@ import { Image } from 'vfox'
 
 ## Events
 
-| 事件  | 描述                 | 回调函数参数                                   | 回调函数参数 |
-| ----- | -------------------- | ---------------------------------------------- | ------------ |
-| error | 当错误发生时触发     | e: Error                                       |              |
-| load  | 当图片载入完毕时触发 | { height: number, width: number, src: string } | ImageOnLoad  |
+| 事件  | 描述                 | 回调函数参数                                            | 回调函数参数 |
+| ----- | -------------------- | ------------------------------------------------------- | ------------ |
+| error | 当错误发生时触发     | e: Error                                                |              |
+| load  | 当图片载入完毕时触发 | payload: { height: number, width: number, src: string } | ImageOnLoad  |

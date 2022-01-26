@@ -2,7 +2,7 @@
 
 ## Import
 
-```
+```JavaScript
 import { Radio, RadioGroup } from 'vfox'
 ```
 
@@ -25,7 +25,7 @@ import { Radio, RadioGroup } from 'vfox'
 
 ## Radio Slots
 
-```
+```Vue
 <fx-radio>男</fx-radio>
 <fx-radio>女</fx-radio>
 ```
@@ -54,13 +54,6 @@ import { Radio, RadioGroup } from 'vfox'
 | value | string \| number |        | 是   | 值， 同 `Radio` 组件 value         |
 | label | string           |        | 是   | 描述，同 `Radio` 组件 slot default |
 
-```
-[
-  { label: '男', value: 1 },
-  { label: '女', value: 2 }
-]
-```
-
 ## RadioGroup Events
 
 | 事件   | 描述                 | 回调函数参数            |
@@ -71,7 +64,7 @@ import { Radio, RadioGroup } from 'vfox'
 
 ### 默认（#default）
 
-```
+```Vue
 <fx-radio-group>
   <fx-radio>男</fx-radio>
   <fx-radio>女</fx-radio>
