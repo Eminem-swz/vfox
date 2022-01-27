@@ -1,3 +1,10 @@
+## [2.5.10](https://github.com/godxiaoji/vfox/compare/v2.5.9...v2.5.10) (2022-01-27)
+
+
+### Bug Fixes
+
+* **cascader:** cascader 弹窗去掉title参数 ([79c90a8](https://github.com/godxiaoji/vfox/commit/79c90a8383196f4b7d746f6d27d91154c6684deb))
+
 ## [2.5.9](https://github.com/godxiaoji/vfox/compare/v2.5.8...v2.5.9) (2022-01-26)
 
 
