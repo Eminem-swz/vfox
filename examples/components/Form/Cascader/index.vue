@@ -75,7 +75,6 @@ export default defineComponent({
 
     function onCallApi() {
       showCascader({
-        title: '家电',
         options: cascadeOptions,
         success: res => {
           console.log('success', res)
