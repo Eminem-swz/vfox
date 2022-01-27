@@ -159,3 +159,43 @@ interface SelectorValueParser {
 | 事件   | 描述                       | 回调函数参数                                                             | 函数 TypeScript  |
 | ------ | -------------------------- | ------------------------------------------------------------------------ | ---------------- |
 | change | 滑动后选中值发生变化时触发 | payload: [SelectorModelValue](./DatePicker.md#selectormodelvalue-的类型) | SelectorOnChange |
+
+## showDatePicker(object)
+
+日期选择弹窗。
+
+### object
+
+| 属性     | 类型                                                             | 默认值                       | 必填 | 说明                                                                     |
+| -------- | ---------------------------------------------------------------- | ---------------------------- | ---- | ------------------------------------------------------------------------ |
+| title    | string                                                           |                              | 否   | 弹窗标题                                                                 |
+| value    | Date                                                             |                              | 否   | 默认选择值                                                               |
+| mode     | [DatePickerMode](./DatePicker.md#datepickermode)                 |                              | 否   | 选择的模式，可选 'date', 'time', 'datetime' 等                           |
+| minDate  | Date                                                             | 当天对应 10 年前的 Date 实例 | 否   | 最小时间对应的 Date 实例（含）                                           |
+| maxDate  | Date                                                             | 当天最后一秒的 Date 实例     | 否   | 最大时间对应的 Date 实例（含）                                           |
+| filter   | [DatePickerOptionFilter](./DatePicker.md#datepickeroptionfilter) |                              | 否   | 选项过滤器                                                               |
+| success  | (payload: SuccessPayload) => void                                |                              | 否   | 接口调用成功（在用户做出选择后，如取消，选择选项）的回调函数             |
+| fail     | (e: Error) => void                                               |                              | 否   | 接口调用失败（如传入错误的参数）的回调函数（不传入 fail 遇错误直接抛出） |
+| complete | () => void                                                       |                              | 否   | 弹窗关闭或调用失败的回调函数                                             |
+
+### SuccessPayload
+
+| 属性          | 类型    | 说明                                          |
+| ------------- | ------- | --------------------------------------------- |
+| cancel?       | boolean | 为 true 时，表示取消                          |
+| confirm?      | boolean | 为 true 时，表示点击了确定，此时返回 `detail` |
+| detail?.label | string  | "2021-05-01"                                  |
+| detail?.value | Date    | 对应日期的 Date 实例                          |
+
+### Usage
+
+具体调用方式可以参考[API 调用](../guide/import.md#api-调用)。
+
+```JavaScript
+showDatePicker({
+  title: 'DatePicker',
+  success: ({ confirm, cancel, detail }) => {
+    ...
+  }
+})
+```

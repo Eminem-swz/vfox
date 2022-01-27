@@ -20,26 +20,20 @@ module.exports = {
         text: '组件',
         link: '/components/Button',
         activeMatch: '^/components/'
-      },
-      {
-        text: 'API',
-        link: '/apis/Toast',
-        activeMatch: '^/apis/'
-      },
-      {
-        text: '选择版本',
-        items: [
-          { text: '1.x', link: 'https://cdn.fox2.cn/1.x/docs/' },
-          { text: '2.x', link: '/', activeMatch: '^/' }
-        ]
       }
+      // {
+      //   text: '选择版本',
+      //   items: [
+      //     { text: '1.x', link: 'https://cdn.fox2.cn/1.x/docs/' },
+      //     { text: '2.x', link: '/', activeMatch: '^/' }
+      //   ]
+      // }
     ],
     sidebar: {
-      '/guide/': getGuideSidebar(),
-      '/design/': getDesignSidebar(),
-      '/components/': getComponentsSidebar(),
-      '/apis/': getApisSidebar(),
-      '/': getGuideSidebar()
+      '/guide/': getGuideSideBar(),
+      '/design/': getDesignSideBar(),
+      '/components/': getComponentsSideBar(),
+      '/': getGuideSideBar()
     },
     smoothScroll: true
   },
@@ -55,7 +49,7 @@ module.exports = {
   }
 }
 
-function getGuideSidebar() {
+function getGuideSideBar() {
   return [
     { text: '介绍', link: '/' },
     { text: '引入组件', link: '/guide/import' },
@@ -65,14 +59,14 @@ function getGuideSidebar() {
   ]
 }
 
-function getDesignSidebar() {
+function getDesignSideBar() {
   return [
     { text: '设计', link: '/design/' },
     { text: '色彩', link: '/design/color' }
   ]
 }
 
-function getComponentsSidebar() {
+function getComponentsSideBar() {
   return [
     {
       text: '基础',
@@ -174,59 +168,6 @@ function getComponentsSidebar() {
     {
       text: '其他',
       children: [{ text: 'Copy', link: '/components/Copy' }]
-    }
-  ]
-}
-
-function getApisSidebar() {
-  return [
-    {
-      text: '通知类弹窗',
-      frontmatter: {
-        sidebarDepth: 2
-      },
-      children: [
-        { text: 'Toast', link: '/apis/Toast' },
-        { text: 'Notify', link: '/apis/Notify' }
-      ]
-    },
-    {
-      text: '预览类弹窗',
-      frontmatter: {
-        sidebarDepth: 2
-      },
-      children: [{ text: 'Preview', link: '/apis/Preview' }]
-    },
-    {
-      text: '模态框类弹窗',
-      frontmatter: {
-        sidebarDepth: 2
-      },
-      children: [{ text: 'Dialog', link: '/apis/Dialog' }]
-    },
-    {
-      text: '抽屉类弹窗',
-      frontmatter: {
-        sidebarDepth: 2
-      },
-      children: [
-        { text: 'ActionSheet', link: '/apis/ActionSheet' },
-        { text: 'Picker', link: '/apis/Picker' },
-        { text: 'DatePicker', link: '/apis/DatePicker' },
-        { text: 'Cascader', link: '/apis/Cascader' },
-        { text: 'Calendar', link: '/apis/Calendar' }
-      ]
-    },
-    {
-      text: '气泡类弹窗',
-      frontmatter: {
-        sidebarDepth: 2
-      },
-      children: [
-        { text: 'Popover', link: '/apis/Popover' },
-        { text: 'PopDialog', link: '/apis/PopDialog' },
-        { text: 'PopMenu', link: '/apis/PopMenu' }
-      ]
     }
   ]
 }

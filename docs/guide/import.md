@@ -141,8 +141,6 @@ export default {
 }
 ```
 
-详情可见 [API](../apis/Toast.md) 。
-
 ## TypeScript 支持
 
 在 `tsconfig.json` 中加入获得 `template` 类型提示：

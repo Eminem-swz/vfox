@@ -14,7 +14,7 @@ import { Notify } from 'vfox'
 | --------------- | --------- | --------- | ---- | ---------------------------------------------------------------------------------- |
 | v-model:visible | boolean   | false     | 是   | 是否显示                                                                           |
 | closable        | boolean   | false     | 是   | 是否显示关闭按钮                                                                   |
-| icon            | string    |           | 否   | 图标，使用 [Icon](./Icon.md) 组件                                                  |
+| icon            | string    |           | 否   | 图标，使用 [Icon](./Icon.md) 组件，图标优先级高于 `type`                           |
 | type            | StateType | 'default' | 否   | 提示类型                                                                           |
 | duration        | number    | 0         | 否   | visible=true 展示后，duration 毫秒后消失，0 为不消失，在 `v-model:visible` 下生效  |
 | color           | string    |           | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
@@ -44,3 +44,54 @@ import { Notify } from 'vfox'
 | shown  | 展示且动画结束后触发 |                                                   |
 | hide   | 隐藏时触发           | 可能携带其他参数 cancel, maskClick, closeClick 等 |
 | hidden | 隐藏且动画结束后触发 | 可能携带其他参数 cancel, maskClick, closeClick 等 |
+
+## showNotify(object)
+
+显示消息提示。
+
+注：Notify 接口目前仅支持单例模式。
+
+### object
+
+| 属性     | 类型                                        | 默认值    | 必填 | 说明                                                                               |
+| -------- | ------------------------------------------- | --------- | ---- | ---------------------------------------------------------------------------------- |
+| title    | string                                      |           | 是   | 提示内容                                                                           |
+| type     | [StateType](./Notify.md#statetype-的合法值) | 'default' | 否   | 提示类型                                                                           |
+| icon     | string                                      |           | 否   | 图标，使用 [Icon](../components/Icon.md) 组件，图标优先级高于 `type`               |
+| duration | number                                      | 1500      | 否   | 展示时长(单位 ms)，值为 0 时，`notify` 不会消失                                    |
+| color    | string                                      |           | 否   | 自定义色彩，支持 hex rgb hsl 等写法，详细效果[查看](../design/color.md#自定义色彩) |
+| closable | boolean                                     | false     | 是   | 是否显示关闭按钮                                                                   |
+| success  | () => void                                  |           | 否   | 接口调用成功的回调函数                                                             |
+| fail     | (e: Error) => void                          |           | 否   | 接口调用失败的回调函数（不传入 fail 遇错误直接抛出）                               |
+| complete | () => void                                  |           | 否   | 接口调用结束的回调函数（调用成功、失败都会执行）                                   |
+
+### Usage
+
+具体调用方式可以参考[API 调用](../guide/import.md#api-调用)。
+
+```JavaScript
+showNotify({
+  title: '提示内容',
+  duration: 2000
+})
+```
+
+## hideNotify([object])
+
+隐藏消息提示框。
+
+### object
+
+| 属性     | 类型               | 默认值 | 必填 | 说明                                                 |
+| -------- | ------------------ | ------ | ---- | ---------------------------------------------------- |
+| success  | () => void         |        | 否   | 接口调用成功的回调函数                               |
+| fail     | (e: Error) => void |        | 否   | 接口调用失败的回调函数（不传入 fail 遇错误直接抛出） |
+| complete | () => void         |        | 否   | 接口调用结束的回调函数（调用成功、失败都会执行）     |
+
+### Usage
+
+具体调用方式可以参考[API 调用](../guide/import.md#api-调用)。
+
+```JavaScript
+hideNotify()
+```

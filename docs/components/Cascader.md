@@ -17,7 +17,7 @@ import { Cascader } from 'vfox'
 | 属性        | 类型                                                                                                         | 默认值                                                   | 必填 | 说明                                                 |
 | ----------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- | ---- | ---------------------------------------------------- |
 | name        | string                                                                                                       |                                                          | 否   | 标识                                                 |
-| placeholder | string                                                                                                       |                                                          | 否   | 没有选中值的提示，也会用在弹窗标题上                 |
+| placeholder | string                                                                                                       |                                                          | 否   | 没有选中值的提示                                     |
 | disabled    | boolean                                                                                                      | false                                                    | 否   | 是否禁用                                             |
 | options     | [Options](./Cascader.md#options-的结构)                                                                      | []                                                       | 否   | 数据集                                               |
 | v-model     | [SelectorValue](./Cascader.md#selectorvalue-的类型) \| [SelectorValue](./Cascader.md#selectorvalue-的类型)[] | []                                                       | 否   | 选中值                                               |
@@ -150,3 +150,41 @@ interface SelectorValueParser {
 | 事件   | 描述                        | 回调函数参数                                                           | 函数 TypeScript  |
 | ------ | --------------------------- | ---------------------------------------------------------------------- | ---------------- |
 | change | 选择后 value 发生改变时触发 | payload: [SelectorModelValue](./Cascader.md#selectormodelvalue-的类型) | SelectorOnChange |
+
+## showCascader(object)
+
+显示级联选择弹窗。
+
+### object
+
+| 属性       | 类型                                                                                                         | 默认值                                                   | 必填 | 说明                                                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- | ---- | ------------------------------------------------------------------------ |
+| options    | [Options](./Cascader.md#options-的结构)                                                                      | []                                                       | 否   | 数据集                                                                   |
+| value      | [SelectorValue](./Cascader.md#selectorvalue-的类型) \| [SelectorValue](./Cascader.md#selectorvalue-的类型)[] | []                                                       | 否   | 选中值                                                                   |
+| fieldNames | [CascaderFieldNames](./Cascader.md#cascaderfieldnames)                                                       | { label: 'label', value: 'value', children: 'children' } | 否   | 自定义 options 中 label value children 的字段 key                        |
+| success    | (payload: SuccessPayload) => void                                                                            |                                                          | 否   | 接口调用成功（在用户做出选择后，如取消，选择选项）的回调函数             |
+| fail       | (e: Error) => void                                                                                           |                                                          | 否   | 接口调用失败（如传入错误的参数）的回调函数（不传入 fail 遇错误直接抛出） |
+| complete   | () => void                                                                                                   |                                                          | 否   | 弹窗关闭或调用失败的回调函数                                             |
+
+#### SuccessPayload
+
+| 属性          | 类型                 | 说明                                          |
+| ------------- | -------------------- | --------------------------------------------- |
+| cancel?       | boolean              | 为 true 时，表示取消                          |
+| confirm?      | boolean              | 为 true 时，表示点击了确定，此时返回 `detail` |
+| detail?.value | (number \| string)[] | ["zaolei", "lunzao"]                          |
+| detail?.label | string               | "藻类/轮藻"                                   |
+
+### Usage
+
+具体调用方式可以参考[API 调用](../guide/import.md#api-调用)。
+
+```JavaScript
+showCascader({
+  title: '植物',
+  options: cascadeOptions,
+  success: ({ confirm, cancel, detail }) => {
+    ...
+  }
+})
+```
