@@ -72,11 +72,7 @@ export default defineComponent({
   components: { Drawer, Tab },
   props: {
     ...popupExtendProps,
-    ...commonProps,
-    title: {
-      type: String,
-      default: ''
-    }
+    ...commonProps
   },
   emits: {
     ...pickerPopupEmits

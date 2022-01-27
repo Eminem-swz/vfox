@@ -3,7 +3,6 @@ import type { SelectorModelValue, SelectorDetail } from '../SelectorField/types'
 
 export interface ShowCascaderOptions {
   options: UserOptionItem[]
-  title?: string
   value?: SelectorModelValue
   fieldNames?: UserFieldNames
 }

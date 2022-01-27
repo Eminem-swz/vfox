@@ -12,7 +12,6 @@
       :options="options"
       :fieldNames="fieldNames"
       :modelValue="modelValue"
-      :title="placeholder"
       :formatter="formatter"
       :parser="parser"
       v-model:visible="popupVisible"
