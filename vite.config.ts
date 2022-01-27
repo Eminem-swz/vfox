@@ -24,6 +24,6 @@ export default defineConfig({
     alias: [{ find: '@', replacement: resolve('./src') }]
   },
   build: {
-    outDir: 'dist/demo'
+    outDir: '../docs/.vitepress/dist/demo'
   }
 })

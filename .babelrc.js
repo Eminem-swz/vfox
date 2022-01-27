@@ -1,17 +1,4 @@
 module.exports = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        modules: false,
-        useBuiltIns: 'usage',
-        corejs: '3' // 新增
-      }
-    ]
-  ],
-  plugins: [
-    // '@babel/plugin-proposal-class-properties' // @link: https://blog.csdn.net/qq_40072045/article/details/105537557
-  ],
   env: {
     test: {
       presets: [
