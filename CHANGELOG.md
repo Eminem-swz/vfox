@@ -1,3 +1,10 @@
+## [2.5.11](https://github.com/godxiaoji/vfox/compare/v2.5.10...v2.5.11) (2022-01-29)
+
+
+### Bug Fixes
+
+* **sass:** custom theme sass ([147a09b](https://github.com/godxiaoji/vfox/commit/147a09b8e837a6edabd9fade84e52f3c13c626fd))
+
 ## [2.5.10](https://github.com/godxiaoji/vfox/compare/v2.5.9...v2.5.10) (2022-01-27)
 
 
