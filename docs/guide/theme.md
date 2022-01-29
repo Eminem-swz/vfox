@@ -7,7 +7,7 @@
 1. 打开 [主题定制](https://godxiaoji.github.io/vfox/demo/#/CustomTheme) 工具，按操作完成定制并复制定制后的代码。
 2. 新建自定义 SCSS 文件 `my-style.scss`，粘贴定制代码，如：
 
-   `my-style.scss` :
+   `path/to/my-style.scss` :
 
    ```Scss
    $primary-color-2: #c5c6d1;
@@ -32,17 +32,33 @@
    $danger-color: $danger-color-6;
    ```
 
-3. 更改原来引入的样式文件：
+3. Vite 配置
 
 ```JavaScript
-import Vfox from 'vfox'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import Components from 'unplugin-vue-components/vite'
+// import { VfoxResolver } from 'vfox-resolver'
 
-// delete: vfox/es/style/index.css
-import 'path/to/my-style.scss'
-import 'vfox/es/style/index.scss'
-
-app.use(Vfox)
+export default defineConfig({
+  plugins: [
+    vue(),
+    // Components({
+    //   dts: true,
+    //   resolvers: [VfoxResolver({ importStyle: 'sass' })]
+    // })
+  ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "path/to/my-style.scss" as *;`
+      }
+    }
+  }
+})
 ```
+
+注：Vue Cli 也有相应的配置。
 
 4. 安装 scss 依赖
 

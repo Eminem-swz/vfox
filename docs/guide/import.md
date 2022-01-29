@@ -53,6 +53,8 @@ module.exports = {
 }
 ```
 
+更多 VfoxResolver 参数可以[查看](https://github.com/godxiaoji/vfox-resolver)。
+
 4. 现在就可以在模版中引入组件
 
 ```Vue
@@ -88,6 +90,7 @@ app.use(Button)
 <script>
 import { Button } from 'vfox/es/Button'
 import 'vfox/es/Button/style'
+// import 'vfox/es/Button/style/sass' // use sass
 
 export default {
   components: { 'fx-button': Button }
@@ -104,6 +107,7 @@ export default {
 ```JavaScript
 import Vfox from 'vfox'
 import 'vfox/es/style'
+// import 'vfox/es/style/sass' // use sass
 
 app.use(Vfox)
 ```
