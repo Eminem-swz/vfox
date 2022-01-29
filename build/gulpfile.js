@@ -111,8 +111,8 @@ function copyIcons() {
 exports.build = gulp.series(
   sass2Css,
   copySass,
-  buildStyleImport
-  // buildSassImport
+  buildStyleImport,
+  buildSassImport
 )
 exports.buildFilePathsCache = buildFilePathsCache
 exports.copyIcons = copyIcons
