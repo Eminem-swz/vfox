@@ -16,15 +16,9 @@ import { computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { createEnumsValidator, getEnumsValue } from '../helpers/validator'
 import type { EmptyType } from './types'
+import { images } from './images'
 
-const TYPE_NAMES: EmptyType[] = [
-  'default',
-  'error',
-  'network',
-  'search',
-  'permission',
-  'service'
-]
+const TYPE_NAMES: EmptyType[] = ['default', 'error', 'network', 'search']
 
 export default defineComponent({
   name: 'fx-empty',
@@ -43,10 +37,7 @@ export default defineComponent({
   },
   setup(props) {
     const imageUrl = computed(() => {
-      return `https://cdn.fox2.cn/vfox/empty/${getEnumsValue(
-        TYPE_NAMES,
-        props.type
-      )}@3x.png`
+      return images[getEnumsValue(TYPE_NAMES, props.type)]
     })
 
     return {
