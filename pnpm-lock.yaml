@@ -47,12 +47,12 @@ specifiers:
   md5: ^2.3.0
   prettier: ^2.4.1
   rollup: ^2.59.0
-  rollup-plugin-svg-sprites: ^1.2.0
+  rollup-plugin-svg-sprites: ^1.2.2
   rollup-plugin-terser: ^7.0.2
   safe-area-insets: ^1.4.1
   sass: ^1.44.0
   semantic-release: ^18.0.1
-  svg-sprites-cli: ^0.1.3
+  svg-sprites-cli: ^0.2.0
   through2: ^4.0.2
   timeago.js: ^4.0.2
   ts-jest: ^26.0.0
@@ -116,11 +116,11 @@ devDependencies:
   md5: 2.3.0
   prettier: 2.5.1
   rollup: 2.66.0
-  rollup-plugin-svg-sprites: 1.2.0
+  rollup-plugin-svg-sprites: 1.2.2_@vue+compiler-sfc@3.2.29
   rollup-plugin-terser: 7.0.2_rollup@2.66.0
   sass: 1.49.0
   semantic-release: 18.0.1
-  svg-sprites-cli: 0.1.3
+  svg-sprites-cli: 0.2.0_@vue+compiler-sfc@3.2.29
   through2: 4.0.2
   ts-jest: 26.5.6_jest@26.6.3+typescript@4.5.5
   tslib: 2.3.1
@@ -8915,8 +8915,10 @@ packages:
       glob: 7.2.0
     dev: true
 
-  /rollup-plugin-svg-sprites/1.2.0:
-    resolution: {integrity: sha512-efohMqO3tPp5sSFI16FhW42CkbdNolnjKomlsYwBjSSn3RCS6wEmn9kr30nzIYRqPyVCOA6aSPcV4843Qmbg7w==}
+  /rollup-plugin-svg-sprites/1.2.2_@vue+compiler-sfc@3.2.29:
+    resolution: {integrity: sha512-E/vkze6oEEyvhxEwkHwPjCctefKldqn4vG/elwCZH/tW5wKradfrMEn64VX8FE0rvc3TI7GeSOriUCkUIxDoSw==}
+    peerDependencies:
+      '@vue/compiler-sfc': ^3.2.0
     dependencies:
       '@rollup/pluginutils': 4.1.2
       '@vue/compiler-sfc': 3.2.29
@@ -9555,15 +9557,17 @@ packages:
       traverse: 0.6.6
     dev: true
 
-  /svg-sprites-cli/0.1.3:
-    resolution: {integrity: sha512-Paz4CHZA1ZHwvCZuDduKcjklSFIS5nrYKQtXOGNbtsfMHH3YNb+A4dl1EFlJtMkkhnob3Mfd9dFckvlH8BGN3A==}
+  /svg-sprites-cli/0.2.0_@vue+compiler-sfc@3.2.29:
+    resolution: {integrity: sha512-6Ywh85PAbwHIH4R8pUP7uS3F+w4QIrQDelgLgTF4XIPJNWj2JO7/Kq/2LRGE2cM6Ur5TXtZroTVRYtIeGHomAw==}
     hasBin: true
     dependencies:
       '@godxiaoji/rollup-plugin-require-context': 1.0.1_rollup@2.66.0
       commander: 8.3.0
       deepmerge: 4.2.2
       rollup: 2.66.0
-      rollup-plugin-svg-sprites: 1.2.0
+      rollup-plugin-svg-sprites: 1.2.2_@vue+compiler-sfc@3.2.29
+    transitivePeerDependencies:
+      - '@vue/compiler-sfc'
     dev: true
 
   /symbol-tree/3.2.4:

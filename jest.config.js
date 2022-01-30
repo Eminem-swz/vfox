@@ -19,12 +19,15 @@ module.exports = {
   transformIgnorePatterns: ['/node_modules/'],
   // support the same @ -> src alias mapping in source code
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@jest/(.*)$': '<rootDir>/examples/jest/$1'
   },
   // testEnvironment: 'jest-environment-jsdom-fifteen',
   // serializer for snapshots
   snapshotSerializers: ['jest-serializer-vue'],
   testMatch: ['**/tests/unit/**/*.spec.[jt]s?(x)', '**/__tests__/*.[jt]s?(x)'],
+  // testMatch: ['**/BackTop/__tests__/*.[jt]s?(x)'],
   // https://github.com/facebook/jest/issues/6766
-  testURL: 'http://localhost/'
+  testURL: 'http://localhost/',
+  setupFilesAfterEnv: ['<rootDir>/examples/jest/setup.ts']
 }

@@ -16,12 +16,12 @@
     "noLib": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@jest/*": ["examples/jest/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable"],
     "resolveJsonModule": true,
     "types": ["vite/client", "jest"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.vue"],
-  "exclude": ["**/*.spec.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
 }

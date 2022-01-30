@@ -27,4 +27,12 @@ describe('BackTop', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  test('test visible by scroll', async () => {
+    const wrapper = mount(BackTop, {
+      attachTo: document.body
+    })
+
+    expect(wrapper.isVisible()).toBeFalsy()
+  })
 })

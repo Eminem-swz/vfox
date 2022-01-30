@@ -12,9 +12,4 @@ exports[`Button should render default slot correctly 1`] = `
 </button>
 `;
 
-exports[`ButtonGroup should render 2 buttons slot correctly 1`] = `
-<div class="fx-button-group size--large pattern--default shape--rectangle count--1">
-  <fx-button-stub loading="false" disabled="false" ghost="false" transparent="false"></fx-button-stub>
-  <fx-button-stub loading="false" disabled="false" ghost="false" transparent="false"></fx-button-stub>
-</div>
-`;
+exports[`ButtonGroup snapshot 1`] = `<div class="fx-button-group size--large pattern--default shape--rectangle count--1"></div>`;

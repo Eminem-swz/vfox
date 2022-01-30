@@ -1,5 +1,6 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import { Button, ButtonGroup } from '@/Button'
+import { delay } from '@jest/utils'
 
 describe('Button', () => {
   test('should render default slot correctly', () => {
@@ -20,13 +21,21 @@ describe('Button', () => {
 })
 
 describe('ButtonGroup', () => {
-  test('should render 2 buttons slot correctly', () => {
-    const wrapper = shallowMount(ButtonGroup, {
+  test('snapshot', () => {
+    const wrapper = shallowMount(ButtonGroup, {})
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  test('classes include "count--2" when render 2 buttons', async () => {
+    const wrapper = mount(ButtonGroup, {
       slots: {
         default: [Button, Button]
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    await delay(100)
+
+    expect(wrapper.classes('count--2')).toBeTruthy()
   })
 })
