@@ -1,3 +1,10 @@
+## [2.5.12](https://github.com/godxiaoji/vfox/compare/v2.5.11...v2.5.12) (2022-01-30)
+
+
+### Bug Fixes
+
+* **empty:** empty 组件图片url改为base64 ([c807198](https://github.com/godxiaoji/vfox/commit/c807198c10564dc73f806ee3510d6f905b9ac873))
+
 ## [2.5.11](https://github.com/godxiaoji/vfox/compare/v2.5.10...v2.5.11) (2022-01-29)
 
 
