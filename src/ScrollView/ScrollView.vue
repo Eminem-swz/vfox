@@ -23,15 +23,19 @@
             name="indicator"
           >
             <div
-              class="fx-scroll-view_pull-refresh-indicator"
+              class="fx-load-more"
+              :class="{
+                vertical: pullDirection === 'left' || pullDirection === 'right'
+              }"
               :style="indicatorStyles"
             >
               <ActivityIndicator
+                class="fx-load-more_icon"
                 v-if="pullRefreshState === PullRefreshState.Refreshing"
                 :size="18"
               />
-              <Icon v-else icon="CircleOutlined" />
-              <span>{{
+              <Icon class="fx-load-more_icon" v-else icon="CircleOutlined" />
+              <span class="fx-load-more_content">{{
                 pullRefreshState === PullRefreshState.Refreshing
                   ? locale.scrollViewRefreshingText
                   : pullRefreshState === PullRefreshState.Holding

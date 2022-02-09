@@ -40,6 +40,7 @@
     <LoadMore
       class="fx-flat-list_indicator"
       loading
+      :vertical="horizontal"
       v-if="lowerLoading && list.length > 0"
     >
       {{ locale.flatListLoadingText }}
@@ -329,7 +330,7 @@ export default defineComponent({
         let colMinIndex = 0
         if (newCols.length > 1) {
           // 瀑布流
-          offset = Math.min.apply(null, newCols)
+          offset = Math.min(...newCols)
           colMinIndex = newCols.indexOf(offset)
         } else {
           colMinIndex = 0
@@ -437,8 +438,7 @@ export default defineComponent({
     const listStyles = computed(() => {
       const styles: StyleObject = {}
 
-      styles[scrollX ? 'width' : 'height'] =
-        Math.max.apply(null, cols.value) + 'px'
+      styles[scrollX ? 'width' : 'height'] = Math.max(...cols.value) + 'px'
 
       return styles
     })
@@ -535,7 +535,7 @@ export default defineComponent({
         let colMinIndex = 0
         if (newCols.length > 1) {
           // 瀑布流
-          offset = Math.min.apply(null, newCols)
+          offset = Math.min(...newCols)
           colMinIndex = newCols.indexOf(offset)
         } else {
           colMinIndex = 0

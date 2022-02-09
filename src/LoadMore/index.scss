@@ -8,13 +8,19 @@
   justify-content: center;
   padding: 0 64px;
   color: var(--fx-color);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 20px;
-  height: 20px;
+  height: 48px;
   border: 0 solid $divider-color;
 
   &_icon {
     margin-right: 8px;
+  }
+
+  &_content {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &_dot {
@@ -25,7 +31,7 @@
     background-color: var(--fx-color);
   }
 
-  &.fx-horizontal-hairline:not(.loading) {
+  &.fx-horizontal-hairline:not(.loading):not(.horizontal) {
     &::before,
     &::after {
       content: '';
@@ -33,6 +39,26 @@
       border-color: inherit;
       border-style: inherit;
       margin: 0 8px;
+    }
+  }
+
+  &.vertical {
+    display: inline-flex;
+    height: 100%;
+    width: 48px;
+    flex-direction: column;
+    width: 20px;
+    padding: 0;
+    vertical-align: top;
+
+    .fx-load-more {
+      &_icon {
+        margin: 0 0 8px 0;
+      }
+
+      &_content {
+        writing-mode: tb-rl;
+      }
     }
   }
 }

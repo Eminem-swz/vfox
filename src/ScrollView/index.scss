@@ -54,23 +54,6 @@
     align-items: flex-end;
     transform: translate3d(0, -100%, 0);
 
-    &-indicator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      font-size: 14px;
-      color: $font3-color;
-      box-sizing: border-box;
-      height: 48px;
-
-      span {
-        line-height: 16px;
-        text-align: center;
-        white-space: normal;
-      }
-    }
-
     .fx-icon,
     .fx-loading-icon {
       --fx-icon-size: 18px;
@@ -98,21 +81,6 @@
       justify-content: flex-end;
       align-items: center;
       transform: translate3d(-100%, 0, 0);
-
-      .fx-scroll-view_pull-refresh-indicator {
-        width: 48px;
-        height: 100%;
-        flex-direction: column;
-
-        .fx-icon,
-        .fx-loading-icon {
-          margin: 0 0 8px 0;
-        }
-
-        span {
-          padding: 0 12px;
-        }
-      }
     }
 
     &.direction--left {

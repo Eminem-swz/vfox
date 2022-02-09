@@ -12,9 +12,25 @@
     <fx-flat-list
       class="exp-flatList-box"
       :data="list"
-      :itemSize="130"
+      :itemSize="140"
       dataKey="id"
       initialHorizontal
+    >
+      <template #default="{ data }">
+        <div class="exp-flatList-item">
+          {{ data.text }}
+        </div>
+      </template>
+    </fx-flat-list>
+  </fx-group>
+  <fx-group title="开启下拉刷新">
+    <fx-flat-list
+      class="exp-flatList-box"
+      :data="list"
+      :itemSize="50"
+      dataKey="id"
+      :enablePullRefresh="true"
+      @refreshing="onRefreshing"
     >
       <template #default="{ data }">
         <div class="exp-flatList-item">
@@ -78,22 +94,6 @@
       dataKey="id"
       @endReached="onEndReached"
       @visibleItemsChange="onVisibleItemsChange"
-    >
-      <template #default="{ data }">
-        <div class="exp-flatList-item">
-          {{ data.text }}
-        </div>
-      </template>
-    </fx-flat-list>
-  </fx-group>
-  <fx-group title="开启下拉刷新">
-    <fx-flat-list
-      class="exp-flatList-box"
-      :data="list"
-      :itemSize="50"
-      dataKey="id"
-      :enablePullRefresh="true"
-      @refreshing="onRefreshing"
     >
       <template #default="{ data }">
         <div class="exp-flatList-item">
