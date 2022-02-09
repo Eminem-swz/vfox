@@ -12,7 +12,6 @@
     <div class="fx-scroll-view_inner">
       <div class="fx-scroll-view_content" :style="contentStyles">
         <div
-          v-show="!lowerLoading"
           v-if="enablePullDirections && enablePullDirections.length > 0"
           class="fx-scroll-view_pull-refresh"
           :class="['direction--' + (pullDirection || 'unknown')]"
@@ -148,10 +147,6 @@ export default defineComponent({
     pullRefreshThreshold: {
       type: Number,
       default: 48
-    },
-    lowerLoading: {
-      type: Boolean,
-      default: false
     }
   },
   emits: {
@@ -353,10 +348,6 @@ export default defineComponent({
           scrollX: props.scrollX && scrollWidth > clientWidth,
           scrollY: props.scrollY && scrollHeight > clientHeight,
           stop: null
-        }
-
-        if (props.lowerLoading) {
-          return
         }
 
         if (pullRefreshState.value === PullRefreshState.Refreshing) {

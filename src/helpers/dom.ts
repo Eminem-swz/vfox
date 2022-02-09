@@ -21,6 +21,19 @@ export function hasClassName($el: Element, className: string) {
   return ([].slice.call($el.classList, 0) as string[]).includes(className)
 }
 
+export function getViewPosition(viewPosition?: ViewPosition): 0 | 0.5 | 1 {
+  const viewPositionMap = new Map<ViewPosition, 0 | 0.5 | 1>([
+    ['start', 0],
+    ['center', 0.5],
+    ['end', 1],
+    [0, 0],
+    [0.5, 0.5],
+    [1, 1]
+  ])
+
+  return viewPositionMap.get(viewPosition ?? 0) ?? 0
+}
+
 export function getRelativeOffset(
   $el: HTMLElement | Document,
   $relativeEl: Element | Document = document,
@@ -55,16 +68,7 @@ export function getRelativeOffset(
     offsetLeft += parent.offsetLeft
   }
 
-  const viewPositionMap = new Map<ViewPosition, number>([
-    ['start', 0],
-    ['center', 0.5],
-    ['end', 1],
-    [0, 0],
-    [0.5, 0.5],
-    [1, 1]
-  ])
-
-  const viewPosition2 = viewPositionMap.get(viewPosition) ?? 0
+  const viewPosition2 = getViewPosition(viewPosition)
 
   if (viewPosition2) {
     if (viewPosition2 === 1) {

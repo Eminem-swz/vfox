@@ -1,9 +1,9 @@
 <template>
   <fx-group title="基础用法">
     <fx-flat-list class="exp-flatList-box" :data="list" dataKey="id">
-      <template #default="{ item }">
+      <template #default="{ data }">
         <div class="exp-flatList-item">
-          {{ item.text }}
+          {{ data.text }}
         </div>
       </template>
     </fx-flat-list>
@@ -16,9 +16,9 @@
       dataKey="id"
       initialHorizontal
     >
-      <template #default="{ item }">
+      <template #default="{ data }">
         <div class="exp-flatList-item">
-          {{ item.text }}
+          {{ data.text }}
         </div>
       </template>
     </fx-flat-list>
@@ -27,29 +27,29 @@
     <fx-flat-list
       class="exp-flatList-box"
       :data="loadList"
-      :itemSize="50"
       dataKey="id"
       :lowerLoading="lowerLoading"
-      @end-reached="onLoadMore"
+      @endReached="onLoadMore"
     >
-      <template #default="{ item }">
+      <template #default="{ data }">
         <div class="exp-flatList-item">
-          {{ item.text }}
+          {{ data.text }}
         </div>
       </template>
     </fx-flat-list>
   </fx-group>
-  <fx-group title="设置间隔（itemGutter=[16, 6]）">
-    <fx-flat-list
-      class="exp-flatList-box"
-      :data="list"
-      dataKey="id"
-      :itemGutter="[16, 6]"
-    >
-      <template #default="{ item, index }">
-        <div class="exp-flatList-item" :class="['color-' + (index % 10)]">
-          {{ item.text }}
+  <fx-group title="分割线（#separator）">
+    <fx-flat-list class="exp-flatList-box" :data="list" dataKey="id">
+      <template #default="{ data }">
+        <div class="exp-flatList-item">
+          {{ data.text }}
         </div>
+      </template>
+      <template #separator="{ index }">
+        <div
+          class="exp-flatList-item-separator"
+          v-if="index < list.length - 1"
+        ></div>
       </template>
     </fx-flat-list>
   </fx-group>
@@ -63,9 +63,9 @@
       :waterfallColCount="3"
       ref="demo"
     >
-      <template #default="{ item, index }">
+      <template #default="{ data, index }">
         <div class="exp-flatList-item" :class="['color-' + (index % 10)]">
-          {{ item.text }}
+          {{ data.text }}
         </div>
       </template>
     </fx-flat-list>
@@ -79,9 +79,9 @@
       @endReached="onEndReached"
       @visibleItemsChange="onVisibleItemsChange"
     >
-      <template #default="{ item }">
+      <template #default="{ data }">
         <div class="exp-flatList-item">
-          {{ item.text }}
+          {{ data.text }}
         </div>
       </template>
     </fx-flat-list>
@@ -95,9 +95,9 @@
       :enablePullRefresh="true"
       @refreshing="onRefreshing"
     >
-      <template #default="{ item }">
+      <template #default="{ data }">
         <div class="exp-flatList-item">
-          {{ item.text }}
+          {{ data.text }}
         </div>
       </template>
     </fx-flat-list>
@@ -121,9 +121,9 @@
       dataKey="id"
       ref="flatList"
     >
-      <template #default="{ item, index }">
+      <template #default="{ data, index }">
         <div class="exp-flatList-item" :class="['color-' + (index % 10)]">
-          {{ item.text }}
+          {{ data.text }}
         </div>
       </template>
     </fx-flat-list>
@@ -146,6 +146,11 @@
       label="scrollTo({ offset: 200 })"
       isLink
       @click="scrollTo(200)"
+    ></fx-cell>
+    <fx-cell
+      label="scrollToEnd(true)"
+      isLink
+      @click="scrollToEnd(true)"
     ></fx-cell>
   </fx-group>
 </template>
@@ -191,7 +196,7 @@ export default defineComponent({
 
     getLoadList()
 
-    const lowerLoading = ref(false)
+    const lowerLoading = ref(true)
     const flatList = ref<InstanceType<typeof FlatList>>()
 
     function scrollToIndex(index: number, viewPosition: ViewPosition = 0) {
@@ -200,6 +205,10 @@ export default defineComponent({
 
     function scrollTo(offset: number) {
       flatList.value?.scrollTo({ offset })
+    }
+
+    function scrollToEnd(animated: boolean) {
+      flatList.value?.scrollToEnd(animated)
     }
 
     const onRefreshing: FlatListOnRefreshing = (res, done) => {
@@ -220,11 +229,11 @@ export default defineComponent({
     const onLoadMore: FlatListOnEndReached = res => {
       console.log('end-reached', res)
 
-      if (loadList.length >= 100) {
+      const max = 100
+
+      if (loadList.length >= max) {
         return
       }
-
-      lowerLoading.value = true
 
       setTimeout(() => {
         getLoadList()
@@ -232,7 +241,10 @@ export default defineComponent({
           title: `加载成功`,
           type: 'success'
         })
-        lowerLoading.value = false
+
+        if (loadList.length >= max) {
+          lowerLoading.value = false
+        }
       }, 500)
     }
 
@@ -255,6 +267,7 @@ export default defineComponent({
       flatList,
       scrollToIndex,
       scrollTo,
+      scrollToEnd,
       onRefreshing,
       onEndReached,
       onLoadMore,
@@ -286,6 +299,12 @@ export default defineComponent({
       &.color-#{$i} {
         background-color: rgb($i * 25, $i * 25, $i * 25);
       }
+    }
+
+    &-separator {
+      height: 1px;
+      width: 100%;
+      background-color: $divider-color;
     }
   }
 }

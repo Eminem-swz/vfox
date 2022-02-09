@@ -11,6 +11,10 @@
     padding: 0;
     position: relative;
     transform: translateZ(0);
+
+    &.pool {
+      visibility: hidden;
+    }
   }
 
   &_item {
@@ -18,6 +22,7 @@
     flex-direction: column;
     left: 0;
     top: 0;
+    position: absolute;
 
     &-inner {
       height: 100%;
