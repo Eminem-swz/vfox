@@ -58,8 +58,6 @@ export default defineComponent({
 .exp-sticky {
   &-box {
     height: 500px;
-    overflow-y: auto;
-    position: relative;
   }
 
   &-header {

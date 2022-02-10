@@ -1,5 +1,11 @@
 <template>
-  <div class="fx-sticky-view" ref="root">
+  <div
+    class="fx-sticky-view"
+    ref="root"
+    :class="{
+      self: isSelfContainer
+    }"
+  >
     <div class="fx-sticky-view_list" ref="listEl">
       <slot></slot>
     </div>
@@ -98,9 +104,7 @@ export default defineComponent({
       scrollOff && scrollOff()
       $container = querySelector(containSelector) || (root.value as HTMLElement)
 
-      if ($container === root.value) {
-        isSelfContainer.value = true
-      }
+      isSelfContainer.value = $container === root.value
 
       sticky.value?.resetContainer($container)
 

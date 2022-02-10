@@ -3,6 +3,10 @@
 .fx-sticky-view {
   position: relative;
 
+  &.self {
+    overflow-y: auto;
+  }
+
   &_top {
     position: absolute;
     left: 0;
