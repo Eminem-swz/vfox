@@ -125,6 +125,11 @@ export default defineComponent({
     initialVertical: {
       type: Boolean,
       default: false
+    },
+    // 边界弹性控制
+    bounces: {
+      type: Boolean,
+      default: true
     }
   },
   emits: {
@@ -573,7 +578,7 @@ export default defineComponent({
           ((active === 0 && offsetX < 0) ||
             (active === getLastIndex() && offsetX > 0))
         ) {
-          transSize += getStretchOffset(offsetX)
+          transSize += props.bounces ? getStretchOffset(offsetX) : 0
         } else {
           transSize += offsetX
         }

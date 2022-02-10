@@ -20,6 +20,7 @@
         @animated="onAnimated"
         ref="swiper"
         :initial-vertical="vertical"
+        :bounces="false"
       >
         <slot></slot>
       </Swiper>
