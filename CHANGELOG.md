@@ -1,3 +1,11 @@
+## [2.5.13](https://github.com/godxiaoji/vfox/compare/v2.5.12...v2.5.13) (2022-02-09)
+
+
+### Bug Fixes
+
+* **flatlist:** flatList 优化虚拟列表 ([f40041c](https://github.com/godxiaoji/vfox/commit/f40041c80f256f82fa723e6f8c98f15899c6abf7))
+* **flatlist:** flatList 及其相关组件优化 ([98ab066](https://github.com/godxiaoji/vfox/commit/98ab0669c64b4bd36a6cd08ee8aede8589aab477))
+
 ## [2.5.12](https://github.com/godxiaoji/vfox/compare/v2.5.11...v2.5.12) (2022-01-30)
 
 
