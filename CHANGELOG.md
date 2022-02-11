@@ -1,3 +1,12 @@
+## [2.5.14](https://github.com/godxiaoji/vfox/compare/v2.5.13...v2.5.14) (2022-02-11)
+
+
+### Bug Fixes
+
+* **sticky:** sticky containSelector ts修复 ([904ed37](https://github.com/godxiaoji/vfox/commit/904ed3758bd2a2f5087f4a8b8b833c241e0eff26))
+* **sticky:** sticky view 固定失效bug fix ([3467e9f](https://github.com/godxiaoji/vfox/commit/3467e9fad3b19d947732ac927be859f6a69f9ffa))
+* **swiper:** swiper支持不回弹配置 ([09df533](https://github.com/godxiaoji/vfox/commit/09df533f4193e2ac2ea78a0189bcd84cf7b47b46))
+
 ## [2.5.13](https://github.com/godxiaoji/vfox/compare/v2.5.12...v2.5.13) (2022-02-09)
 
 
