@@ -38,6 +38,7 @@ import type {
   StickyViewItem
 } from '../StickyView/types'
 import { emitChangeValidator } from '../StickyView/stickyView'
+import type { DomSelector } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-index-view',
@@ -62,7 +63,7 @@ export default defineComponent({
     >([])
     const activeIndex = ref(0)
 
-    function resetContainer(containSelector: any) {
+    function resetContainer(containSelector: DomSelector) {
       stickyView.value?.resetContainer(containSelector)
     }
 

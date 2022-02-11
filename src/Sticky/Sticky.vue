@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted, inject, watch } from 'vue'
+import type { PropType } from 'vue'
 import { widgetZIndex } from '../helpers/layer'
 import { selectorValidator, sizeValidator } from '../helpers/validator'
 import { useScrollEvent } from '../hooks/use-scroll'
@@ -17,15 +18,15 @@ import {
   getSizeValue,
   querySelector
 } from '../helpers/dom'
-import type { StyleObject } from '../helpers/types'
+import type { DomSelector, StyleObject } from '../helpers/types'
 import { useFixed } from '../hooks/use-fixed'
 
 export default defineComponent({
   name: 'fx-sticky',
   props: {
     containSelector: {
-      validator: selectorValidator,
-      default: null
+      type: [String, HTMLElement, Document] as PropType<DomSelector>,
+      validator: selectorValidator
     },
     offsetTop: {
       type: [Number, String],
@@ -115,7 +116,7 @@ export default defineComponent({
     let $container: HTMLElement
     let scrollOff: () => void
 
-    function resetContainer(containSelector: any) {
+    function resetContainer(containSelector?: DomSelector) {
       scrollOff && scrollOff()
       $container = querySelector(containSelector) || document.documentElement
 

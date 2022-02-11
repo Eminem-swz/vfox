@@ -10,14 +10,16 @@
       <slot></slot>
     </div>
     <Sticky
-      :offset-top="offsetTop"
-      :contain-selector="containSelector"
+      :offsetTop="offsetTop"
+      :containSelector="containSelector"
       :disabled="disabled"
       class="fx-sticky-view_top"
       ref="sticky"
     >
-      <div ref="fixedEl" class="fx-sticky-view_fixed" :style="fixedStyles">
-        {{ title }}
+      <div ref="fixedEl" class="fx-sticky-view_fixed">
+        <div class="fx-sticky-view_fixed-inner" :style="fixedStyles">
+          {{ title }}
+        </div>
       </div>
     </Sticky>
   </div>
@@ -25,6 +27,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+import type { PropType } from 'vue'
 import { Sticky } from '../Sticky'
 import {
   getRelativeOffset,
@@ -38,6 +41,7 @@ import { useScrollEvent } from '../hooks/use-scroll'
 import { useList } from '../hooks/use-list'
 import { emitChangeValidator } from '../StickyView/stickyView'
 import { StickyViewItem, ScrollToOptions, ScrollToIndexOptions } from './types'
+import type { DomSelector } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-sticky-view',
@@ -49,8 +53,8 @@ export default defineComponent({
       default: 0
     },
     containSelector: {
-      validator: selectorValidator,
-      default: null
+      type: [String, HTMLElement, Document] as PropType<DomSelector>,
+      validator: selectorValidator
     },
     offsetTop: {
       type: [Number, String],
@@ -100,7 +104,7 @@ export default defineComponent({
     let $container: HTMLElement
     let scrollOff: () => void
 
-    function resetContainer(containSelector: any) {
+    function resetContainer(containSelector?: DomSelector) {
       scrollOff && scrollOff()
       $container = querySelector(containSelector) || (root.value as HTMLElement)
 
@@ -133,6 +137,8 @@ export default defineComponent({
       scrollTop =
         scrollTop == null ? getScrollTop($container) : (scrollTop as number)
 
+        console.log(scrollTop)
+
       const activeIndex = index.value
       const nextIndex = activeIndex + 1
       const offsetTops = getOffsetTops()
@@ -141,6 +147,7 @@ export default defineComponent({
       const next =
         offsetTops[nextIndex] != null ? offsetTops[nextIndex] : Infinity
       const first = offsetTops[0]
+      console.log(offsetTops)
 
       if (scrollTop < first) {
         title.value = ''
@@ -278,9 +285,7 @@ export default defineComponent({
       val => scrollToIndex({ index: val })
     )
 
-    onMounted(() => {
-      resetContainer(props.containSelector)
-    })
+    onMounted(() => resetContainer(props.containSelector))
 
     return {
       root,

@@ -32,6 +32,7 @@ import { sizeValidator } from '../helpers/validator'
 import type { ScrollToIndexOptions, ScrollToOptions } from '../StickyView/types'
 import type { OnChange as StickyViewOnChange } from '../StickyView/types'
 import { emitChangeValidator } from '../StickyView/stickyView'
+import type { DomSelector } from '../helpers/types'
 
 export default defineComponent({
   name: 'fx-scroll-tab',
@@ -60,7 +61,7 @@ export default defineComponent({
     >([])
     const activeIndex = ref(0)
 
-    function resetContainer(containSelector: any) {
+    function resetContainer(containSelector: DomSelector) {
       side.value?.resetContainer(containSelector)
       body.value?.resetContainer(containSelector)
     }
