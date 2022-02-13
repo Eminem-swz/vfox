@@ -12,7 +12,9 @@ setVH()
 
 const store = new ReplStore({
   serializedState: location.hash.slice(1),
-  defaultVueRuntimeURL: import.meta.env.PROD ? undefined : `${location.origin}/src/vue-dev-proxy`,
+  defaultVueRuntimeURL: import.meta.env.PROD
+    ? undefined
+    : `${location.origin}/src/vue-dev-proxy`
 })
 
 // enable experimental features
@@ -42,8 +44,8 @@ watchEffect(() => history.replaceState({}, '', store.serialize()))
 <style>
 body {
   font-size: 13px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
 
   --base: #444;
