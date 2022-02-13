@@ -8,8 +8,8 @@ import { genUnpkgLink } from './utils/link'
 
 const defaultMainFile = 'App.vue'
 const vfoxSetupFile = 'vfox-setup.js'
-const vfoxJs = './dist/vfox.js'
-const vfoxCss = './dist/vfox.css'
+const vfoxJs = genUnpkgLink('vfox', undefined, '/dist/index.esm-browser.js')
+const vfoxCss = genUnpkgLink('vfox', undefined, '/dist/index.css')
 const vfoxImports = {
   vfox: vfoxJs
 }
