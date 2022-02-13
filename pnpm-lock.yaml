@@ -170,6 +170,12 @@ importers:
       vfox: link:../..
       vue: 3.2.30
 
+  packages/vfox-resolver:
+    specifiers:
+      typescript: ^4.4.4
+    devDependencies:
+      typescript: 4.5.5
+
   packages/vfox-ui:
     specifiers: {}
 

@@ -137,8 +137,6 @@ export default defineComponent({
       scrollTop =
         scrollTop == null ? getScrollTop($container) : (scrollTop as number)
 
-        console.log(scrollTop)
-
       const activeIndex = index.value
       const nextIndex = activeIndex + 1
       const offsetTops = getOffsetTops()
@@ -147,7 +145,6 @@ export default defineComponent({
       const next =
         offsetTops[nextIndex] != null ? offsetTops[nextIndex] : Infinity
       const first = offsetTops[0]
-      console.log(offsetTops)
 
       if (scrollTop < first) {
         title.value = ''

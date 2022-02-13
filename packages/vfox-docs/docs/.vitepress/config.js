@@ -20,6 +20,10 @@ module.exports = {
         text: '组件',
         link: '/components/Button',
         activeMatch: '^/components/'
+      },
+      {
+        text: 'Playground',
+        link: 'https://godxiaoji.github.io/vfox/playground/'
       }
       // {
       //   text: '选择版本',
