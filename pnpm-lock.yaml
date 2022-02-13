@@ -62,7 +62,6 @@ importers:
       tslib: ^2.3.1
       typescript: ^4.4.4
       vite: ^2.7.13
-      vitepress: ^0.20.4
       vue: ^3.2.0
       vue-jest: ^5.0.0-alpha.10
       vue-router: ^4.0.12
@@ -127,15 +126,20 @@ importers:
       tslib: 2.3.1
       typescript: 4.5.5
       vite: 2.8.0_sass@1.49.7
-      vitepress: 0.20.10_sass@1.49.7
       vue: 3.2.30
       vue-jest: 5.0.0-alpha.10_828de8fde402ad99d361f7f99828a9a3
       vue-router: 4.0.12_vue@3.2.30
       vue-tsc: 0.30.6_typescript@4.5.5
 
+  packages/vfox-docs:
+    specifiers:
+      vitepress: ^0.22.0
+    devDependencies:
+      vitepress: 0.22.0_sass@1.49.7
+
   packages/vfox-playground:
     specifiers:
-      '@vue/repl': 1.0.0
+      '@vue/repl': ^1.0.0
       file-saver: ^2.0.5
       jszip: ^3.6.0
       vfox: '^workspace: *'
@@ -10108,8 +10112,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/0.20.10_sass@1.49.7:
-    resolution: {integrity: sha512-dKgH6k1yxdEjIIxoXGI0vMg3lpBLvMarre/vvt4beuxd+rXOUB1a7DAtXDmgIXOMGQ7IcF+4zyd2132IedhjtQ==}
+  /vitepress/0.22.0_sass@1.49.7:
+    resolution: {integrity: sha512-0q8OFO6mO1q6o33m7RkHl03Ef3qt2eRM3ZlkO19Q6QNC1m0fAPnV32DHLeq432IaHOfjmFo3bIJb9rptqv7VLQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:

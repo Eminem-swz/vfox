@@ -15,7 +15,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@vue/repl": "1.0.0",
+    "@vue/repl": "^1.0.0",
     "file-saver": "^2.0.5",
     "jszip": "^3.6.0",
     "vfox": "^workspace: *",
