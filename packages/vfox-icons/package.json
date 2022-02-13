@@ -1,18 +1,29 @@
 {
   "name": "@fox2/vfox-icons",
-  "private": true,
   "version": "0.0.1",
   "description": "vfox icons",
   "main": "lib/icons.js",
-  "typings": "lib/icons.d.ts",
+  "types": "lib/icons.d.ts",
+  "scripts": {
+    "build": "svgjs -c ./svgjs.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godxiaoji/vfox.git"
+  },
   "keywords": [
     "vfox",
     "icons"
   ],
+  "author": "Travis",
   "license": "MIT",
-  "scripts": {
-    "build": "svgjs -c ./svgjs.config.js && tsc ./lib/icons.js --declaration --emitDeclarationOnly"
+  "bugs": {
+    "url": "https://github.com/godxiaoji/vfox/issues"
   },
+  "homepage": "https://github.com/godxiaoji/vfox#readme",
+  "files": [
+    "lib/"
+  ],
   "devDependencies": {
     "svg-sprites-cli": "^0.2.0"
   }
