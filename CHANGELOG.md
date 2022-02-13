@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/godxiaoji/vfox/compare/v2.6.0...v2.6.1) (2022-02-13)
+
+
+### Bug Fixes
+
+* 修复引用 @fox2/vfox-icons 导致的问题 ([cf1833f](https://github.com/godxiaoji/vfox/commit/cf1833f50f8d9417b817d7774b759338c1e1f528))
+
 # [2.6.0](https://github.com/godxiaoji/vfox/compare/v2.5.14...v2.6.0) (2022-02-13)
 
 

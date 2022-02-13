@@ -1,6 +1,6 @@
 {
   "name": "vfox",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "description": "Vue components include form, toast, modal, etc.",
   "main": "lib/index.js",
   "module": "es/index.js",
