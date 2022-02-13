@@ -1,6 +1,8 @@
-es/
+# 屏蔽所有 dist 目录，一般是压缩的
 dist/
-lib/
+# 只屏蔽根目录的 lib es
+/es/
+/lib/
 
 # Logs
 logs
