@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import icons from './icons'
+import icons from '@fox2/vfox-icons'
 
 export default defineComponent({
   name: 'fx-svg-icon',

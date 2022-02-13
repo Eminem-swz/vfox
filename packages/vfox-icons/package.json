@@ -1,0 +1,19 @@
+{
+  "name": "@fox2/vfox-icons",
+  "private": true,
+  "version": "0.0.1",
+  "description": "vfox icons",
+  "main": "lib/icons.js",
+  "typings": "lib/icons.d.ts",
+  "keywords": [
+    "vfox",
+    "icons"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "svgjs -c ./svgjs.config.js && tsc ./lib/icons.js --declaration --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "svg-sprites-cli": "^0.2.0"
+  }
+}
