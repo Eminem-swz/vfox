@@ -6,18 +6,12 @@
   "module": "es/index.js",
   "style": "es/style/index.css",
   "typings": "es/index.d.ts",
-  "directories": {
-    "doc": "./docs"
-  },
   "scripts": {
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
-    "build:umd": "node ./build/build.umd.js",
-    "build:css": "node ./build/build.css.js",
-    "build:components": "node ./build/build.components.js",
-    "build:declaration": "node ./build/build.declaration.js",
-    "build:manifest": "node ./build/build.manifest.js",
-    "build": "node ./build/build.js",
+    "lint": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx",
+    "lint:fix": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx --fix",
+    "build": "node ./build/build.mjs",
+    "build:quick": "node ./build/build.quick.mjs",
+    "build:site": "node ./build/build.site.mjs",
     "semantic-release": "semantic-release",
     "prepare": "husky install"
   },
@@ -44,7 +38,7 @@
   ],
   "homepage": "https://github.com/godxiaoji/vfox#readme",
   "dependencies": {
-    "@fox2/vfox-icons": "^workspace: *",
+    "@fox2/vfox-icons": "^0.0.1",
     "colorfuls": "^1.0.2",
     "dayjs": "^1.10.4",
     "safe-area-insets": "^1.4.1",

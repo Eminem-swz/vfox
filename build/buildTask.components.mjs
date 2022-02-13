@@ -1,11 +1,17 @@
-const { resolve } = require('path')
-const { build } = require('esbuild')
-const vuePlugin = require('./esbuild-plugin-vue')
+import { build } from 'esbuild'
+import { resolve } from 'path'
+import vuePlugin from './esbuild-plugin-vue.mjs'
+import { getJSON, getPath } from './utils.mjs'
 
-const pkg = require('../package.json')
-const tss = require('./ts-files.json')
-
+const { __dirname } = getPath(import.meta.url)
+const pkg = await getJSON('./package.json')
+const tss = await getJSON('./build/ts-files.json')
 const deps = Object.keys(pkg.dependencies).concat(['vue'])
+
+const entryPoints = {}
+tss.forEach(name => {
+  entryPoints[name] = resolve(__dirname, `../packages/vfox-ui/${name}.ts`)
+})
 
 const externalPlugin = () => {
   return {
@@ -18,14 +24,8 @@ const externalPlugin = () => {
   }
 }
 
-const runBuild = async () => {
-  const entryPoints = {}
-
-  tss.forEach(name => {
-    entryPoints[name] = resolve(__dirname, `../src/${name}.ts`)
-  })
-
-  await build({
+export const buildCompsEsm = () =>
+  build({
     plugins: [vuePlugin(), externalPlugin()],
     entryPoints: entryPoints,
     external: deps,
@@ -35,7 +35,8 @@ const runBuild = async () => {
     target: ['es2019']
   })
 
-  await build({
+export const buildCompsCjs = () =>
+  build({
     plugins: [vuePlugin(), externalPlugin()],
     entryPoints: entryPoints,
     external: deps,
@@ -44,16 +45,3 @@ const runBuild = async () => {
     bundle: true,
     target: ['es2019']
   })
-
-  await build({
-    plugins: [vuePlugin()],
-    entryPoints: [resolve(__dirname, `../src/index.ts`)],
-    external: ['vue'],
-    outfile: `dist/index.esm-browser.js`,
-    format: 'esm',
-    bundle: true,
-    target: ['es2019']
-  })
-}
-
-runBuild()

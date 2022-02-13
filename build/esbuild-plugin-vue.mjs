@@ -1,7 +1,12 @@
-const path = require('path')
-const fs = require('fs')
-const md5 = require('md5')
-const compiler = require('@vue/compiler-sfc')
+import path from 'path'
+import fs from 'fs'
+import md5 from 'md5'
+import {
+  parse,
+  compileTemplate,
+  compileScript,
+  rewriteDefault
+} from 'vue/compiler-sfc'
 
 const VuePlugin = () => {
   return {
@@ -34,7 +39,7 @@ const VuePlugin = () => {
         const { resolveDir } = args.pluginData
         const filePath = resolvePath(args.path, resolveDir)
         const content = await fs.promises.readFile(filePath, 'utf8')
-        const sfc = compiler.parse(content)
+        const sfc = parse(content)
         const { script, scriptSetup, template } = sfc.descriptor
         const isTS = script?.lang === 'ts' || scriptSetup?.lang === 'ts'
         const id = md5(filePath)
@@ -43,18 +48,18 @@ const VuePlugin = () => {
         let scriptContent = 'export default {}'
 
         if (scriptSetup) {
-          scriptContent = compiler.compileScript(sfc.descriptor, {
+          scriptContent = compileScript(sfc.descriptor, {
             id
           }).content
         } else if (script) {
           scriptContent = script.content
         }
-        contents += compiler.rewriteDefault(scriptContent, '_sfc_script')
+        contents += rewriteDefault(scriptContent, '_sfc_script')
 
         if (template) {
           contents += `
             ${
-              compiler.compileTemplate({
+              compileTemplate({
                 id,
                 source: template.content,
                 filename: filePath,
@@ -87,4 +92,4 @@ const VuePlugin = () => {
   }
 }
 
-module.exports = VuePlugin
+export default VuePlugin

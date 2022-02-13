@@ -40,12 +40,7 @@ jobs:
 
       - name: Build
         run: |
-          pnpm build:manifest
-          pnpm build:svg
-          pnpm build:css
-          pnpm build:declaration
-          pnpm build:components
-          pnpm build:umd
+          pnpm build
 
       - name: Release
         env:
@@ -53,19 +48,15 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm semantic-release
 
-      - name: Build Docs
+      - name: Build Site
         run: |
-          pnpm docs:build
-
-      - name: Build Demo
-        run: |
-          pnpm demo:build
+          pnpm build:site
 
       # Runs a single command using the runners shell
-      - name: Deploy Docs And Demo
+      - name: Deploy Site
         uses: JamesIves/github-pages-deploy-action@4.1.3
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
           clean: false
-          folder: docs/.vitepress/dist
+          folder: packages/vfox-docs/docs/.vitepress/dist

@@ -10,7 +10,7 @@ const rename = require('gulp-rename')
 
 function sass2Css() {
   return gulp
-    .src('../src/**/*.scss')
+    .src('../packages/vfox-ui/**/*.scss')
     .pipe(sass({ outputStyle: 'expanded' }))
     .pipe(autoprefixer({ cascade: false }))
     .pipe(gulp.dest('../es'))
@@ -19,7 +19,7 @@ function sass2Css() {
 
 function copySass() {
   return gulp
-    .src('../src/**/*.scss')
+    .src('../packages/vfox-ui/**/*.scss')
     .pipe(gulp.dest('../es'))
     .pipe(gulp.dest('../lib'))
 }
@@ -30,7 +30,7 @@ function copySass() {
  */
 function buildStyleImport() {
   return gulp
-    .src('../src/**/style/index.js')
+    .src('../packages/vfox-ui/**/style/index.js')
     .pipe(replace('.scss', '.css'))
     .pipe(gulp.dest('../es'))
     .pipe(
@@ -47,7 +47,7 @@ function buildStyleImport() {
  */
 function buildSassImport() {
   return gulp
-    .src('../src/**/style/index.js')
+    .src('../packages/vfox-ui/**/style/index.js')
     .pipe(replace(/style\/index/g, 'style/sass'))
     .pipe(
       rename(function (path) {
@@ -88,22 +88,22 @@ function buildFilePathsCache() {
   const paths = []
 
   return gulp
-    .src('../src/**/*.ts')
+    .src('../packages/vfox-ui/**/*.ts')
     .pipe(
       through.obj(function (file, enc, callback) {
-        this.push(`${file.path.replace(/\\/g, '/').split('src/').pop()}\n`)
+        this.push(`${file.path.replace(/\\/g, '/').split('vfox-ui/').pop()}\n`)
         callback()
       })
     )
     .on('data', function (data) {
       paths.push(data)
     })
-    .pipe(fs.createWriteStream('ts-files.txt'))
+    .pipe(fs.createWriteStream('ts-files.txt', 'utf-8'))
 }
 
 function copyIcons() {
   return gulp
-    .src('../src/Icon/icons.js')
+    .src('../packages/vfox-ui/Icon/icons.js')
     .pipe(gulp.dest('../es/Icon/'))
     .pipe(gulp.dest('../lib/Icon/'))
 }

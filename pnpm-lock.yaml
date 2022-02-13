@@ -9,7 +9,7 @@ importers:
       '@babel/runtime-corejs3': ^7.12.5
       '@commitlint/cli': ^16.0.1
       '@commitlint/config-conventional': ^16.0.0
-      '@fox2/vfox-icons': '^workspace: *'
+      '@fox2/vfox-icons': ^0.0.1
       '@rollup/plugin-commonjs': ^21.0.1
       '@rollup/plugin-node-resolve': ^13.0.6
       '@semantic-release/changelog': ^6.0.1
@@ -113,6 +113,7 @@ importers:
     specifiers:
       '@formily/core': ^2.0.9
       '@formily/vue': ^2.0.9
+      '@fox2/vfox-icons': '^workspace: *'
       '@types/jest': ^26.0.0
       '@vue/test-utils': ^2.0.0-rc.18
       autoprefixer: ^10.4.0
@@ -128,6 +129,7 @@ importers:
     dependencies:
       '@formily/core': 2.0.9
       '@formily/vue': 2.0.9_typescript@4.5.5+vue@3.2.30
+      '@fox2/vfox-icons': link:../vfox-icons
       vfox: link:../..
       vue: 3.2.30
     devDependencies:
