@@ -20,7 +20,7 @@ export default defineConfig({
   },
   base: '/vfox/demo/',
   resolve: {
-    alias: [{ find: '@', replacement: resolve('../../src') }]
+    alias: [{ find: '@', replacement: resolve('../vfox-ui') }]
   },
   build: {
     outDir: '../vfox-docs/docs/.vitepress/dist/demo'

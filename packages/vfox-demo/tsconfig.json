@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "types": ["vite/client", "vue/macros-global", "vfox/global"],
     "paths": {
-      "@/*": ["../../src/*"],
+      "@/*": ["../vfox-ui/*"],
       "@jest/*": ["examples/jest/*"]
     }
   }

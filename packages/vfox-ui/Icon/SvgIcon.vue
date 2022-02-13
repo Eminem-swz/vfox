@@ -17,9 +17,7 @@ export default defineComponent({
   },
   setup(props) {
     const useName = computed(() => {
-      return `#${(icons as any)['fx-' + props.iconName] ? 'fx-' : ''}${
-        props.iconName
-      }`
+      return `#${icons['fx-' + props.iconName] ? 'fx-' : ''}${props.iconName}`
     })
 
     return {
