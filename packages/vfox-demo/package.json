@@ -1,0 +1,23 @@
+{
+  "name": "@fox2/vfox-demo",
+  "private": true,
+  "version": "0.0.1",
+  "description": "vfox demo",
+  "keywords": [
+    "vfox",
+    "demo"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vfox": "^workspace: *",
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "rollup-plugin-svg-sprites": "^1.2.3"
+  }
+}

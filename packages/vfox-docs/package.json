@@ -1,7 +1,7 @@
 {
   "name": "@fox2/vfox-docs",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "vfox docs",
   "keywords": [
     "vfox",
@@ -9,9 +9,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs"
   },
   "devDependencies": {
     "vitepress": "^0.22.0"
