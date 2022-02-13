@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox should render default correctly 1`] = `
+<label class="fx-checkbox fx-horizontal-hairline"><input class="fx-checkbox_input fx-form-input" type="checkbox" name="" value="">
+  <div class="fx-checkbox_box">
+    <icon-stub icon="BorderOutlined" spin="false" size="0" width="0" height="0" class="fx-checkbox_icon"></icon-stub>
+    <icon-stub icon="CheckSquareFilled" spin="false" size="0" width="0" height="0" class="fx-checkbox_checked-icon"></icon-stub>
+    <!--v-if-->
+  </div>
+</label>
+`;
+
+exports[`Checkbox should render prop disabled=true correctly 1`] = `
+<label class="fx-checkbox fx-horizontal-hairline disabled"><input class="fx-checkbox_input fx-form-input" type="checkbox" name="" disabled="" value="">
+  <div class="fx-checkbox_box">
+    <icon-stub icon="BorderOutlined" spin="false" size="0" width="0" height="0" class="fx-checkbox_icon"></icon-stub>
+    <icon-stub icon="CheckSquareFilled" spin="false" size="0" width="0" height="0" class="fx-checkbox_checked-icon"></icon-stub>
+    <!--v-if-->
+  </div>
+</label>
+`;
+
+exports[`CheckboxGroup should render 2 Checkbox slot correctly 1`] = `
+<div class="fx-checkbox-group vertical"><label class="fx-checkbox fx-horizontal-hairline"><input class="fx-checkbox_input fx-form-input" type="checkbox" name="" value="">
+    <div class="fx-checkbox_box"><svg class="fx-icon fx-checkbox_icon">
+        <use xlink:href="#BorderOutlined"></use>
+      </svg><svg class="fx-icon fx-checkbox_checked-icon">
+        <use xlink:href="#CheckSquareFilled"></use>
+      </svg>
+      <!--v-if-->
+    </div>
+  </label><label class="fx-checkbox fx-horizontal-hairline"><input class="fx-checkbox_input fx-form-input" type="checkbox" name="" value="">
+    <div class="fx-checkbox_box"><svg class="fx-icon fx-checkbox_icon">
+        <use xlink:href="#BorderOutlined"></use>
+      </svg><svg class="fx-icon fx-checkbox_checked-icon">
+        <use xlink:href="#CheckSquareFilled"></use>
+      </svg>
+      <!--v-if-->
+    </div>
+  </label></div>
+`;
+
+exports[`CheckboxGroup should render prop disabled=true correctly 1`] = `<div class="fx-checkbox-group vertical disabled"></div>`;

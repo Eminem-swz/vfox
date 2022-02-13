@@ -17,7 +17,6 @@ importers:
       '@semantic-release/github': ^8.0.2
       '@semantic-release/npm': ^8.0.3
       '@semantic-release/release-notes-generator': ^10.0.2
-      '@types/jest': ^26.0.0
       '@types/md5': ^2.3.1
       '@typescript-eslint/eslint-plugin': ^5.4.0
       '@typescript-eslint/parser': ^5.4.0
@@ -25,11 +24,7 @@ importers:
       '@vue/compiler-sfc': ^3.2.0
       '@vue/eslint-config-prettier': ^6.0.0
       '@vue/eslint-config-typescript': ^9.0.1
-      '@vue/test-utils': ^2.0.0-rc.18
-      autoprefixer: ^10.4.0
-      babel-jest: ^26.0.0
       colorfuls: ^1.0.2
-      cross-env: ^7.0.3
       cz-conventional-changelog: ^3.3.0
       dayjs: ^1.10.4
       esbuild: ^0.14.11
@@ -44,9 +39,6 @@ importers:
       gulp-replace: ^1.1.3
       gulp-sass: ^5.0.0
       husky: ^7.0.4
-      jest: ^26.0.0
-      jest-serializer-vue: ^2.0.2
-      jest-transform-stub: ^2.0.0
       md5: ^2.3.0
       ora: ^6.0.1
       prettier: ^2.4.1
@@ -57,13 +49,11 @@ importers:
       semantic-release: ^18.0.1
       through2: ^4.0.2
       timeago.js: ^4.0.2
-      ts-jest: ^26.0.0
       tslib: ^2.3.1
       typescript: ^4.4.4
       vite: ^2.7.13
       vue: ^3.2.0
-      vue-jest: ^5.0.0-alpha.10
-      vue-router: ^4.0.12
+      vue-router: ^4.0.0
       vue-tsc: ^0.30.6
     dependencies:
       '@fox2/vfox-icons': link:packages/vfox-icons
@@ -84,7 +74,6 @@ importers:
       '@semantic-release/github': 8.0.2_semantic-release@18.0.1
       '@semantic-release/npm': 8.0.3_semantic-release@18.0.1
       '@semantic-release/release-notes-generator': 10.0.3_semantic-release@18.0.1
-      '@types/jest': 26.0.24
       '@types/md5': 2.3.2
       '@typescript-eslint/eslint-plugin': 5.11.0_de5a1ddccd75ca1e499b8b8491d3dcba
       '@typescript-eslint/parser': 5.11.0_eslint@8.8.0+typescript@4.5.5
@@ -92,10 +81,6 @@ importers:
       '@vue/compiler-sfc': 3.2.30
       '@vue/eslint-config-prettier': 6.0.0_32b6f1be5d3200f4ccc08478f2d28413
       '@vue/eslint-config-typescript': 9.1.0_dbc16e29809652a00bc61e44d29bbac5
-      '@vue/test-utils': 2.0.0-rc.18_vue@3.2.30
-      autoprefixer: 10.4.2
-      babel-jest: 26.6.3_@babel+core@7.17.2
-      cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
       esbuild: 0.14.21
       eslint: 8.8.0
@@ -109,9 +94,6 @@ importers:
       gulp-replace: 1.1.3
       gulp-sass: 5.1.0
       husky: 7.0.4
-      jest: 26.6.3
-      jest-serializer-vue: 2.0.2
-      jest-transform-stub: 2.0.0
       md5: 2.3.0
       ora: 6.0.1
       prettier: 2.5.1
@@ -120,12 +102,10 @@ importers:
       sass: 1.49.7
       semantic-release: 18.0.1
       through2: 4.0.2
-      ts-jest: 26.5.6_jest@26.6.3+typescript@4.5.5
       tslib: 2.3.1
       typescript: 4.5.5
       vite: 2.8.0_sass@1.49.7
       vue: 3.2.30
-      vue-jest: 5.0.0-alpha.10_828de8fde402ad99d361f7f99828a9a3
       vue-router: 4.0.12_vue@3.2.30
       vue-tsc: 0.30.6_typescript@4.5.5
 
@@ -133,16 +113,34 @@ importers:
     specifiers:
       '@formily/core': ^2.0.9
       '@formily/vue': ^2.0.9
+      '@types/jest': ^26.0.0
+      '@vue/test-utils': ^2.0.0-rc.18
+      autoprefixer: ^10.4.0
+      babel-jest: ^26.0.0
+      jest: ^26.0.0
+      jest-serializer-vue: ^2.0.2
+      jest-transform-stub: ^2.0.0
       rollup-plugin-svg-sprites: ^1.2.3
+      ts-jest: ^26.0.0
       vfox: '^workspace: *'
       vue: ^3.2.0
+      vue-jest: ^5.0.0-alpha.10
     dependencies:
       '@formily/core': 2.0.9
       '@formily/vue': 2.0.9_typescript@4.5.5+vue@3.2.30
       vfox: link:../..
       vue: 3.2.30
     devDependencies:
+      '@types/jest': 26.0.24
+      '@vue/test-utils': 2.0.0-rc.18_vue@3.2.30
+      autoprefixer: 10.4.2
+      babel-jest: 26.6.3_@babel+core@7.17.2
+      jest: 26.6.3
+      jest-serializer-vue: 2.0.2
+      jest-transform-stub: 2.0.0
       rollup-plugin-svg-sprites: 1.2.3_@vue+compiler-sfc@3.2.30
+      ts-jest: 26.5.6_jest@26.6.3+typescript@4.5.5
+      vue-jest: 5.0.0-alpha.10_828de8fde402ad99d361f7f99828a9a3
 
   packages/vfox-docs:
     specifiers:
@@ -4102,14 +4100,6 @@ packages:
 
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
-    dev: true
-
-  /cross-env/7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/6.0.5:

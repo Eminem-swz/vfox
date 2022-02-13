@@ -12,10 +12,10 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "types": ["vite/client", "vue/macros-global", "vfox/global"],
+    "types": ["vite/client", "jest", "vfox/global"],
     "paths": {
       "@/*": ["../vfox-ui/*"],
-      "@jest/*": ["examples/jest/*"]
+      "@jest/*": ["./jest/*"]
     }
   }
 }
