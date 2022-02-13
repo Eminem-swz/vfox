@@ -6,8 +6,6 @@ import { defineConfig, Plugin } from 'vite'
 const jsPath = path.resolve(__dirname, '../../dist/index.esm-browser.js')
 const cssPath = path.resolve(__dirname, '../../dist/index.css')
 
-console.log(jsPath)
-
 function copyVfoxPlugin(): Plugin {
   return {
     name: 'copy-vfox',
