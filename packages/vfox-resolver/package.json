@@ -1,0 +1,37 @@
+{
+  "name": "@fox2/vfox-resolver",
+  "version": "0.0.3",
+  "description": "unplugin-vue-components resolver for vfox",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "lint": "eslint --fix ./src/**/*.ts",
+    "build": "pnpx typescript && node esbuild.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godxiaoji/vfox.git"
+  },
+  "keywords": [
+    "vue",
+    "resolver",
+    "vfox",
+    "unplugin-vue-components"
+  ],
+  "author": "Travis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/godxiaoji/vfox/issues"
+  },
+  "homepage": "https://github.com/godxiaoji/vfox#readme",
+  "files": [
+    "lib/"
+  ],
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "unplugin-vue-components": "^0.17.15"
+  }
+}

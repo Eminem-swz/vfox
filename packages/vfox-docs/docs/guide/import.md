@@ -13,7 +13,7 @@ npm i unplugin-vue-components -D
 2. 安装组件 Resolver：
 
 ```Shell
-npm i vfox-resolver -D
+npm i @fox2/vfox-resolver -D
 ```
 
 3. 配置 config
@@ -24,7 +24,7 @@ npm i vfox-resolver -D
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
-import { VfoxResolver } from 'vfox-resolver'
+import { VfoxResolver } from '@fox2/vfox-resolver'
 
 export default defineConfig({
   plugins: [
@@ -40,7 +40,7 @@ Or `vue.config.js`
 
 ```JavaScript
 const Components = require('unplugin-vue-components/webpack')
-const { VfoxResolver } = require('vfox-resolver')
+const { VfoxResolver } = require('@fox2/vfox-resolver')
 
 module.exports = {
   configureWebpack: {
@@ -53,7 +53,7 @@ module.exports = {
 }
 ```
 
-更多 VfoxResolver 参数可以[查看](https://github.com/godxiaoji/vfox-resolver)。
+更多 VfoxResolver 参数可以[查看](https://github.com/godxiaoji/vfox/tree/main/packages/vfox-resolver)。
 
 4. 现在就可以在模版中引入组件
 
