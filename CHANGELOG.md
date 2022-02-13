@@ -1,3 +1,13 @@
+# [2.6.0](https://github.com/godxiaoji/vfox/compare/v2.5.14...v2.6.0) (2022-02-13)
+
+
+### Features
+
+* **core:** core to monorepo ([1d421d9](https://github.com/godxiaoji/vfox/commit/1d421d9da1ddd501cecc884045722828d50c7513))
+* **icons:** icons to monorepo ([fb1facc](https://github.com/godxiaoji/vfox/commit/fb1facc1cc28b41b539e25ab1492a73abf58f3b6))
+* **playground:** add playground ([6375036](https://github.com/godxiaoji/vfox/commit/637503664b204373d0d5095f5a9822f45fb5f313))
+* **resolver:** resolver to monorepo ([e6c45f0](https://github.com/godxiaoji/vfox/commit/e6c45f0ca910848c6e1e01e0ca62a837d26b0ea7))
+
 ## [2.5.14](https://github.com/godxiaoji/vfox/compare/v2.5.13...v2.5.14) (2022-02-11)
 
 
