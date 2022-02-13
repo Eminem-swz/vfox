@@ -1,0 +1,24 @@
+{
+  "name": "@fox2/vfox-playground",
+  "private": true,
+  "version": "1.0.0",
+  "description": "vfox playground",
+  "keywords": [
+    "vfox",
+    "playground",
+    "repl"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@vue/repl": "1.0.0",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.6.0",
+    "vfox": "^workspace: *",
+    "vue": "^3.2.0"
+  }
+}

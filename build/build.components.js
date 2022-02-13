@@ -44,6 +44,16 @@ const runBuild = async () => {
     bundle: true,
     target: ['es2019']
   })
+
+  await build({
+    plugins: [vuePlugin()],
+    entryPoints: [resolve(__dirname, `../src/index.ts`)],
+    external: ['vue'],
+    outfile: `dist/index.esm-browser.js`,
+    format: 'esm',
+    bundle: true,
+    target: ['es2019']
+  })
 }
 
 runBuild()
