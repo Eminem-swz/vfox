@@ -10,7 +10,16 @@ const defaultMainFile = 'App.vue'
 const vfoxSetupFile = 'vfox-setup.js'
 const vfoxJs = genUnpkgLink('vfox', undefined, '/dist/index.esm-browser.js')
 const vfoxCss = genUnpkgLink('vfox', undefined, '/dist/index.css')
-const vfoxImports = {
+const isDev = import.meta.env.DEV
+
+const coreImports = {
+  vue: !isDev
+    ? genUnpkgLink(
+        '@vue/runtime-dom',
+        version,
+        '/dist/runtime-dom.esm-browser.js'
+      )
+    : `${location.origin}/src/vue-dev-proxy`,
   vfox: vfoxJs
 }
 
@@ -58,8 +67,6 @@ export function appendStyle() {
 }
 `
 
-const isHidden = !import.meta.env.DEV
-
 export class ReplStore implements Store {
   state: StoreState
   compiler = defaultCompiler
@@ -67,22 +74,14 @@ export class ReplStore implements Store {
   initialShowOutput: boolean
   initialOutputMode: OutputModes = 'preview'
 
-  private readonly defaultVueRuntimeURL: string
-
   constructor({
     serializedState = '',
-    defaultVueRuntimeURL = genUnpkgLink(
-      '@vue/runtime-dom',
-      version,
-      '/dist/runtime-dom.esm-browser.js'
-    ),
     showOutput = false,
     outputMode = 'preview'
   }: {
     serializedState?: string
     showOutput?: boolean
-    outputMode?: OutputModes | string
-    defaultVueRuntimeURL?: string
+    outputMode?: OutputModes
   }) {
     let files: StoreState['files'] = {}
 
@@ -97,9 +96,8 @@ export class ReplStore implements Store {
       }
     }
 
-    this.defaultVueRuntimeURL = defaultVueRuntimeURL
     this.initialShowOutput = showOutput
-    this.initialOutputMode = outputMode as OutputModes
+    this.initialOutputMode = outputMode
 
     let mainFile = defaultMainFile
     if (!files[mainFile]) {
@@ -110,7 +108,7 @@ export class ReplStore implements Store {
       files,
       activeFile: files[mainFile],
       errors: [],
-      vueRuntimeURL: this.defaultVueRuntimeURL
+      vueRuntimeURL: coreImports.vue
     })
 
     this.initImportMap()
@@ -118,7 +116,7 @@ export class ReplStore implements Store {
     this.state.files[vfoxSetupFile] = new File(
       vfoxSetupFile,
       vfoxReplPluginCode,
-      isHidden
+      !isDev
     )
 
     watchEffect(() => compileFile(this, this.state.activeFile))
@@ -196,10 +194,7 @@ export class ReplStore implements Store {
         'import-map.json',
         JSON.stringify(
           {
-            imports: {
-              vue: this.defaultVueRuntimeURL,
-              ...vfoxImports
-            }
+            imports: coreImports
           },
           null,
           2
@@ -209,7 +204,7 @@ export class ReplStore implements Store {
       try {
         const json = JSON.parse(map.code)
         if (!json.imports.vue) {
-          json.imports.vue = this.defaultVueRuntimeURL
+          json.imports.vue = coreImports.vue
           map.code = JSON.stringify(json, null, 2)
         }
         // eslint-disable-next-line no-empty

@@ -11,10 +11,7 @@ window.addEventListener('resize', setVH)
 setVH()
 
 const store = new ReplStore({
-  serializedState: location.hash.slice(1),
-  defaultVueRuntimeURL: import.meta.env.PROD
-    ? undefined
-    : `${location.origin}/src/vue-dev-proxy`
+  serializedState: location.hash.slice(1)
 })
 
 // enable experimental features
