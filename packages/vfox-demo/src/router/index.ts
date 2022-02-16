@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
-  { path: '/', name: Home.name, component: Home },
+  { path: '/', name: 'ExpHome', component: Home },
   {
     path: '/ColorCard',
     name: 'ExpColorCard',

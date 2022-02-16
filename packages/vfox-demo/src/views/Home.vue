@@ -1,13 +1,38 @@
+<script lang="ts" setup>
+import { getScrollTop, scrollTo } from '@/helpers/dom'
+import { onActivated, onDeactivated } from 'vue'
+import { onBeforeRouteLeave, useRouter } from 'vue-router'
+import { navConfig } from './data'
+import logo from '../../public/logo.svg?vueComponent'
+
+let scrollTop = 0
+
+onActivated(() => scrollTo(document, scrollTop, false))
+
+onDeactivated(() => scrollTo(document, 0, false))
+
+onBeforeRouteLeave((to, from, next) => {
+  scrollTop = getScrollTop(document)
+  next()
+})
+
+const $router = useRouter()
+
+function onItemClick({ name }: { name: string }) {
+  $router.push({ name: 'Exp' + name })
+}
+</script>
+
 <template>
   <div class="index-wrapper">
     <div class="index-header">
-      <img class="index-logo" src="../assets/logo.svg" />
+      <logo class="index-logo" />
       <h1 class="index-title">VFOX</h1>
     </div>
     <div class="index-body">
       <fx-group
         :title="group.name + ' ' + group.zhName"
-        v-for="group in groups"
+        v-for="group in navConfig"
         :key="group.name"
         card
       >
@@ -22,38 +47,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import { getScrollTop, scrollTo } from '@/helpers/dom'
-import { navConfig } from './data'
-
-export default {
-  name: 'ExpHome',
-  props: {},
-  data() {
-    return {
-      groups: navConfig,
-      scrollTop: 0
-    }
-  },
-  activated() {
-    scrollTo(document, this.scrollTop, false)
-  },
-  deactivated() {
-    scrollTo(document, 0, false)
-  },
-  beforeRouteLeave(to, from, next) {
-    this.scrollTop = getScrollTop(document)
-
-    next()
-  },
-  methods: {
-    onItemClick({ name }) {
-      this.$router.push({ name: 'Exp' + name })
-    }
-  }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
