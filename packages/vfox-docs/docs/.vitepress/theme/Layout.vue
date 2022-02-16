@@ -9,7 +9,7 @@ const { Layout } = DefaultTheme
 const compReg = /^components\/(\w+).md$/
 const route = useRoute()
 
-const baseLink = 'demo/#/'
+const baseLink = '/vfox/demo/#/'
 
 const demoLink = computed(() => {
   const match = route.data.relativePath.match(compReg)
