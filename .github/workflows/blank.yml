@@ -58,5 +58,5 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
-          clean: false
+          clean: true
           folder: packages/vfox-docs/docs/.vitepress/dist
