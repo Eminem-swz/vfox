@@ -15,11 +15,11 @@
 
 ## 参考文档
 
-[Demo](https://godxiaoji.github.io/vfox/demo/)
+[Demo](https://godxiaoji.github.io/vfox/demo/) | [国内站点](https://godxiaoji.gitee.io/vfox/demo/)
 
-[Docs](https://godxiaoji.github.io/vfox/)
+[Docs](https://godxiaoji.github.io/vfox/) | [国内站点](https://godxiaoji.gitee.io/vfox/)
 
-[Playground](https://godxiaoji.github.io/vfox/playground/)
+[Playground](https://godxiaoji.github.io/vfox/playground/) | [国内站点](https://godxiaoji.gitee.io/vfox/playground/)
 
 ## 支持环境
 
