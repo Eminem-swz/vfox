@@ -23,7 +23,8 @@ module.exports = {
       },
       {
         text: 'Playground',
-        link: 'https://godxiaoji.github.io/vfox/playground/'
+        link: '/playground/',
+        target: '_blank'
       }
       // {
       //   text: '选择版本',
