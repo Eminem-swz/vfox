@@ -1,7 +1,7 @@
 <template>
   <div class="index-wrapper">
     <div class="index-header">
-      <img class="index-logo" src="../public/logo.svg" />
+      <img class="index-logo" src="../assets/logo.svg" />
       <h1 class="index-title">VFOX</h1>
     </div>
     <div class="index-body">

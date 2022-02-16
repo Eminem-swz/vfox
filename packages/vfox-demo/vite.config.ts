@@ -18,7 +18,7 @@ export default defineConfig({
       plugins: [autoprefixer()]
     }
   },
-  base: '/vfox/demo/',
+  base: './',
   resolve: {
     alias: [{ find: '@', replacement: resolve('../vfox-ui') }]
   },
