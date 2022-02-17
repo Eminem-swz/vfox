@@ -12,5 +12,14 @@
     "vue": "^3.2.0"
   },
   "main": "index.ts",
-  "module": "index.ts"
+  "module": "index.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview",
+    "test:unit": "jest --detectOpenHandles"
+  },
+  "devDependencies": {
+    "jest": "^26.0.0"
+  }
 }
