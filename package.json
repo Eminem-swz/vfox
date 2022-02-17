@@ -13,7 +13,8 @@
     "build:quick": "node ./build/build.quick.mjs",
     "build:site": "node ./build/build.site.mjs",
     "semantic-release": "semantic-release",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prettier": "prettier --write ."
   },
   "repository": {
     "type": "git",
