@@ -9,7 +9,7 @@ export function kebabCase2CamelCase(name: string) {
   name = name.replace(/-(\w)/g, (all, letter) => {
     return letter.toUpperCase()
   })
-  return name.substr(0, 1).toLowerCase() + name.substr(1)
+  return name.substring(0, 1).toLowerCase() + name.substring(1)
 }
 
 /**
@@ -425,49 +425,4 @@ export const isURL = (object: unknown) => {
       object as string
     )
   )
-}
-
-/**
- * 千分位
- * @param num 数字
- * @returns eg: 1,111
- */
-export function thousands(number: number | string) {
-  const str = number.toString()
-
-  return str.replace(
-    str.indexOf('.') > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(?:\d{3})+$)/g,
-    '$1,'
-  )
-}
-
-/**
- * 简化数值
- * @param number 数值
- * @returns eg: 1.1w
- */
-export function simpleNumber(number: number) {
-  if (!isNumber(number)) {
-    return '0'
-  }
-
-  function toFixed(number: number) {
-    return number.toString().substr(0, 4).replace(/\.$/, '')
-  }
-
-  number = Math.floor(number)
-
-  if (number > 100000000) {
-    number = number / 100000000
-
-    if (number > 999) {
-      return '999y+'
-    }
-
-    return toFixed(number) + 'y'
-  } else if (number > 10000) {
-    return toFixed(number / 10000) + 'w'
-  }
-
-  return number.toString()
 }

@@ -89,7 +89,7 @@ import {
   cloneData,
   noop
 } from '../helpers/util'
-import { formatFileSize } from '../helpers/file'
+import { formatFileSize } from '../helpers/digital-conversion'
 import { formItemProps } from '../Form/form'
 import type { ImageMode } from '../Image/types'
 import { locale } from '../Locale'

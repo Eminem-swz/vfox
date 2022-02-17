@@ -21,7 +21,8 @@ export function formatInputNumber(
     if (decimalLength > 0) {
       const arr = value.split('.')
       if (arr[1] && arr[1].length > decimalLength) {
-        value = parseFloat(value).toFixed(decimalLength)
+        arr[1] = arr[1].substring(0, decimalLength)
+        value = arr.join('.')
       }
     } else if (decimalLength === 0) {
       value = parseInt(value).toString()

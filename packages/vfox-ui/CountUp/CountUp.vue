@@ -8,7 +8,8 @@
 import { defineComponent, onBeforeUnmount, ref, watch } from 'vue'
 import type { PropType } from 'vue'
 import { AnimationFrameTask, frameTo } from '../helpers/animation'
-import { thousands, isNumber } from '../helpers/util'
+import { isNumber } from '../helpers/util'
+import { thousands } from '../helpers/digital-conversion'
 import type { OnCancel, Speed } from './types'
 import type { VoidFnToBooleanFn } from '../helpers/types'
 

@@ -21,7 +21,7 @@ import { computed, defineComponent, provide } from 'vue'
 import Avatar from './Avatar.vue'
 import { useGroup } from '../hooks/use-group'
 import { avatarProps } from '../Avatar/avatar'
-import { simpleNumber } from '../helpers/util'
+import { simpleNumber } from '../helpers/digital-conversion'
 
 export default defineComponent({
   name: 'fx-avatar-group',
