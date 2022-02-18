@@ -1,4 +1,7 @@
-module.exports = {
+import type { Config } from '@jest/types'
+
+const config: Config.InitialOptions = {
+  rootDir: process.cwd(),
   moduleFileExtensions: [
     'ts',
     'js',
@@ -10,7 +13,7 @@ module.exports = {
   ],
   transform: {
     // process *.vue files with vue-jest
-    '^.+\\.vue$': require.resolve('vue-jest'),
+    '^.+\\.vue$': require.resolve('@vue/vue3-jest'),
     '^.+\\.tsx?$': require.resolve('ts-jest'),
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
       require.resolve('jest-transform-stub'),
@@ -19,15 +22,18 @@ module.exports = {
   transformIgnorePatterns: ['/node_modules/'],
   // support the same @ -> src alias mapping in source code
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/../vfox-ui/$1',
-    '^@jest/(.*)$': '<rootDir>/jest/$1',
+    '^@/(.*)$': '<rootDir>/packages/vfox-ui/$1',
     '^@fox2/vfox-icons$': '<rootDir>/jest/icons.ts'
   },
   // testEnvironment: 'jest-environment-jsdom-fifteen',
   // serializer for snapshots
   snapshotSerializers: ['jest-serializer-vue'],
-  testMatch: ['**/__tests__/*.[jt]s?(x)'],
+  testMatch: ['**/tests/unit/**/*.spec.[jt]s?(x)', '**/__tests__/*.[jt]s?(x)'],
   // testMatch: ['**/BackTop/__tests__/*.[jt]s?(x)'],
   // https://github.com/facebook/jest/issues/6766
-  testURL: 'http://localhost/'
+  testURL: 'http://localhost/',
+  setupFilesAfterEnv: ['<rootDir>/jest/setup.ts'],
+  testEnvironment: 'jsdom'
 }
+
+export default config

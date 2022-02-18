@@ -12,10 +12,9 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "types": ["vite/client", "jest", "vfox/global"],
+    "types": ["vite/client", "jest"],
     "paths": {
-      "@/*": ["../vfox-ui/*"],
-      "@jest/*": ["./jest/*"]
+      "@/*": ["packages/vfox-ui/*"]
     }
   }
 }

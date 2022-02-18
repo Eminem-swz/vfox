@@ -1,36 +1,26 @@
 {
   "name": "@fox2/vfox-demo",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "vfox demo",
   "keywords": [
+    "vue",
     "vfox",
     "demo"
   ],
-  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview",
-    "test:unit": "jest --detectOpenHandles"
+    "serve": "vite preview"
   },
   "dependencies": {
-    "@fox2/vfox-icons": "^workspace: *",
     "@formily/core": "^2.0.9",
     "@formily/vue": "^2.0.9",
-    "vfox": "^workspace: *",
-    "vue": "^3.2.0"
+    "@fox2/vfox-icons": "^workspace: *",
+    "vfox": "^workspace: *"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.0",
-    "@vue/test-utils": "^2.0.0-rc.18",
     "autoprefixer": "^10.4.0",
-    "babel-jest": "^26.0.0",
-    "jest": "^26.0.0",
-    "jest-serializer-vue": "^2.0.2",
-    "jest-transform-stub": "^2.0.0",
-    "rollup-plugin-svg-sprites": "^1.2.3",
-    "ts-jest": "^26.0.0",
-    "vue-jest": "^5.0.0-alpha.10"
+    "rollup-plugin-svg-sprites": "^1.2.3"
   }
 }

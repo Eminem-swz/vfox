@@ -1,6 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import { Button, ButtonGroup } from '@/Button'
-import { delay } from '@jest/utils'
 
 describe('Button', () => {
   test('should render default slot correctly', () => {
@@ -33,8 +32,6 @@ describe('ButtonGroup', () => {
         default: [Button, Button]
       }
     })
-
-    await delay(100)
 
     expect(wrapper.classes('count--2')).toBeTruthy()
   })
