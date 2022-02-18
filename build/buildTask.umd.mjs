@@ -10,7 +10,7 @@ import { execa } from 'execa'
 export const buildEsmBrowser = () =>
   build({
     plugins: [vuePlugin()],
-    entryPoints: ['./packages/vfox-ui/index.ts'],
+    entryPoints: ['./packages/vfox/src/index.ts'],
     external: ['vue'],
     outfile: `dist/index.esm-browser.js`,
     format: 'esm',
@@ -21,7 +21,7 @@ export const buildEsmBrowser = () =>
 const buildUmdEsm = async () => {
   await build({
     plugins: [vuePlugin()],
-    entryPoints: ['./packages/vfox-ui/umd.ts'],
+    entryPoints: ['./packages/vfox/src/umd.ts'],
     external: ['vue'],
     outfile: `dist/umd.js`,
     format: 'esm',

@@ -3,7 +3,7 @@ import { getScrollTop, scrollTo } from '@/helpers/dom'
 import { onActivated, onDeactivated } from 'vue'
 import { onBeforeRouteLeave, useRouter } from 'vue-router'
 import { navConfig } from './data'
-import logo from '../../public/logo.svg?vueComponent'
+import logo from '../assets/logo.svg?vueComponent'
 
 let scrollTop = 0
 

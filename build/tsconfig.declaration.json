@@ -16,6 +16,6 @@
     "emitDeclarationOnly": true,
     "declarationDir": "../es"
   },
-  "files": ["../packages/vfox-ui/index.ts"],
+  "files": ["../packages/vfox/src/index.ts"],
   "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
 }

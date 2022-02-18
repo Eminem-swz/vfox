@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "types": ["vite/client", "jest"],
     "paths": {
-      "@/*": ["packages/vfox-ui/*"]
+      "@/*": ["packages/vfox/src/*"]
     }
   }
 }

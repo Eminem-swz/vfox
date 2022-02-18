@@ -131,6 +131,9 @@ importers:
       vue-router: 4.0.12_vue@3.2.30
       vue-tsc: 0.30.6_typescript@4.5.5
 
+  packages/vfox:
+    specifiers: {}
+
   packages/vfox-demo:
     specifiers:
       '@formily/core': ^2.0.9
@@ -179,9 +182,6 @@ importers:
       typescript: ^4.4.4
     devDependencies:
       typescript: 4.5.5
-
-  packages/vfox-ui:
-    specifiers: {}
 
 packages:
 

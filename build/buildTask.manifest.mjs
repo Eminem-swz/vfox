@@ -2,17 +2,21 @@ import fs from 'fs'
 import { execa } from 'execa'
 
 const buildJSON = async () => {
-  const fileStr = await fs.promises.readFile('./build/ts-files.txt', 'utf-8')
+  const fileStrPath = './build/ts-files.txt'
+  const fileStr = await fs.promises.readFile(fileStrPath, 'utf-8')
 
   const paths = fileStr
     .split(`\n`)
-    .filter(function (v) {
+    .filter(function (path) {
       return (
-        v.indexOf('style/index.ts') === -1 &&
-        v.indexOf('types.ts') === -1 &&
-        v.indexOf('.d.ts') === -1 &&
-        v.indexOf('umd.ts') === -1 &&
-        v !== ''
+        ![
+          'style/index.ts',
+          'style/index.ts',
+          'types.ts',
+          '.d.ts',
+          'umd.ts',
+          '__tests__'
+        ].some(v => path.includes(v)) && path !== ''
       )
     })
     .map(v => v.replace(/.ts$/, ''))
@@ -23,7 +27,7 @@ const buildJSON = async () => {
     JSON.stringify(paths, null, 2),
     'utf-8'
   )
-  await fs.promises.unlink('./build/ts-files.txt')
+  await fs.promises.unlink(fileStrPath)
 }
 
 export const buildManifest = async () => {

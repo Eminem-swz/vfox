@@ -3,6 +3,6 @@ import defaultConfig from './config'
 export default async () => {
   return {
     ...defaultConfig,
-    testMatch: ['<rootDir>/packages/vfox-ui/**/__tests__/*.[jt]s?(x)']
+    testMatch: ['<rootDir>/packages/vfox/**/__tests__/*.spec.[jt]s?(x)']
   }
 }

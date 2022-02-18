@@ -12,7 +12,7 @@ const replaceImportToSassImport = () => {
 
 const buildIndexScss = async () => {
   const bundle = await rollup({
-    input: './packages/vfox-ui/style/index.js',
+    input: './packages/vfox/src/style/index.js',
     external: id => {
       if (id.indexOf('.scss') !== -1) {
         return true
@@ -24,7 +24,7 @@ const buildIndexScss = async () => {
 
   await bundle.write({
     format: 'esm',
-    file: './packages/vfox-ui/style/index.scss'
+    file: './packages/vfox/src/style/index.scss'
   })
 }
 

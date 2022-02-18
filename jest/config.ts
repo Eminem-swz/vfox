@@ -22,13 +22,16 @@ const config: Config.InitialOptions = {
   transformIgnorePatterns: ['/node_modules/'],
   // support the same @ -> src alias mapping in source code
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/packages/vfox-ui/$1',
+    '^@/(.*)$': '<rootDir>/packages/vfox/src/$1',
     '^@fox2/vfox-icons$': '<rootDir>/jest/icons.ts'
   },
   // testEnvironment: 'jest-environment-jsdom-fifteen',
   // serializer for snapshots
   snapshotSerializers: ['jest-serializer-vue'],
-  testMatch: ['**/tests/unit/**/*.spec.[jt]s?(x)', '**/__tests__/*.[jt]s?(x)'],
+  testMatch: [
+    '**/tests/unit/**/*.spec.[jt]s?(x)',
+    '**/__tests__/*.spec.[jt]s?(x)'
+  ],
   // testMatch: ['**/BackTop/__tests__/*.[jt]s?(x)'],
   // https://github.com/facebook/jest/issues/6766
   testURL: 'http://localhost/',

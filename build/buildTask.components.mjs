@@ -5,13 +5,18 @@ import { getJSON, getPath } from './utils.mjs'
 
 const { __dirname } = getPath(import.meta.url)
 const pkg = await getJSON('./package.json')
-const tss = await getJSON('./build/ts-files.json')
 const deps = Object.keys(pkg.dependencies).concat(['vue'])
 
-const entryPoints = {}
-tss.forEach(name => {
-  entryPoints[name] = resolve(__dirname, `../packages/vfox-ui/${name}.ts`)
-})
+const getEntryPoints = async () => {
+  const tss = await getJSON('./build/ts-files.json')
+
+  const entryPoints = {}
+  tss.forEach(name => {
+    entryPoints[name] = resolve(__dirname, `../packages/vfox/src/${name}.ts`)
+  })
+
+  return entryPoints
+}
 
 const externalPlugin = () => {
   return {
@@ -24,8 +29,10 @@ const externalPlugin = () => {
   }
 }
 
-export const buildCompsEsm = () =>
-  build({
+export const buildCompsEsm = async () => {
+  const entryPoints = await getEntryPoints()
+
+  await build({
     plugins: [vuePlugin(), externalPlugin()],
     entryPoints: entryPoints,
     external: deps,
@@ -34,9 +41,12 @@ export const buildCompsEsm = () =>
     bundle: true,
     target: ['es2019']
   })
+}
 
-export const buildCompsCjs = () =>
-  build({
+export const buildCompsCjs = async () => {
+  const entryPoints = await getEntryPoints()
+
+  await build({
     plugins: [vuePlugin(), externalPlugin()],
     entryPoints: entryPoints,
     external: deps,
@@ -45,3 +55,4 @@ export const buildCompsCjs = () =>
     bundle: true,
     target: ['es2019']
   })
+}

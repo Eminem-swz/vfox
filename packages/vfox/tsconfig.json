@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "lib": ["esnext", "dom", "dom.iterable"],
     "resolveJsonModule": true,
-    "types": ["vite/client", "jest"]
+    "types": ["vite/client", "jest", "node"]
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.vue"],
   "exclude": ["**/style/index.js"]
