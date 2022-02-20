@@ -128,6 +128,16 @@ export function setupPuppeteer() {
     await el.press('Enter')
   }
 
+  async function focus(selector: string) {
+    const el = (await page.$(selector))!
+    await el.focus()
+  }
+
+  async function blur(selector: string) {
+    const el = (await page.$(selector))!
+    await el.evaluate(node => (node as HTMLInputElement).blur())
+  }
+
   async function clearValue(selector: string) {
     return await page.$eval(
       selector,
@@ -170,6 +180,8 @@ export function setupPuppeteer() {
     enterValue,
     clearValue,
     timeout,
-    nextFrame
+    nextFrame,
+    focus,
+    blur
   }
 }

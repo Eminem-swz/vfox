@@ -22,5 +22,8 @@ module.exports = {
         jest: true
       }
     }
-  ]
+  ],
+  rules: {
+    '@typescript-eslint/no-extra-semi': 'off'
+  }
 }
