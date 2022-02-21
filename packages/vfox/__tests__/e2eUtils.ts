@@ -66,14 +66,40 @@ export function setupPuppeteer() {
     return (await page.$$(selector)).length
   }
 
+  /**
+   * 获取单个元素文本
+   * @param selector css 选择器
+   * @returns 元素文本
+   */
   async function text(selector: string) {
     return await page.$eval(selector, node => node.textContent)
   }
 
+  /**
+   * 获取多个元素文本
+   * @param selector css 选择器
+   * @returns 元素文本
+   */
+  async function texts(selector: string) {
+    return await page.$$eval(selector, nodes =>
+      nodes.map(node => node.textContent)
+    )
+  }
+
+  /**
+   * 获取输入元素值
+   * @param selector css 选择器
+   * @returns 值
+   */
   async function value(selector: string) {
     return await page.$eval(selector, node => (node as HTMLInputElement).value)
   }
 
+  /**
+   * 获取元素内容
+   * @param selector  css 选择器
+   * @returns 节点子内容
+   */
   async function html(selector: string) {
     return await page.$eval(selector, node => node.innerHTML)
   }
@@ -182,6 +208,7 @@ export function setupPuppeteer() {
     timeout,
     nextFrame,
     focus,
-    blur
+    blur,
+    texts
   }
 }
